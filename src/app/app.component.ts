@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MenuItem, PrimeNGConfig } from 'primeng/api';
 import { MenuService } from './services/menu.service';
 import { MenuAction, MenuEntry } from './model/menu';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -13,6 +14,7 @@ export class AppComponent implements OnInit {
   items: MenuItem[] = [];
 
   constructor(
+    private router: Router,
     private primengConfig: PrimeNGConfig,
     private menuService: MenuService
   ) {}
@@ -21,31 +23,34 @@ export class AppComponent implements OnInit {
     this.primengConfig.ripple = true;
 
     this.menuService.getMainMenu().subscribe({
-      next: (items) =>(this.items = items.map(item=> this.getMenuItem(item))
-        )})
-    
+      next: (items) =>
+        (this.items = items.map((item) => this.getMenuItem(item))),
+    });
   }
 
-  getMenuItem(item: MenuEntry):MenuItem  {
+  getMenuItem(item: MenuEntry): MenuItem {
     return {
       id: item.id,
       label: item.label,
-      items: item.children.length > 0 ? item.children.map(item=> this.getMenuItem(item)) : undefined,
-      command: this.evalAction(item.action)
+      items:
+        item.children.length > 0
+          ? item.children.map((item) => this.getMenuItem(item))
+          : undefined,
+      command: this.evalAction(item.action),
     };
   }
 
-  evalAction(action: MenuAction): ((event?: any) => void)| undefined {
-    if (action.type == "GRID") {
+  evalAction(action: MenuAction): ((event?: any) => void) | undefined {
+    if (action.type == 'GRID') {
       return (event) => {
-        this.callGrid(event)
-      }
+        this.callGrid(event);
+      };
     }
-    return undefined
+    return undefined;
   }
 
   callGrid(event?: any) {
-    const menuItem = event.item as MenuItem
-    console.log(menuItem)
+    const menuItem = event.item as MenuItem;
+    this.router.navigate(['table', menuItem.id]);
   }
 }

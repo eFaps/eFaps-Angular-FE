@@ -4,7 +4,18 @@ import { AppComponent } from './app.component';
 import { AuthGuard } from './guard/auth.guard';
 
 const routes: Routes = [
-  { path: '', component: AppComponent, canActivate: [AuthGuard] },
+  {
+    path: 'table',
+    canActivate: [AuthGuard],
+    loadChildren: () =>
+      import('./table/table.module').then((m) => m.TableModule),
+  },
+  {
+    path: '',
+    canActivate: [AuthGuard],
+    loadChildren: () =>
+      import('./dashboard/dashboard.module').then((m) => m.DashboardModule),
+  },
   { path: '**', redirectTo: '' },
 ];
 
