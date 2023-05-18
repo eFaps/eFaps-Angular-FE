@@ -1,8 +1,11 @@
 <p-table [columns]="cols" [value]="elements" styleClass="p-datatable-gridlines p-datatable-striped" 
     [scrollable]="true" scrollHeight="400px" [virtualScroll]="true" [virtualScrollItemSize]="46" [tableStyle]="{ 'min-width': '50rem' }"
-    sortMode="multiple">
+    sortMode="multiple" [selectionMode]="selectionMode" [(selection)]="selectedElements">
     <ng-template pTemplate="header" let-columns>
         <tr>
+            <th style="width: 4rem" *ngIf="selectionMode=='multiple'">
+                <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+            </th>
             <th [pSortableColumn]="col.field" *ngFor="let col of columns">
                 {{ col.header }}
                 <p-sortIcon [field]="col.field"></p-sortIcon>
@@ -11,6 +14,9 @@
     </ng-template>
     <ng-template pTemplate="body" let-rowData let-columns="columns">
         <tr style="height:46px">
+            <td *ngIf="selectionMode=='multiple'">
+                <p-tableCheckbox [value]="rowData"></p-tableCheckbox>
+            </td>
             <td *ngFor="let col of columns">
                 {{ rowData[col.field] }}
             </td>

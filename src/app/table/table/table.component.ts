@@ -11,7 +11,8 @@ export class TableComponent implements OnInit {
   id: string | undefined;
   cols:any[] = []
   elements:any[] = []
-
+  selectionMode: string = "none";
+  selectedElements: any;
   constructor(
     private route: ActivatedRoute,
     private tableService: TableService
@@ -24,6 +25,7 @@ export class TableComponent implements OnInit {
         next: val =>  {
           this.cols = val.columns
           this.elements = val.values
+          this.selectionMode = val.selectionMode == null ? "none" : val.selectionMode
         }
       });
     });
