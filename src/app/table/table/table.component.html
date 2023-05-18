@@ -1,13 +1,16 @@
-<p-table [columns]="cols" [value]="elements" [tableStyle]="{ 'min-width': '50rem' }">
+<p-table [columns]="cols" [value]="elements" styleClass="p-datatable-gridlines p-datatable-striped" 
+    [scrollable]="true" scrollHeight="400px" [virtualScroll]="true" [virtualScrollItemSize]="46" [tableStyle]="{ 'min-width': '50rem' }"
+    sortMode="multiple">
     <ng-template pTemplate="header" let-columns>
         <tr>
-            <th *ngFor="let col of columns">
+            <th [pSortableColumn]="col.field" *ngFor="let col of columns">
                 {{ col.header }}
+                <p-sortIcon [field]="col.field"></p-sortIcon>
             </th>
         </tr>
     </ng-template>
     <ng-template pTemplate="body" let-rowData let-columns="columns">
-        <tr>
+        <tr style="height:46px">
             <td *ngFor="let col of columns">
                 {{ rowData[col.field] }}
             </td>

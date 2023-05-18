@@ -5,4 +5,5 @@ export interface Table {
 }
 export interface Column {
     header: string;
+    field: string;
 }
