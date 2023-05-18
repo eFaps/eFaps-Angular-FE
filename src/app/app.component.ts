@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MenuItem, PrimeNGConfig } from 'primeng/api';
 import { MenuService } from './services/menu.service';
-import { MenuEntry } from './model/menu';
+import { MenuAction, MenuEntry } from './model/menu';
 
 @Component({
   selector: 'app-root',
@@ -10,12 +10,8 @@ import { MenuEntry } from './model/menu';
 })
 export class AppComponent implements OnInit {
   title = 'eFaps-Angular-FE';
+  items: MenuItem[] = [];
 
-  items: MenuItem[] = [
-    {
-      label: 'test',
-    },
-  ];
   constructor(
     private primengConfig: PrimeNGConfig,
     private menuService: MenuService
@@ -32,9 +28,24 @@ export class AppComponent implements OnInit {
 
   getMenuItem(item: MenuEntry):MenuItem  {
     return {
+      id: item.id,
       label: item.label,
-      items: item.children.length > 0 ? item.children.map(item=> this.getMenuItem(item)) : undefined
+      items: item.children.length > 0 ? item.children.map(item=> this.getMenuItem(item)) : undefined,
+      command: this.evalAction(item.action)
     };
   }
 
+  evalAction(action: MenuAction): ((event?: any) => void)| undefined {
+    if (action.type == "GRID") {
+      return (event) => {
+        this.callGrid(event)
+      }
+    }
+    return undefined
+  }
+
+  callGrid(event?: any) {
+    const menuItem = event.item as MenuItem
+    console.log(menuItem)
+  }
 }

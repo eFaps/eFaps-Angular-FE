@@ -6,5 +6,5 @@ export interface MenuEntry {
 }
 
 export interface MenuAction {
-  type: null | 'SEARCH' | 'EXEC';
+  type: null | 'SEARCH' | 'EXEC' | 'GRID';
 }
