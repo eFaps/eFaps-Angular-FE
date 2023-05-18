@@ -6,16 +6,16 @@ import { AppComponent } from './app.component';
 import { MenubarModule } from 'primeng/menubar';
 import { initializeKeycloak } from './init/keycloak-init.factory';
 import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
     MenubarModule,
-    KeycloakAngularModule
+    KeycloakAngularModule,
+    HttpClientModule,
   ],
   providers: [
     {
@@ -23,8 +23,8 @@ import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
       useFactory: initializeKeycloak,
       multi: true,
       deps: [KeycloakService],
-    }
+    },
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

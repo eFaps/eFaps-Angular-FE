@@ -4,12 +4,12 @@ import { AppComponent } from './app.component';
 import { AuthGuard } from './guard/auth.guard';
 
 const routes: Routes = [
-  { path: '', component: AppComponent , canActivate: [AuthGuard]},
-  { path: '**', redirectTo: '' }
+  { path: '', component: AppComponent, canActivate: [AuthGuard] },
+  { path: '**', redirectTo: '' },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
