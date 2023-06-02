@@ -13,6 +13,7 @@ export class TableComponent implements OnInit {
   elements:any[] = []
   selectionMode: string = "none";
   selectedElements: any;
+  title: string = ""
   constructor(
     private route: ActivatedRoute,
     private tableService: TableService
@@ -23,6 +24,7 @@ export class TableComponent implements OnInit {
       this.id = params['id'];
       this.tableService.getTable(this.id!!).subscribe({
         next: val =>  {
+          this.title = val.header
           this.cols = val.columns
           this.elements = val.values
           this.selectionMode = val.selectionMode == null ? "none" : val.selectionMode
