@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/e-faps-angular-fe",
+            "outputPath": "dist/efaps-angular-fe",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [
