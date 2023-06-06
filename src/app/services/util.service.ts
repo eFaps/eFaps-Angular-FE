@@ -10,11 +10,11 @@ export class UtilService {
 
   evalApiUrl(): String {
     let hostname
-    if (environment.apiHostname) {
+    if (!environment.apiHostname) {
       hostname = environment.apiHostname
     } else {
       hostname = window.location.hostname.substring(0,  window.location.hostname.indexOf('.'))
     } 
-   return `https://${environment.apiHostname}${environment.apiBaseUrl}` 
+   return `https://${hostname}${environment.apiBaseUrl}` 
   }
 }
