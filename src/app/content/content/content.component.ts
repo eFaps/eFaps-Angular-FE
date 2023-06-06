@@ -14,7 +14,7 @@ export class ContentComponent implements OnInit {
   activeIndex: number = 0;
 
   tabs: MenuItem[] = []
-
+  mainHeader: string= ""
   constructor(private router: Router,private route: ActivatedRoute, private contentService: ContentService) {
 
   }
@@ -25,7 +25,7 @@ export class ContentComponent implements OnInit {
         next: (val) => {
           console.log(val)
           this.tabs = val.nav.map((item) => this.getMenuItem(item))
-          console.log(this.tabs)
+          this.mainHeader = val.outline.header
         },
       });
     });

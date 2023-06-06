@@ -5,6 +5,8 @@ import { ContentRoutingModule } from './content-routing.module';
 import { ContentComponent } from './content/content.component';
 
 import { TabMenuModule } from 'primeng/tabmenu';
+import { PanelModule } from 'primeng/panel';
+
 @NgModule({
   declarations: [
     ContentComponent
@@ -12,7 +14,8 @@ import { TabMenuModule } from 'primeng/tabmenu';
   imports: [
     CommonModule,
     ContentRoutingModule,
-    TabMenuModule
+    TabMenuModule,
+    PanelModule
   ]
 })
 export class ContentModule { }
