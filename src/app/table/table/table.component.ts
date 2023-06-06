@@ -14,6 +14,7 @@ export class TableComponent implements OnInit {
   selectionMode: string = "none";
   selectedElements: any;
   title: string = ""
+  scrollHeight: string = "800px"
   constructor(
     private route: ActivatedRoute,
     private tableService: TableService

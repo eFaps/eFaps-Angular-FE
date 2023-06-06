@@ -6,5 +6,5 @@
 export const environment = {
   production: false,
   version: '1.0.0-dev',
-  baseUrl: 'api/eFaps/servlet/rest',
+  baseUrl: 'https://demo.lite.synercom.pe/servlet/rest',
 };
