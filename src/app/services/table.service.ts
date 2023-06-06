@@ -1,17 +1,17 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { environment } from 'src/environments/environment';
 import { Table } from '../model/table';
+import { UtilService } from './util.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TableService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private utilService: UtilService) {}
 
   getTable(id: string): Observable<Table> {
-    const url = `${environment.baseUrl}/ui/table/${id}`;
+    const url = `${this.utilService.evalApiUrl()}/ui/table/${id}`;
     return this.http.get<Table>(url);
   }
 }

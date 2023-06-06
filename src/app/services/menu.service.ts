@@ -1,17 +1,17 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { environment } from 'src/environments/environment';
 import { MenuEntry } from '../model/menu';
 import { Observable } from 'rxjs';
+import { UtilService } from './util.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class MenuService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private utilService: UtilService) {}
 
   getMainMenu(): Observable<MenuEntry[]> {
-    const url = `${environment.baseUrl}/ui/nav`;
+    const url = `${this.utilService.evalApiUrl()}/ui/nav`;
     return this.http.get<MenuEntry[]>(url);
   }
 }

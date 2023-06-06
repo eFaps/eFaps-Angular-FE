@@ -6,5 +6,9 @@
 export const environment = {
   production: false,
   version: '1.0.0-dev',
-  baseUrl: 'https://demo.lite.synercom.pe/servlet/rest',
+  apiHostname: 'demo.lite.synercom.pe',
+  apiBaseUrl: '/servlet/rest',
+  ssoUrl: 'https://sso.synercom.pe/auth',
+  ssoRealm: 'demo',
+  ssoClientId: 'localhost-test',
 };
