@@ -14,13 +14,14 @@ export class TableComponent implements OnInit {
   selectionMode: string = "none";
   selectedElements: any;
   title: string = ""
-  scrollHeight: string = "800px"
+  loading = true;
   constructor(
     private route: ActivatedRoute,
     private tableService: TableService
   ) {}
 
   ngOnInit(): void {
+    this.loading = true;    
     this.route.params.subscribe((params) => {
       this.id = params['id'];
       this.tableService.getTable(this.id!!).subscribe({
@@ -29,6 +30,7 @@ export class TableComponent implements OnInit {
           this.cols = val.columns
           this.elements = val.values
           this.selectionMode = val.selectionMode == null ? "none" : val.selectionMode
+          this.loading = false;
         }
       });
     });
