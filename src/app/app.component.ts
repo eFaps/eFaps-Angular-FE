@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 })
 export class AppComponent implements OnInit {
   title = 'eFaps-Angular-FE';
-  items: MenuItem[] = [];
+  menuItems: MenuItem[] = [];
 
   constructor(
     private router: Router,
@@ -24,7 +24,7 @@ export class AppComponent implements OnInit {
 
     this.menuService.getMainMenu().subscribe({
       next: (items) =>
-        (this.items = items.map((item) => this.getMenuItem(item))),
+        (this.menuItems = items.map((item) => this.getMenuItem(item))),
     });
   }
 

@@ -1,4 +1,5 @@
 <div>
-    <p-button *ngIf="showLink()" icon="pi pi-check" styleClass="p-button-rounded p-button-outlined" (click)="followLink()"></p-button>
+    <p-button *ngIf="showLink()" icon="pi pi-check" styleClass="p-button-rounded p-button-outlined" (click)="followLink()" 
+    [style]="{ width:'2rem', height: '2rem' }"></p-button>
     {{value}}
 </div>

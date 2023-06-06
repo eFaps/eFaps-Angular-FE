@@ -6,6 +6,9 @@ import { TableModule as primeTableModule } from 'primeng/table';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { ColumnComponent } from './column/column.component';
 import { ButtonModule } from 'primeng/button';
+import { MenuModule } from 'primeng/menu';
+import { MenubarModule } from 'primeng/menubar';
+
 @NgModule({
   declarations: [TableComponent, ColumnComponent],
   imports: [
@@ -14,6 +17,8 @@ import { ButtonModule } from 'primeng/button';
     primeTableModule,
     MultiSelectModule,
     ButtonModule,
+    MenuModule,
+    MenubarModule
   ],
 })
 export class TableModule {}

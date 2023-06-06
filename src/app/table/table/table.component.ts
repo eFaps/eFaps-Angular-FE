@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { MenuItem } from 'primeng/api';
+import { MenuEntry } from 'src/app/model/menu';
 import { TableService } from 'src/app/services/table.service';
 
 @Component({
@@ -15,6 +17,7 @@ export class TableComponent implements OnInit {
   selectedElements: any;
   title: string = '';
   loading = true;
+  menuItems: MenuItem[] = [];
   constructor(
     private route: ActivatedRoute,
     private tableService: TableService
@@ -31,8 +34,22 @@ export class TableComponent implements OnInit {
           this.elements = val.values;
           this.selectionMode = val.selectionMode;
           this.loading = false;
+          this.menuItems = val.menu.map((item) => this.getMenuItem(item))
         },
       });
     });
+  }
+
+
+  getMenuItem(item: MenuEntry): MenuItem {
+    return {
+      id: item.id,
+      label: item.label,
+      items:
+      item.children && item.children.length > 0
+          ? item.children.map((item) => this.getMenuItem(item))
+          : undefined,
+     
+    };
   }
 }
