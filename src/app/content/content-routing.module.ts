@@ -1,18 +1,19 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from '../guard/auth.guard';
-import { FormComponent } from './form/form.component';
+import { ContentComponent } from './content/content.component';
 
 const routes: Routes = [
   {
     path: ':oid',
     canActivate: [AuthGuard],
-    component: FormComponent,
+    component: ContentComponent,
   },
 ];
 
+
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule],
+  exports: [RouterModule]
 })
-export class FormRoutingModule {}
+export class ContentRoutingModule { }

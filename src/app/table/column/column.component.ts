@@ -34,9 +34,9 @@ export class ColumnComponent {
   followLink() {
     const alternativeOid = this.rowData[this.column!!.field + '_AOID'];
     if (alternativeOid) {
-      this.router.navigate(['form', alternativeOid]);
+      this.router.navigate(['content', alternativeOid]);
     } else {
-      this.router.navigate(['form', this.rowData['OID']]);
+      this.router.navigate(['content', this.rowData['OID']]);
     }
   }
 }
