@@ -5,6 +5,7 @@ export interface Table {
   selectionMode: 'single' | 'multiple' | undefined;
 }
 export interface Column {
-    header: string;
-    field: string;
+  header: string;
+  field: string;
+  ref?: boolean;
 }

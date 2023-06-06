@@ -2,19 +2,18 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UtilService {
-
-  constructor() { }
+  constructor() {}
 
   evalApiUrl(): String {
-    let hostname
+    let hostname;
     if (environment.apiHostname) {
-      hostname = environment.apiHostname
+      hostname = environment.apiHostname;
     } else {
-      hostname = window.location.hostname.replace(".app", "")
-    } 
-   return `https://${hostname}${environment.apiBaseUrl}` 
+      hostname = window.location.hostname.replace('.app', '');
+    }
+    return `https://${hostname}${environment.apiBaseUrl}`;
   }
 }

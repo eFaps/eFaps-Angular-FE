@@ -33,7 +33,7 @@
                 <p-tableCheckbox [value]="rowData"></p-tableCheckbox>
             </td>
             <td *ngFor="let col of columns">
-                {{ rowData[col.field] }}
+                <app-column [rowData]="rowData" [column]="col"></app-column>
             </td>
         </tr>
     </ng-template>

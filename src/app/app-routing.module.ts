@@ -11,6 +11,11 @@ const routes: Routes = [
       import('./table/table.module').then((m) => m.TableModule),
   },
   {
+    path: 'form',
+    canActivate: [AuthGuard],
+    loadChildren: () => import('./form/form.module').then((m) => m.FormModule),
+  },
+  {
     path: '',
     canActivate: [AuthGuard],
     loadChildren: () =>

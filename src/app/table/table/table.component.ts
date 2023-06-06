@@ -9,11 +9,11 @@ import { TableService } from 'src/app/services/table.service';
 })
 export class TableComponent implements OnInit {
   id: string | undefined;
-  cols:any[] = []
-  elements:any[] = []
-  selectionMode: "single" | "multiple" | null | undefined = null;
+  cols: any[] = [];
+  elements: any[] = [];
+  selectionMode: 'single' | 'multiple' | null | undefined = null;
   selectedElements: any;
-  title: string = ""
+  title: string = '';
   loading = true;
   constructor(
     private route: ActivatedRoute,
@@ -21,17 +21,17 @@ export class TableComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.loading = true;    
+    this.loading = true;
     this.route.params.subscribe((params) => {
       this.id = params['id'];
       this.tableService.getTable(this.id!!).subscribe({
-        next: val =>  {
-          this.title = val.header
-          this.cols = val.columns
-          this.elements = val.values
-          this.selectionMode = val.selectionMode
+        next: (val) => {
+          this.title = val.header;
+          this.cols = val.columns;
+          this.elements = val.values;
+          this.selectionMode = val.selectionMode;
           this.loading = false;
-        }
+        },
       });
     });
   }
