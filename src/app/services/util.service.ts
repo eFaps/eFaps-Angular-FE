@@ -13,7 +13,7 @@ export class UtilService {
     if (environment.apiHostname) {
       hostname = environment.apiHostname
     } else {
-      hostname = window.location.hostname.substring(0,  window.location.hostname.indexOf('.'))
+      hostname = window.location.hostname.replace(".app", "")
     } 
    return `https://${hostname}${environment.apiBaseUrl}` 
   }
