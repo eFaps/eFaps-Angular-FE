@@ -1,4 +1,4 @@
-import { MenuEntry } from "./menu";
+import { MenuEntry } from './menu';
 
 export interface Table {
   header: string;

@@ -19,7 +19,16 @@ export class ColumnComponent {
   }
 
   showLink() {
-    return this.column?.ref;
+    if (this.column?.ref) {
+      if (this.rowData.hasOwnProperty(this.column!!.field + '_AOID')) {
+        if (this.rowData[this.column!!.field + '_AOID'] != null) {
+          return true;
+        }
+        return false;
+      }
+      return true;
+    }
+    return false;
   }
 
   followLink() {

@@ -18,7 +18,7 @@ import { MenubarModule } from 'primeng/menubar';
     MultiSelectModule,
     ButtonModule,
     MenuModule,
-    MenubarModule
+    MenubarModule,
   ],
 })
 export class TableModule {}

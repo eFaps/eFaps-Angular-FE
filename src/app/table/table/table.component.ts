@@ -34,22 +34,20 @@ export class TableComponent implements OnInit {
           this.elements = val.values;
           this.selectionMode = val.selectionMode;
           this.loading = false;
-          this.menuItems = val.menu.map((item) => this.getMenuItem(item))
+          this.menuItems = val.menu.map((item) => this.getMenuItem(item));
         },
       });
     });
   }
-
 
   getMenuItem(item: MenuEntry): MenuItem {
     return {
       id: item.id,
       label: item.label,
       items:
-      item.children && item.children.length > 0
+        item.children && item.children.length > 0
           ? item.children.map((item) => this.getMenuItem(item))
           : undefined,
-     
     };
   }
 }
