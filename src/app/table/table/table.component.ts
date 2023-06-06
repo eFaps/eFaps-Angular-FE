@@ -11,7 +11,7 @@ export class TableComponent implements OnInit {
   id: string | undefined;
   cols:any[] = []
   elements:any[] = []
-  selectionMode: string = "none";
+  selectionMode: "single" | "multiple" | null | undefined = null;
   selectedElements: any;
   title: string = ""
   loading = true;
@@ -29,7 +29,7 @@ export class TableComponent implements OnInit {
           this.title = val.header
           this.cols = val.columns
           this.elements = val.values
-          this.selectionMode = val.selectionMode == null ? "none" : val.selectionMode
+          this.selectionMode = val.selectionMode
           this.loading = false;
         }
       });
