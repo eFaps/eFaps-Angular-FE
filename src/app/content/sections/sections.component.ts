@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { FormSection, HeadingSection, Section } from 'src/app/model/content';
+import { FormSection, HeadingSection, Section, TableSection } from 'src/app/model/content';
 
 @Component({
   selector: 'app-sections',
@@ -17,5 +17,9 @@ export class SectionsComponent {
 
   toFormSection(section: Section): FormSection {
     return section as FormSection
+  }
+
+  toTableSection(section: Section): TableSection {
+    return section as TableSection
   }
 }

@@ -1,5 +1,6 @@
-{{headingSection?.header}}
-<div *ngFor="let section of headingSection?.sections">
-    <app-form-section *ngIf="section.type=='FORM'"></app-form-section>
-    <app-table-section *ngIf="section.type=='TABLE'"></app-table-section>
-</div>
+<p-panel [header]="headingSection?.header" [toggleable]="true">
+    <div *ngFor="let section of headingSection?.sections">
+        <app-form-section *ngIf="section.type=='FORM'" [formSection]="toFormSection(section)"></app-form-section>
+        <app-table-section *ngIf="section.type=='TABLE'" [tableSection]="toTableSection(section)"></app-table-section>
+    </div>
+</p-panel>

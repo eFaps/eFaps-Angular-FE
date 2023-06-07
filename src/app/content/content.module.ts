@@ -11,7 +11,8 @@ import { SubSectionComponent } from './sub-section/sub-section.component';
 import { TableSectionComponent } from './table-section/table-section.component';
 import { FormSectionComponent } from './form-section/form-section.component';
 import { ElementComponent } from './element/element.component';
-
+import { TableModule } from 'primeng/table';
+import { ButtonModule } from 'primeng/button';
 @NgModule({
   declarations: [
     ContentComponent,
@@ -25,7 +26,9 @@ import { ElementComponent } from './element/element.component';
     CommonModule,
     ContentRoutingModule,
     TabMenuModule,
-    PanelModule
+    PanelModule,
+    TableModule,
+    ButtonModule
   ]
 })
 export class ContentModule { }

@@ -1,4 +1,5 @@
 import { MenuEntry } from "./menu";
+import { Column } from "./table";
 
 export interface Content { 
     nav: MenuEntry[]
@@ -27,4 +28,9 @@ export interface FormItem {
 export interface HeadingSection extends Section {
     header: string
     sections: Section[]
+}
+
+export interface TableSection extends Section {
+    columns: Column[]
+    values: any[];
 }
