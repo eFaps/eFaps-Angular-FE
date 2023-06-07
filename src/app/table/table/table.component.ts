@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MenuItem } from 'primeng/api';
+import { combineLatest, forkJoin } from 'rxjs';
 import { MenuEntry } from 'src/app/model/menu';
 import { TableService } from 'src/app/services/table.service';
 
@@ -25,9 +26,10 @@ export class TableComponent implements OnInit {
 
   ngOnInit(): void {
     this.loading = true;
-    this.route.params.subscribe((params) => {
-      this.id = params['id'];
-      this.tableService.getTable(this.id!!).subscribe({
+    combineLatest( [this.route.queryParams, this.route.params]).subscribe(parameters => {
+      this.id =  parameters[1]['id'];
+      let oid =  parameters[0]['oid'];
+      this.tableService.getTable(this.id!!, oid).subscribe({
         next: (val) => {
           this.title = val.header;
           this.cols = val.columns;
@@ -37,7 +39,7 @@ export class TableComponent implements OnInit {
           this.menuItems = val.menu.map((item) => this.getMenuItem(item));
         },
       });
-    });
+    })
   }
 
   getMenuItem(item: MenuEntry): MenuItem {

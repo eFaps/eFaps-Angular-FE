@@ -45,7 +45,8 @@ export class ContentComponent implements OnInit {
       label: item.label,
       routerLink:
         index == 0 ? undefined : this.evalRouterLink(item),
-      command:  index == 0 ? (event) =>{ this.mainClick()} :  (event) =>{ this.showSections = false }
+      command:  index == 0 ? (event) =>{ this.mainClick()} :  (event) =>{ this.showSections = false },
+      queryParams:  index == 0 ? undefined : { oid: this.oid }
 
     };
   }

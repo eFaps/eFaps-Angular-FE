@@ -10,8 +10,9 @@ import { UtilService } from './util.service';
 export class TableService {
   constructor(private http: HttpClient, private utilService: UtilService) {}
 
-  getTable(id: string): Observable<Table> {
+  getTable(id: string, oid?: string): Observable<Table> {
     const url = `${this.utilService.evalApiUrl()}/ui/table/${id}`;
-    return this.http.get<Table>(url);
+    const params: any = oid ? {"oid": oid} : {}
+    return this.http.get<Table>(url, {params: params });
   }
 }
