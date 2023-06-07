@@ -1,0 +1,6 @@
+<div *ngFor="let section of sections">
+    <app-form-section *ngIf="section.type=='FORM'" [formSection]="toFormSection(section)"></app-form-section>
+    <app-table-section *ngIf="section.type=='TABLE'"></app-table-section>
+    <app-sub-section *ngIf="section.type=='HEADING'" [headingSection]="toHeaderSection(section)"></app-sub-section>
+</div>
+

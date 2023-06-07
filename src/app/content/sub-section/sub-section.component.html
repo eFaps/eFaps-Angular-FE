@@ -1,0 +1,5 @@
+{{headingSection?.header}}
+<div *ngFor="let section of headingSection?.sections">
+    <app-form-section *ngIf="section.type=='FORM'"></app-form-section>
+    <app-table-section *ngIf="section.type=='TABLE'"></app-table-section>
+</div>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MenuItem } from 'primeng/api';
+import { Section } from 'src/app/model/content';
 import { MenuAction, MenuEntry } from 'src/app/model/menu';
 import { ContentService } from 'src/app/services/content.service';
 
@@ -15,6 +16,8 @@ export class ContentComponent implements OnInit {
 
   tabs: MenuItem[] = []
   mainHeader: string= ""
+  sections: Section[]= []
+
   constructor(private router: Router,private route: ActivatedRoute, private contentService: ContentService) {
 
   }
@@ -24,18 +27,19 @@ export class ContentComponent implements OnInit {
       this.contentService.getContent(this.oid!!).subscribe({
         next: (val) => {
           console.log(val)
-          this.tabs = val.nav.map((item) => this.getMenuItem(item))
+          this.tabs = val.nav.map((item, index) => this.getMenuItem(item, index))
           this.mainHeader = val.outline.header
+          this.sections = val.outline.sections
         },
       });
     });
   }
 
-  getMenuItem(item: MenuEntry): MenuItem {
+  getMenuItem(item: MenuEntry, index: number): MenuItem {
     return {
       id: item.id,
       label: item.label,
-      routerLink: this.evalRouterLink(item),
+      routerLink: index == 0 ? [ "../../content", this.oid ] : this.evalRouterLink(item),
     };
   }
 
