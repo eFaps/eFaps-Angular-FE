@@ -6,21 +6,20 @@ import { Column } from 'src/app/model/table';
 @Component({
   selector: 'app-table-section',
   templateUrl: './table-section.component.html',
-  styleUrls: ['./table-section.component.scss']
+  styleUrls: ['./table-section.component.scss'],
 })
 export class TableSectionComponent {
-  
-  _tableSection: TableSection | undefined
+  _tableSection: TableSection | undefined;
   cols: any[] = [];
   elements: any[] = [];
 
-constructor(private router: Router) {}
+  constructor(private router: Router) {}
 
   @Input()
   set tableSection(tableSection: TableSection) {
-    this._tableSection = tableSection
-    this.cols =tableSection.columns
-    this.elements = tableSection.values
+    this._tableSection = tableSection;
+    this.cols = tableSection.columns;
+    this.elements = tableSection.values;
   }
 
   showLink(rowData: any, column: Column) {

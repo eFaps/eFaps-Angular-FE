@@ -8,28 +8,32 @@ import { ContentService } from 'src/app/services/content.service';
 @Component({
   selector: 'app-content',
   templateUrl: './content.component.html',
-  styleUrls: ['./content.component.scss']
+  styleUrls: ['./content.component.scss'],
 })
 export class ContentComponent implements OnInit {
   oid: string | undefined;
   activeIndex: number = 0;
 
-  tabs: MenuItem[] = []
-  mainHeader: string= ""
-  sections: Section[]= []
+  tabs: MenuItem[] = [];
+  mainHeader: string = '';
+  sections: Section[] = [];
 
-  constructor(private router: Router,private route: ActivatedRoute, private contentService: ContentService) {
-
-  }
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private contentService: ContentService
+  ) {}
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
       this.oid = params['oid'];
       this.contentService.getContent(this.oid!!).subscribe({
         next: (val) => {
-          console.log(val)
-          this.tabs = val.nav.map((item, index) => this.getMenuItem(item, index))
-          this.mainHeader = val.outline.header
-          this.sections = val.outline.sections
+          console.log(val);
+          this.tabs = val.nav.map((item, index) =>
+            this.getMenuItem(item, index)
+          );
+          this.mainHeader = val.outline.header;
+          this.sections = val.outline.sections;
         },
       });
     });
@@ -39,13 +43,14 @@ export class ContentComponent implements OnInit {
     return {
       id: item.id,
       label: item.label,
-      routerLink: index == 0 ? [ "../../content", this.oid ] : this.evalRouterLink(item),
+      routerLink:
+        index == 0 ? ['../../content', this.oid] : this.evalRouterLink(item),
     };
   }
 
   evalRouterLink(item: MenuEntry): any | undefined {
     if (item.action && item.action.type == 'GRID') {
-      return [{ outlets: { contentOutlet: ["table", item.id] } }]
+      return [{ outlets: { contentOutlet: ['table', item.id] } }];
     }
     return undefined;
   }

@@ -14,6 +14,8 @@ export class UtilService {
     } else {
       hostname = window.location.hostname.replace('.app', '');
     }
-    return hostname.startsWith("http") ? `${hostname}${environment.apiBaseUrl}` :  `https://${hostname}${environment.apiBaseUrl}`;
+    return hostname.startsWith('http')
+      ? `${hostname}${environment.apiBaseUrl}`
+      : `https://${hostname}${environment.apiBaseUrl}`;
   }
 }

@@ -20,7 +20,7 @@ import { ButtonModule } from 'primeng/button';
     SubSectionComponent,
     TableSectionComponent,
     FormSectionComponent,
-    ElementComponent
+    ElementComponent,
   ],
   imports: [
     CommonModule,
@@ -28,7 +28,7 @@ import { ButtonModule } from 'primeng/button';
     TabMenuModule,
     PanelModule,
     TableModule,
-    ButtonModule
-  ]
+    ButtonModule,
+  ],
 })
-export class ContentModule { }
+export class ContentModule {}

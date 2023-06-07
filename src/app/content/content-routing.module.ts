@@ -9,20 +9,20 @@ const routes: Routes = [
     path: ':oid',
     canActivate: [AuthGuard],
     component: ContentComponent,
-  
-  children: [
-  {
-    path: 'table/:id',
-    canActivate: [AuthGuard],
-    component: TableComponent,
-    outlet: 'contentOutlet'
+
+    children: [
+      {
+        path: 'table/:id',
+        canActivate: [AuthGuard],
+        component: TableComponent,
+        outlet: 'contentOutlet',
+      },
+    ],
   },
-]
-  }
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class ContentRoutingModule { }
+export class ContentRoutingModule {}
