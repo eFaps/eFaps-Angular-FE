@@ -42,7 +42,8 @@ export class ContentComponent implements OnInit {
   getMenuItem(item: MenuEntry, index: number): MenuItem {
     return {
       id: item.id,
-      label: item.label,
+      label: index == 0? undefined : item.label,
+      icon:  index == 0 ? 'pi pi-fw pi-map-marker' : undefined,
       routerLink:
         index == 0 ? undefined : this.evalRouterLink(item),
       command:  index == 0 ? (event) =>{ this.mainClick()} :  (event) =>{ this.showSections = false },
