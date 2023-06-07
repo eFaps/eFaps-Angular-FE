@@ -12,11 +12,11 @@ import { ContentService } from 'src/app/services/content.service';
 })
 export class ContentComponent implements OnInit {
   oid: string | undefined;
-  activeIndex: number = 0;
-
   tabs: MenuItem[] = [];
   mainHeader: string = '';
   sections: Section[] = [];
+  activeItem: MenuItem|undefined= undefined
+  showSections = true
 
   constructor(
     private router: Router,
@@ -28,10 +28,10 @@ export class ContentComponent implements OnInit {
       this.oid = params['oid'];
       this.contentService.getContent(this.oid!!).subscribe({
         next: (val) => {
-          console.log(val);
           this.tabs = val.nav.map((item, index) =>
             this.getMenuItem(item, index)
           );
+          this.activeItem = this.tabs[0]
           this.mainHeader = val.outline.header;
           this.sections = val.outline.sections;
         },
@@ -44,7 +44,9 @@ export class ContentComponent implements OnInit {
       id: item.id,
       label: item.label,
       routerLink:
-        index == 0 ? ['../../content', this.oid] : this.evalRouterLink(item),
+        index == 0 ? undefined : this.evalRouterLink(item),
+      command:  index == 0 ? (event) =>{ this.mainClick()} :  (event) =>{ this.showSections = false }
+
     };
   }
 
@@ -54,4 +56,11 @@ export class ContentComponent implements OnInit {
     }
     return undefined;
   }
+
+  mainClick() {
+    this.router.navigate(["../../content", this.oid])
+    this.showSections = true
+  }
+
+  
 }

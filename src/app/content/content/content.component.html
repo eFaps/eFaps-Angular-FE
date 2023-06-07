@@ -1,4 +1,5 @@
 <div class="header">{{mainHeader}}</div>
-<p-tabMenu [model]="tabs" [scrollable]="true"></p-tabMenu>
-<app-sections [sections]="sections"></app-sections>
+<p-tabMenu [model]="tabs" [scrollable]="true" [activeItem]="activeItem" ></p-tabMenu>
+
+<app-sections *ngIf="showSections" [sections]="sections"></app-sections>
 <router-outlet name="contentOutlet"></router-outlet>
