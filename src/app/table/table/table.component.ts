@@ -26,20 +26,22 @@ export class TableComponent implements OnInit {
 
   ngOnInit(): void {
     this.loading = true;
-    combineLatest( [this.route.queryParams, this.route.params]).subscribe(parameters => {
-      this.id =  parameters[1]['id'];
-      let oid =  parameters[0]['oid'];
-      this.tableService.getTable(this.id!!, oid).subscribe({
-        next: (val) => {
-          this.title = val.header;
-          this.cols = val.columns;
-          this.elements = val.values;
-          this.selectionMode = val.selectionMode;
-          this.loading = false;
-          this.menuItems = val.menu.map((item) => this.getMenuItem(item));
-        },
-      });
-    })
+    combineLatest([this.route.queryParams, this.route.params]).subscribe(
+      (parameters) => {
+        this.id = parameters[1]['id'];
+        let oid = parameters[0]['oid'];
+        this.tableService.getTable(this.id!!, oid).subscribe({
+          next: (val) => {
+            this.title = val.header;
+            this.cols = val.columns;
+            this.elements = val.values;
+            this.selectionMode = val.selectionMode;
+            this.loading = false;
+            this.menuItems = val.menu.map((item) => this.getMenuItem(item));
+          },
+        });
+      }
+    );
   }
 
   getMenuItem(item: MenuEntry): MenuItem {

@@ -31,7 +31,7 @@ import { MenuModule } from 'primeng/menu';
     PanelModule,
     TableModule,
     ButtonModule,
-    MenuModule
+    MenuModule,
   ],
 })
 export class ContentModule {}

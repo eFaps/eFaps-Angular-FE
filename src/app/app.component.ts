@@ -3,6 +3,8 @@ import { MenuItem, PrimeNGConfig } from 'primeng/api';
 import { MenuService } from './services/menu.service';
 import { MenuAction, MenuEntry } from './model/menu';
 import { Router } from '@angular/router';
+import { UserService } from './services/user.service';
+import { User } from './model/user';
 
 @Component({
   selector: 'app-root',
@@ -12,11 +14,13 @@ import { Router } from '@angular/router';
 export class AppComponent implements OnInit {
   title = 'eFaps-Angular-FE';
   menuItems: MenuItem[] = [];
+  user: User | undefined;
 
   constructor(
     private router: Router,
     private primengConfig: PrimeNGConfig,
-    private menuService: MenuService
+    private menuService: MenuService,
+    private userService: UserService
   ) {}
 
   ngOnInit() {
@@ -25,6 +29,9 @@ export class AppComponent implements OnInit {
     this.menuService.getMainMenu().subscribe({
       next: (items) =>
         (this.menuItems = items.map((item) => this.getMenuItem(item))),
+    });
+    this.userService.getCurrentUser().subscribe({
+      next: (user) => (this.user = user),
     });
   }
 

@@ -12,7 +12,7 @@ export class TableService {
 
   getTable(id: string, oid?: string): Observable<Table> {
     const url = `${this.utilService.evalApiUrl()}/ui/table/${id}`;
-    const params: any = oid ? {"oid": oid} : {}
-    return this.http.get<Table>(url, {params: params });
+    const params: any = oid ? { oid: oid } : {};
+    return this.http.get<Table>(url, { params: params });
   }
 }

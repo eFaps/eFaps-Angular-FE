@@ -7,6 +7,8 @@ import { MenubarModule } from 'primeng/menubar';
 import { initializeKeycloak } from './init/keycloak-init.factory';
 import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
 import { HttpClientModule } from '@angular/common/http';
+import { ButtonModule } from 'primeng/button';
+import { OverlayPanelModule } from 'primeng/overlaypanel';
 
 @NgModule({
   declarations: [AppComponent],
@@ -17,6 +19,8 @@ import { HttpClientModule } from '@angular/common/http';
     KeycloakAngularModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    ButtonModule,
+    OverlayPanelModule,
   ],
   providers: [
     {

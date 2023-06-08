@@ -1,2 +1,17 @@
-<p-menubar [model]="menuItems"></p-menubar>
+<p-menubar [model]="menuItems">
+    <ng-template pTemplate="end">
+        <div class="info">
+            {{user?.company}}
+            <p-button icon="pi pi-user" styleClass="p-button-rounded p-button-info p-button-outlined"
+            (click)="op.toggle($event)"></p-button>
+            <p-overlayPanel #op>
+                <ng-template pTemplate="content" let-option>
+                    <div class="infoOverlay">
+                        {{user?.firstName}} {{user?.lastName}}
+                    </div>
+                </ng-template>
+            </p-overlayPanel>
+        </div>
+    </ng-template>
+</p-menubar>
 <router-outlet></router-outlet>

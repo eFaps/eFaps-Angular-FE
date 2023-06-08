@@ -16,8 +16,8 @@ export class ContentComponent implements OnInit {
   menuItems: MenuItem[] = [];
   mainHeader: string = '';
   sections: Section[] = [];
-  activeItem: MenuItem|undefined= undefined
-  showSections = true
+  activeItem: MenuItem | undefined = undefined;
+  showSections = true;
 
   constructor(
     private router: Router,
@@ -32,7 +32,7 @@ export class ContentComponent implements OnInit {
           this.tabs = val.nav.map((item, index) =>
             this.getTabItem(item, index)
           );
-          this.activeItem = this.tabs[0]
+          this.activeItem = this.tabs[0];
           this.menuItems = val.outline.menu.map((item) =>
             this.getMenuItem(item)
           );
@@ -48,22 +48,27 @@ export class ContentComponent implements OnInit {
       id: item.id,
       label: item.label,
       items:
-      item.children && item.children.length > 0
-        ? item.children.map((item) => this.getMenuItem(item))
-        : undefined,
-    }
+        item.children && item.children.length > 0
+          ? item.children.map((item) => this.getMenuItem(item))
+          : undefined,
+    };
   }
 
   getTabItem(item: MenuEntry, index: number): MenuItem {
     return {
       id: item.id,
-      label: index == 0? undefined : item.label,
-      icon:  index == 0 ? 'pi pi-fw pi-map-marker' : undefined,
-      routerLink:
-        index == 0 ? undefined : this.evalRouterLink(item),
-      command:  index == 0 ? (event) =>{ this.mainClick()} :  (event) =>{ this.showSections = false },
-      queryParams:  index == 0 ? undefined : { oid: this.oid }
-
+      label: index == 0 ? undefined : item.label,
+      icon: index == 0 ? 'pi pi-fw pi-map-marker' : undefined,
+      routerLink: index == 0 ? undefined : this.evalRouterLink(item),
+      command:
+        index == 0
+          ? (event) => {
+              this.mainClick();
+            }
+          : (event) => {
+              this.showSections = false;
+            },
+      queryParams: index == 0 ? undefined : { oid: this.oid },
     };
   }
 
@@ -75,9 +80,7 @@ export class ContentComponent implements OnInit {
   }
 
   mainClick() {
-    this.router.navigate(["../../content", this.oid])
-    this.showSections = true
+    this.router.navigate(['../../content', this.oid]);
+    this.showSections = true;
   }
-
-  
 }
