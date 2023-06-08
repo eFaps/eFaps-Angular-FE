@@ -13,6 +13,8 @@ import { FormSectionComponent } from './form-section/form-section.component';
 import { ElementComponent } from './element/element.component';
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
+import { MenuModule } from 'primeng/menu';
+
 @NgModule({
   declarations: [
     ContentComponent,
@@ -29,6 +31,7 @@ import { ButtonModule } from 'primeng/button';
     PanelModule,
     TableModule,
     ButtonModule,
+    MenuModule
   ],
 })
 export class ContentModule {}

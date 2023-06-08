@@ -9,6 +9,8 @@ export interface Content {
 export interface Outline {
   header: string;
   sections: Section[];
+  menu: MenuEntry[];
+  oid: string;
 }
 
 export interface Section {

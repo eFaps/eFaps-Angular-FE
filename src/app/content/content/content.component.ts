@@ -13,6 +13,7 @@ import { ContentService } from 'src/app/services/content.service';
 export class ContentComponent implements OnInit {
   oid: string | undefined;
   tabs: MenuItem[] = [];
+  menuItems: MenuItem[] = [];
   mainHeader: string = '';
   sections: Section[] = [];
   activeItem: MenuItem|undefined= undefined
@@ -29,9 +30,12 @@ export class ContentComponent implements OnInit {
       this.contentService.getContent(this.oid!!).subscribe({
         next: (val) => {
           this.tabs = val.nav.map((item, index) =>
-            this.getMenuItem(item, index)
+            this.getTabItem(item, index)
           );
           this.activeItem = this.tabs[0]
+          this.menuItems = val.outline.menu.map((item) =>
+            this.getMenuItem(item)
+          );
           this.mainHeader = val.outline.header;
           this.sections = val.outline.sections;
         },
@@ -39,7 +43,14 @@ export class ContentComponent implements OnInit {
     });
   }
 
-  getMenuItem(item: MenuEntry, index: number): MenuItem {
+  getMenuItem(item: MenuEntry): MenuItem {
+    return {
+      id: item.id,
+      label: item.label
+    }
+  }
+
+  getTabItem(item: MenuEntry, index: number): MenuItem {
     return {
       id: item.id,
       label: index == 0? undefined : item.label,

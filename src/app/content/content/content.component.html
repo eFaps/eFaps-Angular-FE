@@ -1,4 +1,10 @@
-<div class="header">{{mainHeader}}</div>
-<p-tabMenu [model]="tabs" [scrollable]="true" [activeItem]="activeItem" ></p-tabMenu>
+<div class="header">
+    <ng-container *ngIf="showSections">
+        <p-menu #menu [model]="menuItems" [popup]="true"></p-menu>
+        <button pButton type="button" (click)="menu.toggle($event)" icon="pi pi-bars"></button>
+    </ng-container>
+    <span>{{mainHeader}}</span>
+</div>
+<p-tabMenu [model]="tabs" [scrollable]="true" [activeItem]="activeItem"></p-tabMenu>
 <app-sections *ngIf="showSections" [sections]="sections"></app-sections>
 <router-outlet name="contentOutlet"></router-outlet>
