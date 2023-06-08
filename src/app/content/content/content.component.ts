@@ -46,7 +46,11 @@ export class ContentComponent implements OnInit {
   getMenuItem(item: MenuEntry): MenuItem {
     return {
       id: item.id,
-      label: item.label
+      label: item.label,
+      items:
+      item.children && item.children.length > 0
+        ? item.children.map((item) => this.getMenuItem(item))
+        : undefined,
     }
   }
 
