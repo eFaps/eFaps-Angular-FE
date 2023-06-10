@@ -1,14 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { MenuItem } from 'primeng/api';
+import { ConfirmationService, MenuItem } from 'primeng/api';
 import { Section } from 'src/app/model/content';
-import { MenuAction, MenuEntry } from 'src/app/model/menu';
+import { MenuEntry } from 'src/app/model/menu';
 import { ContentService } from 'src/app/services/content.service';
+import { ExecService } from 'src/app/services/exec.service';
 
 @Component({
   selector: 'app-content',
   templateUrl: './content.component.html',
   styleUrls: ['./content.component.scss'],
+  providers: [ConfirmationService],
 })
 export class ContentComponent implements OnInit {
   oid: string | undefined;
@@ -22,7 +24,9 @@ export class ContentComponent implements OnInit {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private contentService: ContentService
+    private confirmationService: ConfirmationService,
+    private contentService: ContentService,
+    private execService: ExecService
   ) {}
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
@@ -51,6 +55,7 @@ export class ContentComponent implements OnInit {
         item.children && item.children.length > 0
           ? item.children.map((item) => this.getMenuItem(item))
           : undefined,
+      command: this.evalAction(item),
     };
   }
 
@@ -82,5 +87,35 @@ export class ContentComponent implements OnInit {
   mainClick() {
     this.router.navigate(['../../content', this.oid]);
     this.showSections = true;
+  }
+
+  evalAction(item: MenuEntry): ((event?: any) => void) | undefined {
+    switch (item.action.type) {
+      case 'EXEC':
+        return (event) => {
+          if (item.action.verify) {
+            this.confirmationService.confirm({
+              message: item.action.verify.question,
+              header: 'Confirmation',
+              icon: 'pi pi-exclamation-triangle',
+              accept: () => {
+                this.execService.exec(item.id).subscribe({
+                  next: (_) => {
+                    console.log('run exec');
+                  },
+                });
+              },
+              reject: () => {},
+            });
+          } else {
+            this.execService.exec(item.id).subscribe({
+              next: (_) => {
+                console.log('run exec');
+              },
+            });
+          }
+        };
+    }
+    return undefined;
   }
 }

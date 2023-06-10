@@ -14,6 +14,7 @@ import { ElementComponent } from './element/element.component';
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { MenuModule } from 'primeng/menu';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { MenuModule } from 'primeng/menu';
     TableModule,
     ButtonModule,
     MenuModule,
+    ConfirmDialogModule,
   ],
 })
 export class ContentModule {}

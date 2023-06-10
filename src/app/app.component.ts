@@ -5,6 +5,7 @@ import { MenuAction, MenuEntry } from './model/menu';
 import { Router } from '@angular/router';
 import { UserService } from './services/user.service';
 import { User } from './model/user';
+import { ExecService } from './services/exec.service';
 
 @Component({
   selector: 'app-root',
@@ -20,7 +21,8 @@ export class AppComponent implements OnInit {
     private router: Router,
     private primengConfig: PrimeNGConfig,
     private menuService: MenuService,
-    private userService: UserService
+    private userService: UserService,
+    private execService: ExecService
   ) {}
 
   ngOnInit() {
@@ -43,15 +45,24 @@ export class AppComponent implements OnInit {
         item.children.length > 0
           ? item.children.map((item) => this.getMenuItem(item))
           : undefined,
-      command: this.evalAction(item.action),
+      command: this.evalAction(item),
     };
   }
 
-  evalAction(action: MenuAction): ((event?: any) => void) | undefined {
-    if (action.type == 'GRID') {
-      return (event) => {
-        this.callGrid(event);
-      };
+  evalAction(item: MenuEntry): ((event?: any) => void) | undefined {
+    switch (item.action.type) {
+      case 'GRID':
+        return (event) => {
+          this.callGrid(event);
+        };
+      case 'EXEC':
+        return (event) => {
+          this.execService.exec(item.id).subscribe({
+            next: (_) => {
+              console.log('run exec');
+            },
+          });
+        };
     }
     return undefined;
   }

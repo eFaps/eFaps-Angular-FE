@@ -1,14 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { MenuItem } from 'primeng/api';
-import { combineLatest, forkJoin } from 'rxjs';
+import { ConfirmationService, MenuItem } from 'primeng/api';
+import { combineLatest } from 'rxjs';
 import { MenuEntry } from 'src/app/model/menu';
+import { ExecService } from 'src/app/services/exec.service';
 import { TableService } from 'src/app/services/table.service';
 
 @Component({
   selector: 'app-table',
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.scss'],
+  providers: [ConfirmationService],
 })
 export class TableComponent implements OnInit {
   id: string | undefined;
@@ -21,7 +23,9 @@ export class TableComponent implements OnInit {
   menuItems: MenuItem[] = [];
   constructor(
     private route: ActivatedRoute,
-    private tableService: TableService
+    private confirmationService: ConfirmationService,
+    private tableService: TableService,
+    private execService: ExecService
   ) {}
 
   ngOnInit(): void {
@@ -52,6 +56,37 @@ export class TableComponent implements OnInit {
         item.children && item.children.length > 0
           ? item.children.map((item) => this.getMenuItem(item))
           : undefined,
+      command: this.evalAction(item),
     };
+  }
+
+  evalAction(item: MenuEntry): ((event?: any) => void) | undefined {
+    switch (item.action.type) {
+      case 'EXEC':
+        return (event) => {
+          if (item.action.verify) {
+            this.confirmationService.confirm({
+              message: item.action.verify.question,
+              header: 'Confirmation',
+              icon: 'pi pi-exclamation-triangle',
+              accept: () => {
+                this.execService.exec(item.id).subscribe({
+                  next: (_) => {
+                    console.log('run exec');
+                  },
+                });
+              },
+              reject: () => {},
+            });
+          } else {
+            this.execService.exec(item.id).subscribe({
+              next: (_) => {
+                console.log('run exec');
+              },
+            });
+          }
+        };
+    }
+    return undefined;
   }
 }

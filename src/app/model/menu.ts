@@ -7,4 +7,10 @@ export interface MenuEntry {
 
 export interface MenuAction {
   type: null | 'SEARCH' | 'EXEC' | 'GRID';
+  verify?: Verifcation;
+}
+
+export interface Verifcation {
+  question: string;
+  selectedRows?: number;
 }
