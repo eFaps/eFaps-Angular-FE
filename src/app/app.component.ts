@@ -55,7 +55,11 @@ export class AppComponent implements OnInit {
 
   set user(user: User | undefined) {
     if (user && user.companies.length > 0) {
-      this.showCompanySelector = true;
+      if (user.companies.length > 1) {
+        this.showCompanySelector = true;
+      } else {
+        this.company = user.companies[0];
+      }
     } else {
       this.showCompanySelector = false;
     }
