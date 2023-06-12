@@ -6,9 +6,10 @@ import { AppComponent } from './app.component';
 import { MenubarModule } from 'primeng/menubar';
 import { initializeKeycloak } from './init/keycloak-init.factory';
 import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { ButtonModule } from 'primeng/button';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
+import { CompanyInterceptor } from './interceptors/company.interceptor';
 
 @NgModule({
   declarations: [AppComponent],
@@ -29,6 +30,7 @@ import { OverlayPanelModule } from 'primeng/overlaypanel';
       multi: true,
       deps: [KeycloakService],
     },
+    { provide: HTTP_INTERCEPTORS, useClass: CompanyInterceptor, multi: true },
   ],
   bootstrap: [AppComponent],
 })

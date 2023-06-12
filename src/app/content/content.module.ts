@@ -35,7 +35,7 @@ import { ToolbarModule } from 'primeng/toolbar';
     ButtonModule,
     MenuModule,
     ConfirmDialogModule,
-    ToolbarModule
+    ToolbarModule,
   ],
 })
 export class ContentModule {}

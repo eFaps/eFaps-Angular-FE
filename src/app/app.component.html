@@ -1,7 +1,7 @@
 <p-menubar [model]="menuItems">
     <ng-template pTemplate="end">
         <div class="info">
-            {{user?.company}}
+           {{companyLabel}}
             <p-button icon="pi pi-user" styleClass="p-button-rounded p-button-info p-button-outlined"
             (click)="op.toggle($event)"></p-button>
             <p-overlayPanel #op>

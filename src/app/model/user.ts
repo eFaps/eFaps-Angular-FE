@@ -1,5 +1,11 @@
 export interface User {
-  company: string;
   firstName: string;
   lastName: string;
+  companies: Company[];
+}
+
+export interface Company {
+  name: string;
+  uuid: string;
+  current: boolean;
 }

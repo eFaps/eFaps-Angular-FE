@@ -15,7 +15,8 @@ import { ExecService } from './services/exec.service';
 export class AppComponent implements OnInit {
   title = 'eFaps-Angular-FE';
   menuItems: MenuItem[] = [];
-  user: User | undefined;
+  _user: User | undefined;
+  companyLabel: string  | undefined ;
 
   constructor(
     private router: Router,
@@ -27,14 +28,28 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.primengConfig.ripple = true;
-
-    this.menuService.getMainMenu().subscribe({
-      next: (items) =>
-        (this.menuItems = items.map((item) => this.getMenuItem(item))),
-    });
     this.userService.getCurrentUser().subscribe({
-      next: (user) => (this.user = user),
+      next: (user) => {
+        this.user = user;
+        this.menuService.getMainMenu().subscribe({
+          next: (items) =>
+            (this.menuItems = items.map((item) => this.getMenuItem(item))),
+        });
+      },
     });
+  }
+
+  set user(user: User | undefined) {
+    if (user) {
+      this.companyLabel =  user.companies.find((element) => {
+        return element.current == true;
+      })?.name
+    }
+    this._user = user
+  }
+
+  get user(): User | undefined {
+    return this._user
   }
 
   getMenuItem(item: MenuEntry): MenuItem {
