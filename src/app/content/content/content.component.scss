@@ -1,17 +1,5 @@
-.header {
-    font-weight: 700;
-    line-height: 1;
-    border: 1px solid #dee2e6;
-    padding: 0.5rem;
-    background: #f8f9fa;
-    color: #343a40;
-    border-top-right-radius: 6px;
-    border-top-left-radius: 6px;
-    align-items: center;
-    display: flex;
-    gap: 5px;
-    
-    span {
-        padding: 1rem;
-    }
+.mainHeader {
+   height: 3rem;
+   line-height: 3rem;
+   margin-left: 5px;
 }

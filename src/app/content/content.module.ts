@@ -15,6 +15,7 @@ import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { MenuModule } from 'primeng/menu';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ToolbarModule } from 'primeng/toolbar';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
     ButtonModule,
     MenuModule,
     ConfirmDialogModule,
+    ToolbarModule
   ],
 })
 export class ContentModule {}
