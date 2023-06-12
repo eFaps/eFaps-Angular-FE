@@ -10,6 +10,7 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { ButtonModule } from 'primeng/button';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { CompanyInterceptor } from './interceptors/company.interceptor';
+import { DynamicDialogModule } from 'primeng/dynamicdialog';
 
 @NgModule({
   declarations: [AppComponent],
@@ -22,6 +23,7 @@ import { CompanyInterceptor } from './interceptors/company.interceptor';
     BrowserAnimationsModule,
     ButtonModule,
     OverlayPanelModule,
+    DynamicDialogModule,
   ],
   providers: [
     {

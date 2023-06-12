@@ -1,26 +1,31 @@
 import { Component, OnInit } from '@angular/core';
 import { MenuItem, PrimeNGConfig } from 'primeng/api';
 import { MenuService } from './services/menu.service';
-import { MenuAction, MenuEntry } from './model/menu';
+import { MenuEntry } from './model/menu';
 import { Router } from '@angular/router';
 import { UserService } from './services/user.service';
-import { User } from './model/user';
+import { Company, User } from './model/user';
 import { ExecService } from './services/exec.service';
+import { DialogService } from 'primeng/dynamicdialog';
+import { CompanyChooserComponent } from './standalone/company-chooser/company-chooser.component';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
+  providers: [DialogService],
 })
 export class AppComponent implements OnInit {
   title = 'eFaps-Angular-FE';
   menuItems: MenuItem[] = [];
   _user: User | undefined;
-  companyLabel: string  | undefined ;
+  company: Company | undefined;
+  showCompanySelector: boolean = false;
 
   constructor(
     private router: Router,
     private primengConfig: PrimeNGConfig,
+    private dialogService: DialogService,
     private menuService: MenuService,
     private userService: UserService,
     private execService: ExecService
@@ -28,6 +33,9 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.primengConfig.ripple = true;
+    this.userService.company.subscribe({
+      next: company => this.company= company
+    })
     this.userService.getCurrentUser().subscribe({
       next: (user) => {
         this.user = user;
@@ -40,16 +48,16 @@ export class AppComponent implements OnInit {
   }
 
   set user(user: User | undefined) {
-    if (user) {
-      this.companyLabel =  user.companies.find((element) => {
-        return element.current == true;
-      })?.name
+    if (user && user.companies.length > 0) {
+      this.showCompanySelector = true;
+    } else {
+      this.showCompanySelector = false;
     }
-    this._user = user
+    this._user = user;
   }
 
   get user(): User | undefined {
-    return this._user
+    return this._user;
   }
 
   getMenuItem(item: MenuEntry): MenuItem {
@@ -85,5 +93,29 @@ export class AppComponent implements OnInit {
   callGrid(event?: any) {
     const menuItem = event.item as MenuItem;
     this.router.navigate(['table', menuItem.id]);
+  }
+
+  switchCompany() {
+    const ref = this.dialogService.open(CompanyChooserComponent, {
+      header: 'Compania',
+      width: '300px',
+    });
+    ref.onClose.subscribe((company: Company) => {
+      if (company) {
+          if (company.uuid != this.company?.uuid) {
+            this.userService.setCompany(company).subscribe({
+              next: () => {
+                this.router.navigateByUrl("/").then(()=>{
+                  this.menuService.getMainMenu().subscribe({
+                    next: (items) =>
+                      (this.menuItems = items.map((item) => this.getMenuItem(item))),
+                  });
+                })
+              }
+            })
+
+          }
+      }
+  });
   }
 }

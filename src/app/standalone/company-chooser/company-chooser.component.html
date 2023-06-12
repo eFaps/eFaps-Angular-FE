@@ -1,0 +1,8 @@
+<div class="p-dialog-content">
+    <form [formGroup]="formGroup">
+        <p-dropdown formControlName="company" [options]="companies" optionLabel="name" appendTo="body"></p-dropdown>
+    </form>
+</div>
+<div class="p-dialog-footer submit-btn">
+    <p-button icon="pi pi-check" (click)="submit()"></p-button>
+</div>

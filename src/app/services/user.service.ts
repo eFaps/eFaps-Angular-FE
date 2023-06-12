@@ -29,4 +29,9 @@ export class UserService {
       })
     );
   }
+
+  setCompany(company: Company): Observable<User>  {
+    this.currentCompany.next(company);
+    return this.getCurrentUser();
+  }
 }

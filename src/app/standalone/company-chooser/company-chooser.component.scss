@@ -1,0 +1,9 @@
+:host {
+    ::ng-deep {
+        .p-dialog-footer.submit-btn {
+            button {
+                width: 3rem !important;
+            }
+        }
+    }
+}
