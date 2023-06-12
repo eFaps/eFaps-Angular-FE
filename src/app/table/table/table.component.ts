@@ -41,7 +41,7 @@ export class TableComponent implements OnInit {
             this.elements = val.values;
             this.selectionMode = val.selectionMode;
             this.loading = false;
-            this.menuItems = val.menu.map((item) => this.getMenuItem(item));
+            this.menuItems =  val.menu ? val.menu.map((item) => this.getMenuItem(item)) : [];
           },
         });
       }

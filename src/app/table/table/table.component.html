@@ -7,7 +7,7 @@
         <ng-template pTemplate="caption">
             <div class="table-header">
                 <p-menu #menu [model]="menuItems" [popup]="true"  [appendTo]="wrapperDiv"></p-menu>
-                <button pButton type="button" (click)="menu.toggle($event)" icon="pi pi-bars"></button>
+                <button pButton type="button" (click)="menu.toggle($event)" icon="pi pi-bars" *ngIf="menuItems.length > 0"></button>
                 {{title}}
             </div>
         </ng-template>
