@@ -8,6 +8,7 @@ import { Company, User } from './model/user';
 import { ExecService } from './services/exec.service';
 import { DialogService } from 'primeng/dynamicdialog';
 import { CompanyChooserComponent } from './standalone/company-chooser/company-chooser.component';
+import { LoaderService } from './services/loader.service';
 
 @Component({
   selector: 'app-root',
@@ -21,21 +22,26 @@ export class AppComponent implements OnInit {
   _user: User | undefined;
   company: Company | undefined;
   showCompanySelector: boolean = false;
+  isLoading = false;
 
   constructor(
     private router: Router,
     private primengConfig: PrimeNGConfig,
     private dialogService: DialogService,
+    private loaderService: LoaderService,
     private menuService: MenuService,
     private userService: UserService,
     private execService: ExecService
   ) {}
 
   ngOnInit() {
+    this.loaderService.isLoading.subscribe({
+      next: (isLoading) => (this.isLoading = isLoading),
+    });
     this.primengConfig.ripple = true;
     this.userService.company.subscribe({
-      next: company => this.company= company
-    })
+      next: (company) => (this.company = company),
+    });
     this.userService.getCurrentUser().subscribe({
       next: (user) => {
         this.user = user;
@@ -102,20 +108,21 @@ export class AppComponent implements OnInit {
     });
     ref.onClose.subscribe((company: Company) => {
       if (company) {
-          if (company.uuid != this.company?.uuid) {
-            this.userService.setCompany(company).subscribe({
-              next: () => {
-                this.router.navigateByUrl("/").then(()=>{
-                  this.menuService.getMainMenu().subscribe({
-                    next: (items) =>
-                      (this.menuItems = items.map((item) => this.getMenuItem(item))),
-                  });
-                })
-              }
-            })
-
-          }
+        if (company.uuid != this.company?.uuid) {
+          this.userService.setCompany(company).subscribe({
+            next: () => {
+              this.router.navigateByUrl('/').then(() => {
+                this.menuService.getMainMenu().subscribe({
+                  next: (items) =>
+                    (this.menuItems = items.map((item) =>
+                      this.getMenuItem(item)
+                    )),
+                });
+              });
+            },
+          });
+        }
       }
-  });
+    });
   }
 }

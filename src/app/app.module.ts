@@ -11,6 +11,8 @@ import { ButtonModule } from 'primeng/button';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { CompanyInterceptor } from './interceptors/company.interceptor';
 import { DynamicDialogModule } from 'primeng/dynamicdialog';
+import { LoaderInterceptor } from './interceptors/loader.interceptor';
+import { ProgressBarModule } from 'primeng/progressbar';
 
 @NgModule({
   declarations: [AppComponent],
@@ -24,6 +26,7 @@ import { DynamicDialogModule } from 'primeng/dynamicdialog';
     ButtonModule,
     OverlayPanelModule,
     DynamicDialogModule,
+    ProgressBarModule,
   ],
   providers: [
     {
@@ -33,6 +36,7 @@ import { DynamicDialogModule } from 'primeng/dynamicdialog';
       deps: [KeycloakService],
     },
     { provide: HTTP_INTERCEPTORS, useClass: CompanyInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true },
   ],
   bootstrap: [AppComponent],
 })

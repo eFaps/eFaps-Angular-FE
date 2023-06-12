@@ -18,7 +18,10 @@ export class CompanyChooserComponent implements OnInit {
   companies: Company[] = [];
   formGroup: FormGroup;
 
-  constructor(private userService: UserService, private dialogRef: DynamicDialogRef) {
+  constructor(
+    private userService: UserService,
+    private dialogRef: DynamicDialogRef
+  ) {
     this.formGroup = new FormGroup({
       company: new FormControl<Company | undefined>(undefined),
     });
@@ -37,6 +40,6 @@ export class CompanyChooserComponent implements OnInit {
   }
 
   submit() {
-    this.dialogRef.close(this.formGroup.controls['company'].value)
+    this.dialogRef.close(this.formGroup.controls['company'].value);
   }
 }
