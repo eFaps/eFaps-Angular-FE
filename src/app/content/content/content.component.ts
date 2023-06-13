@@ -27,7 +27,13 @@ export class ContentComponent implements OnInit {
     private confirmationService: ConfirmationService,
     private contentService: ContentService,
     private execService: ExecService
-  ) {}
+  ) {
+    // work arround to force scrollable
+    this.tabs = Array.from({ length: 50 }, (_, i) => ({label: ""}));
+  }
+
+
+
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
       this.oid = params['oid'];

@@ -7,7 +7,9 @@
         <div class="mainHeader">{{mainHeader}}</div>
     </div>
 </p-toolbar>
-<p-tabMenu [model]="tabs" [scrollable]="true" [activeItem]="activeItem"></p-tabMenu>
+<div class="tabs">
+    <p-tabMenu [model]="tabs" [scrollable]="true" [activeItem]="activeItem" [popup]="true"></p-tabMenu>
+</div>
 <app-sections *ngIf="showSections" [sections]="sections"></app-sections>
 <router-outlet name="contentOutlet"></router-outlet>
 <p-confirmDialog></p-confirmDialog>
