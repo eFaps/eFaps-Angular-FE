@@ -9,4 +9,7 @@ import { FormItem } from 'src/app/model/content';
 export class ElementComponent {
   @Input()
   formItem: FormItem | undefined;
+
+
+  
 }
