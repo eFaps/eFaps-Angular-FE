@@ -22,9 +22,10 @@ export interface FormSection extends Section {
 }
 
 export interface FormItem {
+  type: "DATETIME" | "DATE"
   label: string;
   name: string;
-  value: string | number | undefined;
+  value?: any;
 }
 
 export interface HeadingSection extends Section {

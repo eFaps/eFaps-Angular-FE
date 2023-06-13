@@ -1,9 +1,13 @@
-
 <div class="wrapper">
-    <div class="label" >
+    <div class="label">
         {{formItem?.label}}
     </div>
     <div class="value">
-        {{formItem?.value}}
+        <ng-container *ngIf="formItem?.type=='DATETIME'; else others">
+            {{formItem?.value | date:'medium'}} 
+        </ng-container>
+        <ng-template #others>
+            {{formItem?.value}}
+        </ng-template>
     </div>
 </div>
