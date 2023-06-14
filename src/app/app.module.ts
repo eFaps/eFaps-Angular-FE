@@ -13,6 +13,7 @@ import { CompanyInterceptor } from './interceptors/company.interceptor';
 import { DynamicDialogModule } from 'primeng/dynamicdialog';
 import { LoaderInterceptor } from './interceptors/loader.interceptor';
 import { ProgressBarModule } from 'primeng/progressbar';
+import { InputTextModule } from 'primeng/inputtext';
 
 @NgModule({
   declarations: [AppComponent],
@@ -27,6 +28,7 @@ import { ProgressBarModule } from 'primeng/progressbar';
     OverlayPanelModule,
     DynamicDialogModule,
     ProgressBarModule,
+    InputTextModule
   ],
   providers: [
     {

@@ -1,13 +1,19 @@
-.info {
+.wrapper {
     display: flex;
-    align-items: center;
     gap: 5px;
-    .infoOverlay {
-        width: 20px;
-    }
- }
 
- .companies {
+    .info {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+
+        .infoOverlay {
+            min-width: 150px;
+        }
+    }
+}
+
+.companies {
     padding: 5px;
     text-align: center;
 }
