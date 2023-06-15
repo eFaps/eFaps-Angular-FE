@@ -12,6 +12,9 @@
                 <label [for]="'opt' + indexOfelement" class="ml-2">{{ option.label }}</label>
             </div> 
         </ng-container>
+        <ng-container *ngIf="formItem?.type=='DROPDOWN'">
+            <p-dropdown [options]="formItem?.options" [(ngModel)]="dropdownValue" (onChange)="changeDropdown($event.value)"></p-dropdown>
+        </ng-container>
         <ng-container *ngIf="formItem?.type=='INPUT'; else others">
             <input type="text" pInputText #textInput (keyup)="onKey(textInput.value)"/>
         </ng-container>

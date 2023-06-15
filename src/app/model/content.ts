@@ -22,11 +22,11 @@ export interface FormSection extends Section {
 }
 
 export interface FormItem {
-  type: 'DATETIME' | 'DATE' | 'INPUT' | 'RADIO';
+  type: 'DATETIME' | 'DATE' | 'INPUT' | 'RADIO' | 'DROPDOWN';
   label: string;
   name: string;
   value?: any;
-  options?: any;
+  options?: Options[];
 }
 
 export interface HeadingSection extends Section {
@@ -37,4 +37,9 @@ export interface HeadingSection extends Section {
 export interface TableSection extends Section {
   columns: Column[];
   values: any[];
+}
+
+export interface Options {
+  label?: string;
+  value: any
 }
