@@ -9,11 +9,14 @@ import { FormItem } from 'src/app/model/content';
 export class ElementComponent  {
   radioValue: any;
   dropdownValue: any;
-
-  @Output() elementValue = new EventEmitter<{ name: string; value: any }>();
-
+  bitEnumValue: any;
 
   _formItem: FormItem | undefined;
+
+  showMultiSelectFilter = false;
+  
+
+  @Output() elementValue = new EventEmitter<{ name: string; value: any }>();
 
   constructor() {}
 
@@ -23,6 +26,9 @@ export class ElementComponent  {
     if (this.formItem?.type == 'DROPDOWN' &&  this.formItem.options) {
       this.dropdownValue = this.formItem.options[0].value
       this.changeDropdown(this.formItem.options[0].value)
+    }
+    if (this.formItem?.type == 'BITENUM' && this.formItem.options) {
+      this.showMultiSelectFilter = this.formItem.options.length > 10
     }
   }
 
@@ -45,6 +51,12 @@ export class ElementComponent  {
   }
 
   changeDropdown(value: any) {
+    this.elementValue.emit({
+      name: this.formItem!!.name,
+      value: value,
+    });
+  }
+  changeBitEnum(value: any) {
     this.elementValue.emit({
       name: this.formItem!!.name,
       value: value,

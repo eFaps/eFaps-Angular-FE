@@ -22,7 +22,7 @@ export interface FormSection extends Section {
 }
 
 export interface FormItem {
-  type: 'DATETIME' | 'DATE' | 'INPUT' | 'RADIO' | 'DROPDOWN';
+  type: 'DATETIME' | 'DATE' | 'INPUT' | 'RADIO' | 'DROPDOWN' | 'BITENUM';
   label: string;
   name: string;
   value?: any;

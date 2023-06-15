@@ -15,6 +15,9 @@
         <ng-container *ngIf="formItem?.type=='DROPDOWN'">
             <p-dropdown [options]="formItem?.options" [(ngModel)]="dropdownValue" (onChange)="changeDropdown($event.value)"></p-dropdown>
         </ng-container>
+        <ng-container *ngIf="formItem?.type=='BITENUM'">
+            <p-multiSelect [options]="formItem?.options" [(ngModel)]="bitEnumValue" display="chip" [filter]="showMultiSelectFilter" [showToggleAll]="true" [showClear]="true" (onChange)="changeBitEnum($event.value)"></p-multiSelect>
+        </ng-container>
         <ng-container *ngIf="formItem?.type=='INPUT'; else others">
             <input type="text" pInputText #textInput (keyup)="onKey(textInput.value)"/>
         </ng-container>

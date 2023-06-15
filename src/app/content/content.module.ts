@@ -11,6 +11,8 @@ import { RadioButtonModule } from 'primeng/radiobutton';
 import { TableModule } from 'primeng/table';
 import { TabMenuModule } from 'primeng/tabmenu';
 import { ToolbarModule } from 'primeng/toolbar';
+import { MultiSelectModule } from 'primeng/multiselect';
+
 
 import { ContentRoutingModule } from './content-routing.module';
 import { ContentComponent } from './content/content.component';
@@ -45,6 +47,7 @@ import { TableSectionComponent } from './table-section/table-section.component';
     FormsModule,
     RadioButtonModule,
     DropdownModule,
+    MultiSelectModule
   ],
 })
 export class ContentModule {}
