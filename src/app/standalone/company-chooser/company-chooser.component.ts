@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { ButtonModule } from 'primeng/button';
 import { DropdownModule } from 'primeng/dropdown';
+import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { Company } from 'src/app/model/user';
 import { UserService } from 'src/app/services/user.service';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { DynamicDialogRef } from 'primeng/dynamicdialog';
-import { ButtonModule } from 'primeng/button';
 
 @Component({
   selector: 'app-company-chooser',

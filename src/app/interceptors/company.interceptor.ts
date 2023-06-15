@@ -1,13 +1,14 @@
-import { Injectable } from '@angular/core';
 import {
-  HttpRequest,
-  HttpHandler,
   HttpEvent,
+  HttpHandler,
   HttpInterceptor,
+  HttpRequest,
 } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { UserService } from '../services/user.service';
+
 import { Company } from '../model/user';
+import { UserService } from '../services/user.service';
 
 @Injectable()
 export class CompanyInterceptor implements HttpInterceptor {

@@ -1,14 +1,15 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { TableComponent } from './table/table.component';
-import { TableRoutingModule } from './table-routing.module';
-import { TableModule as primeTableModule } from 'primeng/table';
-import { MultiSelectModule } from 'primeng/multiselect';
-import { ColumnComponent } from './column/column.component';
+import { NgModule } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { MenuModule } from 'primeng/menu';
 import { MenubarModule } from 'primeng/menubar';
-import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { MultiSelectModule } from 'primeng/multiselect';
+import { TableModule as primeTableModule } from 'primeng/table';
+
+import { ColumnComponent } from './column/column.component';
+import { TableRoutingModule } from './table-routing.module';
+import { TableComponent } from './table/table.component';
 
 @NgModule({
   declarations: [TableComponent, ColumnComponent],

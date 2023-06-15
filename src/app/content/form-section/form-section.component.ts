@@ -9,7 +9,7 @@ import { FormItem, FormSection } from 'src/app/model/content';
 export class FormSectionComponent {
   _formSection: FormSection | undefined;
   items: any[] = [];
-  values: Map<String, any> = new Map
+  values: Map<String, any> = new Map();
 
   @Input()
   set formSection(formSection: FormSection) {
@@ -24,13 +24,13 @@ export class FormSectionComponent {
   toFormItem(item: any): FormItem {
     return item as FormItem;
   }
-  
+
   toFormItemArray(item: any): FormItem[] {
     return item as FormItem[];
   }
 
-  setValue(elementValue: {name: string, value: any}) {
-    this.values.set(elementValue.name, elementValue.value)
-    console.log(this.values)
+  setValue(elementValue: { name: string; value: any }) {
+    this.values.set(elementValue.name, elementValue.value);
+    console.log(this.values);
   }
 }

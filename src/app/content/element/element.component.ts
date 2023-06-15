@@ -7,28 +7,26 @@ import { FormItem } from 'src/app/model/content';
   styleUrls: ['./element.component.scss'],
 })
 export class ElementComponent {
-  radioValue: any
-  
-  @Output() elementValue = new EventEmitter<{name: string, value: any}>();
+  radioValue: any;
+
+  @Output() elementValue = new EventEmitter<{ name: string; value: any }>();
 
   @Input()
   formItem: FormItem | undefined;
 
-  constructor() {
-    
-  }
+  constructor() {}
 
   onKey(value: string) {
     this.elementValue.emit({
       name: this.formItem!!.name,
-      value: value
-    })
+      value: value,
+    });
   }
 
   changeRadio(value: any) {
     this.elementValue.emit({
       name: this.formItem!!.name,
-      value: value
-    })
+      value: value,
+    });
   }
 }

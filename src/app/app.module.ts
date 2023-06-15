@@ -1,19 +1,20 @@
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
+import { ButtonModule } from 'primeng/button';
+import { DynamicDialogModule } from 'primeng/dynamicdialog';
+import { InputTextModule } from 'primeng/inputtext';
+import { MenubarModule } from 'primeng/menubar';
+import { OverlayPanelModule } from 'primeng/overlaypanel';
+import { ProgressBarModule } from 'primeng/progressbar';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { MenubarModule } from 'primeng/menubar';
 import { initializeKeycloak } from './init/keycloak-init.factory';
-import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
-import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { ButtonModule } from 'primeng/button';
-import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { CompanyInterceptor } from './interceptors/company.interceptor';
-import { DynamicDialogModule } from 'primeng/dynamicdialog';
 import { LoaderInterceptor } from './interceptors/loader.interceptor';
-import { ProgressBarModule } from 'primeng/progressbar';
-import { InputTextModule } from 'primeng/inputtext';
 
 @NgModule({
   declarations: [AppComponent],

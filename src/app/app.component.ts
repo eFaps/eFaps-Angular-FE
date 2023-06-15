@@ -1,14 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { MenuItem, PrimeNGConfig } from 'primeng/api';
-import { MenuService } from './services/menu.service';
-import { MenuEntry } from './model/menu';
 import { Router } from '@angular/router';
-import { UserService } from './services/user.service';
+import { MenuItem, PrimeNGConfig } from 'primeng/api';
+import { DialogService } from 'primeng/dynamicdialog';
+
+import { MenuEntry } from './model/menu';
 import { Company, User } from './model/user';
 import { ExecService } from './services/exec.service';
-import { DialogService } from 'primeng/dynamicdialog';
-import { CompanyChooserComponent } from './standalone/company-chooser/company-chooser.component';
 import { LoaderService } from './services/loader.service';
+import { MenuService } from './services/menu.service';
+import { UserService } from './services/user.service';
+import { CompanyChooserComponent } from './standalone/company-chooser/company-chooser.component';
 
 @Component({
   selector: 'app-root',

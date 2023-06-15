@@ -13,13 +13,13 @@ import { Outline, Section } from 'src/app/model/content';
 })
 export class ModalContentComponent {
   outline: Outline;
-  
+
   constructor(
     config: DynamicDialogConfig,
     private dialogRef: DynamicDialogRef
   ) {
     this.outline = config.data;
     config.header = this.outline.header;
-    config.maximizable = true
+    config.maximizable = true;
   }
 }

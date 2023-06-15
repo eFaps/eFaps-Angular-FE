@@ -1,8 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { UtilService } from './util.service';
-import { Company, User } from '../model/user';
 import { BehaviorSubject, Observable, map } from 'rxjs';
+
+import { Company, User } from '../model/user';
+import { UtilService } from './util.service';
 
 @Injectable({
   providedIn: 'root',
