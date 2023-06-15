@@ -106,9 +106,12 @@ export class TableComponent implements OnInit {
   formAction(item: MenuEntry) {
     if (item.action.modal) {
       this.contentService.getContentWithCmd('none', item.id).subscribe({
-        next: (content) => {
+        next: (outline) => {
           this.dialogService.open(ModalContentComponent, {
-            data: content,
+            data: {
+              item,
+              outline
+            }
           });
         },
       });

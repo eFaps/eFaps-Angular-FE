@@ -4,22 +4,32 @@
     </div>
     <div class="value">
         <ng-container *ngIf="formItem?.type=='DATETIME'">
-            {{formItem?.value | date:'medium'}} 
+            {{formItem?.value | date:'medium'}}
         </ng-container>
         <ng-container *ngIf="formItem?.type=='RADIO'">
             <div *ngFor="let option of formItem?.options;let indexOfelement=index;" class="field-checkbox">
-                <p-radioButton [inputId]="'opt' + indexOfelement" [value]="option.value" [(ngModel)]="radioValue" (onClick)="changeRadio($event.value)"></p-radioButton>
+                <p-radioButton [inputId]="'opt' + indexOfelement" [value]="option.value" [(ngModel)]="radioValue"
+                    (onClick)="changeRadio($event.value)"></p-radioButton>
                 <label [for]="'opt' + indexOfelement" class="ml-2">{{ option.label }}</label>
-            </div> 
+            </div>
         </ng-container>
         <ng-container *ngIf="formItem?.type=='DROPDOWN'">
-            <p-dropdown [options]="formItem?.options" [(ngModel)]="dropdownValue" (onChange)="changeDropdown($event.value)"></p-dropdown>
+            <p-dropdown [options]="formItem?.options" [(ngModel)]="dropdownValue"
+                (onChange)="changeDropdown($event.value)"></p-dropdown>
         </ng-container>
         <ng-container *ngIf="formItem?.type=='BITENUM'">
-            <p-multiSelect [options]="formItem?.options" [(ngModel)]="bitEnumValue" display="chip" [filter]="showMultiSelectFilter" [showToggleAll]="true" [showClear]="true" (onChange)="changeBitEnum($event.value)"></p-multiSelect>
+            <p-multiSelect [options]="formItem?.options" [(ngModel)]="bitEnumValue" display="chip"
+                [filter]="showMultiSelectFilter" [showToggleAll]="true" [showClear]="true"
+                (onChange)="changeBitEnum($event.value)"></p-multiSelect>
+        </ng-container>
+        <ng-container *ngIf="formItem?.type=='AUTOCOMPLETE'">
+            <p-autoComplete [(ngModel)]="autoCompleteValue" [suggestions]="autoCompleteSuggestions"
+                (completeMethod)="search($event.query)" (onSelect)="changeAutoComplete($event)"
+                (onUnselect)="changeAutoComplete($event)" field="label" [lazy]="true" placeholder="buscar"
+                [forceSelection]="true" [showEmptyMessage]="true"> </p-autoComplete>
         </ng-container>
         <ng-container *ngIf="formItem?.type=='INPUT'; else others">
-            <input type="text" pInputText #textInput (keyup)="onKey(textInput.value)"/>
+            <input type="text" pInputText #textInput (keyup)="onKey(textInput.value)" />
         </ng-container>
         <ng-template #others>
             {{formItem?.value}}

@@ -12,7 +12,7 @@ import { TableModule } from 'primeng/table';
 import { TabMenuModule } from 'primeng/tabmenu';
 import { ToolbarModule } from 'primeng/toolbar';
 import { MultiSelectModule } from 'primeng/multiselect';
-
+import { AutoCompleteModule } from 'primeng/autocomplete';
 
 import { ContentRoutingModule } from './content-routing.module';
 import { ContentComponent } from './content/content.component';
@@ -47,7 +47,8 @@ import { TableSectionComponent } from './table-section/table-section.component';
     FormsModule,
     RadioButtonModule,
     DropdownModule,
-    MultiSelectModule
+    MultiSelectModule,
+    AutoCompleteModule
   ],
 })
 export class ContentModule {}

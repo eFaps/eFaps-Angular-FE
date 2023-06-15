@@ -1,4 +1,4 @@
-import { MenuEntry } from './menu';
+import { MenuEntry, MenuAction } from './menu';
 import { Column } from './table';
 
 export interface Content {
@@ -7,6 +7,7 @@ export interface Content {
 }
 
 export interface Outline {
+  action?: MenuAction;
   header: string;
   sections: Section[];
   menu: MenuEntry[];
@@ -22,11 +23,12 @@ export interface FormSection extends Section {
 }
 
 export interface FormItem {
-  type: 'DATETIME' | 'DATE' | 'INPUT' | 'RADIO' | 'DROPDOWN' | 'BITENUM';
+  type: 'DATETIME' | 'DATE' | 'INPUT' | 'RADIO' | 'DROPDOWN' | 'BITENUM' | 'AUTOCOMPLETE';
   label: string;
   name: string;
   value?: any;
-  options?: Options[];
+  options?: Option[];
+  ref?: string;
 }
 
 export interface HeadingSection extends Section {
@@ -39,7 +41,7 @@ export interface TableSection extends Section {
   values: any[];
 }
 
-export interface Options {
+export interface Option {
   label?: string;
   value: any
 }

@@ -1,5 +1,8 @@
-import { AfterViewInit, Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormItem } from 'src/app/model/content';
+import { AutoCompleteService } from 'src/app/services/auto-complete.service';
+import { Option } from 'src/app/model/content';
+
 
 @Component({
   selector: 'app-element',
@@ -10,15 +13,16 @@ export class ElementComponent  {
   radioValue: any;
   dropdownValue: any;
   bitEnumValue: any;
+  autoCompleteValue: any;
 
   _formItem: FormItem | undefined;
 
   showMultiSelectFilter = false;
-  
+  autoCompleteSuggestions: any[] = [];
 
   @Output() elementValue = new EventEmitter<{ name: string; value: any }>();
 
-  constructor() {}
+  constructor(private autoCompleteService: AutoCompleteService) {}
 
   @Input()
   set formItem(formItem: FormItem | undefined) {
@@ -56,10 +60,26 @@ export class ElementComponent  {
       value: value,
     });
   }
+
   changeBitEnum(value: any) {
     this.elementValue.emit({
       name: this.formItem!!.name,
       value: value,
+    });
+  }
+
+  search(query:string) {
+    this.autoCompleteService.search(this.formItem!!.ref!!, query).subscribe({
+      next: (result) => {
+        this.autoCompleteSuggestions = result.options
+      }
+    })
+  }
+
+  changeAutoComplete(option: Option) {
+    this.elementValue.emit({
+      name: this.formItem!!.name,
+      value: option.value,
     });
   }
 }
