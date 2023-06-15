@@ -1,8 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ConfirmationService, MenuItem } from 'primeng/api';
+import { DialogService } from 'primeng/dynamicdialog';
 import { combineLatest } from 'rxjs';
+import { ContentComponent } from 'src/app/content/content/content.component';
+import { ModalContentComponent } from 'src/app/content/modal-content/modal-content.component';
 import { MenuEntry } from 'src/app/model/menu';
+import { ContentService } from 'src/app/services/content.service';
 import { ExecService } from 'src/app/services/exec.service';
 import { TableService } from 'src/app/services/table.service';
 
@@ -10,7 +14,7 @@ import { TableService } from 'src/app/services/table.service';
   selector: 'app-table',
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.scss'],
-  providers: [ConfirmationService],
+  providers: [ConfirmationService, DialogService],
 })
 export class TableComponent implements OnInit {
   id: string | undefined;
@@ -24,6 +28,8 @@ export class TableComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private confirmationService: ConfirmationService,
+    private dialogService: DialogService,
+    private contentService: ContentService,
     private tableService: TableService,
     private execService: ExecService
   ) {}
@@ -88,7 +94,24 @@ export class TableComponent implements OnInit {
             });
           }
         };
+
+      case 'FORM':
+        return (event) => {
+          this.formAction(item);
+        };
     }
     return undefined;
+  }
+
+  formAction(item: MenuEntry) {
+    if (item.action.modal) {
+      this.contentService.getContentWithCmd('none', item.id).subscribe({
+        next: (content) => {
+          this.dialogService.open(ModalContentComponent, {
+            data: content,
+          });
+        },
+      });
+    }
   }
 }

@@ -6,7 +6,8 @@ export interface MenuEntry {
 }
 
 export interface MenuAction {
-  type: null | 'SEARCH' | 'EXEC' | 'GRID';
+  modal: boolean;
+  type: null | 'SEARCH' | 'EXEC' | 'GRID' | 'FORM';
   verify?: Verifcation;
 }
 

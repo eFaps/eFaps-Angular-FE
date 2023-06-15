@@ -28,7 +28,7 @@ import { InputTextModule } from 'primeng/inputtext';
     OverlayPanelModule,
     DynamicDialogModule,
     ProgressBarModule,
-    InputTextModule
+    InputTextModule,
   ],
   providers: [
     {

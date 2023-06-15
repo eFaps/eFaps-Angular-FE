@@ -29,10 +29,8 @@ export class ContentComponent implements OnInit {
     private execService: ExecService
   ) {
     // work arround to force scrollable
-    this.tabs = Array.from({ length: 50 }, (_, i) => ({label: ""}));
+    this.tabs = Array.from({ length: 50 }, (_, i) => ({ label: '' }));
   }
-
-
 
   ngOnInit(): void {
     this.route.params.subscribe((params) => {

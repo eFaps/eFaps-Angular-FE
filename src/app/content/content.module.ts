@@ -16,6 +16,10 @@ import { ButtonModule } from 'primeng/button';
 import { MenuModule } from 'primeng/menu';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ToolbarModule } from 'primeng/toolbar';
+import { ModalContentComponent } from './modal-content/modal-content.component';
+import { InputTextModule } from 'primeng/inputtext';
+import { FormsModule } from '@angular/forms';
+import { RadioButtonModule } from 'primeng/radiobutton';
 
 @NgModule({
   declarations: [
@@ -25,6 +29,7 @@ import { ToolbarModule } from 'primeng/toolbar';
     TableSectionComponent,
     FormSectionComponent,
     ElementComponent,
+    ModalContentComponent,
   ],
   imports: [
     CommonModule,
@@ -36,6 +41,9 @@ import { ToolbarModule } from 'primeng/toolbar';
     MenuModule,
     ConfirmDialogModule,
     ToolbarModule,
+    InputTextModule,
+    FormsModule,
+    RadioButtonModule
   ],
 })
 export class ContentModule {}
