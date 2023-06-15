@@ -1,27 +1,47 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {
-  DialogService,
   DynamicDialogConfig,
   DynamicDialogRef,
 } from 'primeng/dynamicdialog';
-import { Outline, Section } from 'src/app/model/content';
+import { Outline } from 'src/app/model/content';
 import { MenuEntry } from 'src/app/model/menu';
+import { ExecService } from 'src/app/services/exec.service';
+import { ValueService } from 'src/app/services/value.service';
 
 @Component({
   selector: 'app-modal-content',
   templateUrl: './modal-content.component.html',
   styleUrls: ['./modal-content.component.scss'],
 })
-export class ModalContentComponent {
+export class ModalContentComponent implements OnInit{
   outline: Outline;
   callingMenu: MenuEntry
+  values: Map<String, any>| undefined;
+  
   constructor(
     config: DynamicDialogConfig,
-    private dialogRef: DynamicDialogRef
+    private dialogRef: DynamicDialogRef,
+    private valueService: ValueService,
+    private execService: ExecService
   ) {
     this.outline = config.data.outline;
     this.callingMenu = config.data.item
     config.header = this.outline.header;
     config.maximizable = true;
+  }
+
+  ngOnInit(): void {
+    this.valueService.values.subscribe({
+      next: values=> this.values = values
+    })
+  }
+
+  submit() {
+    console.log(this.values)
+    this.execService.exec(this.callingMenu.id, this.values).subscribe({
+      next: (tt) => {
+        console.log(tt)
+      }
+    })
   }
 }

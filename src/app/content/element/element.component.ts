@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormItem } from 'src/app/model/content';
 import { AutoCompleteService } from 'src/app/services/auto-complete.service';
+import { ValueService } from 'src/app/services/value.service';
 import { Option } from 'src/app/model/content';
 
 
@@ -20,9 +21,7 @@ export class ElementComponent  {
   showMultiSelectFilter = false;
   autoCompleteSuggestions: any[] = [];
 
-  @Output() elementValue = new EventEmitter<{ name: string; value: any }>();
-
-  constructor(private autoCompleteService: AutoCompleteService) {}
+  constructor(private valueService: ValueService,private autoCompleteService: AutoCompleteService) {}
 
   @Input()
   set formItem(formItem: FormItem | undefined) {
@@ -41,28 +40,28 @@ export class ElementComponent  {
   }
 
   onKey(value: string) {
-    this.elementValue.emit({
+    this.valueService.addEntry({
       name: this.formItem!!.name,
       value: value,
     });
   }
 
   changeRadio(value: any) {
-    this.elementValue.emit({
+    this.valueService.addEntry({
       name: this.formItem!!.name,
       value: value,
     });
   }
 
   changeDropdown(value: any) {
-    this.elementValue.emit({
+    this.valueService.addEntry({
       name: this.formItem!!.name,
       value: value,
     });
   }
 
   changeBitEnum(value: any) {
-    this.elementValue.emit({
+    this.valueService.addEntry({
       name: this.formItem!!.name,
       value: value,
     });
@@ -77,7 +76,7 @@ export class ElementComponent  {
   }
 
   changeAutoComplete(option: Option) {
-    this.elementValue.emit({
+    this.valueService.addEntry({
       name: this.formItem!!.name,
       value: option.value,
     });

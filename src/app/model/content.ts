@@ -29,6 +29,7 @@ export interface FormItem {
   value?: any;
   options?: Option[];
   ref?: string;
+  required?: boolean;
 }
 
 export interface HeadingSection extends Section {

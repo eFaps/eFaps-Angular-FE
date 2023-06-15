@@ -2,5 +2,5 @@
     <app-sections [sections]="outline.sections"></app-sections>
 </div>
 <div class="p-dialog-footer">
-    <p-button [label]="outline.action?.label" styleClass="p-button-warning"></p-button>
+    <p-button [label]="outline.action?.label" styleClass="p-button-warning" (click)="submit()"></p-button>
 </div>

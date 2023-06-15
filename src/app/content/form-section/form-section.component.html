@@ -1,10 +1,10 @@
 <div *ngFor="let item of items" class="item">
     <ng-container *ngIf="item.length">
         <ng-container *ngFor="let nestedItem of toFormItemArray(item)">
-            <app-element [formItem]="nestedItem" class="element" (elementValue)="setValue($event)"></app-element>
+            <app-element [formItem]="nestedItem" class="element"></app-element>
         </ng-container>
     </ng-container>
     <ng-container *ngIf="!item.length">
-        <app-element [formItem]="toFormItem(item)" class="element" (elementValue)="setValue($event)"></app-element>
+        <app-element [formItem]="toFormItem(item)" class="element"></app-element>
     </ng-container>
 </div>
