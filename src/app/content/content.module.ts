@@ -1,18 +1,18 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { AutoCompleteModule } from 'primeng/autocomplete';
 import { ButtonModule } from 'primeng/button';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { DropdownModule } from 'primeng/dropdown';
 import { InputTextModule } from 'primeng/inputtext';
 import { MenuModule } from 'primeng/menu';
+import { MultiSelectModule } from 'primeng/multiselect';
 import { PanelModule } from 'primeng/panel';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { TableModule } from 'primeng/table';
 import { TabMenuModule } from 'primeng/tabmenu';
 import { ToolbarModule } from 'primeng/toolbar';
-import { MultiSelectModule } from 'primeng/multiselect';
-import { AutoCompleteModule } from 'primeng/autocomplete';
 
 import { ContentRoutingModule } from './content-routing.module';
 import { ContentComponent } from './content/content.component';
@@ -48,7 +48,7 @@ import { TableSectionComponent } from './table-section/table-section.component';
     RadioButtonModule,
     DropdownModule,
     MultiSelectModule,
-    AutoCompleteModule
+    AutoCompleteModule,
   ],
 })
 export class ContentModule {}

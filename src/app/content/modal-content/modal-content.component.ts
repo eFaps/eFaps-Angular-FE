@@ -1,8 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  DynamicDialogConfig,
-  DynamicDialogRef,
-} from 'primeng/dynamicdialog';
+import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { Outline } from 'src/app/model/content';
 import { MenuEntry } from 'src/app/model/menu';
 import { ExecService } from 'src/app/services/exec.service';
@@ -13,11 +10,11 @@ import { ValueService } from 'src/app/services/value.service';
   templateUrl: './modal-content.component.html',
   styleUrls: ['./modal-content.component.scss'],
 })
-export class ModalContentComponent implements OnInit{
+export class ModalContentComponent implements OnInit {
   outline: Outline;
-  callingMenu: MenuEntry
-  values: Map<String, any>| undefined;
-  
+  callingMenu: MenuEntry;
+  values: Map<String, any> | undefined;
+
   constructor(
     config: DynamicDialogConfig,
     private dialogRef: DynamicDialogRef,
@@ -25,23 +22,22 @@ export class ModalContentComponent implements OnInit{
     private execService: ExecService
   ) {
     this.outline = config.data.outline;
-    this.callingMenu = config.data.item
+    this.callingMenu = config.data.item;
     config.header = this.outline.header;
     config.maximizable = true;
   }
 
   ngOnInit(): void {
     this.valueService.values.subscribe({
-      next: values=> this.values = values
-    })
+      next: (values) => (this.values = values),
+    });
   }
 
   submit() {
-    console.log(this.values)
     this.execService.exec(this.callingMenu.id, this.values).subscribe({
-      next: (tt) => {
-        console.log(tt)
-      }
-    })
+      next: (execResponse) => {
+        this.dialogRef.close(execResponse);
+      },
+    });
   }
 }

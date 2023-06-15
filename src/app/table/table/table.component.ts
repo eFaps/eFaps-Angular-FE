@@ -3,7 +3,6 @@ import { ActivatedRoute } from '@angular/router';
 import { ConfirmationService, MenuItem } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
 import { combineLatest } from 'rxjs';
-import { ContentComponent } from 'src/app/content/content/content.component';
 import { ModalContentComponent } from 'src/app/content/modal-content/modal-content.component';
 import { MenuEntry } from 'src/app/model/menu';
 import { ContentService } from 'src/app/services/content.service';
@@ -18,10 +17,11 @@ import { TableService } from 'src/app/services/table.service';
 })
 export class TableComponent implements OnInit {
   id: string | undefined;
+  oid: string | undefined;
   cols: any[] = [];
   elements: any[] = [];
   selectionMode: 'single' | 'multiple' | null | undefined = null;
-  selectedElements: any;
+  selectedElements: any[] = [];
   title: string = '';
   loading = true;
   menuItems: MenuItem[] = [];
@@ -39,21 +39,25 @@ export class TableComponent implements OnInit {
     combineLatest([this.route.queryParams, this.route.params]).subscribe(
       (parameters) => {
         this.id = parameters[1]['id'];
-        let oid = parameters[0]['oid'];
-        this.tableService.getTable(this.id!!, oid).subscribe({
-          next: (val) => {
-            this.title = val.header;
-            this.cols = val.columns;
-            this.elements = val.values;
-            this.selectionMode = val.selectionMode;
-            this.loading = false;
-            this.menuItems = val.menu
-              ? val.menu.map((item) => this.getMenuItem(item))
-              : [];
-          },
-        });
+        this.oid = parameters[0]['oid'];
+        this.loadData();
       }
     );
+  }
+
+  loadData() {
+    this.tableService.getTable(this.id!!, this.oid).subscribe({
+      next: (val) => {
+        this.title = val.header;
+        this.cols = val.columns;
+        this.elements = val.values;
+        this.selectionMode = val.selectionMode;
+        this.loading = false;
+        this.menuItems = val.menu
+          ? val.menu.map((item) => this.getMenuItem(item))
+          : [];
+      },
+    });
   }
 
   getMenuItem(item: MenuEntry): MenuItem {
@@ -72,27 +76,7 @@ export class TableComponent implements OnInit {
     switch (item.action.type) {
       case 'EXEC':
         return (event) => {
-          if (item.action.verify) {
-            this.confirmationService.confirm({
-              message: item.action.verify.question,
-              header: 'Confirmation',
-              icon: 'pi pi-exclamation-triangle',
-              accept: () => {
-                this.execService.exec(item.id).subscribe({
-                  next: (_) => {
-                    console.log('run exec');
-                  },
-                });
-              },
-              reject: () => {},
-            });
-          } else {
-            this.execService.exec(item.id).subscribe({
-              next: (_) => {
-                console.log('run exec');
-              },
-            });
-          }
+          this.execAction(item);
         };
 
       case 'FORM':
@@ -103,16 +87,54 @@ export class TableComponent implements OnInit {
     return undefined;
   }
 
+  execAction(item: MenuEntry) {
+    if (item.action.verify) {
+      this.confirmationService.confirm({
+        message: item.action.verify.question,
+        header: 'Confirmation',
+        icon: 'pi pi-exclamation-triangle',
+        accept: () => {
+          this.exec(item.id);
+        },
+        reject: () => {},
+      });
+    } else {
+      this.exec(item.id);
+    }
+  }
+
+  exec(id: string) {
+    const oids = this.selectedElements.map((element) => {
+      return element.OID;
+    });
+    const map = new Map<string, any>();
+    map.set('eFapsSelectedOids', oids);
+    this.execService.exec(id, map).subscribe({
+      next: execResponse => {
+        if (execResponse.reload) {
+          this.loadData();
+        }
+      }
+    });
+  }
+
   formAction(item: MenuEntry) {
     if (item.action.modal) {
       this.contentService.getContentWithCmd('none', item.id).subscribe({
         next: (outline) => {
-          this.dialogService.open(ModalContentComponent, {
+          const dialogRef = this.dialogService.open(ModalContentComponent, {
             data: {
               item,
-              outline
-            }
+              outline,
+            },
           });
+          dialogRef.onClose.subscribe({
+            next: execResponse => {
+              if (execResponse.reload) {
+                this.loadData();
+              }
+            }
+          })
         },
       });
     }
