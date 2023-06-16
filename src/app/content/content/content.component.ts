@@ -6,6 +6,7 @@ import { Section } from 'src/app/model/content';
 import { MenuEntry } from 'src/app/model/menu';
 import { ContentService } from 'src/app/services/content.service';
 import { ExecService } from 'src/app/services/exec.service';
+
 import { ModalContentComponent } from '../modal-content/modal-content.component';
 
 @Component({
@@ -38,20 +39,16 @@ export class ContentComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
       this.oid = params['oid'];
-      this.loadData()
+      this.loadData();
     });
   }
 
   loadData() {
     this.contentService.getContent(this.oid!!).subscribe({
       next: (val) => {
-        this.tabs = val.nav.map((item, index) =>
-          this.getTabItem(item, index)
-        );
+        this.tabs = val.nav.map((item, index) => this.getTabItem(item, index));
         this.activeItem = this.tabs[0];
-        this.menuItems = val.outline.menu.map((item) =>
-          this.getMenuItem(item)
-        );
+        this.menuItems = val.outline.menu.map((item) => this.getMenuItem(item));
         this.mainHeader = val.outline.header;
         this.sections = val.outline.sections;
       },
@@ -79,11 +76,11 @@ export class ContentComponent implements OnInit {
       command:
         index == 0
           ? (event) => {
-            this.mainClick();
-          }
+              this.mainClick();
+            }
           : (event) => {
-            this.showSections = false;
-          },
+              this.showSections = false;
+            },
       queryParams: index == 0 ? undefined : { oid: this.oid },
     };
   }
@@ -116,7 +113,7 @@ export class ContentComponent implements OnInit {
                   },
                 });
               },
-              reject: () => { },
+              reject: () => {},
             });
           } else {
             this.execService.exec(item.id).subscribe({
@@ -145,12 +142,12 @@ export class ContentComponent implements OnInit {
             },
           });
           dialogRef.onClose.subscribe({
-            next: execResponse => {
+            next: (execResponse) => {
               if (execResponse.reload) {
-                this.loadData()
+                this.loadData();
               }
-            }
-          })
+            },
+          });
         },
       });
     }

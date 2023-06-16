@@ -24,7 +24,7 @@ export class ElementComponent {
   constructor(
     private valueService: ValueService,
     private autoCompleteService: AutoCompleteService
-  ) { }
+  ) {}
 
   @Input()
   set formItem(formItem: FormItem | undefined) {
@@ -33,43 +33,43 @@ export class ElementComponent {
     switch (this.formItem?.type) {
       case 'INPUT':
         if (this.formItem?.value != null) {
-          this.inputValue = this.formItem?.value
-          this.addEntry(this.inputValue)
+          this.inputValue = this.formItem?.value;
+          this.addEntry(this.inputValue);
         }
         break;
       case 'DROPDOWN':
         if (this.formItem.options) {
           if (this.formItem?.value != null) {
-            this.dropdownValue = this.formItem?.value
+            this.dropdownValue = this.formItem?.value;
           } else {
             this.dropdownValue = this.formItem.options[0].value;
           }
-          this.addEntry(this.dropdownValue)
+          this.addEntry(this.dropdownValue);
         }
         break;
       case 'BITENUM':
         if (this.formItem.options) {
           this.showMultiSelectFilter = this.formItem.options.length > 10;
           if (this.formItem?.value != null) {
-            this.bitEnumValue = this.formItem?.value
-            this.addEntry(this.bitEnumValue)
+            this.bitEnumValue = this.formItem?.value;
+            this.addEntry(this.bitEnumValue);
           }
         }
         break;
 
-      case 'RADIO': 
+      case 'RADIO':
         if (this.formItem?.value != null) {
-          this.radioValue = this.formItem?.value
-          this.addEntry(this.radioValue)
+          this.radioValue = this.formItem?.value;
+          this.addEntry(this.radioValue);
         }
         break;
       case 'AUTOCOMPLETE':
         if (this.formItem.options) {
-          this.autoCompleteSuggestions = this.formItem.options
-          this.autoCompleteValue = this.formItem.options[0]
-          this.addEntry(this.autoCompleteValue.value)
+          this.autoCompleteSuggestions = this.formItem.options;
+          this.autoCompleteValue = this.formItem.options[0];
+          this.addEntry(this.autoCompleteValue.value);
         }
-        break    
+        break;
       default:
     }
   }
@@ -81,24 +81,24 @@ export class ElementComponent {
   addEntry(value: any) {
     this.valueService.addEntry({
       name: this.formItem!!.name,
-      value: value
+      value: value,
     });
   }
 
   onKey(value: string) {
-    this.addEntry(value)
+    this.addEntry(value);
   }
 
   changeRadio(value: any) {
-    this.addEntry(value)
+    this.addEntry(value);
   }
 
   changeDropdown(value: any) {
-    this.addEntry(value)
+    this.addEntry(value);
   }
 
   changeBitEnum(value: any) {
-    this.addEntry(value)
+    this.addEntry(value);
   }
 
   search(query: string) {
@@ -110,6 +110,6 @@ export class ElementComponent {
   }
 
   changeAutoComplete(option: Option) {
-    this.addEntry(option.value)
+    this.addEntry(option.value);
   }
 }

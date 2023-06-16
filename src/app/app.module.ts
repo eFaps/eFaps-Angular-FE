@@ -3,17 +3,20 @@ import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
+import { MessageService } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
 import { DynamicDialogModule } from 'primeng/dynamicdialog';
 import { InputTextModule } from 'primeng/inputtext';
 import { MenubarModule } from 'primeng/menubar';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { ProgressBarModule } from 'primeng/progressbar';
+import { ToastModule } from 'primeng/toast';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { initializeKeycloak } from './init/keycloak-init.factory';
 import { CompanyInterceptor } from './interceptors/company.interceptor';
+import { ErrorInterceptor } from './interceptors/error.interceptor';
 import { LoaderInterceptor } from './interceptors/loader.interceptor';
 
 @NgModule({
@@ -30,8 +33,10 @@ import { LoaderInterceptor } from './interceptors/loader.interceptor';
     DynamicDialogModule,
     ProgressBarModule,
     InputTextModule,
+    ToastModule,
   ],
   providers: [
+    MessageService,
     {
       provide: APP_INITIALIZER,
       useFactory: initializeKeycloak,
@@ -40,6 +45,7 @@ import { LoaderInterceptor } from './interceptors/loader.interceptor';
     },
     { provide: HTTP_INTERCEPTORS, useClass: CompanyInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
   ],
   bootstrap: [AppComponent],
 })

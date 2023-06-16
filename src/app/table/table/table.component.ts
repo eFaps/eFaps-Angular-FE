@@ -110,11 +110,11 @@ export class TableComponent implements OnInit {
     const map = new Map<string, any>();
     map.set('eFapsSelectedOids', oids);
     this.execService.exec(id, map).subscribe({
-      next: execResponse => {
+      next: (execResponse) => {
         if (execResponse.reload) {
           this.loadData();
         }
-      }
+      },
     });
   }
 
@@ -129,12 +129,12 @@ export class TableComponent implements OnInit {
             },
           });
           dialogRef.onClose.subscribe({
-            next: execResponse => {
+            next: (execResponse) => {
               if (execResponse.reload) {
                 this.loadData();
               }
-            }
-          })
+            },
+          });
         },
       });
     }
