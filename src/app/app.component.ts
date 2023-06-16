@@ -12,6 +12,10 @@ import { UserService } from './services/user.service';
 import { CompanyChooserComponent } from './standalone/company-chooser/company-chooser.component';
 import { ContentService } from './services/content.service';
 import { ModalContentComponent } from './content/modal-content/modal-content.component';
+import { IndexSearchService } from './services/index-search.service';
+import { ResultElement, SearchResult } from './model/index-search';
+import { OverlayPanel } from 'primeng/overlaypanel';
+
 
 @Component({
   selector: 'app-root',
@@ -27,6 +31,9 @@ export class AppComponent implements OnInit {
   showCompanySelector: boolean = false;
   isLoading = false;
 
+  searchResult: SearchResult | undefined
+  searchElements: any[] = [];
+
   constructor(
     private router: Router,
     private primengConfig: PrimeNGConfig,
@@ -35,8 +42,11 @@ export class AppComponent implements OnInit {
     private menuService: MenuService,
     private userService: UserService,
     private execService: ExecService,
-    private contentService: ContentService
-  ) {}
+    private contentService: ContentService,
+    private indexSearchService: IndexSearchService
+  ) {
+
+  }
 
   ngOnInit() {
     this.loaderService.isLoading.subscribe({
@@ -151,5 +161,25 @@ export class AppComponent implements OnInit {
         },
       });
     }
+  }
+
+  search(event: Event, query: string, op: OverlayPanel) {
+    this.indexSearchService.search(query).subscribe({
+      next: result => {
+        this.searchResult = result
+        this.searchElements = this.searchResult.elements
+        op.show(event)
+      }
+    })
+  }
+
+  focusSearch(event: Event, op: OverlayPanel) {
+    if ( this.searchResult != null &&  this.searchResult.hitCount >0) {
+      op.show(event)
+    }
+  }
+
+  followLink(element: ResultElement) {
+    this.router.navigate(['content', element.oid]);
   }
 }

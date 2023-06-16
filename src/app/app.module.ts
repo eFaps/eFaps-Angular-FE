@@ -18,6 +18,7 @@ import { initializeKeycloak } from './init/keycloak-init.factory';
 import { CompanyInterceptor } from './interceptors/company.interceptor';
 import { ErrorInterceptor } from './interceptors/error.interceptor';
 import { LoaderInterceptor } from './interceptors/loader.interceptor';
+import { TableModule } from 'primeng/table';
 
 @NgModule({
   declarations: [AppComponent],
@@ -34,6 +35,7 @@ import { LoaderInterceptor } from './interceptors/loader.interceptor';
     ProgressBarModule,
     InputTextModule,
     ToastModule,
+    TableModule
   ],
   providers: [
     MessageService,
