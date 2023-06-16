@@ -10,6 +10,7 @@ import { ValueService } from 'src/app/services/value.service';
   styleUrls: ['./element.component.scss'],
 })
 export class ElementComponent {
+  inputValue: any;
   radioValue: any;
   dropdownValue: any;
   bitEnumValue: any;
@@ -23,17 +24,49 @@ export class ElementComponent {
   constructor(
     private valueService: ValueService,
     private autoCompleteService: AutoCompleteService
-  ) {}
+  ) { }
 
   @Input()
   set formItem(formItem: FormItem | undefined) {
     this._formItem = formItem;
-    if (this.formItem?.type == 'DROPDOWN' && this.formItem.options) {
-      this.dropdownValue = this.formItem.options[0].value;
-      this.changeDropdown(this.formItem.options[0].value);
-    }
-    if (this.formItem?.type == 'BITENUM' && this.formItem.options) {
-      this.showMultiSelectFilter = this.formItem.options.length > 10;
+
+    switch (this.formItem?.type) {
+      case 'INPUT':
+        if (this.formItem?.value != null) {
+          this.inputValue = this.formItem?.value
+          this.addEntry(this.inputValue)
+        }
+        break;
+      case 'DROPDOWN':
+        if (this.formItem.options) {
+          if (this.formItem?.value != null) {
+            this.dropdownValue = this.formItem?.value
+          } else {
+            this.dropdownValue = this.formItem.options[0].value;
+          }
+          this.addEntry(this.dropdownValue)
+        }
+        break;
+      case 'BITENUM':
+        if (this.formItem.options) {
+          this.showMultiSelectFilter = this.formItem.options.length > 10;
+        }
+        break;
+
+      case 'RADIO': 
+        if (this.formItem?.value != null) {
+          this.radioValue = this.formItem?.value
+          this.addEntry(this.radioValue)
+        }
+        break;
+      case 'AUTOCOMPLETE':
+        if (this.formItem.options) {
+          this.autoCompleteSuggestions = this.formItem.options
+          this.autoCompleteValue = this.formItem.options[0]
+          this.addEntry(this.autoCompleteValue.value)
+        }
+        break    
+      default:
     }
   }
 
@@ -41,32 +74,27 @@ export class ElementComponent {
     return this._formItem;
   }
 
-  onKey(value: string) {
+  addEntry(value: any) {
     this.valueService.addEntry({
       name: this.formItem!!.name,
-      value: value,
+      value: value
     });
+  }
+
+  onKey(value: string) {
+    this.addEntry(value)
   }
 
   changeRadio(value: any) {
-    this.valueService.addEntry({
-      name: this.formItem!!.name,
-      value: value,
-    });
+    this.addEntry(value)
   }
 
   changeDropdown(value: any) {
-    this.valueService.addEntry({
-      name: this.formItem!!.name,
-      value: value,
-    });
+    this.addEntry(value)
   }
 
   changeBitEnum(value: any) {
-    this.valueService.addEntry({
-      name: this.formItem!!.name,
-      value: value,
-    });
+    this.addEntry(value)
   }
 
   search(query: string) {
@@ -78,9 +106,6 @@ export class ElementComponent {
   }
 
   changeAutoComplete(option: Option) {
-    this.valueService.addEntry({
-      name: this.formItem!!.name,
-      value: option.value,
-    });
+    this.addEntry(option.value)
   }
 }

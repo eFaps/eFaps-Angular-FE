@@ -29,8 +29,14 @@ export class ModalContentComponent implements OnInit {
 
   ngOnInit(): void {
     this.valueService.values.subscribe({
-      next: (values) => (this.values = values),
+      next: values => { 
+        console.log(values)
+        this.values = values
+      },
     });
+    if (this.outline.oid != 'none') {
+      this.valueService.addEntry({name:"eFapsOID", value:this.outline.oid})
+    }
   }
 
   submit() {

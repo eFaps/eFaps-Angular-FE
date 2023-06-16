@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ConfirmationService, MenuItem } from 'primeng/api';
+import { DialogService } from 'primeng/dynamicdialog';
 import { Section } from 'src/app/model/content';
 import { MenuEntry } from 'src/app/model/menu';
 import { ContentService } from 'src/app/services/content.service';
 import { ExecService } from 'src/app/services/exec.service';
+import { ModalContentComponent } from '../modal-content/modal-content.component';
 
 @Component({
   selector: 'app-content',
@@ -25,6 +27,7 @@ export class ContentComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private confirmationService: ConfirmationService,
+    private dialogService: DialogService,
     private contentService: ContentService,
     private execService: ExecService
   ) {
@@ -35,19 +38,23 @@ export class ContentComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
       this.oid = params['oid'];
-      this.contentService.getContent(this.oid!!).subscribe({
-        next: (val) => {
-          this.tabs = val.nav.map((item, index) =>
-            this.getTabItem(item, index)
-          );
-          this.activeItem = this.tabs[0];
-          this.menuItems = val.outline.menu.map((item) =>
-            this.getMenuItem(item)
-          );
-          this.mainHeader = val.outline.header;
-          this.sections = val.outline.sections;
-        },
-      });
+      this.loadData()
+    });
+  }
+
+  loadData() {
+    this.contentService.getContent(this.oid!!).subscribe({
+      next: (val) => {
+        this.tabs = val.nav.map((item, index) =>
+          this.getTabItem(item, index)
+        );
+        this.activeItem = this.tabs[0];
+        this.menuItems = val.outline.menu.map((item) =>
+          this.getMenuItem(item)
+        );
+        this.mainHeader = val.outline.header;
+        this.sections = val.outline.sections;
+      },
     });
   }
 
@@ -72,11 +79,11 @@ export class ContentComponent implements OnInit {
       command:
         index == 0
           ? (event) => {
-              this.mainClick();
-            }
+            this.mainClick();
+          }
           : (event) => {
-              this.showSections = false;
-            },
+            this.showSections = false;
+          },
       queryParams: index == 0 ? undefined : { oid: this.oid },
     };
   }
@@ -109,7 +116,7 @@ export class ContentComponent implements OnInit {
                   },
                 });
               },
-              reject: () => {},
+              reject: () => { },
             });
           } else {
             this.execService.exec(item.id).subscribe({
@@ -119,7 +126,33 @@ export class ContentComponent implements OnInit {
             });
           }
         };
+      case 'FORM':
+        return (event) => {
+          this.formAction(item);
+        };
     }
     return undefined;
+  }
+
+  formAction(item: MenuEntry) {
+    if (item.action.modal) {
+      this.contentService.getContentWithCmd(this.oid!!, item.id).subscribe({
+        next: (outline) => {
+          const dialogRef = this.dialogService.open(ModalContentComponent, {
+            data: {
+              item,
+              outline,
+            },
+          });
+          dialogRef.onClose.subscribe({
+            next: execResponse => {
+              if (execResponse.reload) {
+                this.loadData()
+              }
+            }
+          })
+        },
+      });
+    }
   }
 }
