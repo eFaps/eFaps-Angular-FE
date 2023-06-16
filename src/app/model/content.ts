@@ -10,7 +10,7 @@ export interface Outline {
   action?: MenuAction;
   header: string;
   sections: Section[];
-  menu: MenuEntry[];
+  menu?: MenuEntry[];
   oid: string;
 }
 

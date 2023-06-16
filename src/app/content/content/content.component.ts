@@ -48,7 +48,7 @@ export class ContentComponent implements OnInit {
       next: (val) => {
         this.tabs = val.nav.map((item, index) => this.getTabItem(item, index));
         this.activeItem = this.tabs[0];
-        this.menuItems = val.outline.menu.map((item) => this.getMenuItem(item));
+        this.menuItems = val.outline.menu ? val.outline.menu.map((item) => this.getMenuItem(item)) : [];
         this.mainHeader = val.outline.header;
         this.sections = val.outline.sections;
       },
@@ -143,7 +143,7 @@ export class ContentComponent implements OnInit {
           });
           dialogRef.onClose.subscribe({
             next: (execResponse) => {
-              if (execResponse.reload) {
+              if (execResponse != null && execResponse.reload) {
                 this.loadData();
               }
             },

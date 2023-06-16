@@ -2,7 +2,7 @@
     <div class="p-toolbar-group-start">
         <ng-container *ngIf="showSections">
             <p-menu #menu [model]="menuItems" [popup]="true"></p-menu>
-            <p-button (click)="menu.toggle($event)" icon="pi pi-bars"></p-button>
+            <p-button *ngIf="menuItems.length > 0" (click)="menu.toggle($event)" icon="pi pi-bars"></p-button>
         </ng-container>
         <div class="mainHeader">{{mainHeader}}</div>
     </div>
