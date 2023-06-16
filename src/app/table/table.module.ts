@@ -10,6 +10,7 @@ import { TableModule as primeTableModule } from 'primeng/table';
 import { ColumnComponent } from './column/column.component';
 import { TableRoutingModule } from './table-routing.module';
 import { TableComponent } from './table/table.component';
+import { InputTextModule } from 'primeng/inputtext';
 
 @NgModule({
   declarations: [TableComponent, ColumnComponent],
@@ -22,6 +23,7 @@ import { TableComponent } from './table/table.component';
     MenuModule,
     MenubarModule,
     ConfirmDialogModule,
+    InputTextModule
   ],
 })
 export class TableModule {}
