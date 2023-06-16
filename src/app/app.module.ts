@@ -20,6 +20,8 @@ import { initializeKeycloak } from './init/keycloak-init.factory';
 import { CompanyInterceptor } from './interceptors/company.interceptor';
 import { ErrorInterceptor } from './interceptors/error.interceptor';
 import { LoaderInterceptor } from './interceptors/loader.interceptor';
+import { RouteReuseStrategy } from '@angular/router';
+import { RoutePathReuseStrategy } from './init/route-path-reuse-strategy';
 
 @NgModule({
   declarations: [AppComponent],
@@ -50,6 +52,7 @@ import { LoaderInterceptor } from './interceptors/loader.interceptor';
     { provide: HTTP_INTERCEPTORS, useClass: CompanyInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    { provide: RouteReuseStrategy, useClass: RoutePathReuseStrategy }
   ],
   bootstrap: [AppComponent],
 })

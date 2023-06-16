@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { ConfirmationService, MenuItem } from 'primeng/api';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ConfirmationService, FilterMetadata, MenuItem, TableState } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
 import { combineLatest } from 'rxjs';
 import { ModalContentComponent } from 'src/app/content/modal-content/modal-content.component';
@@ -25,6 +25,9 @@ export class TableComponent implements OnInit {
   title: string = '';
   loading = true;
   menuItems: MenuItem[] = [];
+  storageKey = "temp"
+  globalSearch = ""
+
   constructor(
     private route: ActivatedRoute,
     private confirmationService: ConfirmationService,
@@ -32,7 +35,7 @@ export class TableComponent implements OnInit {
     private contentService: ContentService,
     private tableService: TableService,
     private execService: ExecService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.loading = true;
@@ -40,9 +43,17 @@ export class TableComponent implements OnInit {
       (parameters) => {
         this.id = parameters[1]['id'];
         this.oid = parameters[0]['oid'];
+        this.storageKey = this.id!!
         this.loadData();
       }
     );
+  }
+
+  stateRestore(event:   TableState) {
+    console.log(event)
+    if (event.filters && event.filters["global"]) {
+      this.globalSearch = (event.filters["global"] as FilterMetadata).value
+    }
   }
 
   loadData() {

@@ -11,7 +11,7 @@ import { ColumnComponent } from './column/column.component';
 import { TableRoutingModule } from './table-routing.module';
 import { TableComponent } from './table/table.component';
 import { InputTextModule } from 'primeng/inputtext';
-
+import { FormsModule } from '@angular/forms'; 
 @NgModule({
   declarations: [TableComponent, ColumnComponent],
   imports: [
@@ -23,7 +23,8 @@ import { InputTextModule } from 'primeng/inputtext';
     MenuModule,
     MenubarModule,
     ConfirmDialogModule,
-    InputTextModule
+    InputTextModule,
+    FormsModule
   ],
 })
 export class TableModule {}

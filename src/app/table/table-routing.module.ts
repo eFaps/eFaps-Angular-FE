@@ -7,6 +7,7 @@ import { TableComponent } from './table/table.component';
 const routes: Routes = [
   {
     path: ':id',
+    pathMatch: 'full',
     canActivate: [AuthGuard],
     component: TableComponent,
   },

@@ -3,10 +3,11 @@
     <p-table #dt [columns]="cols" [value]="elements" styleClass="p-datatable-gridlines p-datatable-striped"
         [scrollable]="true" scrollHeight="flex" [virtualScroll]="true" [virtualScrollItemSize]="42"
         [tableStyle]="{ 'min-width': '50rem' }" sortMode="multiple" [selectionMode]="selectionMode"
-        [(selection)]="selectedElements" [resizableColumns]="true" [loading]="loading" [filterDelay]="0">
+        [(selection)]="selectedElements" [resizableColumns]="true" [loading]="loading" stateStorage="local"
+        [stateKey]="storageKey" (onStateRestore)="stateRestore($event)">
         <ng-template pTemplate="caption">
             <div class="table-header">
-                <div>
+                <div class="left">
                     <p-menu #menu [model]="menuItems" [popup]="true" [appendTo]="wrapperDiv"></p-menu>
                     <button pButton type="button" (click)="menu.toggle($event)" icon="pi pi-bars"
                         *ngIf="menuItems.length > 0"></button>
@@ -14,11 +15,13 @@
                 </div>
                 <div></div>
                 <div>
-                    <span class="p-input-icon-left">
-                        <i class="pi pi-search"></i>
-                        <input pInputText type="text" #searchInput
+                    <div class="p-inputgroup">
+                        <span class="p-inputgroup-addon"><i class="pi pi-search"></i></span>
+                        <input pInputText type="text" #searchInput [(ngModel)]="globalSearch"
                             (input)="dt.filterGlobal(searchInput.value, 'contains')" placeholder="buscar" />
-                    </span>
+                        <button type="button" pButton icon="pi pi-times" styleClass="p-button-danger" 
+                            (click)="searchInput.value='';dt.filterGlobal('', 'contains')"></button>
+                    </div>
                 </div>
             </div>
         </ng-template>

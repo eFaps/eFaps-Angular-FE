@@ -7,5 +7,7 @@
   align-items: center;
   gap: 5px;
   justify-content: space-between;
-  line-height: 40px;
+  .left {
+    line-height: 40px;
+  }
 }
