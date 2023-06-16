@@ -1,9 +1,9 @@
 export interface SearchResult {
-    hitCount: number;
-    elements: ResultElement[]
+  hitCount: number;
+  elements: ResultElement[];
 }
 
 export interface ResultElement {
-    oid: string;
-    text: string;
+  oid: string;
+  text: string;
 }

@@ -5,11 +5,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
 import { MessageService } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
+import { DividerModule } from 'primeng/divider';
 import { DynamicDialogModule } from 'primeng/dynamicdialog';
 import { InputTextModule } from 'primeng/inputtext';
 import { MenubarModule } from 'primeng/menubar';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { ProgressBarModule } from 'primeng/progressbar';
+import { TableModule } from 'primeng/table';
 import { ToastModule } from 'primeng/toast';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -18,8 +20,7 @@ import { initializeKeycloak } from './init/keycloak-init.factory';
 import { CompanyInterceptor } from './interceptors/company.interceptor';
 import { ErrorInterceptor } from './interceptors/error.interceptor';
 import { LoaderInterceptor } from './interceptors/loader.interceptor';
-import { TableModule } from 'primeng/table';
-import { DividerModule } from 'primeng/divider';
+
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -36,7 +37,7 @@ import { DividerModule } from 'primeng/divider';
     InputTextModule,
     ToastModule,
     TableModule,
-    DividerModule
+    DividerModule,
   ],
   providers: [
     MessageService,

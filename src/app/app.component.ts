@@ -2,20 +2,20 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MenuItem, MessageService, PrimeNGConfig } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
+import { OverlayPanel } from 'primeng/overlaypanel';
+import { environment } from 'src/environments/environment';
 
+import { ModalContentComponent } from './content/modal-content/modal-content.component';
+import { ResultElement, SearchResult } from './model/index-search';
 import { MenuEntry } from './model/menu';
 import { Company, User } from './model/user';
+import { ContentService } from './services/content.service';
 import { ExecService } from './services/exec.service';
+import { IndexSearchService } from './services/index-search.service';
 import { LoaderService } from './services/loader.service';
 import { MenuService } from './services/menu.service';
 import { UserService } from './services/user.service';
 import { CompanyChooserComponent } from './standalone/company-chooser/company-chooser.component';
-import { ContentService } from './services/content.service';
-import { ModalContentComponent } from './content/modal-content/modal-content.component';
-import { IndexSearchService } from './services/index-search.service';
-import { ResultElement, SearchResult } from './model/index-search';
-import { OverlayPanel } from 'primeng/overlaypanel';
-import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-root',
@@ -31,9 +31,9 @@ export class AppComponent implements OnInit {
   showCompanySelector: boolean = false;
   isLoading = false;
 
-  searchResult: SearchResult | undefined
+  searchResult: SearchResult | undefined;
   searchElements: any[] = [];
-  version = environment.version
+  version = environment.version;
 
   constructor(
     private router: Router,
@@ -45,9 +45,7 @@ export class AppComponent implements OnInit {
     private execService: ExecService,
     private contentService: ContentService,
     private indexSearchService: IndexSearchService
-  ) {
-
-  }
+  ) {}
 
   ngOnInit() {
     this.loaderService.isLoading.subscribe({
@@ -166,17 +164,17 @@ export class AppComponent implements OnInit {
 
   search(event: Event, query: string, op: OverlayPanel) {
     this.indexSearchService.search(query).subscribe({
-      next: result => {
-        this.searchResult = result
-        this.searchElements = this.searchResult.elements
-        op.show(event)
-      }
-    })
+      next: (result) => {
+        this.searchResult = result;
+        this.searchElements = this.searchResult.elements;
+        op.show(event);
+      },
+    });
   }
 
   focusSearch(event: Event, op: OverlayPanel) {
-    if ( this.searchResult != null &&  this.searchResult.hitCount >0) {
-      op.show(event)
+    if (this.searchResult != null && this.searchResult.hitCount > 0) {
+      op.show(event);
     }
   }
 

@@ -1,14 +1,14 @@
-import { Injectable } from '@angular/core';
-import { UtilService } from './util.service';
 import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+
 import { SearchResult } from '../model/index-search';
+import { UtilService } from './util.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class IndexSearchService {
-
   constructor(private http: HttpClient, private utilService: UtilService) {}
 
   search(query: string): Observable<SearchResult> {
