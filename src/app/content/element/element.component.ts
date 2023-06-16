@@ -50,6 +50,10 @@ export class ElementComponent {
       case 'BITENUM':
         if (this.formItem.options) {
           this.showMultiSelectFilter = this.formItem.options.length > 10;
+          if (this.formItem?.value != null) {
+            this.bitEnumValue = this.formItem?.value
+            this.addEntry(this.bitEnumValue)
+          }
         }
         break;
 
