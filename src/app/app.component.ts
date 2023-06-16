@@ -10,6 +10,8 @@ import { LoaderService } from './services/loader.service';
 import { MenuService } from './services/menu.service';
 import { UserService } from './services/user.service';
 import { CompanyChooserComponent } from './standalone/company-chooser/company-chooser.component';
+import { ContentService } from './services/content.service';
+import { ModalContentComponent } from './content/modal-content/modal-content.component';
 
 @Component({
   selector: 'app-root',
@@ -32,7 +34,8 @@ export class AppComponent implements OnInit {
     private loaderService: LoaderService,
     private menuService: MenuService,
     private userService: UserService,
-    private execService: ExecService
+    private execService: ExecService,
+    private contentService: ContentService
   ) {}
 
   ngOnInit() {
@@ -97,6 +100,10 @@ export class AppComponent implements OnInit {
             },
           });
         };
+      case 'FORM':
+        return (event) => {
+          this.formAction(item);
+        };
     }
     return undefined;
   }
@@ -129,5 +136,20 @@ export class AppComponent implements OnInit {
         }
       }
     });
+  }
+
+  formAction(item: MenuEntry) {
+    if (item.action.modal) {
+      this.contentService.getContentWithCmd('none', item.id).subscribe({
+        next: (outline) => {
+          const dialogRef = this.dialogService.open(ModalContentComponent, {
+            data: {
+              item,
+              outline,
+            },
+          });
+        },
+      });
+    }
   }
 }
