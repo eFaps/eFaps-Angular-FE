@@ -19,6 +19,9 @@
                         <div class="infoOverlay">
                             {{user?.firstName}} {{user?.lastName}}
                         </div>
+                        <p-divider></p-divider>
+                        <div>Version: {{version}}</div>
+                        <p-divider></p-divider>
                         <div *ngIf="showCompanySelector" class="companies">
                             <p-button icon="pi pi-building" (click)="switchCompany()"></p-button>
                         </div>

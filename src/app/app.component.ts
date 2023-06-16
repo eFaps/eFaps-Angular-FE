@@ -15,7 +15,7 @@ import { ModalContentComponent } from './content/modal-content/modal-content.com
 import { IndexSearchService } from './services/index-search.service';
 import { ResultElement, SearchResult } from './model/index-search';
 import { OverlayPanel } from 'primeng/overlaypanel';
-
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-root',
@@ -33,6 +33,7 @@ export class AppComponent implements OnInit {
 
   searchResult: SearchResult | undefined
   searchElements: any[] = [];
+  version = environment.version
 
   constructor(
     private router: Router,

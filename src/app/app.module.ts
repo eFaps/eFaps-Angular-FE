@@ -19,7 +19,7 @@ import { CompanyInterceptor } from './interceptors/company.interceptor';
 import { ErrorInterceptor } from './interceptors/error.interceptor';
 import { LoaderInterceptor } from './interceptors/loader.interceptor';
 import { TableModule } from 'primeng/table';
-
+import { DividerModule } from 'primeng/divider';
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -35,7 +35,8 @@ import { TableModule } from 'primeng/table';
     ProgressBarModule,
     InputTextModule,
     ToastModule,
-    TableModule
+    TableModule,
+    DividerModule
   ],
   providers: [
     MessageService,
