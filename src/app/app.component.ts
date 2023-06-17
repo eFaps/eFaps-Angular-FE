@@ -159,6 +159,8 @@ export class AppComponent implements OnInit {
           });
         },
       });
+    } else {
+      this.router.navigate(['content', 'form', item.id]);
     }
   }
 

@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from '../guard/auth.guard';
 import { TableComponent } from '../table/table/table.component';
 import { ContentComponent } from './content/content.component';
+import { FormContentComponent } from './form-content/form-content.component';
 
 const routes: Routes = [
   {
@@ -19,6 +20,11 @@ const routes: Routes = [
         outlet: 'contentOutlet',
       },
     ],
+  },
+  {
+    path: 'form/:id',
+    canActivate: [AuthGuard],
+    component: FormContentComponent,
   },
 ];
 

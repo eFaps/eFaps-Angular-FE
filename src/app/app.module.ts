@@ -2,6 +2,7 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RouteReuseStrategy } from '@angular/router';
 import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
 import { MessageService } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
@@ -17,11 +18,10 @@ import { ToastModule } from 'primeng/toast';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { initializeKeycloak } from './init/keycloak-init.factory';
+import { RoutePathReuseStrategy } from './init/route-path-reuse-strategy';
 import { CompanyInterceptor } from './interceptors/company.interceptor';
 import { ErrorInterceptor } from './interceptors/error.interceptor';
 import { LoaderInterceptor } from './interceptors/loader.interceptor';
-import { RouteReuseStrategy } from '@angular/router';
-import { RoutePathReuseStrategy } from './init/route-path-reuse-strategy';
 
 @NgModule({
   declarations: [AppComponent],
@@ -52,7 +52,7 @@ import { RoutePathReuseStrategy } from './init/route-path-reuse-strategy';
     { provide: HTTP_INTERCEPTORS, useClass: CompanyInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
-    { provide: RouteReuseStrategy, useClass: RoutePathReuseStrategy }
+    { provide: RouteReuseStrategy, useClass: RoutePathReuseStrategy },
   ],
   bootstrap: [AppComponent],
 })

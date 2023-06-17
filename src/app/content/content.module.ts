@@ -17,6 +17,7 @@ import { ToolbarModule } from 'primeng/toolbar';
 import { ContentRoutingModule } from './content-routing.module';
 import { ContentComponent } from './content/content.component';
 import { ElementComponent } from './element/element.component';
+import { FormContentComponent } from './form-content/form-content.component';
 import { FormSectionComponent } from './form-section/form-section.component';
 import { ModalContentComponent } from './modal-content/modal-content.component';
 import { SectionsComponent } from './sections/sections.component';
@@ -32,6 +33,7 @@ import { TableSectionComponent } from './table-section/table-section.component';
     FormSectionComponent,
     ElementComponent,
     ModalContentComponent,
+    FormContentComponent,
   ],
   imports: [
     CommonModule,

@@ -30,7 +30,8 @@ export interface FormItem {
     | 'RADIO'
     | 'DROPDOWN'
     | 'BITENUM'
-    | 'AUTOCOMPLETE';
+    | 'AUTOCOMPLETE'
+    | 'SNIPPLET';
   label: string;
   name: string;
   value?: any;

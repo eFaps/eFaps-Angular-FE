@@ -31,6 +31,9 @@
         <ng-container *ngSwitchCase="'INPUT'">
             <input type="text" pInputText #textInput [(ngModel)]="inputValue" (keyup)="onKey(textInput.value)" />
         </ng-container>
+        <ng-container *ngSwitchCase="'SNIPPLET'">
+            <div [innerHtml]=snippletValue></div>
+        </ng-container>            
         <ng-container *ngSwitchDefault>
             {{formItem?.value}}
         </ng-container>

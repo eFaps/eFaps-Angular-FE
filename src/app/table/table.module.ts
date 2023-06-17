@@ -1,7 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { InputTextModule } from 'primeng/inputtext';
 import { MenuModule } from 'primeng/menu';
 import { MenubarModule } from 'primeng/menubar';
 import { MultiSelectModule } from 'primeng/multiselect';
@@ -10,8 +12,7 @@ import { TableModule as primeTableModule } from 'primeng/table';
 import { ColumnComponent } from './column/column.component';
 import { TableRoutingModule } from './table-routing.module';
 import { TableComponent } from './table/table.component';
-import { InputTextModule } from 'primeng/inputtext';
-import { FormsModule } from '@angular/forms'; 
+
 @NgModule({
   declarations: [TableComponent, ColumnComponent],
   imports: [
@@ -24,7 +25,7 @@ import { FormsModule } from '@angular/forms';
     MenubarModule,
     ConfirmDialogModule,
     InputTextModule,
-    FormsModule
+    FormsModule,
   ],
 })
 export class TableModule {}

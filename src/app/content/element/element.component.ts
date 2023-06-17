@@ -15,6 +15,7 @@ export class ElementComponent {
   dropdownValue: any;
   bitEnumValue: any;
   autoCompleteValue: any;
+  snippletValue: any;
 
   _formItem: FormItem | undefined;
 
@@ -68,6 +69,12 @@ export class ElementComponent {
           this.autoCompleteSuggestions = this.formItem.options;
           this.autoCompleteValue = this.formItem.options[0];
           this.addEntry(this.autoCompleteValue.value);
+        }
+        break;
+
+      case 'SNIPPLET':
+        {
+          this.snippletValue = this.formItem?.value;
         }
         break;
       default:
