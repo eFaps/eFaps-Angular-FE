@@ -1,7 +1,9 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { UploadEvent } from 'primeng/fileupload';
 import { FormItem } from 'src/app/model/content';
 import { Option } from 'src/app/model/content';
 import { AutoCompleteService } from 'src/app/services/auto-complete.service';
+import { UtilService } from 'src/app/services/util.service';
 import { ValueService } from 'src/app/services/value.service';
 
 @Component({
@@ -21,10 +23,13 @@ export class ElementComponent {
 
   showMultiSelectFilter = false;
   autoCompleteSuggestions: any[] = [];
+  uploadUrl: string | undefined;
+  uploadKey: string | undefined;
 
   constructor(
     private valueService: ValueService,
-    private autoCompleteService: AutoCompleteService
+    private autoCompleteService: AutoCompleteService,
+    private utilService: UtilService
   ) {}
 
   @Input()
@@ -73,9 +78,11 @@ export class ElementComponent {
         break;
 
       case 'SNIPPLET':
-        {
-          this.snippletValue = this.formItem?.value;
-        }
+        this.snippletValue = this.formItem?.value;
+        break;
+
+      case 'UPLOAD':
+        this.uploadUrl = `${this.utilService.evalApiUrl()}/ui/upload`;
         break;
       default:
     }
@@ -118,5 +125,11 @@ export class ElementComponent {
 
   changeAutoComplete(option: Option) {
     this.addEntry(option.value);
+  }
+
+  onUpload(event: UploadEvent) {
+    const result = (event.originalEvent as any).body;
+    this.uploadKey = result.key;
+    this.addEntry(this.uploadKey);
   }
 }

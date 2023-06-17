@@ -31,7 +31,8 @@ export interface FormItem {
     | 'DROPDOWN'
     | 'BITENUM'
     | 'AUTOCOMPLETE'
-    | 'SNIPPLET';
+    | 'SNIPPLET'
+    | 'UPLOAD';
   label: string;
   name: string;
   value?: any;

@@ -1,5 +1,5 @@
 <div class="wrapper">
-    <div class="label">
+    <div class="label" *ngIf="formItem?.label != null">
         {{formItem?.label}}
     </div>
     <div class="value" [ngSwitch]="formItem?.type">
@@ -34,6 +34,13 @@
         <ng-container *ngSwitchCase="'SNIPPLET'">
             <div [innerHtml]=snippletValue></div>
         </ng-container>            
+        <ng-container *ngSwitchCase="'UPLOAD'">
+            <p-fileUpload [url]="uploadUrl" (onUpload)="onUpload($event)">
+                <ng-template pTemplate="content" let-files >
+                    <div *ngIf="uploadKey">Successfull uploaded</div>
+                </ng-template>
+            </p-fileUpload>
+        </ng-container>     
         <ng-container *ngSwitchDefault>
             {{formItem?.value}}
         </ng-container>

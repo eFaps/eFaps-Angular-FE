@@ -21,9 +21,15 @@
         color: var(--text-color);
         background-color: var(--surface-section);
         padding: 0.5rem;
-        line-height: 40px;
+        line-height: 40px; 
+        
+       
     }
     .placeholder {
         flex-grow: 1;
     }
+}
+
+::ng-deep .p-fileupload  {
+    line-height: 1rem;
 }

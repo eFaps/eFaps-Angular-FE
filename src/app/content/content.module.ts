@@ -5,6 +5,7 @@ import { AutoCompleteModule } from 'primeng/autocomplete';
 import { ButtonModule } from 'primeng/button';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { DropdownModule } from 'primeng/dropdown';
+import { FileUploadModule } from 'primeng/fileupload';
 import { InputTextModule } from 'primeng/inputtext';
 import { MenuModule } from 'primeng/menu';
 import { MultiSelectModule } from 'primeng/multiselect';
@@ -51,6 +52,7 @@ import { TableSectionComponent } from './table-section/table-section.component';
     DropdownModule,
     MultiSelectModule,
     AutoCompleteModule,
+    FileUploadModule,
   ],
 })
 export class ContentModule {}
