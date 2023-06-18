@@ -5,6 +5,7 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root',
 })
 export class ValueService {
+ 
   private valueMap: Map<String, any> | undefined;
 
   private currentValue = new BehaviorSubject<Map<String, any>>(new Map());
@@ -18,5 +19,9 @@ export class ValueService {
     }
     this.valueMap.set(entry.name, entry.value);
     this.currentValue.next(this.valueMap);
+  }
+
+  reset() {
+    this.valueMap?.clear()
   }
 }

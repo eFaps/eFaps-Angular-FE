@@ -21,6 +21,7 @@ export class ModalContentComponent implements OnInit {
     private valueService: ValueService,
     private execService: ExecService
   ) {
+    this.valueService.reset();
     this.outline = config.data.outline;
     this.callingMenu = config.data.item;
     config.header = this.outline.header;
