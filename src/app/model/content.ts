@@ -32,7 +32,8 @@ export interface FormItem {
     | 'BITENUM'
     | 'AUTOCOMPLETE'
     | 'SNIPPLET'
-    | 'UPLOAD';
+    | 'UPLOAD'
+    | 'UPLOADMULTIPLE';
   label: string;
   name: string;
   value?: any;

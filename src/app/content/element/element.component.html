@@ -37,10 +37,17 @@
         <ng-container *ngSwitchCase="'UPLOAD'">
             <p-fileUpload [url]="uploadUrl" (onUpload)="onUpload($event)">
                 <ng-template pTemplate="content" let-files >
-                    <div *ngIf="uploadKey">Successfull uploaded</div>
+                    <div *ngIf="uploadKeys">Successfull uploaded</div>
                 </ng-template>
             </p-fileUpload>
-        </ng-container>     
+        </ng-container>
+        <ng-container *ngSwitchCase="'UPLOADMULTIPLE'">
+            <p-fileUpload [url]="uploadUrl" (onUpload)="onUpload($event)" [multiple]="true">
+                <ng-template pTemplate="content" let-files >
+                    <div *ngIf="uploadKeys">Successfull uploaded</div>
+                </ng-template>
+            </p-fileUpload>
+        </ng-container>          
         <ng-container *ngSwitchDefault>
             {{formItem?.value}}
         </ng-container>

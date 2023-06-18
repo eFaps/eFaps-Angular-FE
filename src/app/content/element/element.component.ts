@@ -24,13 +24,13 @@ export class ElementComponent {
   showMultiSelectFilter = false;
   autoCompleteSuggestions: any[] = [];
   uploadUrl: string | undefined;
-  uploadKey: string | undefined;
+  uploadKeys: string[] | undefined;
 
   constructor(
     private valueService: ValueService,
     private autoCompleteService: AutoCompleteService,
     private utilService: UtilService
-  ) {}
+  ) { }
 
   @Input()
   set formItem(formItem: FormItem | undefined) {
@@ -84,6 +84,10 @@ export class ElementComponent {
       case 'UPLOAD':
         this.uploadUrl = `${this.utilService.evalApiUrl()}/ui/upload`;
         break;
+
+      case 'UPLOADMULTIPLE':
+        this.uploadUrl = `${this.utilService.evalApiUrl()}/ui/upload`;
+        break;
       default:
     }
   }
@@ -129,7 +133,11 @@ export class ElementComponent {
 
   onUpload(event: UploadEvent) {
     const result = (event.originalEvent as any).body;
-    this.uploadKey = result.key;
-    this.addEntry(this.uploadKey);
+    this.uploadKeys = result.keys;
+    this.addEntry(this.uploadKeys);
+    this.valueService.addEntry({
+      name: "eFapsUpload",
+      value: this.formItem!!.name,
+    });
   }
 }
