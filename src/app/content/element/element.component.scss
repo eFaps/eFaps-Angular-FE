@@ -33,3 +33,28 @@
 ::ng-deep .p-fileupload  {
     line-height: 1rem;
 }
+
+.snipplet {
+    
+    ::ng-deep table {
+        border: 1px solid;
+        border-collapse: collapse;
+        ::ng-deep td, th {
+            border: 1px solid;
+            padding: 5px;
+        }
+    }
+
+    ::ng-deep {
+        .eFapsJR {
+        margin-top: 20px;
+        margin-bottom: 20px;
+        width: calc(100vw - 38px)
+    }
+    .jrPage {
+        margin-left: auto;
+        margin-right: auto;
+        white-space: normal;
+    }
+}
+}

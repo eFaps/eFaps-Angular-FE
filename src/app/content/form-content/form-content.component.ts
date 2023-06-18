@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { combineLatest } from 'rxjs';
 import { Outline, Section } from 'src/app/model/content';
 import { ContentService } from 'src/app/services/content.service';
 import { ValueService } from 'src/app/services/value.service';
@@ -11,6 +12,7 @@ import { ValueService } from 'src/app/services/value.service';
 })
 export class FormContentComponent implements OnInit {
   id: string | undefined;
+  oid: string = "none"
   outline: Outline | undefined;
   sections: Section[] = [];
 
@@ -23,15 +25,20 @@ export class FormContentComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.route.params.subscribe((params) => {
-      this.id = params['id'];
-      this.loadData();
-    });
+
+    combineLatest([this.route.queryParams, this.route.params]).subscribe(
+      (parameters) => {
+        if (parameters[0]['oid']) {
+          this.oid = parameters[0]['oid'];
+        }
+        this.id = parameters[1]['id'];
+        this.loadData();
+      }
+    );
   }
 
   loadData() {
-   
-    this.contentService.getContentWithCmd('none', this.id!!).subscribe({
+    this.contentService.getContentWithCmd(this.oid, this.id!!).subscribe({
       next: (outline) => {
         this.outline = outline;
         this.sections = outline.sections;

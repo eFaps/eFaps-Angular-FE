@@ -88,8 +88,14 @@ export class ContentComponent implements OnInit {
   }
 
   evalRouterLink(item: MenuEntry): any | undefined {
-    if (item.action && item.action.type == 'GRID') {
-      return [{ outlets: { contentOutlet: ['table', item.id] } }];
+    if (item.action) {
+      switch (item.action.type) {
+        case 'GRID':
+          return [{ outlets: { contentOutlet: ['table', item.id] } }];
+        case 'FORM':
+          return [{ outlets: { contentOutlet: ['form', item.id] } }];
+        default:
+      }
     }
     return undefined;
   }

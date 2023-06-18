@@ -24,6 +24,7 @@ import { ModalContentComponent } from './modal-content/modal-content.component';
 import { SectionsComponent } from './sections/sections.component';
 import { SubSectionComponent } from './sub-section/sub-section.component';
 import { TableSectionComponent } from './table-section/table-section.component';
+import { SafeHtmlPipe } from '../pipes/safe-html.pipe';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { TableSectionComponent } from './table-section/table-section.component';
     ElementComponent,
     ModalContentComponent,
     FormContentComponent,
+    SafeHtmlPipe
   ],
   imports: [
     CommonModule,

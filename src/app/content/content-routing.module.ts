@@ -19,6 +19,12 @@ const routes: Routes = [
         component: TableComponent,
         outlet: 'contentOutlet',
       },
+      {
+        path: 'form/:id',
+        canActivate: [AuthGuard],
+        component: FormContentComponent,
+        outlet: 'contentOutlet',
+      },
     ],
   },
   {
@@ -32,4 +38,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class ContentRoutingModule {}
+export class ContentRoutingModule { }
