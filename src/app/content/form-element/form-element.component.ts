@@ -7,11 +7,11 @@ import { UtilService } from 'src/app/services/util.service';
 import { ValueService } from 'src/app/services/value.service';
 
 @Component({
-  selector: 'app-element',
-  templateUrl: './element.component.html',
-  styleUrls: ['./element.component.scss'],
+  selector: 'app-form-element',
+  templateUrl: './form-element.component.html',
+  styleUrls: ['./form-element.component.scss'],
 })
-export class ElementComponent {
+export class FormElementComponent {
   inputValue: any;
   radioValue: any;
   dropdownValue: any;
