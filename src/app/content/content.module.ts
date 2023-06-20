@@ -26,6 +26,8 @@ import { SubSectionComponent } from './sub-section/sub-section.component';
 import { TableSectionComponent } from './table-section/table-section.component';
 import { SafeHtmlPipe } from '../pipes/safe-html.pipe';
 
+import { CalendarModule } from 'primeng/calendar';
+
 @NgModule({
   declarations: [
     ContentComponent,
@@ -55,6 +57,7 @@ import { SafeHtmlPipe } from '../pipes/safe-html.pipe';
     MultiSelectModule,
     AutoCompleteModule,
     FileUploadModule,
+    CalendarModule
   ],
 })
 export class ContentModule {}

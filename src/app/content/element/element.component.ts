@@ -18,6 +18,7 @@ export class ElementComponent {
   bitEnumValue: any;
   autoCompleteValue: any;
   snippletValue: any;
+  dateValue: any;
 
   _formItem: FormItem | undefined;
 
@@ -73,7 +74,7 @@ export class ElementComponent {
         if (this.formItem.options) {
           this.autoCompleteSuggestions = this.formItem.options;
           this.autoCompleteValue = this.formItem.options[0];
-          this.addEntry(this.autoCompleteValue.value);
+          this.addEntry(this.autoCompleteValue?.value);
         }
         break;
 
@@ -88,6 +89,13 @@ export class ElementComponent {
       case 'UPLOADMULTIPLE':
         this.uploadUrl = `${this.utilService.evalApiUrl()}/ui/upload`;
         break;
+
+      case 'DATE':
+        if (this.formItem?.value != null) {
+          this.dateValue =  new Date(this.formItem?.value);
+          this.addEntry(this.formItem?.value);
+        }
+        break
       default:
     }
   }
@@ -117,6 +125,14 @@ export class ElementComponent {
 
   changeBitEnum(value: any) {
     this.addEntry(value);
+  }
+
+  changeDate(value: any) {
+    if (value instanceof Date) {
+      this.addEntry(value.toISOString().substring(0, 10))
+    } else {
+      this.addEntry(null);
+    }
   }
 
   search(query: string) {

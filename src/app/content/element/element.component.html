@@ -47,6 +47,9 @@
                     <div *ngIf="uploadKeys">Successfull uploaded</div>
                 </ng-template>
             </p-fileUpload>
+        </ng-container>
+        <ng-container *ngSwitchCase="'DATE'">
+            <p-calendar [(ngModel)]="dateValue" #date [showIcon]="true" (onBlur)="changeDate(date.value)" (onSelect)="changeDate($event)"></p-calendar>
         </ng-container>          
         <ng-container *ngSwitchDefault>
             {{formItem?.value}}
