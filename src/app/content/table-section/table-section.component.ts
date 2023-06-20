@@ -12,6 +12,7 @@ export class TableSectionComponent {
   _tableSection: TableSection | undefined;
   cols: any[] = [];
   elements: any[] = [];
+  editable = false;
 
   constructor(private router: Router) {}
 
@@ -20,9 +21,16 @@ export class TableSectionComponent {
     this._tableSection = tableSection;
     this.cols = tableSection.columns;
     this.elements = tableSection.values;
+    this.editable = tableSection.editable;
+    if (this.editable) {
+      this.addEmptyRow()
+    }
   }
 
   showLink(rowData: any, column: Column) {
+    if (this.editable) {
+      return false
+    }
     if (column?.ref) {
       if (rowData.hasOwnProperty(column!!.field + '_AOID')) {
         if (rowData[column!!.field + '_AOID'] != null) {
@@ -42,5 +50,9 @@ export class TableSectionComponent {
     } else {
       this.router.navigate(['content', rowData['OID']]);
     }
+  }
+
+  addEmptyRow() {
+    this.elements.push([])
   }
 }

@@ -1,21 +1,54 @@
-<p-table [columns]="cols" [value]="elements" styleClass="p-datatable-gridlines p-datatable-striped">
-    <ng-template pTemplate="header" let-columns>
-        <tr>
-            <th [pSortableColumn]="col.field" *ngFor="let col of columns" pResizableColumn>
-                {{ col.header }}
-                <p-sortIcon [field]="col.field"></p-sortIcon>
-            </th>
-        </tr>
-    </ng-template>
-    <ng-template pTemplate="body" let-rowData let-columns="columns">
-        <tr>
-            <td *ngFor="let col of columns">
-                <div>
-                    <p-button *ngIf="showLink(rowData,col)" icon="pi pi-link" styleClass="p-button-rounded p-button-outlined" (click)="followLink(rowData,col)" 
-                    [style]="{ width:'2rem', height: '2rem' }"></p-button>
-                    {{rowData[col.field]}}
-                </div>
-            </td>
-        </tr>
-    </ng-template>
-</p-table>
+<div *ngIf="editable">
+    <p-table [columns]="cols" [value]="elements" styleClass="p-datatable-gridlines p-datatable-striped">
+        <ng-template pTemplate="caption" *ngIf="editable">
+            <div class="flex align-items-center justify-content-between">
+                <p-button icon="pi pi-plus" (click)="addEmptyRow()"></p-button>
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header" let-columns>
+            <tr>
+                <th [pSortableColumn]="col.field" *ngFor="let col of columns" pResizableColumn>
+                    {{ col.header }}
+                    <p-sortIcon [field]="col.field"></p-sortIcon>
+                </th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-rowData let-columns="columns">
+            <tr>
+                <td *ngFor="let col of columns">
+                    <div>
+                        <p-button *ngIf="showLink(rowData,col)" icon="pi pi-link"
+                            styleClass="p-button-rounded p-button-outlined" (click)="followLink(rowData,col)"
+                            [style]="{ width:'2rem', height: '2rem' }"></p-button>
+                        {{rowData[col.field]}}
+                    </div>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>
+<div *ngIf="!editable">
+    <p-table [columns]="cols" [value]="elements" styleClass="p-datatable-gridlines p-datatable-striped">
+        <ng-template pTemplate="caption" *ngIf="editable">
+            <div class="flex align-items-center justify-content-between">
+                <p-button icon="pi pi-plus" (click)="addEmptyRow()"></p-button>
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header" let-columns>
+            <tr>
+                <th *ngFor="let col of columns" pResizableColumn>
+                    {{ col.header }}
+                </th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-rowData let-columns="columns">
+            <tr>
+                <td *ngFor="let col of columns">
+                    <div>
+                        {{rowData[col.field]}}
+                    </div>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>

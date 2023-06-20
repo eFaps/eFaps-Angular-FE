@@ -9,37 +9,40 @@
         color: var(--primary-color);
         padding: 0.5rem;
         border-radius: var(--border-radius);
-        border-color:var(--primary-100) ;
+        border-color: var(--primary-100);
         border-style: solid;
         border-width: 1px;
         width: 200px;
         max-width: 200px;
         line-height: 40px;
     }
+
     .value {
         flex-grow: 1;
         color: var(--text-color);
         background-color: var(--surface-section);
         padding: 0.5rem;
-        line-height: 40px; 
-        
-       
+        line-height: 40px;
     }
+
     .placeholder {
         flex-grow: 1;
     }
 }
 
-::ng-deep .p-fileupload  {
+::ng-deep .p-fileupload,
+p-dropdown {
     line-height: 1rem;
 }
 
 .snipplet {
-    
+
     ::ng-deep table {
         border: 1px solid;
         border-collapse: collapse;
-        ::ng-deep td, th {
+
+        ::ng-deep td,
+        th {
             border: 1px solid;
             padding: 5px;
         }
@@ -47,14 +50,15 @@
 
     ::ng-deep {
         .eFapsJR {
-        margin-top: 20px;
-        margin-bottom: 20px;
-        width: calc(100vw - 38px)
+            margin-top: 20px;
+            margin-bottom: 20px;
+            width: calc(100vw - 38px)
+        }
+
+        .jrPage {
+            margin-left: auto;
+            margin-right: auto;
+            white-space: normal;
+        }
     }
-    .jrPage {
-        margin-left: auto;
-        margin-right: auto;
-        white-space: normal;
-    }
-}
 }

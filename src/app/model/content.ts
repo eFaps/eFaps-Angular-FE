@@ -50,6 +50,7 @@ export interface HeadingSection extends Section {
 export interface TableSection extends Section {
   columns: Column[];
   values: any[];
+  editable: boolean;
 }
 
 export interface Option {
