@@ -12,7 +12,7 @@ import { ValueService } from 'src/app/services/value.service';
 })
 export class FormContentComponent implements OnInit {
   id: string | undefined;
-  oid: string = "none"
+  oid: string = 'none';
   outline: Outline | undefined;
   sections: Section[] = [];
 
@@ -25,7 +25,6 @@ export class FormContentComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
     combineLatest([this.route.queryParams, this.route.params]).subscribe(
       (parameters) => {
         if (parameters[0]['oid']) {

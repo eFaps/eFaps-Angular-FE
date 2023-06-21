@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import { ButtonModule } from 'primeng/button';
+import { CalendarModule } from 'primeng/calendar';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { DropdownModule } from 'primeng/dropdown';
 import { FileUploadModule } from 'primeng/fileupload';
@@ -15,18 +16,17 @@ import { TableModule } from 'primeng/table';
 import { TabMenuModule } from 'primeng/tabmenu';
 import { ToolbarModule } from 'primeng/toolbar';
 
+import { SafeHtmlPipe } from '../pipes/safe-html.pipe';
 import { ContentRoutingModule } from './content-routing.module';
 import { ContentComponent } from './content/content.component';
-import { FormElementComponent } from './form-element/form-element.component';
 import { FormContentComponent } from './form-content/form-content.component';
+import { FormElementComponent } from './form-element/form-element.component';
 import { FormSectionComponent } from './form-section/form-section.component';
 import { ModalContentComponent } from './modal-content/modal-content.component';
 import { SectionsComponent } from './sections/sections.component';
 import { SubSectionComponent } from './sub-section/sub-section.component';
+import { TableElementComponent } from './table-element/table-element.component';
 import { TableSectionComponent } from './table-section/table-section.component';
-import { SafeHtmlPipe } from '../pipes/safe-html.pipe';
-
-import { CalendarModule } from 'primeng/calendar';
 
 @NgModule({
   declarations: [
@@ -38,7 +38,8 @@ import { CalendarModule } from 'primeng/calendar';
     FormElementComponent,
     ModalContentComponent,
     FormContentComponent,
-    SafeHtmlPipe
+    SafeHtmlPipe,
+    TableElementComponent,
   ],
   imports: [
     CommonModule,
@@ -57,7 +58,7 @@ import { CalendarModule } from 'primeng/calendar';
     MultiSelectModule,
     AutoCompleteModule,
     FileUploadModule,
-    CalendarModule
+    CalendarModule,
   ],
 })
 export class ContentModule {}

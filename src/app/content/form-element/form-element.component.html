@@ -52,7 +52,7 @@
             <p-calendar [(ngModel)]="dateValue" #date [showIcon]="true" (onBlur)="changeDate(date.value)" (onSelect)="changeDate($event)"></p-calendar>
         </ng-container>          
         <ng-container *ngSwitchDefault>
-            {{formItem?.value}}
+            {{readOnlyValue}}
         </ng-container>
     </div>
 </div>

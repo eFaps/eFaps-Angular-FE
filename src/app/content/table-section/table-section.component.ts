@@ -23,13 +23,13 @@ export class TableSectionComponent {
     this.elements = tableSection.values;
     this.editable = tableSection.editable;
     if (this.editable) {
-      this.addEmptyRow()
+      this.addEmptyRow();
     }
   }
 
   showLink(rowData: any, column: Column) {
     if (this.editable) {
-      return false
+      return false;
     }
     if (column?.ref) {
       if (rowData.hasOwnProperty(column!!.field + '_AOID')) {
@@ -53,6 +53,6 @@ export class TableSectionComponent {
   }
 
   addEmptyRow() {
-    this.elements.push([])
+    this.elements.push([]);
   }
 }

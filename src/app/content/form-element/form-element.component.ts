@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { UploadEvent } from 'primeng/fileupload';
 import { FormItem } from 'src/app/model/content';
 import { Option } from 'src/app/model/content';
@@ -11,7 +11,7 @@ import { ValueService } from 'src/app/services/value.service';
   templateUrl: './form-element.component.html',
   styleUrls: ['./form-element.component.scss'],
 })
-export class FormElementComponent {
+export class FormElementComponent implements OnInit {
   inputValue: any;
   radioValue: any;
   dropdownValue: any;
@@ -19,6 +19,8 @@ export class FormElementComponent {
   autoCompleteValue: any;
   snippletValue: any;
   dateValue: any;
+
+  readOnlyValue: any;
 
   _formItem: FormItem | undefined;
 
@@ -31,7 +33,23 @@ export class FormElementComponent {
     private valueService: ValueService,
     private autoCompleteService: AutoCompleteService,
     private utilService: UtilService
-  ) { }
+  ) {}
+  ngOnInit(): void {
+    this.valueService.update.subscribe({
+      next: (entry) => {
+        if (entry?.name == this.formItem?.name) {
+          this.updateValue(entry?.value);
+        }
+      },
+    });
+  }
+
+  updateValue(value: any) {
+    switch (this.formItem?.type) {
+      default:
+        this.readOnlyValue = value;
+    }
+  }
 
   @Input()
   set formItem(formItem: FormItem | undefined) {
@@ -92,11 +110,12 @@ export class FormElementComponent {
 
       case 'DATE':
         if (this.formItem?.value != null) {
-          this.dateValue =  new Date(this.formItem?.value);
+          this.dateValue = new Date(this.formItem?.value);
           this.addEntry(this.formItem?.value);
         }
-        break
+        break;
       default:
+        this.readOnlyValue = this.formItem?.value;
     }
   }
 
@@ -129,7 +148,7 @@ export class FormElementComponent {
 
   changeDate(value: any) {
     if (value instanceof Date) {
-      this.addEntry(value.toISOString().substring(0, 10))
+      this.addEntry(value.toISOString().substring(0, 10));
     } else {
       this.addEntry(null);
     }
@@ -152,7 +171,7 @@ export class FormElementComponent {
     this.uploadKeys = result.keys;
     this.addEntry(this.uploadKeys);
     this.valueService.addEntry({
-      name: "eFapsUpload",
+      name: 'eFapsUpload',
       value: this.formItem!!.name,
     });
   }

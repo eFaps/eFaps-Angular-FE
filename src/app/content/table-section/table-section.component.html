@@ -1,4 +1,4 @@
-<div *ngIf="editable">
+<div *ngIf="!editable">
     <p-table [columns]="cols" [value]="elements" styleClass="p-datatable-gridlines p-datatable-striped">
         <ng-template pTemplate="caption" *ngIf="editable">
             <div class="flex align-items-center justify-content-between">
@@ -27,7 +27,7 @@
         </ng-template>
     </p-table>
 </div>
-<div *ngIf="!editable">
+<div *ngIf="editable">
     <p-table [columns]="cols" [value]="elements" styleClass="p-datatable-gridlines p-datatable-striped">
         <ng-template pTemplate="caption" *ngIf="editable">
             <div class="flex align-items-center justify-content-between">
@@ -45,7 +45,7 @@
             <tr>
                 <td *ngFor="let col of columns">
                     <div>
-                        {{rowData[col.field]}}
+                        <app-table-element [column]="col"></app-table-element>
                     </div>
                 </td>
             </tr>

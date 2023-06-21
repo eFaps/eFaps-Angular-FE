@@ -5,11 +5,15 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root',
 })
 export class ValueService {
- 
   private valueMap: Map<String, any> | undefined;
 
   private currentValue = new BehaviorSubject<Map<String, any>>(new Map());
   values = this.currentValue.asObservable();
+
+  private currentUpdate = new BehaviorSubject<
+    { name: string; value: any } | undefined
+  >(undefined);
+  update = this.currentUpdate.asObservable();
 
   constructor() {}
 
@@ -22,6 +26,10 @@ export class ValueService {
   }
 
   reset() {
-    this.valueMap?.clear()
+    this.valueMap?.clear();
+  }
+
+  updateEntry(entry: { name: string; value: any }) {
+    this.currentUpdate.next(entry);
   }
 }

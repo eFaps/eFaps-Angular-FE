@@ -1,0 +1,95 @@
+import { Component, Input, OnInit } from '@angular/core';
+import { TableColumn } from 'src/app/model/content';
+import { Option } from 'src/app/model/content';
+import { AutoCompleteService } from 'src/app/services/auto-complete.service';
+import { FieldUpdateService } from 'src/app/services/field-update.service';
+import { ValueService } from 'src/app/services/value.service';
+
+@Component({
+  selector: 'app-table-element',
+  templateUrl: './table-element.component.html',
+  styleUrls: ['./table-element.component.scss'],
+})
+export class TableElementComponent implements OnInit {
+  inputValue: any;
+  autoCompleteValue: any;
+
+  readOnlyValue: any;
+
+  _column: TableColumn | undefined;
+
+  autoCompleteSuggestions: any[] = [];
+
+  constructor(
+    private autoCompleteService: AutoCompleteService,
+    private fieldUpdateService: FieldUpdateService,
+    private valueService: ValueService
+  ) {}
+  ngOnInit(): void {
+    this.valueService.update.subscribe({
+      next: (entry) => {
+        if (entry?.name == this.column?.field) {
+          this.updateValue(entry?.value);
+        }
+      },
+    });
+  }
+
+  updateValue(value: any) {
+    switch (this.column?.type) {
+      case 'INPUT':
+        this.inputValue = value;
+        break;
+      default:
+        this.readOnlyValue = value;
+    }
+  }
+
+  @Input()
+  set column(column: TableColumn | undefined) {
+    this._column = column;
+    switch (this.column?.type) {
+    }
+  }
+
+  get column(): TableColumn | undefined {
+    return this._column;
+  }
+
+  addEntry(value: any) {
+    this.valueService.addEntry({
+      name: this._column!!.field,
+      value: value,
+    });
+  }
+
+  onKey(value: string) {
+    this.addEntry(value);
+  }
+
+  changeAutoComplete(option: Option) {
+    this.addEntry(option.value);
+  }
+
+  search(query: string) {
+    this.autoCompleteService.search(this.column!!.ref!!, query).subscribe({
+      next: (result) => {
+        this.autoCompleteSuggestions = result.options;
+      },
+    });
+  }
+
+  fieldUpdate() {
+    if (this._column && this._column.updateRef) {
+      this.fieldUpdateService.execute(this._column.updateRef).subscribe({
+        next: (response) => {
+          if (response.values) {
+            Object.entries(response.values).forEach(([key, value], index) => {
+              this.valueService.updateEntry({ name: key, value });
+            });
+          }
+        },
+      });
+    }
+  }
+}
