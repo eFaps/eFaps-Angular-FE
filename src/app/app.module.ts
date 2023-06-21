@@ -22,6 +22,7 @@ import { RoutePathReuseStrategy } from './init/route-path-reuse-strategy';
 import { CompanyInterceptor } from './interceptors/company.interceptor';
 import { ErrorInterceptor } from './interceptors/error.interceptor';
 import { LoaderInterceptor } from './interceptors/loader.interceptor';
+import { ThemeChooserComponent } from './standalone/theme-chooser/theme-chooser.component';
 
 @NgModule({
   declarations: [AppComponent],
@@ -40,6 +41,7 @@ import { LoaderInterceptor } from './interceptors/loader.interceptor';
     ToastModule,
     TableModule,
     DividerModule,
+    ThemeChooserComponent,
   ],
   providers: [
     MessageService,

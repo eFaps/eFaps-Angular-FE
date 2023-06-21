@@ -1,0 +1,14 @@
+.wrapper {
+    display: flex;
+    width: 15rem;
+    column-gap: 5px;
+    justify-content: center;
+}
+
+::ng-deep .p-button {
+    padding: 0.5rem;
+    min-width: unset;
+}
+.custom-icon {
+    height: 2rem;
+}

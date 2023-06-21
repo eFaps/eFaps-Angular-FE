@@ -25,8 +25,11 @@
                         <div *ngIf="showCompanySelector" class="companies">
                             <p-button icon="pi pi-building" (click)="switchCompany()"></p-button>
                         </div>
+                        <p-divider></p-divider>
+                        <app-theme-chooser></app-theme-chooser>
                     </ng-template>
                 </p-overlayPanel>
+           
             </div>
         </div>
     </ng-template>

@@ -30,9 +30,48 @@
               "src/assets"
             ],
             "styles": [
-              "node_modules/primeng/resources/themes/lara-light-blue/theme.css",
-              "node_modules/primeng/resources/primeng.min.css",
-              "src/styles.scss"
+              "src/styles.scss",
+              {
+                "input": "src/themes/md-dark-deeppurple.scss",
+                "bundleName": "md-dark-deeppurple",
+                "inject": false
+              },
+              {
+                "input": "src/themes/md-dark-indigo.scss",
+                "bundleName": "md-dark-indigo",
+                "inject": false
+              },
+              {
+                "input": "src/themes/md-light-deeppurple.scss",
+                "bundleName": "md-light-deeppurple",
+                "inject": false
+              },
+              {
+                "input": "src/themes/md-light-indigo.scss",
+                "bundleName": "md-light-indigo",
+                "inject": false
+              },
+
+              {
+                "input": "src/themes/mdc-dark-deeppurple.scss",
+                "bundleName": "mdc-dark-deeppurple",
+                "inject": false
+              },
+              {
+                "input": "src/themes/mdc-dark-indigo.scss",
+                "bundleName": "mdc-dark-indigo",
+                "inject": false
+              },
+              {
+                "input": "src/themes/mdc-light-deeppurple.scss",
+                "bundleName": "mdc-light-deeppurple",
+                "inject": false
+              },
+              {
+                "input": "src/themes/mdc-light-indigo.scss",
+                "bundleName": "mdc-light-indigo",
+                "inject": false
+              }
             ],
             "scripts": []
           },
