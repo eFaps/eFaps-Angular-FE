@@ -3,6 +3,7 @@ import { UploadEvent } from 'primeng/fileupload';
 import { FormItem } from 'src/app/model/content';
 import { Option } from 'src/app/model/content';
 import { AutoCompleteService } from 'src/app/services/auto-complete.service';
+import { FieldUpdateService } from 'src/app/services/field-update.service';
 import { UtilService } from 'src/app/services/util.service';
 import { ValueService } from 'src/app/services/value.service';
 
@@ -32,6 +33,7 @@ export class FormElementComponent implements OnInit {
   constructor(
     private valueService: ValueService,
     private autoCompleteService: AutoCompleteService,
+    private fieldUpdateService: FieldUpdateService,
     private utilService: UtilService
   ) {}
   ngOnInit(): void {
@@ -174,5 +176,22 @@ export class FormElementComponent implements OnInit {
       name: 'eFapsUpload',
       value: this.formItem!!.name,
     });
+  }
+
+  fieldUpdate() {
+    if (this._formItem && this._formItem.updateRef) {
+      this.fieldUpdateService.execute(this._formItem.updateRef).subscribe({
+        next: (response) => {
+          if (response.values) {
+            Object.entries(response.values).forEach(([key, value]) => {
+              this.valueService.updateEntry({
+                name: key,
+                value,
+              });
+            });
+          }
+        },
+      });
+    }
   }
 }

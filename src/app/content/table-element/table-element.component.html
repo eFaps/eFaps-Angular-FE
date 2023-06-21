@@ -6,7 +6,7 @@
         <p-autoComplete [(ngModel)]="autoCompleteValue" [suggestions]="autoCompleteSuggestions"
         (completeMethod)="search($event.query)" (onSelect)="changeAutoComplete($event)"
         (onUnselect)="changeAutoComplete($event)" field="label" [lazy]="true" placeholder="buscar"
-        [forceSelection]="true" [showEmptyMessage]="true" appendTo="body"> </p-autoComplete>
+        [forceSelection]="true" [showEmptyMessage]="true" appendTo="body" (onBlur)="fieldUpdate()"> </p-autoComplete>
     </ng-container>    
     <ng-container *ngSwitchDefault>
         {{readOnlyValue}}

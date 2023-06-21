@@ -26,10 +26,10 @@
             <p-autoComplete [(ngModel)]="autoCompleteValue" [suggestions]="autoCompleteSuggestions"
                 (completeMethod)="search($event.query)" (onSelect)="changeAutoComplete($event)"
                 (onUnselect)="changeAutoComplete($event)" field="label" [lazy]="true" placeholder="buscar"
-                [forceSelection]="true" [showEmptyMessage]="true"> </p-autoComplete>
+                [forceSelection]="true" [showEmptyMessage]="true" (onBlur)="fieldUpdate()"> </p-autoComplete>
         </ng-container>
         <ng-container *ngSwitchCase="'INPUT'">
-            <input type="text" pInputText #textInput [(ngModel)]="inputValue" (keyup)="onKey(textInput.value)" />
+            <input type="text" pInputText #textInput [(ngModel)]="inputValue" (keyup)="onKey(textInput.value)" (blur)="fieldUpdate()"/>
         </ng-container>
         <ng-container *ngSwitchCase="'SNIPPLET'">
             <div class="snipplet" [innerHtml]="snippletValue | safeHtml"></div>
