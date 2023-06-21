@@ -41,11 +41,11 @@
                 </th>
             </tr>
         </ng-template>
-        <ng-template pTemplate="body" let-rowData let-columns="columns">
+        <ng-template pTemplate="body" let-rowData let-columns="columns" let-i="rowIndex">
             <tr>
                 <td *ngFor="let col of columns">
                     <div>
-                        <app-table-element [column]="col"></app-table-element>
+                        <app-table-element [column]="col" [index]="i"></app-table-element>
                     </div>
                 </td>
             </tr>

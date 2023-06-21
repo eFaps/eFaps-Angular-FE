@@ -23,10 +23,14 @@ export class FieldUpdateService {
     });
   }
 
-  execute(fieldId: string): Observable<FieldUpdateResponse> {
+  execute(fieldId: string, index?: number): Observable<FieldUpdateResponse> {
     const url = `${this.utilService.evalApiUrl()}/ui/field-update/${fieldId}`;
+
     const values: any =
       this.values != null ? Object.fromEntries(this.values) : {};
+    if (index != null) {
+      values['eFapsRSR'] = index;
+    }
     return this.http.post<FieldUpdateResponse>(url, { values });
   }
 }

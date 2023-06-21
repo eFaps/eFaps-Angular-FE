@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TableSection } from 'src/app/model/content';
 import { Column } from 'src/app/model/table';
+import { ValueService } from 'src/app/services/value.service';
 
 @Component({
   selector: 'app-table-section',
@@ -14,7 +15,7 @@ export class TableSectionComponent {
   elements: any[] = [];
   editable = false;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private valueService: ValueService) {}
 
   @Input()
   set tableSection(tableSection: TableSection) {
@@ -54,5 +55,11 @@ export class TableSectionComponent {
 
   addEmptyRow() {
     this.elements.push([]);
+    this.valueService.resize(
+      this.elements.length,
+      this.cols.map((column) => {
+        return column.field;
+      })
+    );
   }
 }
