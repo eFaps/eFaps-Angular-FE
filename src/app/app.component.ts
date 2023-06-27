@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { MenuItem, MessageService, PrimeNGConfig } from 'primeng/api';
+import { MenuItem, PrimeNGConfig } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
 import { OverlayPanel } from 'primeng/overlaypanel';
 import { environment } from 'src/environments/environment';
 
+import { default as translation } from '../assets/es.json';
 import { ModalContentComponent } from './content/modal-content/modal-content.component';
 import { ResultElement, SearchResult } from './model/index-search';
 import { MenuEntry } from './model/menu';
@@ -52,6 +53,7 @@ export class AppComponent implements OnInit {
       next: (isLoading) => (this.isLoading = isLoading),
     });
     this.primengConfig.ripple = true;
+    this.primengConfig.setTranslation(translation.es);
     this.userService.company.subscribe({
       next: (company) => (this.company = company),
     });
