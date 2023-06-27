@@ -171,7 +171,15 @@ export class TableComponent implements OnInit {
           const dialogRef = this.dialogService.open(SearchContentComponent, {
             data: {
               item,
-              searches
+              searches,
+              oid: this.oid
+            },
+          });
+          dialogRef.onClose.subscribe({
+            next: (execResponse) => {
+              if (execResponse.reload) {
+                this.loadData();
+              }
             },
           });
         }

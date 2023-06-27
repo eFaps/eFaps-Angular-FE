@@ -2,8 +2,8 @@
     values
 
     <div *ngIf="cols && cols.length > 0">
-        <p-table [columns]="cols" [value]="elements" [paginator]="true"  [rows]="5"
-        [showCurrentPageReport]="true" styleClass="p-datatable-gridlines p-datatable-striped">
+        <p-table [columns]="cols" [value]="elements" [paginator]="true" [rows]="5"
+        [showCurrentPageReport]="true" [(selection)]="selectedElements" styleClass="p-datatable-gridlines p-datatable-striped">
             <ng-template pTemplate="header" let-columns>
                 <tr>
                     <th></th>
@@ -16,7 +16,7 @@
             <ng-template pTemplate="body" let-rowData let-columns="columns">
                 <tr>
                     <td>
-                        <p-tableCheckbox [value]="rowData['OID']"></p-tableCheckbox>
+                        <p-tableCheckbox [value]="rowData"></p-tableCheckbox>
                     </td>
                     <td *ngFor="let col of columns">
                         <div>
@@ -29,5 +29,6 @@
     </div>
 </div>
 <div class="p-dialog-footer">
-    <p-button [label]="search?.label" styleClass="p-button-warning" (click)="submit()"></p-button>
+    <p-button label="Connectar" styleClass="p-button-warning" (click)="submit()"></p-button>
+    <p-button label="Buscar" styleClass="p-button" (click)="query()"></p-button>
 </div>
