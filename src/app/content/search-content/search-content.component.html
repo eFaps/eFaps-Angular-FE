@@ -1,5 +1,6 @@
 <div class="p-dialog-content">
     <app-form-section [formSection]="search.formSection"></app-form-section>
+    <p-divider></p-divider>
     <div *ngIf="cols && cols.length > 0">
         <p-table [columns]="cols" [value]="elements" [paginator]="true" [rows]="5"
         [showCurrentPageReport]="true" [(selection)]="selectedElements" styleClass="p-datatable-gridlines p-datatable-striped">

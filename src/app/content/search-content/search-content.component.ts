@@ -10,7 +10,7 @@ import { ValueService } from 'src/app/services/value.service';
   templateUrl: './search-content.component.html',
   styleUrls: ['./search-content.component.scss'],
 })
-export class SearchContentComponent implements OnInit{
+export class SearchContentComponent implements OnInit {
   searches: Search[];
   search: Search;
   menuItem: any;
@@ -37,8 +37,8 @@ export class SearchContentComponent implements OnInit{
   ngOnInit(): void {
     this.valueService.reset();
     this.valueService.values.subscribe({
-      next: values => this.values = values
-    })
+      next: (values) => (this.values = values),
+    });
   }
 
   query() {

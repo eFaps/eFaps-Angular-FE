@@ -5,6 +5,7 @@ import { AutoCompleteModule } from 'primeng/autocomplete';
 import { ButtonModule } from 'primeng/button';
 import { CalendarModule } from 'primeng/calendar';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { DividerModule } from 'primeng/divider';
 import { DropdownModule } from 'primeng/dropdown';
 import { FileUploadModule } from 'primeng/fileupload';
 import { InputTextModule } from 'primeng/inputtext';
@@ -61,6 +62,7 @@ import { TableSectionComponent } from './table-section/table-section.component';
     AutoCompleteModule,
     FileUploadModule,
     CalendarModule,
+    DividerModule,
   ],
 })
 export class ContentModule {}

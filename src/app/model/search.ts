@@ -5,7 +5,7 @@ export interface Search {
   id: string;
   label: string;
   selected: boolean;
-  formSection: FormSection
+  formSection: FormSection;
   children: [];
 }
 
