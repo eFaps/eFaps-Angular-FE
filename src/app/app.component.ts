@@ -172,9 +172,9 @@ export class AppComponent implements OnInit {
     if (item.action.modal) {
       this.contentService.getContentWithCmd('none', item.id).subscribe({
         next: (outline) => {
-          console.log(outline)
-        }
-      })
+          console.log(outline);
+        },
+      });
     }
   }
 

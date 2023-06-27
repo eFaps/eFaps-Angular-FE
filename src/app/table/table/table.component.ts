@@ -9,12 +9,12 @@ import {
 import { DialogService } from 'primeng/dynamicdialog';
 import { combineLatest } from 'rxjs';
 import { ModalContentComponent } from 'src/app/content/modal-content/modal-content.component';
+import { SearchContentComponent } from 'src/app/content/search-content/search-content.component';
 import { MenuEntry } from 'src/app/model/menu';
 import { ContentService } from 'src/app/services/content.service';
 import { ExecService } from 'src/app/services/exec.service';
 import { SearchService } from 'src/app/services/search.service';
 import { TableService } from 'src/app/services/table.service';
-import { SearchContentComponent } from 'src/app/content/search-content/search-content.component';
 
 @Component({
   selector: 'app-table',
@@ -106,7 +106,7 @@ export class TableComponent implements OnInit {
       case 'SEARCH':
         return (event) => {
           this.searchAction(item);
-        };  
+        };
     }
     return undefined;
   }
@@ -172,7 +172,7 @@ export class TableComponent implements OnInit {
             data: {
               item,
               searches,
-              oid: this.oid
+              oid: this.oid,
             },
           });
           dialogRef.onClose.subscribe({
@@ -182,8 +182,8 @@ export class TableComponent implements OnInit {
               }
             },
           });
-        }
-      })
+        },
+      });
     }
   }
 }

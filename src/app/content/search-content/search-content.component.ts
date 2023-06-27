@@ -1,43 +1,53 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { Search } from 'src/app/model/search';
 import { ExecService } from 'src/app/services/exec.service';
 import { SearchService } from 'src/app/services/search.service';
+import { ValueService } from 'src/app/services/value.service';
 
 @Component({
   selector: 'app-search-content',
   templateUrl: './search-content.component.html',
-  styleUrls: ['./search-content.component.scss']
+  styleUrls: ['./search-content.component.scss'],
 })
-export class SearchContentComponent {
+export class SearchContentComponent implements OnInit{
   searches: Search[];
-  search: Search | undefined;
+  search: Search;
   menuItem: any;
   cols: any[] = [];
   elements: any[] = [];
   selectedElements: any[] = [];
   oid: string | undefined;
+  values: Map<String, any> | undefined;
 
-  constructor(config: DynamicDialogConfig, 
+  constructor(
+    config: DynamicDialogConfig,
     private dialogRef: DynamicDialogRef,
-    private searchService: SearchService, 
-    private execService: ExecService) {
+    private valueService: ValueService,
+    private searchService: SearchService,
+    private execService: ExecService
+  ) {
     this.searches = config.data.searches;
-    this.search = this.searches.find(search => {
-      return search.selected = true
+    this.search = this.searches.find((search) => {
+      return (search.selected = true);
+    })!!;
+    this.menuItem = config.data.item;
+    this.oid = config.data.oid;
+  }
+  ngOnInit(): void {
+    this.valueService.reset();
+    this.valueService.values.subscribe({
+      next: values => this.values = values
     })
-    this.menuItem = config.data.item
-    this.oid = config.data.oid
   }
 
   query() {
-    this.searchService.query(this.search!!.id).subscribe({
-      next: searchResult => {
-        this.cols = searchResult.columns
-        this.elements = searchResult.values
-
-      }
-    })
+    this.searchService.query(this.search!!.id, this.values).subscribe({
+      next: (searchResult) => {
+        this.cols = searchResult.columns;
+        this.elements = searchResult.values;
+      },
+    });
   }
 
   submit() {
@@ -50,9 +60,9 @@ export class SearchContentComponent {
       map.set('eFapsOID', this.oid);
     }
     this.execService.exec(this.menuItem.id, map).subscribe({
-      next: execResponse => {
-        this.dialogRef.close(execResponse)
-      }
-    })
+      next: (execResponse) => {
+        this.dialogRef.close(execResponse);
+      },
+    });
   }
 }
