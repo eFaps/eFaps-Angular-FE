@@ -1,0 +1,33 @@
+<div class="p-dialog-content">
+    values
+
+    <div *ngIf="cols && cols.length > 0">
+        <p-table [columns]="cols" [value]="elements" [paginator]="true"  [rows]="5"
+        [showCurrentPageReport]="true" styleClass="p-datatable-gridlines p-datatable-striped">
+            <ng-template pTemplate="header" let-columns>
+                <tr>
+                    <th></th>
+                    <th [pSortableColumn]="col.field" *ngFor="let col of columns" pResizableColumn>
+                        {{ col.header }}
+                        <p-sortIcon [field]="col.field"></p-sortIcon>
+                    </th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-rowData let-columns="columns">
+                <tr>
+                    <td>
+                        <p-tableCheckbox [value]="rowData['OID']"></p-tableCheckbox>
+                    </td>
+                    <td *ngFor="let col of columns">
+                        <div>
+                            {{rowData[col.field]}}
+                        </div>
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+</div>
+<div class="p-dialog-footer">
+    <p-button [label]="search?.label" styleClass="p-button-warning" (click)="submit()"></p-button>
+</div>

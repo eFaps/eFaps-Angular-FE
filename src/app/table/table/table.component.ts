@@ -12,7 +12,9 @@ import { ModalContentComponent } from 'src/app/content/modal-content/modal-conte
 import { MenuEntry } from 'src/app/model/menu';
 import { ContentService } from 'src/app/services/content.service';
 import { ExecService } from 'src/app/services/exec.service';
+import { SearchService } from 'src/app/services/search.service';
 import { TableService } from 'src/app/services/table.service';
+import { SearchContentComponent } from 'src/app/content/search-content/search-content.component';
 
 @Component({
   selector: 'app-table',
@@ -39,7 +41,8 @@ export class TableComponent implements OnInit {
     private dialogService: DialogService,
     private contentService: ContentService,
     private tableService: TableService,
-    private execService: ExecService
+    private execService: ExecService,
+    private searchService: SearchService
   ) {}
 
   ngOnInit(): void {
@@ -99,6 +102,11 @@ export class TableComponent implements OnInit {
         return (event) => {
           this.formAction(item);
         };
+
+      case 'SEARCH':
+        return (event) => {
+          this.searchAction(item);
+        };  
     }
     return undefined;
   }
@@ -153,6 +161,21 @@ export class TableComponent implements OnInit {
           });
         },
       });
+    }
+  }
+
+  searchAction(item: MenuEntry) {
+    if (item.action.modal) {
+      this.searchService.getSearch(item.id).subscribe({
+        next: (searches) => {
+          const dialogRef = this.dialogService.open(SearchContentComponent, {
+            data: {
+              item,
+              searches
+            },
+          });
+        }
+      })
     }
   }
 }

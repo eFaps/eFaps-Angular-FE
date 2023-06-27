@@ -27,6 +27,7 @@ import { SectionsComponent } from './sections/sections.component';
 import { SubSectionComponent } from './sub-section/sub-section.component';
 import { TableElementComponent } from './table-element/table-element.component';
 import { TableSectionComponent } from './table-section/table-section.component';
+import { SearchContentComponent } from './search-content/search-content.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { TableSectionComponent } from './table-section/table-section.component';
     FormContentComponent,
     SafeHtmlPipe,
     TableElementComponent,
+    SearchContentComponent,
   ],
   imports: [
     CommonModule,

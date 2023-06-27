@@ -113,6 +113,10 @@ export class AppComponent implements OnInit {
         return (event) => {
           this.formAction(item);
         };
+      case 'SEARCH':
+        return (event) => {
+          this.searchAction(item);
+        };
     }
     return undefined;
   }
@@ -161,6 +165,16 @@ export class AppComponent implements OnInit {
       });
     } else {
       this.router.navigate(['content', 'form', item.id]);
+    }
+  }
+
+  searchAction(item: MenuEntry) {
+    if (item.action.modal) {
+      this.contentService.getContentWithCmd('none', item.id).subscribe({
+        next: (outline) => {
+          console.log(outline)
+        }
+      })
     }
   }
 
