@@ -50,6 +50,9 @@
         </ng-container>
         <ng-container *ngSwitchCase="'DATE'">
             <p-calendar [(ngModel)]="dateValue" #date [showIcon]="true" (onBlur)="changeDate(date.value)" (onSelect)="changeDate($event)"></p-calendar>
+        </ng-container>
+        <ng-container *ngSwitchCase="'ATTRSET'">
+            <app-attribute-set [formItem]="formItem"></app-attribute-set>
         </ng-container>          
         <ng-container *ngSwitchDefault>
             {{readOnlyValue}}

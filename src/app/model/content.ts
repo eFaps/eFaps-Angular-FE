@@ -33,7 +33,8 @@ export interface FormItem {
     | 'AUTOCOMPLETE'
     | 'SNIPPLET'
     | 'UPLOAD'
-    | 'UPLOADMULTIPLE';
+    | 'UPLOADMULTIPLE'
+    | 'ATTRSET';
   label: string;
   name: string;
   value?: any;
