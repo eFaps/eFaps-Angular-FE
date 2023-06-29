@@ -14,7 +14,7 @@
             </div>
         </ng-container>
         <ng-container *ngSwitchCase="'DROPDOWN'">
-            <p-dropdown [options]="formItem?.options" [(ngModel)]="dropdownValue"
+            <p-dropdown [options]="formItem?.options" [(ngModel)]="dropdownValue" appendTo="body"
                 (onChange)="changeDropdown($event.value)"></p-dropdown>
         </ng-container>
         <ng-container *ngSwitchCase="'BITENUM'">
@@ -29,31 +29,39 @@
                 [forceSelection]="true" [showEmptyMessage]="true" (onBlur)="fieldUpdate()"> </p-autoComplete>
         </ng-container>
         <ng-container *ngSwitchCase="'INPUT'">
-            <input type="text" pInputText #textInput [(ngModel)]="inputValue" (keyup)="onKey(textInput.value)" (blur)="fieldUpdate()"/>
+            <input type="text" pInputText #textInput [(ngModel)]="inputValue" (keyup)="onKey(textInput.value)"
+                (blur)="fieldUpdate()" />
         </ng-container>
         <ng-container *ngSwitchCase="'SNIPPLET'">
             <div class="snipplet" [innerHtml]="snippletValue | safeHtml"></div>
-        </ng-container>            
+        </ng-container>
         <ng-container *ngSwitchCase="'UPLOAD'">
             <p-fileUpload [url]="uploadUrl" (onUpload)="onUpload($event)">
-                <ng-template pTemplate="content" let-files >
+                <ng-template pTemplate="content" let-files>
                     <div *ngIf="uploadKeys">Successfull uploaded</div>
                 </ng-template>
             </p-fileUpload>
         </ng-container>
         <ng-container *ngSwitchCase="'UPLOADMULTIPLE'">
             <p-fileUpload [url]="uploadUrl" (onUpload)="onUpload($event)" [multiple]="true">
-                <ng-template pTemplate="content" let-files >
+                <ng-template pTemplate="content" let-files>
                     <div *ngIf="uploadKeys">Successfull uploaded</div>
                 </ng-template>
             </p-fileUpload>
         </ng-container>
         <ng-container *ngSwitchCase="'DATE'">
-            <p-calendar [(ngModel)]="dateValue" #date [showIcon]="true" (onBlur)="changeDate(date.value)" (onSelect)="changeDate($event)"></p-calendar>
+            <p-calendar [(ngModel)]="dateValue" #date [showIcon]="true" (onBlur)="changeDate(date.value)"
+                (onSelect)="changeDate($event)"></p-calendar>
         </ng-container>
         <ng-container *ngSwitchCase="'ATTRSET'">
             <app-attribute-set [formItem]="formItem"></app-attribute-set>
-        </ng-container>          
+        </ng-container>
+        <ng-container *ngSwitchCase="'CHECKBOX'">
+            <div *ngFor="let option of formItem?.options" class="field-checkbox">
+                <p-checkbox name="group" [label]="option.label" [value]="option.value"
+                    [(ngModel)]="checkboxValue" (onChange)="changeCheckbox($event.checked)"></p-checkbox>
+            </div>
+        </ng-container>
         <ng-container *ngSwitchDefault>
             {{readOnlyValue}}
         </ng-container>

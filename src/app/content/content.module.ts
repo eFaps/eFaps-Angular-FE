@@ -30,6 +30,7 @@ import { SubSectionComponent } from './sub-section/sub-section.component';
 import { TableElementComponent } from './table-element/table-element.component';
 import { TableSectionComponent } from './table-section/table-section.component';
 import { AttributeSetComponent } from './attribute-set/attribute-set.component';
+import { CheckboxModule } from 'primeng/checkbox';
 
 @NgModule({
   declarations: [
@@ -65,6 +66,7 @@ import { AttributeSetComponent } from './attribute-set/attribute-set.component';
     FileUploadModule,
     CalendarModule,
     DividerModule,
+    CheckboxModule
   ],
 })
 export class ContentModule {}

@@ -20,6 +20,7 @@ export class FormElementComponent implements OnInit {
   autoCompleteValue: any;
   snippletValue: any;
   dateValue: any;
+  checkboxValue: any;
 
   readOnlyValue: any;
 
@@ -156,6 +157,10 @@ export class FormElementComponent implements OnInit {
     }
   }
 
+  changeCheckbox(value: any) {
+    this.addEntry(value);
+  }
+
   search(query: string) {
     this.autoCompleteService.search(this.formItem!!.ref!!, query).subscribe({
       next: (result) => {
@@ -167,7 +172,7 @@ export class FormElementComponent implements OnInit {
   changeAutoComplete(option: Option) {
     this.addEntry(option.value);
   }
-
+  
   onUpload(event: UploadEvent) {
     const result = (event.originalEvent as any).body;
     this.uploadKeys = result.keys;

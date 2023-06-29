@@ -34,7 +34,8 @@ export interface FormItem {
     | 'SNIPPLET'
     | 'UPLOAD'
     | 'UPLOADMULTIPLE'
-    | 'ATTRSET';
+    | 'ATTRSET'
+    | 'CHECKBOX';
   label: string;
   name: string;
   value?: any;
