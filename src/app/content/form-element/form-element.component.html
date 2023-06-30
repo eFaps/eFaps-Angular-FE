@@ -1,5 +1,5 @@
 <div class="wrapper">
-    <div class="label" *ngIf="formItem?.label != null">
+    <div class="label" *ngIf="formItem?.label != null && formItem?.type != 'BUTTON'">
         {{formItem?.label}}
     </div>
     <div class="value" [ngSwitch]="formItem?.type">
@@ -64,6 +64,9 @@
                 <p-checkbox name="group" [label]="option.label" [value]="option.value"
                     [(ngModel)]="checkboxValue" (onChange)="changeCheckbox($event.checked)"></p-checkbox>
             </div>
+        </ng-container>
+        <ng-container *ngSwitchCase="'BUTTON'">
+            <p-button [label]="formItem?.label" (click)="executeFieldCmd()"></p-button>
         </ng-container>
         <ng-container *ngSwitchDefault>
             {{readOnlyValue}}

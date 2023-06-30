@@ -36,7 +36,8 @@ export interface FormItem {
     | 'UPLOADMULTIPLE'
     | 'ATTRSET'
     | 'CHECKBOX'
-    | 'TEXTAREA';
+    | 'TEXTAREA'
+    | 'BUTTON';
   label: string;
   name: string;
   value?: any;
