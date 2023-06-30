@@ -32,6 +32,9 @@
             <input type="text" pInputText #textInput [(ngModel)]="inputValue" (keyup)="onKey(textInput.value)"
                 (blur)="fieldUpdate()" />
         </ng-container>
+        <ng-container *ngSwitchCase="'TEXTAREA'">
+            <textarea rows="5" cols="30" pInputTextarea  #textArea [(ngModel)]="textareaValue" (keyup)="onKey(textArea.value)" (blur)="fieldUpdate()" ></textarea>    
+        </ng-container>
         <ng-container *ngSwitchCase="'SNIPPLET'">
             <div class="snipplet" [innerHtml]="snippletValue | safeHtml"></div>
         </ng-container>

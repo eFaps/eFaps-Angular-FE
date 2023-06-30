@@ -31,7 +31,7 @@ import { TableElementComponent } from './table-element/table-element.component';
 import { TableSectionComponent } from './table-section/table-section.component';
 import { AttributeSetComponent } from './attribute-set/attribute-set.component';
 import { CheckboxModule } from 'primeng/checkbox';
-
+import { InputTextareaModule } from 'primeng/inputtextarea';
 @NgModule({
   declarations: [
     ContentComponent,
@@ -66,7 +66,8 @@ import { CheckboxModule } from 'primeng/checkbox';
     FileUploadModule,
     CalendarModule,
     DividerModule,
-    CheckboxModule
+    CheckboxModule,
+    InputTextareaModule
   ],
 })
 export class ContentModule {}

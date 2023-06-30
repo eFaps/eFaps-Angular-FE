@@ -21,6 +21,7 @@ export class FormElementComponent implements OnInit {
   snippletValue: any;
   dateValue: any;
   checkboxValue: any;
+  textareaValue: any;
 
   readOnlyValue: any;
 
@@ -63,6 +64,12 @@ export class FormElementComponent implements OnInit {
         if (this.formItem?.value != null) {
           this.inputValue = this.formItem?.value;
           this.addEntry(this.inputValue);
+        }
+        break;
+      case 'TEXTAREA':
+        if (this.formItem?.value != null) {
+          this.textareaValue = this.formItem?.value;
+          this.addEntry(this.textareaValue);
         }
         break;
       case 'DROPDOWN':
