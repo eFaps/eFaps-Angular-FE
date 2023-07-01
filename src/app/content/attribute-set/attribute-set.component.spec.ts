@@ -8,7 +8,7 @@ describe('AttributeSetComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [AttributeSetComponent]
+      declarations: [AttributeSetComponent],
     });
     fixture = TestBed.createComponent(AttributeSetComponent);
     component = fixture.componentInstance;

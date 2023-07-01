@@ -4,11 +4,13 @@ import { FormsModule } from '@angular/forms';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import { ButtonModule } from 'primeng/button';
 import { CalendarModule } from 'primeng/calendar';
+import { CheckboxModule } from 'primeng/checkbox';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { DividerModule } from 'primeng/divider';
 import { DropdownModule } from 'primeng/dropdown';
 import { FileUploadModule } from 'primeng/fileupload';
 import { InputTextModule } from 'primeng/inputtext';
+import { InputTextareaModule } from 'primeng/inputtextarea';
 import { MenuModule } from 'primeng/menu';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { PanelModule } from 'primeng/panel';
@@ -18,6 +20,7 @@ import { TabMenuModule } from 'primeng/tabmenu';
 import { ToolbarModule } from 'primeng/toolbar';
 
 import { SafeHtmlPipe } from '../pipes/safe-html.pipe';
+import { AttributeSetComponent } from './attribute-set/attribute-set.component';
 import { ContentRoutingModule } from './content-routing.module';
 import { ContentComponent } from './content/content.component';
 import { FormContentComponent } from './form-content/form-content.component';
@@ -29,9 +32,7 @@ import { SectionsComponent } from './sections/sections.component';
 import { SubSectionComponent } from './sub-section/sub-section.component';
 import { TableElementComponent } from './table-element/table-element.component';
 import { TableSectionComponent } from './table-section/table-section.component';
-import { AttributeSetComponent } from './attribute-set/attribute-set.component';
-import { CheckboxModule } from 'primeng/checkbox';
-import { InputTextareaModule } from 'primeng/inputtextarea';
+
 @NgModule({
   declarations: [
     ContentComponent,
@@ -67,7 +68,7 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
     CalendarModule,
     DividerModule,
     CheckboxModule,
-    InputTextareaModule
+    InputTextareaModule,
   ],
 })
 export class ContentModule {}

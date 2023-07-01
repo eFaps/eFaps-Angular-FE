@@ -1,18 +1,20 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { BehaviorSubject, Observable } from 'rxjs';
+
+import { FieldCommandResponse } from '../model/field-command';
 import { UtilService } from './util.service';
 import { ValueService } from './value.service';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { FieldCommandResponse } from '../model/field-command';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class FieldCommandService {
-
   private values: Map<String, any> | undefined;
 
-  private currentResponse = new BehaviorSubject<FieldCommandResponse | undefined>(undefined);
+  private currentResponse = new BehaviorSubject<
+    FieldCommandResponse | undefined
+  >(undefined);
   response = this.currentResponse.asObservable();
 
   constructor(
@@ -33,9 +35,9 @@ export class FieldCommandService {
       values['eFapsRSR'] = index;
     }
     this.http.post<FieldCommandResponse>(url, { values }).subscribe({
-      next: cmdResp => {
-        this.currentResponse.next(cmdResp)
-      }
+      next: (cmdResp) => {
+        this.currentResponse.next(cmdResp);
+      },
     });
   }
 }

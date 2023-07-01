@@ -1,4 +1,10 @@
-import { Component, Input, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnInit,
+  ViewChild,
+  ViewContainerRef,
+} from '@angular/core';
 import { UploadEvent } from 'primeng/fileupload';
 import { FormItem } from 'src/app/model/content';
 import { Option } from 'src/app/model/content';
@@ -35,7 +41,8 @@ export class FormElementComponent implements OnInit {
   uploadUrl: string | undefined;
   uploadKeys: string[] | undefined;
 
-  @ViewChild("dynamicComponent", { read: ViewContainerRef }) vcr!: ViewContainerRef;
+  @ViewChild('dynamicComponent', { read: ViewContainerRef })
+  vcr!: ViewContainerRef;
 
   constructor(
     private valueService: ValueService,
@@ -54,10 +61,10 @@ export class FormElementComponent implements OnInit {
       },
     });
     this.fieldCommandService.response.subscribe({
-      next: cmdResp => {
-        this.evalFieldCmdResp(cmdResp)
-      }
-    })
+      next: (cmdResp) => {
+        this.evalFieldCmdResp(cmdResp);
+      },
+    });
   }
 
   updateValue(value: any) {
@@ -191,7 +198,7 @@ export class FormElementComponent implements OnInit {
   changeAutoComplete(option: Option) {
     this.addEntry(option.value);
   }
-  
+
   onUpload(event: UploadEvent) {
     const result = (event.originalEvent as any).body;
     this.uploadKeys = result.keys;
@@ -221,14 +228,18 @@ export class FormElementComponent implements OnInit {
 
   executeFieldCmd() {
     if (this._formItem && this._formItem.ref) {
-      this.fieldCommandService.execute(this._formItem.ref)
+      this.fieldCommandService.execute(this._formItem.ref);
     }
   }
 
   evalFieldCmdResp(fieldCmdResp: FieldCommandResponse | undefined) {
-    if (fieldCmdResp && this.vcr && fieldCmdResp.values['targetField'] == this.formItem?.name) {
-      this.vcr.clear()
-      this.dynamicComponentService.load(this.vcr, fieldCmdResp)
+    if (
+      fieldCmdResp &&
+      this.vcr &&
+      fieldCmdResp.values['targetField'] == this.formItem?.name
+    ) {
+      this.vcr.clear();
+      this.dynamicComponentService.load(this.vcr, fieldCmdResp);
     }
   }
 }

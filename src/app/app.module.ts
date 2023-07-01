@@ -1,4 +1,6 @@
+import { registerLocaleData } from '@angular/common';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import localeEs from '@angular/common/locales/es';
 import { APP_INITIALIZER, LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -23,8 +25,6 @@ import { CompanyInterceptor } from './interceptors/company.interceptor';
 import { ErrorInterceptor } from './interceptors/error.interceptor';
 import { LoaderInterceptor } from './interceptors/loader.interceptor';
 import { ThemeChooserComponent } from './standalone/theme-chooser/theme-chooser.component';
-import { registerLocaleData } from '@angular/common';
-import localeEs from '@angular/common/locales/es';
 
 registerLocaleData(localeEs, 'es');
 
