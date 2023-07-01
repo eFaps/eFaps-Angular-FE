@@ -2,8 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { UtilService } from './util.service';
 import { ValueService } from './value.service';
-import { FieldUpdateResponse } from '../model/field-update';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { FieldCommandResponse } from '../model/field-command';
 
 @Injectable({
@@ -11,7 +10,10 @@ import { FieldCommandResponse } from '../model/field-command';
 })
 export class FieldCommandService {
 
-  values: Map<String, any> | undefined;
+  private values: Map<String, any> | undefined;
+
+  private currentResponse = new BehaviorSubject<FieldCommandResponse | undefined>(undefined);
+  response = this.currentResponse.asObservable();
 
   constructor(
     private http: HttpClient,
@@ -23,14 +25,17 @@ export class FieldCommandService {
     });
   }
 
-  execute(fieldId: string, index?: number): Observable<FieldCommandResponse> {
+  execute(fieldId: string, index?: number) {
     const url = `${this.utilService.evalApiUrl()}/ui/field-command/${fieldId}`;
-
     const values: any =
       this.values != null ? Object.fromEntries(this.values) : {};
     if (index != null) {
       values['eFapsRSR'] = index;
     }
-    return this.http.post<FieldCommandResponse>(url, { values });
+    this.http.post<FieldCommandResponse>(url, { values }).subscribe({
+      next: cmdResp => {
+        this.currentResponse.next(cmdResp)
+      }
+    });
   }
 }

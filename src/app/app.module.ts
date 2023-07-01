@@ -25,6 +25,7 @@ import { LoaderInterceptor } from './interceptors/loader.interceptor';
 import { ThemeChooserComponent } from './standalone/theme-chooser/theme-chooser.component';
 import { registerLocaleData } from '@angular/common';
 import localeEs from '@angular/common/locales/es';
+
 registerLocaleData(localeEs, 'es');
 
 @NgModule({

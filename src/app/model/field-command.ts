@@ -1,3 +1,3 @@
 export interface FieldCommandResponse {
-    values: { [key: string]: any }[];
+    values: { [key: string]: any };
   }

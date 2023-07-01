@@ -1,8 +1,10 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { UploadEvent } from 'primeng/fileupload';
 import { FormItem } from 'src/app/model/content';
 import { Option } from 'src/app/model/content';
+import { FieldCommandResponse } from 'src/app/model/field-command';
 import { AutoCompleteService } from 'src/app/services/auto-complete.service';
+import { DynamicComponentService } from 'src/app/services/dynamic-component.service';
 import { FieldCommandService } from 'src/app/services/field-command.service';
 import { FieldUpdateService } from 'src/app/services/field-update.service';
 import { UtilService } from 'src/app/services/util.service';
@@ -33,11 +35,14 @@ export class FormElementComponent implements OnInit {
   uploadUrl: string | undefined;
   uploadKeys: string[] | undefined;
 
+  @ViewChild("dynamicComponent", { read: ViewContainerRef }) vcr!: ViewContainerRef;
+
   constructor(
     private valueService: ValueService,
     private autoCompleteService: AutoCompleteService,
     private fieldUpdateService: FieldUpdateService,
     private fieldCommandService: FieldCommandService,
+    private dynamicComponentService: DynamicComponentService,
     private utilService: UtilService
   ) {}
   ngOnInit(): void {
@@ -48,6 +53,11 @@ export class FormElementComponent implements OnInit {
         }
       },
     });
+    this.fieldCommandService.response.subscribe({
+      next: cmdResp => {
+        this.evalFieldCmdResp(cmdResp)
+      }
+    })
   }
 
   updateValue(value: any) {
@@ -211,18 +221,14 @@ export class FormElementComponent implements OnInit {
 
   executeFieldCmd() {
     if (this._formItem && this._formItem.ref) {
-      this.fieldCommandService.execute(this._formItem.ref).subscribe({
-        next: (response) => {
-          if (response.values) {
-            Object.entries(response.values).forEach(([key, value]) => {
-              this.valueService.updateEntry({
-                name: key,
-                value,
-              });
-            });
-          }
-        },
-      });
+      this.fieldCommandService.execute(this._formItem.ref)
+    }
+  }
+
+  evalFieldCmdResp(fieldCmdResp: FieldCommandResponse | undefined) {
+    if (fieldCmdResp && this.vcr && fieldCmdResp.values['targetField'] == this.formItem?.name) {
+      this.vcr.clear()
+      this.dynamicComponentService.load(this.vcr, fieldCmdResp)
     }
   }
 }
