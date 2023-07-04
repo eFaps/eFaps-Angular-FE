@@ -1,5 +1,11 @@
-import { Component, Input } from '@angular/core';
-import { Page } from 'src/app/model/dashboard';
+import { Component, Input, OnInit } from '@angular/core';
+import {
+  CompactType,
+  GridType,
+  GridsterConfig,
+  GridsterItem,
+} from 'angular-gridster2';
+import { DashboardPage } from 'src/app/model/dashboard';
 
 @Component({
   selector: 'app-page',
@@ -7,6 +13,38 @@ import { Page } from 'src/app/model/dashboard';
   styleUrls: ['./page.component.scss'],
 })
 export class PageComponent {
+ 
+  _page: DashboardPage | undefined;
+
+  options: GridsterConfig | undefined;
+  items: GridsterItem[] | undefined;
+
+
+  editMode = false;
+
   @Input()
-  page: Page | undefined;
+  set page(page: DashboardPage) {
+    this._page = page;
+    this.options = {
+      gridType: GridType.Fit,
+      compactType: CompactType.None,
+      maxCols: 10,
+      maxRows: 10,
+      pushItems: true,
+      draggable: {
+        enabled: this.editMode,
+      },
+      resizable: {
+        enabled: this.editMode,
+      },
+      margin: 5
+    };
+    this.items = page.items.map(item => {
+      return {
+        x: item.x
+      } as GridsterItem
+    })
+  }
+
+
 }

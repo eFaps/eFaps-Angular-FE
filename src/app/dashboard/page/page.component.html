@@ -1,2 +1,10 @@
-<p>page works!</p>
+<div class="wrapper">
 {{page?.label}}
+<gridster [options]="options!!">
+    <gridster-item [item]="item" *ngFor="let item of items">
+       
+            some text
+       
+    </gridster-item>
+</gridster>
+</div>

@@ -1,0 +1,10 @@
+.wrapper {
+    height: 80vh;
+    gridster {
+        background-color: var(--surface-300);
+
+        .p-card {
+            height: 100%;
+        }
+    }
+}

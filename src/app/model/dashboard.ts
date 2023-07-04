@@ -1,7 +1,17 @@
 export interface Dashboard {
-  pages: Page[];
+  pages: DashboardPage[];
 }
 
-export interface Page {
+export interface DashboardPage {
   label?: string;
+  items: DashboardItem[];
 }
+
+export interface DashboardItem {
+  x: number;
+  y: number;
+  rows: number;
+  cols: number;
+}
+
+export interface DashboardWidget {}
