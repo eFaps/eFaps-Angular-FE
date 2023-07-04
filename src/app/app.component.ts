@@ -61,8 +61,9 @@ export class AppComponent implements OnInit {
       next: (user) => {
         this.user = user;
         this.menuService.getMainMenu().subscribe({
-          next: (items) =>
-            (this.menuItems = items.map((item) => this.getMenuItem(item))),
+          next: (items) => {
+            this.menuItems = items.map((item) => this.getMenuItem(item));
+          },
         });
       },
     });
@@ -198,5 +199,9 @@ export class AppComponent implements OnInit {
 
   followLink(element: ResultElement) {
     this.router.navigate(['content', element.oid]);
+  }
+
+  home() {
+    this.router.navigate(['/dashboard']);
   }
 }

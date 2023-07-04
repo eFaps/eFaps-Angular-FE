@@ -1,0 +1,7 @@
+<div class="wrapper">
+    <p-carousel [value]="pages" [numVisible]="1" [numScroll]="1" [circular]="true">
+        <ng-template let-page pTemplate="page">
+            <app-page [page]="page"></app-page>
+        </ng-template>
+    </p-carousel>
+</div>
