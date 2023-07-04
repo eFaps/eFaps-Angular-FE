@@ -15,4 +15,9 @@ export class DashboardService {
     const url = `${this.utilService.evalApiUrl()}/ui/dashboard`;
     return this.http.get<Dashboard>(url);
   }
+
+  getWidget(widgetId: string): Observable<any> {
+    const url = `${this.utilService.evalApiUrl()}/ui/dashboard/widgets/${widgetId}`;
+    return this.http.get<any>(url);
+  }
 }

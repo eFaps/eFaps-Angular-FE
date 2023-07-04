@@ -13,12 +13,10 @@ import { DashboardPage } from 'src/app/model/dashboard';
   styleUrls: ['./page.component.scss'],
 })
 export class PageComponent {
- 
-  _page: DashboardPage | undefined;
+  _page: DashboardPage = { items: [] };
 
   options: GridsterConfig | undefined;
   items: GridsterItem[] | undefined;
-
 
   editMode = false;
 
@@ -37,14 +35,18 @@ export class PageComponent {
       resizable: {
         enabled: this.editMode,
       },
-      margin: 5
+      margin: 5,
     };
-    this.items = page.items.map(item => {
-      return {
-        x: item.x
-      } as GridsterItem
-    })
+    this.items = page.items.map((item) => {
+      const gridsterItem = {
+        x: item.x,
+      } as GridsterItem;
+      gridsterItem['widget'] = item.widget;
+      return gridsterItem;
+    });
   }
 
-
+  get page(): DashboardPage {
+    return this._page;
+  }
 }

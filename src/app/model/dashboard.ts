@@ -12,6 +12,11 @@ export interface DashboardItem {
   y: number;
   rows: number;
   cols: number;
+  widget?: DashboardWidget;
 }
 
-export interface DashboardWidget {}
+export interface DashboardWidget {
+  type: 'BARCHART' | 'TABLE';
+  identifier: string;
+  title?: string;
+}
