@@ -18,7 +18,7 @@ export class PageComponent {
   options: GridsterConfig | undefined;
   items: GridsterItem[] | undefined;
 
-  editMode = false;
+  editMode = true;
 
   @Input()
   set page(page: DashboardPage) {
@@ -40,6 +40,9 @@ export class PageComponent {
     this.items = page.items.map((item) => {
       const gridsterItem = {
         x: item.x,
+        y: item.y,
+        cols: item.cols,
+        rows: item.rows
       } as GridsterItem;
       gridsterItem['widget'] = item.widget;
       return gridsterItem;

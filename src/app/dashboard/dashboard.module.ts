@@ -9,6 +9,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { ItemComponent } from './item/item.component';
 import { PageComponent } from './page/page.component';
 import { TableWidgetComponent } from './table-widget/table-widget.component';
+import { ChartWidgetComponent } from './chart-widget/chart-widget.component';
+import { ChartModule } from 'primeng/chart';
 
 @NgModule({
   declarations: [
@@ -16,6 +18,7 @@ import { TableWidgetComponent } from './table-widget/table-widget.component';
     PageComponent,
     ItemComponent,
     TableWidgetComponent,
+    ChartWidgetComponent,
   ],
   imports: [
     CommonModule,
@@ -23,6 +26,7 @@ import { TableWidgetComponent } from './table-widget/table-widget.component';
     CarouselModule,
     GridsterModule,
     TableModule,
+    ChartModule
   ],
 })
 export class DashboardModule {}
