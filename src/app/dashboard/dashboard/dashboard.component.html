@@ -1,7 +1,7 @@
 <div class="wrapper">
     <app-page *ngIf="currentPage" [page]="currentPage!!" [editMode]="editMode"></app-page>            
 </div>
-<div class="steps-wrapper">
+<div class="steps-wrapper" *ngIf="!editMode">
     <p-steps [model]="steps" [readonly]="false" [(activeIndex)]="activeStepIdx" (activeIndexChange)="onActiveStepChange($event)"></p-steps>
 </div>
 <div class="btn">

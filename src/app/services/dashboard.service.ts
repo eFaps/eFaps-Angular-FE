@@ -10,10 +10,11 @@ import { GridsterItem } from 'angular-gridster2';
   providedIn: 'root',
 })
 export class DashboardService {
-  
-  dashboard: Dashboard |  undefined;
-  
-  constructor(private http: HttpClient, private utilService: UtilService) {}
+
+
+  dashboard: Dashboard | undefined;
+
+  constructor(private http: HttpClient, private utilService: UtilService) { }
 
   getDashboard(): Observable<Dashboard> {
     const url = `${this.utilService.evalApiUrl()}/ui/dashboard`;
@@ -44,17 +45,29 @@ export class DashboardService {
 
   updateItems(page: DashboardPage, items: GridsterItem[]) {
     const existingPage = this.dashboard?.pages.find(entry => entry.key == page.key)
-    console.log(existingPage)
     if (existingPage) {
-    existingPage!!.items = items.map(item => {
-      return {
-        x: item.x,
-        y: item.y,
-        cols: item.cols,
-        rows: item.rows,
-        widget: item["widget"]
-      }
-    })
+      existingPage!!.items = items.map(item => {
+        return {
+          x: item.x,
+          y: item.y,
+          cols: item.cols,
+          rows: item.rows,
+          widget: item["widget"]
+        }
+      })
+    }
   }
+
+  updateItem(page: DashboardPage, item: GridsterItem) {
+    const existingPage = this.dashboard?.pages.find(entry => entry.key == page.key)
+    if (existingPage) {
+      const existingItem =  existingPage!!.items.find(entry => entry.widget?.identifier == item["widget"].identifier)
+      if (existingItem) {
+        existingItem.x = item.x
+        existingItem.y = item.y
+        existingItem.cols = item.cols
+        existingItem.rows = item.rows
+      }
+    }
   }
 }

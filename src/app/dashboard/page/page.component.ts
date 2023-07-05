@@ -5,6 +5,7 @@ import {
   GridType,
   GridsterConfig,
   GridsterItem,
+  GridsterItemComponentInterface,
 } from 'angular-gridster2';
 import { DashboardPage } from 'src/app/model/dashboard';
 import { DashboardService } from 'src/app/services/dashboard.service';
@@ -63,6 +64,7 @@ export class PageComponent {
       disableAutoPositionOnConflict: false,
       defaultItemCols: 1,
       defaultItemRows: 1,
+      itemChangeCallback: (item: GridsterItem) => {this.itemChanged(item)},
     };
     this.items = page.items.map((item) => {
       const gridsterItem = {
@@ -98,5 +100,9 @@ export class PageComponent {
   removeItem(item: GridsterItem) {
     this.items.splice(this.items.indexOf(item), 1);
     this.dashboardService.updateItems(this.page, this.items)
+  }
+
+  itemChanged(item: GridsterItem) {
+     this.dashboardService.updateItem(this.page, item)
   }
 }
