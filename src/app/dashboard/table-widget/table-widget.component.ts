@@ -29,19 +29,19 @@ export class TableWidgetComponent {
   load() {
     this.dashboardservice.getWidget(this.widget!!.identifier).subscribe({
       next: (content) => {
-      const values = content[1]
-      if (Array.isArray(values)) {
-        (values[0].values as Array<any>).forEach((entry) => {
-          this.cols.push({ header: entry.key });
-        });
-        values.forEach((rowEntry) => {
-          const row: any = {};
-          (rowEntry.values as Array<any>).forEach((entry) => {
-            row[entry.key] = entry.value;
+        const values = content[1];
+        if (Array.isArray(values)) {
+          (values[0].values as Array<any>).forEach((entry) => {
+            this.cols.push({ header: entry.key });
           });
-          this.elements.push(row);
-        });
-      }
+          values.forEach((rowEntry) => {
+            const row: any = {};
+            (rowEntry.values as Array<any>).forEach((entry) => {
+              row[entry.key] = entry.value;
+            });
+            this.elements.push(row);
+          });
+        }
       },
     });
   }

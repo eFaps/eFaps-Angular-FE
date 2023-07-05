@@ -9,6 +9,9 @@ import { DashboardService } from 'src/app/services/dashboard.service';
 })
 export class DashboardComponent implements OnInit {
   pages: DashboardPage[] = [];
+  editMode = false;
+
+  buttonClass = 'p-button-rounded';
 
   constructor(private dashboardService: DashboardService) {}
 
@@ -18,5 +21,13 @@ export class DashboardComponent implements OnInit {
         this.pages = dashboard.pages;
       },
     });
+  }
+
+  toggleEditMode() {
+    this.editMode = !this.editMode;
+    this.buttonClass = 'p-button-rounded';
+    if (this.editMode) {
+      this.buttonClass = this.buttonClass + ' p-button-warning';
+    }
   }
 }

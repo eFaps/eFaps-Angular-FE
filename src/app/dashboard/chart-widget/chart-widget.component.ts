@@ -5,12 +5,12 @@ import { DashboardService } from 'src/app/services/dashboard.service';
 @Component({
   selector: 'app-chart-widget',
   templateUrl: './chart-widget.component.html',
-  styleUrls: ['./chart-widget.component.scss']
+  styleUrls: ['./chart-widget.component.scss'],
 })
 export class ChartWidgetComponent {
   _widget: DashboardWidget | undefined;
-  
-  type="bar";
+
+  type = 'bar';
   data: any;
   options: any;
 
@@ -25,9 +25,9 @@ export class ChartWidgetComponent {
           title: {
             display: widget?.title != null,
             text: widget.title,
-          }
-        }
-      }
+          },
+        },
+      };
       this.load();
     }
   }
@@ -39,35 +39,34 @@ export class ChartWidgetComponent {
   load() {
     this.dashboardservice.getWidget(this.widget!!.identifier).subscribe({
       next: (content) => {
-        let labels = []
-        const datasets : any[] = [];
+        let labels = [];
+        const datasets: any[] = [];
         for (const label in content) {
-          labels.push(label)
+          labels.push(label);
         }
-        labels.sort()
+        labels.sort();
 
-        labels.forEach(label => {
+        labels.forEach((label) => {
           for (const datasetName in content[label]) {
-            
-            let dataset = datasets.find(it => {
-              return it.key = datasetName
-            })
+            let dataset = datasets.find((it) => {
+              return (it.key = datasetName);
+            });
             if (!dataset) {
               dataset = {
                 label: datasetName,
                 key: datasetName,
-                data: []
-              }
-              datasets.push(dataset)
+                data: [],
+              };
+              datasets.push(dataset);
             }
-            dataset.data.push(content[label][datasetName])
+            dataset.data.push(content[label][datasetName]);
           }
-        })
+        });
 
         this.data = {
-          labels : labels,
-          datasets: datasets
-        }
+          labels: labels,
+          datasets: datasets,
+        };
       },
     });
   }

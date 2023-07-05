@@ -16,7 +16,7 @@ export interface DashboardItem {
 }
 
 export interface DashboardWidget {
-  type: 'CHART' | 'TABLE';
+  type: 'CHART' | 'TABLE' | 'PLACEHOLDER';
   identifier: string;
   title?: string;
 }
