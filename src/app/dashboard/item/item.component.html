@@ -1,4 +1,4 @@
-<div class="value" [ngSwitch]="widget?.type">
+<ng-container [ngSwitch]="widget?.type">
     <ng-container *ngSwitchCase="'CHART'">
         <app-chart-widget [widget]="widget"></app-chart-widget>
     </ng-container>
@@ -8,4 +8,4 @@
     <ng-container *ngSwitchDefault>
     unknown widget
     </ng-container>
-</div>    
+</ng-container>    

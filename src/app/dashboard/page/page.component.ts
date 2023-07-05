@@ -18,7 +18,7 @@ export class PageComponent {
   options: GridsterConfig | undefined;
   items: GridsterItem[] | undefined;
 
-  editMode = true;
+  editMode = false;
 
   @Input()
   set page(page: DashboardPage) {
