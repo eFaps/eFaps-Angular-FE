@@ -1,5 +1,32 @@
 .wrapper {
-    height: 80vh;
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+}
+.steps-wrapper {
+    position: absolute;
+    bottom: 1rem;
+    width: 99%;
+    display: flex;
+    justify-content: center;
+
+    ::ng-deep .p-steps {
+        min-width: 50vh;
+        padding: 0;
+        z-index: 1;
+    }
+
+    ::ng-deep .p-steps-item:before {
+        margin-top: -1rem;
+    }
+
+    ::ng-deep .p-menuitem-link {
+        flex-direction: column !important;
+        
+        .p-steps-title {
+            margin-left: 0;
+            padding-left: 0;
+        }
+    }
 }
 .btn {
     position: absolute;

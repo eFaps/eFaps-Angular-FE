@@ -1,9 +1,8 @@
 <div class="wrapper">
-    <p-carousel [value]="pages" [numVisible]="1" [numScroll]="1" [circular]="true" verticalViewPortHeight="800px">
-        <ng-template let-page pTemplate="page">
-            <app-page [page]="page" [editMode]="editMode"></app-page>
-        </ng-template>
-    </p-carousel>
+    <app-page *ngIf="currentPage" [page]="currentPage!!" [editMode]="editMode"></app-page>            
+</div>
+<div class="steps-wrapper">
+    <p-steps [model]="steps" [readonly]="false" [(activeIndex)]="activeStepIdx" (activeIndexChange)="onActiveStepChange($event)"></p-steps>
 </div>
 <div class="btn">
     <p-button icon="pi pi-wrench" [styleClass]="buttonClass" (click)="toggleEditMode()"></p-button>
