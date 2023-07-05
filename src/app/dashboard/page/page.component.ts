@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
+import {  Component, Input } from '@angular/core';
 import {
   CompactType,
   DisplayGrid,
@@ -7,6 +7,7 @@ import {
   GridsterItem,
 } from 'angular-gridster2';
 import { DashboardPage } from 'src/app/model/dashboard';
+import { DashboardService } from 'src/app/services/dashboard.service';
 import { v4 as uuidv4 } from 'uuid';
 
 @Component({
@@ -15,14 +16,14 @@ import { v4 as uuidv4 } from 'uuid';
   styleUrls: ['./page.component.scss'],
 })
 export class PageComponent {
-  _page: DashboardPage = { items: [] };
+  _page: DashboardPage = { key : "not a key", items: [] };
 
   options: GridsterConfig | undefined;
   items: GridsterItem[] = [];
 
   _editMode = false;
 
-  constructor(private ref: ChangeDetectorRef) {}
+  constructor(private dashboardService: DashboardService) {}
 
   @Input()
   set editMode(editMode: boolean) {
@@ -61,7 +62,7 @@ export class PageComponent {
       margin: 5,
       disableAutoPositionOnConflict: false,
       defaultItemCols: 1,
-      defaultItemRows: 1
+      defaultItemRows: 1,
     };
     this.items = page.items.map((item) => {
       const gridsterItem = {
@@ -80,10 +81,22 @@ export class PageComponent {
   }
 
   addItem(): void {
-    this.items?.push({ x: 1, y: 1, cols: 1, rows: 1 ,widget: { 
-      type: 'PLACEHOLDER',identifier: uuidv4() }});
-    //this.ref.detectChanges();
+    this.items?.push({
+      x: 0,
+      y: 0,
+      cols: 1,
+      rows: 1,
+      widget: {
+        type: 'PLACEHOLDER',
+        identifier: uuidv4(),
+      },
+    });
     this.options!!.api!!.resize!!();
+    this.dashboardService.updateItems(this.page, this.items)
   }
-  removeItem() {}
+
+  removeItem(item: GridsterItem) {
+    this.items.splice(this.items.indexOf(item), 1);
+    this.dashboardService.updateItems(this.page, this.items)
+  }
 }

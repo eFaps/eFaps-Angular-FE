@@ -13,7 +13,7 @@ export class ItemComponent {
 
   @Input()
   set widget(widget: DashboardWidget | undefined) {
-    console.log(widget)
+    console.log(widget);
     this._widget = widget;
   }
 

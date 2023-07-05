@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { GridsterModule } from 'angular-gridster2';
 import { ButtonModule } from 'primeng/button';
 import { ChartModule } from 'primeng/chart';
+import { StepsModule } from 'primeng/steps';
 import { TableModule } from 'primeng/table';
 
 import { ChartWidgetComponent } from './chart-widget/chart-widget.component';
@@ -11,7 +12,6 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { ItemComponent } from './item/item.component';
 import { PageComponent } from './page/page.component';
 import { TableWidgetComponent } from './table-widget/table-widget.component';
-import { StepsModule } from 'primeng/steps';
 
 @NgModule({
   declarations: [
@@ -28,7 +28,7 @@ import { StepsModule } from 'primeng/steps';
     TableModule,
     ChartModule,
     ButtonModule,
-    StepsModule
+    StepsModule,
   ],
 })
 export class DashboardModule {}

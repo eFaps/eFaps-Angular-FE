@@ -3,6 +3,7 @@ export interface Dashboard {
 }
 
 export interface DashboardPage {
+  key: string;
   label?: string;
   items: DashboardItem[];
 }

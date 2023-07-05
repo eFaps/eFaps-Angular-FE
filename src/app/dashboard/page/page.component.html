@@ -3,7 +3,7 @@
         <gridster-item [item]="item" *ngFor="let item of items">
             <app-item [widget]="item['widget']"></app-item>
             <div class="delete-btn" *ngIf="editMode">
-                <p-button icon="pi pi-trash" styleClass="p-button-rounded" (click)="removeItem()"></p-button>
+                <p-button icon="pi pi-trash" styleClass="p-button-rounded" (click)="removeItem(item)"></p-button>
             </div>
         </gridster-item>
     </gridster>
