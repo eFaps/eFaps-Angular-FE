@@ -1,6 +1,10 @@
 import { Component, Input } from '@angular/core';
 import { DialogService } from 'primeng/dynamicdialog';
-import { ChartWidget, DashboardWidget, TableWidget } from 'src/app/model/dashboard';
+import {
+  ChartWidget,
+  DashboardWidget,
+  TableWidget,
+} from 'src/app/model/dashboard';
 
 import { EditComponent } from '../edit/edit.component';
 
@@ -25,11 +29,11 @@ export class ItemComponent {
   }
 
   get chartWidget(): ChartWidget {
-    return this.widget as ChartWidget
+    return this.widget as ChartWidget;
   }
 
   get tableWidget(): TableWidget {
-    return this.widget as TableWidget
+    return this.widget as TableWidget;
   }
 
   @Input()
@@ -46,12 +50,14 @@ export class ItemComponent {
       data: {
         widget: this.widget,
       },
-      maximizable: true
+      maximizable: true,
     });
     dialogRef.onClose.subscribe({
-      next: widget => {if (widget){
-        console.log(widget)
-      } }
-    })
+      next: (widget) => {
+        if (widget) {
+          console.log(widget);
+        }
+      },
+    });
   }
 }

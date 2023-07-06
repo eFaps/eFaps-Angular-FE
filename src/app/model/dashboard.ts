@@ -24,20 +24,20 @@ export interface DashboardWidget {
 }
 
 export interface PlaceHolderWidget extends DashboardWidget {
-  type: 'PLACEHOLDER'
+  type: 'PLACEHOLDER';
 }
 
-export interface TableWidget extends DashboardWidget{
-  type: 'TABLE'
+export interface TableWidget extends DashboardWidget {
+  type: 'TABLE';
 }
 
 export interface ChartWidget extends DashboardWidget {
-  type: 'CHART'
+  type: 'CHART';
   groupBy?: string[];
   metrics?: Metric[];
 }
 
 export interface Metric {
-  function: 'SUM',
-  key: string
+  function: 'SUM';
+  key: string;
 }
