@@ -1,7 +1,4 @@
-import {
-  Component,
-  OnInit,
-} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MenuItem } from 'primeng/api';
 import { DashboardPage } from 'src/app/model/dashboard';
 import { DashboardService } from 'src/app/services/dashboard.service';
@@ -16,12 +13,11 @@ export class DashboardComponent implements OnInit {
   pages: DashboardPage[] = [];
   editMode = false;
   buttonClass = 'p-button-rounded';
+  buttonIcon = 'pi pi-lock';
   steps: MenuItem[] = [];
   activeStepIdx: number = 0;
 
-  constructor(
-    private dashboardService: DashboardService
-  ) {}
+  constructor(private dashboardService: DashboardService) {}
 
   ngOnInit(): void {
     this.dashboardService.getDashboard().subscribe({
@@ -46,7 +42,9 @@ export class DashboardComponent implements OnInit {
     this.buttonClass = 'p-button-rounded';
     if (this.editMode) {
       this.buttonClass = this.buttonClass + ' p-button-warning';
+      this.buttonIcon = 'pi pi-lock-open';
     } else {
+      this.buttonIcon = 'pi pi-lock';
       this.dashboardService.persist();
     }
   }

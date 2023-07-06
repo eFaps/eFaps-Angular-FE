@@ -19,5 +19,20 @@ export interface DashboardItem {
 export interface DashboardWidget {
   type: 'CHART' | 'TABLE' | 'PLACEHOLDER';
   identifier: string;
+  eql?: string;
   title?: string;
+}
+
+export interface PlaceHolderWidget extends DashboardWidget {
+  type: 'PLACEHOLDER'
+}
+
+export interface TableWidget extends DashboardWidget{
+  type: 'TABLE'
+}
+
+export interface ChartWidget extends DashboardWidget {
+  type: 'CHART'
+  groupBy?: string[];
+  metrics?: string[];
 }

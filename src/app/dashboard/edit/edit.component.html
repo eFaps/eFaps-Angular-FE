@@ -1,0 +1,21 @@
+<div class="p-dialog-content">
+    <span class="p-float-label">
+        <p-dropdown id="type" [options]="types" [(ngModel)]="type"></p-dropdown>
+        <label htmlFor="type">Tipo</label>
+    </span>
+    <span class="p-float-label">
+        <input pInputText id="title" [(ngModel)]="title" />
+        <label htmlFor="title">Titulo</label>
+    </span>
+    <span class="p-float-label">
+        <textarea id="eql" rows="20" cols="150" pInputTextarea [(ngModel)]="eql"> </textarea>
+        <label for="eql">EQL</label>
+    </span>
+    <span class="p-float-label">
+        <p-chips id="groupBy"  [(ngModel)]="groupBy"></p-chips>
+        <label for="groupBy">Agrupar</label>
+    </span>
+</div>
+<div class="p-dialog-footer">
+    <p-button label="Actualizar" styleClass="p-button-warning" (click)="submit()"></p-button>
+</div>

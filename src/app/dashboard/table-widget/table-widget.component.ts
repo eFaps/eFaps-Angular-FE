@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { DashboardWidget } from 'src/app/model/dashboard';
+import { DashboardWidget, TableWidget } from 'src/app/model/dashboard';
 import { DashboardService } from 'src/app/services/dashboard.service';
 
 @Component({
@@ -8,14 +8,14 @@ import { DashboardService } from 'src/app/services/dashboard.service';
   styleUrls: ['./table-widget.component.scss'],
 })
 export class TableWidgetComponent {
-  _widget: DashboardWidget | undefined;
+  _widget: TableWidget | undefined;
   cols: any[] = [];
   elements: any[] = [];
 
   constructor(private dashboardservice: DashboardService) {}
 
   @Input()
-  set widget(widget: DashboardWidget | undefined) {
+  set widget(widget: TableWidget | undefined) {
     this._widget = widget;
     if (widget) {
       this.load();

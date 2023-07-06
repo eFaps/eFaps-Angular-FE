@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { DashboardWidget } from 'src/app/model/dashboard';
+import { ChartWidget, DashboardWidget } from 'src/app/model/dashboard';
 import { DashboardService } from 'src/app/services/dashboard.service';
 
 @Component({
@@ -8,7 +8,7 @@ import { DashboardService } from 'src/app/services/dashboard.service';
   styleUrls: ['./chart-widget.component.scss'],
 })
 export class ChartWidgetComponent {
-  _widget: DashboardWidget | undefined;
+  _widget: ChartWidget | undefined;
 
   type = 'bar';
   data: any;
@@ -17,7 +17,7 @@ export class ChartWidgetComponent {
   constructor(private dashboardservice: DashboardService) {}
 
   @Input()
-  set widget(widget: DashboardWidget | undefined) {
+  set widget(widget: ChartWidget | undefined) {
     this._widget = widget;
     if (widget) {
       this.options = {

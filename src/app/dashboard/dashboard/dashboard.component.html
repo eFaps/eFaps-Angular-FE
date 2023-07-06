@@ -5,5 +5,5 @@
     <p-steps [model]="steps" [readonly]="false" [(activeIndex)]="activeStepIdx" (activeIndexChange)="onActiveStepChange($event)"></p-steps>
 </div>
 <div class="btn">
-    <p-button icon="pi pi-wrench" [styleClass]="buttonClass" (click)="toggleEditMode()"></p-button>
+    <p-button [icon]="buttonIcon" [styleClass]="buttonClass" (click)="toggleEditMode()"></p-button>
 </div>

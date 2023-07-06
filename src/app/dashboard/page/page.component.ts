@@ -1,4 +1,4 @@
-import {  Component, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import {
   CompactType,
   DisplayGrid,
@@ -17,7 +17,7 @@ import { v4 as uuidv4 } from 'uuid';
   styleUrls: ['./page.component.scss'],
 })
 export class PageComponent {
-  _page: DashboardPage = { key : "not a key", items: [] };
+  _page: DashboardPage = { key: 'not a key', items: [] };
 
   options: GridsterConfig | undefined;
   items: GridsterItem[] = [];
@@ -64,7 +64,9 @@ export class PageComponent {
       disableAutoPositionOnConflict: false,
       defaultItemCols: 1,
       defaultItemRows: 1,
-      itemChangeCallback: (item: GridsterItem) => {this.itemChanged(item)},
+      itemChangeCallback: (item: GridsterItem) => {
+        this.itemChanged(item);
+      },
     };
     this.items = page.items.map((item) => {
       const gridsterItem = {
@@ -94,15 +96,15 @@ export class PageComponent {
       },
     });
     this.options!!.api!!.resize!!();
-    this.dashboardService.updateItems(this.page, this.items)
+    this.dashboardService.updateItems(this.page, this.items);
   }
 
   removeItem(item: GridsterItem) {
     this.items.splice(this.items.indexOf(item), 1);
-    this.dashboardService.updateItems(this.page, this.items)
+    this.dashboardService.updateItems(this.page, this.items);
   }
 
   itemChanged(item: GridsterItem) {
-     this.dashboardService.updateItem(this.page, item)
+    this.dashboardService.updateItem(this.page, item);
   }
 }
