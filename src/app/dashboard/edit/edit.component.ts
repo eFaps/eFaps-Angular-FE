@@ -21,6 +21,10 @@ export class EditComponent {
   eql: string | undefined
   groupBy: string[] | undefined
 
+  functions =[{ label: "Sumar", value: 'SUM'}]
+  function = 'SUM'
+  key: string | undefined
+
   constructor(
     config: DynamicDialogConfig,
     private dialogRef: DynamicDialogRef
@@ -33,6 +37,14 @@ export class EditComponent {
     if (this.widget.eql != null) {
       this.eql = this.widget.eql
     }
+    if (this.widget.type == 'CHART') {
+      if ((this.widget as ChartWidget).groupBy != null) {
+        this.groupBy = (this.widget as ChartWidget).groupBy
+      }
+      if ((this.widget as ChartWidget).metrics != null && (this.widget as ChartWidget).metrics!!.length > 0) {
+        this.key = (this.widget as ChartWidget).metrics!![0].key
+      }
+    }
   }
 
   submit() {
@@ -40,7 +52,8 @@ export class EditComponent {
     this.widget.title = this.title
     this.widget.eql = this.eql
     if (this.widget.type == 'CHART') {
-      (this.widget as ChartWidget).groupBy = this.groupBy
+      (this.widget as ChartWidget).groupBy = this.groupBy;
+      (this.widget as ChartWidget).metrics = [{ function: 'SUM', key: this.key!! }];
     }
     this.dialogRef.close(this.widget)
   }

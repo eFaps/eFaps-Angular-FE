@@ -34,5 +34,10 @@ export interface TableWidget extends DashboardWidget{
 export interface ChartWidget extends DashboardWidget {
   type: 'CHART'
   groupBy?: string[];
-  metrics?: string[];
+  metrics?: Metric[];
+}
+
+export interface Metric {
+  function: 'SUM',
+  key: string
 }

@@ -8,13 +8,25 @@
         <label htmlFor="title">Titulo</label>
     </span>
     <span class="p-float-label">
-        <textarea id="eql" rows="20" cols="150" pInputTextarea [(ngModel)]="eql"> </textarea>
+        <textarea id="eql" rows="15" cols="150" pInputTextarea [(ngModel)]="eql"> </textarea>
         <label for="eql">EQL</label>
     </span>
-    <span class="p-float-label">
-        <p-chips id="groupBy"  [(ngModel)]="groupBy"></p-chips>
-        <label for="groupBy">Agrupar</label>
-    </span>
+    <div *ngIf="widget.type=='CHART'">
+        <span class="p-float-label">
+            <p-chips id="groupBy" [(ngModel)]="groupBy"></p-chips>
+            <label for="groupBy">Agrupar</label>
+        </span>
+    </div>
+    <div *ngIf="widget.type=='CHART'">
+        <span class="p-float-label">
+            <p-dropdown id="function" [options]="functions" [(ngModel)]="function"></p-dropdown>
+            <label htmlFor="function">Funcion</label>
+        </span>
+        <span class="p-float-label">
+            <input pInputText id="key" [(ngModel)]="key" />
+            <label htmlFor="key">Llave</label>
+        </span>
+    </div>
 </div>
 <div class="p-dialog-footer">
     <p-button label="Actualizar" styleClass="p-button-warning" (click)="submit()"></p-button>
