@@ -4,6 +4,7 @@ import { Column } from './table';
 export interface Content {
   nav: MenuEntry[];
   outline: Outline;
+  selected?: string;
 }
 
 export interface Outline {
