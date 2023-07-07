@@ -23,7 +23,12 @@
 }
 
 .custom-icon {
-    
     height: 1rem;
-    
+}
+
+.searchBtn {
+    position: fixed;
+    bottom: 1rem;
+    left: 1rem;
+    z-index: 10;
 }

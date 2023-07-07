@@ -9,6 +9,8 @@ import { UtilService } from './util.service';
   providedIn: 'root',
 })
 export class SearchService {
+  private searchContent: any;
+
   constructor(private http: HttpClient, private utilService: UtilService) {}
 
   getSearch(cmdId: string): Observable<Search[]> {
@@ -24,5 +26,21 @@ export class SearchService {
     const params: any =
       queryParams == null ? undefined : Object.fromEntries(queryParams);
     return this.http.get<SearchResult>(url, { params });
+  }
+
+  persist(searchContent: any) {
+    this.searchContent = searchContent;
+  }
+
+  restore(): any {
+    return this.searchContent;
+  }
+
+  clear() {
+    this.searchContent = undefined;
+  }
+
+  hasPersistedSearch(): boolean {
+    return this.searchContent != null;
   }
 }

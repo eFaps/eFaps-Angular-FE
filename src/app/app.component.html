@@ -9,7 +9,7 @@
                 <span class="p-input-icon-left">
                     <i class="pi pi-search"></i>
                     <input type="text" pInputText #searchInput
-                        (keyup.enter)="search($event, searchInput.value, searchOp)"
+                        (keyup.enter)="indexSearch($event, searchInput.value, searchOp)"
                         (focus)='focusSearch($event, searchOp)' />
                 </span>
             </div>
@@ -32,7 +32,6 @@
                         <app-theme-chooser></app-theme-chooser>
                     </ng-template>
                 </p-overlayPanel>
-           
             </div>
         </div>
     </ng-template>
@@ -61,3 +60,6 @@
     </ng-template>
 </p-overlayPanel>
 <router-outlet></router-outlet>
+<div class="searchBtn" *ngIf="showRestoreSearch()">
+    <p-button icon="pi pi-search" styleClass="p-button-rounded p-button-success" (click)="restoreSearch()"></p-button>
+</div>

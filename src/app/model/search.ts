@@ -6,7 +6,7 @@ export interface Search {
   label: string;
   selected: boolean;
   formSection: FormSection;
-  children: [];
+  children: Search[];
 }
 
 export interface SearchResult extends Table {}

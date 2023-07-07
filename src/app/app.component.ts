@@ -7,6 +7,7 @@ import { environment } from 'src/environments/environment';
 
 import { default as translation } from '../assets/es.json';
 import { ModalContentComponent } from './content/modal-content/modal-content.component';
+import { SearchContentComponent } from './content/search-content/search-content.component';
 import { ResultElement, SearchResult } from './model/index-search';
 import { MenuEntry } from './model/menu';
 import { Company, User } from './model/user';
@@ -15,6 +16,7 @@ import { ExecService } from './services/exec.service';
 import { IndexSearchService } from './services/index-search.service';
 import { LoaderService } from './services/loader.service';
 import { MenuService } from './services/menu.service';
+import { SearchService } from './services/search.service';
 import { UserService } from './services/user.service';
 import { CompanyChooserComponent } from './standalone/company-chooser/company-chooser.component';
 
@@ -45,7 +47,8 @@ export class AppComponent implements OnInit {
     private userService: UserService,
     private execService: ExecService,
     private contentService: ContentService,
-    private indexSearchService: IndexSearchService
+    private indexSearchService: IndexSearchService,
+    private searchService: SearchService
   ) {}
 
   ngOnInit() {
@@ -172,16 +175,19 @@ export class AppComponent implements OnInit {
   }
 
   searchAction(item: MenuEntry) {
-    if (item.action.modal) {
-      this.contentService.getContentWithCmd('none', item.id).subscribe({
-        next: (outline) => {
-          console.log(outline);
-        },
-      });
-    }
+    this.searchService.getSearch(item.id).subscribe({
+      next: (searches) => {
+        const dialogRef = this.dialogService.open(SearchContentComponent, {
+          data: {
+            item,
+            searches,
+          },
+        });
+      },
+    });
   }
 
-  search(event: Event, query: string, op: OverlayPanel) {
+  indexSearch(event: Event, query: string, op: OverlayPanel) {
     this.indexSearchService.search(query).subscribe({
       next: (result) => {
         this.searchResult = result;
@@ -203,5 +209,17 @@ export class AppComponent implements OnInit {
 
   home() {
     this.router.navigate(['/dashboard']);
+  }
+
+  showRestoreSearch(): boolean {
+    return this.searchService.hasPersistedSearch();
+  }
+
+  restoreSearch() {
+    const dialogRef = this.dialogService.open(SearchContentComponent, {
+      data: {
+        restore: true,
+      },
+    });
   }
 }

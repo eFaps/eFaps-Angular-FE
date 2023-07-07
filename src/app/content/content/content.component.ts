@@ -54,13 +54,17 @@ export class ContentComponent implements OnInit {
         this.mainHeader = val.outline.header;
         this.sections = val.outline.sections;
         if (val.selected != this.tabs[0].id) {
-          var defaultItem = this.tabs.find(item => { return item.id == val.selected });
+          var defaultItem = this.tabs.find((item) => {
+            return item.id == val.selected;
+          });
           if (defaultItem) {
             this.showSections = false;
-            const cmds = [ "content", this.oid, ...defaultItem.routerLink]
-            const url = this.router.createUrlTree(cmds, {  queryParams: defaultItem.queryParams });
+            const cmds = ['content', this.oid, ...defaultItem.routerLink];
+            const url = this.router.createUrlTree(cmds, {
+              queryParams: defaultItem.queryParams,
+            });
             this.router.navigateByUrl(url.toString());
-            this.activeItem = defaultItem
+            this.activeItem = defaultItem;
           }
         }
       },
