@@ -1,0 +1,3 @@
+<p-tree class="w-full md:w-30rem" [metaKeySelection]="false" selectionMode="checkbox" [propagateSelectionUp]="false"
+    [propagateSelectionDown]="false" [value]="classifications" [(selection)]="selection"
+    (onNodeSelect)="nodeSelect($event)" (onNodeUnselect)="nodeUnselect($event)"></p-tree>

@@ -33,6 +33,8 @@ import { SectionsComponent } from './sections/sections.component';
 import { SubSectionComponent } from './sub-section/sub-section.component';
 import { TableElementComponent } from './table-element/table-element.component';
 import { TableSectionComponent } from './table-section/table-section.component';
+import { ClassificationsComponent } from './classifications/classifications.component';
+import { TreeModule } from 'primeng/tree';
 
 @NgModule({
   declarations: [
@@ -48,6 +50,7 @@ import { TableSectionComponent } from './table-section/table-section.component';
     TableElementComponent,
     SearchContentComponent,
     AttributeSetComponent,
+    ClassificationsComponent,
   ],
   imports: [
     CommonModule,
@@ -71,6 +74,7 @@ import { TableSectionComponent } from './table-section/table-section.component';
     CheckboxModule,
     InputTextareaModule,
     MenubarModule,
+    TreeModule
   ],
 })
 export class ContentModule {}

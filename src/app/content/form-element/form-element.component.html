@@ -68,11 +68,12 @@
         <ng-container *ngSwitchCase="'BUTTON'">
             <p-button [label]="formItem?.label" (click)="executeFieldCmd()"></p-button>
         </ng-container>
+        <ng-container *ngSwitchCase="'CLASSIFICATION'">
+            <p-button icon="pi pi-bookmark" styleClass="p-button-sm p-button-secondary" (click)="classSel()"></p-button>
+        </ng-container>
         <ng-container *ngSwitchDefault>
             {{readOnlyValue}}
         </ng-container>
-
         <ng-template #dynamicComponent></ng-template>
-
     </div>
 </div>

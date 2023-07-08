@@ -5,6 +5,7 @@ import {
   ViewChild,
   ViewContainerRef,
 } from '@angular/core';
+import { DialogService } from 'primeng/dynamicdialog';
 import { UploadEvent } from 'primeng/fileupload';
 import { FormItem } from 'src/app/model/content';
 import { Option } from 'src/app/model/content';
@@ -15,6 +16,7 @@ import { FieldCommandService } from 'src/app/services/field-command.service';
 import { FieldUpdateService } from 'src/app/services/field-update.service';
 import { UtilService } from 'src/app/services/util.service';
 import { ValueService } from 'src/app/services/value.service';
+import { ClassificationsComponent } from '../classifications/classifications.component';
 
 @Component({
   selector: 'app-form-element',
@@ -45,6 +47,7 @@ export class FormElementComponent implements OnInit {
   vcr!: ViewContainerRef;
 
   constructor(
+    private dialogService: DialogService,
     private valueService: ValueService,
     private autoCompleteService: AutoCompleteService,
     private fieldUpdateService: FieldUpdateService,
@@ -241,5 +244,14 @@ export class FormElementComponent implements OnInit {
       this.vcr.clear();
       this.dynamicComponentService.load(this.vcr, fieldCmdResp);
     }
+  }
+
+  classSel() {
+    const dialogRef = this.dialogService.open(ClassificationsComponent, {
+      data: {
+        classUUIDs: this.formItem?.value
+      },
+      maximizable: true,
+    });
   }
 }

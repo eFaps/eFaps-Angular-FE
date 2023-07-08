@@ -38,7 +38,8 @@ export interface FormItem {
     | 'ATTRSET'
     | 'CHECKBOX'
     | 'TEXTAREA'
-    | 'BUTTON';
+    | 'BUTTON'
+    | 'CLASSIFICATION';
   label: string;
   name: string;
   value?: any;
