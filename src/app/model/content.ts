@@ -1,5 +1,5 @@
+import { Classification } from './classification';
 import { MenuAction, MenuEntry } from './menu';
-import { Column } from './table';
 
 export interface Content {
   nav: MenuEntry[];
@@ -13,7 +13,7 @@ export interface Outline {
   sections: Section[];
   menu?: MenuEntry[];
   oid: string;
-  classifications?: string[];
+  classifications?: Classification[];
 }
 
 export interface Section {

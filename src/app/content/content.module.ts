@@ -35,6 +35,8 @@ import { SectionsComponent } from './sections/sections.component';
 import { SubSectionComponent } from './sub-section/sub-section.component';
 import { TableElementComponent } from './table-element/table-element.component';
 import { TableSectionComponent } from './table-section/table-section.component';
+import { ClassificationDisplayComponent } from './classification-display/classification-display.component';
+import { ChipModule } from 'primeng/chip';
 
 @NgModule({
   declarations: [
@@ -51,6 +53,7 @@ import { TableSectionComponent } from './table-section/table-section.component';
     SearchContentComponent,
     AttributeSetComponent,
     ClassificationsComponent,
+    ClassificationDisplayComponent,
   ],
   imports: [
     CommonModule,
@@ -75,6 +78,7 @@ import { TableSectionComponent } from './table-section/table-section.component';
     InputTextareaModule,
     MenubarModule,
     TreeModule,
+    ChipModule
   ],
 })
 export class ContentModule {}

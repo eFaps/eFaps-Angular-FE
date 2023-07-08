@@ -30,13 +30,7 @@ export class ModalContentComponent implements OnInit {
     config.maximizable = true;
     if (this.outline.classifications) {
       this.classificationService.setClassifications(
-        this.outline.classifications.map((uuid) => {
-          return {
-            id: uuid,
-            label: '',
-            children: [],
-          };
-        })
+        this.outline.classifications
       );
     }
   }

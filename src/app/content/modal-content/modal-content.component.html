@@ -1,4 +1,5 @@
 <div class="p-dialog-content">
+    <app-classification-display *ngIf="outline?.classifications" [classifications]="outline?.classifications"></app-classification-display>
     <app-sections [sections]="outline.sections"></app-sections>
 </div>
 <div class="p-dialog-footer">

@@ -8,6 +8,7 @@ import { ContentService } from 'src/app/services/content.service';
 import { ExecService } from 'src/app/services/exec.service';
 
 import { ModalContentComponent } from '../modal-content/modal-content.component';
+import { Classification } from 'src/app/model/classification';
 
 @Component({
   selector: 'app-content',
@@ -23,6 +24,7 @@ export class ContentComponent implements OnInit {
   sections: Section[] = [];
   activeItem: MenuItem | undefined = undefined;
   showSections = true;
+  classifications: Classification[] | undefined;
 
   constructor(
     private router: Router,
@@ -53,6 +55,7 @@ export class ContentComponent implements OnInit {
           : [];
         this.mainHeader = val.outline.header;
         this.sections = val.outline.sections;
+        this.classifications = val.outline.classifications;
         if (val.selected != this.tabs[0].id) {
           var defaultItem = this.tabs.find((item) => {
             return item.id == val.selected;

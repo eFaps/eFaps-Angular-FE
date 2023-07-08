@@ -10,6 +10,7 @@
 <div class="tabs">
     <p-tabMenu [model]="tabs" [scrollable]="true" [activeItem]="activeItem" [popup]="true"></p-tabMenu>
 </div>
+<app-classification-display *ngIf="showSections && classifications" [classifications]="classifications"></app-classification-display>
 <app-sections *ngIf="showSections" [sections]="sections"></app-sections>
 <router-outlet name="contentOutlet"></router-outlet>
 <p-confirmDialog></p-confirmDialog>
