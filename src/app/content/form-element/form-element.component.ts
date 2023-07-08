@@ -16,6 +16,7 @@ import { FieldCommandService } from 'src/app/services/field-command.service';
 import { FieldUpdateService } from 'src/app/services/field-update.service';
 import { UtilService } from 'src/app/services/util.service';
 import { ValueService } from 'src/app/services/value.service';
+
 import { ClassificationsComponent } from '../classifications/classifications.component';
 
 @Component({
@@ -249,7 +250,7 @@ export class FormElementComponent implements OnInit {
   classSel() {
     const dialogRef = this.dialogService.open(ClassificationsComponent, {
       data: {
-        classUUIDs: this.formItem?.value
+        classUUIDs: this.formItem?.value,
       },
       maximizable: true,
     });

@@ -13,6 +13,7 @@ export interface Outline {
   sections: Section[];
   menu?: MenuEntry[];
   oid: string;
+  classifications?: string[];
 }
 
 export interface Section {

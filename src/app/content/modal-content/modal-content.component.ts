@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { Outline } from 'src/app/model/content';
 import { MenuEntry } from 'src/app/model/menu';
+import { ClassificationService } from 'src/app/services/classification.service';
 import { ExecService } from 'src/app/services/exec.service';
 import { ValueService } from 'src/app/services/value.service';
 
@@ -19,6 +20,7 @@ export class ModalContentComponent implements OnInit {
     config: DynamicDialogConfig,
     private dialogRef: DynamicDialogRef,
     private valueService: ValueService,
+    private classificationService: ClassificationService,
     private execService: ExecService
   ) {
     this.valueService.reset();
@@ -26,6 +28,17 @@ export class ModalContentComponent implements OnInit {
     this.callingMenu = config.data.item;
     config.header = this.outline.header;
     config.maximizable = true;
+    if (this.outline.classifications) {
+      this.classificationService.setClassifications(
+        this.outline.classifications.map((uuid) => {
+          return {
+            id: uuid,
+            label: '',
+            children: [],
+          };
+        })
+      );
+    }
   }
 
   ngOnInit(): void {

@@ -1,3 +1,8 @@
+<div class="p-dialog-content">
 <p-tree class="w-full md:w-30rem" [metaKeySelection]="false" selectionMode="checkbox" [propagateSelectionUp]="false"
-    [propagateSelectionDown]="false" [value]="classifications" [(selection)]="selection"
+    [propagateSelectionDown]="false" [value]="treeNodes" [(selection)]="selection"
     (onNodeSelect)="nodeSelect($event)" (onNodeUnselect)="nodeUnselect($event)"></p-tree>
+</div>
+<div class="p-dialog-footer">
+    <p-button label="Actualizar" styleClass="p-button-warning" (click)="submit()"></p-button>
+</div>

@@ -19,9 +19,11 @@ import { RadioButtonModule } from 'primeng/radiobutton';
 import { TableModule } from 'primeng/table';
 import { TabMenuModule } from 'primeng/tabmenu';
 import { ToolbarModule } from 'primeng/toolbar';
+import { TreeModule } from 'primeng/tree';
 
 import { SafeHtmlPipe } from '../pipes/safe-html.pipe';
 import { AttributeSetComponent } from './attribute-set/attribute-set.component';
+import { ClassificationsComponent } from './classifications/classifications.component';
 import { ContentRoutingModule } from './content-routing.module';
 import { ContentComponent } from './content/content.component';
 import { FormContentComponent } from './form-content/form-content.component';
@@ -33,8 +35,6 @@ import { SectionsComponent } from './sections/sections.component';
 import { SubSectionComponent } from './sub-section/sub-section.component';
 import { TableElementComponent } from './table-element/table-element.component';
 import { TableSectionComponent } from './table-section/table-section.component';
-import { ClassificationsComponent } from './classifications/classifications.component';
-import { TreeModule } from 'primeng/tree';
 
 @NgModule({
   declarations: [
@@ -74,7 +74,7 @@ import { TreeModule } from 'primeng/tree';
     CheckboxModule,
     InputTextareaModule,
     MenubarModule,
-    TreeModule
+    TreeModule,
   ],
 })
 export class ContentModule {}

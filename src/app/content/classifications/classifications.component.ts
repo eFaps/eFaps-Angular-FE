@@ -8,66 +8,105 @@ import { ClassificationService } from 'src/app/services/classification.service';
 @Component({
   selector: 'app-classifications',
   templateUrl: './classifications.component.html',
-  styleUrls: ['./classifications.component.scss']
+  styleUrls: ['./classifications.component.scss'],
 })
-export class ClassificationsComponent implements OnInit{
+export class ClassificationsComponent implements OnInit {
   classUUIDs: string[];
-  classifications: TreeNode[] = []
-  selection:  TreeNode<any> | TreeNode<any>[] | null = null;
+  treeNodes: TreeNode[] = [];
+  selection: TreeNode<any> | TreeNode<any>[] | null = [];
+  preSelected: Classification[] = [];
 
-  constructor(config: DynamicDialogConfig,
+  constructor(
+    config: DynamicDialogConfig,
     private dialogRef: DynamicDialogRef,
     private classificationService: ClassificationService
   ) {
-    this.classUUIDs = config.data.classUUIDs
+    this.classUUIDs = config.data.classUUIDs;
   }
+
   ngOnInit(): void {
+    this.classificationService.classifications.subscribe({
+      next: (selected) => {
+        this.preSelected = selected;
+      },
+    });
     this.classificationService.getClassifications(this.classUUIDs).subscribe({
       next: (tree) => {
-        console.log(tree)
-        tree.forEach(entry => {
+        tree.forEach((entry) => {
           const treeNode = this.getTreeNode(entry);
           treeNode.expanded = true;
-          this.classifications.push(treeNode)
-        })
+          this.treeNodes.push(treeNode);
+        });
+        this.evalPreselected(this.treeNodes);
+      },
+    });
+  }
+
+  get selected(): TreeNode<Classification>[] {
+    return this.selection as TreeNode<Classification>[];
+  }
+
+  evalPreselected(treeNodes: TreeNode[]) {
+    treeNodes.forEach((treeNode) => {
+      if (
+        this.preSelected.findIndex((entry) => {
+          return entry.id == treeNode.data.id;
+        }) > -1
+      ) {
+        this.selected.push(treeNode);
       }
-    })
+      if (treeNode.children) {
+        this.evalPreselected(treeNode.children);
+      }
+    });
   }
 
   getTreeNode(classification: Classification): TreeNode {
     return {
       label: classification.label,
-      children: classification.children.map(entry => { return this.getTreeNode(entry)})
+      data: classification,
+      children: classification.children.map((entry) => {
+        return this.getTreeNode(entry);
+      }),
+    };
+  }
+
+  nodeSelect(event: TreeNodeSelectEvent) {
+    let parent = event.node.parent;
+    while (parent) {
+      if (this.selected.indexOf(parent) < 0) {
+        this.selected.push(parent);
+      }
+      parent = parent.parent;
     }
   }
 
-  nodeSelect(event:  TreeNodeSelectEvent) {
-    let parent = event.node.parent
-    while (parent) {
-      if ((this.selection as TreeNode<any>[]).indexOf(parent) < 0) {
-        (this.selection as TreeNode<any>[]).push(parent)
-      }
-      parent = parent.parent
-    }
-  }
-  
-  nodeUnselect(event:  TreeNodeUnSelectEvent) {
+  nodeUnselect(event: TreeNodeUnSelectEvent) {
     if (this.hasSelectedChild(event.node)) {
-      (this.selection as TreeNode<any>[]).push(event.node)
+      this.selected.push(event.node);
     }
   }
 
   hasSelectedChild(node: TreeNode): boolean {
     let foundOne = false;
-    (this.selection as TreeNode<any>[]).forEach(selected => {
-      let parent = selected.parent
+    this.selected.forEach((selected) => {
+      let parent = selected.parent;
       while (parent && !foundOne) {
         if (parent == node) {
-          foundOne = true
+          foundOne = true;
         }
-        parent = parent.parent
+        parent = parent.parent;
       }
-    })
-    return foundOne
+    });
+    return foundOne;
+  }
+
+  submit() {
+    this.classificationService.setClassifications(
+      this.selected.map((treeNode) => {
+        return treeNode.data;
+      })
+    );
+    this.dialogRef.close();
   }
 }
