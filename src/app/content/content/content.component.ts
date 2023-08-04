@@ -2,13 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ConfirmationService, MenuItem } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
+import { Classification } from 'src/app/model/classification';
 import { Section } from 'src/app/model/content';
 import { MenuEntry } from 'src/app/model/menu';
 import { ContentService } from 'src/app/services/content.service';
 import { ExecService } from 'src/app/services/exec.service';
 
 import { ModalContentComponent } from '../modal-content/modal-content.component';
-import { Classification } from 'src/app/model/classification';
 
 @Component({
   selector: 'app-content',

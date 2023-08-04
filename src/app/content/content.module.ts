@@ -5,6 +5,7 @@ import { AutoCompleteModule } from 'primeng/autocomplete';
 import { ButtonModule } from 'primeng/button';
 import { CalendarModule } from 'primeng/calendar';
 import { CheckboxModule } from 'primeng/checkbox';
+import { ChipModule } from 'primeng/chip';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { DividerModule } from 'primeng/divider';
 import { DropdownModule } from 'primeng/dropdown';
@@ -23,6 +24,7 @@ import { TreeModule } from 'primeng/tree';
 
 import { SafeHtmlPipe } from '../pipes/safe-html.pipe';
 import { AttributeSetComponent } from './attribute-set/attribute-set.component';
+import { ClassificationDisplayComponent } from './classification-display/classification-display.component';
 import { ClassificationsComponent } from './classifications/classifications.component';
 import { ContentRoutingModule } from './content-routing.module';
 import { ContentComponent } from './content/content.component';
@@ -35,8 +37,6 @@ import { SectionsComponent } from './sections/sections.component';
 import { SubSectionComponent } from './sub-section/sub-section.component';
 import { TableElementComponent } from './table-element/table-element.component';
 import { TableSectionComponent } from './table-section/table-section.component';
-import { ClassificationDisplayComponent } from './classification-display/classification-display.component';
-import { ChipModule } from 'primeng/chip';
 
 @NgModule({
   declarations: [
@@ -78,7 +78,7 @@ import { ChipModule } from 'primeng/chip';
     InputTextareaModule,
     MenubarModule,
     TreeModule,
-    ChipModule
+    ChipModule,
   ],
 })
 export class ContentModule {}

@@ -8,7 +8,7 @@ describe('ClassificationDisplayComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [ClassificationDisplayComponent]
+      declarations: [ClassificationDisplayComponent],
     });
     fixture = TestBed.createComponent(ClassificationDisplayComponent);
     component = fixture.componentInstance;
