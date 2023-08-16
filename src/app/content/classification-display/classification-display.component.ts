@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Classification } from 'src/app/model/classification';
 import { ClassificationService } from 'src/app/services/classification.service';
 
@@ -7,9 +7,19 @@ import { ClassificationService } from 'src/app/services/classification.service';
   templateUrl: './classification-display.component.html',
   styleUrls: ['./classification-display.component.scss'],
 })
-export class ClassificationDisplayComponent {
+export class ClassificationDisplayComponent implements OnInit {
   @Input()
   classifications: Classification[] | undefined;
 
   constructor(private classificationService: ClassificationService) {}
+
+  ngOnInit(): void {
+    this.classificationService.classifications.subscribe({
+      next: (classifications) => {
+        if (classifications != null) {
+          this.classifications = classifications;
+        }
+      },
+    });
+  }
 }

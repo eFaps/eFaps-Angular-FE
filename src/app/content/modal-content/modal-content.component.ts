@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { Classification } from 'src/app/model/classification';
 import { Outline } from 'src/app/model/content';
 import { MenuEntry } from 'src/app/model/menu';
 import { ClassificationService } from 'src/app/services/classification.service';
@@ -15,6 +16,7 @@ export class ModalContentComponent implements OnInit {
   outline: Outline;
   callingMenu: MenuEntry;
   values: Map<String, any> | undefined;
+  addedClassifications: Classification[] = [];
 
   constructor(
     config: DynamicDialogConfig,
@@ -45,9 +47,38 @@ export class ModalContentComponent implements OnInit {
     if (this.outline.oid != 'none') {
       this.valueService.addEntry({ name: 'eFapsOID', value: this.outline.oid });
     }
+    this.classificationService.classifications.subscribe({
+      next: (classifications) => {
+        classifications.forEach((classification) => {
+          let existing =
+            this.outline.classifications != null &&
+            this.outline.classifications.find((clazz) => {
+              return clazz.id == classification.id;
+            }) != null;
+          if (!existing) {
+            this.classificationService.getSections(classification).subscribe({
+              next: (sections) => {
+                this.addedClassifications.push(classification);
+                this.outline.sections.push(...sections);
+              },
+            });
+          }
+        });
+      },
+    });
   }
 
   submit() {
+    if (this.outline.classifications != null) {
+      this.values?.set('eFapsClassifications', [
+        ...this.outline.classifications.map((clazz) => {
+          return clazz.id;
+        }),
+        ...this.addedClassifications.map((clazz) => {
+          return clazz.id;
+        }),
+      ]);
+    }
     this.execService.exec(this.callingMenu.id, this.values).subscribe({
       next: (execResponse) => {
         this.dialogRef.close(execResponse);

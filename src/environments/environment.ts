@@ -6,8 +6,8 @@
 export const environment = {
   production: false,
   version: '1.0.0-dev',
-  apiHostname: 'http://localhost:4200/api/eFaps',
-  apiBaseUrl: '/servlet/rest',
+  apiHostname: 'http://localhost:8080',
+  apiBaseUrl: '/api',
   ssoUrl: 'https://sso.synercom.pe/auth',
   ssoRealm: 'demo',
   ssoClientId: 'localhost-test',

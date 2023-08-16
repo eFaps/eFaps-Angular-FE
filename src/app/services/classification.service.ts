@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 
 import { Classification } from '../model/classification';
+import { Section } from '../model/content';
 import { UtilService } from './util.service';
 
 @Injectable({
@@ -23,5 +24,12 @@ export class ClassificationService {
 
   setClassifications(classifications: Classification[]) {
     this.currentValue.next(classifications);
+  }
+
+  getSections(classification: Classification): Observable<Section[]> {
+    const url = `${this.utilService.evalApiUrl()}/ui/classification/${
+      classification.id
+    }/sections`;
+    return this.http.get<Section[]>(url);
   }
 }
