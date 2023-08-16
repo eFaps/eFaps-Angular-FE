@@ -25,6 +25,7 @@ import { CompanyInterceptor } from './interceptors/company.interceptor';
 import { ErrorInterceptor } from './interceptors/error.interceptor';
 import { LoaderInterceptor } from './interceptors/loader.interceptor';
 import { ThemeChooserComponent } from './standalone/theme-chooser/theme-chooser.component';
+import { WebStorageModule } from '@efaps/ngx-store';
 
 registerLocaleData(localeEs, 'es');
 
@@ -46,6 +47,7 @@ registerLocaleData(localeEs, 'es');
     TableModule,
     DividerModule,
     ThemeChooserComponent,
+    WebStorageModule
   ],
   providers: [
     MessageService,

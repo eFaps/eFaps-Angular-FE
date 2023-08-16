@@ -9,12 +9,14 @@ import { Observable } from 'rxjs';
 
 import { Company } from '../model/user';
 import { UserService } from '../services/user.service';
+import { LocalStorage } from '@efaps/ngx-store';
 
 @Injectable()
 export class CompanyInterceptor implements HttpInterceptor {
-  currentCompany: Company | undefined;
+  @LocalStorage() currentCompany: Company | undefined;
 
   constructor(private userService: UserService) {
+    localStorage.getItem("")
     this.userService.company.subscribe({
       next: (company) => (this.currentCompany = company),
     });

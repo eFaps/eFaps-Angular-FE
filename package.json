@@ -22,6 +22,7 @@
     "@angular/router": "~16.0.0",
     "angular-gridster2": "^16.0.0",
     "chart.js": "^4.3.3",
+    "@efaps/ngx-store": "^7.0.0",
     "keycloak-angular": "^14.0.0",
     "keycloak-js": "^21.1.2",
     "primeicons": "^6.0.1",
