@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { Classification } from 'src/app/model/classification';
-import { Outline } from 'src/app/model/content';
+import { Outline, Section } from 'src/app/model/content';
 import { MenuEntry } from 'src/app/model/menu';
 import { ClassificationService } from 'src/app/services/classification.service';
 import { ExecService } from 'src/app/services/exec.service';
@@ -16,7 +16,7 @@ export class ModalContentComponent implements OnInit {
   outline: Outline;
   callingMenu: MenuEntry;
   values: Map<String, any> | undefined;
-  addedClassifications: Classification[] = [];
+  classifications: Classification[] | undefined;
 
   constructor(
     config: DynamicDialogConfig,
@@ -49,6 +49,27 @@ export class ModalContentComponent implements OnInit {
     }
     this.classificationService.classifications.subscribe({
       next: (classifications) => {
+        this.classifications = classifications;
+        const toBeRemoved: Section[] = [];
+        this.outline.sections.forEach((section) => {
+          if (section.ref != null) {
+            if (
+              classifications.find((clazz) => {
+                return clazz.id == section.ref;
+              }) == null
+            ) {
+              toBeRemoved.push(section);
+            }
+          }
+        });
+
+        toBeRemoved.forEach((section) => {
+          const index = this.outline.sections.indexOf(section);
+          if (index !== -1) {
+            this.outline.sections.splice(index, 1);
+          }
+        });
+
         classifications.forEach((classification) => {
           let existing =
             this.outline.classifications != null &&
@@ -58,7 +79,6 @@ export class ModalContentComponent implements OnInit {
           if (!existing) {
             this.classificationService.getSections(classification).subscribe({
               next: (sections) => {
-                this.addedClassifications.push(classification);
                 this.outline.sections.push(...sections);
               },
             });
@@ -69,12 +89,9 @@ export class ModalContentComponent implements OnInit {
   }
 
   submit() {
-    if (this.outline.classifications != null) {
+    if (this.classifications != null) {
       this.values?.set('eFapsClassifications', [
-        ...this.outline.classifications.map((clazz) => {
-          return clazz.id;
-        }),
-        ...this.addedClassifications.map((clazz) => {
+        ...this.classifications!!.map((clazz) => {
           return clazz.id;
         }),
       ]);

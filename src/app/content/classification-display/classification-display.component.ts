@@ -17,7 +17,7 @@ export class ClassificationDisplayComponent implements OnInit {
     this.classificationService.classifications.subscribe({
       next: (classifications) => {
         if (classifications != null) {
-          this.classifications = classifications;
+          // this.classifications = classifications;
         }
       },
     });

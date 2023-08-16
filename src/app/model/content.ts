@@ -18,6 +18,7 @@ export interface Outline {
 
 export interface Section {
   type: 'FORM' | 'TABLE' | 'HEADING';
+  ref?: string;
 }
 
 export interface FormSection extends Section {

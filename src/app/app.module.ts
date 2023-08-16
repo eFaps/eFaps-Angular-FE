@@ -5,6 +5,7 @@ import { APP_INITIALIZER, LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouteReuseStrategy } from '@angular/router';
+import { WebStorageModule } from '@efaps/ngx-store';
 import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
 import { MessageService } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
@@ -25,7 +26,6 @@ import { CompanyInterceptor } from './interceptors/company.interceptor';
 import { ErrorInterceptor } from './interceptors/error.interceptor';
 import { LoaderInterceptor } from './interceptors/loader.interceptor';
 import { ThemeChooserComponent } from './standalone/theme-chooser/theme-chooser.component';
-import { WebStorageModule } from '@efaps/ngx-store';
 
 registerLocaleData(localeEs, 'es');
 
@@ -47,7 +47,7 @@ registerLocaleData(localeEs, 'es');
     TableModule,
     DividerModule,
     ThemeChooserComponent,
-    WebStorageModule
+    WebStorageModule,
   ],
   providers: [
     MessageService,
