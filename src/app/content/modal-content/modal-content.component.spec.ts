@@ -1,5 +1,14 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ButtonModule } from 'primeng/button';
+import {
+  DynamicDialogConfig,
+  DynamicDialogModule,
+  DynamicDialogRef,
+} from 'primeng/dynamicdialog';
 
+import { ClassificationDisplayComponent } from '../classification-display/classification-display.component';
+import { SectionsComponent } from '../sections/sections.component';
 import { ModalContentComponent } from './modal-content.component';
 
 describe('ModalContentComponent', () => {
@@ -8,7 +17,25 @@ describe('ModalContentComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [ModalContentComponent],
+      imports: [DynamicDialogModule, HttpClientTestingModule, ButtonModule],
+      declarations: [
+        ModalContentComponent,
+        SectionsComponent,
+        ClassificationDisplayComponent,
+      ],
+      providers: [
+        {
+          provide: DynamicDialogConfig,
+          useValue: {
+            data: {
+              outline: {
+                header: {},
+              },
+            },
+          },
+        },
+        { provide: DynamicDialogRef, useValue: {} },
+      ],
     });
     fixture = TestBed.createComponent(ModalContentComponent);
     component = fixture.componentInstance;

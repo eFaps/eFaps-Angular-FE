@@ -1,5 +1,14 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { DialogModule } from 'primeng/dialog';
+import { DialogService } from 'primeng/dynamicdialog';
+import { MenuModule } from 'primeng/menu';
+import { TabMenuModule } from 'primeng/tabmenu';
+import { ToolbarModule } from 'primeng/toolbar';
 
+import { SectionsComponent } from '../sections/sections.component';
 import { ContentComponent } from './content.component';
 
 describe('ContentComponent', () => {
@@ -8,7 +17,17 @@ describe('ContentComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [ContentComponent],
+      imports: [
+        DialogModule,
+        RouterTestingModule,
+        HttpClientTestingModule,
+        ToolbarModule,
+        TabMenuModule,
+        ConfirmDialogModule,
+        MenuModule,
+      ],
+      declarations: [ContentComponent, SectionsComponent],
+      providers: [{ provide: DialogService, useValue: {} }],
     });
     fixture = TestBed.createComponent(ContentComponent);
     component = fixture.componentInstance;

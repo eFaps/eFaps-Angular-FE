@@ -8,7 +8,7 @@ describe('EQLResponseComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [EQLResponseComponent],
+      imports: [EQLResponseComponent],
     });
     fixture = TestBed.createComponent(EQLResponseComponent);
     component = fixture.componentInstance;

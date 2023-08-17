@@ -1,4 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { PanelModule } from 'primeng/panel';
 
 import { SubSectionComponent } from './sub-section.component';
 
@@ -8,6 +10,7 @@ describe('SubSectionComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
+      imports: [PanelModule, NoopAnimationsModule],
       declarations: [SubSectionComponent],
     });
     fixture = TestBed.createComponent(SubSectionComponent);

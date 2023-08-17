@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { TableModule } from 'primeng/table';
 
 import { AttributeSetComponent } from './attribute-set.component';
 
@@ -8,6 +9,7 @@ describe('AttributeSetComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
+      imports: [TableModule],
       declarations: [AttributeSetComponent],
     });
     fixture = TestBed.createComponent(AttributeSetComponent);

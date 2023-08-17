@@ -1,3 +1,4 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ClassificationDisplayComponent } from './classification-display.component';
@@ -8,6 +9,7 @@ describe('ClassificationDisplayComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule],
       declarations: [ClassificationDisplayComponent],
     });
     fixture = TestBed.createComponent(ClassificationDisplayComponent);

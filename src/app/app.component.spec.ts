@@ -1,13 +1,25 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
+import { MessageService } from 'primeng/api';
+import { MenubarModule } from 'primeng/menubar';
+import { OverlayPanelModule } from 'primeng/overlaypanel';
+import { ToastModule } from 'primeng/toast';
 
 import { AppComponent } from './app.component';
 
 describe('AppComponent', () => {
   beforeEach(() =>
     TestBed.configureTestingModule({
-      imports: [RouterTestingModule],
+      imports: [
+        RouterTestingModule,
+        HttpClientTestingModule,
+        MenubarModule,
+        ToastModule,
+        OverlayPanelModule,
+      ],
       declarations: [AppComponent],
+      providers: [{ provide: MessageService, useValue: {} }],
     })
   );
 
@@ -21,14 +33,5 @@ describe('AppComponent', () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
     expect(app.title).toEqual('eFaps-Angular-FE');
-  });
-
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.content span')?.textContent).toContain(
-      'eFaps-Angular-FE app is running!'
-    );
   });
 });
