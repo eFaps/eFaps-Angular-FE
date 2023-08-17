@@ -35,6 +35,11 @@ export class ModalContentComponent implements OnInit {
         this.outline.classifications
       );
     }
+    this.dialogRef.onClose.subscribe({
+      next: (_) => {
+        this.classificationService.setClassifications([]);
+      },
+    });
   }
 
   ngOnInit(): void {
