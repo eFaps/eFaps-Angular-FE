@@ -1,4 +1,10 @@
-import { AfterViewInit, Component, ElementRef, Input, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  Input,
+  ViewChild,
+} from '@angular/core';
 import { Router } from '@angular/router';
 import { TooltipOptions } from 'primeng/api';
 import { Column } from 'src/app/model/table';
@@ -17,7 +23,6 @@ export class ColumnComponent {
   @ViewChild('overflowWrapper') overflowElement: ElementRef | undefined;
 
   constructor(private router: Router) {}
-
 
   get value(): any {
     return this.rowData[this.column!!.field];
@@ -47,7 +52,10 @@ export class ColumnComponent {
 
   isOverflowing() {
     if (this.overflowElement) {
-      return this.overflowElement.nativeElement.offsetWidth < this.overflowElement.nativeElement.scrollWidth;
+      return (
+        this.overflowElement.nativeElement.offsetWidth <
+        this.overflowElement.nativeElement.scrollWidth
+      );
     }
     return false;
   }

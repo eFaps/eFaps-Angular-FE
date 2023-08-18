@@ -7,12 +7,12 @@ import { InputTextModule } from 'primeng/inputtext';
 import { MenuModule } from 'primeng/menu';
 import { MenubarModule } from 'primeng/menubar';
 import { MultiSelectModule } from 'primeng/multiselect';
+import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { TableModule as primeTableModule } from 'primeng/table';
 
 import { ColumnComponent } from './column/column.component';
 import { TableRoutingModule } from './table-routing.module';
 import { TableComponent } from './table/table.component';
-import { OverlayPanelModule } from 'primeng/overlaypanel';
 
 @NgModule({
   declarations: [TableComponent, ColumnComponent],
@@ -27,7 +27,7 @@ import { OverlayPanelModule } from 'primeng/overlaypanel';
     ConfirmDialogModule,
     InputTextModule,
     FormsModule,
-    OverlayPanelModule
+    OverlayPanelModule,
   ],
 })
 export class TableModule {}

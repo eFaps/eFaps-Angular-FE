@@ -6,6 +6,7 @@ import {
   DynamicDialogModule,
   DynamicDialogRef,
 } from 'primeng/dynamicdialog';
+import { Observable } from 'rxjs';
 
 import { ClassificationDisplayComponent } from '../classification-display/classification-display.component';
 import { SectionsComponent } from '../sections/sections.component';
@@ -34,7 +35,16 @@ describe('ModalContentComponent', () => {
             },
           },
         },
-        { provide: DynamicDialogRef, useValue: {} },
+        {
+          provide: DynamicDialogRef,
+          useValue: {
+            onClose: {
+              subscribe(): Observable<any> {
+                return new Observable();
+              },
+            },
+          },
+        },
       ],
     });
     fixture = TestBed.createComponent(ModalContentComponent);
