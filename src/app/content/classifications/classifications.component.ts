@@ -104,7 +104,7 @@ export class ClassificationsComponent implements OnInit {
   submit() {
     this.classificationService.setClassifications(
       this.selected.map((treeNode) => {
-        return treeNode.data;
+        return treeNode.data as Classification;
       })
     );
     this.dialogRef.close();

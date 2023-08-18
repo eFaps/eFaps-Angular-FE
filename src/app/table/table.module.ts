@@ -12,6 +12,7 @@ import { TableModule as primeTableModule } from 'primeng/table';
 import { ColumnComponent } from './column/column.component';
 import { TableRoutingModule } from './table-routing.module';
 import { TableComponent } from './table/table.component';
+import { OverlayPanelModule } from 'primeng/overlaypanel';
 
 @NgModule({
   declarations: [TableComponent, ColumnComponent],
@@ -26,6 +27,7 @@ import { TableComponent } from './table/table.component';
     ConfirmDialogModule,
     InputTextModule,
     FormsModule,
+    OverlayPanelModule
   ],
 })
 export class TableModule {}
