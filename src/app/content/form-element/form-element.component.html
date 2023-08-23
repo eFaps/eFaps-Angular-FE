@@ -20,7 +20,7 @@
         <ng-container *ngSwitchCase="'BITENUM'">
             <p-multiSelect [options]="formItem?.options" [(ngModel)]="bitEnumValue" display="chip"
                 [filter]="showMultiSelectFilter" [showToggleAll]="true" [showClear]="true"
-                (onChange)="changeBitEnum($event.value)"></p-multiSelect>
+                (onChange)="changeBitEnum($event.value)" appendTo="body"></p-multiSelect>
         </ng-container>
         <ng-container *ngSwitchCase="'AUTOCOMPLETE'">
             <p-autoComplete [(ngModel)]="autoCompleteValue" [suggestions]="autoCompleteSuggestions"

@@ -148,7 +148,11 @@ export class FormElementComponent implements OnInit {
         }
         break;
       default:
-        this.readOnlyValue = this.formItem?.value;
+        if (this.formItem?.value && this.formItem?.value instanceof Array) {
+          this.readOnlyValue = this.formItem.value.join(', ')
+        } else {
+          this.readOnlyValue = this.formItem?.value;
+        }
     }
   }
 
