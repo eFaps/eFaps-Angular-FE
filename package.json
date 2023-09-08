@@ -6,6 +6,7 @@
     "start": "ng serve --proxy-config proxy.conf.json --host 0.0.0.0",
     "start:prod": "ng serve --configuration production --proxy-config proxy.conf.json --host 0.0.0.0",
     "build": "ng build --configuration production",
+    "build-demo": "ng build --configuration demo",
     "watch": "ng build --watch --configuration development",
     "test": "ng test --browsers ChromeHeadlessNoSandbox --no-progress --no-watch",
     "prettier": "prettier --write \"src/**/*.ts\""

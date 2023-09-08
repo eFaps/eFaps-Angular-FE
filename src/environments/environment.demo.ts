@@ -4,6 +4,6 @@ export const environment = {
   apiHostname: undefined,
   apiBaseUrl: '/api',
   ssoUrl: 'https://sso.synercom.pe/auth',
-  ssoRealm: 'SynerCOM',
-  ssoClientId: 'app',
+  ssoRealm: 'demo',
+  ssoClientId: 'localhost-test',
 };
