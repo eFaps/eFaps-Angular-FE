@@ -3,7 +3,4 @@ export const environment = {
   version: '1.0.0',
   apiHostname: undefined,
   apiBaseUrl: '/api',
-  ssoUrl: 'https://sso.synercom.pe/auth',
-  ssoRealm: 'SynerCOM',
-  ssoClientId: 'app',
 };

@@ -149,7 +149,7 @@ export class FormElementComponent implements OnInit {
         break;
       default:
         if (this.formItem?.value && this.formItem?.value instanceof Array) {
-          this.readOnlyValue = this.formItem.value.join(', ')
+          this.readOnlyValue = this.formItem.value.join(', ');
         } else {
           this.readOnlyValue = this.formItem?.value;
         }

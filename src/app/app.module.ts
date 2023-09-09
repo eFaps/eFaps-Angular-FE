@@ -20,11 +20,12 @@ import { ToastModule } from 'primeng/toast';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { initializeKeycloak } from './init/keycloak-init.factory';
+import { initApp } from './init/app-init.factory';
 import { RoutePathReuseStrategy } from './init/route-path-reuse-strategy';
 import { CompanyInterceptor } from './interceptors/company.interceptor';
 import { ErrorInterceptor } from './interceptors/error.interceptor';
 import { LoaderInterceptor } from './interceptors/loader.interceptor';
+import { ConfigService } from './services/config.service';
 import { ThemeChooserComponent } from './standalone/theme-chooser/theme-chooser.component';
 
 registerLocaleData(localeEs, 'es');
@@ -53,9 +54,9 @@ registerLocaleData(localeEs, 'es');
     MessageService,
     {
       provide: APP_INITIALIZER,
-      useFactory: initializeKeycloak,
+      useFactory: initApp,
       multi: true,
-      deps: [KeycloakService],
+      deps: [ConfigService, KeycloakService],
     },
     { provide: HTTP_INTERCEPTORS, useClass: CompanyInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true },
