@@ -9,7 +9,9 @@ import {
 import { DialogService } from 'primeng/dynamicdialog';
 import { combineLatest } from 'rxjs';
 import { ModalContentComponent } from 'src/app/content/modal-content/modal-content.component';
+import { ModalModuleContentComponent } from 'src/app/content/modal-module-content/modal-module-content.component';
 import { SearchContentComponent } from 'src/app/content/search-content/search-content.component';
+import { isOutline } from 'src/app/model/content';
 import { MenuEntry } from 'src/app/model/menu';
 import { ContentService } from 'src/app/services/content.service';
 import { ExecService } from 'src/app/services/exec.service';
@@ -43,7 +45,7 @@ export class TableComponent implements OnInit {
     private tableService: TableService,
     private execService: ExecService,
     private searchService: SearchService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.loading = true;
@@ -120,7 +122,7 @@ export class TableComponent implements OnInit {
         accept: () => {
           this.exec(item.id);
         },
-        reject: () => {},
+        reject: () => { },
       });
     } else {
       this.exec(item.id);
@@ -144,23 +146,45 @@ export class TableComponent implements OnInit {
 
   formAction(item: MenuEntry) {
     if (item.action.modal) {
+
       this.contentService.getContentWithCmd('none', item.id).subscribe({
         next: (outline) => {
-          const dialogRef = this.dialogService.open(ModalContentComponent, {
-            data: {
-              item,
-              outline,
-            },
-          });
-          dialogRef.onClose.subscribe({
-            next: (execResponse) => {
-              if (execResponse.reload) {
-                this.loadData();
+          if (isOutline(outline)) {
+            const dialogRef = this.dialogService.open(ModalContentComponent, {
+              data: {
+                item,
+                outline,
+              },
+            });
+            dialogRef.onClose.subscribe({
+              next: (execResponse) => {
+                if (execResponse.reload) {
+                  this.loadData();
+                }
+              },
+            });
+          } else {
+            const dialogRef = this.dialogService.open(
+              ModalModuleContentComponent,
+              {
+                data: {
+                  item,
+                  uimodule: outline,
+                  parentOid: this.oid,
+                },
               }
-            },
-          });
+            );
+            dialogRef.onClose.subscribe({
+              next: (execResponse) => {
+                if (execResponse != null && execResponse.reload) {
+                  this.loadData();
+                }
+              },
+            });
+          }
         },
       });
+
     }
   }
 

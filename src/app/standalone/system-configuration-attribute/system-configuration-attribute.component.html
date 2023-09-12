@@ -1,7 +1,8 @@
 <div class="p-dialog-content">
     <div class="wrapper">
         <span class="p-float-label">
-            <input type="text" id="key" pInputText [(ngModel)]="key" />
+            <p-autoComplete [(ngModel)]="key" [dropdown]="true" [suggestions]="keys" 
+            (completeMethod)="loadKeys($event)" (onSelect)="onKeySelect($event)" (onBlur)="onKeyBlur($event)" field="key"></p-autoComplete>
             <label htmlFor="key">Key</label>
         </span>
         <span class="p-float-label" *ngIf="type=='STRING' || type=='UNDEFINED'">
@@ -20,8 +21,16 @@
             <textarea rows="3" cols="50" id="description" pInputTextarea [(ngModel)]="description"></textarea>
             <label for="description">Description</label>
         </span>
+        <span class="p-float-label">
+            <p-dropdown id="company" [options]="companies" [(ngModel)]="company" optionLabel="name" appendTo="body"></p-dropdown>
+            <label for="company">Company</label>
+        </span>
+        <span class="p-float-label">
+            <input type="text" id="appKey" pInputText [(ngModel)]="appKey"/>
+            <label htmlFor="appKey">AppKey</label>
+        </span>
     </div>
 </div>
 <div class="p-dialog-footer">
-    <p-button label="Actualizar" styleClass="p-button-warning" (click)="submit()"></p-button>
+    <p-button [label]="buttonLabel" styleClass="p-button-warning" (click)="submit()"></p-button>
 </div>

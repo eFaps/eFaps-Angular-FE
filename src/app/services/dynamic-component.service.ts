@@ -1,7 +1,7 @@
 import { Injectable, ViewContainerRef } from '@angular/core';
 
 import { FieldCommandResponse } from '../model/field-command';
-import { UIModule } from '../model/module';
+import { ModuleData, UIModule } from '../model/module';
 
 @Injectable({
   providedIn: 'root',
@@ -19,7 +19,7 @@ export class DynamicComponentService {
   loadUIModule(
     viewContainerRef: ViewContainerRef,
     uimodule: UIModule,
-    oid: string
+    data: ModuleData
   ) {
     switch (uimodule.key) {
       case 'SystemConfigurationAttribute':
@@ -30,7 +30,7 @@ export class DynamicComponentService {
             m.SystemConfigurationAttributeComponent
           );
           ref.setInput('uimodule', uimodule);
-          ref.setInput('oid', oid);
+          ref.setInput('data', data);
         });
         break;
     }

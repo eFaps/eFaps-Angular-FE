@@ -28,7 +28,7 @@ export class ModalModuleContentComponent implements AfterViewInit {
       this.dynamicComponentService.loadUIModule(
         this.vcr,
         this.config.data.uimodule,
-        this.config.data.oid
+        this.config.data
       );
     }
   }

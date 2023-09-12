@@ -5,6 +5,7 @@ export interface User {
 }
 
 export interface Company {
+  oid: string;
   name: string;
   uuid: string;
   current: boolean;

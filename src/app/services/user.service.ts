@@ -35,4 +35,9 @@ export class UserService {
     this.currentCompany.next(company);
     return this.getCurrentUser();
   }
+
+  getCompanies(): Observable<Company[]> {
+    const url = `${this.utilService.evalApiUrl()}/ui/user/companies`;
+    return this.http.get<Company[]>(url)
+  }
 }
