@@ -32,6 +32,7 @@ import { FormContentComponent } from './form-content/form-content.component';
 import { FormElementComponent } from './form-element/form-element.component';
 import { FormSectionComponent } from './form-section/form-section.component';
 import { ModalContentComponent } from './modal-content/modal-content.component';
+import { ModalModuleContentComponent } from './modal-module-content/modal-module-content.component';
 import { SearchContentComponent } from './search-content/search-content.component';
 import { SectionsComponent } from './sections/sections.component';
 import { SubSectionComponent } from './sub-section/sub-section.component';
@@ -54,6 +55,7 @@ import { TableSectionComponent } from './table-section/table-section.component';
     AttributeSetComponent,
     ClassificationsComponent,
     ClassificationDisplayComponent,
+    ModalModuleContentComponent,
   ],
   imports: [
     CommonModule,

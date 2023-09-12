@@ -6,7 +6,7 @@
 export const environment = {
   production: false,
   version: '1.0.0-dev',
-  xapiHostname: 'http://localhost:8080',
-  apiHostname: 'https://demo.lite.synercom.pe',
+  apiHostname: 'http://localhost:8080',
+  xapiHostname: 'https://demo.lite.synercom.pe',
   apiBaseUrl: '/api',
 };

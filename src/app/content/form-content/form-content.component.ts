@@ -39,8 +39,10 @@ export class FormContentComponent implements OnInit {
   loadData() {
     this.contentService.getContentWithCmd(this.oid, this.id!!).subscribe({
       next: (outline) => {
-        this.outline = outline;
-        this.sections = outline.sections;
+        if ('sections' in outline) {
+          this.outline = outline;
+          this.sections = outline.sections;
+        }
       },
     });
   }

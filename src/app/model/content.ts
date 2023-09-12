@@ -16,6 +16,10 @@ export interface Outline {
   classifications?: Classification[];
 }
 
+export function isOutline(obj: any): boolean {
+  return 'sections' in obj;
+}
+
 export interface Section {
   type: 'FORM' | 'TABLE' | 'HEADING';
   ref?: string;

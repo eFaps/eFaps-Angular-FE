@@ -1,0 +1,27 @@
+<div class="p-dialog-content">
+    <div class="wrapper">
+        <span class="p-float-label">
+            <input type="text" id="key" pInputText [(ngModel)]="key" />
+            <label htmlFor="key">Key</label>
+        </span>
+        <span class="p-float-label" *ngIf="type=='STRING' || type=='UNDEFINED'">
+            <input type="text" id="strValue" pInputText [(ngModel)]="strValue" />
+            <label htmlFor="strValue">Value</label>
+        </span>
+        <span class="p-float-label" *ngIf="type=='BOOLEAN'">
+            <p-toggleButton id="booleanValue" [(ngModel)]="booleanValue" onLabel="True"
+                offLabel="False"></p-toggleButton>
+        </span>
+        <span class="p-float-label" *ngIf="type=='PROPERTIES'">
+            <textarea rows="5" cols="50" id="properties" pInputTextarea [(ngModel)]="strValue"></textarea>
+            <label for="properties">Value</label>
+        </span>
+        <span class="p-float-label">
+            <textarea rows="3" cols="50" id="description" pInputTextarea [(ngModel)]="description"></textarea>
+            <label for="description">Description</label>
+        </span>
+    </div>
+</div>
+<div class="p-dialog-footer">
+    <p-button label="Actualizar" styleClass="p-button-warning" (click)="submit()"></p-button>
+</div>

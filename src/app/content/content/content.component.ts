@@ -3,12 +3,13 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ConfirmationService, MenuItem } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
 import { Classification } from 'src/app/model/classification';
-import { Section } from 'src/app/model/content';
+import { Content, Section, isOutline } from 'src/app/model/content';
 import { MenuEntry } from 'src/app/model/menu';
 import { ContentService } from 'src/app/services/content.service';
 import { ExecService } from 'src/app/services/exec.service';
 
 import { ModalContentComponent } from '../modal-content/modal-content.component';
+import { ModalModuleContentComponent } from '../modal-module-content/modal-module-content.component';
 
 @Component({
   selector: 'app-content',
@@ -48,27 +49,34 @@ export class ContentComponent implements OnInit {
   loadData() {
     this.contentService.getContent(this.oid!!).subscribe({
       next: (val) => {
-        this.tabs = val.nav.map((item, index) => this.getTabItem(item, index));
-        this.activeItem = this.tabs[0];
-        this.menuItems = val.outline.menu
-          ? val.outline.menu.map((item) => this.getMenuItem(item))
-          : [];
-        this.mainHeader = val.outline.header;
-        this.sections = val.outline.sections;
-        this.classifications = val.outline.classifications;
-        if (val.selected != this.tabs[0].id) {
-          var defaultItem = this.tabs.find((item) => {
-            return item.id == val.selected;
-          });
-          if (defaultItem) {
-            this.showSections = false;
-            const cmds = ['content', this.oid, ...defaultItem.routerLink];
-            const url = this.router.createUrlTree(cmds, {
-              queryParams: defaultItem.queryParams,
+        if ('nav' in val) {
+          //const content = val as Content;
+          this.tabs = val.nav.map((item, index) =>
+            this.getTabItem(item, index)
+          );
+          this.activeItem = this.tabs[0];
+          this.menuItems = val.outline.menu
+            ? val.outline.menu.map((item) => this.getMenuItem(item))
+            : [];
+          this.mainHeader = val.outline.header;
+          this.sections = val.outline.sections;
+          this.classifications = val.outline.classifications;
+          if (val.selected != this.tabs[0].id) {
+            var defaultItem = this.tabs.find((item) => {
+              return item.id == val.selected;
             });
-            this.router.navigateByUrl(url.toString());
-            this.activeItem = defaultItem;
+            if (defaultItem) {
+              this.showSections = false;
+              const cmds = ['content', this.oid, ...defaultItem.routerLink];
+              const url = this.router.createUrlTree(cmds, {
+                queryParams: defaultItem.queryParams,
+              });
+              this.router.navigateByUrl(url.toString());
+              this.activeItem = defaultItem;
+            }
           }
+        } else {
+          console.log(val);
         }
       },
     });
@@ -160,19 +168,39 @@ export class ContentComponent implements OnInit {
     if (item.action.modal) {
       this.contentService.getContentWithCmd(this.oid!!, item.id).subscribe({
         next: (outline) => {
-          const dialogRef = this.dialogService.open(ModalContentComponent, {
-            data: {
-              item,
-              outline,
-            },
-          });
-          dialogRef.onClose.subscribe({
-            next: (execResponse) => {
-              if (execResponse != null && execResponse.reload) {
-                this.loadData();
+          if (isOutline(outline)) {
+            const dialogRef = this.dialogService.open(ModalContentComponent, {
+              data: {
+                item,
+                outline,
+              },
+            });
+            dialogRef.onClose.subscribe({
+              next: (execResponse) => {
+                if (execResponse != null && execResponse.reload) {
+                  this.loadData();
+                }
+              },
+            });
+          } else {
+            const dialogRef = this.dialogService.open(
+              ModalModuleContentComponent,
+              {
+                data: {
+                  item,
+                  uimodule: outline,
+                  oid: this.oid,
+                },
               }
-            },
-          });
+            );
+            dialogRef.onClose.subscribe({
+              next: (execResponse) => {
+                if (execResponse != null && execResponse.reload) {
+                  this.loadData();
+                }
+              },
+            });
+          }
         },
       });
     }
