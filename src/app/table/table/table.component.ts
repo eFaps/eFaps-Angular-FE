@@ -45,7 +45,7 @@ export class TableComponent implements OnInit {
     private tableService: TableService,
     private execService: ExecService,
     private searchService: SearchService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.loading = true;
@@ -122,7 +122,7 @@ export class TableComponent implements OnInit {
         accept: () => {
           this.exec(item.id);
         },
-        reject: () => { },
+        reject: () => {},
       });
     } else {
       this.exec(item.id);
@@ -146,7 +146,6 @@ export class TableComponent implements OnInit {
 
   formAction(item: MenuEntry) {
     if (item.action.modal) {
-
       this.contentService.getContentWithCmd('none', item.id).subscribe({
         next: (outline) => {
           if (isOutline(outline)) {
@@ -184,7 +183,6 @@ export class TableComponent implements OnInit {
           }
         },
       });
-
     }
   }
 

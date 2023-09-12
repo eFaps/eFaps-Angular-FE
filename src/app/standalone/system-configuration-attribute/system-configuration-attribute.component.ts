@@ -2,7 +2,10 @@ import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { AutoCompleteCompleteEvent, AutoCompleteModule } from 'primeng/autocomplete';
+import {
+  AutoCompleteCompleteEvent,
+  AutoCompleteModule,
+} from 'primeng/autocomplete';
 import { ButtonModule } from 'primeng/button';
 import { DropdownModule } from 'primeng/dropdown';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
@@ -63,42 +66,49 @@ export class SystemConfigurationAttributeComponent implements OnInit {
 
   ngOnInit(): void {
     this.userService.getCompanies().subscribe({
-      next: companies =>  {
-        this.companies =  [{oid: "", current: false, name: "", uuid: ""}, ... companies]
-      }
-    })
+      next: (companies) => {
+        this.companies = [
+          { oid: '', current: false, name: '', uuid: '' },
+          ...companies,
+        ];
+      },
+    });
 
-    if (this.uimodule?.targetMode == "CREATE") {
-      this.buttonLabel = "Create";
+    if (this.uimodule?.targetMode == 'CREATE') {
+      this.buttonLabel = 'Create';
       this.config.header = 'Create SystemConfiguration Attribute';
     } else {
-      const url = `${this.utilService.evalApiUrl()}/ui/modules/system-configurations/${this.data?.parentOid}/attributes/${this.data?.oid}`;
+      const url = `${this.utilService.evalApiUrl()}/ui/modules/system-configurations/${
+        this.data?.parentOid
+      }/attributes/${this.data?.oid}`;
       this.http.get<any>(url).subscribe({
         next: (attr) => {
           this.key = {
             key: attr.key,
-            type: attr.type
+            type: attr.type,
           };
           this.description = attr.description;
           this.type = attr.type;
-          this.setValue(attr.value)
+          this.setValue(attr.value);
           this.appKey = attr.appKey;
-          this.setCompany(attr.companyLink)
+          this.setCompany(attr.companyLink);
         },
       });
     }
   }
 
   submit() {
-    if (this.uimodule?.targetMode == "CREATE") {
-      const url = `${this.utilService.evalApiUrl()}/ui/modules/system-configurations/${this.data?.parentOid}/attributes`;
+    if (this.uimodule?.targetMode == 'CREATE') {
+      const url = `${this.utilService.evalApiUrl()}/ui/modules/system-configurations/${
+        this.data?.parentOid
+      }/attributes`;
       this.http
         .post(url, {
           key: this.keyStr,
           value: this.getValue(),
           description: this.description,
           appKey: this.appKey,
-          companyLink: this.companyLink
+          companyLink: this.companyLink,
         })
         .subscribe({
           next: (_) => {
@@ -106,14 +116,16 @@ export class SystemConfigurationAttributeComponent implements OnInit {
           },
         });
     } else {
-      const url = `${this.utilService.evalApiUrl()}/ui/modules/system-configurations/${this.data?.parentOid}/attributes/${this.data?.oid}`;
+      const url = `${this.utilService.evalApiUrl()}/ui/modules/system-configurations/${
+        this.data?.parentOid
+      }/attributes/${this.data?.oid}`;
       this.http
         .put(url, {
           key: this.keyStr,
           value: this.getValue(),
           description: this.description,
           appKey: this.appKey,
-          companyLink: this.companyLink
+          companyLink: this.companyLink,
         })
         .subscribe({
           next: (_) => {
@@ -146,48 +158,50 @@ export class SystemConfigurationAttributeComponent implements OnInit {
     }
   }
 
-  setCompany(companyLink: number|null) {
-    let found = this.companies.find(company => {
+  setCompany(companyLink: number | null) {
+    let found = this.companies.find((company) => {
       if (company.oid.length > 0) {
-        return (company.oid as string).split(".")[1] == companyLink?.toString()
+        return (company.oid as string).split('.')[1] == companyLink?.toString();
       }
-      return false
-    })
+      return false;
+    });
     if (found) {
-      this.company = found
+      this.company = found;
     }
   }
 
   get companyLink() {
     if (this.company && this.company?.oid.length > 0) {
-      return (this.company.oid as string).split(".")[1] 
+      return (this.company.oid as string).split('.')[1];
     } else {
-      return null
+      return null;
     }
   }
 
   loadKeys(event: AutoCompleteCompleteEvent) {
-    const url = `${this.utilService.evalApiUrl()}/ui/modules/system-configurations/${this.data?.parentOid}/attributes`;
+    const url = `${this.utilService.evalApiUrl()}/ui/modules/system-configurations/${
+      this.data?.parentOid
+    }/attributes`;
     this.http.get<any>(url).subscribe({
-      next: keys => this.keys = keys
-    })
+      next: (keys) => (this.keys = keys),
+    });
   }
 
   onKeySelect(value: any) {
     this.type = this.key.type;
     this.description = this.key.description;
-    this.setValue(this.key.defaultValue)
+    this.setValue(this.key.defaultValue);
   }
 
   onKeyBlur(event: Event) {
-    if (typeof this.key == "string") {
-      this.type = 'UNDEFINED'
+    if (typeof this.key == 'string') {
+      this.type = 'UNDEFINED';
     } else {
       this.type = this.key.type;
     }
   }
 
   get keyStr(): string {
-    return typeof this.key == "string" ? this.key : this.key.key
+    return typeof this.key == 'string' ? this.key : this.key.key;
   }
 }

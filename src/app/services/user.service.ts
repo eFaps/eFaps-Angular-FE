@@ -38,6 +38,6 @@ export class UserService {
 
   getCompanies(): Observable<Company[]> {
     const url = `${this.utilService.evalApiUrl()}/ui/user/companies`;
-    return this.http.get<Company[]>(url)
+    return this.http.get<Company[]>(url);
   }
 }

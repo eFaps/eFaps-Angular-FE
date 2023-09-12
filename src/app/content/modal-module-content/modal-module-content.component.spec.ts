@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { DynamicDialogConfig } from 'primeng/dynamicdialog';
 
 import { ModalModuleContentComponent } from './modal-module-content.component';
 
@@ -9,6 +10,14 @@ describe('ModalModuleContentComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [ModalModuleContentComponent],
+      providers: [
+        {
+          provide: DynamicDialogConfig,
+          useValue: {
+            data: {},
+          },
+        },
+      ],
     });
     fixture = TestBed.createComponent(ModalModuleContentComponent);
     component = fixture.componentInstance;
