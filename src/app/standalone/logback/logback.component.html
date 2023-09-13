@@ -1,0 +1,32 @@
+<div class="p-dialog-content">
+    <p-table [value]="loggers" [tableStyle]="{ 'min-width': '50rem' }" dataKey="name" (onEditComplete)="afterEdit($event)">
+        <ng-template pTemplate="header">
+            <tr>
+                <th>Logger</th>
+                <th>Effective Level</th>
+                <th>Level</th>
+                <th>Appender</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-logger let-editing="editing">
+            <tr>
+                <td>{{ logger.name }}</td>
+                <td>{{ logger.effectiveLevel }}</td>
+                <td [pEditableColumn]="logger" [pEditableColumnField]="'level'">
+                    <p-cellEditor>
+                        <ng-template pTemplate="input">
+                            <p-dropdown [options]="levels" appendTo="body" [(ngModel)]="logger.level" [style]="{'width':'100%'}"></p-dropdown>
+                        </ng-template>
+                        <ng-template pTemplate="output">
+                            {{ logger.level }}
+                        </ng-template>
+                    </p-cellEditor>    
+                </td>
+                <td>{{ logger.appender }}</td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>
+<div class="p-dialog-footer">
+    <p-button label="Update" styleClass="p-button-warning" (click)="submit()"></p-button>
+</div>

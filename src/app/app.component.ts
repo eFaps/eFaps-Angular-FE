@@ -7,7 +7,9 @@ import { environment } from 'src/environments/environment';
 
 import { default as translation } from '../assets/es.json';
 import { ModalContentComponent } from './content/modal-content/modal-content.component';
+import { ModalModuleContentComponent } from './content/modal-module-content/modal-module-content.component';
 import { SearchContentComponent } from './content/search-content/search-content.component';
+import { isOutline } from './model/content';
 import { ResultElement, SearchResult } from './model/index-search';
 import { MenuEntry } from './model/menu';
 import { Company, User } from './model/user';
@@ -161,12 +163,24 @@ export class AppComponent implements OnInit {
     if (item.action.modal) {
       this.contentService.getContentWithCmd('none', item.id).subscribe({
         next: (outline) => {
-          const dialogRef = this.dialogService.open(ModalContentComponent, {
-            data: {
-              item,
-              outline,
-            },
-          });
+          if (isOutline(outline)) {
+            const dialogRef = this.dialogService.open(ModalContentComponent, {
+              data: {
+                item,
+                outline,
+              },
+            });
+          } else {
+            const dialogRef = this.dialogService.open(
+              ModalModuleContentComponent,
+              {
+                data: {
+                  item,
+                  uimodule: outline,
+                },
+              }
+            );
+          }
         },
       });
     } else {

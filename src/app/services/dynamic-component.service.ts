@@ -33,6 +33,13 @@ export class DynamicComponentService {
           ref.setInput('data', data);
         });
         break;
+      case 'Logback':
+        import('../standalone/logback/logback.component').then((m) => {
+          const ref = viewContainerRef.createComponent(m.LogbackComponent);
+          ref.setInput('uimodule', uimodule);
+          ref.setInput('data', data);
+        });
+        break;
     }
   }
 }
