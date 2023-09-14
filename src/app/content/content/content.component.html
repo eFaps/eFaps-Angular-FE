@@ -1,6 +1,6 @@
 <p-toolbar class="toolbar">
     <div class="p-toolbar-group-start">
-        <ng-container *ngIf="showSections">
+        <ng-container *ngIf="activeIndex==0">
             <p-menu #menu [model]="menuItems" [popup]="true"></p-menu>
             <p-button *ngIf="menuItems.length > 0" (click)="menu.toggle($event)" icon="pi pi-bars"></p-button>
         </ng-container>
@@ -17,7 +17,7 @@
         </p-tabPanel>
     </p-tabView>
 </div>
-<app-classification-display *ngIf="showSections && classifications" [classifications]="classifications"></app-classification-display>
+<app-classification-display *ngIf="activeIndex==0 && classifications" [classifications]="classifications"></app-classification-display>
 <app-sections *ngIf="activeIndex==0" [sections]="sections"></app-sections>
 <router-outlet name="contentOutlet"></router-outlet>
 <p-confirmDialog></p-confirmDialog>

@@ -26,7 +26,6 @@ export class ContentComponent implements OnInit {
   mainHeader: string = '';
   sections: Section[] = [];
   activeItem: MenuItem | undefined = undefined;
-  showSections = true;
   classifications: Classification[] | undefined;
 
   activeIndex: number = 0;
