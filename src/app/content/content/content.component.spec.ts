@@ -5,7 +5,7 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { DialogModule } from 'primeng/dialog';
 import { DialogService } from 'primeng/dynamicdialog';
 import { MenuModule } from 'primeng/menu';
-import { TabMenuModule } from 'primeng/tabmenu';
+import { TabViewModule } from 'primeng/tabview';
 import { ToolbarModule } from 'primeng/toolbar';
 
 import { SectionsComponent } from '../sections/sections.component';
@@ -22,7 +22,7 @@ describe('ContentComponent', () => {
         RouterTestingModule,
         HttpClientTestingModule,
         ToolbarModule,
-        TabMenuModule,
+        TabViewModule,
         ConfirmDialogModule,
         MenuModule,
       ],
