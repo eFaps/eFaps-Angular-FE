@@ -21,6 +21,7 @@ import { MenuService } from './services/menu.service';
 import { SearchService } from './services/search.service';
 import { UserService } from './services/user.service';
 import { CompanyChooserComponent } from './standalone/company-chooser/company-chooser.component';
+import { KeycloakService } from 'keycloak-angular';
 
 @Component({
   selector: 'app-root',
@@ -45,6 +46,7 @@ export class AppComponent implements OnInit {
     private primengConfig: PrimeNGConfig,
     private dialogService: DialogService,
     private loaderService: LoaderService,
+    private keycloakService: KeycloakService,
     private menuService: MenuService,
     private userService: UserService,
     private execService: ExecService,
@@ -235,5 +237,9 @@ export class AppComponent implements OnInit {
         restore: true,
       },
     });
+  }
+
+  signOut() {
+    this.keycloakService.logout()
   }
 }

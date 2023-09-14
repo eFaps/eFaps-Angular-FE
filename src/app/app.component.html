@@ -23,13 +23,17 @@
                             {{user?.firstName}} {{user?.lastName}}
                         </div>
                         <p-divider></p-divider>
-                        <div>Version: {{version}}</div>
+                        <div class="infoOverlay">Version: {{version}}</div>
                         <p-divider></p-divider>
                         <div *ngIf="showCompanySelector" class="companies">
                             <p-button icon="pi pi-building" (click)="switchCompany()"></p-button>
                         </div>
                         <p-divider></p-divider>
                         <app-theme-chooser></app-theme-chooser>
+                        <p-divider></p-divider>
+                        <div class="infoOverlay">
+                            <p-button label="Sign out" icon="pi pi-sign-out" (click)="signOut()"></p-button>
+                        </div>
                     </ng-template>
                 </p-overlayPanel>
             </div>
