@@ -1,6 +1,7 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
+import { KeycloakService } from 'keycloak-angular';
 import { MessageService } from 'primeng/api';
 import { MenubarModule } from 'primeng/menubar';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
@@ -19,7 +20,10 @@ describe('AppComponent', () => {
         OverlayPanelModule,
       ],
       declarations: [AppComponent],
-      providers: [{ provide: MessageService, useValue: {} }],
+      providers: [
+        { provide: MessageService, useValue: {} },
+        { provide: KeycloakService, useValue: {} },
+      ],
     })
   );
 

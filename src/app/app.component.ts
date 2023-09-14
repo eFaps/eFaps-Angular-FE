@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { KeycloakService } from 'keycloak-angular';
 import { MenuItem, PrimeNGConfig } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
 import { OverlayPanel } from 'primeng/overlaypanel';
@@ -21,7 +22,6 @@ import { MenuService } from './services/menu.service';
 import { SearchService } from './services/search.service';
 import { UserService } from './services/user.service';
 import { CompanyChooserComponent } from './standalone/company-chooser/company-chooser.component';
-import { KeycloakService } from 'keycloak-angular';
 
 @Component({
   selector: 'app-root',
@@ -240,6 +240,6 @@ export class AppComponent implements OnInit {
   }
 
   signOut() {
-    this.keycloakService.logout()
+    this.keycloakService.logout();
   }
 }
