@@ -141,9 +141,10 @@ export class TableComponent implements OnInit {
         if (execResponse.reload) {
           this.loadData();
         }
-      },error: _ => {
-        this.selectedElements = []
-      }
+      },
+      error: (_) => {
+        this.selectedElements = [];
+      },
     });
   }
 

@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ConfirmationService, MenuItem } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
+import { TabMenu } from 'primeng/tabmenu';
+import { TabViewChangeEvent } from 'primeng/tabview';
 import { Classification } from 'src/app/model/classification';
 import { Content, Section, isOutline } from 'src/app/model/content';
 import { MenuEntry } from 'src/app/model/menu';
@@ -19,7 +21,7 @@ import { ModalModuleContentComponent } from '../modal-module-content/modal-modul
 })
 export class ContentComponent implements OnInit {
   oid: string | undefined;
-  tabs: MenuItem[] = [];
+  tabs: MenuEntry[] = [];
   menuItems: MenuItem[] = [];
   mainHeader: string = '';
   sections: Section[] = [];
@@ -27,7 +29,10 @@ export class ContentComponent implements OnInit {
   showSections = true;
   classifications: Classification[] | undefined;
 
+  activeIndex: number = 0;
+
   constructor(
+    private changeDetectorRef: ChangeDetectorRef,
     private router: Router,
     private route: ActivatedRoute,
     private confirmationService: ConfirmationService,
@@ -36,7 +41,7 @@ export class ContentComponent implements OnInit {
     private execService: ExecService
   ) {
     // work arround to force scrollable
-    this.tabs = Array.from({ length: 50 }, (_, i) => ({ label: '' }));
+    //this.tabs = Array.from({ length: 50 }, (_, i) => ({ label: '' }));
   }
 
   ngOnInit(): void {
@@ -50,11 +55,11 @@ export class ContentComponent implements OnInit {
     this.contentService.getContent(this.oid!!).subscribe({
       next: (val) => {
         if ('nav' in val) {
-          //const content = val as Content;
-          this.tabs = val.nav.map((item, index) =>
-            this.getTabItem(item, index)
-          );
-          this.activeItem = this.tabs[0];
+          this.activeIndex = 0;
+          this.tabs = [];
+          this.changeDetectorRef.detectChanges();
+
+          this.tabs = val.nav;
           this.menuItems = val.outline.menu
             ? val.outline.menu.map((item) => this.getMenuItem(item))
             : [];
@@ -62,17 +67,14 @@ export class ContentComponent implements OnInit {
           this.sections = val.outline.sections;
           this.classifications = val.outline.classifications;
           if (val.selected != this.tabs[0].id) {
-            var defaultItem = this.tabs.find((item) => {
-              return item.id == val.selected;
+            let navIndex;
+            this.tabs.forEach((item, index) => {
+              if (item.id == val.selected) {
+                navIndex = index;
+              }
             });
-            if (defaultItem) {
-              this.showSections = false;
-              const cmds = ['content', this.oid, ...defaultItem.routerLink];
-              const url = this.router.createUrlTree(cmds, {
-                queryParams: defaultItem.queryParams,
-              });
-              this.router.navigateByUrl(url.toString());
-              this.activeItem = defaultItem;
+            if (navIndex) {
+              this.navigate(navIndex);
             }
           }
         } else {
@@ -94,40 +96,17 @@ export class ContentComponent implements OnInit {
     };
   }
 
-  getTabItem(item: MenuEntry, index: number): MenuItem {
-    return {
-      id: item.id,
-      label: index == 0 ? undefined : item.label,
-      icon: index == 0 ? 'pi pi-fw pi-map-marker' : undefined,
-      routerLink: index == 0 ? undefined : this.evalRouterLink(item),
-      command:
-        index == 0
-          ? (event) => {
-              this.mainClick();
-            }
-          : (event) => {
-              this.showSections = false;
-            },
-      queryParams: index == 0 ? undefined : { oid: this.oid },
-    };
-  }
-
   evalRouterLink(item: MenuEntry): any | undefined {
     if (item.action) {
       switch (item.action.type) {
         case 'GRID':
-          return [{ outlets: { contentOutlet: ['table', item.id] } }];
+          return { outlets: { contentOutlet: ['table', item.id] } };
         case 'FORM':
-          return [{ outlets: { contentOutlet: ['form', item.id] } }];
+          return { outlets: { contentOutlet: ['form', item.id] } };
         default:
       }
     }
     return undefined;
-  }
-
-  mainClick() {
-    this.router.navigate(['../../content', this.oid]);
-    this.showSections = true;
   }
 
   evalAction(item: MenuEntry): ((event?: any) => void) | undefined {
@@ -203,6 +182,21 @@ export class ContentComponent implements OnInit {
           }
         },
       });
+    }
+  }
+
+  onTabChange(event: TabViewChangeEvent) {
+    this.navigate(event.index);
+  }
+
+  navigate(index: number) {
+    if (index > 0) {
+      const link = this.evalRouterLink(this.tabs[index]);
+      this.router.navigate(['../../content', this.oid, link], {
+        queryParams: { oid: this.oid },
+      });
+    } else {
+      this.router.navigate(['../../content', this.oid]);
     }
   }
 }

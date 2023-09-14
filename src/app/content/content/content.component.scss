@@ -6,3 +6,7 @@
 .tabs {
    width: 100%;
 }
+
+::ng-deep .p-tabview-panels {
+   display: none;
+}
