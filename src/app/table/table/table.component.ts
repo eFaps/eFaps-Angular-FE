@@ -67,6 +67,7 @@ export class TableComponent implements OnInit {
   }
 
   loadData() {
+    this.selectedElements = [];
     this.tableService.getTable(this.id!!, this.oid).subscribe({
       next: (val) => {
         this.title = val.header;
@@ -140,7 +141,9 @@ export class TableComponent implements OnInit {
         if (execResponse.reload) {
           this.loadData();
         }
-      },
+      },error: _ => {
+        this.selectedElements = []
+      }
     });
   }
 
