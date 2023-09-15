@@ -53,6 +53,7 @@ export interface FormItem {
   ref?: string;
   required?: boolean;
   updateRef?: string;
+  navRef?: string;
 }
 
 export interface HeadingSection extends Section {

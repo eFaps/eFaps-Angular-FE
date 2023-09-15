@@ -5,6 +5,7 @@ import {
   ViewChild,
   ViewContainerRef,
 } from '@angular/core';
+import { Router } from '@angular/router';
 import { DialogService } from 'primeng/dynamicdialog';
 import { UploadEvent } from 'primeng/fileupload';
 import { FormItem } from 'src/app/model/content';
@@ -48,6 +49,7 @@ export class FormElementComponent implements OnInit {
   vcr!: ViewContainerRef;
 
   constructor(
+    private router: Router,
     private dialogService: DialogService,
     private valueService: ValueService,
     private autoCompleteService: AutoCompleteService,
@@ -258,5 +260,9 @@ export class FormElementComponent implements OnInit {
       },
       maximizable: true,
     });
+  }
+
+  followLink() {
+    this.router.navigate(['..', 'content', this._formItem?.navRef]);
   }
 }

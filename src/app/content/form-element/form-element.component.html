@@ -33,7 +33,8 @@
                 (blur)="fieldUpdate()" />
         </ng-container>
         <ng-container *ngSwitchCase="'TEXTAREA'">
-            <textarea rows="5" cols="30" pInputTextarea  #textArea [(ngModel)]="textareaValue" (keyup)="onKey(textArea.value)" (blur)="fieldUpdate()" ></textarea>    
+            <textarea rows="5" cols="30" pInputTextarea #textArea [(ngModel)]="textareaValue"
+                (keyup)="onKey(textArea.value)" (blur)="fieldUpdate()"></textarea>
         </ng-container>
         <ng-container *ngSwitchCase="'SNIPPLET'">
             <div class="snipplet" [innerHtml]="snippletValue | safeHtml"></div>
@@ -61,8 +62,8 @@
         </ng-container>
         <ng-container *ngSwitchCase="'CHECKBOX'">
             <div *ngFor="let option of formItem?.options" class="field-checkbox">
-                <p-checkbox name="group" [label]="option.label" [value]="option.value"
-                    [(ngModel)]="checkboxValue" (onChange)="changeCheckbox($event.checked)"></p-checkbox>
+                <p-checkbox name="group" [label]="option.label" [value]="option.value" [(ngModel)]="checkboxValue"
+                    (onChange)="changeCheckbox($event.checked)"></p-checkbox>
             </div>
         </ng-container>
         <ng-container *ngSwitchCase="'BUTTON'">
@@ -72,6 +73,10 @@
             <p-button icon="pi pi-bookmark" styleClass="p-button-sm p-button-secondary" (click)="classSel()"></p-button>
         </ng-container>
         <ng-container *ngSwitchDefault>
+            <div *ngIf="formItem?.navRef != null" class="navRef">
+                <p-button icon="pi pi-link" styleClass="p-button-rounded p-button-outlined" (click)="followLink()"
+                    [style]="{ width:'2rem', height: '2rem' }"></p-button>
+            </div>
             {{readOnlyValue}}
         </ng-container>
         <ng-template #dynamicComponent></ng-template>
