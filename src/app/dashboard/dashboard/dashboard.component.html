@@ -4,6 +4,6 @@
 <div class="steps-wrapper" *ngIf="!editMode">
     <p-steps [model]="steps" [readonly]="false" [(activeIndex)]="activeStepIdx" (activeIndexChange)="onActiveStepChange($event)"></p-steps>
 </div>
-<div class="btn">
+<div class="btn" *ngIf="!deactivated">
     <p-button [icon]="buttonIcon" [styleClass]="buttonClass" (click)="toggleEditMode()"></p-button>
 </div>
