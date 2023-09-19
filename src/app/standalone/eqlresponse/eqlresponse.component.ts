@@ -15,6 +15,8 @@ export class EQLResponseComponent {
 
   cols: any[] = [];
   elements: any[] = [];
+  simpleResponse: string | undefined
+  ci: any | undefined
 
   @Input()
   set fieldCmdResp(fieldCmdResp: FieldCommandResponse) {
@@ -32,6 +34,11 @@ export class EQLResponseComponent {
           });
           this.elements.push(row);
         });
+      } else if (typeof result === "object" && "id" in result) {
+        // CI response
+        this.simpleResponse = JSON.stringify(result, null, 2)
+      } else {
+        this.simpleResponse = result;
       }
     }
   }
