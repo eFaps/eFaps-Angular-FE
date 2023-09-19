@@ -7,6 +7,7 @@ import { Outline, Section } from 'src/app/model/content';
 import { MenuEntry } from 'src/app/model/menu';
 import { ContentService } from 'src/app/services/content.service';
 import { ValueService } from 'src/app/services/value.service';
+
 import { ModalContentComponent } from '../modal-content/modal-content.component';
 
 @Component({
@@ -20,7 +21,7 @@ export class FormContentComponent implements OnInit {
   outline: Outline | undefined;
   sections: Section[] = [];
   menuItems: MenuItem[] = [];
-  
+
   constructor(
     valueService: ValueService,
     private route: ActivatedRoute,
@@ -49,8 +50,8 @@ export class FormContentComponent implements OnInit {
           this.outline = outline;
           this.sections = outline.sections;
           this.menuItems = outline.menu
-          ? outline.menu.map((item) => this.getMenuItem(item))
-          : [];
+            ? outline.menu.map((item) => this.getMenuItem(item))
+            : [];
         }
       },
     });
@@ -64,7 +65,7 @@ export class FormContentComponent implements OnInit {
         item.children && item.children.length > 0
           ? item.children.map((item) => this.getMenuItem(item))
           : undefined,
-        command: this.evalAction(item),
+      command: this.evalAction(item),
     };
   }
 
@@ -82,20 +83,20 @@ export class FormContentComponent implements OnInit {
     if (item.action.modal) {
       this.contentService.getContentWithCmd(this.oid!!, item.id).subscribe({
         next: (outline) => {
-            const dialogRef = this.dialogService.open(ModalContentComponent, {
-              data: {
-                item,
-                outline,
-              },
-            });
-            dialogRef.onClose.subscribe({
-              next: (execResponse) => {
-                if (execResponse != null && execResponse.reload) {
-                  this.loadData();
-                }
-              },
-            });
-          },
+          const dialogRef = this.dialogService.open(ModalContentComponent, {
+            data: {
+              item,
+              outline,
+            },
+          });
+          dialogRef.onClose.subscribe({
+            next: (execResponse) => {
+              if (execResponse != null && execResponse.reload) {
+                this.loadData();
+              }
+            },
+          });
+        },
       });
     }
   }

@@ -17,8 +17,8 @@ export class DashboardComponent implements OnInit {
   steps: MenuItem[] = [];
   activeStepIdx: number = 0;
   deactivated = false;
-  
-  constructor(private dashboardService: DashboardService) { }
+
+  constructor(private dashboardService: DashboardService) {}
 
   ngOnInit(): void {
     this.dashboardService.getDashboard().subscribe({

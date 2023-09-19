@@ -57,7 +57,7 @@ export class FormElementComponent implements OnInit {
     private fieldCommandService: FieldCommandService,
     private dynamicComponentService: DynamicComponentService,
     private utilService: UtilService
-  ) { }
+  ) {}
   ngOnInit(): void {
     this.valueService.update.subscribe({
       next: (entry) => {
@@ -259,12 +259,14 @@ export class FormElementComponent implements OnInit {
     this.router.navigate(['..', 'content', this._formItem?.navRef]);
   }
 
-
   updateValue(value: any) {
     switch (this.formItem?.type) {
-      case "INPUT":
-        if (typeof value == "string" && (value as string).startsWith("new Array")) {
-          this.convertToDropdown(value)
+      case 'INPUT':
+        if (
+          typeof value == 'string' &&
+          (value as string).startsWith('new Array')
+        ) {
+          this.convertToDropdown(value);
         } else {
           this.readOnlyValue = value;
         }
@@ -275,22 +277,21 @@ export class FormElementComponent implements OnInit {
   }
 
   convertToDropdown(jsString: string) {
-    const regex = /\s*new\sArray\s*\((.*)\)/
-    const innerRegex = /['"](\w+)['"]/
+    const regex = /\s*new\sArray\s*\((.*)\)/;
+    const innerRegex = /['"](\w+)['"]/;
     const result = jsString.match(regex);
     if (result != null) {
-
       let item = this.formItem!!;
-      item.type = "DROPDOWN"
-      item.options = []
-      const entries = result[1].split(",")
-      const defVal = entries[0].match(innerRegex)![1]
-            
+      item.type = 'DROPDOWN';
+      item.options = [];
+      const entries = result[1].split(',');
+      const defVal = entries[0].match(innerRegex)![1];
+
       for (let i = 1; i < entries.length; i = i + 2) {
         item.options.push({
           label: entries[i + 1].match(innerRegex)![1],
-          value: entries[i].match(innerRegex)![1]
-        })
+          value: entries[i].match(innerRegex)![1],
+        });
       }
 
       this.dropdownValue = defVal;
