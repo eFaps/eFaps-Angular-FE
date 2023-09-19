@@ -48,6 +48,15 @@ p-dropdown {
     line-height: 1rem;
 }
 
+::ng-deep .p-fileupload-row  {
+    div:first-child {
+        display: none;
+    }
+    div:nth-child(2) {
+        width: unset;
+    }
+}
+
 .snipplet {
 
     ::ng-deep table {
