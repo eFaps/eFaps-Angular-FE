@@ -5,13 +5,15 @@ import { ButtonModule } from 'primeng/button';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { MenuModule } from 'primeng/menu';
 import { MenubarModule } from 'primeng/menubar';
+import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { TreeTableModule } from 'primeng/treetable';
 
+import { ColumnComponent } from './column/column.component';
 import { StructureBrowserRoutingModule } from './structure-browser-routing.module';
 import { StructureBrowserComponent } from './structure-browser/structure-browser.component';
 
 @NgModule({
-  declarations: [StructureBrowserComponent],
+  declarations: [StructureBrowserComponent, ColumnComponent],
   imports: [
     CommonModule,
     StructureBrowserRoutingModule,
@@ -22,6 +24,7 @@ import { StructureBrowserComponent } from './structure-browser/structure-browser
     MenuModule,
     MenubarModule,
     ConfirmDialogModule,
+    OverlayPanelModule,
   ],
 })
 export class StructureBrowserModule {}

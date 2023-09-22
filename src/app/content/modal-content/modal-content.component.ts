@@ -17,6 +17,7 @@ export class ModalContentComponent implements OnInit {
   callingMenu: MenuEntry;
   values: Map<String, any> | undefined;
   classifications: Classification[] | undefined;
+  parentOid: string | undefined;
 
   constructor(
     config: DynamicDialogConfig,
@@ -28,6 +29,7 @@ export class ModalContentComponent implements OnInit {
     this.valueService.reset();
     this.outline = config.data.outline;
     this.callingMenu = config.data.item;
+    this.parentOid = config.data.parentOid;
     config.header = this.outline.header;
     config.maximizable = true;
     if (this.outline.classifications) {
@@ -51,6 +53,9 @@ export class ModalContentComponent implements OnInit {
     });
     if (this.outline.oid != 'none') {
       this.valueService.addEntry({ name: 'eFapsOID', value: this.outline.oid });
+    }
+    if (this.parentOid != null) {
+      this.valueService.addEntry({ name: 'eFapsParentOID', value: this.parentOid });
     }
     this.classificationService.classifications.subscribe({
       next: (classifications) => {

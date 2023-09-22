@@ -157,6 +157,7 @@ export class TableComponent implements OnInit {
               data: {
                 item,
                 outline,
+                parentOid: this.oid
               },
             });
             dialogRef.onClose.subscribe({

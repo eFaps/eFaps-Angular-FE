@@ -1,7 +1,7 @@
 <p-confirmDialog></p-confirmDialog>
 <div #wrapperDiv style="height: calc(100vh - 100px)">
-    <p-treeTable #dt [scrollable]="true" [columns]="cols" [value]="elements" [selectionMode]="selectionMode" 
-    [(selection)]="selectedElements">
+    <p-treeTable #dt [scrollable]="true" [columns]="cols" [value]="elements" [selectionMode]="selectionMode"
+        [(selection)]="selectedElements">
         <ng-template pTemplate="caption">
             <div class="table-header">
                 <div class="left">
@@ -35,9 +35,12 @@
         <ng-template pTemplate="body" let-rowNode let-rowData="rowData" let-columns="columns">
             <tr>
                 <td *ngFor="let col of columns; let i = index">
-                    <p-treeTableCheckbox [value]="rowNode" *ngIf="selectionMode=='checkbox' && i === 0"></p-treeTableCheckbox>
-                    <p-treeTableToggler [rowNode]="rowNode" *ngIf="i === togglerColIdx"></p-treeTableToggler>
-                    {{ rowData[col.field] }}
+                    <div class="columnWrapper">
+                        <p-treeTableCheckbox [value]="rowNode"
+                            *ngIf="selectionMode=='checkbox' && i === 0"></p-treeTableCheckbox>
+                        <p-treeTableToggler [rowNode]="rowNode" *ngIf="i === togglerColIdx"></p-treeTableToggler>
+                        <app-column [rowData]="rowData" [column]="col"></app-column>
+                    </div>
                 </td>
             </tr>
         </ng-template>

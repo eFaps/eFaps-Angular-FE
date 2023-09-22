@@ -72,7 +72,9 @@ export class StructureBrowserComponent implements OnInit {
         this.menuItems = val.menu
           ? val.menu.map((item) => this.toMenuItem(item))
           : [];
-        const toggleIndex = this.cols.findIndex(col => {return col.field === val.toggleColumn})   
+        const toggleIndex = this.cols.findIndex((col) => {
+          return col.field === val.toggleColumn;
+        });
         this.togglerColIdx = toggleIndex > -1 ? toggleIndex : 0;
       },
     });
