@@ -1,0 +1,13 @@
+.p-datatable-wrapper {
+    min-height: calc(100vh - 90px);
+  }
+  
+  .table-header {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    justify-content: space-between;
+    .left {
+      line-height: 3rem;
+    }
+  }

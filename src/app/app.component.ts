@@ -108,11 +108,11 @@ export class AppComponent implements OnInit {
   evalAction(item: MenuEntry): ((event?: any) => void) | undefined {
     switch (item.action.type) {
       case 'GRID':
-        return (event) => {
-          this.callGrid(event);
+        return (_event) => {
+          this.gridAction(item);
         };
       case 'EXEC':
-        return (event) => {
+        return (_event) => {
           this.execService.exec(item.id).subscribe({
             next: (_) => {
               console.log('run exec');
@@ -120,20 +120,27 @@ export class AppComponent implements OnInit {
           });
         };
       case 'FORM':
-        return (event) => {
+        return (_event) => {
           this.formAction(item);
         };
       case 'SEARCH':
-        return (event) => {
+        return (_event) => {
           this.searchAction(item);
         };
+      case  'STRBRWSR':
+        return (_event) => {
+          this.strctBrwsrAction(item);
+        }; 
     }
     return undefined;
   }
 
-  callGrid(event?: any) {
-    const menuItem = event.item as MenuItem;
-    this.router.navigate(['table', menuItem.id]);
+  strctBrwsrAction(item: MenuEntry) {
+    this.router.navigate(['strctbrws', item.id]);
+  }
+
+  gridAction(item: MenuEntry) {
+    this.router.navigate(['table', item.id]);
   }
 
   switchCompany() {

@@ -5,6 +5,12 @@ import { AuthGuard } from './guard/auth.guard';
 
 const routes: Routes = [
   {
+    path: 'strctbrws',
+    canActivate: [AuthGuard],
+    loadChildren: () =>
+      import('./structure-browser/structure-browser.module').then((m) => m.StructureBrowserModule),
+  },
+  {
     path: 'table',
     canActivate: [AuthGuard],
     loadChildren: () =>

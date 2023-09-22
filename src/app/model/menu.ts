@@ -8,7 +8,7 @@ export interface MenuEntry {
 export interface MenuAction {
   label?: string;
   modal: boolean;
-  type: null | 'SEARCH' | 'EXEC' | 'GRID' | 'FORM';
+  type: null | 'SEARCH' | 'EXEC' | 'GRID' | 'FORM' | 'STRBRWSR';
   verify?: Verifcation;
 }
 

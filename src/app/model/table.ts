@@ -12,3 +12,15 @@ export interface Column {
   field: string;
   ref?: boolean;
 }
+export interface StructureBrowser {
+  header: string;
+  columns: Column[];
+  values: StructureBrowserEntry[];
+  selectionMode: 'single' | 'multiple' | undefined;
+  menu: MenuEntry[];
+}
+
+export interface StructureBrowserEntry {
+  children: StructureBrowserEntry[];
+  values: any;
+}
