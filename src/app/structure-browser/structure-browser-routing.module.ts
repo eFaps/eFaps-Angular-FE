@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { StructureBrowserComponent } from './structure-browser/structure-browser.component';
+
 import { AuthGuard } from '../guard/auth.guard';
+import { StructureBrowserComponent } from './structure-browser/structure-browser.component';
 
 const routes: Routes = [
   {
@@ -14,6 +15,6 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class StructureBrowserRoutingModule { }
+export class StructureBrowserRoutingModule {}

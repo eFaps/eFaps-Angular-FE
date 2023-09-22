@@ -8,7 +8,9 @@ const routes: Routes = [
     path: 'strctbrws',
     canActivate: [AuthGuard],
     loadChildren: () =>
-      import('./structure-browser/structure-browser.module').then((m) => m.StructureBrowserModule),
+      import('./structure-browser/structure-browser.module').then(
+        (m) => m.StructureBrowserModule
+      ),
   },
   {
     path: 'table',

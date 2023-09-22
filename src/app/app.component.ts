@@ -127,10 +127,10 @@ export class AppComponent implements OnInit {
         return (_event) => {
           this.searchAction(item);
         };
-      case  'STRBRWSR':
+      case 'STRBRWSR':
         return (_event) => {
           this.strctBrwsrAction(item);
-        }; 
+        };
     }
     return undefined;
   }

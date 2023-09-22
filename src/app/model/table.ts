@@ -18,6 +18,7 @@ export interface StructureBrowser {
   values: StructureBrowserEntry[];
   selectionMode: 'single' | 'multiple' | undefined;
   menu: MenuEntry[];
+  toggleColumn?: string;
 }
 
 export interface StructureBrowserEntry {

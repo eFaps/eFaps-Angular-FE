@@ -1,19 +1,17 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { ButtonModule } from 'primeng/button';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { MenuModule } from 'primeng/menu';
+import { MenubarModule } from 'primeng/menubar';
+import { TreeTableModule } from 'primeng/treetable';
 
 import { StructureBrowserRoutingModule } from './structure-browser-routing.module';
 import { StructureBrowserComponent } from './structure-browser/structure-browser.component';
 
-import { TreeTableModule } from 'primeng/treetable';
-import { MenuModule } from 'primeng/menu';
-import { FormsModule } from '@angular/forms';
-import { ButtonModule } from 'primeng/button';
-import { MenubarModule } from 'primeng/menubar';
-
 @NgModule({
-  declarations: [
-    StructureBrowserComponent
-  ],
+  declarations: [StructureBrowserComponent],
   imports: [
     CommonModule,
     StructureBrowserRoutingModule,
@@ -23,6 +21,7 @@ import { MenubarModule } from 'primeng/menubar';
     ButtonModule,
     MenuModule,
     MenubarModule,
-  ]
+    ConfirmDialogModule,
+  ],
 })
-export class StructureBrowserModule { }
+export class StructureBrowserModule {}

@@ -1,5 +1,7 @@
+<p-confirmDialog></p-confirmDialog>
 <div #wrapperDiv style="height: calc(100vh - 100px)">
-    <p-treeTable #dt [scrollable]="true" [columns]="cols" [value]="elements">
+    <p-treeTable #dt [scrollable]="true" [columns]="cols" [value]="elements" [selectionMode]="selectionMode" 
+    [(selection)]="selectedElements">
         <ng-template pTemplate="caption">
             <div class="table-header">
                 <div class="left">
@@ -22,10 +24,9 @@
         </ng-template>
         <ng-template pTemplate="header" let-columns>
             <tr>
-                <th style="width: 4rem" *ngIf="selectionMode=='multiple'">
-                    <p-treeTableCheckbox></p-treeTableCheckbox>
-                </th>
-                <th [ttSortableColumn]="col.field" *ngFor="let col of columns" pResizableColumn>
+                <th [ttSortableColumn]="col.field" *ngFor="let col of columns;let i = index" pResizableColumn>
+                    <p-treeTableHeaderCheckbox *ngIf="selectionMode=='checkbox' && i === 0"></p-treeTableHeaderCheckbox>
+
                     {{ col.header }}
                     <p-treeTableSortIcon [field]="col.field"></p-treeTableSortIcon>
                 </th>
@@ -34,7 +35,8 @@
         <ng-template pTemplate="body" let-rowNode let-rowData="rowData" let-columns="columns">
             <tr>
                 <td *ngFor="let col of columns; let i = index">
-                    <p-treeTableToggler [rowNode]="rowNode" *ngIf="i === 0"></p-treeTableToggler>
+                    <p-treeTableCheckbox [value]="rowNode" *ngIf="selectionMode=='checkbox' && i === 0"></p-treeTableCheckbox>
+                    <p-treeTableToggler [rowNode]="rowNode" *ngIf="i === togglerColIdx"></p-treeTableToggler>
                     {{ rowData[col.field] }}
                 </td>
             </tr>
