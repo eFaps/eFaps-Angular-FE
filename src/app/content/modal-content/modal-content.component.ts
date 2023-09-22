@@ -55,7 +55,10 @@ export class ModalContentComponent implements OnInit {
       this.valueService.addEntry({ name: 'eFapsOID', value: this.outline.oid });
     }
     if (this.parentOid != null) {
-      this.valueService.addEntry({ name: 'eFapsParentOID', value: this.parentOid });
+      this.valueService.addEntry({
+        name: 'eFapsParentOID',
+        value: this.parentOid,
+      });
     }
     this.classificationService.classifications.subscribe({
       next: (classifications) => {
