@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { InputTextModule } from 'primeng/inputtext';
-import { MenuModule } from 'primeng/menu';
+import { TieredMenuModule } from 'primeng/tieredmenu';
 import { TableModule } from 'primeng/table';
 
 import { TableComponent } from './table.component';
@@ -20,7 +20,7 @@ describe('TableComponent', () => {
         HttpClientTestingModule,
         ConfirmDialogModule,
         TableModule,
-        MenuModule,
+        TieredMenuModule,
         InputTextModule,
         FormsModule,
       ],

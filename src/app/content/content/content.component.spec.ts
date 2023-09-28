@@ -4,12 +4,12 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { DialogModule } from 'primeng/dialog';
 import { DialogService } from 'primeng/dynamicdialog';
-import { MenuModule } from 'primeng/menu';
 import { TabViewModule } from 'primeng/tabview';
 import { ToolbarModule } from 'primeng/toolbar';
 
 import { SectionsComponent } from '../sections/sections.component';
 import { ContentComponent } from './content.component';
+import { TieredMenuModule } from 'primeng/tieredmenu';
 
 describe('ContentComponent', () => {
   let component: ContentComponent;
@@ -24,7 +24,7 @@ describe('ContentComponent', () => {
         ToolbarModule,
         TabViewModule,
         ConfirmDialogModule,
-        MenuModule,
+        TieredMenuModule,
       ],
       declarations: [ContentComponent, SectionsComponent],
       providers: [{ provide: DialogService, useValue: {} }],
