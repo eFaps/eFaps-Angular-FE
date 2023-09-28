@@ -18,7 +18,11 @@ import { ContentService } from './services/content.service';
 import { ExecService } from './services/exec.service';
 import { IndexSearchService } from './services/index-search.service';
 import { LoaderService } from './services/loader.service';
-import { MenuService } from './services/menu.service';
+import {
+  MenuActionProvider,
+  MenuService,
+  toMenuItem,
+} from './services/menu.service';
 import { SearchService } from './services/search.service';
 import { UserService } from './services/user.service';
 import { CompanyChooserComponent } from './standalone/company-chooser/company-chooser.component';
@@ -69,7 +73,9 @@ export class AppComponent implements OnInit {
         this.user = user;
         this.menuService.getMainMenu().subscribe({
           next: (items) => {
-            this.menuItems = items.map((item) => this.getMenuItem(item));
+            this.menuItems = items.map((item) =>
+              toMenuItem(item, this.actionProvider)
+            );
           },
         });
       },
@@ -93,19 +99,7 @@ export class AppComponent implements OnInit {
     return this._user;
   }
 
-  getMenuItem(item: MenuEntry): MenuItem {
-    return {
-      id: item.id,
-      label: item.label,
-      items:
-        item.children.length > 0
-          ? item.children.map((item) => this.getMenuItem(item))
-          : undefined,
-      command: this.evalAction(item),
-    };
-  }
-
-  evalAction(item: MenuEntry): ((event?: any) => void) | undefined {
+  actionProvider: MenuActionProvider = (item: MenuEntry) => {
     switch (item.action.type) {
       case 'GRID':
         return (_event) => {
@@ -133,7 +127,7 @@ export class AppComponent implements OnInit {
         };
     }
     return undefined;
-  }
+  };
 
   strctBrwsrAction(item: MenuEntry) {
     this.router.navigate(['strctbrws', item.id]);
@@ -157,7 +151,7 @@ export class AppComponent implements OnInit {
                 this.menuService.getMainMenu().subscribe({
                   next: (items) =>
                     (this.menuItems = items.map((item) =>
-                      this.getMenuItem(item)
+                      toMenuItem(item, this.actionProvider)
                     )),
                 });
               });

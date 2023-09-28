@@ -9,6 +9,7 @@ import { Content, Section, isOutline } from 'src/app/model/content';
 import { MenuEntry } from 'src/app/model/menu';
 import { ContentService } from 'src/app/services/content.service';
 import { ExecService } from 'src/app/services/exec.service';
+import { MenuActionProvider, toMenuItems } from 'src/app/services/menu.service';
 
 import { ModalContentComponent } from '../modal-content/modal-content.component';
 import { ModalModuleContentComponent } from '../modal-module-content/modal-module-content.component';
@@ -59,9 +60,7 @@ export class ContentComponent implements OnInit {
           this.changeDetectorRef.detectChanges();
 
           this.tabs = val.nav;
-          this.menuItems = val.outline.menu
-            ? val.outline.menu.map((item) => this.getMenuItem(item))
-            : [];
+          this.menuItems = toMenuItems(val.outline.menu, this.actionProvider);
           this.mainHeader = val.outline.header;
           this.sections = val.outline.sections;
           this.classifications = val.outline.classifications;
@@ -83,18 +82,6 @@ export class ContentComponent implements OnInit {
     });
   }
 
-  getMenuItem(item: MenuEntry): MenuItem {
-    return {
-      id: item.id,
-      label: item.label,
-      items:
-        item.children && item.children.length > 0
-          ? item.children.map((item) => this.getMenuItem(item))
-          : undefined,
-      command: this.evalAction(item),
-    };
-  }
-
   evalRouterLink(item: MenuEntry): any | undefined {
     if (item.action) {
       switch (item.action.type) {
@@ -108,7 +95,7 @@ export class ContentComponent implements OnInit {
     return undefined;
   }
 
-  evalAction(item: MenuEntry): ((event?: any) => void) | undefined {
+  actionProvider: MenuActionProvider = (item: MenuEntry) => {
     switch (item.action.type) {
       case 'EXEC':
         return (event) => {
@@ -140,7 +127,7 @@ export class ContentComponent implements OnInit {
         };
     }
     return undefined;
-  }
+  };
 
   formAction(item: MenuEntry) {
     if (item.action.modal) {

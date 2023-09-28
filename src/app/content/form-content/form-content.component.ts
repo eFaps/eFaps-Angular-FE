@@ -6,6 +6,7 @@ import { combineLatest } from 'rxjs';
 import { Outline, Section } from 'src/app/model/content';
 import { MenuEntry } from 'src/app/model/menu';
 import { ContentService } from 'src/app/services/content.service';
+import { MenuActionProvider, toMenuItems } from 'src/app/services/menu.service';
 import { ValueService } from 'src/app/services/value.service';
 
 import { ModalContentComponent } from '../modal-content/modal-content.component';
@@ -49,27 +50,13 @@ export class FormContentComponent implements OnInit {
         if ('sections' in outline) {
           this.outline = outline;
           this.sections = outline.sections;
-          this.menuItems = outline.menu
-            ? outline.menu.map((item) => this.getMenuItem(item))
-            : [];
+          this.menuItems = toMenuItems(outline.menu, this.actionProvider);
         }
       },
     });
   }
 
-  getMenuItem(item: MenuEntry): MenuItem {
-    return {
-      id: item.id,
-      label: item.label,
-      items:
-        item.children && item.children.length > 0
-          ? item.children.map((item) => this.getMenuItem(item))
-          : undefined,
-      command: this.evalAction(item),
-    };
-  }
-
-  evalAction(item: MenuEntry): ((event?: any) => void) | undefined {
+  actionProvider: MenuActionProvider = (item: MenuEntry) => {
     switch (item.action.type) {
       case 'FORM':
         return (event) => {
@@ -77,7 +64,7 @@ export class FormContentComponent implements OnInit {
         };
     }
     return undefined;
-  }
+  };
 
   formAction(item: MenuEntry) {
     if (item.action.modal) {

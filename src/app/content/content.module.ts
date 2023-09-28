@@ -20,6 +20,7 @@ import { RadioButtonModule } from 'primeng/radiobutton';
 import { TableModule } from 'primeng/table';
 import { TabMenuModule } from 'primeng/tabmenu';
 import { TabViewModule } from 'primeng/tabview';
+import { TieredMenuModule } from 'primeng/tieredmenu';
 import { ToolbarModule } from 'primeng/toolbar';
 import { TreeModule } from 'primeng/tree';
 
@@ -83,6 +84,7 @@ import { TableSectionComponent } from './table-section/table-section.component';
     TreeModule,
     ChipModule,
     TabViewModule,
+    TieredMenuModule,
   ],
 })
 export class ContentModule {}

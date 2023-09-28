@@ -1,5 +1,5 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import {
   ConfirmationService,
   FilterMetadata,
@@ -15,6 +15,7 @@ import { isOutline } from 'src/app/model/content';
 import { MenuEntry } from 'src/app/model/menu';
 import { ContentService } from 'src/app/services/content.service';
 import { ExecService } from 'src/app/services/exec.service';
+import { MenuActionProvider, toMenuItems } from 'src/app/services/menu.service';
 import { SearchService } from 'src/app/services/search.service';
 import { TableService } from 'src/app/services/table.service';
 
@@ -75,38 +76,12 @@ export class TableComponent implements OnInit {
         this.elements = val.values;
         this.selectionMode = val.selectionMode;
         this.loading = false;
-        this.menuItems = this.getMenu(val.menu);
+        this.menuItems = toMenuItems(val.menu, this.actionProvider);
       },
     });
   }
 
-  getMenu(items: MenuEntry[]): MenuItem[] {
-    if (items != null) {
-      if (
-        items.length == 1 &&
-        items[0].children &&
-        items[0].children.length > 0
-      ) {
-        return items[0].children.map((item) => this.getMenuItem(item));
-      }
-      return items.map((item) => this.getMenuItem(item));
-    }
-    return [];
-  }
-
-  getMenuItem(item: MenuEntry): MenuItem {
-    return {
-      id: item.id,
-      label: item.label,
-      items:
-        item.children && item.children.length > 0
-          ? item.children.map((item) => this.getMenuItem(item))
-          : undefined,
-      command: this.evalAction(item),
-    };
-  }
-
-  evalAction(item: MenuEntry): ((event?: any) => void) | undefined {
+  actionProvider: MenuActionProvider = (item: MenuEntry) => {
     switch (item.action.type) {
       case 'EXEC':
         return (event) => {
@@ -124,7 +99,7 @@ export class TableComponent implements OnInit {
         };
     }
     return undefined;
-  }
+  };
 
   execAction(item: MenuEntry) {
     if (item.action.verify) {
