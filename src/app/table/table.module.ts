@@ -9,6 +9,7 @@ import { MenubarModule } from 'primeng/menubar';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { TableModule as primeTableModule } from 'primeng/table';
+import { TieredMenuModule } from 'primeng/tieredmenu';
 
 import { ColumnComponent } from './column/column.component';
 import { TableRoutingModule } from './table-routing.module';
@@ -28,6 +29,7 @@ import { TableComponent } from './table/table.component';
     InputTextModule,
     FormsModule,
     OverlayPanelModule,
+    TieredMenuModule,
   ],
 })
 export class TableModule {}

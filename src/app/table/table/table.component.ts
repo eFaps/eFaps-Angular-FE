@@ -75,11 +75,23 @@ export class TableComponent implements OnInit {
         this.elements = val.values;
         this.selectionMode = val.selectionMode;
         this.loading = false;
-        this.menuItems = val.menu
-          ? val.menu.map((item) => this.getMenuItem(item))
-          : [];
+        this.menuItems = this.getMenu(val.menu);
       },
     });
+  }
+
+  getMenu(items: MenuEntry[]): MenuItem[] {
+    if (items != null) {
+      if (
+        items.length == 1 &&
+        items[0].children &&
+        items[0].children.length > 0
+      ) {
+        return items[0].children.map((item) => this.getMenuItem(item));
+      }
+      return items.map((item) => this.getMenuItem(item));
+    }
+    return [];
   }
 
   getMenuItem(item: MenuEntry): MenuItem {
