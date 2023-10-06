@@ -5,11 +5,11 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { DialogModule } from 'primeng/dialog';
 import { DialogService } from 'primeng/dynamicdialog';
 import { TabViewModule } from 'primeng/tabview';
+import { TieredMenuModule } from 'primeng/tieredmenu';
 import { ToolbarModule } from 'primeng/toolbar';
 
 import { SectionsComponent } from '../sections/sections.component';
 import { ContentComponent } from './content.component';
-import { TieredMenuModule } from 'primeng/tieredmenu';
 
 describe('ContentComponent', () => {
   let component: ContentComponent;

@@ -8,6 +8,7 @@ import { RouteReuseStrategy } from '@angular/router';
 import { WebStorageModule } from '@efaps/ngx-store';
 import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
 import { MessageService } from 'primeng/api';
+import { BreadcrumbModule } from 'primeng/breadcrumb';
 import { ButtonModule } from 'primeng/button';
 import { DividerModule } from 'primeng/divider';
 import { DynamicDialogModule } from 'primeng/dynamicdialog';
@@ -49,6 +50,7 @@ registerLocaleData(localeEs, 'es');
     DividerModule,
     ThemeChooserComponent,
     WebStorageModule,
+    BreadcrumbModule,
   ],
   providers: [
     MessageService,

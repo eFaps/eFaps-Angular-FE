@@ -1,16 +1,18 @@
-import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ConfirmationService, MenuItem } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
-import { TabMenu } from 'primeng/tabmenu';
 import { TabViewChangeEvent } from 'primeng/tabview';
+import { Subscription } from 'rxjs';
 import { Classification } from 'src/app/model/classification';
-import { Content, Section, isOutline } from 'src/app/model/content';
+import { Section, isOutline } from 'src/app/model/content';
 import { MenuEntry } from 'src/app/model/menu';
 import { ContentService } from 'src/app/services/content.service';
 import { ExecService } from 'src/app/services/exec.service';
 import { MenuActionProvider, toMenuItems } from 'src/app/services/menu.service';
+import { TableComponent } from 'src/app/table/table/table.component';
 
+import { FormContentComponent } from '../form-content/form-content.component';
 import { ModalContentComponent } from '../modal-content/modal-content.component';
 import { ModalModuleContentComponent } from '../modal-module-content/modal-module-content.component';
 
@@ -20,7 +22,7 @@ import { ModalModuleContentComponent } from '../modal-module-content/modal-modul
   styleUrls: ['./content.component.scss'],
   providers: [ConfirmationService],
 })
-export class ContentComponent implements OnInit {
+export class ContentComponent implements OnInit, OnDestroy {
   oid: string | undefined;
   tabs: MenuEntry[] = [];
   menuItems: MenuItem[] = [];
@@ -30,6 +32,9 @@ export class ContentComponent implements OnInit {
   classifications: Classification[] | undefined;
 
   activeIndex: number = 0;
+  private subscribtions = new Subscription();
+
+  contentOutletId: string | undefined;
 
   constructor(
     private changeDetectorRef: ChangeDetectorRef,
@@ -39,9 +44,9 @@ export class ContentComponent implements OnInit {
     private dialogService: DialogService,
     private contentService: ContentService,
     private execService: ExecService
-  ) {
-    // work arround to force scrollable
-    //this.tabs = Array.from({ length: 50 }, (_, i) => ({ label: '' }));
+  ) {}
+  ngOnDestroy(): void {
+    this.subscribtions.unsubscribe();
   }
 
   ngOnInit(): void {
@@ -64,7 +69,14 @@ export class ContentComponent implements OnInit {
           this.mainHeader = val.outline.header;
           this.sections = val.outline.sections;
           this.classifications = val.outline.classifications;
-          if (val.selected != this.tabs[0].id) {
+          if (this.contentOutletId != null) {
+            const newIndex = this.tabs.findIndex((entry) => {
+              return entry.id == this.contentOutletId;
+            });
+            if (newIndex > -1) {
+              this.activeIndex = newIndex;
+            }
+          } else if (val.selected != this.tabs[0].id) {
             let navIndex;
             this.tabs.forEach((item, index) => {
               if (item.id == val.selected) {
@@ -183,6 +195,17 @@ export class ContentComponent implements OnInit {
       });
     } else {
       this.router.navigate(['../../content', this.oid]);
+    }
+  }
+
+  onActivate(event: any) {
+    if (event instanceof TableComponent) {
+      (event as TableComponent).idEmitter.subscribe({
+        next: (id: string) => {
+          this.contentOutletId = id;
+        },
+      });
+    } else if (event instanceof FormContentComponent) {
     }
   }
 }

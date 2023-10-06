@@ -19,5 +19,5 @@
 </div>
 <app-classification-display *ngIf="activeIndex==0 && classifications" [classifications]="classifications"></app-classification-display>
 <app-sections *ngIf="activeIndex==0" [sections]="sections"></app-sections>
-<router-outlet name="contentOutlet"></router-outlet>
+<router-outlet name="contentOutlet" (activate)="onActivate($event)"></router-outlet>
 <p-confirmDialog></p-confirmDialog>

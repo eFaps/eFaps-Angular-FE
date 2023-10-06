@@ -4,8 +4,8 @@ import { FormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { InputTextModule } from 'primeng/inputtext';
-import { TieredMenuModule } from 'primeng/tieredmenu';
 import { TableModule } from 'primeng/table';
+import { TieredMenuModule } from 'primeng/tieredmenu';
 
 import { TableComponent } from './table.component';
 

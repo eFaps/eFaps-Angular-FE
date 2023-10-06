@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import {
   ConfirmationService,
@@ -13,6 +13,7 @@ import { ModalModuleContentComponent } from 'src/app/content/modal-module-conten
 import { SearchContentComponent } from 'src/app/content/search-content/search-content.component';
 import { isOutline } from 'src/app/model/content';
 import { MenuEntry } from 'src/app/model/menu';
+import { BreadcrumbService } from 'src/app/services/breadcrumb.service';
 import { ContentService } from 'src/app/services/content.service';
 import { ExecService } from 'src/app/services/exec.service';
 import { MenuActionProvider, toMenuItems } from 'src/app/services/menu.service';
@@ -38,6 +39,8 @@ export class TableComponent implements OnInit {
   storageKey = 'temp';
   globalSearch = '';
 
+  idEmitter = new EventEmitter<string>();
+
   constructor(
     private route: ActivatedRoute,
     private confirmationService: ConfirmationService,
@@ -45,7 +48,8 @@ export class TableComponent implements OnInit {
     private contentService: ContentService,
     private tableService: TableService,
     private execService: ExecService,
-    private searchService: SearchService
+    private searchService: SearchService,
+    private breadcrumbService: BreadcrumbService
   ) {}
 
   ngOnInit(): void {
@@ -56,12 +60,12 @@ export class TableComponent implements OnInit {
         this.oid = parameters[0]['oid'];
         this.storageKey = this.id!!;
         this.loadData();
+        this.idEmitter.emit(this.id);
       }
     );
   }
 
   stateRestore(event: TableState) {
-    console.log(event);
     if (event.filters && event.filters['global']) {
       this.globalSearch = (event.filters['global'] as FilterMetadata).value;
     }
@@ -199,5 +203,11 @@ export class TableComponent implements OnInit {
         },
       });
     }
+  }
+
+  onNavEvent(event: any) {
+    this.breadcrumbService.addEntry({
+      label: this.title,
+    });
   }
 }

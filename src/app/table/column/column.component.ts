@@ -1,12 +1,12 @@
 import {
-  AfterViewInit,
   Component,
   ElementRef,
+  EventEmitter,
   Input,
+  Output,
   ViewChild,
 } from '@angular/core';
 import { Router } from '@angular/router';
-import { TooltipOptions } from 'primeng/api';
 import { Column } from 'src/app/model/table';
 
 @Component({
@@ -19,6 +19,8 @@ export class ColumnComponent {
   rowData: any | undefined;
   @Input()
   column: Column | undefined;
+  @Output()
+  navEvent = new EventEmitter();
 
   @ViewChild('overflowWrapper') overflowElement: ElementRef | undefined;
 
@@ -42,6 +44,7 @@ export class ColumnComponent {
   }
 
   followLink() {
+    this.navEvent.emit();
     const alternativeOid = this.rowData[this.column!!.field + '_AOID'];
     if (alternativeOid) {
       this.router.navigate(['content', alternativeOid]);

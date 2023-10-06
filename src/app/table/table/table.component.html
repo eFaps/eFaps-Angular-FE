@@ -42,7 +42,7 @@
                     <p-tableCheckbox [value]="rowData"></p-tableCheckbox>
                 </td>
                 <td *ngFor="let col of columns">
-                    <app-column [rowData]="rowData" [column]="col"></app-column>
+                    <app-column [rowData]="rowData" [column]="col" (navEvent)="onNavEvent($event)"></app-column>
                 </td>
             </tr>
         </ng-template>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { KeycloakService } from 'keycloak-angular';
 import { MenuItem, PrimeNGConfig } from 'primeng/api';
@@ -14,6 +14,7 @@ import { isOutline } from './model/content';
 import { ResultElement, SearchResult } from './model/index-search';
 import { MenuEntry } from './model/menu';
 import { Company, User } from './model/user';
+import { BreadcrumbService } from './services/breadcrumb.service';
 import { ContentService } from './services/content.service';
 import { ExecService } from './services/exec.service';
 import { IndexSearchService } from './services/index-search.service';
@@ -45,8 +46,11 @@ export class AppComponent implements OnInit {
   searchElements: any[] = [];
   version = environment.version;
 
+  breadcrumbs: MenuItem[] = [];
+
   constructor(
     private router: Router,
+    private changeDetectorRef: ChangeDetectorRef,
     private primengConfig: PrimeNGConfig,
     private dialogService: DialogService,
     private loaderService: LoaderService,
@@ -56,7 +60,8 @@ export class AppComponent implements OnInit {
     private execService: ExecService,
     private contentService: ContentService,
     private indexSearchService: IndexSearchService,
-    private searchService: SearchService
+    private searchService: SearchService,
+    private breadcrumbService: BreadcrumbService
   ) {}
 
   ngOnInit() {
@@ -78,6 +83,13 @@ export class AppComponent implements OnInit {
             );
           },
         });
+      },
+    });
+    this.breadcrumbService.breadcrumbs.subscribe({
+      next: (breadcrumbs) => {
+        console.log(breadcrumbs);
+        this.breadcrumbs = [...breadcrumbs];
+        this.changeDetectorRef.detectChanges();
       },
     });
   }
