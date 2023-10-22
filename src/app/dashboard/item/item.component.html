@@ -1,5 +1,5 @@
 <div class="btn" *ngIf="editMode">
-    <p-button icon="pi pi-cog" styleClass="p-button-rounded" (click)="edit()"></p-button>
+    <p-button icon="pi pi-cog" [rounded]="true" (click)="edit()"></p-button>
 </div>
 <ng-container [ngSwitch]="widget?.type">
     <ng-container *ngSwitchCase="'CHART'">

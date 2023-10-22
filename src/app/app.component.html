@@ -15,7 +15,7 @@
             </div>
             <div class="info">
                 {{company?.name}}
-                <p-button icon="pi pi-user" styleClass="p-button-rounded p-button-info p-button-outlined"
+                <p-button icon="pi pi-user"  [rounded]="true" [outlined]="true" severity="info"
                     (click)="op.toggle($event)"></p-button>
                 <p-overlayPanel #op>
                     <ng-template pTemplate="content" let-option>
@@ -55,7 +55,7 @@
             <ng-template pTemplate="body" let-rowData let-element>
                 <tr [pSelectableRow]="rowData">
                     <td>
-                        <p-button icon="pi pi-link" styleClass="p-button-rounded p-button-outlined"
+                        <p-button icon="pi pi-link" [rounded]="true" [outlined]="true"
                             (click)="followLink(element)" [style]="{ width:'2rem', height: '2rem' }"></p-button>
                     </td>
                     <td>{{element.text}}</td>
@@ -66,5 +66,5 @@
 </p-overlayPanel>
 <router-outlet></router-outlet>
 <div class="searchBtn" *ngIf="showRestoreSearch()">
-    <p-button icon="pi pi-search" styleClass="p-button-rounded p-button-success" (click)="restoreSearch()"></p-button>
+    <p-button icon="pi pi-search"  [rounded]="true"  severity="success" (click)="restoreSearch()"></p-button>
 </div>

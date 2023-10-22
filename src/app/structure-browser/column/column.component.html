@@ -1,4 +1,4 @@
-<p-button *ngIf="showLink()" icon="pi pi-link" styleClass="p-button-rounded p-button-outlined" (click)="followLink()"
+<p-button *ngIf="showLink()" icon="pi pi-link" [rounded]="true" [outlined]="true" (click)="followLink()"
     [style]="{ width:'2rem', height: '2rem' }"></p-button>
 <div #overflowWrapper (mouseenter)="isOverflowing() ? op.show($event) : undefined" (mouseleave)="op.hide()">
     {{value}}

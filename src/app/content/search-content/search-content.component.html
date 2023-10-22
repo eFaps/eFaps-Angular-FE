@@ -18,7 +18,7 @@
                 <tr>
                     <td>
                         <p-tableCheckbox *ngIf="isConnect" [value]="rowData"></p-tableCheckbox>
-                        <p-button *ngIf="!isConnect" icon="pi pi-link" styleClass="p-button-rounded p-button-outlined"
+                        <p-button *ngIf="!isConnect" icon="pi pi-link" [rounded]="true" [outlined]="true"
                             (click)="followLink(rowData)" [style]="{ width:'2rem', height: '2rem' }"></p-button>
                     </td>
                     <td *ngFor="let col of columns">
@@ -32,6 +32,6 @@
     </div>
 </div>
 <div class="p-dialog-footer">
-    <p-button *ngIf="isConnect" label="Connectar" styleClass="p-button-warning" (click)="submit()"></p-button>
+    <p-button *ngIf="isConnect" label="Connectar" severity="warning" (click)="submit()"></p-button>
     <p-button label="Buscar" styleClass="p-button" (click)="query()"></p-button>
 </div>

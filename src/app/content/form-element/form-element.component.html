@@ -70,11 +70,11 @@
             <p-button [label]="formItem?.label" (click)="executeFieldCmd()"></p-button>
         </ng-container>
         <ng-container *ngSwitchCase="'CLASSIFICATION'">
-            <p-button icon="pi pi-bookmark" styleClass="p-button-sm p-button-secondary" (click)="classSel()"></p-button>
+            <p-button icon="pi pi-bookmark" size="small" severity="secondary" (click)="classSel()"></p-button>
         </ng-container>
         <ng-container *ngSwitchDefault>
             <div *ngIf="formItem?.navRef != null" class="navRef">
-                <p-button icon="pi pi-link" styleClass="p-button-rounded p-button-outlined" (click)="followLink()"
+                <p-button icon="pi pi-link" [rounded]="true" [outlined]="true" (click)="followLink()"
                     [style]="{ width:'2rem', height: '2rem' }"></p-button>
             </div>
             {{readOnlyValue}}

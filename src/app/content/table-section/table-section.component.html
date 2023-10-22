@@ -18,7 +18,7 @@
                 <td *ngFor="let col of columns">
                     <div>
                         <p-button *ngIf="showLink(rowData,col)" icon="pi pi-link"
-                            styleClass="p-button-rounded p-button-outlined" (click)="followLink(rowData,col)"
+                        [rounded]="true" [outlined]="true" (click)="followLink(rowData,col)"
                             [style]="{ width:'2rem', height: '2rem' }"></p-button>
                         {{rowData[col.field]}}
                     </div>
