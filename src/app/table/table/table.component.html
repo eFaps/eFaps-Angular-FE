@@ -4,7 +4,7 @@
         [scrollable]="true" scrollHeight="flex" [virtualScroll]="true" [virtualScrollItemSize]="42"
         [tableStyle]="{ 'min-width': '50rem' }" sortMode="multiple" [selectionMode]="selectionMode"
         [(selection)]="selectedElements" [resizableColumns]="true" [loading]="loading" stateStorage="local"
-        [stateKey]="storageKey" (onStateRestore)="stateRestore($event)">
+        [stateKey]="storageKey" (onStateRestore)="stateRestore($event)" [reorderableColumns]="true">
         <ng-template pTemplate="caption">
             <div class="table-header">
                 <div class="left">
@@ -33,6 +33,7 @@
                 <th [pSortableColumn]="col.field" *ngFor="let col of columns" pResizableColumn>
                     {{ col.header }}
                     <p-sortIcon [field]="col.field"></p-sortIcon>
+                    <p-columnFilter type="text" field="name" display="menu"></p-columnFilter>
                 </th>
             </tr>
         </ng-template>
