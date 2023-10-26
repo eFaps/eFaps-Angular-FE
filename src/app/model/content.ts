@@ -32,6 +32,7 @@ export interface FormSection extends Section {
 export interface FormItem {
   type:
     | 'DATETIME'
+    | 'DATETIMELABEL'
     | 'DATE'
     | 'INPUT'
     | 'RADIO'

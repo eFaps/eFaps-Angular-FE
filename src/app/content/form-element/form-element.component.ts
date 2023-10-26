@@ -33,6 +33,7 @@ export class FormElementComponent implements OnInit {
   autoCompleteValue: any;
   snippletValue: any;
   dateValue: any;
+  dateTimeValue: any;
   checkboxValue: any;
   textareaValue: any;
 
@@ -142,6 +143,14 @@ export class FormElementComponent implements OnInit {
           this.addEntry(this.formItem?.value);
         }
         break;
+      case 'DATETIME':
+          if (this.formItem?.value != null) {
+            let dateTime = new Date(this.formItem?.value);
+            dateTime.setSeconds(0);
+            this.dateTimeValue = dateTime;
+            this.addEntry(this.formItem?.value);
+          }
+          break;  
       default:
         if (this.formItem?.value && this.formItem?.value instanceof Array) {
           this.readOnlyValue = this.formItem.value.join(', ');
@@ -181,6 +190,14 @@ export class FormElementComponent implements OnInit {
   changeDate(value: any) {
     if (value instanceof Date) {
       this.addEntry(value.toISOString().substring(0, 10));
+    } else {
+      this.addEntry(null);
+    }
+  }
+
+  changeDateTime(value: any) {
+    if (value instanceof Date) {
+      this.addEntry(value.toISOString());
     } else {
       this.addEntry(null);
     }

@@ -3,7 +3,7 @@
         {{formItem?.label}}
     </div>
     <div class="value" [ngSwitch]="formItem?.type">
-        <ng-container *ngSwitchCase="'DATETIME'">
+        <ng-container *ngSwitchCase="'DATETIMELABEL'">
             {{formItem?.value | date:'medium'}}
         </ng-container>
         <ng-container *ngSwitchCase="'RADIO'">
@@ -55,7 +55,11 @@
         </ng-container>
         <ng-container *ngSwitchCase="'DATE'">
             <p-calendar [(ngModel)]="dateValue" #date [showIcon]="true" (onBlur)="changeDate(date.value)"
-                (onSelect)="changeDate($event)"></p-calendar>
+                (onSelect)="changeDate($event)" appendTo="body"></p-calendar>
+        </ng-container>
+        <ng-container *ngSwitchCase="'DATETIME'">
+            <p-calendar [(ngModel)]="dateTimeValue" #date [showIcon]="true" (onBlur)="changeDateTime(date.value)"
+                (onSelect)="changeDateTime($event)" [showTime]="true" appendTo="body"></p-calendar>
         </ng-container>
         <ng-container *ngSwitchCase="'ATTRSET'">
             <app-attribute-set [formItem]="formItem"></app-attribute-set>
