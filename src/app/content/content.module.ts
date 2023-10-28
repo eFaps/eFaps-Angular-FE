@@ -14,6 +14,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { MenuModule } from 'primeng/menu';
 import { MenubarModule } from 'primeng/menubar';
+import { MessagesModule } from 'primeng/messages';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { PanelModule } from 'primeng/panel';
 import { RadioButtonModule } from 'primeng/radiobutton';
@@ -85,6 +86,7 @@ import { TableSectionComponent } from './table-section/table-section.component';
     ChipModule,
     TabViewModule,
     TieredMenuModule,
+    MessagesModule,
   ],
 })
 export class ContentModule {}

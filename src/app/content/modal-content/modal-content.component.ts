@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { Classification } from 'src/app/model/classification';
-import { Outline, Section } from 'src/app/model/content';
+import { FormItem, FormSection, Outline, Section } from 'src/app/model/content';
 import { MenuEntry } from 'src/app/model/menu';
 import { ClassificationService } from 'src/app/services/classification.service';
 import { ExecService } from 'src/app/services/exec.service';
+import { ValidationService } from 'src/app/services/validation.service';
 import { ValueService } from 'src/app/services/value.service';
 
 @Component({
@@ -23,10 +24,12 @@ export class ModalContentComponent implements OnInit {
     config: DynamicDialogConfig,
     private dialogRef: DynamicDialogRef,
     private valueService: ValueService,
+    private validationService: ValidationService,
     private classificationService: ClassificationService,
     private execService: ExecService
   ) {
     this.valueService.reset();
+    this.validationService.reset();
     this.outline = config.data.outline;
     this.callingMenu = config.data.item;
     this.parentOid = config.data.parentOid;
@@ -102,17 +105,19 @@ export class ModalContentComponent implements OnInit {
   }
 
   submit() {
-    if (this.classifications != null) {
-      this.values?.set('eFapsClassifications', [
-        ...this.classifications!!.map((clazz) => {
-          return clazz.id;
-        }),
-      ]);
+    if (this.validationService.isValid(this.values)) {
+      if (this.classifications != null) {
+        this.values?.set('eFapsClassifications', [
+          ...this.classifications!!.map((clazz) => {
+            return clazz.id;
+          }),
+        ]);
+      }
+      this.execService.exec(this.callingMenu.id, this.values).subscribe({
+        next: (execResponse) => {
+          this.dialogRef.close(execResponse);
+        },
+      });
     }
-    this.execService.exec(this.callingMenu.id, this.values).subscribe({
-      next: (execResponse) => {
-        this.dialogRef.close(execResponse);
-      },
-    });
   }
 }

@@ -33,7 +33,7 @@ export class StructureBrowserComponent implements OnInit {
   globalSearch = '';
   selectionMode: 'single' | 'checkbox' | undefined;
   elements: TreeNode[] = [];
-  selectedElements: TreeTableNode<any>[] | null = [];
+  selectedElements: TreeTableNode<any> | TreeTableNode<any>[] | null = [];
   togglerColIdx = 0;
 
   constructor(
@@ -181,9 +181,11 @@ export class StructureBrowserComponent implements OnInit {
     const map = new Map<string, any>();
 
     if (this.selectedElements != null) {
-      const oids = this.selectedElements.map((element) => {
-        return element.data.OID;
-      });
+      const oids = (this.selectedElements as TreeTableNode<any>[]).map(
+        (element) => {
+          return element.data.OID;
+        }
+      );
       map.set('eFapsSelectedOids', oids);
     }
 

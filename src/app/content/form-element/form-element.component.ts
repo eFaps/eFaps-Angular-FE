@@ -6,6 +6,7 @@ import {
   ViewContainerRef,
 } from '@angular/core';
 import { Router } from '@angular/router';
+import { Message } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
 import { UploadEvent } from 'primeng/fileupload';
 import { FormItem } from 'src/app/model/content';
@@ -16,6 +17,7 @@ import { DynamicComponentService } from 'src/app/services/dynamic-component.serv
 import { FieldCommandService } from 'src/app/services/field-command.service';
 import { FieldUpdateService } from 'src/app/services/field-update.service';
 import { UtilService } from 'src/app/services/util.service';
+import { ValidationService } from 'src/app/services/validation.service';
 import { ValueService } from 'src/app/services/value.service';
 
 import { ClassificationsComponent } from '../classifications/classifications.component';
@@ -26,6 +28,8 @@ import { ClassificationsComponent } from '../classifications/classifications.com
   styleUrls: ['./form-element.component.scss'],
 })
 export class FormElementComponent implements OnInit {
+  messages: Message[] = [];
+
   inputValue: any;
   radioValue: any;
   dropdownValue: any;
@@ -53,13 +57,28 @@ export class FormElementComponent implements OnInit {
     private router: Router,
     private dialogService: DialogService,
     private valueService: ValueService,
+    private validationService: ValidationService,
     private autoCompleteService: AutoCompleteService,
     private fieldUpdateService: FieldUpdateService,
     private fieldCommandService: FieldCommandService,
     private dynamicComponentService: DynamicComponentService,
     private utilService: UtilService
   ) {}
+
   ngOnInit(): void {
+    this.validationService.registerValidation((values) => {
+      let valid = true;
+      if (this.formItem?.required) {
+        valid = values.has(this.formItem.name);
+      }
+      if (valid) {
+        this.messages = [];
+      } else {
+        this.messages = [{ severity: 'error', summary: 'Valor requerido' }];
+      }
+      return valid;
+    });
+
     this.valueService.update.subscribe({
       next: (entry) => {
         if (entry?.name == this.formItem?.name) {
@@ -144,13 +163,13 @@ export class FormElementComponent implements OnInit {
         }
         break;
       case 'DATETIME':
-          if (this.formItem?.value != null) {
-            let dateTime = new Date(this.formItem?.value);
-            dateTime.setSeconds(0);
-            this.dateTimeValue = dateTime;
-            this.addEntry(this.formItem?.value);
-          }
-          break;  
+        if (this.formItem?.value != null) {
+          let dateTime = new Date(this.formItem?.value);
+          dateTime.setSeconds(0);
+          this.dateTimeValue = dateTime;
+          this.addEntry(this.formItem?.value);
+        }
+        break;
       default:
         if (this.formItem?.value && this.formItem?.value instanceof Array) {
           this.readOnlyValue = this.formItem.value.join(', ');
