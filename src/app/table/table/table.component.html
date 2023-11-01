@@ -33,7 +33,9 @@
                 <th [pSortableColumn]="col.field" *ngFor="let col of columns" pResizableColumn>
                     {{ col.header }}
                     <p-sortIcon [field]="col.field"></p-sortIcon>
+                    <!--
                     <p-columnFilter type="text" field="name" display="menu"></p-columnFilter>
+                    -->
                 </th>
             </tr>
         </ng-template>
