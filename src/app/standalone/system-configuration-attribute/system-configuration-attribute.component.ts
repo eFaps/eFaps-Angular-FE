@@ -42,7 +42,7 @@ export class SystemConfigurationAttributeComponent implements OnInit {
   buttonLabel: string = 'Update';
 
   keys: [] = [];
-  key: any = {};
+  key: any = undefined;
   description: string = '';
   strValue: string = '';
   booleanValue: boolean = false;

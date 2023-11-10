@@ -7,4 +7,16 @@
     input {
         width: 100%;
     }
+
+    ::ng-deep .p-autocomplete {
+        width: 100%;
+    }
+
+    ::ng-deep .p-dropdown {
+        width: 100%;
+    }
+ }
+
+::ng-deep .p-dropdown-panel {
+    width: 100%;
 }
