@@ -111,13 +111,17 @@ export class ContentComponent implements OnInit, OnDestroy {
     switch (item.action.type) {
       case 'EXEC':
         return (event) => {
+          var valueMap =  new Map<String, any>()
+          if (this.oid) {
+            valueMap.set('eFapsOID', this.oid);
+          }
           if (item.action.verify) {
             this.confirmationService.confirm({
               message: item.action.verify.question,
               header: 'Confirmation',
               icon: 'pi pi-exclamation-triangle',
               accept: () => {
-                this.execService.exec(item.id).subscribe({
+                this.execService.exec(item.id, valueMap).subscribe({
                   next: (_) => {
                     console.log('run exec');
                   },
@@ -126,7 +130,7 @@ export class ContentComponent implements OnInit, OnDestroy {
               reject: () => {},
             });
           } else {
-            this.execService.exec(item.id).subscribe({
+            this.execService.exec(item.id, valueMap).subscribe({
               next: (_) => {
                 console.log('run exec');
               },
