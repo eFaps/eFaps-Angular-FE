@@ -111,7 +111,7 @@ export class ContentComponent implements OnInit, OnDestroy {
     switch (item.action.type) {
       case 'EXEC':
         return (event) => {
-          var valueMap =  new Map<String, any>()
+          var valueMap = new Map<String, any>();
           if (this.oid) {
             valueMap.set('eFapsOID', this.oid);
           }

@@ -152,7 +152,18 @@ export class SystemConfigurationAttributeComponent implements OnInit {
       case 'BOOLEAN':
         this.booleanValue = String(value).toLowerCase() == 'true';
         break;
-
+      case 'PROPERTIES':
+        try {
+          const propObj = JSON.parse(value);
+          if (propObj != null) {
+            Object.keys(propObj).forEach((key) => {
+              this.strValue = this.strValue + key + '=' + propObj[key] + '\n';
+            });
+          }
+        } catch (error) {
+          this.strValue = value;
+        }
+        break;
       default:
         this.strValue = value;
     }
