@@ -25,10 +25,13 @@ export class ColumnComponent {
 
   @ViewChild('overflowWrapper') overflowElement: ElementRef | undefined;
 
-  constructor(private router: Router, private checkoutService: CheckoutService) {}
+  constructor(
+    private router: Router,
+    private checkoutService: CheckoutService
+  ) {}
 
   isCheckout(): boolean {
-    return this.column?.field == 'checkout'
+    return this.column?.field == 'checkout';
   }
 
   get value(): any {
@@ -60,11 +63,11 @@ export class ColumnComponent {
 
   checkout() {
     this.checkoutService.checkout(this.rowData['OID']).subscribe({
-      next: blob => {
+      next: (blob) => {
         const url = window.URL.createObjectURL(blob);
-			  window.open(url);
-      }
-    })
+        window.open(url);
+      },
+    });
   }
 
   isOverflowing() {

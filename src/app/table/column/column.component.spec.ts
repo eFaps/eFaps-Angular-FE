@@ -3,6 +3,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
 
 import { ColumnComponent } from './column.component';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('ColumnComponent', () => {
   let component: ColumnComponent;
@@ -10,7 +11,7 @@ describe('ColumnComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [RouterTestingModule, OverlayPanelModule],
+      imports: [RouterTestingModule, HttpClientTestingModule, OverlayPanelModule],
       declarations: [ColumnComponent],
     });
     fixture = TestBed.createComponent(ColumnComponent);
