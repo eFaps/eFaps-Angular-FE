@@ -1,10 +1,16 @@
-<p-button *ngIf="showLink()" icon="pi pi-link" [rounded]="true" [outlined]="true" (click)="followLink()"
-    [style]="{ width:'2rem', height: '2rem' }"></p-button>
-<div #overflowWrapper (mouseenter)="isOverflowing() ? op.show($event) : undefined" (mouseleave)="op.hide()">
-    {{value}}
-</div>
-<p-overlayPanel #op>
-    <div class="overlay">
+<ng-container *ngIf="isCheckout()">
+    <p-button  icon="pi pi-globe" [rounded]="true" [outlined]="true" (click)="checkout()"
+        [style]="{ width:'2rem', height: '2rem' }"></p-button>
+</ng-container>    
+<ng-container *ngIf="!isCheckout()">
+    <p-button *ngIf="showLink()" icon="pi pi-link" [rounded]="true" [outlined]="true" (click)="followLink()"
+        [style]="{ width:'2rem', height: '2rem' }"></p-button>
+    <div #overflowWrapper (mouseenter)="isOverflowing() ? op.show($event) : undefined" (mouseleave)="op.hide()">
         {{value}}
     </div>
-</p-overlayPanel>
+    <p-overlayPanel #op>
+        <div class="overlay">
+            {{value}}
+        </div>
+    </p-overlayPanel>
+</ng-container>    
