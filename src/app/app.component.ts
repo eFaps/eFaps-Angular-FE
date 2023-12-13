@@ -37,16 +37,18 @@ import { toSignal } from '@angular/core/rxjs-interop';
 })
 export class AppComponent implements OnInit {
   title = 'eFaps-Angular-FE';
+  
   mainMenu: Signal<MenuEntry[] | undefined> = toSignal(this.menuService.getMainMenu())
   menuItems = computed(() => {
     return this.mainMenu()?.map(item => toMenuItem(item, this.actionProvider))
   })
 
+  isLoading = this.loaderService.isLoading;
 
   _user: User | undefined;
   company: Company | undefined;
   showCompanySelector: boolean = false;
-  isLoading = false;
+  
 
   searchResult: SearchResult | undefined;
   searchElements: any[] = [];
@@ -71,9 +73,6 @@ export class AppComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.loaderService.isLoading.subscribe({
-      next: (isLoading) => (this.isLoading = isLoading),
-    });
     this.primengConfig.ripple = true;
     this.primengConfig.setTranslation(translation.es);
     this.userService.company.subscribe({

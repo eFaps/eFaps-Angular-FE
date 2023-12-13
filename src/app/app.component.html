@@ -1,4 +1,4 @@
-<p-progressBar *ngIf="isLoading" mode="indeterminate" [style]="{ height: '6px' }"></p-progressBar>
+<p-progressBar *ngIf="isLoading()" mode="indeterminate" [style]="{ height: '6px' }"></p-progressBar>
 <p-menubar [model]="menuItems()">
     <ng-template pTemplate="start">
         <img src="assets/logo.svg" height="40" class="mr-2 icon" (click)="home()"/>
