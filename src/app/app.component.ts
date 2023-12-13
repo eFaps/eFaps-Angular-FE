@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, Signal, WritableSignal, computed, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { KeycloakService } from 'keycloak-angular';
 import { MenuItem, PrimeNGConfig } from 'primeng/api';
@@ -36,7 +36,12 @@ import { CompanyChooserComponent } from './standalone/company-chooser/company-ch
 })
 export class AppComponent implements OnInit {
   title = 'eFaps-Angular-FE';
-  menuItems: MenuItem[] = [];
+  mainMenu: Signal<MenuEntry[] | undefined> = this.menuService.getMainMenu()
+  menuItems = computed(() => {
+    return this.mainMenu()?.map(item => toMenuItem(item, this.actionProvider))
+  })
+
+
   _user: User | undefined;
   company: Company | undefined;
   showCompanySelector: boolean = false;
@@ -73,18 +78,12 @@ export class AppComponent implements OnInit {
     this.userService.company.subscribe({
       next: (company) => (this.company = company),
     });
+
     this.userService.getCurrentUser().subscribe({
       next: (user) => {
         this.user = user;
-        this.menuService.getMainMenu().subscribe({
-          next: (items) => {
-            this.menuItems = items.map((item) =>
-              toMenuItem(item, this.actionProvider)
-            );
-          },
-        });
-      },
-    });
+    }})
+  
     this.breadcrumbService.breadcrumbs.subscribe({
       next: (breadcrumbs) => {
         console.log(breadcrumbs);
@@ -160,12 +159,12 @@ export class AppComponent implements OnInit {
           this.userService.setCompany(company).subscribe({
             next: () => {
               this.router.navigateByUrl('/').then(() => {
-                this.menuService.getMainMenu().subscribe({
+                /**this.menuService.getMainMenu().subscribe({
                   next: (items) =>
                     (this.menuItems = items.map((item) =>
                       toMenuItem(item, this.actionProvider)
                     )),
-                });
+                });**/
               });
             },
           });
