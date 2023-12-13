@@ -2,10 +2,10 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable, Signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { MenuItem, MenuItemCommandEvent } from 'primeng/api';
+import { Observable } from 'rxjs';
 
 import { MenuEntry } from '../model/menu';
 import { UtilService } from './util.service';
-import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -15,7 +15,7 @@ export class MenuService {
 
   getMainMenu(): Observable<MenuEntry[]> {
     const url = `${this.utilService.evalApiUrl()}/ui/nav`;
-    return this.http.get<MenuEntry[]>(url)
+    return this.http.get<MenuEntry[]>(url);
   }
 }
 

@@ -9,7 +9,7 @@ import { UtilService } from './util.service';
   providedIn: 'root',
 })
 export class UserService {
-  company: WritableSignal<Company| undefined> = signal(undefined);
+  company: WritableSignal<Company | undefined> = signal(undefined);
 
   constructor(private http: HttpClient, private utilService: UtilService) {}
 

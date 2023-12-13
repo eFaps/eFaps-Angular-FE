@@ -1,7 +1,14 @@
-import { ChangeDetectorRef, Component, OnInit, Signal, WritableSignal, computed, signal } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  OnInit,
+  Signal,
+  computed,
+} from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { Router } from '@angular/router';
 import { KeycloakService } from 'keycloak-angular';
-import { MenuItem, PrimeNGConfig } from 'primeng/api';
+import { PrimeNGConfig } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
 import { OverlayPanel } from 'primeng/overlaypanel';
 import { environment } from 'src/environments/environment';
@@ -27,7 +34,6 @@ import {
 import { SearchService } from './services/search.service';
 import { UserService } from './services/user.service';
 import { CompanyChooserComponent } from './standalone/company-chooser/company-chooser.component';
-import { toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-root',
@@ -37,25 +43,26 @@ import { toSignal } from '@angular/core/rxjs-interop';
 })
 export class AppComponent implements OnInit {
   title = 'eFaps-Angular-FE';
-  
-  mainMenu: Signal<MenuEntry[] | undefined> = toSignal(this.menuService.getMainMenu())
+
+  mainMenu: Signal<MenuEntry[] | undefined> = toSignal(
+    this.menuService.getMainMenu()
+  );
   menuItems = computed(() => {
-    return this.mainMenu()?.map(item => toMenuItem(item, this.actionProvider))
-  })
+    return this.mainMenu()?.map((item) =>
+      toMenuItem(item, this.actionProvider)
+    );
+  });
 
   isLoading = this.loaderService.isLoading;
   company = this.userService.company;
+  breadcrumbs = this.breadcrumbService.breadcrumbs;
 
   _user: User | undefined;
-  
-  showCompanySelector: boolean = false;
-  
 
+  showCompanySelector: boolean = false;
   searchResult: SearchResult | undefined;
   searchElements: any[] = [];
   version = environment.version;
-
-  breadcrumbs: MenuItem[] = [];
 
   constructor(
     private router: Router,
@@ -80,13 +87,6 @@ export class AppComponent implements OnInit {
     this.userService.getCurrentUser().subscribe({
       next: (user) => {
         this.user = user;
-    }})
-  
-    this.breadcrumbService.breadcrumbs.subscribe({
-      next: (breadcrumbs) => {
-        console.log(breadcrumbs);
-        this.breadcrumbs = [...breadcrumbs];
-        this.changeDetectorRef.detectChanges();
       },
     });
   }
@@ -156,9 +156,11 @@ export class AppComponent implements OnInit {
         if (company.uuid != this.company()?.uuid) {
           this.userService.setCompany(company).subscribe({
             next: () => {
-              this.router.navigateByUrl('/', {onSameUrlNavigation: 'reload'}).then(() => {
-                this.menuService.getMainMenu().subscribe()
-              });
+              this.router
+                .navigateByUrl('/', { onSameUrlNavigation: 'reload' })
+                .then(() => {
+                  this.menuService.getMainMenu().subscribe();
+                });
             },
           });
         }

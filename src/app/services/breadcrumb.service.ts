@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Signal, WritableSignal, signal } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { MenuItem, MenuItemCommandEvent } from 'primeng/api';
 import { BehaviorSubject, filter } from 'rxjs';
@@ -8,8 +8,7 @@ import { BehaviorSubject, filter } from 'rxjs';
 })
 export class BreadcrumbService {
   maxEntries = 7;
-  private breadcrumbSubject = new BehaviorSubject<MenuItem[]>([]);
-  breadcrumbs = this.breadcrumbSubject.asObservable();
+  breadcrumbs: WritableSignal<MenuItem[]> = signal([]);
   currentUrl: string = '';
 
   constructor(private router: Router) {
@@ -30,31 +29,32 @@ export class BreadcrumbService {
       this.navigate(event);
     };
 
-    const items = this.breadcrumbSubject.getValue();
-    var index = items.findIndex((menuItem) => {
-      return JSON.stringify(entry) == JSON.stringify(menuItem);
+    this.breadcrumbs.update((items) => {
+      var index = items.findIndex((menuItem) => {
+        return JSON.stringify(entry) == JSON.stringify(menuItem);
+      });
+      if (index > -1) {
+        items.splice(index, 1);
+      }
+      items.push(entry);
+
+      if (items.length > this.maxEntries) {
+        items.splice(0, items.length - this.maxEntries);
+      }
+      return Array.from(items);
     });
-    if (index > -1) {
-      items.splice(index, 1);
-    }
-    items.push(entry);
-
-    if (items.length > this.maxEntries) {
-      items.splice(0, items.length - this.maxEntries);
-    }
-
-    this.breadcrumbSubject.next(items);
   }
 
   navigate(event: MenuItemCommandEvent) {
     this.router.navigateByUrl(event.item!!.id!!);
-    const items = this.breadcrumbSubject.getValue();
-    var index = items.findIndex((menuItem) => {
-      return JSON.stringify(event.item) == JSON.stringify(menuItem);
+    this.breadcrumbs.update((items) => {
+      var index = items.findIndex((menuItem) => {
+        return JSON.stringify(event.item) == JSON.stringify(menuItem);
+      });
+      if (index > -1) {
+        items.splice(index, 1);
+      }
+      return Array.from(items);
     });
-    if (index > -1) {
-      items.splice(index, 1);
-    }
-    this.breadcrumbSubject.next(items);
   }
 }

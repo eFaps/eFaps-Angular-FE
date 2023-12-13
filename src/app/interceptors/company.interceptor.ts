@@ -14,12 +14,12 @@ import { UserService } from '../services/user.service';
 @Injectable()
 export class CompanyInterceptor implements HttpInterceptor {
   @LocalStorage() currentCompany: Company | undefined;
-  
+
   constructor(private userService: UserService) {
     localStorage.getItem('');
     effect(() => {
       this.currentCompany = this.userService.company();
-  });
+    });
   }
 
   intercept(
