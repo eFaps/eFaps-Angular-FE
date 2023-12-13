@@ -27,6 +27,7 @@ import {
 import { SearchService } from './services/search.service';
 import { UserService } from './services/user.service';
 import { CompanyChooserComponent } from './standalone/company-chooser/company-chooser.component';
+import { toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-root',
@@ -36,7 +37,7 @@ import { CompanyChooserComponent } from './standalone/company-chooser/company-ch
 })
 export class AppComponent implements OnInit {
   title = 'eFaps-Angular-FE';
-  mainMenu: Signal<MenuEntry[] | undefined> = this.menuService.getMainMenu()
+  mainMenu: Signal<MenuEntry[] | undefined> = toSignal(this.menuService.getMainMenu())
   menuItems = computed(() => {
     return this.mainMenu()?.map(item => toMenuItem(item, this.actionProvider))
   })
@@ -158,13 +159,8 @@ export class AppComponent implements OnInit {
         if (company.uuid != this.company?.uuid) {
           this.userService.setCompany(company).subscribe({
             next: () => {
-              this.router.navigateByUrl('/').then(() => {
-                /**this.menuService.getMainMenu().subscribe({
-                  next: (items) =>
-                    (this.menuItems = items.map((item) =>
-                      toMenuItem(item, this.actionProvider)
-                    )),
-                });**/
+              this.router.navigateByUrl('/', {onSameUrlNavigation: 'reload'}).then(() => {
+                this.menuService.getMainMenu().subscribe()
               });
             },
           });
