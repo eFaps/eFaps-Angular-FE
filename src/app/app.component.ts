@@ -44,9 +44,10 @@ export class AppComponent implements OnInit {
   })
 
   isLoading = this.loaderService.isLoading;
+  company = this.userService.company;
 
   _user: User | undefined;
-  company: Company | undefined;
+  
   showCompanySelector: boolean = false;
   
 
@@ -75,9 +76,6 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this.primengConfig.ripple = true;
     this.primengConfig.setTranslation(translation.es);
-    this.userService.company.subscribe({
-      next: (company) => (this.company = company),
-    });
 
     this.userService.getCurrentUser().subscribe({
       next: (user) => {
@@ -98,7 +96,7 @@ export class AppComponent implements OnInit {
       if (user.companies.length > 1) {
         this.showCompanySelector = true;
       } else {
-        this.company = user.companies[0];
+        this.company.set(user.companies[0]);
       }
     } else {
       this.showCompanySelector = false;
@@ -155,7 +153,7 @@ export class AppComponent implements OnInit {
     });
     ref.onClose.subscribe((company: Company) => {
       if (company) {
-        if (company.uuid != this.company?.uuid) {
+        if (company.uuid != this.company()?.uuid) {
           this.userService.setCompany(company).subscribe({
             next: () => {
               this.router.navigateByUrl('/', {onSameUrlNavigation: 'reload'}).then(() => {

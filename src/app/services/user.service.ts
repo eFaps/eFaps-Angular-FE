@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, Signal, WritableSignal, signal } from '@angular/core';
 import { BehaviorSubject, Observable, map } from 'rxjs';
 
 import { Company, User } from '../model/user';
@@ -9,8 +9,7 @@ import { UtilService } from './util.service';
   providedIn: 'root',
 })
 export class UserService {
-  private currentCompany = new BehaviorSubject<Company | undefined>(undefined);
-  company = this.currentCompany.asObservable();
+  company: WritableSignal<Company| undefined> = signal(undefined);
 
   constructor(private http: HttpClient, private utilService: UtilService) {}
 
@@ -19,12 +18,12 @@ export class UserService {
     return this.http.get<User>(url).pipe(
       map((user) => {
         if (user.companies.length > 1) {
-          var cC = user.companies.find((element) => {
+          var currentCompany = user.companies.find((element) => {
             return element.current == true;
           });
-          this.currentCompany.next(cC);
+          this.company.set(currentCompany);
         } else {
-          this.currentCompany.next(undefined);
+          this.company.set(undefined);
         }
         return user;
       })
@@ -32,7 +31,7 @@ export class UserService {
   }
 
   setCompany(company: Company): Observable<User> {
-    this.currentCompany.next(company);
+    this.company.set(company);
     return this.getCurrentUser();
   }
 
