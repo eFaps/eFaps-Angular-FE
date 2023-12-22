@@ -235,7 +235,11 @@ export class FormElementComponent implements OnInit {
   }
 
   changeAutoComplete(option: Option) {
-    this.addEntry(option.value);
+    if (typeof option.value === 'object') {
+      this.addEntry(option.value['value'])
+    } else {
+      this.addEntry(option.value);
+    }
   }
 
   onUpload(event: UploadEvent) {

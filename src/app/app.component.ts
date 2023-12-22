@@ -66,7 +66,6 @@ export class AppComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private changeDetectorRef: ChangeDetectorRef,
     private primengConfig: PrimeNGConfig,
     private dialogService: DialogService,
     private loaderService: LoaderService,
