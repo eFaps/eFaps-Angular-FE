@@ -1,0 +1,29 @@
+<div class="p-dialog-content">
+    <div class="wrapper">
+        <span class="p-float-label">
+            <p-autoComplete [(ngModel)]="key" [dropdown]="true" [suggestions]="keys" (completeMethod)="loadKeys($event)"
+                (onSelect)="onKeySelect($event)" appendTo="body" field="key"></p-autoComplete>
+            <label htmlFor="key">Key</label>
+        </span>
+        <span class="p-float-label">
+            <input type="text" id="strValue" pInputText [(ngModel)]="strValue" />
+            <label htmlFor="strValue">OID</label>
+        </span>
+        <span class="p-float-label">
+            <textarea rows="3" cols="50" id="description" pInputTextarea [(ngModel)]="description"></textarea>
+            <label for="description">Description</label>
+        </span>
+        <span class="p-float-label">
+            <p-dropdown id="company" [options]="companies" [(ngModel)]="company" optionLabel="name"
+                appendTo="body"></p-dropdown>
+            <label for="company">Company</label>
+        </span>
+        <span class="p-float-label">
+            <input type="text" id="appKey" pInputText [(ngModel)]="appKey" />
+            <label htmlFor="appKey">AppKey</label>
+        </span>
+    </div>
+</div>
+<div class="p-dialog-footer">
+    <p-button [label]="buttonLabel" severity="warning" (click)="submit()"></p-button>
+</div>
