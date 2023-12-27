@@ -1,4 +1,6 @@
-<p-progressBar *ngIf="isLoading()" mode="indeterminate" [style]="{ height: '6px' }"></p-progressBar>
+@if (isLoading()) {
+    <p-progressBar mode="indeterminate" [style]="{ height: '6px' }"></p-progressBar>
+}
 <p-menubar [model]="menuItems()">
     <ng-template pTemplate="start">
         <img src="assets/logo.svg" height="40" class="mr-2 icon" (click)="home()"/>
@@ -40,7 +42,9 @@
         </div>
     </ng-template>
 </p-menubar>
-<p-breadcrumb *ngIf="breadcrumbs().length > 0" class="max-w-full" [model]="breadcrumbs()"></p-breadcrumb>
+@if (breadcrumbs().length > 0) {
+    <p-breadcrumb class="max-w-full" [model]="breadcrumbs()"></p-breadcrumb>
+}
 <p-toast></p-toast>
 <p-overlayPanel #searchOp [style]="{'width': '450px'}" [showCloseIcon]="true">
     <ng-template pTemplate="content">
@@ -65,6 +69,8 @@
     </ng-template>
 </p-overlayPanel>
 <router-outlet></router-outlet>
-<div class="searchBtn" *ngIf="showRestoreSearch()">
-    <p-button icon="pi pi-search"  [rounded]="true"  severity="success" (click)="restoreSearch()"></p-button>
-</div>
+@if (showRestoreSearch()) {
+    <div class="searchBtn" *ngIf="showRestoreSearch()">
+        <p-button icon="pi pi-search"  [rounded]="true"  severity="success" (click)="restoreSearch()"></p-button>
+    </div>
+}
