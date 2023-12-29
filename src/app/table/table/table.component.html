@@ -30,7 +30,7 @@
                 <th style="width: 4rem" *ngIf="selectionMode=='multiple'">
                     <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
                 </th>
-                <th [pSortableColumn]="col.field" *ngFor="let col of columns" pResizableColumn>
+                <th [pSortableColumn]="col.field" *ngFor="let col of columns" pResizableColumn pReorderableColumn>
                     {{ col.header }}
                     <p-sortIcon [field]="col.field"></p-sortIcon>
                     <!--

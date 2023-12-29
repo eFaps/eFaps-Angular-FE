@@ -13,6 +13,7 @@ import { ModalModuleContentComponent } from 'src/app/content/modal-module-conten
 import { SearchContentComponent } from 'src/app/content/search-content/search-content.component';
 import { isOutline } from 'src/app/model/content';
 import { MenuEntry } from 'src/app/model/menu';
+import { Column } from 'src/app/model/table';
 import { BreadcrumbService } from 'src/app/services/breadcrumb.service';
 import { ContentService } from 'src/app/services/content.service';
 import { ExecService } from 'src/app/services/exec.service';
@@ -30,6 +31,7 @@ export class TableComponent implements OnInit {
   id: string | undefined;
   oid: string | undefined;
   cols: any[] = [];
+  columnOrder: string[] = [];
   elements: any[] = [];
   selectionMode: 'single' | 'multiple' | null | undefined = null;
   selectedElements: any[] = [];
@@ -69,6 +71,9 @@ export class TableComponent implements OnInit {
     if (event.filters && event.filters['global']) {
       this.globalSearch = (event.filters['global'] as FilterMetadata).value;
     }
+    if (event.columnOrder) {
+      this.columnOrder = event.columnOrder; 
+    }
   }
 
   loadData() {
@@ -76,13 +81,23 @@ export class TableComponent implements OnInit {
     this.tableService.getTable(this.id!!, this.oid).subscribe({
       next: (val) => {
         this.title = val.header;
-        this.cols = val.columns;
+        this.evalColumns4Order(val.columns);
         this.elements = val.values;
         this.selectionMode = val.selectionMode;
         this.loading = false;
         this.menuItems = toMenuItems(val.menu, this.actionProvider);
       },
     });
+  }
+
+  private evalColumns4Order(columns: Column[]) {
+    const co = this.columnOrder
+    if (this.columnOrder.length > 0 && this.columnOrder.length == columns.length) {
+      columns.sort(function(a, b){  
+        return co.indexOf(a.field) - co.indexOf(b.field);
+      })
+    } 
+    this.cols = columns;
   }
 
   actionProvider: MenuActionProvider = (item: MenuEntry) => {
