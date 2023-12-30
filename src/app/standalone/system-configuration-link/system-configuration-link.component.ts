@@ -2,7 +2,10 @@ import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { AutoCompleteCompleteEvent, AutoCompleteModule } from 'primeng/autocomplete';
+import {
+  AutoCompleteCompleteEvent,
+  AutoCompleteModule,
+} from 'primeng/autocomplete';
 import { ButtonModule } from 'primeng/button';
 import { DropdownModule } from 'primeng/dropdown';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
@@ -28,9 +31,9 @@ import { UtilService } from 'src/app/services/util.service';
     ToggleButtonModule,
   ],
   templateUrl: './system-configuration-link.component.html',
-  styleUrl: './system-configuration-link.component.scss'
+  styleUrl: './system-configuration-link.component.scss',
 })
-export class SystemConfigurationLinkComponent  implements OnInit {
+export class SystemConfigurationLinkComponent implements OnInit {
   @Input()
   uimodule: UIModule | undefined;
   @Input()
@@ -77,7 +80,7 @@ export class SystemConfigurationLinkComponent  implements OnInit {
       }/links/${this.data?.oid}`;
       this.http.get<any>(url).subscribe({
         next: (link) => {
-          this.key = link.key
+          this.key = link.key;
           this.description = link.description;
           this.setValue(link.value);
           this.appKey = link.appKey;

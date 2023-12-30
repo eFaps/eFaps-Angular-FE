@@ -10,7 +10,14 @@
   .left {
     line-height: 3rem;
   }
-}
-.p-button {
-  vertical-align: middle;
+  .right {
+    display: flex;
+    gap: 10px;
+    p-button {
+      ::ng-deep button {
+        vertical-align: middle;
+        line-height: 1.75rem;
+      }
+    }
+  }
 }

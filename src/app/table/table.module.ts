@@ -2,7 +2,10 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
+import { CalendarModule } from 'primeng/calendar';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { InputGroupModule } from 'primeng/inputgroup';
+import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
 import { InputTextModule } from 'primeng/inputtext';
 import { MenuModule } from 'primeng/menu';
 import { MenubarModule } from 'primeng/menubar';
@@ -12,11 +15,18 @@ import { TableModule as primeTableModule } from 'primeng/table';
 import { TieredMenuModule } from 'primeng/tieredmenu';
 
 import { ColumnComponent } from './column/column.component';
+import { FilterElementComponent } from './filter-element/filter-element.component';
+import { FilterComponent } from './filter/filter.component';
 import { TableRoutingModule } from './table-routing.module';
 import { TableComponent } from './table/table.component';
 
 @NgModule({
-  declarations: [TableComponent, ColumnComponent],
+  declarations: [
+    TableComponent,
+    ColumnComponent,
+    FilterComponent,
+    FilterElementComponent,
+  ],
   imports: [
     CommonModule,
     TableRoutingModule,
@@ -27,9 +37,12 @@ import { TableComponent } from './table/table.component';
     MenubarModule,
     ConfirmDialogModule,
     InputTextModule,
+    InputGroupModule,
+    InputGroupAddonModule,
     FormsModule,
     OverlayPanelModule,
     TieredMenuModule,
+    CalendarModule,
   ],
 })
 export class TableModule {}

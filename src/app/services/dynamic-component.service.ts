@@ -40,17 +40,17 @@ export class DynamicComponentService {
           ref.setInput('data', data);
         });
         break;
-        case 'SystemConfigurationLink':
-          import(
-            '../standalone/system-configuration-link/system-configuration-link.component'
-          ).then((m) => {
-            const ref = viewContainerRef.createComponent(
-              m.SystemConfigurationLinkComponent
-            );
-            ref.setInput('uimodule', uimodule);
-            ref.setInput('data', data);
-          });
-          break;  
+      case 'SystemConfigurationLink':
+        import(
+          '../standalone/system-configuration-link/system-configuration-link.component'
+        ).then((m) => {
+          const ref = viewContainerRef.createComponent(
+            m.SystemConfigurationLinkComponent
+          );
+          ref.setInput('uimodule', uimodule);
+          ref.setInput('data', data);
+        });
+        break;
     }
   }
 }

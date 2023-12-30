@@ -21,6 +21,8 @@ import { MenuActionProvider, toMenuItems } from 'src/app/services/menu.service';
 import { SearchService } from 'src/app/services/search.service';
 import { TableService } from 'src/app/services/table.service';
 
+import { FilterComponent } from '../filter/filter.component';
+
 @Component({
   selector: 'app-table',
   templateUrl: './table.component.html',
@@ -40,6 +42,7 @@ export class TableComponent implements OnInit {
   menuItems: MenuItem[] = [];
   storageKey = 'temp';
   globalSearch = '';
+  filtered: boolean = false;
 
   idEmitter = new EventEmitter<string>();
 
@@ -72,7 +75,7 @@ export class TableComponent implements OnInit {
       this.globalSearch = (event.filters['global'] as FilterMetadata).value;
     }
     if (event.columnOrder) {
-      this.columnOrder = event.columnOrder; 
+      this.columnOrder = event.columnOrder;
     }
   }
 
@@ -82,6 +85,7 @@ export class TableComponent implements OnInit {
       next: (val) => {
         this.title = val.header;
         this.evalColumns4Order(val.columns);
+        this.filtered = val.filtered;
         this.elements = val.values;
         this.selectionMode = val.selectionMode;
         this.loading = false;
@@ -91,12 +95,15 @@ export class TableComponent implements OnInit {
   }
 
   private evalColumns4Order(columns: Column[]) {
-    const co = this.columnOrder
-    if (this.columnOrder.length > 0 && this.columnOrder.length == columns.length) {
-      columns.sort(function(a, b){  
+    const co = this.columnOrder;
+    if (
+      this.columnOrder.length > 0 &&
+      this.columnOrder.length == columns.length
+    ) {
+      columns.sort(function (a, b) {
         return co.indexOf(a.field) - co.indexOf(b.field);
-      })
-    } 
+      });
+    }
     this.cols = columns;
   }
 
@@ -223,6 +230,15 @@ export class TableComponent implements OnInit {
   onNavEvent(event: any) {
     this.breadcrumbService.addEntry({
       label: this.title,
+    });
+  }
+
+  filter() {
+    const cmdId = this.id;
+    const dialogRef = this.dialogService.open(FilterComponent, {
+      data: {
+        cmdId,
+      },
     });
   }
 }

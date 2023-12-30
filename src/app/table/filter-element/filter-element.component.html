@@ -1,0 +1,6 @@
+@switch (filter?.kind) {
+    @case ('DATE') { 
+        <p-calendar [(ngModel)]="rangeDates" selectionMode="range" appendTo="body"></p-calendar>
+    }
+    @default { <span>What is going on</span> }
+}

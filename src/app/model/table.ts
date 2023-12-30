@@ -6,6 +6,7 @@ export interface Table {
   values: any[];
   selectionMode: 'single' | 'multiple' | undefined;
   menu: MenuEntry[];
+  filtered: boolean;
 }
 export interface Column {
   header: string;
@@ -24,4 +25,11 @@ export interface StructureBrowser {
 export interface StructureBrowserEntry {
   children: StructureBrowserEntry[];
   values: any;
+}
+
+export interface Filter {
+  kind: 'DATE';
+  field: string;
+  value1?: string;
+  value2?: string;
 }

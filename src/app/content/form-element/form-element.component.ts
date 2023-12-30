@@ -236,7 +236,7 @@ export class FormElementComponent implements OnInit {
 
   changeAutoComplete(option: Option) {
     if (typeof option.value === 'object') {
-      this.addEntry(option.value['value'])
+      this.addEntry(option.value['value']);
     } else {
       this.addEntry(option.value);
     }

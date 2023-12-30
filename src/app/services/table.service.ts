@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
-import { StructureBrowser, Table } from '../model/table';
+import { Filter, StructureBrowser, Table } from '../model/table';
 import { UtilService } from './util.service';
 
 @Injectable({
@@ -21,5 +21,10 @@ export class TableService {
     const url = `${this.utilService.evalApiUrl()}/ui/strctbrws/${id}`;
     const params: any = oid ? { oid: oid } : {};
     return this.http.get<StructureBrowser>(url, { params: params });
+  }
+
+  getFilters(id: string): Observable<Filter[]> {
+    const url = `${this.utilService.evalApiUrl()}/ui/table/${id}/filters`;
+    return this.http.get<Filter[]>(url);
   }
 }

@@ -9,19 +9,24 @@
             <div class="table-header">
                 <div class="left">
                     <p-tieredMenu #menu [model]="menuItems" [popup]="true" [appendTo]="wrapperDiv"></p-tieredMenu>
-                    <button pButton type="button" (click)="menu.toggle($event)" icon="pi pi-bars"
-                        *ngIf="menuItems.length > 0"></button>
+                    <p-button (click)="menu.toggle($event)" icon="pi pi-bars"
+                        *ngIf="menuItems.length > 0"></p-button>
                     {{title}}
                 </div>
                 <div></div>
-                <div>
-                    <div class="p-inputgroup">
-                        <span class="p-inputgroup-addon"><i class="pi pi-search"></i></span>
+                <div class="right">
+                    @if (filtered){
+                        <p-button icon="pi pi-filter" severity="help" (click)="filter()"></p-button >
+                    }
+                    <p-inputGroup>
+                        <p-inputGroupAddon>
+                            <i class="pi pi-search"></i>
+                        </p-inputGroupAddon>
                         <input pInputText type="text" #searchInput [(ngModel)]="globalSearch"
-                            (input)="dt.filterGlobal(searchInput.value, 'contains')" placeholder="buscar" />
-                        <button type="button" pButton icon="pi pi-times" styleClass="p-button-danger" 
-                            (click)="searchInput.value='';dt.filterGlobal('', 'contains')"></button>
-                    </div>
+                            (input)="dt.filterGlobal(searchInput.value, 'contains')" placeholder="buscar" class="p-inputtext-sm"/>
+                        <p-button icon="pi pi-times" 
+                            (click)="searchInput.value='';dt.filterGlobal('', 'contains')"></p-button>
+                    </p-inputGroup>
                 </div>
             </div>
         </ng-template>

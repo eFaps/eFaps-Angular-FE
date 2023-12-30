@@ -1,8 +1,8 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 
 import { SystemConfigurationLinkComponent } from './system-configuration-link.component';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 
 describe('SystemConfigurationLinkComponent', () => {
   let component: SystemConfigurationLinkComponent;
@@ -19,10 +19,9 @@ describe('SystemConfigurationLinkComponent', () => {
           },
         },
         { provide: DynamicDialogRef, useValue: {} },
-      ]
-    })
-    .compileComponents();
-    
+      ],
+    }).compileComponents();
+
     fixture = TestBed.createComponent(SystemConfigurationLinkComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
