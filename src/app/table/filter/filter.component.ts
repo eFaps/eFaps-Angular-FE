@@ -16,7 +16,7 @@ export class FilterComponent implements OnInit {
   constructor(
     private tableService: TableService,
     private config: DynamicDialogConfig,
-    private dialogRef: DynamicDialogRef,
+    private dialogRef: DynamicDialogRef
   ) {
     config.header = 'Filtrar';
   }
@@ -29,23 +29,23 @@ export class FilterComponent implements OnInit {
   }
 
   submit() {
-    console.log(this.id)
-    console.log(this.updatedFilters)
+    console.log(this.id);
+    console.log(this.updatedFilters);
     this.tableService.updateFilters(this.id!!, this.updatedFilters).subscribe({
-      next: _=> {
-        this.dialogRef.close()
-      }
-    })
+      next: (_) => {
+        this.dialogRef.close();
+      },
+    });
   }
 
   onFilterEvent(updatedFilter: Filter) {
-    const index = this.updatedFilters.findIndex(filter => {
-      return filter.field == updatedFilter.field
-    })
+    const index = this.updatedFilters.findIndex((filter) => {
+      return filter.field == updatedFilter.field;
+    });
     if (index > -1) {
-      this.updatedFilters!![index] = updatedFilter
+      this.updatedFilters!![index] = updatedFilter;
     } else {
-      this.updatedFilters.push(updatedFilter)
+      this.updatedFilters.push(updatedFilter);
     }
   }
 }

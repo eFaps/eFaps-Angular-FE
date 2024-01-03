@@ -18,19 +18,19 @@ export class FilterElementComponent {
     this._filter = filter;
     switch (filter.kind) {
       case 'DATE': {
-        const date1 = this.toDate(filter.value1!)
-        const date2 = this.toDate(filter.value2!)
-        this.rangeDates = [date1,date2 ];
+        const date1 = this.toDate(filter.value1!);
+        const date2 = this.toDate(filter.value2!);
+        this.rangeDates = [date1, date2];
       }
     }
   }
 
   private toDate(isoLocalDate: string): Date {
-    const aDate = new Date()
-    aDate.setDate(+isoLocalDate.split("-")[2])
-    aDate.setMonth(+isoLocalDate.split("-")[1] - 1)
-    aDate.setFullYear(+isoLocalDate.split("-")[0])
-    return aDate
+    const aDate = new Date();
+    aDate.setDate(+isoLocalDate.split('-')[2]);
+    aDate.setMonth(+isoLocalDate.split('-')[1] - 1);
+    aDate.setFullYear(+isoLocalDate.split('-')[0]);
+    return aDate;
   }
 
   get filter(): Filter | undefined {
@@ -43,13 +43,17 @@ export class FilterElementComponent {
 
   set rangeDates(rangeDates: Date[]) {
     this._rangeDates = rangeDates;
-    if (rangeDates.length == 2 && rangeDates[0] != null && rangeDates[1] != null) {
+    if (
+      rangeDates.length == 2 &&
+      rangeDates[0] != null &&
+      rangeDates[1] != null
+    ) {
       this.filterEvent.emit({
         kind: this._filter!!.kind,
         attribute: this._filter!!.attribute,
         field: this._filter!!.field,
-        value1: rangeDates[0].toISOString().substring(0,10) ,
-        value2: rangeDates[1].toISOString().substring(0,10), 
+        value1: rangeDates[0].toISOString().substring(0, 10),
+        value2: rangeDates[1].toISOString().substring(0, 10),
       });
     }
   }

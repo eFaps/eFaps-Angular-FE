@@ -241,9 +241,9 @@ export class TableComponent implements OnInit {
       },
     });
     dialogRef.onClose.subscribe({
-      next: _ => {
+      next: (_) => {
         this.loadData();
-      }
-    })
+      },
+    });
   }
 }

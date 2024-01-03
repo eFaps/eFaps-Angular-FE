@@ -3,6 +3,8 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { InputGroupModule } from 'primeng/inputgroup';
+import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
 import { InputTextModule } from 'primeng/inputtext';
 import { TableModule } from 'primeng/table';
 import { TieredMenuModule } from 'primeng/tieredmenu';
@@ -23,6 +25,8 @@ describe('TableComponent', () => {
         TieredMenuModule,
         InputTextModule,
         FormsModule,
+        InputGroupModule,
+        InputGroupAddonModule,
       ],
       declarations: [TableComponent],
     });

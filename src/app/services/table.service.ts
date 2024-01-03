@@ -30,6 +30,6 @@ export class TableService {
 
   updateFilters(id: string, filters: Filter[]): Observable<void> {
     const url = `${this.utilService.evalApiUrl()}/ui/table/${id}/filters`;
-    return this.http.put<void>(url, filters); 
+    return this.http.put<void>(url, filters);
   }
 }
