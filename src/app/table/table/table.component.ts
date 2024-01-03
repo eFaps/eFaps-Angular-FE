@@ -240,5 +240,10 @@ export class TableComponent implements OnInit {
         cmdId,
       },
     });
+    dialogRef.onClose.subscribe({
+      next: _ => {
+        this.loadData();
+      }
+    })
   }
 }

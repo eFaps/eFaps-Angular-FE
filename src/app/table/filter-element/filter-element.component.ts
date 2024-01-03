@@ -46,6 +46,7 @@ export class FilterElementComponent {
     if (rangeDates.length == 2 && rangeDates[0] != null && rangeDates[1] != null) {
       this.filterEvent.emit({
         kind: this._filter!!.kind,
+        attribute: this._filter!!.attribute,
         field: this._filter!!.field,
         value1: rangeDates[0].toISOString().substring(0,10) ,
         value2: rangeDates[1].toISOString().substring(0,10), 

@@ -29,6 +29,7 @@ export interface StructureBrowserEntry {
 
 export interface Filter {
   kind: 'DATE';
+  attribute: string;
   field: string;
   value1?: string;
   value2?: string;

@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnInit } from '@angular/core';
-import { DynamicDialogConfig } from 'primeng/dynamicdialog';
+import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { Filter } from 'src/app/model/table';
 import { TableService } from 'src/app/services/table.service';
 
@@ -15,7 +15,8 @@ export class FilterComponent implements OnInit {
 
   constructor(
     private tableService: TableService,
-    private config: DynamicDialogConfig
+    private config: DynamicDialogConfig,
+    private dialogRef: DynamicDialogRef,
   ) {
     config.header = 'Filtrar';
   }
@@ -27,7 +28,15 @@ export class FilterComponent implements OnInit {
     });
   }
 
-  submit() {}
+  submit() {
+    console.log(this.id)
+    console.log(this.updatedFilters)
+    this.tableService.updateFilters(this.id!!, this.updatedFilters).subscribe({
+      next: _=> {
+        this.dialogRef.close()
+      }
+    })
+  }
 
   onFilterEvent(updatedFilter: Filter) {
     const index = this.updatedFilters.findIndex(filter => {
@@ -38,6 +47,5 @@ export class FilterComponent implements OnInit {
     } else {
       this.updatedFilters.push(updatedFilter)
     }
-    console.log(this.updatedFilters)
   }
 }

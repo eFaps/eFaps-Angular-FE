@@ -27,4 +27,9 @@ export class TableService {
     const url = `${this.utilService.evalApiUrl()}/ui/table/${id}/filters`;
     return this.http.get<Filter[]>(url);
   }
+
+  updateFilters(id: string, filters: Filter[]): Observable<void> {
+    const url = `${this.utilService.evalApiUrl()}/ui/table/${id}/filters`;
+    return this.http.put<void>(url, filters); 
+  }
 }
