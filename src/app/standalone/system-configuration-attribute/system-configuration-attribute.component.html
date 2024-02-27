@@ -7,7 +7,7 @@
             <label htmlFor="key">Key</label>
         </span>
         <span class="p-float-label" *ngIf="type=='STRING' || type=='UNDEFINED'">
-            <input type="text" id="strValue" pInputText [(ngModel)]="strValue" />
+            <textarea rows="5" cols="50" id="strValue" pInputTextarea [autoResize]="true" [(ngModel)]="strValue"></textarea>
             <label htmlFor="strValue">Value</label>
         </span>
         <span class="p-float-label" *ngIf="type=='BOOLEAN'">
