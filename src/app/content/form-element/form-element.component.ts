@@ -200,6 +200,7 @@ export class FormElementComponent implements OnInit {
 
   changeDropdown(value: any) {
     this.addEntry(value);
+    this.fieldUpdate();
   }
 
   changeBitEnum(value: any) {
@@ -310,6 +311,14 @@ export class FormElementComponent implements OnInit {
         } else {
           this.readOnlyValue = value;
         }
+        break;
+      case 'DROPDOWN':
+        if (
+          typeof value == 'string' &&
+          (value as string).startsWith('new Array')
+        ) {
+          this.convertToDropdown(value);
+        } 
         break;
       default:
         this.readOnlyValue = value;
