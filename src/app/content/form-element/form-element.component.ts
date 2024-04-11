@@ -318,7 +318,7 @@ export class FormElementComponent implements OnInit {
           (value as string).startsWith('new Array')
         ) {
           this.convertToDropdown(value);
-        } 
+        }
         break;
       default:
         this.readOnlyValue = value;
@@ -333,12 +333,12 @@ export class FormElementComponent implements OnInit {
       item.type = 'DROPDOWN';
       item.options = [];
       const entries = result[1].split(',');
-      const defVal = entries[0].slice(1,-1);
+      const defVal = entries[0].slice(1, -1);
 
       for (let i = 1; i < entries.length; i = i + 2) {
         item.options.push({
-          label: entries[i + 1].slice(1,-1),
-          value: entries[i].slice(1,-1),
+          label: entries[i + 1].slice(1, -1),
+          value: entries[i].slice(1, -1),
         });
       }
 

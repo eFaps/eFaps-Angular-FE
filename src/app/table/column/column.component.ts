@@ -7,9 +7,9 @@ import {
   ViewChild,
 } from '@angular/core';
 import { Router } from '@angular/router';
+import { saveAs } from 'file-saver';
 import { Column } from 'src/app/model/table';
 import { CheckoutService } from 'src/app/services/checkout.service';
-import { saveAs } from 'file-saver';
 
 @Component({
   selector: 'app-column',
@@ -65,7 +65,7 @@ export class ColumnComponent {
   checkout() {
     this.checkoutService.checkout(this.rowData['OID']).subscribe({
       next: (downloadFile) => {
-        saveAs(downloadFile.blob, downloadFile.fileName)
+        saveAs(downloadFile.blob, downloadFile.fileName);
       },
     });
   }

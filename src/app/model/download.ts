@@ -1,4 +1,4 @@
 export interface DownloadFile {
-    blob: Blob,
-    fileName: string
+  blob: Blob;
+  fileName: string;
 }
