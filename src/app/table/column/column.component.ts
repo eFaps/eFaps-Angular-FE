@@ -9,6 +9,7 @@ import {
 import { Router } from '@angular/router';
 import { Column } from 'src/app/model/table';
 import { CheckoutService } from 'src/app/services/checkout.service';
+import { saveAs } from 'file-saver';
 
 @Component({
   selector: 'app-column',
@@ -63,9 +64,8 @@ export class ColumnComponent {
 
   checkout() {
     this.checkoutService.checkout(this.rowData['OID']).subscribe({
-      next: (blob) => {
-        const url = window.URL.createObjectURL(blob);
-        window.open(url);
+      next: (downloadFile) => {
+        saveAs(downloadFile.blob, downloadFile.fileName)
       },
     });
   }
