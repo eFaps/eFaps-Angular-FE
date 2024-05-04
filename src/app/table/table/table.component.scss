@@ -7,16 +7,37 @@
   align-items: center;
   gap: 5px;
   justify-content: space-between;
+
   .left {
     line-height: 3rem;
+
+    ::ng-deep button {
+      height: 3rem;
+    }
   }
+
   .right {
+
     display: flex;
     gap: 10px;
+
+    .quantity {
+      line-height: 3rem;
+      font-weight: normal;
+      font-size: smaller;
+      width: 150px;
+      text-align: right;
+      vertical-align: middle;
+    }
+
+    ::ng-deep .p-inputgroup {
+      height: 3rem;
+    }
+
     p-button {
       ::ng-deep button {
         vertical-align: middle;
-        line-height: 1.75rem;
+        height: 3rem;
       }
     }
   }
