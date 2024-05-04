@@ -1,7 +1,7 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 
 import { DownloadService } from './download.service';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('DownloadService', () => {
   let service: DownloadService;
