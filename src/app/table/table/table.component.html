@@ -24,7 +24,7 @@
                             <i class="pi pi-search"></i>
                         </p-inputGroupAddon>
                         <input pInputText type="text" #searchInput [(ngModel)]="globalSearch"
-                            (input)="dt.filterGlobal(searchInput.value, 'contains');log(dt)" placeholder="buscar" class="p-inputtext-sm"/>
+                            (input)="dt.filterGlobal(searchInput.value, 'contains')" placeholder="buscar" class="p-inputtext-sm"/>
                         <p-button icon="pi pi-times" 
                             (click)="searchInput.value='';dt.filterGlobal('', 'contains')"></p-button>
                     </p-inputGroup>

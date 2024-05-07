@@ -247,8 +247,4 @@ export class TableComponent implements OnInit {
       },
     });
   }
-
-  log(content: any) {
-console.log(content)
-  }
 }
