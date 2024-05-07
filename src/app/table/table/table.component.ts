@@ -22,6 +22,7 @@ import { SearchService } from 'src/app/services/search.service';
 import { TableService } from 'src/app/services/table.service';
 
 import { FilterComponent } from '../filter/filter.component';
+import { AnyCatcher } from 'rxjs/internal/AnyCatcher';
 
 @Component({
   selector: 'app-table',
@@ -245,5 +246,9 @@ export class TableComponent implements OnInit {
         this.loadData();
       },
     });
+  }
+
+  log(content: any) {
+console.log(content)
   }
 }
