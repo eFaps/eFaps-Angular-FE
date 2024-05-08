@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { CalendarModule } from 'primeng/calendar';
+import { CheckboxModule } from 'primeng/checkbox';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { InputGroupModule } from 'primeng/inputgroup';
 import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
@@ -29,6 +30,7 @@ import { TableComponent } from './table/table.component';
   ],
   imports: [
     CommonModule,
+    CheckboxModule,
     TableRoutingModule,
     primeTableModule,
     MultiSelectModule,

@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Option } from 'src/app/model/content';
 import { Filter } from 'src/app/model/table';
 
 @Component({
@@ -9,6 +10,9 @@ import { Filter } from 'src/app/model/table';
 export class FilterElementComponent {
   _filter: Filter | undefined;
   _rangeDates: Date[] = [];
+
+  _selectedStatus: Option[] = [];
+  statusList: Option[] = [];
 
   @Output()
   filterEvent = new EventEmitter<Filter>();
@@ -21,6 +25,18 @@ export class FilterElementComponent {
         const date1 = this.toDate(filter.value1!);
         const date2 = this.toDate(filter.value2!);
         this.rangeDates = [date1, date2];
+      }
+      case 'STATUS': {
+        this.statusList = filter.value1! as Option[];
+        this.statusList.sort((a, b) => (a.label! > b.label! ? 1 : -1));
+        if (filter.value2 != null) {
+          const selectedKeys = filter.value2 as string[];
+          this.statusList.forEach((opt) => {
+            if (selectedKeys.findIndex((key) => opt.value == key) > -1) {
+              this._selectedStatus.push(opt);
+            }
+          });
+        }
       }
     }
   }
@@ -56,5 +72,20 @@ export class FilterElementComponent {
         value2: rangeDates[1].toISOString().substring(0, 10),
       });
     }
+  }
+
+  get selectedStatus(): Option[] {
+    return this._selectedStatus;
+  }
+
+  set selectedStatus(selectedStatus: Option[]) {
+    this._selectedStatus = selectedStatus;
+    this.filterEvent.emit({
+      kind: this._filter!!.kind,
+      attribute: this._filter!!.attribute,
+      field: this._filter!!.field,
+      value1: this.statusList,
+      value2: this.selectedStatus.map((opt) => opt.value),
+    });
   }
 }

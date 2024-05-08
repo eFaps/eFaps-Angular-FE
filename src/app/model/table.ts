@@ -28,9 +28,9 @@ export interface StructureBrowserEntry {
 }
 
 export interface Filter {
-  kind: 'DATE';
+  kind: 'DATE' | 'STATUS';
   attribute: string;
   field: string;
-  value1?: string;
-  value2?: string;
+  value1?: any;
+  value2?: any;
 }

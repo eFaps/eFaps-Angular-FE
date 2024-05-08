@@ -2,5 +2,14 @@
     @case ('DATE') { 
         <p-calendar [(ngModel)]="rangeDates" selectionMode="range" appendTo="body"></p-calendar>
     }
+    @case ('STATUS') {
+        <div *ngFor="let status of statusList" class="field-checkbox">
+            <p-checkbox 
+                [(ngModel)]="selectedStatus"
+                [label]="status.label" 
+                name="statusFilter" 
+                [value]="status" />
+        </div>
+    }
     @default { <span>What is going on</span> }
 }
