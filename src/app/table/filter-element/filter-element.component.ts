@@ -25,6 +25,7 @@ export class FilterElementComponent {
         const date1 = this.toDate(filter.value1!);
         const date2 = this.toDate(filter.value2!);
         this.rangeDates = [date1, date2];
+        break;
       }
       case 'STATUS': {
         this.statusList = filter.value1! as Option[];
@@ -37,6 +38,7 @@ export class FilterElementComponent {
             }
           });
         }
+        break;
       }
     }
   }
