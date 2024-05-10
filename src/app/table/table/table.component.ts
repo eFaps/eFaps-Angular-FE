@@ -60,7 +60,6 @@ export class TableComponent implements OnInit {
     effect(() => {
       this.hasBreadcrumbs = breadcrumbService.breadcrumbs().length > 0;
     });
-
   }
 
   ngOnInit(): void {

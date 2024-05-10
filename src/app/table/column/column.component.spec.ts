@@ -1,6 +1,6 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
+import { provideRouter } from '@angular/router';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
 
 import { ColumnComponent } from './column.component';
@@ -11,12 +11,9 @@ describe('ColumnComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [
-        RouterTestingModule,
-        HttpClientTestingModule,
-        OverlayPanelModule,
-      ],
+      imports: [HttpClientTestingModule, OverlayPanelModule],
       declarations: [ColumnComponent],
+      providers: [provideRouter([])],
     });
     fixture = TestBed.createComponent(ColumnComponent);
     component = fixture.componentInstance;

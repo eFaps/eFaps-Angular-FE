@@ -18,13 +18,13 @@ import { MessagesModule } from 'primeng/messages';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { PanelModule } from 'primeng/panel';
 import { RadioButtonModule } from 'primeng/radiobutton';
+import { ScrollPanelModule } from 'primeng/scrollpanel';
 import { TableModule } from 'primeng/table';
 import { TabMenuModule } from 'primeng/tabmenu';
 import { TabViewModule } from 'primeng/tabview';
 import { TieredMenuModule } from 'primeng/tieredmenu';
 import { ToolbarModule } from 'primeng/toolbar';
 import { TreeModule } from 'primeng/tree';
-import { ScrollPanelModule } from 'primeng/scrollpanel';
 
 import { SafeHtmlPipe } from '../pipes/safe-html.pipe';
 import { AttributeSetComponent } from './attribute-set/attribute-set.component';
@@ -59,7 +59,7 @@ import { TableSectionComponent } from './table-section/table-section.component';
     AttributeSetComponent,
     ClassificationsComponent,
     ClassificationDisplayComponent,
-    ModalModuleContentComponent
+    ModalModuleContentComponent,
   ],
   imports: [
     CommonModule,
@@ -88,7 +88,7 @@ import { TableSectionComponent } from './table-section/table-section.component';
     TabViewModule,
     TieredMenuModule,
     MessagesModule,
-    ScrollPanelModule
+    ScrollPanelModule,
   ],
 })
 export class ContentModule {}

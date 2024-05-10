@@ -1,6 +1,6 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
+import { provideRouter } from '@angular/router';
 import { DialogService } from 'primeng/dynamicdialog';
 import { MenuModule } from 'primeng/menu';
 import { ToolbarModule } from 'primeng/toolbar';
@@ -14,14 +14,9 @@ describe('FormContentComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [
-        RouterTestingModule,
-        HttpClientTestingModule,
-        ToolbarModule,
-        MenuModule,
-      ],
+      imports: [HttpClientTestingModule, ToolbarModule, MenuModule],
       declarations: [FormContentComponent, SectionsComponent],
-      providers: [{ provide: DialogService, useValue: {} }],
+      providers: [{ provide: DialogService, useValue: {} }, provideRouter([])],
     });
     fixture = TestBed.createComponent(FormContentComponent);
     component = fixture.componentInstance;

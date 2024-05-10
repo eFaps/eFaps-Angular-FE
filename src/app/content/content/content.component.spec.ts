@@ -1,9 +1,10 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
+import { provideRouter } from '@angular/router';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { DialogModule } from 'primeng/dialog';
 import { DialogService } from 'primeng/dynamicdialog';
+import { ScrollPanelModule } from 'primeng/scrollpanel';
 import { TabViewModule } from 'primeng/tabview';
 import { TieredMenuModule } from 'primeng/tieredmenu';
 import { ToolbarModule } from 'primeng/toolbar';
@@ -19,15 +20,15 @@ describe('ContentComponent', () => {
     TestBed.configureTestingModule({
       imports: [
         DialogModule,
-        RouterTestingModule,
         HttpClientTestingModule,
         ToolbarModule,
         TabViewModule,
         ConfirmDialogModule,
         TieredMenuModule,
+        ScrollPanelModule,
       ],
       declarations: [ContentComponent, SectionsComponent],
-      providers: [{ provide: DialogService, useValue: {} }],
+      providers: [{ provide: DialogService, useValue: {} }, provideRouter([])],
     });
     fixture = TestBed.createComponent(ContentComponent);
     component = fixture.componentInstance;

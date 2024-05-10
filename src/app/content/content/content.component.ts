@@ -1,4 +1,10 @@
-import { ChangeDetectorRef, Component, OnDestroy, OnInit, effect } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  OnDestroy,
+  OnInit,
+  effect,
+} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ConfirmationService, MenuItem } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
@@ -7,6 +13,7 @@ import { Subscription } from 'rxjs';
 import { Classification } from 'src/app/model/classification';
 import { Section, isOutline } from 'src/app/model/content';
 import { MenuEntry } from 'src/app/model/menu';
+import { BreadcrumbService } from 'src/app/services/breadcrumb.service';
 import { ContentService } from 'src/app/services/content.service';
 import { ExecService } from 'src/app/services/exec.service';
 import { MenuActionProvider, toMenuItems } from 'src/app/services/menu.service';
@@ -15,7 +22,6 @@ import { TableComponent } from 'src/app/table/table/table.component';
 import { FormContentComponent } from '../form-content/form-content.component';
 import { ModalContentComponent } from '../modal-content/modal-content.component';
 import { ModalModuleContentComponent } from '../modal-module-content/modal-module-content.component';
-import { BreadcrumbService } from 'src/app/services/breadcrumb.service';
 
 @Component({
   selector: 'app-content',
@@ -46,7 +52,7 @@ export class ContentComponent implements OnInit, OnDestroy {
     private confirmationService: ConfirmationService,
     private dialogService: DialogService,
     private contentService: ContentService,
-    private execService: ExecService,
+    private execService: ExecService
   ) {
     effect(() => {
       this.hasBreadcrumbs = breadcrumbService.breadcrumbs().length > 0;
