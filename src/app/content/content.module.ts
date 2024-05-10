@@ -24,6 +24,7 @@ import { TabViewModule } from 'primeng/tabview';
 import { TieredMenuModule } from 'primeng/tieredmenu';
 import { ToolbarModule } from 'primeng/toolbar';
 import { TreeModule } from 'primeng/tree';
+import { ScrollPanelModule } from 'primeng/scrollpanel';
 
 import { SafeHtmlPipe } from '../pipes/safe-html.pipe';
 import { AttributeSetComponent } from './attribute-set/attribute-set.component';
@@ -58,7 +59,7 @@ import { TableSectionComponent } from './table-section/table-section.component';
     AttributeSetComponent,
     ClassificationsComponent,
     ClassificationDisplayComponent,
-    ModalModuleContentComponent,
+    ModalModuleContentComponent
   ],
   imports: [
     CommonModule,
@@ -87,6 +88,7 @@ import { TableSectionComponent } from './table-section/table-section.component';
     TabViewModule,
     TieredMenuModule,
     MessagesModule,
+    ScrollPanelModule
   ],
 })
 export class ContentModule {}

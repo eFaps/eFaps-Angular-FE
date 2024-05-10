@@ -1,23 +1,26 @@
-<p-toolbar class="toolbar">
-    <div class="p-toolbar-group-start">
-        <ng-container *ngIf="activeIndex==0">
-            <p-tieredMenu #menu [model]="menuItems" [popup]="true"></p-tieredMenu>
-            <p-button *ngIf="menuItems.length > 0" (click)="menu.toggle($event)" icon="pi pi-bars"></p-button>
-        </ng-container>
-        <div class="mainHeader">{{mainHeader}}</div>
+<p-scrollPanel [style]="hasBreadcrumbs ? { width: '100%', height:'calc(100vh - 150px)' } : { width: '100%', height:'calc(100vh - 100px)' }">
+    <p-toolbar class="toolbar">
+        <div class="p-toolbar-group-start">
+            <ng-container *ngIf="activeIndex==0">
+                <p-tieredMenu #menu [model]="menuItems" [popup]="true"></p-tieredMenu>
+                <p-button *ngIf="menuItems.length > 0" (click)="menu.toggle($event)" icon="pi pi-bars"></p-button>
+            </ng-container>
+            <div class="mainHeader">{{mainHeader}}</div>
+        </div>
+    </p-toolbar>
+    <div class="tabs">
+        <p-tabView [(activeIndex)]="activeIndex" (onChange)="onTabChange($event)">
+            <p-tabPanel *ngFor="let tab of tabs;let indexOfelement=index;">
+                <ng-template pTemplate="header">
+                    <i *ngIf="indexOfelement==0" class="pi pi-fw pi-map-marker"></i>
+                    <span *ngIf="indexOfelement!=0">{{tab.label}}</span>
+                </ng-template>
+            </p-tabPanel>
+        </p-tabView>
     </div>
-</p-toolbar>
-<div class="tabs">
-    <p-tabView [(activeIndex)]="activeIndex" (onChange)="onTabChange($event)">
-        <p-tabPanel *ngFor="let tab of tabs;let indexOfelement=index;">
-            <ng-template pTemplate="header">
-                <i *ngIf="indexOfelement==0" class="pi pi-fw pi-map-marker"></i>
-                <span *ngIf="indexOfelement!=0">{{tab.label}}</span>
-            </ng-template>
-        </p-tabPanel>
-    </p-tabView>
-</div>
-<app-classification-display *ngIf="activeIndex==0 && classifications" [classifications]="classifications"></app-classification-display>
-<app-sections *ngIf="activeIndex==0" [sections]="sections"></app-sections>
-<router-outlet name="contentOutlet" (activate)="onActivate($event)"></router-outlet>
-<p-confirmDialog></p-confirmDialog>
+    <app-classification-display *ngIf="activeIndex==0 && classifications"
+        [classifications]="classifications"></app-classification-display>
+    <app-sections *ngIf="activeIndex==0" [sections]="sections"></app-sections>
+    <router-outlet name="contentOutlet" (activate)="onActivate($event)"></router-outlet>
+    <p-confirmDialog></p-confirmDialog>
+</p-scrollPanel>

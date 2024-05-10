@@ -1,5 +1,5 @@
 <p-confirmDialog></p-confirmDialog>
-<div #wrapperDiv style="height: calc(100vh - 100px)">
+<div #wrapperDiv [style.height]="hasBreadcrumbs ? 'calc(100vh - 150px)' : 'calc(100vh - 100px)'">
     <p-table #dt [columns]="cols" [value]="elements" styleClass="p-datatable-gridlines p-datatable-striped"
         [scrollable]="true" scrollHeight="flex" [virtualScroll]="true" [virtualScrollItemSize]="42"
         [tableStyle]="{ 'min-width': '50rem' }" sortMode="multiple" [selectionMode]="selectionMode"

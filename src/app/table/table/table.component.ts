@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, effect } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import {
   ConfirmationService,
@@ -43,6 +43,7 @@ export class TableComponent implements OnInit {
   storageKey = 'temp';
   globalSearch = '';
   filtered: boolean = false;
+  hasBreadcrumbs = true;
 
   idEmitter = new EventEmitter<string>();
 
@@ -55,7 +56,12 @@ export class TableComponent implements OnInit {
     private execService: ExecService,
     private searchService: SearchService,
     private breadcrumbService: BreadcrumbService
-  ) {}
+  ) {
+    effect(() => {
+      this.hasBreadcrumbs = breadcrumbService.breadcrumbs().length > 0;
+    });
+
+  }
 
   ngOnInit(): void {
     this.loading = true;

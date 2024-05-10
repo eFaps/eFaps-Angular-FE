@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit, effect } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ConfirmationService, MenuItem } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
@@ -15,6 +15,7 @@ import { TableComponent } from 'src/app/table/table/table.component';
 import { FormContentComponent } from '../form-content/form-content.component';
 import { ModalContentComponent } from '../modal-content/modal-content.component';
 import { ModalModuleContentComponent } from '../modal-module-content/modal-module-content.component';
+import { BreadcrumbService } from 'src/app/services/breadcrumb.service';
 
 @Component({
   selector: 'app-content',
@@ -30,6 +31,7 @@ export class ContentComponent implements OnInit, OnDestroy {
   sections: Section[] = [];
   activeItem: MenuItem | undefined = undefined;
   classifications: Classification[] | undefined;
+  hasBreadcrumbs = false;
 
   activeIndex: number = 0;
   private subscribtions = new Subscription();
@@ -37,14 +39,19 @@ export class ContentComponent implements OnInit, OnDestroy {
   contentOutletId: string | undefined;
 
   constructor(
+    breadcrumbService: BreadcrumbService,
     private changeDetectorRef: ChangeDetectorRef,
     private router: Router,
     private route: ActivatedRoute,
     private confirmationService: ConfirmationService,
     private dialogService: DialogService,
     private contentService: ContentService,
-    private execService: ExecService
-  ) {}
+    private execService: ExecService,
+  ) {
+    effect(() => {
+      this.hasBreadcrumbs = breadcrumbService.breadcrumbs().length > 0;
+    });
+  }
   ngOnDestroy(): void {
     this.subscribtions.unsubscribe();
   }

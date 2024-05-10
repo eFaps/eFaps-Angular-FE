@@ -1,7 +1,7 @@
-import { Injectable, Signal, WritableSignal, signal } from '@angular/core';
+import { Injectable, WritableSignal, signal } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { MenuItem, MenuItemCommandEvent } from 'primeng/api';
-import { BehaviorSubject, filter } from 'rxjs';
+import { filter } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
