@@ -4,7 +4,7 @@
         [scrollable]="true" scrollHeight="flex" [virtualScroll]="true" [virtualScrollItemSize]="42"
         [tableStyle]="{ 'min-width': '50rem' }" sortMode="multiple" [selectionMode]="selectionMode"
         [(selection)]="selectedElements" [resizableColumns]="true" [loading]="loading" stateStorage="local"
-        [stateKey]="storageKey" (onStateRestore)="stateRestore($event)" [reorderableColumns]="true">
+        [stateKey]="storageKey" (onStateRestore)="stateRestore($event)" [reorderableColumns]="true" [exportFilename]="title">
         <ng-template pTemplate="caption">
             <div class="table-header">
                 <div class="left">
@@ -16,8 +16,9 @@
                 <div></div>
                 <div class="right">
                     <span class="quantity">Cantidad: {{dt.filteredValue?.length ? dt.filteredValue?.length + ' /' : ''}} {{elements.length}}</span>
-                    <button type="button" pButton pRipple icon="pi pi-file" (click)="dt.exportCSV()" class="mr-2" pTooltip="CSV" tooltipPosition="bottom"></button>
-                    <button type="button" pButton pRipple icon="pi pi-file-pdf" (click)="exportPdf()" class="p-button-warning mr-2" pTooltip="PDF" tooltipPosition="bottom"></button>
+                    <button type="button" pButton pRipple icon="pi pi-file" (click)="dt.exportCSV({})" pTooltip="CSV" tooltipPosition="bottom"></button>
+                    <button type="button" pButton pRipple icon="pi pi-file-excel" (click)="exportExcel()"  pTooltip="XLS" tooltipPosition="bottom"></button>
+                    <button type="button" pButton pRipple icon="pi pi-file-pdf" (click)="exportPdf()" pTooltip="PDF" tooltipPosition="bottom"></button>
             
                     @if (filtered){
                         <p-button icon="pi pi-filter" severity="help" (click)="filter()"></p-button >

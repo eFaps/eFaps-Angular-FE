@@ -1,5 +1,6 @@
 import { Component, EventEmitter, OnInit, effect } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import FileSaver from 'file-saver';
 import {
   ConfirmationService,
   FilterMetadata,
@@ -46,7 +47,6 @@ export class TableComponent implements OnInit {
   hasBreadcrumbs = true;
 
   idEmitter = new EventEmitter<string>();
-
 
   constructor(
     private route: ActivatedRoute,
@@ -253,13 +253,46 @@ export class TableComponent implements OnInit {
     });
   }
   exportPdf() {
-    import("jspdf").then(jsPDF => {
-        import("jspdf-autotable").then(x => {
-            const exportColumns = this.cols.map(col => ({title: col.header, dataKey: col.field}));
-            const doc = new jsPDF.default();
-            (doc as any).autoTable(exportColumns, this.elements);
-            doc.save('products.pdf');
-        })
-    })
-}
+    import('jspdf').then((jsPDF) => {
+      import('jspdf-autotable').then((x) => {
+        const exportColumns = this.cols.map((col) => ({
+          title: col.header,
+          dataKey: col.field,
+        }));
+        const doc = new jsPDF.default();
+        (doc as any).autoTable(exportColumns, this.elements);
+        doc.save(this.title + '.pdf');
+      });
+    });
+  }
+
+  exportExcel() {
+    import('xlsx').then((xlsx) => {
+      const data: any[] = [];
+      this.elements.forEach((element) => {
+        const row: any = {};
+        data.push(row);
+        this.cols.forEach((col) => {
+          row[col.header] = element[col.field];
+        });
+      });
+      const worksheet = xlsx.utils.json_to_sheet(data);
+      const workbook = { Sheets: { data: worksheet }, SheetNames: ['data'] };
+      const excelBuffer: any = xlsx.write(workbook, {
+        bookType: 'xlsx',
+        type: 'array',
+      });
+      this.saveAsExcelFile(excelBuffer, this.title);
+    });
+  }
+
+  saveAsExcelFile(buffer: any, fileName: string): void {
+    let EXCEL_TYPE =
+      'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
+    let EXCEL_EXTENSION = '.xlsx';
+    const data: Blob = new Blob([buffer], {
+      type: EXCEL_TYPE,
+    });
+    FileSaver.saveAs(data, fileName + EXCEL_EXTENSION);
+  }
 }
