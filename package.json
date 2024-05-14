@@ -25,6 +25,8 @@
     "angular-gridster2": "^17.0.0",
     "chart.js": "^4.4.2",
     "file-saver": "^2.0.5",
+    "jspdf": "^2.5.1",
+    "jspdf-autotable": "^3.8.2",
     "keycloak-angular": "^15.2.1",
     "keycloak-js": "^22.0.5",
     "primeicons": "^6.0.1",

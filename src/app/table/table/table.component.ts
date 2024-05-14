@@ -47,6 +47,7 @@ export class TableComponent implements OnInit {
 
   idEmitter = new EventEmitter<string>();
 
+
   constructor(
     private route: ActivatedRoute,
     private confirmationService: ConfirmationService,
@@ -251,4 +252,14 @@ export class TableComponent implements OnInit {
       },
     });
   }
+  exportPdf() {
+    import("jspdf").then(jsPDF => {
+        import("jspdf-autotable").then(x => {
+            const exportColumns = this.cols.map(col => ({title: col.header, dataKey: col.field}));
+            const doc = new jsPDF.default();
+            (doc as any).autoTable(exportColumns, this.elements);
+            doc.save('products.pdf');
+        })
+    })
+}
 }
