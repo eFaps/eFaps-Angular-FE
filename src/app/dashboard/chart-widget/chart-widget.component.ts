@@ -10,7 +10,7 @@ import { DashboardService } from 'src/app/services/dashboard.service';
 export class ChartWidgetComponent {
   _widget: ChartWidget | undefined;
 
-  type = 'bar';
+  type : "bar" | "line" | "scatter" | "bubble" | "pie" | "doughnut" | "polarArea" | "radar" | undefined = "bar";
   data: any;
   options: any;
 
