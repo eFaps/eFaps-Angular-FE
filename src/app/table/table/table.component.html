@@ -6,9 +6,9 @@
         [(selection)]="selectedElements" [resizableColumns]="true" [loading]="loading" stateStorage="local"
         [stateKey]="storageKey" (onStateRestore)="stateRestore($event)" [reorderableColumns]="true" [exportFilename]="title">
         <ng-template pTemplate="caption">
-            <div class="table-header">
-                <div class="left">
-                    <p-tieredMenu #menu [model]="menuItems" [popup]="true" [appendTo]="wrapperDiv"></p-tieredMenu>
+            <div class="table-header" >
+                <div class="left" >
+                    <p-tieredMenu #menu [model]="menuItems" popup="true" appendTo="body"></p-tieredMenu>
                     <p-button (click)="menu.toggle($event)" icon="pi pi-bars"
                         *ngIf="menuItems.length > 0"></p-button>
                     {{title}}

@@ -11,6 +11,11 @@
   .left {
     line-height: 3rem;
 
+    p-button {
+      height: 3rem;
+      display: inline-block;
+    }
+
     ::ng-deep button {
       height: 3rem;
     }
