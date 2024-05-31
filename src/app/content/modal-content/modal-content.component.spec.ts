@@ -1,4 +1,4 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ButtonModule } from 'primeng/button';
 import {
@@ -11,6 +11,7 @@ import { Observable } from 'rxjs';
 import { ClassificationDisplayComponent } from '../classification-display/classification-display.component';
 import { SectionsComponent } from '../sections/sections.component';
 import { ModalContentComponent } from './modal-content.component';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 describe('ModalContentComponent', () => {
   let component: ModalContentComponent;
@@ -18,35 +19,37 @@ describe('ModalContentComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [DynamicDialogModule, HttpClientTestingModule, ButtonModule],
-      declarations: [
+    declarations: [
         ModalContentComponent,
         SectionsComponent,
         ClassificationDisplayComponent,
-      ],
-      providers: [
+    ],
+    imports: [DynamicDialogModule, ButtonModule],
+    providers: [
         {
-          provide: DynamicDialogConfig,
-          useValue: {
-            data: {
-              outline: {
-                header: {},
-              },
+            provide: DynamicDialogConfig,
+            useValue: {
+                data: {
+                    outline: {
+                        header: {},
+                    },
+                },
             },
-          },
         },
         {
-          provide: DynamicDialogRef,
-          useValue: {
-            onClose: {
-              subscribe(): Observable<any> {
-                return new Observable();
-              },
+            provide: DynamicDialogRef,
+            useValue: {
+                onClose: {
+                    subscribe(): Observable<any> {
+                        return new Observable();
+                    },
+                },
             },
-          },
         },
-      ],
-    });
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting(),
+    ]
+});
     fixture = TestBed.createComponent(ModalContentComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

@@ -1,8 +1,9 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 
 import { SystemConfigurationLinkComponent } from './system-configuration-link.component';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 describe('SystemConfigurationLinkComponent', () => {
   let component: SystemConfigurationLinkComponent;
@@ -10,17 +11,19 @@ describe('SystemConfigurationLinkComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [SystemConfigurationLinkComponent, HttpClientTestingModule],
-      providers: [
+    imports: [SystemConfigurationLinkComponent],
+    providers: [
         {
-          provide: DynamicDialogConfig,
-          useValue: {
-            data: {},
-          },
+            provide: DynamicDialogConfig,
+            useValue: {
+                data: {},
+            },
         },
         { provide: DynamicDialogRef, useValue: {} },
-      ],
-    }).compileComponents();
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting(),
+    ]
+}).compileComponents();
 
     fixture = TestBed.createComponent(SystemConfigurationLinkComponent);
     component = fixture.componentInstance;

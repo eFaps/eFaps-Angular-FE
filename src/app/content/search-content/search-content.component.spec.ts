@@ -1,4 +1,4 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ButtonModule } from 'primeng/button';
 import { DividerModule } from 'primeng/divider';
@@ -10,6 +10,7 @@ import {
 
 import { FormSectionComponent } from '../form-section/form-section.component';
 import { SearchContentComponent } from './search-content.component';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 describe('SearchContentComponent', () => {
   let component: SearchContentComponent;
@@ -17,32 +18,31 @@ describe('SearchContentComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [
-        DynamicDialogModule,
-        HttpClientTestingModule,
+    declarations: [SearchContentComponent, FormSectionComponent],
+    imports: [DynamicDialogModule,
         DividerModule,
-        ButtonModule,
-      ],
-      declarations: [SearchContentComponent, FormSectionComponent],
-      providers: [
+        ButtonModule],
+    providers: [
         {
-          provide: DynamicDialogConfig,
-          useValue: {
-            data: {
-              searches: [
-                {
-                  selected: true,
-                  children: [],
-                  label: 'Label',
-                  formSection: {},
+            provide: DynamicDialogConfig,
+            useValue: {
+                data: {
+                    searches: [
+                        {
+                            selected: true,
+                            children: [],
+                            label: 'Label',
+                            formSection: {},
+                        },
+                    ],
                 },
-              ],
             },
-          },
         },
         { provide: DynamicDialogRef, useValue: {} },
-      ],
-    });
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting(),
+    ]
+});
     fixture = TestBed.createComponent(SearchContentComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

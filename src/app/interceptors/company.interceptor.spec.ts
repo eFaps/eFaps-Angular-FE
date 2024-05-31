@@ -1,14 +1,15 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 
 import { CompanyInterceptor } from './company.interceptor';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 describe('CompanyInterceptor', () => {
   beforeEach(() =>
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
-      providers: [CompanyInterceptor],
-    })
+    imports: [],
+    providers: [CompanyInterceptor, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+})
   );
 
   it('should be created', () => {

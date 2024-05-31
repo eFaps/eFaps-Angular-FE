@@ -1,4 +1,4 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { KeycloakService } from 'keycloak-angular';
@@ -8,23 +8,23 @@ import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { ToastModule } from 'primeng/toast';
 
 import { AppComponent } from './app.component';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 describe('AppComponent', () => {
   beforeEach(() =>
     TestBed.configureTestingModule({
-      imports: [
-        RouterTestingModule,
-        HttpClientTestingModule,
+    declarations: [AppComponent],
+    imports: [RouterTestingModule,
         MenubarModule,
         ToastModule,
-        OverlayPanelModule,
-      ],
-      declarations: [AppComponent],
-      providers: [
+        OverlayPanelModule],
+    providers: [
         { provide: MessageService, useValue: {} },
         { provide: KeycloakService, useValue: {} },
-      ],
-    })
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting(),
+    ]
+})
   );
 
   it('should create the app', () => {

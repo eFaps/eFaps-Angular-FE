@@ -1,8 +1,9 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 
 import { LogbackComponent } from './logback.component';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 describe('LogbackComponent', () => {
   let component: LogbackComponent;
@@ -10,17 +11,19 @@ describe('LogbackComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [LogbackComponent, HttpClientTestingModule],
-      providers: [
+    imports: [LogbackComponent],
+    providers: [
         {
-          provide: DynamicDialogConfig,
-          useValue: {
-            data: {},
-          },
+            provide: DynamicDialogConfig,
+            useValue: {
+                data: {},
+            },
         },
         { provide: DynamicDialogRef, useValue: {} },
-      ],
-    });
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting(),
+    ]
+});
     fixture = TestBed.createComponent(LogbackComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
