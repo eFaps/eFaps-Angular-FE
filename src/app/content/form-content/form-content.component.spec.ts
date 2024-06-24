@@ -1,3 +1,7 @@
+import {
+  provideHttpClient,
+  withInterceptorsFromDi,
+} from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
@@ -7,7 +11,6 @@ import { ToolbarModule } from 'primeng/toolbar';
 
 import { SectionsComponent } from '../sections/sections.component';
 import { FormContentComponent } from './form-content.component';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 describe('FormContentComponent', () => {
   let component: FormContentComponent;
@@ -15,10 +18,15 @@ describe('FormContentComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-    declarations: [FormContentComponent, SectionsComponent],
-    imports: [ToolbarModule, MenuModule],
-    providers: [{ provide: DialogService, useValue: {} }, provideRouter([]), provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
-});
+      declarations: [FormContentComponent, SectionsComponent],
+      imports: [ToolbarModule, MenuModule],
+      providers: [
+        { provide: DialogService, useValue: {} },
+        provideRouter([]),
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting(),
+      ],
+    });
     fixture = TestBed.createComponent(FormContentComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

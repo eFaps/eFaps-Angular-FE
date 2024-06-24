@@ -252,7 +252,7 @@ export class TableComponent implements OnInit {
       },
     });
   }
-  
+
   exportPdf() {
     import('jspdf').then((jsPDF) => {
       import('jspdf-autotable').then((x) => {
@@ -260,7 +260,7 @@ export class TableComponent implements OnInit {
           title: col.header,
           dataKey: col.field,
         }));
-        const doc = new jsPDF.default("landscape");
+        const doc = new jsPDF.default('landscape');
         (doc as any).autoTable(exportColumns, this.elements);
         doc.save(this.title + '.pdf');
       });

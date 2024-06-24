@@ -1,8 +1,11 @@
+import {
+  provideHttpClient,
+  withInterceptorsFromDi,
+} from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ClassificationDisplayComponent } from './classification-display.component';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 describe('ClassificationDisplayComponent', () => {
   let component: ClassificationDisplayComponent;
@@ -10,10 +13,13 @@ describe('ClassificationDisplayComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-    declarations: [ClassificationDisplayComponent],
-    imports: [],
-    providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
-});
+      declarations: [ClassificationDisplayComponent],
+      imports: [],
+      providers: [
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting(),
+      ],
+    });
     fixture = TestBed.createComponent(ClassificationDisplayComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

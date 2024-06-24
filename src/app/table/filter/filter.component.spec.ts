@@ -1,3 +1,7 @@
+import {
+  provideHttpClient,
+  withInterceptorsFromDi,
+} from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ButtonModule } from 'primeng/button';
@@ -9,7 +13,6 @@ import {
 import { Observable } from 'rxjs';
 
 import { FilterComponent } from './filter.component';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 describe('FilterComponent', () => {
   let component: FilterComponent;
@@ -17,33 +20,33 @@ describe('FilterComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-    declarations: [FilterComponent],
-    imports: [DynamicDialogModule, ButtonModule],
-    providers: [
+      declarations: [FilterComponent],
+      imports: [DynamicDialogModule, ButtonModule],
+      providers: [
         {
-            provide: DynamicDialogConfig,
-            useValue: {
-                data: {
-                    outline: {
-                        header: {},
-                    },
-                },
+          provide: DynamicDialogConfig,
+          useValue: {
+            data: {
+              outline: {
+                header: {},
+              },
             },
+          },
         },
         {
-            provide: DynamicDialogRef,
-            useValue: {
-                onClose: {
-                    subscribe(): Observable<any> {
-                        return new Observable();
-                    },
-                },
+          provide: DynamicDialogRef,
+          useValue: {
+            onClose: {
+              subscribe(): Observable<any> {
+                return new Observable();
+              },
             },
+          },
         },
         provideHttpClient(withInterceptorsFromDi()),
         provideHttpClientTesting(),
-    ]
-}).compileComponents();
+      ],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(FilterComponent);
     component = fixture.componentInstance;

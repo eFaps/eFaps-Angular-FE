@@ -8,12 +8,12 @@
     <ng-template pTemplate="end">
         <div class="wrapper">
             <div>
-                <span class="p-input-icon-left">
-                    <i class="pi pi-search"></i>
-                    <input type="text" pInputText #searchInput
+                <p-iconField iconPosition="left">
+                    <p-inputIcon styleClass="pi pi-search" />
+                    <input type="text" pInputText #searchInput placeholder="buscar"
                         (keyup.enter)="indexSearch($event, searchInput.value, searchOp)"
                         (focus)='focusSearch($event, searchOp)' />
-                </span>
+                </p-iconField>
             </div>
             <div class="info">
                 {{company()?.name}}

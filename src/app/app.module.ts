@@ -1,5 +1,9 @@
 import { registerLocaleData } from '@angular/common';
-import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import {
+  HTTP_INTERCEPTORS,
+  provideHttpClient,
+  withInterceptorsFromDi,
+} from '@angular/common/http';
 import localeEs from '@angular/common/locales/es';
 import { APP_INITIALIZER, LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -12,6 +16,8 @@ import { BreadcrumbModule } from 'primeng/breadcrumb';
 import { ButtonModule } from 'primeng/button';
 import { DividerModule } from 'primeng/divider';
 import { DynamicDialogModule } from 'primeng/dynamicdialog';
+import { IconFieldModule } from 'primeng/iconfield';
+import { InputIconModule } from 'primeng/inputicon';
 import { InputTextModule } from 'primeng/inputtext';
 import { MenubarModule } from 'primeng/menubar';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
@@ -31,35 +37,43 @@ import { ThemeChooserComponent } from './standalone/theme-chooser/theme-chooser.
 
 registerLocaleData(localeEs, 'es');
 
-@NgModule({ declarations: [AppComponent],
-    bootstrap: [AppComponent], imports: [BrowserModule,
-        AppRoutingModule,
-        MenubarModule,
-        KeycloakAngularModule,
-        BrowserAnimationsModule,
-        ButtonModule,
-        OverlayPanelModule,
-        DynamicDialogModule,
-        ProgressBarModule,
-        InputTextModule,
-        ToastModule,
-        TableModule,
-        DividerModule,
-        ThemeChooserComponent,
-        WebStorageModule,
-        BreadcrumbModule], providers: [
-        MessageService,
-        {
-            provide: APP_INITIALIZER,
-            useFactory: initApp,
-            multi: true,
-            deps: [ConfigService, KeycloakService],
-        },
-        { provide: HTTP_INTERCEPTORS, useClass: CompanyInterceptor, multi: true },
-        { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true },
-        { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
-        { provide: RouteReuseStrategy, useClass: RoutePathReuseStrategy },
-        { provide: LOCALE_ID, useValue: 'es' },
-        provideHttpClient(withInterceptorsFromDi()),
-    ] })
+@NgModule({
+  declarations: [AppComponent],
+  bootstrap: [AppComponent],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    MenubarModule,
+    KeycloakAngularModule,
+    BrowserAnimationsModule,
+    ButtonModule,
+    OverlayPanelModule,
+    DynamicDialogModule,
+    ProgressBarModule,
+    IconFieldModule,
+    InputIconModule,
+    InputTextModule,
+    ToastModule,
+    TableModule,
+    DividerModule,
+    ThemeChooserComponent,
+    WebStorageModule,
+    BreadcrumbModule,
+  ],
+  providers: [
+    MessageService,
+    {
+      provide: APP_INITIALIZER,
+      useFactory: initApp,
+      multi: true,
+      deps: [ConfigService, KeycloakService],
+    },
+    { provide: HTTP_INTERCEPTORS, useClass: CompanyInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    { provide: RouteReuseStrategy, useClass: RoutePathReuseStrategy },
+    { provide: LOCALE_ID, useValue: 'es' },
+    provideHttpClient(withInterceptorsFromDi()),
+  ],
+})
 export class AppModule {}

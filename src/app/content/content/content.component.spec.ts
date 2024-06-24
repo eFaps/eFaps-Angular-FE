@@ -1,3 +1,7 @@
+import {
+  provideHttpClient,
+  withInterceptorsFromDi,
+} from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
@@ -11,7 +15,6 @@ import { ToolbarModule } from 'primeng/toolbar';
 
 import { SectionsComponent } from '../sections/sections.component';
 import { ContentComponent } from './content.component';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 describe('ContentComponent', () => {
   let component: ContentComponent;
@@ -19,15 +22,22 @@ describe('ContentComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-    declarations: [ContentComponent, SectionsComponent],
-    imports: [DialogModule,
+      declarations: [ContentComponent, SectionsComponent],
+      imports: [
+        DialogModule,
         ToolbarModule,
         TabViewModule,
         ConfirmDialogModule,
         TieredMenuModule,
-        ScrollPanelModule],
-    providers: [{ provide: DialogService, useValue: {} }, provideRouter([]), provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
-});
+        ScrollPanelModule,
+      ],
+      providers: [
+        { provide: DialogService, useValue: {} },
+        provideRouter([]),
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting(),
+      ],
+    });
     fixture = TestBed.createComponent(ContentComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

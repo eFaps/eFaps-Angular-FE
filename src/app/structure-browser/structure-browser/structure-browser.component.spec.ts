@@ -1,3 +1,7 @@
+import {
+  provideHttpClient,
+  withInterceptorsFromDi,
+} from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
@@ -8,7 +12,6 @@ import { MenuModule } from 'primeng/menu';
 import { TreeTableModule } from 'primeng/treetable';
 
 import { StructureBrowserComponent } from './structure-browser.component';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 describe('StructureBrowserComponent', () => {
   let component: StructureBrowserComponent;
@@ -16,13 +19,15 @@ describe('StructureBrowserComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-    declarations: [StructureBrowserComponent],
-    imports: [ConfirmDialogModule,
-        TreeTableModule,
-        MenuModule,
-        FormsModule],
-    providers: [{ provide: DialogService, useValue: {} }, provideRouter([]), provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
-});
+      declarations: [StructureBrowserComponent],
+      imports: [ConfirmDialogModule, TreeTableModule, MenuModule, FormsModule],
+      providers: [
+        { provide: DialogService, useValue: {} },
+        provideRouter([]),
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting(),
+      ],
+    });
     fixture = TestBed.createComponent(StructureBrowserComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

@@ -1,3 +1,7 @@
+import {
+  provideHttpClient,
+  withInterceptorsFromDi,
+} from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
@@ -10,7 +14,6 @@ import { TableModule } from 'primeng/table';
 import { TieredMenuModule } from 'primeng/tieredmenu';
 
 import { TableComponent } from './table.component';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 describe('TableComponent', () => {
   let component: TableComponent;
@@ -18,17 +21,22 @@ describe('TableComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-    declarations: [TableComponent],
-    imports: [RouterTestingModule,
+      declarations: [TableComponent],
+      imports: [
+        RouterTestingModule,
         ConfirmDialogModule,
         TableModule,
         TieredMenuModule,
         InputTextModule,
         FormsModule,
         InputGroupModule,
-        InputGroupAddonModule],
-    providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
-});
+        InputGroupAddonModule,
+      ],
+      providers: [
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting(),
+      ],
+    });
     fixture = TestBed.createComponent(TableComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
