@@ -28,7 +28,7 @@
     "jspdf": "^2.5.1",
     "jspdf-autotable": "^3.8.2",
     "keycloak-angular": "^16.0.1",
-    "keycloak-js": "^22.0.5",
+    "keycloak-js": "^24.0.5",
     "primeicons": "^6.0.1",
     "primeng": "^17.18.1",
     "rxjs": "~7.8.0",
