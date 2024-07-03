@@ -80,3 +80,8 @@ export interface TableColumn {
   type?: 'INPUT' | 'AUTOCOMPLETE';
   updateRef?: string;
 }
+
+export interface AttributeSetEntry {
+  rowId: number;
+  values: Array<FormItem>;
+}

@@ -60,4 +60,35 @@ export class ValueService {
     });
     this.currentValue.next(this.valueMap);
   }
+
+  addSetEntry(entry: {
+    setName: String;
+    rowId: number;
+    name: string;
+    value: any;
+  }) {
+    if (this.valueMap == null) {
+      this.valueMap = new Map();
+    }
+    if (!this.valueMap.has(entry.setName)) {
+      this.valueMap.set(entry.setName, {});
+    }
+    const setValue = this.valueMap.get(entry.setName);
+    if (setValue[entry.rowId] == null) {
+      setValue[entry.rowId] = new Map();
+    }
+    setValue[entry.rowId][entry.name] = entry.value;
+    this.currentValue.next(this.valueMap);
+  }
+
+  removeSetEntry(setName: string, rowId: string | number) {
+    if (this.valueMap != null) {
+      if (this.valueMap.has(setName)) {
+        const setValue = this.valueMap.get(setName);
+        delete setValue[rowId];
+        console.log();
+      }
+      this.currentValue.next(this.valueMap);
+    }
+  }
 }

@@ -27,6 +27,7 @@ import { ToolbarModule } from 'primeng/toolbar';
 import { TreeModule } from 'primeng/tree';
 
 import { SafeHtmlPipe } from '../pipes/safe-html.pipe';
+import { AttributeSetElementComponent } from './attribute-set-element/attribute-set-element.component';
 import { AttributeSetComponent } from './attribute-set/attribute-set.component';
 import { ClassificationDisplayComponent } from './classification-display/classification-display.component';
 import { ClassificationsComponent } from './classifications/classifications.component';
@@ -57,6 +58,7 @@ import { TableSectionComponent } from './table-section/table-section.component';
     TableElementComponent,
     SearchContentComponent,
     AttributeSetComponent,
+    AttributeSetElementComponent,
     ClassificationsComponent,
     ClassificationDisplayComponent,
     ModalModuleContentComponent,
