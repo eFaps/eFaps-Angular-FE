@@ -1,4 +1,4 @@
-import { KeycloakService } from 'keycloak-angular';
+import { KeycloakEventType, KeycloakService } from 'keycloak-angular';
 
 import { ConfigService } from '../services/config.service';
 
@@ -23,5 +23,12 @@ export function initApp(
           })
           .then(() => resolve(true));
       });
+      keycloak.keycloakEvents$.subscribe({
+        next: event => {
+          if (KeycloakEventType.OnAuthSuccess == event.type) {
+            console.log("juhu")
+          }
+        }
+      })
     });
 }
