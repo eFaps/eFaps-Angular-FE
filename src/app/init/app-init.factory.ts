@@ -24,11 +24,11 @@ export function initApp(
           .then(() => resolve(true));
       });
       keycloak.keycloakEvents$.subscribe({
-        next: event => {
+        next: (event) => {
           if (KeycloakEventType.OnAuthSuccess == event.type) {
-            console.log("juhu")
+            console.log('juhu');
           }
-        }
-      })
+        },
+      });
     });
 }
