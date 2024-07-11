@@ -1,9 +1,11 @@
 import { KeycloakEventType, KeycloakService } from 'keycloak-angular';
 
 import { ConfigService } from '../services/config.service';
+import { UserService } from '../services/user.service';
 
 export function initApp(
   configService: ConfigService,
+  userService: UserService,
   keycloak: KeycloakService
 ) {
   return () =>
@@ -26,7 +28,7 @@ export function initApp(
       keycloak.keycloakEvents$.subscribe({
         next: (event) => {
           if (KeycloakEventType.OnAuthSuccess == event.type) {
-            console.log('juhu');
+            userService.getCurrentUser(true).subscribe();
           }
         },
       });

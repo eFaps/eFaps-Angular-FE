@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable, Signal, WritableSignal, signal } from '@angular/core';
-import { BehaviorSubject, Observable, map } from 'rxjs';
+import { Injectable, WritableSignal, signal } from '@angular/core';
+import { Observable, map } from 'rxjs';
 
 import { Company, User } from '../model/user';
 import { UtilService } from './util.service';
@@ -13,9 +13,14 @@ export class UserService {
 
   constructor(private http: HttpClient, private utilService: UtilService) {}
 
-  getCurrentUser(): Observable<User> {
+  getCurrentUser(sync?: boolean): Observable<User> {
     const url = `${this.utilService.evalApiUrl()}/ui/user/current`;
-    return this.http.get<User>(url).pipe(
+    let options = undefined;
+    if (sync) {
+      options = { params: { sync: true } };
+    }
+    console.log('sync', sync);
+    return this.http.get<User>(url, options).pipe(
       map((user) => {
         if (user.companies.length > 1) {
           var currentCompany = user.companies.find((element) => {

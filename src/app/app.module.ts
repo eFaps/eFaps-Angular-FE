@@ -33,6 +33,7 @@ import { CompanyInterceptor } from './interceptors/company.interceptor';
 import { ErrorInterceptor } from './interceptors/error.interceptor';
 import { LoaderInterceptor } from './interceptors/loader.interceptor';
 import { ConfigService } from './services/config.service';
+import { UserService } from './services/user.service';
 import { ThemeChooserComponent } from './standalone/theme-chooser/theme-chooser.component';
 
 registerLocaleData(localeEs, 'es');
@@ -66,7 +67,7 @@ registerLocaleData(localeEs, 'es');
       provide: APP_INITIALIZER,
       useFactory: initApp,
       multi: true,
-      deps: [ConfigService, KeycloakService],
+      deps: [ConfigService, UserService, KeycloakService],
     },
     { provide: HTTP_INTERCEPTORS, useClass: CompanyInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true },
