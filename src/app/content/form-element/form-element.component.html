@@ -76,6 +76,11 @@
         <ng-container *ngSwitchCase="'CLASSIFICATION'">
             <p-button icon="pi pi-bookmark" size="small" severity="secondary" (click)="classSel()"></p-button>
         </ng-container>
+        <ng-container *ngSwitchCase="'IMAGE'">
+            @if(readOnlyValue != null) {
+                <p-image [src]="evalImageUrl()" alt="Image" width="250" [preview]="true"/>
+            }
+        </ng-container>
         <ng-container *ngSwitchDefault>
             <div *ngIf="formItem?.navRef != null" class="navRef">
                 <p-button icon="pi pi-link" [rounded]="true" [outlined]="true" (click)="followLink()"

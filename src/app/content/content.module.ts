@@ -10,6 +10,7 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { DividerModule } from 'primeng/divider';
 import { DropdownModule } from 'primeng/dropdown';
 import { FileUploadModule } from 'primeng/fileupload';
+import { ImageModule } from 'primeng/image';
 import { InputTextModule } from 'primeng/inputtext';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { MenuModule } from 'primeng/menu';
@@ -74,6 +75,7 @@ import { TableSectionComponent } from './table-section/table-section.component';
     ConfirmDialogModule,
     ToolbarModule,
     InputTextModule,
+    ImageModule,
     FormsModule,
     RadioButtonModule,
     DropdownModule,

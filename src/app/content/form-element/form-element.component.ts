@@ -346,4 +346,9 @@ export class FormElementComponent implements OnInit {
       this.addEntry(this.dropdownValue);
     }
   }
+
+  evalImageUrl(): string {
+    const url = `${this.utilService.evalApiUrl()}${this.readOnlyValue}`;
+    return url;
+  }
 }
