@@ -154,6 +154,8 @@ export class ContentComponent implements OnInit, OnDestroy {
         return (event) => {
           this.formAction(item);
         };
+      default: 
+         console.log("No item action type?")
     }
     return undefined;
   };
