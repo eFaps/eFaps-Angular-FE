@@ -45,6 +45,7 @@ export interface FormItem {
     | 'ATTRSET'
     | 'CHECKBOX'
     | 'TEXTAREA'
+    | 'TIME'
     | 'BUTTON'
     | 'CLASSIFICATION';
   label: string;

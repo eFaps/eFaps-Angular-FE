@@ -38,6 +38,7 @@ export class FormElementComponent implements OnInit {
   snippletValue: any;
   dateValue: any;
   dateTimeValue: any;
+  timeValue: any;
   checkboxValue: any;
   textareaValue: any;
 
@@ -170,6 +171,17 @@ export class FormElementComponent implements OnInit {
           this.addEntry(this.formItem?.value);
         }
         break;
+      case 'TIME':
+        if (this.formItem?.value != null) {
+          const timeArray = this.formItem?.value.split(':');
+          let dateTime = new Date();
+          dateTime.setHours(timeArray[0]);
+          dateTime.setMinutes(timeArray[1]);
+          dateTime.setSeconds(timeArray[2]);
+          this.timeValue = dateTime;
+          this.changeTime(this.timeValue);
+        }
+        break;
       default:
         if (this.formItem?.value && this.formItem?.value instanceof Array) {
           this.readOnlyValue = this.formItem.value.join(', ');
@@ -218,6 +230,14 @@ export class FormElementComponent implements OnInit {
   changeDateTime(value: any) {
     if (value instanceof Date) {
       this.addEntry(value.toISOString());
+    } else {
+      this.addEntry(null);
+    }
+  }
+
+  changeTime(value: any) {
+    if (value instanceof Date) {
+      this.addEntry(`${value.getHours()}:${value.getMinutes()}`);
     } else {
       this.addEntry(null);
     }

@@ -61,6 +61,10 @@
             <p-calendar [(ngModel)]="dateTimeValue" #date [showIcon]="true" (onBlur)="changeDateTime(date.value)"
                 (onSelect)="changeDateTime($event)" [showTime]="true" appendTo="body"></p-calendar>
         </ng-container>
+        <ng-container *ngSwitchCase="'TIME'">
+            <p-calendar [(ngModel)]="timeValue" #date [showIcon]="true" (onBlur)="changeTime(date.value)"
+                (onSelect)="changeTime($event)" appendTo="body" [timeOnly]="true"></p-calendar>
+        </ng-container>
         <ng-container *ngSwitchCase="'ATTRSET'">
             <app-attribute-set [formItem]="formItem"></app-attribute-set>
         </ng-container>
