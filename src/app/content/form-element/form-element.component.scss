@@ -5,6 +5,7 @@
 
     .label {
         flex-grow: 1;
+        flex-shrink: 0;
         background-color: var(--highlight-bg);
         color: var(--primary-color);
         padding: var(--inline-spacing);
@@ -23,7 +24,7 @@
         background-color: var(--surface-section);
         padding: 0.5rem;
         line-height: 3rem;
-        white-space: pre;
+        white-space-collapse: preserve;
 
         .navRef {
             height: 2rem;
