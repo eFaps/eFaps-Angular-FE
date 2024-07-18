@@ -70,7 +70,25 @@ export class FormElementComponent implements OnInit {
     this.validationService.registerValidation((values) => {
       let valid = true;
       if (this.formItem?.required) {
-        valid = values.has(this.formItem.name);
+        valid = false;
+        if (
+          values.has(this.formItem.name) &&
+          values.get(this.formItem.name) != null
+        ) {
+          switch (typeof values.get(this.formItem.name)) {
+            case 'string':
+              valid = values.get(this.formItem.name).length > 0;
+              break;
+            case 'number':
+            case 'bigint':
+            case 'boolean':
+            case 'symbol':
+            case 'undefined':
+            case 'object':
+            case 'function':
+            default:
+          }
+        }
       }
       if (valid) {
         this.messages = [];
