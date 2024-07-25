@@ -53,6 +53,11 @@ p-dropdown {
     line-height: 1rem;
 }
 
+::ng-deep p-radiobutton {
+    vertical-align: middle;
+    margin-right: 0.5rem;
+}
+
 
 ::ng-deep .p-fileupload-row  {
     div:nth-child(1) {
