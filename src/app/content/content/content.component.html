@@ -9,11 +9,11 @@
         </div>
     </p-toolbar>
     <div class="tabs">
-        <p-tabView [(activeIndex)]="activeIndex" (onChange)="onTabChange($event)">
+        <p-tabView [(activeIndex)]="activeIndex" (onChange)="onTabChange($event)" [scrollable]="true">
             <p-tabPanel *ngFor="let tab of tabs;let indexOfelement=index;">
                 <ng-template pTemplate="header">
                     <i *ngIf="indexOfelement==0" class="pi pi-fw pi-map-marker"></i>
-                    <span *ngIf="indexOfelement!=0">{{tab.label}}</span>
+                    <span *ngIf="indexOfelement!=0" class="tabLabel">{{tab.label}}</span>
                 </ng-template>
             </p-tabPanel>
         </p-tabView>
