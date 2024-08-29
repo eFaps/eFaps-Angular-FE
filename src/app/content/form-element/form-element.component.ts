@@ -185,7 +185,9 @@ export class FormElementComponent implements OnInit {
           } else {
             const hours = -Math.floor(new Date().getTimezoneOffset() / 60);
             const minutes = new Date().getTimezoneOffset() % 60;
-            const dateStr = `${this.formItem?.value}GMT${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
+            const dateStr = `${this.formItem?.value}GMT${hours
+              .toString()
+              .padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
             this.dateValue = new Date(dateStr);
           }
           this.changeDate(this.dateValue);
