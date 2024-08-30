@@ -1,5 +1,5 @@
 .p-datatable-wrapper {
-  min-height: calc(100vh - 90px);
+//  min-height: calc(100vh - 90px);
 }
 
 .table-header {
@@ -46,4 +46,15 @@
       }
     }
   }
+}
+.paginator {
+  background-color: red;
+  width: 100vw;
+}
+::ng-deep .p-datatable-footer {
+  padding: 0;
+}
+
+::ng-deep .p-datatable-footer:has(.empty) {
+  display: none;
 }

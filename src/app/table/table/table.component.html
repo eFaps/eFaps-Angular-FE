@@ -1,7 +1,8 @@
 <p-confirmDialog></p-confirmDialog>
-<div #wrapperDiv [style.height]="styleHeight">
+@if (tableLoaded) {
+<div #wrapperDiv>
     <p-table #dt [columns]="cols" [value]="elements" styleClass="p-datatable-gridlines p-datatable-striped"
-        [scrollable]="true" scrollHeight="flex" [virtualScroll]="true" [virtualScrollItemSize]="42"
+        [scrollable]="true" [scrollHeight]="scrollHeight" [virtualScroll]="true" [virtualScrollItemSize]="42"
         [tableStyle]="{ 'min-width': '50rem' }" sortMode="multiple" [selectionMode]="selectionMode"
         [(selection)]="selectedElements" [resizableColumns]="true" [loading]="loading" stateStorage="local"
         [stateKey]="storageKey" (onStateRestore)="stateRestore($event)" [reorderableColumns]="true" [exportFilename]="title">
@@ -61,14 +62,21 @@
                 </td>
             </tr>
         </ng-template>
+        <ng-template pTemplate="summary">
+            @if (paginated) {
+                <p-paginator 
+                    (onPageChange)="onPageChange($event)" 
+                    [rows]="page?.pageSize" 
+                    [totalRecords]="page?.totalItems" 
+                    [rowsPerPageOptions]="page?.pageOptions" 
+                    [showCurrentPageReport]="true"
+                    currentPageReportTemplate="{first} - {last} de {totalRecords}" />
+            } @else {
+                <div class="empty"></div>
+            }
+        </ng-template>
     </p-table>
-    @if (paginated) {
-        <p-paginator 
-            (onPageChange)="onPageChange($event)" 
-            [rows]="page?.pageSize" 
-            [totalRecords]="page?.totalItems" 
-            [rowsPerPageOptions]="page?.pageOptions" 
-            [showCurrentPageReport]="true"
-            currentPageReportTemplate="{first} - {last} de {totalRecords}" />
-    }
 </div>
+}
+
+

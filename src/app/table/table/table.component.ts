@@ -1,4 +1,11 @@
-import { Component, EventEmitter, OnInit, effect } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  EventEmitter,
+  OnInit,
+  ViewChild,
+  effect,
+} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import FileSaver from 'file-saver';
 import {
@@ -9,7 +16,7 @@ import {
 } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
 import { PaginatorState } from 'primeng/paginator';
-import { TablePageEvent } from 'primeng/table';
+import { Table } from 'primeng/table';
 import { combineLatest } from 'rxjs';
 import { ModalContentComponent } from 'src/app/content/modal-content/modal-content.component';
 import { ModalModuleContentComponent } from 'src/app/content/modal-module-content/modal-module-content.component';
@@ -22,6 +29,7 @@ import { ContentService } from 'src/app/services/content.service';
 import { ExecService } from 'src/app/services/exec.service';
 import { MenuActionProvider, toMenuItems } from 'src/app/services/menu.service';
 import { SearchService } from 'src/app/services/search.service';
+import { StyleService } from 'src/app/services/style.service';
 import { TableService } from 'src/app/services/table.service';
 
 import { FilterComponent } from '../filter/filter.component';
@@ -47,12 +55,16 @@ export class TableComponent implements OnInit {
   globalSearch = '';
   filtered: boolean = false;
   hasBreadcrumbs = true;
-
+  tableLoaded = false;
   page: Page | undefined = undefined;
 
   idEmitter = new EventEmitter<string>();
 
+  scrollHeight = '500px';
+
+  @ViewChild(Table) table: Table | undefined = undefined;
   constructor(
+    private cdRef: ChangeDetectorRef,
     private route: ActivatedRoute,
     private confirmationService: ConfirmationService,
     private dialogService: DialogService,
@@ -60,7 +72,8 @@ export class TableComponent implements OnInit {
     private tableService: TableService,
     private execService: ExecService,
     private searchService: SearchService,
-    private breadcrumbService: BreadcrumbService
+    private breadcrumbService: BreadcrumbService,
+    private styleService: StyleService
   ) {
     effect(() => {
       this.hasBreadcrumbs = breadcrumbService.breadcrumbs().length > 0;
@@ -93,6 +106,9 @@ export class TableComponent implements OnInit {
     this.selectedElements = [];
     this.tableService.getTable(this.id!!, this.oid).subscribe({
       next: (val) => {
+        this.page = val.page;
+        this.evalScrollHeight();
+        this.tableLoaded = true;
         this.title = val.header;
         this.evalColumns4Order(val.columns);
         this.filtered = val.filtered;
@@ -100,7 +116,6 @@ export class TableComponent implements OnInit {
         this.selectionMode = val.selectionMode;
         this.loading = false;
         this.menuItems = toMenuItems(val.menu, this.actionProvider);
-        this.page = val.page;
       },
     });
   }
@@ -321,14 +336,22 @@ export class TableComponent implements OnInit {
       });
   }
 
-  get styleHeight(): string {
-    let offset = 100;
+  evalScrollHeight() {
+    // TODO this values change depending on the browser and if it is compact or not
+    let height = window.innerHeight;
+
+    const offset = Math.round(this.styleService.menuBarHeight());
+
+    // substract menuBar and  tableheader
+    height = height - offset - 90;
+
     if (this.hasBreadcrumbs) {
-      offset = offset + 50;
+      height = height - 50;
     }
+
     if (this.paginated) {
-      offset = offset + 60;
+      height = height - 70;
     }
-    return `calc(100vh - ${offset}px)`;
+    this.scrollHeight = `${height}px`;
   }
 }

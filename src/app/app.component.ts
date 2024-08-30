@@ -1,8 +1,10 @@
 import {
   ChangeDetectorRef,
   Component,
+  ElementRef,
   OnInit,
   Signal,
+  ViewChild,
   computed,
 } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
@@ -10,6 +12,7 @@ import { Router } from '@angular/router';
 import { KeycloakService } from 'keycloak-angular';
 import { PrimeNGConfig } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
+import { Menubar } from 'primeng/menubar';
 import { OverlayPanel } from 'primeng/overlaypanel';
 import { environment } from 'src/environments/environment';
 
@@ -32,6 +35,7 @@ import {
   toMenuItem,
 } from './services/menu.service';
 import { SearchService } from './services/search.service';
+import { StyleService } from './services/style.service';
 import { UserService } from './services/user.service';
 import { CompanyChooserComponent } from './standalone/company-chooser/company-chooser.component';
 
@@ -76,7 +80,8 @@ export class AppComponent implements OnInit {
     private contentService: ContentService,
     private indexSearchService: IndexSearchService,
     private searchService: SearchService,
-    private breadcrumbService: BreadcrumbService
+    private breadcrumbService: BreadcrumbService,
+    private styleService: StyleService
   ) {}
 
   ngOnInit() {
@@ -88,6 +93,18 @@ export class AppComponent implements OnInit {
         this.user = user;
       },
     });
+  }
+
+  @ViewChild(Menubar) set menuBar(element: Menubar) {
+    const observer = new ResizeObserver((entries: ResizeObserverEntry[]) => {
+      const style = getComputedStyle(element.el.nativeElement.childNodes[0]);
+      const top = parseInt(style.paddingTop, 10);
+      const bottom = parseInt(style.paddingBottom, 10);
+      this.styleService.menuBarHeight.set(
+        entries[0].contentRect.height + top + bottom
+      );
+    });
+    observer.observe(element.el.nativeElement.childNodes[0]);
   }
 
   set user(user: User | undefined) {
