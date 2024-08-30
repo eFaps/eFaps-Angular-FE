@@ -8,13 +8,15 @@ import {
   TableState,
 } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
+import { PaginatorState } from 'primeng/paginator';
+import { TablePageEvent } from 'primeng/table';
 import { combineLatest } from 'rxjs';
 import { ModalContentComponent } from 'src/app/content/modal-content/modal-content.component';
 import { ModalModuleContentComponent } from 'src/app/content/modal-module-content/modal-module-content.component';
 import { SearchContentComponent } from 'src/app/content/search-content/search-content.component';
 import { isOutline } from 'src/app/model/content';
 import { MenuEntry } from 'src/app/model/menu';
-import { Column } from 'src/app/model/table';
+import { Column, Page } from 'src/app/model/table';
 import { BreadcrumbService } from 'src/app/services/breadcrumb.service';
 import { ContentService } from 'src/app/services/content.service';
 import { ExecService } from 'src/app/services/exec.service';
@@ -45,6 +47,8 @@ export class TableComponent implements OnInit {
   globalSearch = '';
   filtered: boolean = false;
   hasBreadcrumbs = true;
+
+  page: Page | undefined = undefined;
 
   idEmitter = new EventEmitter<string>();
 
@@ -96,6 +100,7 @@ export class TableComponent implements OnInit {
         this.selectionMode = val.selectionMode;
         this.loading = false;
         this.menuItems = toMenuItems(val.menu, this.actionProvider);
+        this.page = val.page;
       },
     });
   }
@@ -295,5 +300,35 @@ export class TableComponent implements OnInit {
       type: EXCEL_TYPE,
     });
     FileSaver.saveAs(data, fileName + EXCEL_EXTENSION);
+  }
+
+  get paginated(): boolean {
+    return this.page != null;
+  }
+
+  onPageChange(event: PaginatorState) {
+    this.loading = true;
+    this.tableService
+      .getPageData(this.id!!, event.rows!!, event.page!!, this.oid)
+      .subscribe({
+        next: (val) => {
+          this.elements = val.values;
+          const pageOptTemp = this.page?.pageOptions!;
+          this.page = val.page;
+          this.page.pageOptions = pageOptTemp;
+          this.loading = false;
+        },
+      });
+  }
+
+  get styleHeight(): string {
+    let offset = 100;
+    if (this.hasBreadcrumbs) {
+      offset = offset + 50;
+    }
+    if (this.paginated) {
+      offset = offset + 60;
+    }
+    return `calc(100vh - ${offset}px)`;
   }
 }

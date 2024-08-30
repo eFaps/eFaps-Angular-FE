@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
-import { Filter, StructureBrowser, Table } from '../model/table';
+import { Filter, PagedData, StructureBrowser, Table } from '../model/table';
 import { UtilService } from './util.service';
 
 @Injectable({
@@ -31,5 +31,13 @@ export class TableService {
   updateFilters(id: string, filters: Filter[]): Observable<void> {
     const url = `${this.utilService.evalApiUrl()}/ui/table/${id}/filters`;
     return this.http.put<void>(url, filters);
+  }
+
+  getPageData(id: string, pageSize: number, pageNo: number, oid?: string) {
+    const url = `${this.utilService.evalApiUrl()}/ui/table/${id}/pagination`;
+    const params: any = oid ? { oid: oid } : {};
+    params['pageSize'] = pageSize;
+    params['pageNo'] = pageNo;
+    return this.http.get<PagedData>(url, { params: params });
   }
 }

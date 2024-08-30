@@ -12,6 +12,7 @@ import { MenuModule } from 'primeng/menu';
 import { MenubarModule } from 'primeng/menubar';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
+import { PaginatorModule } from 'primeng/paginator';
 import { TableModule as primeTableModule } from 'primeng/table';
 import { TieredMenuModule } from 'primeng/tieredmenu';
 
@@ -45,6 +46,7 @@ import { TableComponent } from './table/table.component';
     OverlayPanelModule,
     TieredMenuModule,
     CalendarModule,
+    PaginatorModule,
   ],
 })
 export class TableModule {}

@@ -7,6 +7,7 @@ export interface Table {
   selectionMode: 'single' | 'multiple' | undefined;
   menu: MenuEntry[];
   filtered: boolean;
+  page?: Page;
 }
 export interface Column {
   header: string;
@@ -33,4 +34,15 @@ export interface Filter {
   field: string;
   value1?: any;
   value2?: any;
+}
+
+export interface Page {
+  pageSize: number;
+  totalItems: number;
+  pageOptions: string[];
+}
+
+export interface PagedData {
+  values: any[];
+  page: Page;
 }
