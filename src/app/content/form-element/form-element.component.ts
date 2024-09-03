@@ -79,11 +79,11 @@ export class FormElementComponent implements OnInit {
             case 'string':
               valid = values.get(this.formItem.name).length > 0;
               break;
+            case 'boolean':
             case 'number':
               valid = true;
               break;
             case 'bigint':
-            case 'boolean':
             case 'symbol':
             case 'undefined':
             case 'object':
