@@ -31,6 +31,11 @@ const routes: Routes = [
       import('./dashboard/dashboard.module').then((m) => m.DashboardModule),
   },
   {
+    path: 'first-time-user',
+    loadComponent: () =>
+      import('./standalone/first-time-user/first-time-user.component').then((mod) => mod.FirstTimeUserComponent),
+  },
+  {
     path: '',
     canActivate: [AuthGuard],
     loadChildren: () =>

@@ -4,11 +4,12 @@ import {
   HttpHandler,
   HttpInterceptor,
   HttpRequest,
+  HttpResponse,
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { MessageService } from 'primeng/api';
-import { Observable, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { Observable, of, throwError } from 'rxjs';
+import { catchError, tap } from 'rxjs/operators';
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
@@ -19,13 +20,16 @@ export class ErrorInterceptor implements HttpInterceptor {
     next: HttpHandler
   ): Observable<HttpEvent<unknown>> {
     return next.handle(request).pipe(
-      catchError((error: HttpErrorResponse) => {
-        this.messageService.add({
-          severity: 'error',
-          summary: error.statusText,
-          detail: error.error.message,
-        });
-        return throwError(error);
+      tap({
+        error: error  => {
+          if (error instanceof HttpErrorResponse) {
+            this.messageService.add({
+              severity: 'error',
+              summary: error.statusText,
+              detail: error.message,
+            });
+          }
+        }
       })
     );
   }

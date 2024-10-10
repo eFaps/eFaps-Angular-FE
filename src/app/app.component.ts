@@ -1,11 +1,10 @@
 import {
-  ChangeDetectorRef,
   Component,
-  ElementRef,
   OnInit,
   Signal,
   ViewChild,
   computed,
+  signal,
 } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { Router } from '@angular/router';
@@ -48,9 +47,7 @@ import { CompanyChooserComponent } from './standalone/company-chooser/company-ch
 export class AppComponent implements OnInit {
   title = 'eFaps-Angular-FE';
 
-  mainMenu: Signal<MenuEntry[] | undefined> = toSignal(
-    this.menuService.getMainMenu()
-  );
+  mainMenu: Signal<MenuEntry[] | undefined> = signal(undefined)
   menuItems = computed(() => {
     return this.mainMenu()?.map((item) =>
       toMenuItem(item, this.actionProvider)
@@ -67,7 +64,7 @@ export class AppComponent implements OnInit {
   searchResult: SearchResult | undefined;
   searchElements: any[] = [];
   version = environment.version;
-
+  
   constructor(
     private router: Router,
     private primengConfig: PrimeNGConfig,
@@ -91,6 +88,9 @@ export class AppComponent implements OnInit {
     this.userService.getCurrentUser().subscribe({
       next: (user) => {
         this.user = user;
+        this.mainMenu =  toSignal(
+          this.menuService.getMainMenu()
+        );
       },
     });
   }

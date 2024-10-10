@@ -1,9 +1,10 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable, WritableSignal, signal } from '@angular/core';
-import { Observable, map } from 'rxjs';
+import { Observable, catchError, map, of, throwError } from 'rxjs';
 
 import { Company, User } from '../model/user';
 import { UtilService } from './util.service';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -11,7 +12,7 @@ import { UtilService } from './util.service';
 export class UserService {
   company: WritableSignal<Company | undefined> = signal(undefined);
 
-  constructor(private http: HttpClient, private utilService: UtilService) {}
+  constructor(private http: HttpClient, private router: Router, private utilService: UtilService) {}
 
   getCurrentUser(sync?: boolean): Observable<User> {
     const url = `${this.utilService.evalApiUrl()}/ui/user/current`;
@@ -19,8 +20,15 @@ export class UserService {
     if (sync) {
       options = { params: { sync: true } };
     }
-    console.log('sync', sync);
     return this.http.get<User>(url, options).pipe(
+      catchError((error) => {
+        if (sync && error.status === 403) {
+          // that means that this is a valid first time login
+          this.router.navigate(['first-time-user'])
+          return of()
+        }
+        return throwError(() => new Error('Something bad happened; please try again later.'))
+      }),
       map((user) => {
         if (user.companies.length > 1) {
           var currentCompany = user.companies.find((element) => {
@@ -43,5 +51,10 @@ export class UserService {
   getCompanies(): Observable<Company[]> {
     const url = `${this.utilService.evalApiUrl()}/ui/user/companies`;
     return this.http.get<Company[]>(url);
+  }
+
+  firstTimeUser() {
+    const url = `${this.utilService.evalApiUrl()}/first-time-user`;
+    return this.http.get(url)
   }
 }
