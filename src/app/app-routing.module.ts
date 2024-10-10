@@ -33,7 +33,9 @@ const routes: Routes = [
   {
     path: 'first-time-user',
     loadComponent: () =>
-      import('./standalone/first-time-user/first-time-user.component').then((mod) => mod.FirstTimeUserComponent),
+      import('./standalone/first-time-user/first-time-user.component').then(
+        (mod) => mod.FirstTimeUserComponent
+      ),
   },
   {
     path: '',

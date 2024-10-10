@@ -21,7 +21,7 @@ export class ErrorInterceptor implements HttpInterceptor {
   ): Observable<HttpEvent<unknown>> {
     return next.handle(request).pipe(
       tap({
-        error: error  => {
+        error: (error) => {
           if (error instanceof HttpErrorResponse) {
             this.messageService.add({
               severity: 'error',
@@ -29,7 +29,7 @@ export class ErrorInterceptor implements HttpInterceptor {
               detail: error.message,
             });
           }
-        }
+        },
       })
     );
   }

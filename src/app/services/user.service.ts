@@ -1,10 +1,10 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable, WritableSignal, signal } from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable, catchError, map, of, throwError } from 'rxjs';
 
 import { Company, User } from '../model/user';
 import { UtilService } from './util.service';
-import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -12,7 +12,11 @@ import { Router } from '@angular/router';
 export class UserService {
   company: WritableSignal<Company | undefined> = signal(undefined);
 
-  constructor(private http: HttpClient, private router: Router, private utilService: UtilService) {}
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    private utilService: UtilService
+  ) {}
 
   getCurrentUser(sync?: boolean): Observable<User> {
     const url = `${this.utilService.evalApiUrl()}/ui/user/current`;
@@ -24,10 +28,12 @@ export class UserService {
       catchError((error) => {
         if (sync && error.status === 403) {
           // that means that this is a valid first time login
-          this.router.navigate(['first-time-user'])
-          return of()
+          this.router.navigate(['first-time-user']);
+          return of();
         }
-        return throwError(() => new Error('Something bad happened; please try again later.'))
+        return throwError(
+          () => new Error('Something bad happened; please try again later.')
+        );
       }),
       map((user) => {
         if (user.companies.length > 1) {
@@ -55,6 +61,6 @@ export class UserService {
 
   firstTimeUser() {
     const url = `${this.utilService.evalApiUrl()}/first-time-user`;
-    return this.http.get(url)
+    return this.http.get(url);
   }
 }

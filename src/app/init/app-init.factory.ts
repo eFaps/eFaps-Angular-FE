@@ -28,9 +28,7 @@ export function initApp(
       keycloak.keycloakEvents$.subscribe({
         next: (event) => {
           if (KeycloakEventType.OnAuthSuccess == event.type) {
-            userService.getCurrentUser(true).subscribe({ error: (response) => {
-console.log(response)
-            }} );
+            userService.getCurrentUser(true).subscribe();
           }
         },
       });
