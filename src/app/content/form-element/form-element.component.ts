@@ -75,20 +75,27 @@ export class FormElementComponent implements OnInit {
           values.has(this.formItem.name) &&
           values.get(this.formItem.name) != null
         ) {
-          switch (typeof values.get(this.formItem.name)) {
-            case 'string':
-              valid = values.get(this.formItem.name).length > 0;
-              break;
-            case 'boolean':
-            case 'number':
-              valid = true;
-              break;
-            case 'bigint':
-            case 'symbol':
-            case 'undefined':
-            case 'object':
-            case 'function':
-            default:
+          if (
+            this.formItem.type == 'UPLOAD' ||
+            this.formItem.type == 'UPLOADMULTIPLE'
+          ) {
+            valid = values.has('eFapsUpload');
+          } else {
+            switch (typeof values.get(this.formItem.name)) {
+              case 'string':
+                valid = values.get(this.formItem.name).length > 0;
+                break;
+              case 'boolean':
+              case 'number':
+                valid = true;
+                break;
+              case 'bigint':
+              case 'symbol':
+              case 'undefined':
+              case 'object':
+              case 'function':
+              default:
+            }
           }
         }
       }
