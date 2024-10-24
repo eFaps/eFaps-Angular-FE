@@ -46,6 +46,7 @@ export class ContentComponent implements OnInit, OnDestroy {
   private subscribtions = new Subscription();
 
   contentOutletId: string | undefined;
+  contentHeight: string = '500px';
 
   constructor(
     breadcrumbService: BreadcrumbService,
@@ -104,6 +105,7 @@ export class ContentComponent implements OnInit, OnDestroy {
               this.navigate(navIndex);
             }
           }
+          this.evaluateContentHeight();
         } else {
           console.log(val);
         }
@@ -241,5 +243,26 @@ export class ContentComponent implements OnInit, OnDestroy {
       });
       observer.observe(element.nativeElement);
     }
+  }
+
+  evaluateContentHeight() {
+    let height = window.innerHeight;
+
+    const menuBarHeight = Math.round(this.styleService.menuBarHeight());
+    const breadcrumbHeight = Math.round(this.styleService.breadcrumbHeight());
+    const contenHeaderHeight = Math.round(
+      this.styleService.contentHeaderHeight()
+    );
+
+    height = height - menuBarHeight - breadcrumbHeight - 2;
+
+    this.contentHeight = `${height}px`;
+    /**
+    console.log(`innerHeight: ${window.innerHeight}
+      menuBarHeight: ${menuBarHeight}, 
+      breadcrumbHeight: ${breadcrumbHeight}, 
+      contenHeaderHeight: ${contenHeaderHeight},
+      contentHeight: ${this.contentHeight}`);
+    */
   }
 }

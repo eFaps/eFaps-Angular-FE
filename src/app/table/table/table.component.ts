@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, effect } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import FileSaver from 'file-saver';
 import {
@@ -330,7 +330,7 @@ export class TableComponent implements OnInit {
       this.styleService.contentHeaderHeight()
     );
 
-    height = height - menuBarHeight - breadcrumbHeight - contenHeaderHeight;
+    height = height - menuBarHeight - breadcrumbHeight - contenHeaderHeight - 2;
 
     this.contentHeight = `${height}px`;
     /**
@@ -339,6 +339,6 @@ export class TableComponent implements OnInit {
       breadcrumbHeight: ${breadcrumbHeight}, 
       contenHeaderHeight: ${contenHeaderHeight},
       contentHeight: ${this.contentHeight}`);
-       */
+     */
   }
 }

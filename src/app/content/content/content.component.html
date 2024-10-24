@@ -1,4 +1,4 @@
-<p-scrollPanel [style]="hasBreadcrumbs ? { width: '100%', height:'calc(100vh - 150px)' } : { width: '100%', height:'calc(100vh - 100px)' }">
+<div [style.height]="contentHeight" class="contentWrapper">
     <div #contentHeader>
         <p-toolbar class="toolbar">
             <div class="p-toolbar-group-start">
@@ -25,4 +25,4 @@
     <app-sections *ngIf="activeIndex==0" [sections]="sections"></app-sections>
     <router-outlet name="contentOutlet" (activate)="onActivate($event)"></router-outlet>
     <p-confirmDialog></p-confirmDialog>
-</p-scrollPanel>
+</div>
