@@ -1,8 +1,8 @@
 <p-confirmDialog></p-confirmDialog>
 @if (tableLoaded) {
-<div #wrapperDiv>
+<div #wrapperDiv [style.height]="contentHeight">
     <p-table #dt [columns]="cols" [value]="elements" styleClass="p-datatable-gridlines p-datatable-striped"
-        [scrollable]="true" [scrollHeight]="scrollHeight" [virtualScroll]="true" [virtualScrollItemSize]="42"
+        [scrollable]="true" scrollHeight="flex" [virtualScroll]="true" [virtualScrollItemSize]="42"
         [tableStyle]="{ 'min-width': '50rem' }" sortMode="multiple" [selectionMode]="selectionMode"
         [(selection)]="selectedElements" [resizableColumns]="true" [loading]="loading" stateStorage="local"
         [stateKey]="storageKey" (onStateRestore)="stateRestore($event)" [reorderableColumns]="true" [exportFilename]="title">

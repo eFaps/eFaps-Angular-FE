@@ -1,4 +1,4 @@
-<div *ngIf="!editable">
+@if(!editable) {
     <p-table [columns]="cols" [value]="elements" styleClass="p-datatable-gridlines p-datatable-striped">
         <ng-template pTemplate="caption" *ngIf="editable">
             <div class="flex align-items-center justify-content-between">
@@ -26,8 +26,7 @@
             </tr>
         </ng-template>
     </p-table>
-</div>
-<div *ngIf="editable">
+} @else {
     <p-table [columns]="cols" [value]="elements" styleClass="p-datatable-gridlines p-datatable-striped" [resizableColumns]="true">
         <ng-template pTemplate="caption" *ngIf="editable">
             <div class="flex align-items-center justify-content-between">
@@ -51,4 +50,4 @@
             </tr>
         </ng-template>
     </p-table>
-</div>
+}

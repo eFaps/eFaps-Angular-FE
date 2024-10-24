@@ -1,11 +1,4 @@
-import {
-  ChangeDetectorRef,
-  Component,
-  EventEmitter,
-  OnInit,
-  ViewChild,
-  effect,
-} from '@angular/core';
+import { Component, EventEmitter, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import FileSaver from 'file-saver';
 import {
@@ -16,7 +9,6 @@ import {
 } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
 import { PaginatorState } from 'primeng/paginator';
-import { Table } from 'primeng/table';
 import { combineLatest } from 'rxjs';
 import { ModalContentComponent } from 'src/app/content/modal-content/modal-content.component';
 import { ModalModuleContentComponent } from 'src/app/content/modal-module-content/modal-module-content.component';
@@ -54,17 +46,14 @@ export class TableComponent implements OnInit {
   storageKey = 'temp';
   globalSearch = '';
   filtered: boolean = false;
-  hasBreadcrumbs = true;
   tableLoaded = false;
   page: Page | undefined = undefined;
 
   idEmitter = new EventEmitter<string>();
 
-  scrollHeight = '500px';
+  contentHeight: string = '500px';
 
-  @ViewChild(Table) table: Table | undefined = undefined;
   constructor(
-    private cdRef: ChangeDetectorRef,
     private route: ActivatedRoute,
     private confirmationService: ConfirmationService,
     private dialogService: DialogService,
@@ -74,11 +63,7 @@ export class TableComponent implements OnInit {
     private searchService: SearchService,
     private breadcrumbService: BreadcrumbService,
     private styleService: StyleService
-  ) {
-    effect(() => {
-      this.hasBreadcrumbs = breadcrumbService.breadcrumbs().length > 0;
-    });
-  }
+  ) {}
 
   ngOnInit(): void {
     this.loading = true;
@@ -107,13 +92,13 @@ export class TableComponent implements OnInit {
     this.tableService.getTable(this.id!!, this.oid).subscribe({
       next: (val) => {
         this.page = val.page;
-        this.evalScrollHeight();
-        this.tableLoaded = true;
+        this.evalContentHeight();
         this.title = val.header;
         this.evalColumns4Order(val.columns);
         this.filtered = val.filtered;
         this.elements = val.values;
         this.selectionMode = val.selectionMode;
+        this.tableLoaded = true;
         this.loading = false;
         this.menuItems = toMenuItems(val.menu, this.actionProvider);
       },
@@ -336,22 +321,24 @@ export class TableComponent implements OnInit {
       });
   }
 
-  evalScrollHeight() {
-    // TODO this values change depending on the browser and if it is compact or not
+  evalContentHeight() {
     let height = window.innerHeight;
 
-    const offset = Math.round(this.styleService.menuBarHeight());
+    const menuBarHeight = Math.round(this.styleService.menuBarHeight());
+    const breadcrumbHeight = Math.round(this.styleService.breadcrumbHeight());
+    const contenHeaderHeight = Math.round(
+      this.styleService.contentHeaderHeight()
+    );
 
-    // substract menuBar and  tableheader
-    height = height - offset - 90;
+    height = height - menuBarHeight - breadcrumbHeight - contenHeaderHeight;
 
-    if (this.hasBreadcrumbs) {
-      height = height - 50;
-    }
-
-    if (this.paginated) {
-      height = height - 70;
-    }
-    this.scrollHeight = `${height}px`;
+    this.contentHeight = `${height}px`;
+    /**
+    console.log(`innerHeight: ${window.innerHeight}
+      menuBarHeight: ${menuBarHeight}, 
+      breadcrumbHeight: ${breadcrumbHeight}, 
+      contenHeaderHeight: ${contenHeaderHeight},
+      contentHeight: ${this.contentHeight}`);
+       */
   }
 }

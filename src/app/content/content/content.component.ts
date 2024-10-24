@@ -1,8 +1,10 @@
 import {
   ChangeDetectorRef,
   Component,
+  ElementRef,
   OnDestroy,
   OnInit,
+  ViewChild,
   effect,
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -17,6 +19,7 @@ import { BreadcrumbService } from 'src/app/services/breadcrumb.service';
 import { ContentService } from 'src/app/services/content.service';
 import { ExecService } from 'src/app/services/exec.service';
 import { MenuActionProvider, toMenuItems } from 'src/app/services/menu.service';
+import { StyleService } from 'src/app/services/style.service';
 import { TableComponent } from 'src/app/table/table/table.component';
 
 import { FormContentComponent } from '../form-content/form-content.component';
@@ -52,7 +55,8 @@ export class ContentComponent implements OnInit, OnDestroy {
     private confirmationService: ConfirmationService,
     private dialogService: DialogService,
     private contentService: ContentService,
-    private execService: ExecService
+    private execService: ExecService,
+    private styleService: StyleService
   ) {
     effect(() => {
       this.hasBreadcrumbs = breadcrumbService.breadcrumbs().length > 0;
@@ -225,6 +229,17 @@ export class ContentComponent implements OnInit, OnDestroy {
         },
       });
     } else if (event instanceof FormContentComponent) {
+    }
+  }
+
+  @ViewChild('contentHeader') set contentHeader(element: ElementRef) {
+    if (element) {
+      const observer = new ResizeObserver((_entries: ResizeObserverEntry[]) => {
+        this.styleService.contentHeaderHeight.set(
+          element.nativeElement.offsetHeight
+        );
+      });
+      observer.observe(element.nativeElement);
     }
   }
 }

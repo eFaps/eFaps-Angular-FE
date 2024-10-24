@@ -44,7 +44,9 @@
         </ng-template>
     </p-menubar>
     @if (breadcrumbs().length > 0) {
-        <p-breadcrumb class="max-w-full" [model]="breadcrumbs()"></p-breadcrumb>
+        <div #breadcrumbWrapper>
+            <p-breadcrumb class="max-w-full" [model]="breadcrumbs()"></p-breadcrumb>
+        </div>
     }
     <p-toast></p-toast>
     <p-overlayPanel #searchOp [style]="{'width': '450px'}" [showCloseIcon]="true">

@@ -3,6 +3,8 @@ import { NavigationEnd, Router } from '@angular/router';
 import { MenuItem, MenuItemCommandEvent } from 'primeng/api';
 import { filter } from 'rxjs';
 
+import { StyleService } from './style.service';
+
 @Injectable({
   providedIn: 'root',
 })
@@ -11,7 +13,7 @@ export class BreadcrumbService {
   breadcrumbs: WritableSignal<MenuItem[]> = signal([]);
   currentUrl: string = '';
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private styleService: StyleService) {
     this.router.events
       .pipe(
         filter((event) => {
@@ -53,6 +55,9 @@ export class BreadcrumbService {
       });
       if (index > -1) {
         items.splice(index, 1);
+      }
+      if (items.length == 0) {
+        this.styleService.breadcrumbHeight.set(0);
       }
       return Array.from(items);
     });

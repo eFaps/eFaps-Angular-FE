@@ -1,5 +1,6 @@
 import {
   Component,
+  ElementRef,
   OnInit,
   Signal,
   ViewChild,
@@ -10,6 +11,7 @@ import { toSignal } from '@angular/core/rxjs-interop';
 import { Router } from '@angular/router';
 import { KeycloakService } from 'keycloak-angular';
 import { PrimeNGConfig } from 'primeng/api';
+import { Breadcrumb } from 'primeng/breadcrumb';
 import { DialogService } from 'primeng/dynamicdialog';
 import { Menubar } from 'primeng/menubar';
 import { OverlayPanel } from 'primeng/overlaypanel';
@@ -95,15 +97,25 @@ export class AppComponent implements OnInit {
   }
 
   @ViewChild(Menubar) set menuBar(element: Menubar) {
-    const observer = new ResizeObserver((entries: ResizeObserverEntry[]) => {
-      const style = getComputedStyle(element.el.nativeElement.childNodes[0]);
-      const top = parseInt(style.paddingTop, 10);
-      const bottom = parseInt(style.paddingBottom, 10);
-      this.styleService.menuBarHeight.set(
-        entries[0].contentRect.height + top + bottom
-      );
-    });
-    observer.observe(element.el.nativeElement.childNodes[0]);
+    if (element) {
+      const observer = new ResizeObserver((_entries: ResizeObserverEntry[]) => {
+        this.styleService.menuBarHeight.set(
+          element.el.nativeElement.offsetHeight
+        );
+      });
+      observer.observe(element.el.nativeElement.childNodes[0]);
+    }
+  }
+
+  @ViewChild('breadcrumbWrapper') set breadcrumb(element: ElementRef) {
+    if (element) {
+      const observer = new ResizeObserver((_entries: ResizeObserverEntry[]) => {
+        this.styleService.breadcrumbHeight.set(
+          element.nativeElement.offsetHeight
+        );
+      });
+      observer.observe(element.nativeElement);
+    }
   }
 
   set user(user: User | undefined) {
