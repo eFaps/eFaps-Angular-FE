@@ -7,7 +7,7 @@ import { ModuleData, UIModule } from '../model/module';
   providedIn: 'root',
 })
 export class DynamicComponentService {
-  constructor() {}
+  constructor() { }
 
   load(viewContainerRef: ViewContainerRef, fieldCmdResp: FieldCommandResponse) {
     import('../standalone/eqlresponse/eqlresponse.component').then((m) => {
@@ -54,6 +54,12 @@ export class DynamicComponentService {
       case 'CSVImport':
         import('../standalone/csvimport/csvimport.component').then((m) => {
           const ref = viewContainerRef.createComponent(m.CSVImportComponent);
+          ref.setInput('uimodule', uimodule);
+          ref.setInput('data', data);
+        });
+      case 'PromoSimulator':
+        import('../standalone/promo-simulator/promo-simulator.component').then((m) => {
+          const ref = viewContainerRef.createComponent(m.PromoSimulatorComponent);
           ref.setInput('uimodule', uimodule);
           ref.setInput('data', data);
         });

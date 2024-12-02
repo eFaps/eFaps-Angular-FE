@@ -1,15 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MenuItem } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
 import { combineLatest } from 'rxjs';
-import { Outline, Section } from 'src/app/model/content';
+import { isOutline, Outline, Section } from 'src/app/model/content';
 import { MenuEntry } from 'src/app/model/menu';
 import { ContentService } from 'src/app/services/content.service';
 import { MenuActionProvider, toMenuItems } from 'src/app/services/menu.service';
 import { ValueService } from 'src/app/services/value.service';
 
 import { ModalContentComponent } from '../modal-content/modal-content.component';
+import { DynamicComponentService } from 'src/app/services/dynamic-component.service';
+import { UIModule } from 'src/app/model/module';
 
 @Component({
   selector: 'app-form-content',
@@ -25,6 +27,7 @@ export class FormContentComponent implements OnInit {
 
   constructor(
     valueService: ValueService,
+    private router: Router,
     private route: ActivatedRoute,
     private dialogService: DialogService,
     private contentService: ContentService
@@ -46,11 +49,15 @@ export class FormContentComponent implements OnInit {
 
   loadData() {
     this.contentService.getContentWithCmd(this.oid, this.id!!).subscribe({
-      next: (outline) => {
-        if ('sections' in outline) {
-          this.outline = outline;
-          this.sections = outline.sections;
-          this.menuItems = toMenuItems(outline.menu, this.actionProvider);
+      next: (response) => {
+        if (isOutline(response)) {
+          this.outline = response as Outline;
+          this.sections =  this.outline.sections;
+          this.menuItems = toMenuItems(this.outline.menu, this.actionProvider);
+        } else {
+          // its a module
+          let module = response as UIModule
+          this.router.navigate(['content', 'module', this.id!!], { state: { "module": module}});
         }
       },
     });

@@ -5,6 +5,7 @@ import { AuthGuard } from '../guard/auth.guard';
 import { TableComponent } from '../table/table/table.component';
 import { ContentComponent } from './content/content.component';
 import { FormContentComponent } from './form-content/form-content.component';
+import { ModuleContentComponent } from './module-content/module-content.component';
 
 const routes: Routes = [
   {
@@ -31,6 +32,11 @@ const routes: Routes = [
     path: 'form/:id',
     canActivate: [AuthGuard],
     component: FormContentComponent,
+  },
+  {
+    path: 'module/:id',
+    canActivate: [AuthGuard],
+    component: ModuleContentComponent,
   },
 ];
 
