@@ -1,11 +1,15 @@
-<p-toolbar class="toolbar">
-    <div class="p-toolbar-group-start">
-        <p-menu #menu [model]="menuItems" [popup]="true"></p-menu>
-        <p-button *ngIf="menuItems.length > 0" (click)="menu.toggle($event)" icon="pi pi-bars"></p-button>
-        <div class="mainHeader">{{outline?.header}}</div>
+ 
+@if(!isModule()){    
+    <p-toolbar class="toolbar">
+        <div class="p-toolbar-group-start">
+            <p-menu #menu [model]="menuItems" [popup]="true"></p-menu>
+            <p-button *ngIf="menuItems.length > 0" (click)="menu.toggle($event)" icon="pi pi-bars"></p-button>
+            <div class="mainHeader">{{outline?.header}}</div>
+        </div>
+    </p-toolbar>
+    <div class="p-dialog-content">
+        <app-classification-display *ngIf="outline?.classifications" [classifications]="outline?.classifications"></app-classification-display>
+        <app-sections [sections]="sections"></app-sections>
     </div>
-</p-toolbar>
-<div class="p-dialog-content">
-    <app-classification-display *ngIf="outline?.classifications" [classifications]="outline?.classifications"></app-classification-display>
-    <app-sections [sections]="sections"></app-sections>
-</div>
+}
+<ng-template #dynamicComponent></ng-template>

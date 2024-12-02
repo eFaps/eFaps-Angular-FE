@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MenuItem } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
@@ -18,22 +18,28 @@ import { UIModule } from 'src/app/model/module';
   templateUrl: './form-content.component.html',
   styleUrls: ['./form-content.component.scss'],
 })
-export class FormContentComponent implements OnInit {
+export class FormContentComponent implements OnInit, AfterViewInit {
   id: string | undefined;
   oid: string = 'none';
   outline: Outline | undefined;
   sections: Section[] = [];
   menuItems: MenuItem[] = [];
 
+  @ViewChild('dynamicComponent', { read: ViewContainerRef })
+  vcr!: ViewContainerRef;
+  module: UIModule | undefined;
+  moduleLoaded = false;
+
   constructor(
     valueService: ValueService,
-    private router: Router,
     private route: ActivatedRoute,
     private dialogService: DialogService,
-    private contentService: ContentService
+    private contentService: ContentService,
+    private dynamicComponentService: DynamicComponentService
   ) {
     valueService.reset();
   }
+ 
 
   ngOnInit(): void {
     combineLatest([this.route.queryParams, this.route.params]).subscribe(
@@ -47,6 +53,10 @@ export class FormContentComponent implements OnInit {
     );
   }
 
+  ngAfterViewInit(): void {
+    this.loadModule();
+  }
+
   loadData() {
     this.contentService.getContentWithCmd(this.oid, this.id!!).subscribe({
       next: (response) => {
@@ -56,11 +66,30 @@ export class FormContentComponent implements OnInit {
           this.menuItems = toMenuItems(this.outline.menu, this.actionProvider);
         } else {
           // its a module
-          let module = response as UIModule
-          this.router.navigate(['content', 'module', this.id!!], { state: { "module": module}});
+          this.module = response as UIModule
+          this.loadModule();
         }
       },
     });
+  }
+
+  loadModule() {
+    if (this.isModule() && !this.moduleLoaded) {
+      this.moduleLoaded = true
+      this.vcr.clear();
+      this.dynamicComponentService.loadUIModule(
+        this.vcr,
+        this.module!!,
+        {
+          oid: undefined,
+          parentOid: undefined
+        }
+      );
+    }
+  }
+
+  isModule() {
+    return !(this.module == undefined)
   }
 
   actionProvider: MenuActionProvider = (item: MenuEntry) => {
