@@ -1,1 +1,78 @@
-<p>promo-simulator works!</p>
+<div class="wrapper">
+    <div>
+        <p-toolbar styleClass="mb-4 gap-2">
+            <ng-template pTemplate="left">
+                <p-button severity="success" label="Añadir" icon="pi pi-plus" (onClick)="add()" />
+                <p-button severity="danger" label="Borrar" icon="pi pi-trash" (onClick)="delete()"
+                    [disabled]="!selectedItems || !selectedItems.length" />
+            </ng-template>
+            <ng-template pTemplate="right">
+                <p-button severity="success" label="Calcular" icon="pi pi-calculator" (onClick)="calculate()" />
+            </ng-template>
+        </p-toolbar>
+
+
+        <p-table [value]="items" [tableStyle]="{ 'min-width': '50rem' }" [(selection)]="selectedItems">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th>Candidad</th>
+                    <th>Producto</th>
+                    <th>Precio Base</th>
+                    <th>Precio Neto</th>
+                    <th>Descuento Neto</th>
+                    <th>Precio Bruto</th>
+                    <th>Descuento Bruto</th>
+                    <th>Promocion</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-item>
+                <tr>
+                    <td>{{ item.quantity }}</td>
+                    <td>{{ item.product.label }}</td>
+                    <td>{{ item.basePrice }}</td>
+                    <td>{{ item.netPrice }}</td>
+                    <td>{{ item.netDiscount }}</td>
+                    <td>{{ item.crossPrice }}</td>
+                    <td>{{ item.crossDiscount }}</td>
+                    <td>
+                    @for (promotion of item.promotions; track promotion.oid) {
+                        <div class="promoDetail">
+                            <span>{{promotion.oid}}</span>
+                            <span>{{promotion.name}}</span>
+                            <span>{{promotion.description}}</span>
+                            <span>{{promotion.label}}</span>
+                        </div>
+                    }
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>    
+    <div class="totals">
+        <div>NetTotal: {{calcResponse?.netTotal}}</div>
+        <div>CrossTotal: {{calcResponse?.crossTotal}}</div>
+        <div>Discount NetTotal: {{calcResponse?.promotionInfo?.netTotalDiscount}}</div>
+        <div>Discount CrossTotal: {{calcResponse?.promotionInfo?.crossTotalDiscount}}</div>
+    </div>
+</div>
+
+<p-dialog [(visible)]="editDialog" [style]="{ width: '450px' }" header="Editar" [modal]="true" styleClass="p-fluid">
+    <ng-template pTemplate="content">
+        <div class="field">
+            <label for="name">Candidad</label>
+            <p-inputNumber pInputText id="name" [(ngModel)]="item.quantity" required autofocus />
+        </div>
+        <div class="field">
+            <label for="name">Producto</label>
+
+            <p-autoComplete [(ngModel)]="autoCompleteValue" [suggestions]="autoCompleteSuggestions"
+                (completeMethod)="search($event.query)" field="label" [lazy]="true" placeholder="buscar"
+                [forceSelection]="true" [showEmptyMessage]="true" appendTo="body" (onSelect)="onSelect($event.value)">
+            </p-autoComplete>
+        </div>
+    </ng-template>
+    <ng-template pTemplate="footer">
+        <p-button label="Cerrar" icon="pi pi-times" [text]="true" (onClick)="cancel()" />
+        <p-button label="Guardar" icon="pi pi-check" [text]="true" (onClick)="save()" />
+    </ng-template>
+</p-dialog>
