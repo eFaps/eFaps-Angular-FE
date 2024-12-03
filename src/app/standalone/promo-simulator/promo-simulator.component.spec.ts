@@ -8,9 +8,8 @@ describe('PromoSimulatorComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [PromoSimulatorComponent]
-    })
-    .compileComponents();
+      imports: [PromoSimulatorComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(PromoSimulatorComponent);
     component = fixture.componentInstance;

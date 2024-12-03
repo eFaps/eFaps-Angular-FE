@@ -31,7 +31,7 @@ const routes: Routes = [
     path: 'form/:id',
     canActivate: [AuthGuard],
     component: FormContentComponent,
-  }
+  },
 ];
 
 @NgModule({
