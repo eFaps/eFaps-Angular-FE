@@ -2,27 +2,30 @@ import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { ConfirmationService } from 'primeng/api';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import { ButtonModule } from 'primeng/button';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { DialogModule } from 'primeng/dialog';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { TableModule } from 'primeng/table';
 import { ToolbarModule } from 'primeng/toolbar';
-import { Observable } from 'rxjs';
 import { UtilService } from 'src/app/services/util.service';
 
 @Component({
   selector: 'app-promo-simulator',
   standalone: true,
+  providers: [ConfirmationService],
   imports: [
-    TableModule,
-    DialogModule,
-    ToolbarModule,
-    ButtonModule,
-    InputNumberModule,
-    CommonModule,
-    FormsModule,
     AutoCompleteModule,
+    ButtonModule,
+    CommonModule,
+    ConfirmDialogModule,
+    DialogModule,
+    FormsModule,
+    InputNumberModule,
+    TableModule,
+    ToolbarModule,
   ],
   templateUrl: './promo-simulator.component.html',
   styleUrl: './promo-simulator.component.scss',
@@ -31,15 +34,19 @@ export class PromoSimulatorComponent {
   items: Item[] = [];
   editDialog = false;
 
-  selectedItems = [];
+  selectedItems: Item[] = [];
 
   item: Item = this.emptyItem();
   autoCompleteValue: Product | undefined;
   autoCompleteSuggestions: Product[] = [];
 
   calcResponse: CalcResponse | undefined;
+  showPromotionModal =  false;
+  displayPromotion: Promotion | undefined;
 
-  constructor(private http: HttpClient, private utilService: UtilService) {}
+  constructor(private http: HttpClient, 
+    private confirmationService: ConfirmationService,
+    private utilService: UtilService) { }
 
   emptyItem(): Item {
     return {
@@ -56,10 +63,21 @@ export class PromoSimulatorComponent {
 
   add() {
     this.item = this.emptyItem();
+    this.autoCompleteValue = undefined;
     this.editDialog = true;
   }
 
-  delete() {}
+  delete() {
+    this.confirmationService.confirm({
+      message: 'Esta seguro?',
+      header: 'Confirmar',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        this.items = this.items.filter((val) => !this.selectedItems?.includes(val));
+        this.selectedItems = [];
+      }
+    });
+  }
 
   save() {
     this.items.push(this.item);
@@ -72,11 +90,11 @@ export class PromoSimulatorComponent {
   }
 
   search(term: string | undefined) {
-    this.autoCompleteSuggestions = [];
     if (term) {
       const url = `${this.utilService.evalApiUrl()}/ui/modules/promo-simulator/products`;
       this.http.get<any[]>(url, { params: { term: term } }).subscribe({
         next: (products) => {
+          this.autoCompleteSuggestions = [];
           products.forEach((product) => {
             this.autoCompleteSuggestions.push({
               oid: product.oid,
@@ -87,6 +105,7 @@ export class PromoSimulatorComponent {
       });
     }
   }
+
   onSelect(product: Product) {
     this.item.product = product;
   }
@@ -138,6 +157,9 @@ export class PromoSimulatorComponent {
                   name: promotion.name,
                   label: promotion.label,
                   description: promotion.description,
+                  priority: promotion.priority,
+                  endDateTime: promotion.endDateTime,
+                  startDateTime: promotion.startDateTime,
                 });
               },
             });
@@ -146,6 +168,11 @@ export class PromoSimulatorComponent {
       });
     }
   }
+
+  showPromotion(promotion: Promotion) {
+    this.displayPromotion = promotion;
+    this.showPromotionModal = true;
+  }
 }
 
 export interface Promotion {
@@ -153,6 +180,9 @@ export interface Promotion {
   name: string;
   label: string;
   description: string;
+  priority: number;
+  endDateTime: string;
+  startDateTime: string;
 }
 
 export interface Item {

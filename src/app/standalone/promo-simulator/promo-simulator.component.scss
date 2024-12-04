@@ -1,10 +1,42 @@
 .wrapper {
+    padding: 5px;
+
     .totals {
         margin-top: 50px;
+        margin-left: 20px;
+        font-family: var(--font-family);
+        font-feature-settings: var(--font-feature-settings, normal);
+        font-size: 1.1rem;
+
+        div {
+            display: flex;
+            .totalLabel {
+                width: 200px;
+            }
+            .totalValue {
+                text-align: right;
+                width: 50px;
+            }
+        }
     }
 
     .promoDetail {
         display: flex;
         flex-direction: column;
+    }
+}
+
+.promotionModal {
+    display: flex;
+    flex-direction: column;
+    
+    div {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 10px;
+        
+        span:first-child {
+            font-weight: bold;
+        }
     }
 }
