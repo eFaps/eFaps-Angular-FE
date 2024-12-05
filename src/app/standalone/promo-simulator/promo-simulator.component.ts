@@ -140,31 +140,34 @@ export class PromoSimulatorComponent {
       this.calcResponse.positions.forEach((pos, index) => {
         this.items[index].netPrice = pos.netPrice;
         this.items[index].crossPrice = pos.crossPrice;
-        this.items[index].basePrice =
-          this.calcResponse?.promotionInfo.details[index].netBase;
-        this.items[index].crossDiscount =
-          this.calcResponse?.promotionInfo.details[index].crossDiscount;
-        this.items[index].netDiscount =
-          this.calcResponse?.promotionInfo.details[index].netDiscount;
-        this.items[index].promotions = [];
-        this.calcResponse?.promotionInfo.details[index].promotionOids.forEach(
-          (oid) => {
-            const url = `${this.utilService.evalApiUrl()}/ui/modules/promo-simulator/promotions/${oid}`;
-            this.http.get<any>(url).subscribe({
-              next: (promotion) => {
-                this.items[index].promotions.push({
-                  oid: promotion.oid,
-                  name: promotion.name,
-                  label: promotion.label,
-                  description: promotion.description,
-                  priority: promotion.priority,
-                  endDateTime: promotion.endDateTime,
-                  startDateTime: promotion.startDateTime,
-                });
-              },
-            });
-          }
-        );
+        
+        if (this.calcResponse?.promotionInfo) {
+          this.items[index].basePrice =
+            this.calcResponse?.promotionInfo.details[index].netBase;
+          this.items[index].crossDiscount =
+            this.calcResponse?.promotionInfo.details[index].crossDiscount;
+          this.items[index].netDiscount =
+            this.calcResponse?.promotionInfo.details[index].netDiscount;
+          this.items[index].promotions = [];
+          this.calcResponse?.promotionInfo.details[index].promotionOids.forEach(
+            (oid) => {
+              const url = `${this.utilService.evalApiUrl()}/ui/modules/promo-simulator/promotions/${oid}`;
+              this.http.get<any>(url).subscribe({
+                next: (promotion) => {
+                  this.items[index].promotions.push({
+                    oid: promotion.oid,
+                    name: promotion.name,
+                    label: promotion.label,
+                    description: promotion.description,
+                    priority: promotion.priority,
+                    endDateTime: promotion.endDateTime,
+                    startDateTime: promotion.startDateTime,
+                  });
+                },
+              });
+            }
+          );
+        }
       });
     }
   }
