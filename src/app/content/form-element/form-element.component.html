@@ -41,7 +41,10 @@
         </ng-container>
         <ng-container *ngSwitchCase="'UPLOAD'">
             <p-fileUpload [url]="uploadUrl" (onUpload)="onUpload($event)">
-                <ng-template pTemplate="content" let-files>
+                <ng-template #empty>
+                    <div>Drag and drop files to here to upload.</div>
+                </ng-template>
+                <ng-template #content let-files>
                     <div *ngIf="uploadKeys">Successfull uploaded</div>
                 </ng-template>
             </p-fileUpload>
