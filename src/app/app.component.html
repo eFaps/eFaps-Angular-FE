@@ -45,7 +45,12 @@
     </p-menubar>
     @if (breadcrumbs().length > 0) {
         <div #breadcrumbWrapper>
-            <p-breadcrumb class="max-w-full" [model]="breadcrumbs()"></p-breadcrumb>
+            <p-breadcrumb class="max-w-full" [model]="breadcrumbs()">
+                <ng-template #item let-item>
+                   <span (click)="breadcrumbOnClick(item)">{{item.label}}</span>
+                </ng-template>
+
+            </p-breadcrumb>
         </div>
     }
     <p-toast></p-toast>

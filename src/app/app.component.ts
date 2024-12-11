@@ -36,6 +36,7 @@ import { SearchService } from './services/search.service';
 import { StyleService } from './services/style.service';
 import { UserService } from './services/user.service';
 import { CompanyChooserComponent } from './standalone/company-chooser/company-chooser.component';
+import { MenuItem } from 'primeng/api';
 
 @Component({
   selector: 'app-root',
@@ -269,5 +270,11 @@ export class AppComponent implements OnInit {
 
   signOut() {
     this.keycloakService.logout();
+  }
+
+  breadcrumbOnClick(menuItem: MenuItem) {
+    if (menuItem.command) {
+      menuItem.command({ item: menuItem })
+    }
   }
 }
