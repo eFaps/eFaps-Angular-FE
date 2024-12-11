@@ -1,5 +1,6 @@
 <div class="p-dialog-content">
-    <p-table [value]="loggers" [tableStyle]="{ 'min-width': '50rem' }" dataKey="name" (onEditComplete)="afterEdit($event)" styleClass="p-datatable-sm p-datatable-striped">
+    <p-table [value]="loggers" [tableStyle]="{ 'min-width': '50rem' }" dataKey="name"
+        (onEditComplete)="afterEdit($event)" styleClass="p-datatable-sm" stripedRows>
         <ng-template pTemplate="header">
             <tr>
                 <th>Logger</th>
@@ -15,12 +16,13 @@
                 <td [pEditableColumn]="logger" [pEditableColumnField]="'level'" class="editable">
                     <p-cellEditor>
                         <ng-template pTemplate="input">
-                            <p-select [options]="levels" appendTo="body" [(ngModel)]="logger.level" [style]="{'width':'100%'}"></p-select>
+                            <p-select [options]="levels" appendTo="body" [(ngModel)]="logger.level"
+                                [style]="{'width':'100%'}"></p-select>
                         </ng-template>
                         <ng-template pTemplate="output">
                             {{ logger.level }}
                         </ng-template>
-                    </p-cellEditor>    
+                    </p-cellEditor>
                 </td>
                 <td>{{ logger.appender }}</td>
             </tr>

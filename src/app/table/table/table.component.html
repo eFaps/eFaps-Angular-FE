@@ -1,7 +1,7 @@
 <p-confirmDialog></p-confirmDialog>
 @if (tableLoaded) {
 <div #wrapperDiv>
-    <p-table #dt [columns]="cols" [value]="elements" styleClass="p-datatable-gridlines p-datatable-striped"
+    <p-table #dt [columns]="cols" [value]="elements" styleClass="p-datatable-gridlines" stripedRows
         [scrollable]="true" [scrollHeight]="scrollHeight" [virtualScroll]="true" [virtualScrollItemSize]="42"
         [tableStyle]="{ 'min-width': '50rem' }" sortMode="multiple" [selectionMode]="selectionMode"
         [(selection)]="selectedElements" [resizableColumns]="true" [loading]="loading" stateStorage="local"

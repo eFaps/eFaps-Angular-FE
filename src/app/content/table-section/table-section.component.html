@@ -1,5 +1,5 @@
 @if(!editable) {
-    <p-table [columns]="cols" [value]="elements" styleClass="p-datatable-gridlines p-datatable-striped">
+    <p-table [columns]="cols" [value]="elements" styleClass="p-datatable-gridlines" stripedRows>
         <ng-template pTemplate="caption" *ngIf="editable">
             <div class="flex align-items-center justify-content-between">
                 <p-button icon="pi pi-plus" (click)="addEmptyRow()"></p-button>
@@ -27,7 +27,7 @@
         </ng-template>
     </p-table>
 } @else {
-    <p-table [columns]="cols" [value]="elements" styleClass="p-datatable-gridlines p-datatable-striped" [resizableColumns]="true">
+    <p-table [columns]="cols" [value]="elements" styleClass="p-datatable-gridlines" stripedRows [resizableColumns]="true">
         <ng-template pTemplate="caption" *ngIf="editable">
             <div class="flex align-items-center justify-content-between">
                 <p-button icon="pi pi-plus" (click)="addEmptyRow()"></p-button>
