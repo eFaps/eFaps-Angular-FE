@@ -7,6 +7,12 @@
 
     .config {
         flex-grow: 1;
+        
+        .confElement {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
     }
 
     .document {

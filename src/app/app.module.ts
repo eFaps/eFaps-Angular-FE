@@ -79,7 +79,10 @@ registerLocaleData(localeEs, 'es');
     provideAnimationsAsync(),
     providePrimeNG({ 
       theme: {
-          preset: Material
+          preset: Material,
+          options: {
+            darkModeSelector: '.dark-mode'
+          }
       }
   })
   ],

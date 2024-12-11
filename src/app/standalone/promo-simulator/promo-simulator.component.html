@@ -2,19 +2,19 @@
     <div class="document">
         <div>
             <p-toolbar styleClass="mb-4 gap-2">
-                <ng-template pTemplate="left">
-                    <p-button severity="success" label="Añadir" icon="pi pi-plus" (onClick)="add()" />
-                    <p-button severity="danger" label="Borrar" icon="pi pi-trash" (onClick)="delete()"
-                        [disabled]="!selectedItems || !selectedItems.length" />
+                <ng-template #start>
+                    <div class="gap-4">
+                        <p-button severity="success" label="Añadir" icon="pi pi-plus" (onClick)="add()" />
+                        <p-button severity="danger" label="Borrar" icon="pi pi-trash" (onClick)="delete()"
+                            [disabled]="!selectedItems || !selectedItems.length" />
+                    </div>
                 </ng-template>
-                <ng-template pTemplate="right">
+                <ng-template #end>
                     <p-button severity="success" label="Calcular" icon="pi pi-calculator" (onClick)="calculate()" />
                 </ng-template>
             </p-toolbar>
-
-
             <p-table [value]="items" [tableStyle]="{ 'min-width': '50rem' }" [(selection)]="selectedItems">
-                <ng-template pTemplate="header">
+                <ng-template #header>
                     <tr>
                         <th style="width: 4rem"><p-tableHeaderCheckbox /></th>
                         <th>Candidad</th>
@@ -65,12 +65,13 @@
     </div>
     <div class="config">
         <h3>Configuraciones:</h3>
-        
-        <p-floatLabel>
-            <p-datepicker [(ngModel)]="date" [showIcon]="true"/>
-            <label for="username">Fecha</label>
-        </p-floatLabel>
-        
+        <div class="confElement">
+            <p-floatLabel>
+                <p-datepicker [(ngModel)]="date" [showIcon]="true" [disabled]="!dateChecked"/>
+                <label for="username">Fecha</label>
+            </p-floatLabel>
+            <p-toggleswitch [(ngModel)]="dateChecked" />
+        </div>
     </div>
 </div>
 

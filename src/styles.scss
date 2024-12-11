@@ -6,8 +6,8 @@ body {
     min-height: 100%;
     font-size: 14px;
     font-family: 'Roboto';
-    color: var(--text-color);
-    background-color: var(--ground-background);
+    color: var(--p-text-color);
+    background-color: var(--p-content-background);
 
     .watermark {
         background-image: url(./assets/logo.svg);

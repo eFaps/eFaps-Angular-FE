@@ -13,7 +13,7 @@ import { TableModule } from 'primeng/table';
 import { ToolbarModule } from 'primeng/toolbar';
 import { UtilService } from 'src/app/services/util.service';
 import { FloatLabelModule } from 'primeng/floatlabel';
-
+import { ToggleSwitchModule } from 'primeng/toggleswitch';
 
 @Component({
   selector: 'app-promo-simulator',
@@ -30,7 +30,8 @@ import { FloatLabelModule } from 'primeng/floatlabel';
     TableModule,
     ToolbarModule,
     DatePickerModule,
-    FloatLabelModule
+    FloatLabelModule,
+    ToggleSwitchModule
   ],
   templateUrl: './promo-simulator.component.html',
   styleUrl: './promo-simulator.component.scss',
@@ -50,6 +51,7 @@ export class PromoSimulatorComponent {
   displayPromotion: Promotion | undefined;
 
   date: Date | undefined
+  dateChecked: boolean  = false
 
   constructor(private http: HttpClient, 
     private confirmationService: ConfirmationService,

@@ -6,11 +6,11 @@
     .label {
         flex-grow: 1;
         flex-shrink: 0;
-        background-color: var(--highlight-bg);
-        color: var(--primary-color);
-        padding: var(--inline-spacing);
-        border-radius: var(--border-radius);
-        border-color: var(--primary-100);
+        background-color: var(--p-highlight-background);
+        color: var(--p-primary-color);
+        padding: var(--p-button-gap);
+        border-radius: var(--p-border-radius-sm);
+        border-color: var(--p-primary-100);
         border-style: solid;
         border-width: 1px;
         width: 200px;

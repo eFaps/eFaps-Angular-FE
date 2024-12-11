@@ -1,13 +1,11 @@
 <div [style.height]="contentHeight" class="contentWrapper">
     <div #contentHeader>
         <p-toolbar class="toolbar">
-            <div class="p-toolbar-group-start">
-                <ng-container>
-                    <p-tieredMenu #menu [model]="menuItems" [popup]="true" appendTo="body"></p-tieredMenu>
-                    <p-button *ngIf="menuItems.length > 0" (click)="menu.toggle($event)" icon="pi pi-bars"></p-button>
-                </ng-container>
+            <ng-template #start>
+                <p-tieredMenu #menu [model]="menuItems" [popup]="true" appendTo="body"></p-tieredMenu>
+                <p-button *ngIf="menuItems.length > 0" (click)="menu.toggle($event)" icon="pi pi-bars"></p-button>
                 <div class="mainHeader">{{mainHeader}}</div>
-            </div>
+            </ng-template>
         </p-toolbar>
         <div class="tabs">
             <p-tabs [(value)]="activeTab" [scrollable]="true">

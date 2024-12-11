@@ -35,6 +35,7 @@ export class ModalContentComponent implements OnInit {
     this.parentOid = config.data.parentOid;
     config.header = this.outline.header;
     config.maximizable = true;
+    config.closable = true;
     if (this.outline.classifications) {
       this.classificationService.setClassifications(
         this.outline.classifications
