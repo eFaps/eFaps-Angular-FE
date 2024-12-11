@@ -8,6 +8,7 @@ import {
 } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { Router } from '@angular/router';
+import { LocalStorage } from '@efaps/ngx-store';
 import { updatePrimaryPalette } from '@primeng/themes';
 import { KeycloakService } from 'keycloak-angular';
 import { MenuItem } from 'primeng/api';
@@ -68,6 +69,8 @@ export class AppComponent implements OnInit {
   searchElements: any[] = [];
   version = environment.version;
 
+  @LocalStorage() palette: string | undefined;
+
   constructor(
     private router: Router,
     private dialogService: DialogService,
@@ -89,18 +92,22 @@ export class AppComponent implements OnInit {
         this.user = user;
       },
     });
+    var color = 'indigo';
+    if (this.palette) {
+      color = this.palette;
+    }
     updatePrimaryPalette({
-      50: '{blue.50}',
-      100: '{blue.100}',
-      200: '{blue.200}',
-      300: '{blue.300}',
-      400: '{blue.400}',
-      500: '{blue.500}',
-      600: '{blue.600}',
-      700: '{blue.700}',
-      800: '{blue.800}',
-      900: '{blue.900}',
-      950: '{blue.950}',
+      50: `{${color}.50}`,
+      100: `{${color}.100}`,
+      200: `{${color}.200}`,
+      300: `{${color}.300}`,
+      400: `{${color}.400}`,
+      500: `{${color}.500}`,
+      600: `{${color}.600}`,
+      700: `{${color}.700}`,
+      800: `{${color}.800}`,
+      900: `{${color}.900}`,
+      950: `{${color}.950}`,
     });
   }
 

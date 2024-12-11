@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { LocalStorage } from '@efaps/ngx-store';
 import { updatePrimaryPalette } from '@primeng/themes';
 import { ButtonModule } from 'primeng/button';
 import { TooltipModule } from 'primeng/tooltip';
@@ -13,6 +14,8 @@ import { TooltipModule } from 'primeng/tooltip';
 })
 export class ThemeChooserComponent implements OnInit {
   icon: string = 'pi pi-sun';
+
+  @LocalStorage() palette: string | undefined;
 
   constructor() {}
 
@@ -40,6 +43,7 @@ export class ThemeChooserComponent implements OnInit {
   }
 
   updateColor(color: string) {
+    this.palette = color;
     updatePrimaryPalette({
       50: `{${color}.50}`,
       100: `{${color}.100}`,
