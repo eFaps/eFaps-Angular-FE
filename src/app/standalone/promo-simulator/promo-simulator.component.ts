@@ -5,15 +5,15 @@ import { FormsModule } from '@angular/forms';
 import { ConfirmationService } from 'primeng/api';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import { ButtonModule } from 'primeng/button';
-import { DatePickerModule } from 'primeng/datepicker';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { DatePickerModule } from 'primeng/datepicker';
 import { DialogModule } from 'primeng/dialog';
+import { FloatLabelModule } from 'primeng/floatlabel';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { TableModule } from 'primeng/table';
+import { ToggleSwitchModule } from 'primeng/toggleswitch';
 import { ToolbarModule } from 'primeng/toolbar';
 import { UtilService } from 'src/app/services/util.service';
-import { FloatLabelModule } from 'primeng/floatlabel';
-import { ToggleSwitchModule } from 'primeng/toggleswitch';
 
 @Component({
   selector: 'app-promo-simulator',
@@ -31,7 +31,7 @@ import { ToggleSwitchModule } from 'primeng/toggleswitch';
     ToolbarModule,
     DatePickerModule,
     FloatLabelModule,
-    ToggleSwitchModule
+    ToggleSwitchModule,
   ],
   templateUrl: './promo-simulator.component.html',
   styleUrl: './promo-simulator.component.scss',
@@ -47,15 +47,17 @@ export class PromoSimulatorComponent {
   autoCompleteSuggestions: Product[] = [];
 
   calcResponse: CalcResponse | undefined;
-  showPromotionModal =  false;
+  showPromotionModal = false;
   displayPromotion: Promotion | undefined;
 
-  date: Date | undefined
-  dateChecked: boolean  = false
+  date: Date | undefined;
+  dateChecked: boolean = false;
 
-  constructor(private http: HttpClient, 
+  constructor(
+    private http: HttpClient,
     private confirmationService: ConfirmationService,
-    private utilService: UtilService) { }
+    private utilService: UtilService
+  ) {}
 
   emptyItem(): Item {
     return {
@@ -82,9 +84,11 @@ export class PromoSimulatorComponent {
       header: 'Confirmar',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
-        this.items = this.items.filter((val) => !this.selectedItems?.includes(val));
+        this.items = this.items.filter(
+          (val) => !this.selectedItems?.includes(val)
+        );
         this.selectedItems = [];
-      }
+      },
     });
   }
 
@@ -134,7 +138,7 @@ export class PromoSimulatorComponent {
 
     const body = {
       items: positions,
-      date: this.date
+      date: this.date,
     };
 
     this.http.post<any>(url, body).subscribe({
@@ -150,7 +154,7 @@ export class PromoSimulatorComponent {
       this.calcResponse.positions.forEach((pos, index) => {
         this.items[index].netPrice = pos.netPrice;
         this.items[index].crossPrice = pos.crossPrice;
-        
+
         if (this.calcResponse?.promotionInfo) {
           this.items[index].basePrice =
             this.calcResponse?.promotionInfo.details[index].netBase;

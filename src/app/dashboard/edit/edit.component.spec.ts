@@ -1,12 +1,12 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
-import { SelectModule } from 'primeng/select';
 import {
   DynamicDialogConfig,
   DynamicDialogModule,
   DynamicDialogRef,
 } from 'primeng/dynamicdialog';
+import { SelectModule } from 'primeng/select';
 
 import { EditComponent } from './edit.component';
 

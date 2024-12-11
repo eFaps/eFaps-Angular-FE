@@ -333,7 +333,12 @@ export class TableComponent implements OnInit {
 
     const tableCaption = 78;
 
-    height = height - menuBarHeight - breadcrumbHeight - contenHeaderHeight - tableCaption;
+    height =
+      height -
+      menuBarHeight -
+      breadcrumbHeight -
+      contenHeaderHeight -
+      tableCaption;
 
     this.scrollHeight = `${height}px`;
     /**

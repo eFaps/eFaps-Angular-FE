@@ -2,8 +2,8 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
-import { SelectModule } from 'primeng/select';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
+import { SelectModule } from 'primeng/select';
 import { Company } from 'src/app/model/user';
 import { UserService } from 'src/app/services/user.service';
 

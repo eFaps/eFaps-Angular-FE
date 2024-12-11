@@ -3,8 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
-import { SelectModule } from 'primeng/select';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { SelectModule } from 'primeng/select';
 import { TableEditCompleteEvent, TableModule } from 'primeng/table';
 import { ModuleData, UIModule } from 'src/app/model/module';
 import { UtilService } from 'src/app/services/util.service';
@@ -12,13 +12,7 @@ import { UtilService } from 'src/app/services/util.service';
 @Component({
   selector: 'app-logback',
   standalone: true,
-  imports: [
-    CommonModule,
-    ButtonModule,
-    SelectModule,
-    FormsModule,
-    TableModule,
-  ],
+  imports: [CommonModule, ButtonModule, SelectModule, FormsModule, TableModule],
   templateUrl: './logback.component.html',
   styleUrls: ['./logback.component.scss'],
 })

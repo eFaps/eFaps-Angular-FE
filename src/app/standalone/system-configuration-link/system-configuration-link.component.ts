@@ -7,9 +7,9 @@ import {
   AutoCompleteModule,
 } from 'primeng/autocomplete';
 import { ButtonModule } from 'primeng/button';
-import { SelectModule } from 'primeng/select';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { InputTextModule } from 'primeng/inputtext';
+import { SelectModule } from 'primeng/select';
 import { TextareaModule } from 'primeng/textarea';
 import { ToggleButtonModule } from 'primeng/togglebutton';
 import { ModuleData, UIModule } from 'src/app/model/module';

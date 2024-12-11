@@ -9,6 +9,7 @@ import {
 import { toSignal } from '@angular/core/rxjs-interop';
 import { Router } from '@angular/router';
 import { KeycloakService } from 'keycloak-angular';
+import { MenuItem } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
 import { Menubar } from 'primeng/menubar';
 import { Popover } from 'primeng/popover';
@@ -36,7 +37,6 @@ import { SearchService } from './services/search.service';
 import { StyleService } from './services/style.service';
 import { UserService } from './services/user.service';
 import { CompanyChooserComponent } from './standalone/company-chooser/company-chooser.component';
-import { MenuItem } from 'primeng/api';
 
 @Component({
   selector: 'app-root',
@@ -83,7 +83,6 @@ export class AppComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-
     this.userService.getCurrentUser().subscribe({
       next: (user) => {
         this.user = user;
@@ -274,7 +273,7 @@ export class AppComponent implements OnInit {
 
   breadcrumbOnClick(menuItem: MenuItem) {
     if (menuItem.command) {
-      menuItem.command({ item: menuItem })
+      menuItem.command({ item: menuItem });
     }
   }
 }

@@ -42,7 +42,7 @@ export class ContentComponent implements OnInit, OnDestroy {
   classifications: Classification[] | undefined;
   hasBreadcrumbs = false;
 
-  activeTab: string = "";
+  activeTab: string = '';
   private subscribtions = new Subscription();
 
   contentOutletId: string | undefined;
@@ -78,12 +78,12 @@ export class ContentComponent implements OnInit, OnDestroy {
     this.contentService.getContent(this.oid!!).subscribe({
       next: (val) => {
         if ('nav' in val) {
-          this.activeTab = "";
+          this.activeTab = '';
           this.tabs = [];
           this.changeDetectorRef.detectChanges();
 
           this.tabs = val.nav;
-          this.activeTab = this.tabs[0].id
+          this.activeTab = this.tabs[0].id;
           this.menuItems = toMenuItems(val.outline.menu, this.actionProvider);
           this.mainHeader = val.outline.header;
           this.sections = val.outline.sections;
@@ -210,11 +210,11 @@ export class ContentComponent implements OnInit, OnDestroy {
   }
 
   isMainActive(): boolean {
-    return this.tabs.length == 0 || this.activeTab == this.tabs[0].id
+    return this.tabs.length == 0 || this.activeTab == this.tabs[0].id;
   }
 
   onSelect(tab: MenuEntry) {
-    this.navigate(tab)
+    this.navigate(tab);
   }
 
   navigate(tab: MenuEntry) {

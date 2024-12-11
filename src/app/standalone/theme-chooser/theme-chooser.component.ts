@@ -12,30 +12,29 @@ import { ThemeService } from 'src/app/services/theme.service';
   styleUrls: ['./theme-chooser.component.scss'],
 })
 export class ThemeChooserComponent implements OnInit {
-  icon: string = "pi pi-sun"
+  icon: string = 'pi pi-sun';
 
   constructor(private themeService: ThemeService) {}
-  
+
   ngOnInit(): void {
     const element = document.querySelector('html');
     if (element) {
       if (element.classList.contains('dark-mode')) {
-        this.icon = "pi pi-sun"
+        this.icon = 'pi pi-sun';
       } else {
-        this.icon = "pi pi-moon"
+        this.icon = 'pi pi-moon';
       }
     }
   }
 
-  
   toggleDarkMode() {
     const element = document.querySelector('html');
     if (element) {
       element.classList.toggle('dark-mode');
       if (element.classList.contains('dark-mode')) {
-        this.icon = "pi pi-sun"
+        this.icon = 'pi pi-sun';
       } else {
-        this.icon = "pi pi-moon"
+        this.icon = 'pi pi-moon';
       }
     }
   }
