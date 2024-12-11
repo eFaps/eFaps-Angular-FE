@@ -5,16 +5,13 @@ import {
   Signal,
   ViewChild,
   computed,
-  signal,
 } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { Router } from '@angular/router';
 import { KeycloakService } from 'keycloak-angular';
-import { PrimeNGConfig } from 'primeng/api';
-import { Breadcrumb } from 'primeng/breadcrumb';
 import { DialogService } from 'primeng/dynamicdialog';
 import { Menubar } from 'primeng/menubar';
-import { OverlayPanel } from 'primeng/overlaypanel';
+import { Popover } from 'primeng/popover';
 import { environment } from 'src/environments/environment';
 
 import { default as translation } from '../assets/es.json';
@@ -71,7 +68,6 @@ export class AppComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private primengConfig: PrimeNGConfig,
     private dialogService: DialogService,
     private loaderService: LoaderService,
     private keycloakService: KeycloakService,
@@ -86,8 +82,6 @@ export class AppComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.primengConfig.ripple = true;
-    this.primengConfig.setTranslation(translation.es);
 
     this.userService.getCurrentUser().subscribe({
       next: (user) => {
@@ -237,7 +231,7 @@ export class AppComponent implements OnInit {
     });
   }
 
-  indexSearch(event: Event, query: string, op: OverlayPanel) {
+  indexSearch(event: Event, query: string, op: Popover) {
     this.indexSearchService.search(query).subscribe({
       next: (result) => {
         this.searchResult = result;
@@ -247,7 +241,7 @@ export class AppComponent implements OnInit {
     });
   }
 
-  focusSearch(event: Event, op: OverlayPanel) {
+  focusSearch(event: Event, op: Popover) {
     if (this.searchResult != null && this.searchResult.hitCount > 0) {
       op.show(event);
     }

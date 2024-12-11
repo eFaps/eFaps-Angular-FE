@@ -3,16 +3,16 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import { ButtonModule } from 'primeng/button';
-import { CalendarModule } from 'primeng/calendar';
+import { DatePickerModule } from 'primeng/datepicker';
 import { CheckboxModule } from 'primeng/checkbox';
 import { ChipModule } from 'primeng/chip';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { DividerModule } from 'primeng/divider';
-import { DropdownModule } from 'primeng/dropdown';
+import { SelectModule } from 'primeng/select';
 import { FileUploadModule } from 'primeng/fileupload';
 import { ImageModule } from 'primeng/image';
 import { InputTextModule } from 'primeng/inputtext';
-import { InputTextareaModule } from 'primeng/inputtextarea';
+import { TextareaModule } from 'primeng/textarea';
 import { MenuModule } from 'primeng/menu';
 import { MenubarModule } from 'primeng/menubar';
 import { MessagesModule } from 'primeng/messages';
@@ -21,8 +21,7 @@ import { PanelModule } from 'primeng/panel';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { ScrollPanelModule } from 'primeng/scrollpanel';
 import { TableModule } from 'primeng/table';
-import { TabMenuModule } from 'primeng/tabmenu';
-import { TabViewModule } from 'primeng/tabview';
+import { TabsModule } from 'primeng/tabs';
 import { TieredMenuModule } from 'primeng/tieredmenu';
 import { ToolbarModule } from 'primeng/toolbar';
 import { TreeModule } from 'primeng/tree';
@@ -67,7 +66,7 @@ import { TableSectionComponent } from './table-section/table-section.component';
   imports: [
     CommonModule,
     ContentRoutingModule,
-    TabMenuModule,
+    TabsModule,
     PanelModule,
     TableModule,
     ButtonModule,
@@ -78,18 +77,17 @@ import { TableSectionComponent } from './table-section/table-section.component';
     ImageModule,
     FormsModule,
     RadioButtonModule,
-    DropdownModule,
+    SelectModule,
     MultiSelectModule,
     AutoCompleteModule,
     FileUploadModule,
-    CalendarModule,
+    DatePickerModule,
     DividerModule,
     CheckboxModule,
-    InputTextareaModule,
+    TextareaModule,
     MenubarModule,
     TreeModule,
     ChipModule,
-    TabViewModule,
     TieredMenuModule,
     MessagesModule,
     ScrollPanelModule,

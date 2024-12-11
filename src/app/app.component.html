@@ -3,10 +3,10 @@
 }
 @if (user != undefined) {
     <p-menubar [model]="menuItems()">
-        <ng-template pTemplate="start">
+        <ng-template #start>
             <img src="assets/logo.svg" height="40" class="mr-2 icon" (click)="home()"/>
         </ng-template>
-        <ng-template pTemplate="end">
+        <ng-template #end>
             <div class="wrapper">
                 <div>
                     <p-iconField iconPosition="left">
@@ -20,8 +20,8 @@
                     {{company()?.name}}
                     <p-button icon="pi pi-user"  [rounded]="true" [outlined]="true" severity="info"
                         (click)="op.toggle($event)"></p-button>
-                    <p-overlayPanel #op>
-                        <ng-template pTemplate="content" let-option>
+                    <p-popover #op>
+                        <div>
                             <div class="infoOverlay">
                                 {{user.firstName}} {{user.lastName}}
                             </div>
@@ -37,8 +37,8 @@
                             <div class="infoOverlay">
                                 <p-button label="Sign out" icon="pi pi-sign-out" (click)="signOut()"></p-button>
                             </div>
-                        </ng-template>
-                    </p-overlayPanel>
+                        </div>
+                    </p-popover>
                 </div>
             </div>
         </ng-template>
@@ -49,8 +49,7 @@
         </div>
     }
     <p-toast></p-toast>
-    <p-overlayPanel #searchOp [style]="{'width': '450px'}" [showCloseIcon]="true">
-        <ng-template pTemplate="content">
+    <p-popover #searchOp [style]="{'width': '450px'}" [showCloseIcon]="true">
             <p-table [value]="searchElements" selectionMode="single" [paginator]="true" [rows]="10"
                 responsiveLayout="scroll">
                 <ng-template pTemplate="header">
@@ -69,8 +68,7 @@
                     </tr>
                 </ng-template>
             </p-table>
-        </ng-template>
-    </p-overlayPanel>
+    </p-popover>
 }
 <router-outlet></router-outlet>
 @if (showRestoreSearch()) {

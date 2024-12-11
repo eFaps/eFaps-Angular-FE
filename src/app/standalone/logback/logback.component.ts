@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
-import { DropdownModule } from 'primeng/dropdown';
+import { SelectModule } from 'primeng/select';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { TableEditCompleteEvent, TableModule } from 'primeng/table';
 import { ModuleData, UIModule } from 'src/app/model/module';
@@ -15,7 +15,7 @@ import { UtilService } from 'src/app/services/util.service';
   imports: [
     CommonModule,
     ButtonModule,
-    DropdownModule,
+    SelectModule,
     FormsModule,
     TableModule,
   ],

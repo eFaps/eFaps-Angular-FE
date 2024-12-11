@@ -6,7 +6,7 @@ import {
   ViewContainerRef,
 } from '@angular/core';
 import { Router } from '@angular/router';
-import { Message } from 'primeng/api';
+import { ToastMessageOptions } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
 import { UploadEvent } from 'primeng/fileupload';
 import { FormItem } from 'src/app/model/content';
@@ -28,7 +28,7 @@ import { ClassificationsComponent } from '../classifications/classifications.com
   styleUrls: ['./form-element.component.scss'],
 })
 export class FormElementComponent implements OnInit {
-  messages: Message[] = [];
+  messages: ToastMessageOptions[] = [];
 
   inputValue: any;
   radioValue: any;

@@ -7,10 +7,10 @@ import {
   AutoCompleteModule,
 } from 'primeng/autocomplete';
 import { ButtonModule } from 'primeng/button';
-import { DropdownModule } from 'primeng/dropdown';
+import { SelectModule } from 'primeng/select';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { InputTextModule } from 'primeng/inputtext';
-import { InputTextareaModule } from 'primeng/inputtextarea';
+import { TextareaModule } from 'primeng/textarea';
 import { ToggleButtonModule } from 'primeng/togglebutton';
 import { ModuleData, UIModule } from 'src/app/model/module';
 import { Company } from 'src/app/model/user';
@@ -24,10 +24,10 @@ import { UtilService } from 'src/app/services/util.service';
     AutoCompleteModule,
     CommonModule,
     ButtonModule,
-    DropdownModule,
+    SelectModule,
     FormsModule,
     InputTextModule,
-    InputTextareaModule,
+    TextareaModule,
     ToggleButtonModule,
   ],
   templateUrl: './system-configuration-link.component.html',

@@ -1,7 +1,7 @@
 @switch (elementData?.formItem?.type) {
     @case ('DROPDOWN') {
-        <p-dropdown [options]="elementData?.formItem?.options" [(ngModel)]="dropdownValue" appendTo="body"
-        (onChange)="changeDropdown($event.value)"></p-dropdown>
+        <p-select [options]="elementData?.formItem?.options" [(ngModel)]="dropdownValue" appendTo="body"
+        (onChange)="changeDropdown($event.value)"></p-select>
     }
     @case ('INPUT') {
         <input type="text" pInputText #textInput [(ngModel)]="inputValue" (keyup)="onKey(textInput.value)"/>

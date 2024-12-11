@@ -7,7 +7,7 @@
             <label htmlFor="key">Key</label>
         </span>
         <span class="p-float-label" *ngIf="type=='STRING' || type=='UNDEFINED'">
-            <textarea rows="5" cols="50" id="strValue" pInputTextarea [autoResize]="true" [(ngModel)]="strValue"></textarea>
+            <textarea rows="5" cols="50" id="strValue" pTextarea [autoResize]="true" [(ngModel)]="strValue"></textarea>
             <label htmlFor="strValue">Value</label>
         </span>
         <span class="p-float-label" *ngIf="type=='BOOLEAN'">
@@ -23,8 +23,8 @@
             <label for="description">Description</label>
         </span>
         <span class="p-float-label">
-            <p-dropdown id="company" [options]="companies" [(ngModel)]="company" optionLabel="name"
-                appendTo="body"></p-dropdown>
+            <p-select id="company" [options]="companies" [(ngModel)]="company" optionLabel="name"
+                appendTo="body"></p-select>
             <label for="company">Company</label>
         </span>
         <span class="p-float-label">
@@ -34,5 +34,5 @@
     </div>
 </div>
 <div class="p-dialog-footer">
-    <p-button [label]="buttonLabel" severity="warning" (click)="submit()"></p-button>
+    <p-button [label]="buttonLabel" severity="warn" (click)="submit()"></p-button>
 </div>

@@ -5,6 +5,7 @@ import {
   ConfirmationService,
   FilterMetadata,
   MenuItem,
+  ScrollerOptions,
   TableState,
 } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
@@ -51,7 +52,7 @@ export class TableComponent implements OnInit {
 
   idEmitter = new EventEmitter<string>();
 
-  contentHeight: string = '500px';
+  scrollHeight: string = '500px';
 
   constructor(
     private route: ActivatedRoute,
@@ -330,15 +331,17 @@ export class TableComponent implements OnInit {
       this.styleService.contentHeaderHeight()
     );
 
-    height = height - menuBarHeight - breadcrumbHeight - contenHeaderHeight - 2;
+    const tableCaption = 78;
 
-    this.contentHeight = `${height}px`;
+    height = height - menuBarHeight - breadcrumbHeight - contenHeaderHeight - tableCaption;
+
+    this.scrollHeight = `${height}px`;
     /**
     console.log(`innerHeight: ${window.innerHeight}
       menuBarHeight: ${menuBarHeight}, 
       breadcrumbHeight: ${breadcrumbHeight}, 
       contenHeaderHeight: ${contenHeaderHeight},
-      contentHeight: ${this.contentHeight}`);
-     */
+      scrollHeight: ${this.scrollHeight}`);
+       **/
   }
 }

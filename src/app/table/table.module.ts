@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
-import { CalendarModule } from 'primeng/calendar';
+import { DatePickerModule } from 'primeng/datepicker';
 import { CheckboxModule } from 'primeng/checkbox';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { InputGroupModule } from 'primeng/inputgroup';
@@ -45,7 +45,7 @@ import { TableComponent } from './table/table.component';
     FormsModule,
     OverlayPanelModule,
     TieredMenuModule,
-    CalendarModule,
+    DatePickerModule,
     PaginatorModule,
   ],
 })

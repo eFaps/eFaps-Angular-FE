@@ -1,6 +1,6 @@
 <div class="p-dialog-content">
     <span class="p-float-label">
-        <p-dropdown id="type" [options]="types" [(ngModel)]="type"></p-dropdown>
+        <p-select id="type" [options]="types" [(ngModel)]="type"></p-select>
         <label htmlFor="type">Tipo</label>
     </span>
     <span class="p-float-label">
@@ -19,7 +19,7 @@
     </div>
     <div *ngIf="widget.type=='CHART'">
         <span class="p-float-label">
-            <p-dropdown id="function" [options]="functions" [(ngModel)]="function"></p-dropdown>
+            <p-select id="function" [options]="functions" [(ngModel)]="function"></p-select>
             <label htmlFor="function">Funcion</label>
         </span>
         <span class="p-float-label">
@@ -29,5 +29,5 @@
     </div>
 </div>
 <div class="p-dialog-footer">
-    <p-button label="Actualizar" severity="warning" (click)="submit()"></p-button>
+    <p-button label="Actualizar" severity="warn" (click)="submit()"></p-button>
 </div>

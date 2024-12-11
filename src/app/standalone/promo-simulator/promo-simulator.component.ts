@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { ConfirmationService } from 'primeng/api';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import { ButtonModule } from 'primeng/button';
-import { CalendarModule } from 'primeng/calendar';
+import { DatePickerModule } from 'primeng/datepicker';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { DialogModule } from 'primeng/dialog';
 import { InputNumberModule } from 'primeng/inputnumber';
@@ -29,7 +29,7 @@ import { FloatLabelModule } from 'primeng/floatlabel';
     InputNumberModule,
     TableModule,
     ToolbarModule,
-    CalendarModule,
+    DatePickerModule,
     FloatLabelModule
   ],
   templateUrl: './promo-simulator.component.html',

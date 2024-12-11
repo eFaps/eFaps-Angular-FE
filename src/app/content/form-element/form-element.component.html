@@ -14,8 +14,8 @@
             </div>
         </ng-container>
         <ng-container *ngSwitchCase="'DROPDOWN'">
-            <p-dropdown [options]="formItem?.options" [(ngModel)]="dropdownValue" appendTo="body"
-                (onChange)="changeDropdown($event.value)"></p-dropdown>
+            <p-select [options]="formItem?.options" [(ngModel)]="dropdownValue" appendTo="body"
+                (onChange)="changeDropdown($event.value)"></p-select>
         </ng-container>
         <ng-container *ngSwitchCase="'BITENUM'">
             <p-multiSelect [options]="formItem?.options" [(ngModel)]="bitEnumValue" display="chip"
@@ -54,24 +54,26 @@
             </p-fileUpload>
         </ng-container>
         <ng-container *ngSwitchCase="'DATE'">
-            <p-calendar [(ngModel)]="dateValue" #date [showIcon]="true" (onBlur)="changeDate(date.value)"
-                (onSelect)="changeDate($event)" appendTo="body"></p-calendar>
+            <p-datepicker [(ngModel)]="dateValue" #date [showIcon]="true" (onBlur)="changeDate(date.value)"
+                (onSelect)="changeDate($event)" appendTo="body"></p-datepicker>
         </ng-container>
         <ng-container *ngSwitchCase="'DATETIME'">
-            <p-calendar [(ngModel)]="dateTimeValue" #date [showIcon]="true" (onBlur)="changeDateTime(date.value)"
-                (onSelect)="changeDateTime($event)" [showTime]="true" appendTo="body"></p-calendar>
+            <p-datepicker [(ngModel)]="dateTimeValue" #date [showIcon]="true" (onBlur)="changeDateTime(date.value)"
+                (onSelect)="changeDateTime($event)" [showTime]="true" appendTo="body"></p-datepicker>
         </ng-container>
         <ng-container *ngSwitchCase="'TIME'">
-            <p-calendar [(ngModel)]="timeValue" #date [showIcon]="true" (onBlur)="changeTime(date.value)"
-                (onSelect)="changeTime($event)" appendTo="body" [timeOnly]="true"></p-calendar>
+            <p-datepicker [(ngModel)]="timeValue" #date [showIcon]="true" (onBlur)="changeTime(date.value)"
+                (onSelect)="changeTime($event)" appendTo="body" [timeOnly]="true"></p-datepicker>
         </ng-container>
         <ng-container *ngSwitchCase="'ATTRSET'">
             <app-attribute-set [formItem]="formItem"></app-attribute-set>
         </ng-container>
         <ng-container *ngSwitchCase="'CHECKBOX'">
             <div *ngFor="let option of formItem?.options" class="field-checkbox">
-                <p-checkbox name="group" [label]="option.label" [value]="option.value" [(ngModel)]="checkboxValue"
-                    (onChange)="changeCheckbox($event.checked)"></p-checkbox>
+                <p-checkbox name="group" [value]="option.value" [(ngModel)]="checkboxValue" 
+                    (onChange)="changeCheckbox($event.checked)" [inputId]="option.value">
+                </p-checkbox>
+                <label for="{{option.value}}" class="ml-2"> {{option.label}} </label>
             </div>
         </ng-container>
         <ng-container *ngSwitchCase="'BUTTON'">

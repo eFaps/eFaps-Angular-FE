@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
-import { DropdownModule } from 'primeng/dropdown';
+import { SelectModule } from 'primeng/select';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { Company } from 'src/app/model/user';
 import { UserService } from 'src/app/services/user.service';
@@ -10,7 +10,7 @@ import { UserService } from 'src/app/services/user.service';
 @Component({
   selector: 'app-company-chooser',
   standalone: true,
-  imports: [CommonModule, DropdownModule, ButtonModule, ReactiveFormsModule],
+  imports: [CommonModule, SelectModule, ButtonModule, ReactiveFormsModule],
   templateUrl: './company-chooser.component.html',
   styleUrls: ['./company-chooser.component.scss'],
 })

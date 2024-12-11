@@ -2,7 +2,8 @@ import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, Input, ViewChild } from '@angular/core';
 import Papa, { ParseResult } from 'papaparse';
-import { Message } from 'primeng/api/message';
+import { ToastMessageOptions } from 'primeng/api';
+
 import { ButtonModule } from 'primeng/button';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import {
@@ -45,7 +46,7 @@ export class CSVImportComponent {
   results: ParseResult<any> | undefined;
   dialogData: any;
   verified: Boolean = false;
-  messages: Message[] = [];
+  messages: ToastMessageOptions[] = [];
 
   constructor(
     config: DynamicDialogConfig,

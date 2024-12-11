@@ -30,48 +30,7 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss",
-              {
-                "input": "src/themes/md-dark-deeppurple.scss",
-                "bundleName": "md-dark-deeppurple",
-                "inject": false
-              },
-              {
-                "input": "src/themes/md-dark-indigo.scss",
-                "bundleName": "md-dark-indigo",
-                "inject": false
-              },
-              {
-                "input": "src/themes/md-light-deeppurple.scss",
-                "bundleName": "md-light-deeppurple",
-                "inject": false
-              },
-              {
-                "input": "src/themes/md-light-indigo.scss",
-                "bundleName": "md-light-indigo",
-                "inject": false
-              },
-
-              {
-                "input": "src/themes/mdc-dark-deeppurple.scss",
-                "bundleName": "mdc-dark-deeppurple",
-                "inject": false
-              },
-              {
-                "input": "src/themes/mdc-dark-indigo.scss",
-                "bundleName": "mdc-dark-indigo",
-                "inject": false
-              },
-              {
-                "input": "src/themes/mdc-light-deeppurple.scss",
-                "bundleName": "mdc-light-deeppurple",
-                "inject": false
-              },
-              {
-                "input": "src/themes/mdc-light-indigo.scss",
-                "bundleName": "mdc-light-indigo",
-                "inject": false
-              }
+              "src/styles.scss"
             ],
             "scripts": [
               "./node_modules/chart.js/dist/chart.js"

@@ -2,7 +2,7 @@
     <div #contentHeader>
         <p-toolbar class="toolbar">
             <div class="p-toolbar-group-start">
-                <ng-container *ngIf="activeIndex==0">
+                <ng-container>
                     <p-tieredMenu #menu [model]="menuItems" [popup]="true" appendTo="body"></p-tieredMenu>
                     <p-button *ngIf="menuItems.length > 0" (click)="menu.toggle($event)" icon="pi pi-bars"></p-button>
                 </ng-container>
@@ -10,19 +10,24 @@
             </div>
         </p-toolbar>
         <div class="tabs">
-            <p-tabView [(activeIndex)]="activeIndex" (onChange)="onTabChange($event)" [scrollable]="true">
-                <p-tabPanel *ngFor="let tab of tabs;let indexOfelement=index;">
-                    <ng-template pTemplate="header">
-                        <i *ngIf="indexOfelement==0" class="pi pi-fw pi-map-marker"></i>
-                        <span *ngIf="indexOfelement!=0" class="tabLabel">{{tab.label}}</span>
-                    </ng-template>
-                </p-tabPanel>
-            </p-tabView>
+            <p-tabs [(value)]="activeTab" [scrollable]="true">
+                <p-tablist>
+                    @for(tab of tabs; track tab.id){
+                    <p-tab [value]="tab.id" (click)="onSelect(tab)">
+                        <span class="tabLabel">{{tab.label}}</span>
+                    </p-tab>
+                    }
+                </p-tablist>
+            </p-tabs>
         </div>
     </div>
-    <app-classification-display *ngIf="activeIndex==0 && classifications"
-        [classifications]="classifications"></app-classification-display>
-    <app-sections *ngIf="activeIndex==0" [sections]="sections"></app-sections>
+    @if (isMainActive() && classifications) {
+        <app-classification-display 
+            [classifications]="classifications"></app-classification-display>
+    }
+    @if (isMainActive()) {
+        <app-sections [sections]="sections"></app-sections>
+    }
     <router-outlet name="contentOutlet" (activate)="onActivate($event)"></router-outlet>
     <p-confirmDialog></p-confirmDialog>
 </div>

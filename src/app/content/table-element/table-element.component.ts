@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { TableColumn } from 'src/app/model/content';
 import { Option } from 'src/app/model/content';
 import { AutoCompleteService } from 'src/app/services/auto-complete.service';

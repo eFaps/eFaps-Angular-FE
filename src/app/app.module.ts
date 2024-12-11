@@ -15,12 +15,10 @@ import { MessageService } from 'primeng/api';
 import { BreadcrumbModule } from 'primeng/breadcrumb';
 import { ButtonModule } from 'primeng/button';
 import { DividerModule } from 'primeng/divider';
-import { DynamicDialogModule } from 'primeng/dynamicdialog';
 import { IconFieldModule } from 'primeng/iconfield';
 import { InputIconModule } from 'primeng/inputicon';
 import { InputTextModule } from 'primeng/inputtext';
 import { MenubarModule } from 'primeng/menubar';
-import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { ProgressBarModule } from 'primeng/progressbar';
 import { TableModule } from 'primeng/table';
 import { ToastModule } from 'primeng/toast';
@@ -35,6 +33,10 @@ import { LoaderInterceptor } from './interceptors/loader.interceptor';
 import { ConfigService } from './services/config.service';
 import { UserService } from './services/user.service';
 import { ThemeChooserComponent } from './standalone/theme-chooser/theme-chooser.component';
+import { providePrimeNG } from 'primeng/config';
+import Material from '@primeng/themes/material';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { PopoverModule } from 'primeng/popover';
 
 registerLocaleData(localeEs, 'es');
 
@@ -48,8 +50,7 @@ registerLocaleData(localeEs, 'es');
     KeycloakAngularModule,
     BrowserAnimationsModule,
     ButtonModule,
-    OverlayPanelModule,
-    DynamicDialogModule,
+    PopoverModule,
     ProgressBarModule,
     IconFieldModule,
     InputIconModule,
@@ -75,6 +76,12 @@ registerLocaleData(localeEs, 'es');
     { provide: RouteReuseStrategy, useClass: RoutePathReuseStrategy },
     { provide: LOCALE_ID, useValue: 'es' },
     provideHttpClient(withInterceptorsFromDi()),
+    provideAnimationsAsync(),
+    providePrimeNG({ 
+      theme: {
+          preset: Material
+      }
+  })
   ],
 })
 export class AppModule {}

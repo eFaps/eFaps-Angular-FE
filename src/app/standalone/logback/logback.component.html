@@ -15,7 +15,7 @@
                 <td [pEditableColumn]="logger" [pEditableColumnField]="'level'" class="editable">
                     <p-cellEditor>
                         <ng-template pTemplate="input">
-                            <p-dropdown [options]="levels" appendTo="body" [(ngModel)]="logger.level" [style]="{'width':'100%'}"></p-dropdown>
+                            <p-select [options]="levels" appendTo="body" [(ngModel)]="logger.level" [style]="{'width':'100%'}"></p-select>
                         </ng-template>
                         <ng-template pTemplate="output">
                             {{ logger.level }}
@@ -28,5 +28,5 @@
     </p-table>
 </div>
 <div class="p-dialog-footer">
-    <p-button label="Update" severity="warning" (click)="submit()"></p-button>
+    <p-button label="Update" severity="warn" (click)="submit()"></p-button>
 </div>
