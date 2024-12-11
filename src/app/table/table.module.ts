@@ -21,6 +21,7 @@ import { FilterElementComponent } from './filter-element/filter-element.componen
 import { FilterComponent } from './filter/filter.component';
 import { TableRoutingModule } from './table-routing.module';
 import { TableComponent } from './table/table.component';
+import { TooltipModule } from 'primeng/tooltip';
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import { TableComponent } from './table/table.component';
     TieredMenuModule,
     DatePickerModule,
     PaginatorModule,
+    TooltipModule
   ],
 })
 export class TableModule {}

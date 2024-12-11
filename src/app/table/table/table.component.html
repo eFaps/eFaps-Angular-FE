@@ -19,9 +19,9 @@
                     @if (!paginated) {
                         <span class="quantity">Cantidad: {{dt.filteredValue?.length ? dt.filteredValue?.length + ' /' : ''}} {{elements.length}}</span>
                     }
-                    <button type="button" pButton pRipple icon="pi pi-file" (click)="dt.exportCSV({})" pTooltip="CSV" tooltipPosition="bottom"></button>
-                    <button type="button" pButton pRipple icon="pi pi-file-excel" (click)="exportExcel()"  pTooltip="XLS" tooltipPosition="bottom"></button>
-                    <button type="button" pButton pRipple icon="pi pi-file-pdf" (click)="exportPdf()" pTooltip="PDF" tooltipPosition="bottom"></button>
+                    <p-button type="button" icon="pi pi-file" (click)="dt.exportCSV({})" pTooltip="CSV" tooltipPosition="bottom"></p-button>
+                    <p-button type="button" icon="pi pi-file-excel" (click)="exportExcel()"  pTooltip="XLS" tooltipPosition="bottom"></p-button>
+                    <p-button type="button" icon="pi pi-file-pdf" (click)="exportPdf()" pTooltip="PDF" tooltipPosition="bottom"></p-button>
             
                     @if (filtered){
                         <p-button icon="pi pi-filter" severity="help" (click)="filter()"></p-button >
