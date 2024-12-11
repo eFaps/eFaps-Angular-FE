@@ -46,6 +46,14 @@
     }
 }
 
+.editDialog {
+    padding-top: 25px;
+    padding-bottom: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 45px;
+}
+
 .promotionModal {
     display: flex;
     flex-direction: column;

@@ -67,7 +67,7 @@
         <h3>Configuraciones:</h3>
         <div class="confElement">
             <p-floatLabel>
-                <p-datepicker [(ngModel)]="date" [showIcon]="true" [disabled]="!dateChecked"/>
+                <p-datepicker [(ngModel)]="date" [showIcon]="true" [disabled]="!dateChecked" />
                 <label for="username">Fecha</label>
             </p-floatLabel>
             <p-toggleswitch [(ngModel)]="dateChecked" />
@@ -76,21 +76,23 @@
 </div>
 
 <p-dialog [(visible)]="editDialog" [style]="{ width: '450px' }" header="Editar" [modal]="true" styleClass="p-fluid">
-    <ng-template pTemplate="content">
-        <div class="field">
-            <label for="name">Candidad</label>
-            <p-inputNumber pInputText id="name" [(ngModel)]="item.quantity" required autofocus />
-        </div>
-        <div class="field">
-            <label for="name">Producto</label>
-
-            <p-autoComplete [(ngModel)]="autoCompleteValue" [suggestions]="autoCompleteSuggestions"
-                (completeMethod)="search($event.query)" optionLabel="label" [lazy]="true" placeholder="buscar"
-                [forceSelection]="true" [showEmptyMessage]="true" appendTo="body" (onSelect)="onSelect($event.value)">
-            </p-autoComplete>
+    <ng-template #content>
+        <div class="editDialog">
+            <p-floatlabel>
+                <p-inputNumber pInputText id="quantity" [(ngModel)]="item.quantity" required autofocus />
+                <label for="quantity">Candidad</label>
+            </p-floatlabel>
+            <p-floatlabel>
+                <p-autoComplete id="product" [(ngModel)]="autoCompleteValue" [suggestions]="autoCompleteSuggestions"
+                    (completeMethod)="search($event.query)" optionLabel="label" [lazy]="true" 
+                    [forceSelection]="true" [showEmptyMessage]="true" appendTo="body"
+                    (onSelect)="onSelect($event.value)">
+                </p-autoComplete>
+                <label for="product">Producto</label>
+            </p-floatlabel>
         </div>
     </ng-template>
-    <ng-template pTemplate="footer">
+    <ng-template #footer>
         <p-button label="Cerrar" icon="pi pi-times" [text]="true" (onClick)="cancel()" />
         <p-button label="Guardar" icon="pi pi-check" [text]="true" (onClick)="save()" />
     </ng-template>
@@ -98,7 +100,7 @@
 <p-confirmDialog [style]="{ width: '450px' }" />
 
 <p-dialog [(visible)]="showPromotionModal" header="Promocion" [modal]="true" styleClass="p-fluid">
-    <ng-template pTemplate="content">
+    <ng-template #content>
         <div class="promotionModal">
             <div>
                 <span>OID</span>
