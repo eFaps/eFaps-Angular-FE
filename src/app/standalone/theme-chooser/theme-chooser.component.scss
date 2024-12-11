@@ -5,10 +5,25 @@
     justify-content: center;
 }
 
-::ng-deep .p-button {
-    padding: 0.5rem;
-    min-width: unset;
-}
 .custom-icon {
     height: 2rem;
+}
+
+::ng-deep p-button#blue {
+    button {
+        background-color: var(--p-blue-500);
+        border: 1px solid var(--p-blue-500);
+    }
+}
+::ng-deep p-button#indigo {
+    button {
+        background-color: var(--p-indigo-500);
+        border: 1px solid var(--p-indigo-500);
+    }
+}
+::ng-deep p-button#purple {
+    button {
+        background-color: var(--p-purple-500);
+        border: 1px solid var(--p-purple-500);
+    }
 }
