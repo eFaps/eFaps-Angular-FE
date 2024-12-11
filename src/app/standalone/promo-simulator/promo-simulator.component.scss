@@ -9,6 +9,7 @@
         flex-grow: 1;
         
         .confElement {
+            margin-top: 25px;
             display: flex;
             gap: 15px;
             align-items: center;
@@ -18,6 +19,11 @@
     .document {
         flex-grow: 2;
         
+        .buttons {
+            display: flex;
+            gap: 10px;
+        }
+
         .totals {
             margin-top: 50px;
             margin-left: 20px;

@@ -11,7 +11,7 @@ import { DialogModule } from 'primeng/dialog';
 import { FloatLabelModule } from 'primeng/floatlabel';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { TableModule } from 'primeng/table';
-import { ToggleSwitchModule } from 'primeng/toggleswitch';
+import { ToggleSwitchChangeEvent, ToggleSwitchModule } from 'primeng/toggleswitch';
 import { ToolbarModule } from 'primeng/toolbar';
 import { UtilService } from 'src/app/services/util.service';
 
@@ -189,6 +189,10 @@ export class PromoSimulatorComponent {
   showPromotion(promotion: Promotion) {
     this.displayPromotion = promotion;
     this.showPromotionModal = true;
+  }
+
+  toggleDate(event: ToggleSwitchChangeEvent) {
+    this.date = undefined
   }
 }
 

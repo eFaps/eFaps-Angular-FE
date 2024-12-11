@@ -3,7 +3,7 @@
         <div>
             <p-toolbar styleClass="mb-4 gap-2">
                 <ng-template #start>
-                    <div class="gap-4">
+                    <div class="buttons">
                         <p-button severity="success" label="Añadir" icon="pi pi-plus" (onClick)="add()" />
                         <p-button severity="danger" label="Borrar" icon="pi pi-trash" (onClick)="delete()"
                             [disabled]="!selectedItems || !selectedItems.length" />
@@ -70,7 +70,7 @@
                 <p-datepicker [(ngModel)]="date" [showIcon]="true" [disabled]="!dateChecked" />
                 <label for="username">Fecha</label>
             </p-floatLabel>
-            <p-toggleswitch [(ngModel)]="dateChecked" />
+            <p-toggleswitch [(ngModel)]="dateChecked" (onChange)="toggleDate($event)"/>
         </div>
     </div>
 </div>
