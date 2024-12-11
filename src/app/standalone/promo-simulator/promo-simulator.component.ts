@@ -5,12 +5,15 @@ import { FormsModule } from '@angular/forms';
 import { ConfirmationService } from 'primeng/api';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import { ButtonModule } from 'primeng/button';
+import { CalendarModule } from 'primeng/calendar';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { DialogModule } from 'primeng/dialog';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { TableModule } from 'primeng/table';
 import { ToolbarModule } from 'primeng/toolbar';
 import { UtilService } from 'src/app/services/util.service';
+import { FloatLabelModule } from 'primeng/floatlabel';
+
 
 @Component({
   selector: 'app-promo-simulator',
@@ -26,6 +29,8 @@ import { UtilService } from 'src/app/services/util.service';
     InputNumberModule,
     TableModule,
     ToolbarModule,
+    CalendarModule,
+    FloatLabelModule
   ],
   templateUrl: './promo-simulator.component.html',
   styleUrl: './promo-simulator.component.scss',
@@ -43,6 +48,8 @@ export class PromoSimulatorComponent {
   calcResponse: CalcResponse | undefined;
   showPromotionModal =  false;
   displayPromotion: Promotion | undefined;
+
+  date: Date | undefined
 
   constructor(private http: HttpClient, 
     private confirmationService: ConfirmationService,
@@ -125,6 +132,7 @@ export class PromoSimulatorComponent {
 
     const body = {
       items: positions,
+      date: this.date
     };
 
     this.http.post<any>(url, body).subscribe({
