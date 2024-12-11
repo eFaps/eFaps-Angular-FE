@@ -1,5 +1,9 @@
 .wrapper {
     padding: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+
     span {
         min-width: 400px;
         margin: 10px;
@@ -12,11 +16,11 @@
         width: 100%;
     }
 
-    ::ng-deep .p-dropdown {
+    ::ng-deep .p-select {
         width: 100%;
     }
  }
 
-::ng-deep .p-dropdown-panel {
+::ng-deep .p-select-panel {
     width: 100%;
 }

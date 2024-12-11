@@ -1,36 +1,42 @@
 <div class="p-dialog-content">
     <div class="wrapper">
-        <span class="p-float-label">
+        <p-floatlabel>
             <p-autoComplete [(ngModel)]="key" [dropdown]="true" [suggestions]="keys" (completeMethod)="loadKeys($event)"
                 (onSelect)="onKeySelect($event)" (onBlur)="onKeyBlur($event)" field="key"
                 appendTo="body"></p-autoComplete>
-            <label htmlFor="key">Key</label>
-        </span>
-        <span class="p-float-label" *ngIf="type=='STRING' || type=='UNDEFINED'">
-            <textarea rows="5" cols="50" id="strValue" pTextarea [autoResize]="true" [(ngModel)]="strValue"></textarea>
-            <label htmlFor="strValue">Value</label>
-        </span>
-        <span class="p-float-label" *ngIf="type=='BOOLEAN'">
+            <label for="key">Key</label>
+        </p-floatlabel>
+        @if (type=='STRING' || type=='UNDEFINED') {
+        <p-floatlabel>
+            <textarea rows="5" cols="50" id="strValue" pTextarea [autoResize]="true" [(ngModel)]="strValue" [fluid]="true"></textarea>
+            <label for="strValue">Value</label>
+        </p-floatlabel>
+        }
+        @if (type=='BOOLEAN') {
+        <p-floatlabel>
             <p-toggleButton id="booleanValue" [(ngModel)]="booleanValue" onLabel="True"
                 offLabel="False"></p-toggleButton>
-        </span>
-        <span class="p-float-label" *ngIf="type=='PROPERTIES'">
-            <textarea rows="5" cols="50" id="properties" pInputTextarea [(ngModel)]="strValue"></textarea>
+        </p-floatlabel>
+        }
+        @if (type=='PROPERTIES') {
+        <p-floatlabel>
+            <textarea rows="5" cols="50" id="properties" pTextarea [(ngModel)]="strValue"  [fluid]="true"></textarea>
             <label for="properties">Value</label>
-        </span>
-        <span class="p-float-label">
-            <textarea rows="3" cols="50" id="description" pInputTextarea [(ngModel)]="description"></textarea>
+        </p-floatlabel>
+        }
+        <p-floatlabel>
+            <textarea rows="3" cols="50" id="description" pTextarea [(ngModel)]="description" class="h-full" [fluid]="true"></textarea>
             <label for="description">Description</label>
-        </span>
-        <span class="p-float-label">
+        </p-floatlabel>
+        <p-floatlabel>
             <p-select id="company" [options]="companies" [(ngModel)]="company" optionLabel="name"
                 appendTo="body"></p-select>
             <label for="company">Company</label>
-        </span>
-        <span class="p-float-label">
+        </p-floatlabel>
+        <p-floatlabel>
             <input type="text" id="appKey" pInputText [(ngModel)]="appKey" />
             <label htmlFor="appKey">AppKey</label>
-        </span>
+        </p-floatlabel>
     </div>
 </div>
 <div class="p-dialog-footer">

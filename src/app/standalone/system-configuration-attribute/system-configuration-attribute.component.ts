@@ -8,6 +8,7 @@ import {
 } from 'primeng/autocomplete';
 import { ButtonModule } from 'primeng/button';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { FloatLabelModule } from 'primeng/floatlabel';
 import { InputTextModule } from 'primeng/inputtext';
 import { SelectModule } from 'primeng/select';
 import { TextareaModule } from 'primeng/textarea';
@@ -29,6 +30,7 @@ import { UtilService } from 'src/app/services/util.service';
     InputTextModule,
     TextareaModule,
     ToggleButtonModule,
+    FloatLabelModule
   ],
   templateUrl: './system-configuration-attribute.component.html',
   styleUrls: ['./system-configuration-attribute.component.scss'],
@@ -62,6 +64,8 @@ export class SystemConfigurationAttributeComponent implements OnInit {
     private userService: UserService
   ) {
     config.header = 'Edit SystemConfiguration Attribute';
+    config.closable = true
+    config.width = "800px"
   }
 
   ngOnInit(): void {
