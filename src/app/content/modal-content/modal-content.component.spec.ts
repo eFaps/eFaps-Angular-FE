@@ -5,11 +5,7 @@ import {
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ButtonModule } from 'primeng/button';
-import {
-  DynamicDialogConfig,
-  DynamicDialogModule,
-  DynamicDialogRef,
-} from 'primeng/dynamicdialog';
+import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { Observable } from 'rxjs';
 
 import { ClassificationDisplayComponent } from '../classification-display/classification-display.component';
@@ -27,7 +23,7 @@ describe('ModalContentComponent', () => {
         SectionsComponent,
         ClassificationDisplayComponent,
       ],
-      imports: [DynamicDialogModule, ButtonModule],
+      imports: [ButtonModule],
       providers: [
         {
           provide: DynamicDialogConfig,

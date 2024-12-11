@@ -4,7 +4,7 @@ import {
 } from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { DynamicDialogModule, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { DynamicDialogRef } from 'primeng/dynamicdialog';
 
 import { CompanyChooserComponent } from './company-chooser.component';
 
@@ -14,7 +14,7 @@ describe('CompanyChooserComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [CompanyChooserComponent, DynamicDialogModule],
+      imports: [CompanyChooserComponent],
       providers: [
         { provide: DynamicDialogRef, useValue: {} },
         provideHttpClient(withInterceptorsFromDi()),

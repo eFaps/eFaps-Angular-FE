@@ -5,11 +5,7 @@ import {
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ButtonModule } from 'primeng/button';
-import {
-  DynamicDialogConfig,
-  DynamicDialogModule,
-  DynamicDialogRef,
-} from 'primeng/dynamicdialog';
+import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { Observable } from 'rxjs';
 
 import { FilterComponent } from './filter.component';
@@ -21,7 +17,7 @@ describe('FilterComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [FilterComponent],
-      imports: [DynamicDialogModule, ButtonModule],
+      imports: [ButtonModule],
       providers: [
         {
           provide: DynamicDialogConfig,

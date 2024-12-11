@@ -1,15 +1,16 @@
+import { CommonModule } from '@angular/common';
 import {
   provideHttpClient,
   withInterceptorsFromDi,
 } from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { provideRouter } from '@angular/router';
+import { RouterModule, provideRouter } from '@angular/router';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { DialogModule } from 'primeng/dialog';
 import { DialogService } from 'primeng/dynamicdialog';
 import { ScrollPanelModule } from 'primeng/scrollpanel';
-import { TabViewModule } from 'primeng/tabview';
+import { TabsModule } from 'primeng/tabs';
 import { TieredMenuModule } from 'primeng/tieredmenu';
 import { ToolbarModule } from 'primeng/toolbar';
 
@@ -24,9 +25,10 @@ describe('ContentComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ContentComponent, SectionsComponent],
       imports: [
+        RouterModule,
         DialogModule,
         ToolbarModule,
-        TabViewModule,
+        TabsModule,
         ConfirmDialogModule,
         TieredMenuModule,
         ScrollPanelModule,

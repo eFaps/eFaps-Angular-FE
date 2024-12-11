@@ -1,11 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
-import {
-  DynamicDialogConfig,
-  DynamicDialogModule,
-  DynamicDialogRef,
-} from 'primeng/dynamicdialog';
+import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { SelectModule } from 'primeng/select';
 
 import { EditComponent } from './edit.component';
@@ -16,7 +12,7 @@ describe('EditComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [DynamicDialogModule, SelectModule, ButtonModule, FormsModule],
+      imports: [SelectModule, ButtonModule, FormsModule],
       declarations: [EditComponent],
       providers: [
         {

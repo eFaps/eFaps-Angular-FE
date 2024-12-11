@@ -15,13 +15,13 @@ import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { PaginatorModule } from 'primeng/paginator';
 import { TableModule as primeTableModule } from 'primeng/table';
 import { TieredMenuModule } from 'primeng/tieredmenu';
+import { TooltipModule } from 'primeng/tooltip';
 
 import { ColumnComponent } from './column/column.component';
 import { FilterElementComponent } from './filter-element/filter-element.component';
 import { FilterComponent } from './filter/filter.component';
 import { TableRoutingModule } from './table-routing.module';
 import { TableComponent } from './table/table.component';
-import { TooltipModule } from 'primeng/tooltip';
 
 @NgModule({
   declarations: [
@@ -48,7 +48,7 @@ import { TooltipModule } from 'primeng/tooltip';
     TieredMenuModule,
     DatePickerModule,
     PaginatorModule,
-    TooltipModule
+    TooltipModule,
   ],
 })
 export class TableModule {}
