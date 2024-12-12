@@ -2,7 +2,7 @@
 <p-progressBar mode="indeterminate" [style]="{ position: 'absolute', height: '6px', width: '100%' }"></p-progressBar>
 }
 @if (user != undefined) {
-<p-menubar [model]="menuItems()" [autoDisplay]="true" [autoHide]="true">
+<p-menubar [model]="menuItems()" [autoDisplay]="true" [autoHide]="true" [style]="{ position: 'relative', 'z-index':'10'}">
     <ng-template #start>
         <img src="assets/logo.svg" height="40" class="mr-2 icon" (click)="home()" />
     </ng-template>
