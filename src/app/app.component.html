@@ -1,5 +1,5 @@
 @if (isLoading()) {
-<p-progressBar mode="indeterminate" [style]="{ position: 'absolute', height: '6px', width: '100%' }"></p-progressBar>
+<p-progressBar mode="indeterminate" [style]="{ position: 'absolute', height: '6px', width: '100%', 'z-index':'11'}"></p-progressBar>
 }
 @if (user != undefined) {
 <p-menubar [model]="menuItems()" [autoDisplay]="true" [autoHide]="true" [style]="{ position: 'relative', 'z-index':'10'}">
