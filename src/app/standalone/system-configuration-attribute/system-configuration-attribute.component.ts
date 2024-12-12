@@ -30,7 +30,7 @@ import { UtilService } from 'src/app/services/util.service';
     InputTextModule,
     TextareaModule,
     ToggleButtonModule,
-    FloatLabelModule
+    FloatLabelModule,
   ],
   templateUrl: './system-configuration-attribute.component.html',
   styleUrls: ['./system-configuration-attribute.component.scss'],
@@ -64,8 +64,8 @@ export class SystemConfigurationAttributeComponent implements OnInit {
     private userService: UserService
   ) {
     config.header = 'Edit SystemConfiguration Attribute';
-    config.closable = true
-    config.width = "800px"
+    config.closable = true;
+    config.width = '800px';
   }
 
   ngOnInit(): void {

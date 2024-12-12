@@ -332,6 +332,7 @@ export class TableComponent implements OnInit {
     );
 
     const tableCaption = 78;
+    const paginatorHeight = 58;
 
     height =
       height -
@@ -339,6 +340,10 @@ export class TableComponent implements OnInit {
       breadcrumbHeight -
       contenHeaderHeight -
       tableCaption;
+
+    if (this.page) {
+      height = height - paginatorHeight;
+    }
 
     this.scrollHeight = `${height}px`;
     /**
