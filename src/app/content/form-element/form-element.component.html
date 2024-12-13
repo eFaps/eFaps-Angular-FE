@@ -42,7 +42,7 @@
         <ng-container *ngSwitchCase="'UPLOAD'">
             <p-fileUpload [url]="uploadUrl" (onUpload)="onUpload($event)">
                 <ng-template #empty>
-                    <div>Drag and drop files to here to upload.</div>
+                    <div class="dragDrop">Arrastre y suelte archivos aquí para cargarlos.</div>
                 </ng-template>
                 <ng-template #content let-files>
                     <div *ngIf="uploadKeys">Successfull uploaded</div>
@@ -51,6 +51,9 @@
         </ng-container>
         <ng-container *ngSwitchCase="'UPLOADMULTIPLE'">
             <p-fileUpload [url]="uploadUrl" (onUpload)="onUpload($event)" [multiple]="true">
+                <ng-template #empty>
+                    <div class="dragDrop">Arrastre y suelte archivos aquí para cargarlos.</div>
+                </ng-template>
                 <ng-template pTemplate="content" let-files>
                     <div *ngIf="uploadKeys">Successfull uploaded</div>
                 </ng-template>
