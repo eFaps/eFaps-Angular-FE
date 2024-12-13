@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { MenuItem } from 'primeng/api';
+import { MenuItem, MessageService } from 'primeng/api';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
-import { Search } from 'src/app/model/search';
+import { Search, SearchResult } from 'src/app/model/search';
 import { ExecService } from 'src/app/services/exec.service';
 import { SearchService } from 'src/app/services/search.service';
 import { ValueService } from 'src/app/services/value.service';
@@ -29,9 +29,10 @@ export class SearchContentComponent implements OnInit {
     private dialogRef: DynamicDialogRef,
     private valueService: ValueService,
     private searchService: SearchService,
-    private execService: ExecService
+    private execService: ExecService,
+    private messageService: MessageService
   ) {
-    config.closable = true
+    config.closable = true;
     if (config.data.restore) {
       const searchContent = this.searchService.restore();
       this.searchMenuItems = searchContent.search.menuItems;
@@ -105,8 +106,20 @@ export class SearchContentComponent implements OnInit {
       next: (searchResult) => {
         this.cols = searchResult.columns;
         this.elements = searchResult.values;
+        this.evalMax(searchResult);
       },
     });
+  }
+
+  evalMax(searchResult: SearchResult) {
+    const limit = searchResult.page?.pageSize;
+    if (limit == searchResult.values.length) {
+      this.messageService.add({
+        severity: 'warn',
+        summary: 'Limite',
+        detail: `Resultado llego al limite de ${limit}`,
+      });
+    }
   }
 
   submit() {

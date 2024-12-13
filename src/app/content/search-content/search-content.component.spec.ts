@@ -10,6 +10,7 @@ import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 
 import { FormSectionComponent } from '../form-section/form-section.component';
 import { SearchContentComponent } from './search-content.component';
+import { MessageService } from 'primeng/api';
 
 describe('SearchContentComponent', () => {
   let component: SearchContentComponent;
@@ -38,6 +39,7 @@ describe('SearchContentComponent', () => {
         { provide: DynamicDialogRef, useValue: {} },
         provideHttpClient(withInterceptorsFromDi()),
         provideHttpClientTesting(),
+        MessageService
       ],
     });
     fixture = TestBed.createComponent(SearchContentComponent);
