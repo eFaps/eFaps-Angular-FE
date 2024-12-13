@@ -164,6 +164,7 @@ export class PromoSimulatorComponent {
         item.netDiscount = undefined
         item.crossPrice = undefined
         item.crossDiscount = undefined
+        item.promotions = []
       })
 
       this.calcResponse.positions.forEach((pos, index) => {
