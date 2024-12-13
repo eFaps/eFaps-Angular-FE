@@ -31,6 +31,7 @@ export class SearchContentComponent implements OnInit {
     private searchService: SearchService,
     private execService: ExecService
   ) {
+    config.closable = true
     if (config.data.restore) {
       const searchContent = this.searchService.restore();
       this.searchMenuItems = searchContent.search.menuItems;
