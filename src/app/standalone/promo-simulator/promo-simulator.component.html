@@ -86,7 +86,7 @@
                 <p-autoComplete id="product" [(ngModel)]="autoCompleteValue" [suggestions]="autoCompleteSuggestions"
                     (completeMethod)="search($event.query)" optionLabel="label" [lazy]="true" 
                     [forceSelection]="true" [showEmptyMessage]="true" appendTo="body"
-                    (onSelect)="onSelect($event.value)">
+                    (onSelect)="onSelect($event.value)" required>
                 </p-autoComplete>
                 <label for="product">Producto</label>
             </p-floatlabel>
@@ -94,7 +94,7 @@
     </ng-template>
     <ng-template #footer>
         <p-button label="Cerrar" icon="pi pi-times" [text]="true" (onClick)="cancel()" />
-        <p-button label="Guardar" icon="pi pi-check" [text]="true" (onClick)="save()" />
+        <p-button label="Guardar" icon="pi pi-check" [text]="true" (onClick)="save()" [disabled]="!isValid()"/>
     </ng-template>
 </p-dialog>
 <p-confirmDialog [style]="{ width: '450px' }" />

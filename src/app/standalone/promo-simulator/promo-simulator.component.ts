@@ -81,6 +81,10 @@ export class PromoSimulatorComponent {
     this.editDialog = true;
   }
 
+  isValid(): boolean {
+    return this.item.quantity != undefined && this.item.product != undefined
+  }
+
   delete() {
     this.confirmationService.confirm({
       message: 'Esta seguro?',
@@ -154,6 +158,14 @@ export class PromoSimulatorComponent {
 
   mapResponse() {
     if (this.calcResponse) {
+      this.items.forEach(item => {
+        item.basePrice = undefined
+        item.netPrice = undefined
+        item.netDiscount = undefined
+        item.crossPrice = undefined
+        item.crossDiscount = undefined
+      })
+
       this.calcResponse.positions.forEach((pos, index) => {
         this.items[index].netPrice = pos.netPrice;
         this.items[index].crossPrice = pos.crossPrice;
