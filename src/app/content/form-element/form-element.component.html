@@ -45,7 +45,7 @@
                     <div class="dragDrop">Arrastre y suelte archivos aquí para cargarlos.</div>
                 </ng-template>
                 <ng-template #content let-files>
-                    <div *ngIf="uploadKeys">Successfull uploaded</div>
+                    <div *ngIf="uploadKeys">Subido con &#233;xito</div>
                 </ng-template>
             </p-fileUpload>
         </ng-container>
@@ -54,8 +54,8 @@
                 <ng-template #empty>
                     <div class="dragDrop">Arrastre y suelte archivos aquí para cargarlos.</div>
                 </ng-template>
-                <ng-template pTemplate="content" let-files>
-                    <div *ngIf="uploadKeys">Successfull uploaded</div>
+                <ng-template #content let-files>
+                    <div *ngIf="uploadKeys">Subido con &#233;xito</div>
                 </ng-template>
             </p-fileUpload>
         </ng-container>
