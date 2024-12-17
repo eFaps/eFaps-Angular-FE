@@ -298,6 +298,7 @@ export class FormElementComponent implements OnInit {
     } else {
       this.addEntry(option.value);
     }
+    this.fieldUpdate()
   }
 
   onUpload(event: UploadEvent) {

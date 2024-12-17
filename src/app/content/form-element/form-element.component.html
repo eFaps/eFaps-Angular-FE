@@ -25,8 +25,9 @@
         <ng-container *ngSwitchCase="'AUTOCOMPLETE'">
             <p-autoComplete [(ngModel)]="autoCompleteValue" [suggestions]="autoCompleteSuggestions"
                 (completeMethod)="search($event.query)" (onSelect)="changeAutoComplete($event)"
-                (onUnselect)="changeAutoComplete($event)" field="label" [lazy]="true" placeholder="buscar"
-                [forceSelection]="true" [showEmptyMessage]="true" (onBlur)="fieldUpdate()" appendTo="body"> </p-autoComplete>
+                (onUnselect)="changeAutoComplete($event)" optionLabel="label" optionValue="value" dataKey="value"
+                [lazy]="true" placeholder="buscar" [forceSelection]="true" [showEmptyMessage]="true" 
+                [showClear]="!formItem?.required" appendTo="body"> </p-autoComplete>
         </ng-container>
         <ng-container *ngSwitchCase="'INPUT'">
             <input type="text" pInputText #textInput [(ngModel)]="inputValue" (keyup)="onKey(textInput.value)"
@@ -76,7 +77,7 @@
         </ng-container>
         <ng-container *ngSwitchCase="'CHECKBOX'">
             <div *ngFor="let option of formItem?.options" class="field-checkbox">
-                <p-checkbox name="group" [value]="option.value" [(ngModel)]="checkboxValue" 
+                <p-checkbox name="group" [value]="option.value" [(ngModel)]="checkboxValue"
                     (onChange)="changeCheckbox($event.checked)" [inputId]="option.value">
                 </p-checkbox>
                 <label for="{{option.value}}" class="ml-2"> {{option.label}} </label>
@@ -90,7 +91,7 @@
         </ng-container>
         <ng-container *ngSwitchCase="'IMAGE'">
             @if(readOnlyValue != null) {
-                <p-image [src]="evalImageUrl()" alt="Image" width="250" [preview]="true"/>
+            <p-image [src]="evalImageUrl()" alt="Image" width="250" [preview]="true" />
             }
         </ng-container>
         <ng-container *ngSwitchDefault>
