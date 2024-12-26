@@ -113,6 +113,7 @@ export class SystemConfigurationAttributeComponent implements OnInit {
           description: this.description,
           appKey: this.appKey,
           companyLink: this.companyLink,
+          type: this.type
         })
         .subscribe({
           next: (_) => {
@@ -130,6 +131,7 @@ export class SystemConfigurationAttributeComponent implements OnInit {
           description: this.description,
           appKey: this.appKey,
           companyLink: this.companyLink,
+          type: this.type
         })
         .subscribe({
           next: (_) => {
@@ -144,6 +146,9 @@ export class SystemConfigurationAttributeComponent implements OnInit {
     switch (this.type) {
       case 'BOOLEAN':
         value = '' + this.booleanValue;
+        break;
+      case 'LIST':
+        value = JSON.stringify(('' + this.strValue).split("\n"))
         break;
       default:
         value = this.strValue;
@@ -165,6 +170,19 @@ export class SystemConfigurationAttributeComponent implements OnInit {
             });
           }
         } catch (error) {
+          this.strValue = value;
+        }
+        break;
+      case 'LIST': 
+        if (value.startsWith("[")) {
+          const list = JSON.parse(value);
+          if (list != null && list.length) {
+            (list as Array<string>).forEach(entry => {
+                this.strValue = this.strValue + entry + '\n';
+              }
+            )
+          }
+        } else {
           this.strValue = value;
         }
         break;

@@ -24,6 +24,12 @@
             <label for="properties">Value</label>
         </p-floatlabel>
         }
+        @if (type=='LIST') {
+        <p-floatlabel>
+            <textarea rows="5" cols="50" id="list" pTextarea [(ngModel)]="strValue"  [fluid]="true"></textarea>
+            <label for="list">Value</label>
+        </p-floatlabel>
+        }
         <p-floatlabel>
             <textarea rows="3" cols="50" id="description" pTextarea [(ngModel)]="description" class="h-full" [fluid]="true"></textarea>
             <label for="description">Description</label>
