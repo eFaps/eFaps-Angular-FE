@@ -7,9 +7,10 @@ import {
 } from 'src/app/model/content';
 
 @Component({
-  selector: 'app-sub-section',
-  templateUrl: './sub-section.component.html',
-  styleUrls: ['./sub-section.component.scss'],
+    selector: 'app-sub-section',
+    templateUrl: './sub-section.component.html',
+    styleUrls: ['./sub-section.component.scss'],
+    standalone: false
 })
 export class SubSectionComponent {
   @Input()

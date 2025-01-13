@@ -27,10 +27,11 @@ import { ModalContentComponent } from '../modal-content/modal-content.component'
 import { ModalModuleContentComponent } from '../modal-module-content/modal-module-content.component';
 
 @Component({
-  selector: 'app-content',
-  templateUrl: './content.component.html',
-  styleUrls: ['./content.component.scss'],
-  providers: [ConfirmationService],
+    selector: 'app-content',
+    templateUrl: './content.component.html',
+    styleUrls: ['./content.component.scss'],
+    providers: [ConfirmationService],
+    standalone: false
 })
 export class ContentComponent implements OnInit, OnDestroy {
   oid: string | undefined;

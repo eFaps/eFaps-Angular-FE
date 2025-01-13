@@ -4,11 +4,10 @@ import { TableModule } from 'primeng/table';
 import { FieldCommandResponse } from 'src/app/model/field-command';
 
 @Component({
-  selector: 'app-eqlresponse',
-  standalone: true,
-  templateUrl: './eqlresponse.component.html',
-  imports: [CommonModule, TableModule],
-  styleUrls: ['./eqlresponse.component.scss'],
+    selector: 'app-eqlresponse',
+    templateUrl: './eqlresponse.component.html',
+    imports: [CommonModule, TableModule],
+    styleUrls: ['./eqlresponse.component.scss']
 })
 export class EQLResponseComponent {
   _fieldCmdResp: FieldCommandResponse | undefined;

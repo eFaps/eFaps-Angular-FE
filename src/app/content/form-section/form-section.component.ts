@@ -2,9 +2,10 @@ import { Component, Input } from '@angular/core';
 import { FormItem, FormSection } from 'src/app/model/content';
 
 @Component({
-  selector: 'app-form-section',
-  templateUrl: './form-section.component.html',
-  styleUrls: ['./form-section.component.scss'],
+    selector: 'app-form-section',
+    templateUrl: './form-section.component.html',
+    styleUrls: ['./form-section.component.scss'],
+    standalone: false
 })
 export class FormSectionComponent {
   _formSection: FormSection | undefined;

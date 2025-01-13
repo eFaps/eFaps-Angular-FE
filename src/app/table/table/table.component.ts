@@ -28,10 +28,11 @@ import { TableService } from 'src/app/services/table.service';
 import { FilterComponent } from '../filter/filter.component';
 
 @Component({
-  selector: 'app-table',
-  templateUrl: './table.component.html',
-  styleUrls: ['./table.component.scss'],
-  providers: [ConfirmationService, DialogService],
+    selector: 'app-table',
+    templateUrl: './table.component.html',
+    styleUrls: ['./table.component.scss'],
+    providers: [ConfirmationService, DialogService],
+    standalone: false
 })
 export class TableComponent implements OnInit {
   id: string | undefined;

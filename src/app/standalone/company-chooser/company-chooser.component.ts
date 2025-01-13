@@ -8,11 +8,10 @@ import { Company } from 'src/app/model/user';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
-  selector: 'app-company-chooser',
-  standalone: true,
-  imports: [CommonModule, SelectModule, ButtonModule, ReactiveFormsModule],
-  templateUrl: './company-chooser.component.html',
-  styleUrls: ['./company-chooser.component.scss'],
+    selector: 'app-company-chooser',
+    imports: [CommonModule, SelectModule, ButtonModule, ReactiveFormsModule],
+    templateUrl: './company-chooser.component.html',
+    styleUrls: ['./company-chooser.component.scss']
 })
 export class CompanyChooserComponent implements OnInit {
   companies: Company[] = [];

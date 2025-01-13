@@ -19,25 +19,24 @@ import { ToolbarModule } from 'primeng/toolbar';
 import { UtilService } from 'src/app/services/util.service';
 
 @Component({
-  selector: 'app-promo-simulator',
-  standalone: true,
-  providers: [ConfirmationService],
-  imports: [
-    AutoCompleteModule,
-    ButtonModule,
-    CommonModule,
-    ConfirmDialogModule,
-    DialogModule,
-    FormsModule,
-    InputNumberModule,
-    TableModule,
-    ToolbarModule,
-    DatePickerModule,
-    FloatLabelModule,
-    ToggleSwitchModule,
-  ],
-  templateUrl: './promo-simulator.component.html',
-  styleUrl: './promo-simulator.component.scss',
+    selector: 'app-promo-simulator',
+    providers: [ConfirmationService],
+    imports: [
+        AutoCompleteModule,
+        ButtonModule,
+        CommonModule,
+        ConfirmDialogModule,
+        DialogModule,
+        FormsModule,
+        InputNumberModule,
+        TableModule,
+        ToolbarModule,
+        DatePickerModule,
+        FloatLabelModule,
+        ToggleSwitchModule,
+    ],
+    templateUrl: './promo-simulator.component.html',
+    styleUrl: './promo-simulator.component.scss'
 })
 export class PromoSimulatorComponent {
   items: Item[] = [];

@@ -17,18 +17,17 @@ import { ModuleData, UIModule } from 'src/app/model/module';
 import { UtilService } from 'src/app/services/util.service';
 
 @Component({
-  selector: 'app-csvimport',
-  standalone: true,
-  imports: [
-    ButtonModule,
-    CommonModule,
-    FileUploadModule,
-    MessagesModule,
-    TableModule,
-    ScrollPanelModule,
-  ],
-  templateUrl: './csvimport.component.html',
-  styleUrl: './csvimport.component.scss',
+    selector: 'app-csvimport',
+    imports: [
+        ButtonModule,
+        CommonModule,
+        FileUploadModule,
+        MessagesModule,
+        TableModule,
+        ScrollPanelModule,
+    ],
+    templateUrl: './csvimport.component.html',
+    styleUrl: './csvimport.component.scss'
 })
 export class CSVImportComponent {
   @Input()

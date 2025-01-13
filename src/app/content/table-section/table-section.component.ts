@@ -5,9 +5,10 @@ import { Column } from 'src/app/model/table';
 import { ValueService } from 'src/app/services/value.service';
 
 @Component({
-  selector: 'app-table-section',
-  templateUrl: './table-section.component.html',
-  styleUrls: ['./table-section.component.scss'],
+    selector: 'app-table-section',
+    templateUrl: './table-section.component.html',
+    styleUrls: ['./table-section.component.scss'],
+    standalone: false
 })
 export class TableSectionComponent {
   _tableSection: TableSection | undefined;

@@ -20,9 +20,10 @@ import { ValueService } from 'src/app/services/value.service';
 import { ModalContentComponent } from '../modal-content/modal-content.component';
 
 @Component({
-  selector: 'app-form-content',
-  templateUrl: './form-content.component.html',
-  styleUrls: ['./form-content.component.scss'],
+    selector: 'app-form-content',
+    templateUrl: './form-content.component.html',
+    styleUrls: ['./form-content.component.scss'],
+    standalone: false
 })
 export class FormContentComponent implements OnInit, AfterViewInit {
   id: string | undefined;

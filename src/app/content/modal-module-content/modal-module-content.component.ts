@@ -9,9 +9,10 @@ import { DynamicDialogConfig } from 'primeng/dynamicdialog';
 import { DynamicComponentService } from 'src/app/services/dynamic-component.service';
 
 @Component({
-  selector: 'app-modal-module-content',
-  templateUrl: './modal-module-content.component.html',
-  styleUrls: ['./modal-module-content.component.scss'],
+    selector: 'app-modal-module-content',
+    templateUrl: './modal-module-content.component.html',
+    styleUrls: ['./modal-module-content.component.scss'],
+    standalone: false
 })
 export class ModalModuleContentComponent implements AfterViewInit {
   @ViewChild('dynamicComponent', { read: ViewContainerRef })

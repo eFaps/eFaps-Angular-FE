@@ -9,9 +9,10 @@ import {
 import { EditComponent } from '../edit/edit.component';
 
 @Component({
-  selector: 'app-item',
-  templateUrl: './item.component.html',
-  styleUrls: ['./item.component.scss'],
+    selector: 'app-item',
+    templateUrl: './item.component.html',
+    styleUrls: ['./item.component.scss'],
+    standalone: false
 })
 export class ItemComponent {
   _widget: DashboardWidget | undefined;

@@ -3,9 +3,10 @@ import { Option } from 'src/app/model/content';
 import { Filter } from 'src/app/model/table';
 
 @Component({
-  selector: 'app-filter-element',
-  templateUrl: './filter-element.component.html',
-  styleUrl: './filter-element.component.scss',
+    selector: 'app-filter-element',
+    templateUrl: './filter-element.component.html',
+    styleUrl: './filter-element.component.scss',
+    standalone: false
 })
 export class FilterElementComponent {
   _filter: Filter | undefined;

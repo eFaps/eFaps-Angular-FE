@@ -19,21 +19,20 @@ import { UserService } from 'src/app/services/user.service';
 import { UtilService } from 'src/app/services/util.service';
 
 @Component({
-  selector: 'app-system-configuration-attribute',
-  standalone: true,
-  imports: [
-    AutoCompleteModule,
-    CommonModule,
-    ButtonModule,
-    SelectModule,
-    FormsModule,
-    InputTextModule,
-    TextareaModule,
-    ToggleButtonModule,
-    FloatLabelModule,
-  ],
-  templateUrl: './system-configuration-attribute.component.html',
-  styleUrls: ['./system-configuration-attribute.component.scss'],
+    selector: 'app-system-configuration-attribute',
+    imports: [
+        AutoCompleteModule,
+        CommonModule,
+        ButtonModule,
+        SelectModule,
+        FormsModule,
+        InputTextModule,
+        TextareaModule,
+        ToggleButtonModule,
+        FloatLabelModule,
+    ],
+    templateUrl: './system-configuration-attribute.component.html',
+    styleUrls: ['./system-configuration-attribute.component.scss']
 })
 export class SystemConfigurationAttributeComponent implements OnInit {
   @Input()

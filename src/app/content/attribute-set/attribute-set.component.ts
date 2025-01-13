@@ -3,9 +3,10 @@ import { AttributeSetEntry, FormItem } from 'src/app/model/content';
 import { ValueService } from 'src/app/services/value.service';
 
 @Component({
-  selector: 'app-attribute-set',
-  templateUrl: './attribute-set.component.html',
-  styleUrls: ['./attribute-set.component.scss'],
+    selector: 'app-attribute-set',
+    templateUrl: './attribute-set.component.html',
+    styleUrls: ['./attribute-set.component.scss'],
+    standalone: false
 })
 export class AttributeSetComponent {
   _formItem: FormItem | undefined;

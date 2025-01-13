@@ -6,9 +6,10 @@ import { FieldUpdateService } from 'src/app/services/field-update.service';
 import { ValueService } from 'src/app/services/value.service';
 
 @Component({
-  selector: 'app-table-element',
-  templateUrl: './table-element.component.html',
-  styleUrls: ['./table-element.component.scss'],
+    selector: 'app-table-element',
+    templateUrl: './table-element.component.html',
+    styleUrls: ['./table-element.component.scss'],
+    standalone: false
 })
 export class TableElementComponent implements OnInit {
   inputValue: any;

@@ -6,9 +6,10 @@ import { Classification } from 'src/app/model/classification';
 import { ClassificationService } from 'src/app/services/classification.service';
 
 @Component({
-  selector: 'app-classifications',
-  templateUrl: './classifications.component.html',
-  styleUrls: ['./classifications.component.scss'],
+    selector: 'app-classifications',
+    templateUrl: './classifications.component.html',
+    styleUrls: ['./classifications.component.scss'],
+    standalone: false
 })
 export class ClassificationsComponent implements OnInit {
   classUUIDs: string[];

@@ -18,10 +18,11 @@ import { ExecService } from 'src/app/services/exec.service';
 import { TableService } from 'src/app/services/table.service';
 
 @Component({
-  selector: 'app-structure-browser',
-  templateUrl: './structure-browser.component.html',
-  styleUrls: ['./structure-browser.component.scss'],
-  providers: [ConfirmationService],
+    selector: 'app-structure-browser',
+    templateUrl: './structure-browser.component.html',
+    styleUrls: ['./structure-browser.component.scss'],
+    providers: [ConfirmationService],
+    standalone: false
 })
 export class StructureBrowserComponent implements OnInit {
   loading: boolean;
