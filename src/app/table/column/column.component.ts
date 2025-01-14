@@ -2,8 +2,8 @@ import {
   Component,
   ElementRef,
   Input,
-  ViewChild,
-  output
+  output,
+  viewChild
 } from '@angular/core';
 import { Router } from '@angular/router';
 import { saveAs } from 'file-saver';
@@ -23,7 +23,7 @@ export class ColumnComponent {
   column: Column | undefined;
   readonly navEvent = output();
 
-  @ViewChild('overflowWrapper') overflowElement: ElementRef | undefined;
+  readonly overflowElement = viewChild<ElementRef>('overflowWrapper');
 
   constructor(
     private router: Router,
@@ -70,10 +70,11 @@ export class ColumnComponent {
   }
 
   isOverflowing() {
-    if (this.overflowElement) {
+    const overflowElement = this.overflowElement();
+    if (overflowElement) {
       return (
-        this.overflowElement.nativeElement.offsetWidth <
-        this.overflowElement.nativeElement.scrollWidth
+        overflowElement.nativeElement.offsetWidth <
+        overflowElement.nativeElement.scrollWidth
       );
     }
     return false;

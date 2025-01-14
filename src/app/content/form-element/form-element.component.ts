@@ -2,8 +2,8 @@ import {
   Component,
   Input,
   OnInit,
-  ViewChild,
   ViewContainerRef,
+  viewChild
 } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastMessageOptions } from 'primeng/api';
@@ -52,8 +52,7 @@ export class FormElementComponent implements OnInit {
   uploadUrl: string | undefined;
   uploadKeys: string[] | undefined;
 
-  @ViewChild('dynamicComponent', { read: ViewContainerRef })
-  vcr!: ViewContainerRef;
+  readonly vcr = viewChild.required('dynamicComponent', { read: ViewContainerRef });
 
   constructor(
     private router: Router,
@@ -336,13 +335,14 @@ export class FormElementComponent implements OnInit {
   }
 
   evalFieldCmdResp(fieldCmdResp: FieldCommandResponse | undefined) {
+    const vcr = this.vcr();
     if (
       fieldCmdResp &&
-      this.vcr &&
+      vcr &&
       fieldCmdResp.values['targetField'] == this.formItem?.name
     ) {
-      this.vcr.clear();
-      this.dynamicComponentService.load(this.vcr, fieldCmdResp);
+      vcr.clear();
+      this.dynamicComponentService.load(vcr, fieldCmdResp);
     }
   }
 

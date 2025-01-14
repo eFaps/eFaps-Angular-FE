@@ -1,6 +1,6 @@
 
 import { HttpClient } from '@angular/common/http';
-import { Component, ViewChild, input } from '@angular/core';
+import { Component, input, viewChild } from '@angular/core';
 import Papa, { ParseResult } from 'papaparse';
 import { ToastMessageOptions } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
@@ -35,8 +35,7 @@ export class CSVImportComponent {
   cols: string[] = [];
   items: any[] = [];
 
-  @ViewChild('upload')
-  upload: FileUpload | undefined;
+  readonly upload = viewChild<FileUpload>('upload');
 
   results: ParseResult<any> | undefined;
   dialogData: any;
@@ -81,7 +80,7 @@ export class CSVImportComponent {
     this.verified = false;
     this.cols = [];
     this.items = [];
-    this.upload?.clear();
+    this.upload()?.clear();
     this.messages = [];
   }
 

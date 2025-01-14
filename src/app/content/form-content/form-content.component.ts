@@ -2,8 +2,8 @@ import {
   AfterViewInit,
   Component,
   OnInit,
-  ViewChild,
   ViewContainerRef,
+  viewChild
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MenuItem } from 'primeng/api';
@@ -32,8 +32,7 @@ export class FormContentComponent implements OnInit, AfterViewInit {
   sections: Section[] = [];
   menuItems: MenuItem[] = [];
 
-  @ViewChild('dynamicComponent', { read: ViewContainerRef })
-  vcr!: ViewContainerRef;
+  readonly vcr = viewChild.required('dynamicComponent', { read: ViewContainerRef });
   module: UIModule | undefined;
   moduleLoaded = false;
 
@@ -82,8 +81,8 @@ export class FormContentComponent implements OnInit, AfterViewInit {
   loadModule() {
     if (this.isModule() && !this.moduleLoaded) {
       this.moduleLoaded = true;
-      this.vcr.clear();
-      this.dynamicComponentService.loadUIModule(this.vcr, this.module!!, {
+      this.vcr().clear();
+      this.dynamicComponentService.loadUIModule(this.vcr(), this.module!!, {
         oid: undefined,
         parentOid: undefined,
       });
