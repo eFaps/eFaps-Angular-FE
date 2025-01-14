@@ -3,10 +3,10 @@ import { ChartWidget, DashboardWidget } from 'src/app/model/dashboard';
 import { DashboardService } from 'src/app/services/dashboard.service';
 
 @Component({
-    selector: 'app-chart-widget',
-    templateUrl: './chart-widget.component.html',
-    styleUrls: ['./chart-widget.component.scss'],
-    standalone: false
+  selector: 'app-chart-widget',
+  templateUrl: './chart-widget.component.html',
+  styleUrls: ['./chart-widget.component.scss'],
+  standalone: false,
 })
 export class ChartWidgetComponent {
   _widget: ChartWidget | undefined;

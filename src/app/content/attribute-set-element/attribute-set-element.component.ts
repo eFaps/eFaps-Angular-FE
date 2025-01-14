@@ -3,10 +3,10 @@ import { FormItem } from 'src/app/model/content';
 import { ValueService } from 'src/app/services/value.service';
 
 @Component({
-    selector: 'app-attribute-set-element',
-    templateUrl: './attribute-set-element.component.html',
-    styleUrl: './attribute-set-element.component.scss',
-    standalone: false
+  selector: 'app-attribute-set-element',
+  templateUrl: './attribute-set-element.component.html',
+  styleUrl: './attribute-set-element.component.scss',
+  standalone: false,
 })
 export class AttributeSetElementComponent {
   dropdownValue: any;

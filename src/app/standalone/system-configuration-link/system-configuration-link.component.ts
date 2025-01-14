@@ -18,19 +18,19 @@ import { UserService } from 'src/app/services/user.service';
 import { UtilService } from 'src/app/services/util.service';
 
 @Component({
-    selector: 'app-system-configuration-link',
-    imports: [
-        AutoCompleteModule,
-        CommonModule,
-        ButtonModule,
-        SelectModule,
-        FormsModule,
-        InputTextModule,
-        TextareaModule,
-        ToggleButtonModule,
-    ],
-    templateUrl: './system-configuration-link.component.html',
-    styleUrl: './system-configuration-link.component.scss'
+  selector: 'app-system-configuration-link',
+  imports: [
+    AutoCompleteModule,
+    CommonModule,
+    ButtonModule,
+    SelectModule,
+    FormsModule,
+    InputTextModule,
+    TextareaModule,
+    ToggleButtonModule,
+  ],
+  templateUrl: './system-configuration-link.component.html',
+  styleUrl: './system-configuration-link.component.scss',
 })
 export class SystemConfigurationLinkComponent implements OnInit {
   @Input()

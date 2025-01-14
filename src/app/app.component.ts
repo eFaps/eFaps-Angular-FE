@@ -12,7 +12,12 @@ import { toSignal } from '@angular/core/rxjs-interop';
 import { Router } from '@angular/router';
 import { LocalStorage } from '@efaps/ngx-store';
 import { updatePrimaryPalette } from '@primeng/themes';
-import { KEYCLOAK_EVENT_SIGNAL, KeycloakEventType, KeycloakService } from 'keycloak-angular';
+import {
+  KEYCLOAK_EVENT_SIGNAL,
+  KeycloakEventType,
+  KeycloakService,
+} from 'keycloak-angular';
+import Keycloak from 'keycloak-js';
 import { MenuItem } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
 import { Menubar } from 'primeng/menubar';
@@ -40,14 +45,13 @@ import { SearchService } from './services/search.service';
 import { StyleService } from './services/style.service';
 import { UserService } from './services/user.service';
 import { CompanyChooserComponent } from './standalone/company-chooser/company-chooser.component';
-import Keycloak from 'keycloak-js';
 
 @Component({
-    selector: 'app-root',
-    templateUrl: './app.component.html',
-    styleUrls: ['./app.component.scss'],
-    providers: [DialogService],
-    standalone: false
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.scss'],
+  providers: [DialogService],
+  standalone: false,
 })
 export class AppComponent implements OnInit {
   title = 'eFaps-Angular-FE';
@@ -76,7 +80,6 @@ export class AppComponent implements OnInit {
 
   @LocalStorage() palette: string | undefined;
 
-
   constructor(
     private router: Router,
     private dialogService: DialogService,
@@ -90,7 +93,7 @@ export class AppComponent implements OnInit {
     private breadcrumbService: BreadcrumbService,
     private styleService: StyleService
   ) {
-    console.log("app init")
+    console.log('app init');
     const keycloakSignal = inject(KEYCLOAK_EVENT_SIGNAL);
     effect(() => {
       const keycloakEvent = keycloakSignal();
@@ -303,7 +306,7 @@ export class AppComponent implements OnInit {
   }
 
   signOut() {
-   // this.keycloak.logout();
+    // this.keycloak.logout();
   }
 
   breadcrumbOnClick(menuItem: MenuItem) {

@@ -8,10 +8,10 @@ import { SearchService } from 'src/app/services/search.service';
 import { ValueService } from 'src/app/services/value.service';
 
 @Component({
-    selector: 'app-search-content',
-    templateUrl: './search-content.component.html',
-    styleUrls: ['./search-content.component.scss'],
-    standalone: false
+  selector: 'app-search-content',
+  templateUrl: './search-content.component.html',
+  styleUrls: ['./search-content.component.scss'],
+  standalone: false,
 })
 export class SearchContentComponent implements OnInit {
   searches: Search[];

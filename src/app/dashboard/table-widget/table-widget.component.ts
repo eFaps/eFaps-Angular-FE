@@ -3,10 +3,10 @@ import { TableWidget } from 'src/app/model/dashboard';
 import { DashboardService } from 'src/app/services/dashboard.service';
 
 @Component({
-    selector: 'app-table-widget',
-    templateUrl: './table-widget.component.html',
-    styleUrls: ['./table-widget.component.scss'],
-    standalone: false
+  selector: 'app-table-widget',
+  templateUrl: './table-widget.component.html',
+  styleUrls: ['./table-widget.component.scss'],
+  standalone: false,
 })
 export class TableWidgetComponent {
   _widget: TableWidget | undefined;

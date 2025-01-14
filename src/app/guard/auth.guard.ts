@@ -1,4 +1,4 @@
-import { inject, Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import {
   ActivatedRouteSnapshot,
   CanActivateFn,
@@ -15,15 +15,15 @@ const isAccessAllowed = async (
   authData: AuthGuardData
 ): Promise<boolean | UrlTree> => {
   const { authenticated } = authData;
- 
+
   if (authenticated) {
     return true;
   }
-  const  keycloak = inject(Keycloak)
+  const keycloak = inject(Keycloak);
   await keycloak.login({
-      redirectUri: window.location.origin + state.url,
+    redirectUri: window.location.origin + state.url,
   });
- 
+
   return authenticated;
 };
 

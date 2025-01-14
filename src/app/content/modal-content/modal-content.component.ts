@@ -9,10 +9,10 @@ import { ValidationService } from 'src/app/services/validation.service';
 import { ValueService } from 'src/app/services/value.service';
 
 @Component({
-    selector: 'app-modal-content',
-    templateUrl: './modal-content.component.html',
-    styleUrls: ['./modal-content.component.scss'],
-    standalone: false
+  selector: 'app-modal-content',
+  templateUrl: './modal-content.component.html',
+  styleUrls: ['./modal-content.component.scss'],
+  standalone: false,
 })
 export class ModalContentComponent implements OnInit {
   outline: Outline;

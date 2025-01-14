@@ -23,10 +23,10 @@ import { ValueService } from 'src/app/services/value.service';
 import { ClassificationsComponent } from '../classifications/classifications.component';
 
 @Component({
-    selector: 'app-form-element',
-    templateUrl: './form-element.component.html',
-    styleUrls: ['./form-element.component.scss'],
-    standalone: false
+  selector: 'app-form-element',
+  templateUrl: './form-element.component.html',
+  styleUrls: ['./form-element.component.scss'],
+  standalone: false,
 })
 export class FormElementComponent implements OnInit {
   messages: ToastMessageOptions[] = [];
@@ -299,7 +299,7 @@ export class FormElementComponent implements OnInit {
     } else {
       this.addEntry(option.value);
     }
-    this.fieldUpdate()
+    this.fieldUpdate();
   }
 
   onUpload(event: UploadEvent) {

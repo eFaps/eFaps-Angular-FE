@@ -6,13 +6,25 @@ import {
   withInterceptorsFromDi,
 } from '@angular/common/http';
 import localeEs from '@angular/common/locales/es';
-import { LOCALE_ID, NgModule, inject, Provider, provideAppInitializer, APP_INITIALIZER } from '@angular/core';
+import {
+  APP_INITIALIZER,
+  LOCALE_ID,
+  NgModule,
+  Provider,
+  inject,
+  provideAppInitializer,
+} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import { provideRouter, RouteReuseStrategy } from '@angular/router';
+import { RouteReuseStrategy, provideRouter } from '@angular/router';
 import { WebStorageModule } from '@efaps/ngx-store';
 import Material from '@primeng/themes/material';
+import {
+  INCLUDE_BEARER_TOKEN_INTERCEPTOR_CONFIG,
+  includeBearerTokenInterceptor,
+  provideKeycloak,
+} from 'keycloak-angular';
 import { MessageService } from 'primeng/api';
 import { BreadcrumbModule } from 'primeng/breadcrumb';
 import { ButtonModule } from 'primeng/button';
@@ -26,6 +38,7 @@ import { PopoverModule } from 'primeng/popover';
 import { ProgressBarModule } from 'primeng/progressbar';
 import { TableModule } from 'primeng/table';
 import { ToastModule } from 'primeng/toast';
+import { environment } from 'src/environments/environment';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -34,11 +47,8 @@ import { CompanyInterceptor } from './interceptors/company.interceptor';
 import { ErrorInterceptor } from './interceptors/error.interceptor';
 import { LoaderInterceptor } from './interceptors/loader.interceptor';
 import { ThemeChooserComponent } from './standalone/theme-chooser/theme-chooser.component';
-import { INCLUDE_BEARER_TOKEN_INTERCEPTOR_CONFIG, includeBearerTokenInterceptor, provideKeycloak } from 'keycloak-angular';
-import { environment } from 'src/environments/environment';
 
 registerLocaleData(localeEs, 'es');
-
 
 @NgModule({
   declarations: [AppComponent],
@@ -59,7 +69,7 @@ registerLocaleData(localeEs, 'es');
     DividerModule,
     ThemeChooserComponent,
     WebStorageModule,
-    BreadcrumbModule
+    BreadcrumbModule,
   ],
   providers: [
     MessageService,
@@ -68,7 +78,10 @@ registerLocaleData(localeEs, 'es');
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     { provide: RouteReuseStrategy, useClass: RoutePathReuseStrategy },
     { provide: LOCALE_ID, useValue: 'es' },
-    provideHttpClient(withInterceptorsFromDi(), (withInterceptors([includeBearerTokenInterceptor]))),
+    provideHttpClient(
+      withInterceptorsFromDi(),
+      withInterceptors([includeBearerTokenInterceptor])
+    ),
     provideAnimationsAsync(),
     providePrimeNG({
       theme: {
@@ -80,7 +93,7 @@ registerLocaleData(localeEs, 'es');
     }),
     provideKeycloak({
       config: {
-        url: environment.sso.url, 
+        url: environment.sso.url,
         realm: environment.sso.realm,
         clientId: environment.sso.clientId,
       },
@@ -94,9 +107,9 @@ registerLocaleData(localeEs, 'es');
       useValue: [
         {
           urlPattern: /^http[s]*:\/\/.*\/api\/.*$/,
-        }
-      ]
-    }
+        },
+      ],
+    },
   ],
 })
 export class AppModule {}

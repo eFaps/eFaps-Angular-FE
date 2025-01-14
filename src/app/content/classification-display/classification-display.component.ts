@@ -3,10 +3,10 @@ import { Classification } from 'src/app/model/classification';
 import { ClassificationService } from 'src/app/services/classification.service';
 
 @Component({
-    selector: 'app-classification-display',
-    templateUrl: './classification-display.component.html',
-    styleUrls: ['./classification-display.component.scss'],
-    standalone: false
+  selector: 'app-classification-display',
+  templateUrl: './classification-display.component.html',
+  styleUrls: ['./classification-display.component.scss'],
+  standalone: false,
 })
 export class ClassificationDisplayComponent implements OnInit {
   @Input()

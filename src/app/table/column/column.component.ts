@@ -12,10 +12,10 @@ import { Column } from 'src/app/model/table';
 import { CheckoutService } from 'src/app/services/checkout.service';
 
 @Component({
-    selector: 'app-column',
-    templateUrl: './column.component.html',
-    styleUrls: ['./column.component.scss'],
-    standalone: false
+  selector: 'app-column',
+  templateUrl: './column.component.html',
+  styleUrls: ['./column.component.scss'],
+  standalone: false,
 })
 export class ColumnComponent {
   @Input()

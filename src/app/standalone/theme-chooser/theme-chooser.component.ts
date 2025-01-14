@@ -6,10 +6,10 @@ import { ButtonModule } from 'primeng/button';
 import { TooltipModule } from 'primeng/tooltip';
 
 @Component({
-    selector: 'app-theme-chooser',
-    imports: [CommonModule, ButtonModule, TooltipModule],
-    templateUrl: './theme-chooser.component.html',
-    styleUrls: ['./theme-chooser.component.scss']
+  selector: 'app-theme-chooser',
+  imports: [CommonModule, ButtonModule, TooltipModule],
+  templateUrl: './theme-chooser.component.html',
+  styleUrls: ['./theme-chooser.component.scss'],
 })
 export class ThemeChooserComponent implements OnInit {
   icon: string = 'pi pi-sun';

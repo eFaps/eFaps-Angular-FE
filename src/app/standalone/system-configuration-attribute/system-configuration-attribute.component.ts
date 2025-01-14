@@ -19,20 +19,20 @@ import { UserService } from 'src/app/services/user.service';
 import { UtilService } from 'src/app/services/util.service';
 
 @Component({
-    selector: 'app-system-configuration-attribute',
-    imports: [
-        AutoCompleteModule,
-        CommonModule,
-        ButtonModule,
-        SelectModule,
-        FormsModule,
-        InputTextModule,
-        TextareaModule,
-        ToggleButtonModule,
-        FloatLabelModule,
-    ],
-    templateUrl: './system-configuration-attribute.component.html',
-    styleUrls: ['./system-configuration-attribute.component.scss']
+  selector: 'app-system-configuration-attribute',
+  imports: [
+    AutoCompleteModule,
+    CommonModule,
+    ButtonModule,
+    SelectModule,
+    FormsModule,
+    InputTextModule,
+    TextareaModule,
+    ToggleButtonModule,
+    FloatLabelModule,
+  ],
+  templateUrl: './system-configuration-attribute.component.html',
+  styleUrls: ['./system-configuration-attribute.component.scss'],
 })
 export class SystemConfigurationAttributeComponent implements OnInit {
   @Input()
@@ -112,7 +112,7 @@ export class SystemConfigurationAttributeComponent implements OnInit {
           description: this.description,
           appKey: this.appKey,
           companyLink: this.companyLink,
-          type: this.type
+          type: this.type,
         })
         .subscribe({
           next: (_) => {
@@ -130,7 +130,7 @@ export class SystemConfigurationAttributeComponent implements OnInit {
           description: this.description,
           appKey: this.appKey,
           companyLink: this.companyLink,
-          type: this.type
+          type: this.type,
         })
         .subscribe({
           next: (_) => {
@@ -147,7 +147,7 @@ export class SystemConfigurationAttributeComponent implements OnInit {
         value = '' + this.booleanValue;
         break;
       case 'LIST':
-        value = JSON.stringify(('' + this.strValue).split("\n"))
+        value = JSON.stringify(('' + this.strValue).split('\n'));
         break;
       default:
         value = this.strValue;
@@ -172,14 +172,13 @@ export class SystemConfigurationAttributeComponent implements OnInit {
           this.strValue = value;
         }
         break;
-      case 'LIST': 
-        if (value.startsWith("[")) {
+      case 'LIST':
+        if (value.startsWith('[')) {
           const list = JSON.parse(value);
           if (list != null && list.length) {
-            (list as Array<string>).forEach(entry => {
-                this.strValue = this.strValue + entry + '\n';
-              }
-            )
+            (list as Array<string>).forEach((entry) => {
+              this.strValue = this.strValue + entry + '\n';
+            });
           }
         } else {
           this.strValue = value;

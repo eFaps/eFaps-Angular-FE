@@ -4,10 +4,10 @@ import { Filter } from 'src/app/model/table';
 import { TableService } from 'src/app/services/table.service';
 
 @Component({
-    selector: 'app-filter',
-    templateUrl: './filter.component.html',
-    styleUrl: './filter.component.scss',
-    standalone: false
+  selector: 'app-filter',
+  templateUrl: './filter.component.html',
+  styleUrl: './filter.component.scss',
+  standalone: false,
 })
 export class FilterComponent implements OnInit {
   id: string | undefined;

@@ -11,10 +11,10 @@ import { DashboardService } from 'src/app/services/dashboard.service';
 import { v4 as uuidv4 } from 'uuid';
 
 @Component({
-    selector: 'app-page',
-    templateUrl: './page.component.html',
-    styleUrls: ['./page.component.scss'],
-    standalone: false
+  selector: 'app-page',
+  templateUrl: './page.component.html',
+  styleUrls: ['./page.component.scss'],
+  standalone: false,
 })
 export class PageComponent {
   _page: DashboardPage = { key: 'not a key', items: [] };

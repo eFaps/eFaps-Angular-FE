@@ -10,10 +10,10 @@ import { ModuleData, UIModule } from 'src/app/model/module';
 import { UtilService } from 'src/app/services/util.service';
 
 @Component({
-    selector: 'app-logback',
-    imports: [CommonModule, ButtonModule, SelectModule, FormsModule, TableModule],
-    templateUrl: './logback.component.html',
-    styleUrls: ['./logback.component.scss']
+  selector: 'app-logback',
+  imports: [CommonModule, ButtonModule, SelectModule, FormsModule, TableModule],
+  templateUrl: './logback.component.html',
+  styleUrls: ['./logback.component.scss'],
 })
 export class LogbackComponent implements OnInit {
   @Input()

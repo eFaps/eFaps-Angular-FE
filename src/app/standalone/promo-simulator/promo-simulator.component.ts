@@ -19,24 +19,24 @@ import { ToolbarModule } from 'primeng/toolbar';
 import { UtilService } from 'src/app/services/util.service';
 
 @Component({
-    selector: 'app-promo-simulator',
-    providers: [ConfirmationService],
-    imports: [
-        AutoCompleteModule,
-        ButtonModule,
-        CommonModule,
-        ConfirmDialogModule,
-        DialogModule,
-        FormsModule,
-        InputNumberModule,
-        TableModule,
-        ToolbarModule,
-        DatePickerModule,
-        FloatLabelModule,
-        ToggleSwitchModule,
-    ],
-    templateUrl: './promo-simulator.component.html',
-    styleUrl: './promo-simulator.component.scss'
+  selector: 'app-promo-simulator',
+  providers: [ConfirmationService],
+  imports: [
+    AutoCompleteModule,
+    ButtonModule,
+    CommonModule,
+    ConfirmDialogModule,
+    DialogModule,
+    FormsModule,
+    InputNumberModule,
+    TableModule,
+    ToolbarModule,
+    DatePickerModule,
+    FloatLabelModule,
+    ToggleSwitchModule,
+  ],
+  templateUrl: './promo-simulator.component.html',
+  styleUrl: './promo-simulator.component.scss',
 })
 export class PromoSimulatorComponent {
   items: Item[] = [];
@@ -81,7 +81,7 @@ export class PromoSimulatorComponent {
   }
 
   isValid(): boolean {
-    return this.item.quantity != undefined && this.item.product != undefined
+    return this.item.quantity != undefined && this.item.product != undefined;
   }
 
   delete() {
@@ -157,14 +157,14 @@ export class PromoSimulatorComponent {
 
   mapResponse() {
     if (this.calcResponse) {
-      this.items.forEach(item => {
-        item.basePrice = undefined
-        item.netPrice = undefined
-        item.netDiscount = undefined
-        item.crossPrice = undefined
-        item.crossDiscount = undefined
-        item.promotions = []
-      })
+      this.items.forEach((item) => {
+        item.basePrice = undefined;
+        item.netPrice = undefined;
+        item.netDiscount = undefined;
+        item.crossPrice = undefined;
+        item.crossDiscount = undefined;
+        item.promotions = [];
+      });
 
       this.calcResponse.positions.forEach((pos, index) => {
         this.items[index].netPrice = pos.netPrice;
