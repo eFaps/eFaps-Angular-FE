@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, Input, output } from '@angular/core';
 import { Option } from 'src/app/model/content';
 import { Filter } from 'src/app/model/table';
 
@@ -15,8 +15,7 @@ export class FilterElementComponent {
   _selectedStatus: Option[] = [];
   statusList: Option[] = [];
 
-  @Output()
-  filterEvent = new EventEmitter<Filter>();
+  readonly filterEvent = output<Filter>();
 
   @Input()
   set filter(filter: Filter) {

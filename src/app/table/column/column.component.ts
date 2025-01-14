@@ -1,10 +1,9 @@
 import {
   Component,
   ElementRef,
-  EventEmitter,
   Input,
-  Output,
   ViewChild,
+  output
 } from '@angular/core';
 import { Router } from '@angular/router';
 import { saveAs } from 'file-saver';
@@ -22,8 +21,7 @@ export class ColumnComponent {
   rowData: any | undefined;
   @Input()
   column: Column | undefined;
-  @Output()
-  navEvent = new EventEmitter();
+  readonly navEvent = output();
 
   @ViewChild('overflowWrapper') overflowElement: ElementRef | undefined;
 
