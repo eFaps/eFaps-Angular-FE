@@ -31,7 +31,7 @@
             display: inline-block;
             position: relative;
             top: 0.5rem;
-            
+
             p-button {
                 top: -1rem;
                 position: inherit;
@@ -41,6 +41,18 @@
 
     .placeholder {
         flex-grow: 1;
+    }
+
+    .checkbox {
+        line-height: 2rem;
+        
+        ::ng-deep .p-checkbox {
+            vertical-align: middle;
+        }
+
+        label {
+            margin-left: 5px;
+        }
     }
 }
 
@@ -59,13 +71,15 @@ p-dropdown {
 }
 
 
-::ng-deep .p-fileupload-row  {
+::ng-deep .p-fileupload-row {
     div:nth-child(1) {
         flex-basis: 75%;
     }
+
     div:nth-child(2) {
         flex-basis: 25%;
     }
+
     div:nth-child(3) {
         flex-basis: 20px;
     }
@@ -98,6 +112,7 @@ p-dropdown {
         }
     }
 }
+
 .dragDrop {
     min-height: 100px;
 }
