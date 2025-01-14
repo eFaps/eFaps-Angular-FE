@@ -28,7 +28,7 @@ describe('AppComponent', () => {
         { provide: KeycloakService, useValue: {} },
         provideHttpClient(withInterceptorsFromDi()),
         provideHttpClientTesting(),
-        { provide: KEYCLOAK_EVENT_SIGNAL, useValue: {}}
+        { provide: KEYCLOAK_EVENT_SIGNAL, useValue: {} },
       ],
     })
   );
