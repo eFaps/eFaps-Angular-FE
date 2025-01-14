@@ -1,10 +1,12 @@
-<p-button *ngIf="showLink()" icon="pi pi-link" [rounded]="true" [outlined]="true" (click)="followLink()"
-    [style]="{ width:'2rem', height: '2rem' }"></p-button>
+@if (showLink()) {
+  <p-button icon="pi pi-link" [rounded]="true" [outlined]="true" (click)="followLink()"
+  [style]="{ width:'2rem', height: '2rem' }"></p-button>
+}
 <div #overflowWrapper (mouseenter)="isOverflowing() ? op.show($event) : undefined" (mouseleave)="op.hide()">
-    {{value}}
+  {{value}}
 </div>
 <p-overlayPanel #op>
-    <div class="overlay">
-        {{value}}
-    </div>
+  <div class="overlay">
+    {{value}}
+  </div>
 </p-overlayPanel>

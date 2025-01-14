@@ -1,32 +1,36 @@
 <div class="wrapper">
-    <div class="header">
-        <p-fileUpload #upload mode="basic" chooseLabel="Selecionar csv" chooseIcon="pi pi-upload" name="demo[]"
-            accept=".csv" maxFileSize="1000000" (onSelect)="onSelect($event)" />
-        <p-button label="Resetar" severity="secondary" [disabled]="cols.length == 0" (onClick)="clear()"></p-button>
-    </div>
-    <div class="tableWrapper">
-        <p-table [columns]="cols" [value]="items" [tableStyle]="{ 'min-width': '50rem' }">
-            <ng-template pTemplate="header" let-columns>
-                <tr>
-                    <th *ngFor="let col of columns">
-                        {{ col }}
-                    </th>
-                </tr>
-            </ng-template>
-            <ng-template pTemplate="body" let-rowData let-columns="columns">
-                <tr>
-                    <td *ngFor="let col of columns">
-                        {{ rowData[col] }}
-                    </td>
-                </tr>
-            </ng-template>
-        </p-table>
-    </div>
-    @if (messages.length > 0) {
-        <p-messages [(value)]="messages" [enableService]="false" [closable]="false" />
-    }
-    <div class="footer">
-        <p-button label="Verificar" [disabled]="cols.length == 0" (onClick)="verify()"></p-button>
-        <p-button label="Importar" [disabled]="!verified" (onClick)="execute()" severity="danger"></p-button>
-    </div>
+  <div class="header">
+    <p-fileUpload #upload mode="basic" chooseLabel="Selecionar csv" chooseIcon="pi pi-upload" name="demo[]"
+      accept=".csv" maxFileSize="1000000" (onSelect)="onSelect($event)" />
+    <p-button label="Resetar" severity="secondary" [disabled]="cols.length == 0" (onClick)="clear()"></p-button>
+  </div>
+  <div class="tableWrapper">
+    <p-table [columns]="cols" [value]="items" [tableStyle]="{ 'min-width': '50rem' }">
+      <ng-template pTemplate="header" let-columns>
+        <tr>
+          @for (col of columns; track col) {
+            <th>
+              {{ col }}
+            </th>
+          }
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-rowData let-columns="columns">
+        <tr>
+          @for (col of columns; track col) {
+            <td>
+              {{ rowData[col] }}
+            </td>
+          }
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+  @if (messages.length > 0) {
+    <p-messages [(value)]="messages" [enableService]="false" [closable]="false" />
+  }
+  <div class="footer">
+    <p-button label="Verificar" [disabled]="cols.length == 0" (onClick)="verify()"></p-button>
+    <p-button label="Importar" [disabled]="!verified" (onClick)="execute()" severity="danger"></p-button>
+  </div>
 </div>

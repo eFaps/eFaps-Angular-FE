@@ -1,13 +1,19 @@
 <div class="wrapper">
-    <gridster [options]="options!!">
-        <gridster-item [item]="item" *ngFor="let item of items">
-            <app-item [widget]="item['widget']" [editMode]="editMode"></app-item>
-            <div class="delete-btn" *ngIf="editMode">
-                <p-button icon="pi pi-trash" [rounded]="true" (click)="removeItem(item)"></p-button>
-            </div>
-        </gridster-item>
-    </gridster>
+  <gridster [options]="options!!">
+    @for (item of items; track item) {
+      <gridster-item [item]="item">
+        <app-item [widget]="item['widget']" [editMode]="editMode"></app-item>
+        @if (editMode) {
+          <div class="delete-btn">
+            <p-button icon="pi pi-trash" [rounded]="true" (click)="removeItem(item)"></p-button>
+          </div>
+        }
+      </gridster-item>
+    }
+  </gridster>
 </div>
-<div class="add-btn" *ngIf="editMode">
+@if (editMode) {
+  <div class="add-btn">
     <p-button icon="pi pi-plus" [rounded]="true" (click)="addItem()"></p-button>
-</div>
+  </div>
+}

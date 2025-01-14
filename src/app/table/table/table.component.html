@@ -1,82 +1,92 @@
 <p-confirmDialog></p-confirmDialog>
 @if (tableLoaded) {
-<div #wrapperDiv>
+  <div #wrapperDiv>
     <p-table #dt [columns]="cols" [value]="elements" styleClass="p-datatable-gridlines" stripedRows
-        [scrollable]="true" [scrollHeight]="scrollHeight" [virtualScroll]="true" [virtualScrollItemSize]="42"
-        [tableStyle]="{ 'min-width': '50rem' }" sortMode="multiple" [selectionMode]="selectionMode"
-        [(selection)]="selectedElements" [resizableColumns]="true" [loading]="loading" stateStorage="local"
-        [stateKey]="storageKey" (onStateRestore)="stateRestore($event)" [reorderableColumns]="true" [exportFilename]="title">
-        <ng-template #caption>
-            <div class="table-header" >
-                <div class="left" >
-                    <p-tieredMenu #menu [model]="menuItems" popup="true" appendTo="body"></p-tieredMenu>
-                    <p-button (click)="menu.toggle($event)" icon="pi pi-bars"
-                        *ngIf="menuItems.length > 0"></p-button>
-                    {{title}}
-                </div>
-                <div></div>
-                <div class="right">
-                    @if (!paginated) {
-                        <span class="quantity">Cantidad: {{dt.filteredValue?.length ? dt.filteredValue?.length + ' /' : ''}} {{elements.length}}</span>
-                    }
-                    <p-button type="button" icon="pi pi-file" (click)="dt.exportCSV({})" pTooltip="CSV" tooltipPosition="bottom"></p-button>
-                    <p-button type="button" icon="pi pi-file-excel" (click)="exportExcel()"  pTooltip="XLS" tooltipPosition="bottom"></p-button>
-                    <p-button type="button" icon="pi pi-file-pdf" (click)="exportPdf()" pTooltip="PDF" tooltipPosition="bottom"></p-button>
-            
-                    @if (filtered){
-                        <p-button icon="pi pi-filter" severity="help" (click)="filter()"></p-button >
-                    }
-                    <p-inputGroup>
-                        <p-inputGroupAddon>
-                            <i class="pi pi-search"></i>
-                        </p-inputGroupAddon>
-                        <input pInputText type="text" #searchInput [(ngModel)]="globalSearch"
-                            (input)="dt.filterGlobal(searchInput.value, 'contains')" placeholder="buscar" class="p-inputtext-sm"/>
-                        <p-button icon="pi pi-times" 
-                            (click)="searchInput.value='';dt.filterGlobal('', 'contains')"></p-button>
-                    </p-inputGroup>
-                </div>
-            </div>
-        </ng-template>
-        <ng-template #header let-columns>
-            <tr>
-                <th style="width: 4rem" *ngIf="selectionMode=='multiple'">
-                    <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
-                </th>
-                <th [pSortableColumn]="col.field" *ngFor="let col of columns" pResizableColumn pReorderableColumn>
-                    {{ col.header }}
-                    <p-sortIcon [field]="col.field"></p-sortIcon>
-                    <!--
-                    <p-columnFilter type="text" field="name" display="menu"></p-columnFilter>
-                    -->
-                </th>
-            </tr>
-        </ng-template>
-        <ng-template #body let-rowData let-columns="columns">
-            <tr style="height:42px">
-                <td *ngIf="selectionMode=='multiple'">
-                    <p-tableCheckbox [value]="rowData"></p-tableCheckbox>
-                </td>
-                <td *ngFor="let col of columns">
-                    <app-column [rowData]="rowData" [column]="col" (navEvent)="onNavEvent($event)"></app-column>
-                </td>
-            </tr>
-        </ng-template>
-        <ng-template #summary>
-            @if (paginated) {
-                <p-paginator 
-                    (onPageChange)="onPageChange($event)" 
-                    [rows]="page?.pageSize" 
-                    [totalRecords]="page?.totalItems" 
-                    [rowsPerPageOptions]="page?.pageOptions" 
-                    [showCurrentPageReport]="true"
-                    currentPageReportTemplate="{first} - {last} de {totalRecords}" />
-            } @else {
-                <div class="empty"></div>
+      [scrollable]="true" [scrollHeight]="scrollHeight" [virtualScroll]="true" [virtualScrollItemSize]="42"
+      [tableStyle]="{ 'min-width': '50rem' }" sortMode="multiple" [selectionMode]="selectionMode"
+      [(selection)]="selectedElements" [resizableColumns]="true" [loading]="loading" stateStorage="local"
+      [stateKey]="storageKey" (onStateRestore)="stateRestore($event)" [reorderableColumns]="true" [exportFilename]="title">
+      <ng-template #caption>
+        <div class="table-header" >
+          <div class="left" >
+            <p-tieredMenu #menu [model]="menuItems" popup="true" appendTo="body"></p-tieredMenu>
+            @if (menuItems.length > 0) {
+              <p-button (click)="menu.toggle($event)" icon="pi pi-bars"
+              ></p-button>
             }
-        </ng-template>
+            {{title}}
+          </div>
+          <div></div>
+          <div class="right">
+            @if (!paginated) {
+              <span class="quantity">Cantidad: {{dt.filteredValue?.length ? dt.filteredValue?.length + ' /' : ''}} {{elements.length}}</span>
+            }
+            <p-button type="button" icon="pi pi-file" (click)="dt.exportCSV({})" pTooltip="CSV" tooltipPosition="bottom"></p-button>
+            <p-button type="button" icon="pi pi-file-excel" (click)="exportExcel()"  pTooltip="XLS" tooltipPosition="bottom"></p-button>
+            <p-button type="button" icon="pi pi-file-pdf" (click)="exportPdf()" pTooltip="PDF" tooltipPosition="bottom"></p-button>
+
+            @if (filtered){
+              <p-button icon="pi pi-filter" severity="help" (click)="filter()"></p-button >
+            }
+            <p-inputGroup>
+              <p-inputGroupAddon>
+                <i class="pi pi-search"></i>
+              </p-inputGroupAddon>
+              <input pInputText type="text" #searchInput [(ngModel)]="globalSearch"
+                (input)="dt.filterGlobal(searchInput.value, 'contains')" placeholder="buscar" class="p-inputtext-sm"/>
+              <p-button icon="pi pi-times"
+              (click)="searchInput.value='';dt.filterGlobal('', 'contains')"></p-button>
+            </p-inputGroup>
+          </div>
+        </div>
+      </ng-template>
+      <ng-template #header let-columns>
+        <tr>
+          @if (selectionMode=='multiple') {
+            <th style="width: 4rem">
+              <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+            </th>
+          }
+          @for (col of columns; track col) {
+            <th [pSortableColumn]="col.field" pResizableColumn pReorderableColumn>
+              {{ col.header }}
+              <p-sortIcon [field]="col.field"></p-sortIcon>
+              <!--
+              <p-columnFilter type="text" field="name" display="menu"></p-columnFilter>
+              -->
+            </th>
+          }
+        </tr>
+      </ng-template>
+      <ng-template #body let-rowData let-columns="columns">
+        <tr style="height:42px">
+          @if (selectionMode=='multiple') {
+            <td>
+              <p-tableCheckbox [value]="rowData"></p-tableCheckbox>
+            </td>
+          }
+          @for (col of columns; track col) {
+            <td>
+              <app-column [rowData]="rowData" [column]="col" (navEvent)="onNavEvent($event)"></app-column>
+            </td>
+          }
+        </tr>
+      </ng-template>
+      <ng-template #summary>
+        @if (paginated) {
+          <p-paginator
+            (onPageChange)="onPageChange($event)"
+            [rows]="page?.pageSize"
+            [totalRecords]="page?.totalItems"
+            [rowsPerPageOptions]="page?.pageOptions"
+            [showCurrentPageReport]="true"
+            currentPageReportTemplate="{first} - {last} de {totalRecords}" />
+        } @else {
+          <div class="empty"></div>
+        }
+      </ng-template>
     </p-table>
-</div>
+  </div>
 }
 
 

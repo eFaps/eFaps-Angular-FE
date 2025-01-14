@@ -1,7 +1,9 @@
 <div class="p-dialog-content">
-    <app-classification-display *ngIf="classifications" [classifications]="classifications"></app-classification-display>
-    <app-sections [sections]="outline.sections"></app-sections>
+  @if (classifications) {
+    <app-classification-display [classifications]="classifications"></app-classification-display>
+  }
+  <app-sections [sections]="outline.sections"></app-sections>
 </div>
 <div class="p-dialog-footer">
-    <p-button [label]="outline.action?.label" severity="warn" (click)="submit()"></p-button>
+  <p-button [label]="outline.action?.label" severity="warn" (click)="submit()"></p-button>
 </div>

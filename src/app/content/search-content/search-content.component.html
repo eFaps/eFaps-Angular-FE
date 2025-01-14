@@ -1,39 +1,53 @@
 <div class="p-dialog-content">
-    <p-menubar *ngIf="searchMenuItems.length > 0 && searchMenuItems[0].items" [model]="searchMenuItems"></p-menubar>
-    <app-form-section [formSection]="search.formSection"></app-form-section>
-    <p-divider></p-divider>
-    <div *ngIf="cols && cols.length > 0">
-        <p-table [columns]="cols" [value]="elements" [paginator]="true" [rows]="5" [rowsPerPageOptions]="[5, 10, 20]"
-            [showCurrentPageReport]="true" currentPageReportTemplate="{first} - {last} de {totalRecords}"
-            paginatorDropdownAppendTo="body" [(selection)]="selectedElements" styleClass="p-datatable-gridlines"
-            stripedRows>
-            <ng-template pTemplate="header" let-columns>
-                <tr>
-                    <th></th>
-                    <th [pSortableColumn]="col.field" *ngFor="let col of columns" pResizableColumn>
-                        {{ col.header }}
-                        <p-sortIcon [field]="col.field"></p-sortIcon>
-                    </th>
-                </tr>
-            </ng-template>
-            <ng-template pTemplate="body" let-rowData let-columns="columns">
-                <tr>
-                    <td>
-                        <p-tableCheckbox *ngIf="isConnect" [value]="rowData"></p-tableCheckbox>
-                        <p-button *ngIf="!isConnect" icon="pi pi-link" [rounded]="true" [outlined]="true"
-                            (click)="followLink(rowData)" [style]="{ width:'2rem', height: '2rem' }"></p-button>
-                    </td>
-                    <td *ngFor="let col of columns">
-                        <div>
-                            {{rowData[col.field]}}
-                        </div>
-                    </td>
-                </tr>
-            </ng-template>
-        </p-table>
+  @if (searchMenuItems.length > 0 && searchMenuItems[0].items) {
+    <p-menubar [model]="searchMenuItems"></p-menubar>
+  }
+  <app-form-section [formSection]="search.formSection"></app-form-section>
+  <p-divider></p-divider>
+  @if (cols && cols.length > 0) {
+    <div>
+      <p-table [columns]="cols" [value]="elements" [paginator]="true" [rows]="5" [rowsPerPageOptions]="[5, 10, 20]"
+        [showCurrentPageReport]="true" currentPageReportTemplate="{first} - {last} de {totalRecords}"
+        paginatorDropdownAppendTo="body" [(selection)]="selectedElements" styleClass="p-datatable-gridlines"
+        stripedRows>
+        <ng-template pTemplate="header" let-columns>
+          <tr>
+            <th></th>
+            @for (col of columns; track col) {
+              <th [pSortableColumn]="col.field" pResizableColumn>
+                {{ col.header }}
+                <p-sortIcon [field]="col.field"></p-sortIcon>
+              </th>
+            }
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-rowData let-columns="columns">
+          <tr>
+            <td>
+              @if (isConnect) {
+                <p-tableCheckbox [value]="rowData"></p-tableCheckbox>
+              }
+              @if (!isConnect) {
+                <p-button icon="pi pi-link" [rounded]="true" [outlined]="true"
+                (click)="followLink(rowData)" [style]="{ width:'2rem', height: '2rem' }"></p-button>
+              }
+            </td>
+            @for (col of columns; track col) {
+              <td>
+                <div>
+                  {{rowData[col.field]}}
+                </div>
+              </td>
+            }
+          </tr>
+        </ng-template>
+      </p-table>
     </div>
+  }
 </div>
 <div class="p-dialog-footer">
-    <p-button *ngIf="isConnect" label="Connectar" severity="warn" (click)="submit()"></p-button>
-    <p-button label="Buscar" styleClass="p-button" (click)="query()"></p-button>
+  @if (isConnect) {
+    <p-button label="Connectar" severity="warn" (click)="submit()"></p-button>
+  }
+  <p-button label="Buscar" styleClass="p-button" (click)="query()"></p-button>
 </div>

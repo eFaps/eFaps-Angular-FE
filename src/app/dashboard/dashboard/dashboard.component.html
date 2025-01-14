@@ -1,9 +1,15 @@
 <div class="wrapper">
-    <app-page *ngIf="currentPage" [page]="currentPage!!" [editMode]="editMode"></app-page>            
+  @if (currentPage) {
+    <app-page [page]="currentPage!!" [editMode]="editMode"></app-page>
+  }
 </div>
-<div class="steps-wrapper" *ngIf="!editMode">
+@if (!editMode) {
+  <div class="steps-wrapper">
     <p-steps [model]="steps" [readonly]="false" [(activeIndex)]="activeStepIdx" (activeIndexChange)="onActiveStepChange($event)"></p-steps>
-</div>
-<div class="btn" *ngIf="!deactivated">
+  </div>
+}
+@if (!deactivated) {
+  <div class="btn">
     <p-button [icon]="buttonIcon" [styleClass]="buttonClass" (click)="toggleEditMode()" [rounded]="true"></p-button>
-</div>
+  </div>
+}

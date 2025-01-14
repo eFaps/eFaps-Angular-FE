@@ -1,14 +1,16 @@
-<div class="value" [ngSwitch]="column?.type">
-    <ng-container *ngSwitchCase="'INPUT'">
-        <input type="text" pInputText #textInput [(ngModel)]="inputValue" (keyup)="onKey(textInput.value)" (blur)="fieldUpdate()" />
-    </ng-container>
-    <ng-container *ngSwitchCase="'AUTOCOMPLETE'">
-        <p-autoComplete [(ngModel)]="autoCompleteValue" [suggestions]="autoCompleteSuggestions"
+<div class="value">
+  @switch (column?.type) {
+    @case ('INPUT') {
+      <input type="text" pInputText #textInput [(ngModel)]="inputValue" (keyup)="onKey(textInput.value)" (blur)="fieldUpdate()" />
+    }
+    @case ('AUTOCOMPLETE') {
+      <p-autoComplete [(ngModel)]="autoCompleteValue" [suggestions]="autoCompleteSuggestions"
         (completeMethod)="search($event.query)" (onSelect)="changeAutoComplete($event)"
         (onUnselect)="changeAutoComplete($event)" field="label" [lazy]="true" placeholder="buscar"
-        [forceSelection]="true" [showEmptyMessage]="true" appendTo="body" (onBlur)="fieldUpdate()"> </p-autoComplete>
-    </ng-container>    
-    <ng-container *ngSwitchDefault>
-        {{readOnlyValue}}
-    </ng-container>
+      [forceSelection]="true" [showEmptyMessage]="true" appendTo="body" (onBlur)="fieldUpdate()"> </p-autoComplete>
+    }
+    @default {
+      {{readOnlyValue}}
+    }
+  }
 </div>

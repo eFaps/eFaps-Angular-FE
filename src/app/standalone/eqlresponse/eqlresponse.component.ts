@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, Input } from '@angular/core';
 import { TableModule } from 'primeng/table';
 import { FieldCommandResponse } from 'src/app/model/field-command';
@@ -6,7 +6,7 @@ import { FieldCommandResponse } from 'src/app/model/field-command';
 @Component({
   selector: 'app-eqlresponse',
   templateUrl: './eqlresponse.component.html',
-  imports: [CommonModule, TableModule],
+  imports: [TableModule],
   styleUrls: ['./eqlresponse.component.scss'],
 })
 export class EQLResponseComponent {

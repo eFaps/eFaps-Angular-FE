@@ -1,19 +1,25 @@
 <p-table [columns]="cols" [value]="elements" styleClass="p-datatable-sm">
-    <ng-template pTemplate="header" let-columns>
-        <tr>
-            <th *ngFor="let col of columns">
-                {{ col.header }}
-            </th>
-        </tr>
-    </ng-template>
-    <ng-template pTemplate="body" let-rowData let-columns="columns">
-        <tr>
-            <td *ngFor="let col of columns" class="small">
-                {{ rowData[col.header] }}
-            </td>
-        </tr>
-    </ng-template>
+  <ng-template pTemplate="header" let-columns>
+    <tr>
+      @for (col of columns; track col) {
+        <th>
+          {{ col.header }}
+        </th>
+      }
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-rowData let-columns="columns">
+    <tr>
+      @for (col of columns; track col) {
+        <td class="small">
+          {{ rowData[col.header] }}
+        </td>
+      }
+    </tr>
+  </ng-template>
 </p-table>
-<div *ngIf="simpleResponse != null" class="simple">
+@if (simpleResponse != null) {
+  <div class="simple">
     {{ simpleResponse}}
-</div>
+  </div>
+}

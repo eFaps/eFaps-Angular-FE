@@ -1,5 +1,5 @@
 <div class="wrapper">
-    <ng-container *ngFor="let classification of classifications">
-        <p-chip [label]="classification.label"></p-chip>
-    </ng-container>
+  @for (classification of classifications; track classification) {
+    <p-chip [label]="classification.label"></p-chip>
+  }
 </div>

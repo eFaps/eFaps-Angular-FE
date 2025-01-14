@@ -1,6 +1,14 @@
-<div *ngFor="let section of sections">
-    <app-form-section *ngIf="section.type=='FORM'" [formSection]="toFormSection(section)"></app-form-section>
-    <app-table-section *ngIf="section.type=='TABLE'" [tableSection]="toTableSection(section)"></app-table-section>
-    <app-sub-section *ngIf="section.type=='HEADING'" [headingSection]="toHeaderSection(section)"></app-sub-section>
-</div>
+@for (section of sections; track section) {
+  <div>
+    @if (section.type=='FORM') {
+      <app-form-section [formSection]="toFormSection(section)"></app-form-section>
+    }
+    @if (section.type=='TABLE') {
+      <app-table-section [tableSection]="toTableSection(section)"></app-table-section>
+    }
+    @if (section.type=='HEADING') {
+      <app-sub-section [headingSection]="toHeaderSection(section)"></app-sub-section>
+    }
+  </div>
+}
 

@@ -1,48 +1,59 @@
 <p-confirmDialog></p-confirmDialog>
 <div #wrapperDiv style="height: calc(100vh - 100px)">
-    <p-treeTable #dt [scrollable]="true" [columns]="cols" [value]="elements" [selectionMode]="selectionMode"
-        [(selection)]="selectedElements">
-        <ng-template pTemplate="caption">
-            <div class="table-header">
-                <div class="left">
-                    <p-menu #menu [model]="menuItems" [popup]="true" [appendTo]="wrapperDiv"></p-menu>
-                    <button pButton type="button" (click)="menu.toggle($event)" icon="pi pi-bars"
-                        *ngIf="menuItems.length > 0"></button>
-                    {{title}}
-                </div>
-                <div></div>
-                <div>
-                    <div class="p-inputgroup">
-                        <span class="p-inputgroup-addon"><i class="pi pi-search"></i></span>
-                        <input pInputText type="text" #searchInput [(ngModel)]="globalSearch"
-                            (input)="dt.filterGlobal(searchInput.value, 'contains')" placeholder="buscar" />
-                        <button type="button" pButton icon="pi pi-times" styleClass="p-button-danger"
-                            (click)="searchInput.value='';dt.filterGlobal('', 'contains')"></button>
-                    </div>
-                </div>
+  <p-treeTable #dt [scrollable]="true" [columns]="cols" [value]="elements" [selectionMode]="selectionMode"
+    [(selection)]="selectedElements">
+    <ng-template pTemplate="caption">
+      <div class="table-header">
+        <div class="left">
+          <p-menu #menu [model]="menuItems" [popup]="true" [appendTo]="wrapperDiv"></p-menu>
+          @if (menuItems.length > 0) {
+            <button pButton type="button" (click)="menu.toggle($event)" icon="pi pi-bars"
+            ></button>
+          }
+          {{title}}
+        </div>
+        <div></div>
+        <div>
+          <div class="p-inputgroup">
+            <span class="p-inputgroup-addon"><i class="pi pi-search"></i></span>
+            <input pInputText type="text" #searchInput [(ngModel)]="globalSearch"
+              (input)="dt.filterGlobal(searchInput.value, 'contains')" placeholder="buscar" />
+            <button type="button" pButton icon="pi pi-times" styleClass="p-button-danger"
+            (click)="searchInput.value='';dt.filterGlobal('', 'contains')"></button>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+    <ng-template pTemplate="header" let-columns>
+      <tr>
+        @for (col of columns; track col; let i = $index) {
+          <th [ttSortableColumn]="col.field" pResizableColumn>
+            @if (selectionMode=='checkbox' && i === 0) {
+              <p-treeTableHeaderCheckbox></p-treeTableHeaderCheckbox>
+            }
+            {{ col.header }}
+            <p-treeTableSortIcon [field]="col.field"></p-treeTableSortIcon>
+          </th>
+        }
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-rowNode let-rowData="rowData" let-columns="columns">
+      <tr>
+        @for (col of columns; track col; let i = $index) {
+          <td>
+            <div class="columnWrapper">
+              @if (selectionMode=='checkbox' && i === 0) {
+                <p-treeTableCheckbox [value]="rowNode"
+                ></p-treeTableCheckbox>
+              }
+              @if (i === togglerColIdx) {
+                <p-treeTableToggler [rowNode]="rowNode"></p-treeTableToggler>
+              }
+              <app-column [rowData]="rowData" [column]="col"></app-column>
             </div>
-        </ng-template>
-        <ng-template pTemplate="header" let-columns>
-            <tr>
-                <th [ttSortableColumn]="col.field" *ngFor="let col of columns;let i = index" pResizableColumn>
-                    <p-treeTableHeaderCheckbox *ngIf="selectionMode=='checkbox' && i === 0"></p-treeTableHeaderCheckbox>
-
-                    {{ col.header }}
-                    <p-treeTableSortIcon [field]="col.field"></p-treeTableSortIcon>
-                </th>
-            </tr>
-        </ng-template>
-        <ng-template pTemplate="body" let-rowNode let-rowData="rowData" let-columns="columns">
-            <tr>
-                <td *ngFor="let col of columns; let i = index">
-                    <div class="columnWrapper">
-                        <p-treeTableCheckbox [value]="rowNode"
-                            *ngIf="selectionMode=='checkbox' && i === 0"></p-treeTableCheckbox>
-                        <p-treeTableToggler [rowNode]="rowNode" *ngIf="i === togglerColIdx"></p-treeTableToggler>
-                        <app-column [rowData]="rowData" [column]="col"></app-column>
-                    </div>
-                </td>
-            </tr>
-        </ng-template>
-    </p-treeTable>
+          </td>
+        }
+      </tr>
+    </ng-template>
+  </p-treeTable>
 </div>

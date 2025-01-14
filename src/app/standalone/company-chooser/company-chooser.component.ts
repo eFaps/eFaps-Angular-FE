@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
@@ -9,7 +9,7 @@ import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-company-chooser',
-  imports: [CommonModule, SelectModule, ButtonModule, ReactiveFormsModule],
+  imports: [SelectModule, ButtonModule, ReactiveFormsModule],
   templateUrl: './company-chooser.component.html',
   styleUrls: ['./company-chooser.component.scss'],
 })

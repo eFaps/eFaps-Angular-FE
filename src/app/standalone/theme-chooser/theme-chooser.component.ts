@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, OnInit } from '@angular/core';
 import { LocalStorage } from '@efaps/ngx-store';
 import { updatePrimaryPalette } from '@primeng/themes';
@@ -7,7 +7,7 @@ import { TooltipModule } from 'primeng/tooltip';
 
 @Component({
   selector: 'app-theme-chooser',
-  imports: [CommonModule, ButtonModule, TooltipModule],
+  imports: [ButtonModule, TooltipModule],
   templateUrl: './theme-chooser.component.html',
   styleUrls: ['./theme-chooser.component.scss'],
 })

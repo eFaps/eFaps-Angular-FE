@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { HttpClient } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -11,7 +11,7 @@ import { UtilService } from 'src/app/services/util.service';
 
 @Component({
   selector: 'app-logback',
-  imports: [CommonModule, ButtonModule, SelectModule, FormsModule, TableModule],
+  imports: [ButtonModule, SelectModule, FormsModule, TableModule],
   templateUrl: './logback.component.html',
   styleUrls: ['./logback.component.scss'],
 })

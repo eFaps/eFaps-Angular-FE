@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { HttpClient } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -22,15 +22,14 @@ import { UtilService } from 'src/app/services/util.service';
   selector: 'app-system-configuration-attribute',
   imports: [
     AutoCompleteModule,
-    CommonModule,
     ButtonModule,
     SelectModule,
     FormsModule,
     InputTextModule,
     TextareaModule,
     ToggleButtonModule,
-    FloatLabelModule,
-  ],
+    FloatLabelModule
+],
   templateUrl: './system-configuration-attribute.component.html',
   styleUrls: ['./system-configuration-attribute.component.scss'],
 })
