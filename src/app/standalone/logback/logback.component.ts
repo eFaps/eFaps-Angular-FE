@@ -1,6 +1,6 @@
 
 import { HttpClient } from '@angular/common/http';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit, input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
@@ -16,10 +16,8 @@ import { UtilService } from 'src/app/services/util.service';
   styleUrls: ['./logback.component.scss'],
 })
 export class LogbackComponent implements OnInit {
-  @Input()
-  uimodule: UIModule | undefined;
-  @Input()
-  data: ModuleData | undefined;
+  readonly uimodule = input<UIModule>();
+  readonly data = input<ModuleData>();
 
   loggers: [] = [];
 

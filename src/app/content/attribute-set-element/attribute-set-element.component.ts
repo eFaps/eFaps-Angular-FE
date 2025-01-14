@@ -19,7 +19,7 @@ export class AttributeSetElementComponent {
       }
     | undefined;
   inputValue: any;
-  @Input() rowId: number | undefined;
+  readonly rowId = input<number>();
   radioValue: any;
 
   constructor(private valueService: ValueService) {}

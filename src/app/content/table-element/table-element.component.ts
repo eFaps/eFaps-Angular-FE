@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, input } from '@angular/core';
 import { TableColumn } from 'src/app/model/content';
 import { Option } from 'src/app/model/content';
 import { AutoCompleteService } from 'src/app/services/auto-complete.service';
@@ -21,8 +21,7 @@ export class TableElementComponent implements OnInit {
 
   autoCompleteSuggestions: any[] = [];
 
-  @Input()
-  index: number = 0;
+  readonly index = input<number>(0);
 
   constructor(
     private autoCompleteService: AutoCompleteService,
@@ -33,7 +32,7 @@ export class TableElementComponent implements OnInit {
   ngOnInit(): void {
     this.valueService.update.subscribe({
       next: (entry) => {
-        if (entry?.name == this.column?.field && this.index == entry?.index) {
+        if (entry?.name == this.column?.field && this.index() == entry?.index) {
           this.updateValue(entry?.value);
         }
       },
@@ -68,7 +67,7 @@ export class TableElementComponent implements OnInit {
         name: this._column!!.field,
         value: value,
       },
-      this.index
+      this.index()
     );
   }
 
@@ -91,7 +90,7 @@ export class TableElementComponent implements OnInit {
   fieldUpdate() {
     if (this._column && this._column.updateRef) {
       this.fieldUpdateService
-        .execute(this._column.updateRef, this.index)
+        .execute(this._column.updateRef, this.index())
         .subscribe({
           next: (response) => {
             if (response.values) {
@@ -99,7 +98,7 @@ export class TableElementComponent implements OnInit {
                 this.valueService.updateEntry({
                   name: key,
                   value,
-                  index: this.index,
+                  index: this.index(),
                 });
               });
             }

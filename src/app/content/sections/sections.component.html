@@ -1,4 +1,4 @@
-@for (section of sections; track section) {
+@for (section of sections(); track section) {
   <div>
     @if (section.type=='FORM') {
       <app-form-section [formSection]="toFormSection(section)"></app-form-section>

@@ -1,6 +1,6 @@
 
 import { HttpClient } from '@angular/common/http';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit, input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import {
   AutoCompleteCompleteEvent,
@@ -34,10 +34,8 @@ import { UtilService } from 'src/app/services/util.service';
   styleUrls: ['./system-configuration-attribute.component.scss'],
 })
 export class SystemConfigurationAttributeComponent implements OnInit {
-  @Input()
-  uimodule: UIModule | undefined;
-  @Input()
-  data: ModuleData | undefined;
+  readonly uimodule = input<UIModule>();
+  readonly data = input<ModuleData>();
 
   buttonLabel: string = 'Update';
 
@@ -76,13 +74,14 @@ export class SystemConfigurationAttributeComponent implements OnInit {
       },
     });
 
-    if (this.uimodule?.targetMode == 'CREATE') {
+    if (this.uimodule()?.targetMode == 'CREATE') {
       this.buttonLabel = 'Create';
       this.config.header = 'Create SystemConfiguration Attribute';
     } else {
+      const data = this.data();
       const url = `${this.utilService.evalApiUrl()}/ui/modules/system-configurations/${
-        this.data?.parentOid
-      }/attributes/${this.data?.oid}`;
+        data?.parentOid
+      }/attributes/${data?.oid}`;
       this.http.get<any>(url).subscribe({
         next: (attr) => {
           this.key = {
@@ -100,9 +99,9 @@ export class SystemConfigurationAttributeComponent implements OnInit {
   }
 
   submit() {
-    if (this.uimodule?.targetMode == 'CREATE') {
+    if (this.uimodule()?.targetMode == 'CREATE') {
       const url = `${this.utilService.evalApiUrl()}/ui/modules/system-configurations/${
-        this.data?.parentOid
+        this.data()?.parentOid
       }/attributes`;
       this.http
         .post(url, {
@@ -119,9 +118,10 @@ export class SystemConfigurationAttributeComponent implements OnInit {
           },
         });
     } else {
+      const data = this.data();
       const url = `${this.utilService.evalApiUrl()}/ui/modules/system-configurations/${
-        this.data?.parentOid
-      }/attributes/${this.data?.oid}`;
+        data?.parentOid
+      }/attributes/${data?.oid}`;
       this.http
         .put(url, {
           key: this.keyStr,
@@ -210,7 +210,7 @@ export class SystemConfigurationAttributeComponent implements OnInit {
 
   loadKeys(event: AutoCompleteCompleteEvent) {
     const url = `${this.utilService.evalApiUrl()}/ui/modules/system-configurations/${
-      this.data?.parentOid
+      this.data()?.parentOid
     }/attributes`;
     this.http.get<any>(url).subscribe({
       next: (keys) => (this.keys = keys),

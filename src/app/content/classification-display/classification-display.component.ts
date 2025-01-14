@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit, input } from '@angular/core';
 import { Classification } from 'src/app/model/classification';
 import { ClassificationService } from 'src/app/services/classification.service';
 
@@ -9,8 +9,7 @@ import { ClassificationService } from 'src/app/services/classification.service';
   standalone: false,
 })
 export class ClassificationDisplayComponent implements OnInit {
-  @Input()
-  classifications: Classification[] | undefined;
+  readonly classifications = input<Classification[]>();
 
   constructor(private classificationService: ClassificationService) {}
 

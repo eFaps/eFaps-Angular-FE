@@ -1,6 +1,6 @@
 
 import { HttpClient } from '@angular/common/http';
-import { Component, Input, ViewChild } from '@angular/core';
+import { Component, ViewChild, input } from '@angular/core';
 import Papa, { ParseResult } from 'papaparse';
 import { ToastMessageOptions } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
@@ -29,10 +29,8 @@ import { UtilService } from 'src/app/services/util.service';
   styleUrl: './csvimport.component.scss',
 })
 export class CSVImportComponent {
-  @Input()
-  uimodule: UIModule | undefined;
-  @Input()
-  data: ModuleData | undefined;
+  readonly uimodule = input<UIModule>();
+  readonly data = input<ModuleData>();
 
   cols: string[] = [];
   items: any[] = [];
@@ -58,7 +56,7 @@ export class CSVImportComponent {
   readCSV(file: File) {
     var self = this;
     Papa.parse(file, {
-      header: this.uimodule?.properties.Header == 'true',
+      header: this.uimodule()?.properties.Header == 'true',
       complete: function (results: ParseResult<any>) {
         self.results = results;
         self.updateTable(results.meta.fields, results.data);
@@ -93,7 +91,7 @@ export class CSVImportComponent {
     }/validate`;
     this.http
       .post<any>(url, {
-        parentOid: this.data?.parentOid,
+        parentOid: this.data()?.parentOid,
         result: this.results,
       })
       .subscribe({
@@ -116,7 +114,7 @@ export class CSVImportComponent {
     }/execute`;
     this.http
       .post<any>(url, {
-        parentOid: this.data?.parentOid,
+        parentOid: this.data()?.parentOid,
         result: this.results,
       })
       .subscribe({

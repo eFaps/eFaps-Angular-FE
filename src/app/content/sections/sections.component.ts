@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, input } from '@angular/core';
 import {
   FormSection,
   HeadingSection,
@@ -13,8 +13,7 @@ import {
   standalone: false,
 })
 export class SectionsComponent {
-  @Input()
-  sections: Section[] = [];
+  readonly sections = input<Section[]>([]);
 
   toHeaderSection(section: Section): HeadingSection {
     return section as HeadingSection;
