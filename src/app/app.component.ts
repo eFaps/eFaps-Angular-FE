@@ -12,10 +12,7 @@ import { toSignal } from '@angular/core/rxjs-interop';
 import { Router } from '@angular/router';
 import { LocalStorage } from '@efaps/ngx-store';
 import { updatePrimaryPalette } from '@primeng/themes';
-import {
-  KEYCLOAK_EVENT_SIGNAL,
-  KeycloakEventType,
-} from 'keycloak-angular';
+import { KEYCLOAK_EVENT_SIGNAL, KeycloakEventType } from 'keycloak-angular';
 import Keycloak from 'keycloak-js';
 import { MenuItem } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
@@ -305,7 +302,7 @@ export class AppComponent implements OnInit {
   }
 
   signOut() {
-     this.keycloak.logout();
+    this.keycloak.logout();
   }
 
   breadcrumbOnClick(menuItem: MenuItem) {

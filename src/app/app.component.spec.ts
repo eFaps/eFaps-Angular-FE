@@ -6,6 +6,7 @@ import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { KEYCLOAK_EVENT_SIGNAL, KeycloakService } from 'keycloak-angular';
+import Keycloak from 'keycloak-js';
 import { MessageService } from 'primeng/api';
 import { MenubarModule } from 'primeng/menubar';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
@@ -26,6 +27,7 @@ describe('AppComponent', () => {
       providers: [
         { provide: MessageService, useValue: {} },
         { provide: KeycloakService, useValue: {} },
+        { provide: Keycloak, useValue: {} },
         provideHttpClient(withInterceptorsFromDi()),
         provideHttpClientTesting(),
         { provide: KEYCLOAK_EVENT_SIGNAL, useValue: {} },
