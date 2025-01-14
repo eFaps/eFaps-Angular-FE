@@ -1,4 +1,3 @@
-
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -26,8 +25,8 @@ import { UtilService } from 'src/app/services/util.service';
     FormsModule,
     InputTextModule,
     TextareaModule,
-    ToggleButtonModule
-],
+    ToggleButtonModule,
+  ],
   templateUrl: './system-configuration-link.component.html',
   styleUrl: './system-configuration-link.component.scss',
 })

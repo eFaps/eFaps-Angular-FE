@@ -3,7 +3,7 @@ import {
   Component,
   OnInit,
   ViewContainerRef,
-  viewChild
+  viewChild,
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MenuItem } from 'primeng/api';
@@ -32,7 +32,9 @@ export class FormContentComponent implements OnInit, AfterViewInit {
   sections: Section[] = [];
   menuItems: MenuItem[] = [];
 
-  readonly vcr = viewChild.required('dynamicComponent', { read: ViewContainerRef });
+  readonly vcr = viewChild.required('dynamicComponent', {
+    read: ViewContainerRef,
+  });
   module: UIModule | undefined;
   moduleLoaded = false;
 

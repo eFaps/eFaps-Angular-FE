@@ -1,4 +1,3 @@
-
 import { HttpClient } from '@angular/common/http';
 import { Component, input, viewChild } from '@angular/core';
 import Papa, { ParseResult } from 'papaparse';
@@ -23,8 +22,8 @@ import { UtilService } from 'src/app/services/util.service';
     FileUploadModule,
     MessagesModule,
     TableModule,
-    ScrollPanelModule
-],
+    ScrollPanelModule,
+  ],
   templateUrl: './csvimport.component.html',
   styleUrl: './csvimport.component.scss',
 })

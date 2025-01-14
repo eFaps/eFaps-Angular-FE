@@ -3,7 +3,7 @@ import {
   Component,
   OnInit,
   ViewContainerRef,
-  viewChild
+  viewChild,
 } from '@angular/core';
 import { DynamicDialogConfig } from 'primeng/dynamicdialog';
 import { DynamicComponentService } from 'src/app/services/dynamic-component.service';
@@ -15,7 +15,9 @@ import { DynamicComponentService } from 'src/app/services/dynamic-component.serv
   standalone: false,
 })
 export class ModalModuleContentComponent implements AfterViewInit {
-  readonly vcr = viewChild.required('dynamicComponent', { read: ViewContainerRef });
+  readonly vcr = viewChild.required('dynamicComponent', {
+    read: ViewContainerRef,
+  });
 
   constructor(
     private config: DynamicDialogConfig,

@@ -1,4 +1,3 @@
-
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -28,8 +27,8 @@ import { UtilService } from 'src/app/services/util.service';
     InputTextModule,
     TextareaModule,
     ToggleButtonModule,
-    FloatLabelModule
-],
+    FloatLabelModule,
+  ],
   templateUrl: './system-configuration-attribute.component.html',
   styleUrls: ['./system-configuration-attribute.component.scss'],
 })

@@ -1,10 +1,4 @@
-import {
-  Component,
-  ElementRef,
-  Input,
-  output,
-  viewChild
-} from '@angular/core';
+import { Component, ElementRef, Input, output, viewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { saveAs } from 'file-saver';
 import { Column } from 'src/app/model/table';

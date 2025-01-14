@@ -3,7 +3,7 @@ import {
   Input,
   OnInit,
   ViewContainerRef,
-  viewChild
+  viewChild,
 } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastMessageOptions } from 'primeng/api';
@@ -52,7 +52,9 @@ export class FormElementComponent implements OnInit {
   uploadUrl: string | undefined;
   uploadKeys: string[] | undefined;
 
-  readonly vcr = viewChild.required('dynamicComponent', { read: ViewContainerRef });
+  readonly vcr = viewChild.required('dynamicComponent', {
+    read: ViewContainerRef,
+  });
 
   constructor(
     private router: Router,

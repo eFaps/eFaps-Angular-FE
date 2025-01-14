@@ -1,4 +1,3 @@
-
 import { Component, OnInit } from '@angular/core';
 import { LocalStorage } from '@efaps/ngx-store';
 import { updatePrimaryPalette } from '@primeng/themes';
