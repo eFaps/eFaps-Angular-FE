@@ -1,33 +1,30 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import {
   ActivatedRouteSnapshot,
+  CanActivateFn,
   Router,
   RouterStateSnapshot,
   UrlTree,
 } from '@angular/router';
-import { KeycloakAuthGuard, KeycloakService } from 'keycloak-angular';
+import { AuthGuardData, createAuthGuard } from 'keycloak-angular';
+import Keycloak from 'keycloak-js';
 
-@Injectable({
-  providedIn: 'root',
-})
-export class AuthGuard extends KeycloakAuthGuard {
-  constructor(
-    protected override readonly router: Router,
-    protected readonly keycloak: KeycloakService
-  ) {
-    super(router, keycloak);
+const isAccessAllowed = async (
+  route: ActivatedRouteSnapshot,
+  state: RouterStateSnapshot,
+  authData: AuthGuardData
+): Promise<boolean | UrlTree> => {
+  const { authenticated } = authData;
+ 
+  if (authenticated) {
+    return true;
   }
+  const  keycloak = inject(Keycloak)
+  await keycloak.login({
+      redirectUri: window.location.origin + state.url,
+  });
+ 
+  return authenticated;
+};
 
-  async isAccessAllowed(
-    route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot
-  ): Promise<boolean | UrlTree> {
-    if (!this.authenticated) {
-      await this.keycloak.login({
-        redirectUri: window.location.origin + state.url,
-      });
-    }
-
-    return this.authenticated;
-  }
-}
+export const canActivateAuth = createAuthGuard<CanActivateFn>(isAccessAllowed);

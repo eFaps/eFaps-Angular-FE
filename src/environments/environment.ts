@@ -9,4 +9,9 @@ export const environment = {
   apiHostname: 'http://localhost:8080',
   xapiHostname: 'https://demo.lite.synercom.pe',
   apiBaseUrl: '/api',
+  sso: {
+        url: "https://sso.synercom.pe/auth",
+        realm: "demo",
+        clientId: "localhost-test"
+    }
 };

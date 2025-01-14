@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { canActivateAuth } from './guard/auth.guard';
 
-import { AuthGuard } from './guard/auth.guard';
 
-const routes: Routes = [
+export const routes: Routes = [
   {
     path: 'strctbrws',
-    canActivate: [AuthGuard],
+    canActivate: [canActivateAuth],
     loadChildren: () =>
       import('./structure-browser/structure-browser.module').then(
         (m) => m.StructureBrowserModule
@@ -14,19 +14,19 @@ const routes: Routes = [
   },
   {
     path: 'table',
-    canActivate: [AuthGuard],
+    canActivate: [canActivateAuth],
     loadChildren: () =>
       import('./table/table.module').then((m) => m.TableModule),
   },
   {
     path: 'content',
-    canActivate: [AuthGuard],
+    canActivate: [canActivateAuth],
     loadChildren: () =>
       import('./content/content.module').then((m) => m.ContentModule),
   },
   {
     path: 'dashboard',
-    canActivate: [AuthGuard],
+    canActivate: [canActivateAuth],
     loadChildren: () =>
       import('./dashboard/dashboard.module').then((m) => m.DashboardModule),
   },
@@ -39,7 +39,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    canActivate: [AuthGuard],
+    canActivate: [canActivateAuth],
     loadChildren: () =>
       import('./dashboard/dashboard.module').then((m) => m.DashboardModule),
   },

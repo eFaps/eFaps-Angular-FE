@@ -5,19 +5,20 @@ import {
   Signal,
   ViewChild,
   computed,
+  effect,
+  inject,
 } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { Router } from '@angular/router';
 import { LocalStorage } from '@efaps/ngx-store';
 import { updatePrimaryPalette } from '@primeng/themes';
-import { KeycloakService } from 'keycloak-angular';
+import { KEYCLOAK_EVENT_SIGNAL, KeycloakEventType, KeycloakService } from 'keycloak-angular';
 import { MenuItem } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
 import { Menubar } from 'primeng/menubar';
 import { Popover } from 'primeng/popover';
 import { environment } from 'src/environments/environment';
 
-import { default as translation } from '../assets/es.json';
 import { ModalContentComponent } from './content/modal-content/modal-content.component';
 import { ModalModuleContentComponent } from './content/modal-module-content/modal-module-content.component';
 import { SearchContentComponent } from './content/search-content/search-content.component';
@@ -39,6 +40,7 @@ import { SearchService } from './services/search.service';
 import { StyleService } from './services/style.service';
 import { UserService } from './services/user.service';
 import { CompanyChooserComponent } from './standalone/company-chooser/company-chooser.component';
+import Keycloak from 'keycloak-js';
 
 @Component({
     selector: 'app-root',
@@ -49,6 +51,8 @@ import { CompanyChooserComponent } from './standalone/company-chooser/company-ch
 })
 export class AppComponent implements OnInit {
   title = 'eFaps-Angular-FE';
+
+  //private readonly keycloak = inject(Keycloak);
 
   mainMenu: Signal<MenuEntry[] | undefined> = toSignal(
     this.menuService.getMainMenu()
@@ -72,11 +76,11 @@ export class AppComponent implements OnInit {
 
   @LocalStorage() palette: string | undefined;
 
+
   constructor(
     private router: Router,
     private dialogService: DialogService,
     private loaderService: LoaderService,
-    private keycloakService: KeycloakService,
     private menuService: MenuService,
     private userService: UserService,
     private execService: ExecService,
@@ -85,7 +89,16 @@ export class AppComponent implements OnInit {
     private searchService: SearchService,
     private breadcrumbService: BreadcrumbService,
     private styleService: StyleService
-  ) {}
+  ) {
+    console.log("app init")
+    const keycloakSignal = inject(KEYCLOAK_EVENT_SIGNAL);
+    effect(() => {
+      const keycloakEvent = keycloakSignal();
+      if (keycloakEvent.type === KeycloakEventType.AuthSuccess) {
+        userService.getCurrentUser(true).subscribe();
+      }
+    });
+  }
 
   ngOnInit() {
     this.userService.getCurrentUser().subscribe({
@@ -290,7 +303,7 @@ export class AppComponent implements OnInit {
   }
 
   signOut() {
-    this.keycloakService.logout();
+   // this.keycloak.logout();
   }
 
   breadcrumbOnClick(menuItem: MenuItem) {

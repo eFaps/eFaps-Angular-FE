@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { AuthGuard } from '../guard/auth.guard';
+import { canActivateAuth } from '../guard/auth.guard';
 import { TableComponent } from '../table/table/table.component';
 import { ContentComponent } from './content/content.component';
 import { FormContentComponent } from './form-content/form-content.component';
@@ -9,19 +9,19 @@ import { FormContentComponent } from './form-content/form-content.component';
 const routes: Routes = [
   {
     path: ':oid',
-    canActivate: [AuthGuard],
+    canActivate: [canActivateAuth],
     component: ContentComponent,
 
     children: [
       {
         path: 'table/:id',
-        canActivate: [AuthGuard],
+        canActivate: [canActivateAuth],
         component: TableComponent,
         outlet: 'contentOutlet',
       },
       {
         path: 'form/:id',
-        canActivate: [AuthGuard],
+        canActivate: [canActivateAuth],
         component: FormContentComponent,
         outlet: 'contentOutlet',
       },
@@ -29,7 +29,7 @@ const routes: Routes = [
   },
   {
     path: 'form/:id',
-    canActivate: [AuthGuard],
+    canActivate: [canActivateAuth],
     component: FormContentComponent,
   },
 ];
