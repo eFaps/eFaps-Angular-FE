@@ -15,7 +15,6 @@ import { updatePrimaryPalette } from '@primeng/themes';
 import {
   KEYCLOAK_EVENT_SIGNAL,
   KeycloakEventType,
-  KeycloakService,
 } from 'keycloak-angular';
 import Keycloak from 'keycloak-js';
 import { MenuItem } from 'primeng/api';
@@ -56,7 +55,7 @@ import { CompanyChooserComponent } from './standalone/company-chooser/company-ch
 export class AppComponent implements OnInit {
   title = 'eFaps-Angular-FE';
 
-  //private readonly keycloak = inject(Keycloak);
+  private readonly keycloak = inject(Keycloak);
 
   mainMenu: Signal<MenuEntry[] | undefined> = toSignal(
     this.menuService.getMainMenu()
@@ -306,7 +305,7 @@ export class AppComponent implements OnInit {
   }
 
   signOut() {
-    // this.keycloak.logout();
+     this.keycloak.logout();
   }
 
   breadcrumbOnClick(menuItem: MenuItem) {
