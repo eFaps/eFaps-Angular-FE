@@ -1,5 +1,5 @@
 @for (section of sections(); track section) {
-  <div>
+  <div class="sectionWrapper">
     @if (section.type=='FORM') {
       <app-form-section [formSection]="toFormSection(section)"></app-form-section>
     }
