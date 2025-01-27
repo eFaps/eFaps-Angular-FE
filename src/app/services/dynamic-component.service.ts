@@ -57,6 +57,7 @@ export class DynamicComponentService {
           ref.setInput('uimodule', uimodule);
           ref.setInput('data', data);
         });
+        break;
       case 'PromoSimulator':
         import('../standalone/promo-simulator/promo-simulator.component').then(
           (m) => {
