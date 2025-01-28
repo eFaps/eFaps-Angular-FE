@@ -4,7 +4,7 @@ import {
   HttpInterceptor,
   HttpRequest,
 } from '@angular/common/http';
-import { Injectable, computed, effect } from '@angular/core';
+import { Injectable, effect } from '@angular/core';
 import { LocalStorage } from '@efaps/ngx-store';
 import { Observable } from 'rxjs';
 

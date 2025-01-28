@@ -1,8 +1,7 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Injectable, WritableSignal, signal } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Injectable, WritableSignal, effect, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, catchError, map, of, throwError } from 'rxjs';
-import { LocalStorage } from '@efaps/ngx-store';
 import { Company, User } from '../model/user';
 import { UtilService } from './util.service';
 
@@ -11,8 +10,6 @@ import { UtilService } from './util.service';
 })
 export class UserService {
   company: WritableSignal<Company | undefined> = signal(undefined);
-
-  @LocalStorage() private lsComp: Company | undefined;
 
   constructor(
     private http: HttpClient,
@@ -42,10 +39,8 @@ export class UserService {
           var currentCompany = user.companies.find((element) => {
             return element.current == true;
           });
-          this.lsComp = currentCompany
           this.company.set(currentCompany);
         } else {
-          this.lsComp = undefined
           this.company.set(undefined);
         }
         return user;
@@ -54,9 +49,8 @@ export class UserService {
   }
 
   setCompany(company: Company): Observable<User> {
-    this.lsComp = company
     this.company.set(company);
-    return this.getCurrentUser();
+    return new Observable();
   }
 
   getCompanies(): Observable<Company[]> {
