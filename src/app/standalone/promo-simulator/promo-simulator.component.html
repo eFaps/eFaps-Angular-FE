@@ -72,6 +72,12 @@
             </p-floatLabel>
             <p-toggleswitch [(ngModel)]="dateChecked" (onChange)="toggleDate($event)"/>
         </div>
+        <div class="confElement">
+            <p-listbox styleClass="promotionsConf" [options]="promotions" [(ngModel)]="selectedPromotions" 
+                [multiple]="true" [showToggleAll]="true" [disabled]="!promotionsChecked" optionLabel="name" 
+                optionValue="oid" [checkmark]="true"/>
+            <p-toggleswitch [(ngModel)]="promotionsChecked" (onChange)="togglePromotions($event)"/>
+        </div>
     </div>
 </div>
 

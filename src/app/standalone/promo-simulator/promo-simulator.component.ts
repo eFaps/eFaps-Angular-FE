@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ConfirmationService } from 'primeng/api';
 import { AutoCompleteModule } from 'primeng/autocomplete';
@@ -17,7 +17,7 @@ import {
 } from 'primeng/toggleswitch';
 import { ToolbarModule } from 'primeng/toolbar';
 import { UtilService } from 'src/app/services/util.service';
-
+import { ListboxModule } from 'primeng/listbox';
 @Component({
   selector: 'app-promo-simulator',
   providers: [ConfirmationService],
@@ -34,11 +34,12 @@ import { UtilService } from 'src/app/services/util.service';
     DatePickerModule,
     FloatLabelModule,
     ToggleSwitchModule,
+    ListboxModule,
   ],
   templateUrl: './promo-simulator.component.html',
   styleUrl: './promo-simulator.component.scss',
 })
-export class PromoSimulatorComponent {
+export class PromoSimulatorComponent implements OnInit {
   items: Item[] = [];
   editDialog = false;
 
@@ -55,11 +56,24 @@ export class PromoSimulatorComponent {
   date: Date | undefined;
   dateChecked: boolean = false;
 
+  promotions: Promotion[] = []
+  selectedPromotions: string[] | undefined;
+  promotionsChecked: boolean = false;
+
   constructor(
     private http: HttpClient,
     private confirmationService: ConfirmationService,
     private utilService: UtilService
-  ) {}
+  ) { }
+
+  ngOnInit(): void {
+    const url = `${this.utilService.evalApiUrl()}/ui/modules/promo-simulator/promotions`;
+    this.http.get<any>(url).subscribe({
+      next: (promotions) => {
+        this.promotions = promotions
+      },
+    });
+  }
 
   emptyItem(): Item {
     return {
@@ -145,6 +159,7 @@ export class PromoSimulatorComponent {
     const body = {
       items: positions,
       date: this.date,
+      promotionOids: this.selectedPromotions
     };
 
     this.http.post<any>(url, body).subscribe({
@@ -208,6 +223,10 @@ export class PromoSimulatorComponent {
 
   toggleDate(event: ToggleSwitchChangeEvent) {
     this.date = undefined;
+  }
+
+  togglePromotions(event: ToggleSwitchChangeEvent) {
+    this.selectedPromotions = undefined;
   }
 }
 

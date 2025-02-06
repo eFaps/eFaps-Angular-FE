@@ -13,6 +13,10 @@
             display: flex;
             gap: 15px;
             align-items: center;
+   
+        }
+        ::ng-deep .promotionsConf {
+            min-width: 16rem;
         }
     }
 
