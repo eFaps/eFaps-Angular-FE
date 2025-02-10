@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { Classification } from 'src/app/model/classification';
-import { FormItem, FormSection, Outline, Section } from 'src/app/model/content';
+import { Outline, Section } from 'src/app/model/content';
 import { MenuEntry } from 'src/app/model/menu';
 import { ClassificationService } from 'src/app/services/classification.service';
 import { ExecService } from 'src/app/services/exec.service';
@@ -15,6 +15,12 @@ import { ValueService } from 'src/app/services/value.service';
   standalone: false,
 })
 export class ModalContentComponent implements OnInit {
+
+  private valueService = inject(ValueService);
+  private validationService = inject(ValidationService);
+  private classificationService = inject(ClassificationService);
+  private execService = inject(ExecService);
+
   outline: Outline;
   callingMenu: MenuEntry;
   values: Map<String, any> | undefined;
@@ -24,10 +30,6 @@ export class ModalContentComponent implements OnInit {
   constructor(
     config: DynamicDialogConfig,
     private dialogRef: DynamicDialogRef,
-    private valueService: ValueService,
-    private validationService: ValidationService,
-    private classificationService: ClassificationService,
-    private execService: ExecService
   ) {
     this.valueService.reset();
     this.validationService.reset();
@@ -50,6 +52,7 @@ export class ModalContentComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.outline = this.outline;
     this.valueService.values.subscribe({
       next: (values) => {
         console.log(values);
