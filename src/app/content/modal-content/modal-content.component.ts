@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { Classification } from 'src/app/model/classification';
 import { Outline, Section } from 'src/app/model/content';
@@ -15,7 +15,6 @@ import { ValueService } from 'src/app/services/value.service';
   standalone: false,
 })
 export class ModalContentComponent implements OnInit {
-
   private valueService = inject(ValueService);
   private validationService = inject(ValidationService);
   private classificationService = inject(ClassificationService);
@@ -29,7 +28,7 @@ export class ModalContentComponent implements OnInit {
 
   constructor(
     config: DynamicDialogConfig,
-    private dialogRef: DynamicDialogRef,
+    private dialogRef: DynamicDialogRef
   ) {
     this.valueService.reset();
     this.validationService.reset();

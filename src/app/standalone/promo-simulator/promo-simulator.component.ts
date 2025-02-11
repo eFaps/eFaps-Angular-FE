@@ -10,6 +10,7 @@ import { DatePickerModule } from 'primeng/datepicker';
 import { DialogModule } from 'primeng/dialog';
 import { FloatLabelModule } from 'primeng/floatlabel';
 import { InputNumberModule } from 'primeng/inputnumber';
+import { ListboxModule } from 'primeng/listbox';
 import { TableModule } from 'primeng/table';
 import {
   ToggleSwitchChangeEvent,
@@ -17,7 +18,6 @@ import {
 } from 'primeng/toggleswitch';
 import { ToolbarModule } from 'primeng/toolbar';
 import { UtilService } from 'src/app/services/util.service';
-import { ListboxModule } from 'primeng/listbox';
 @Component({
   selector: 'app-promo-simulator',
   providers: [ConfirmationService],
@@ -56,7 +56,7 @@ export class PromoSimulatorComponent implements OnInit {
   date: Date | undefined;
   dateChecked: boolean = false;
 
-  promotions: Promotion[] = []
+  promotions: Promotion[] = [];
   selectedPromotions: string[] | undefined;
   promotionsChecked: boolean = false;
 
@@ -64,13 +64,13 @@ export class PromoSimulatorComponent implements OnInit {
     private http: HttpClient,
     private confirmationService: ConfirmationService,
     private utilService: UtilService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     const url = `${this.utilService.evalApiUrl()}/ui/modules/promo-simulator/promotions`;
     this.http.get<any>(url).subscribe({
       next: (promotions) => {
-        this.promotions = promotions
+        this.promotions = promotions;
       },
     });
   }
@@ -159,7 +159,7 @@ export class PromoSimulatorComponent implements OnInit {
     const body = {
       items: positions,
       date: this.date,
-      promotionOids: this.selectedPromotions
+      promotionOids: this.selectedPromotions,
     };
 
     this.http.post<any>(url, body).subscribe({

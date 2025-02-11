@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable, WritableSignal, effect, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, Subscriber, catchError, map, of, throwError } from 'rxjs';
+
 import { Company, User } from '../model/user';
 import { UtilService } from './util.service';
 
@@ -50,7 +51,7 @@ export class UserService {
 
   setCompany(company: Company): Observable<User> {
     this.company.set(company);
-    return new Observable(subscriber => {
+    return new Observable((subscriber) => {
       subscriber.next();
     });
   }

@@ -14,7 +14,7 @@ import {
 })
 export class SectionsComponent {
   sections = input.required<Section[]>();
- 
+
   toHeaderSection(section: Section): HeadingSection {
     return section as HeadingSection;
   }

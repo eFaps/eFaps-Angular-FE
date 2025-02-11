@@ -143,8 +143,10 @@ export class ContentComponent implements OnInit, OnDestroy {
               icon: 'pi pi-exclamation-triangle',
               accept: () => {
                 this.execService.exec(item.id, valueMap).subscribe({
-                  next: (_) => {
-                    console.log('run exec');
+                  next: (execResponse) => {
+                    if (execResponse != null && execResponse.reload) {
+                      this.loadData();
+                    }
                   },
                 });
               },
@@ -152,8 +154,10 @@ export class ContentComponent implements OnInit, OnDestroy {
             });
           } else {
             this.execService.exec(item.id, valueMap).subscribe({
-              next: (_) => {
-                console.log('run exec');
+              next: (execResponse) => {
+                if (execResponse != null && execResponse.reload) {
+                  this.loadData();
+                }
               },
             });
           }
