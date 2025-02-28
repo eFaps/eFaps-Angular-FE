@@ -49,7 +49,7 @@ export class UserService {
     );
   }
 
-  setCompany(company: Company): Observable<User> {
+  setCompany(company: Company): Observable<void> {
     this.company.set(company);
     return new Observable((subscriber) => {
       subscriber.next();
