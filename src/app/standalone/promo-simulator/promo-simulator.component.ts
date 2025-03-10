@@ -18,6 +18,7 @@ import {
 } from 'primeng/toggleswitch';
 import { ToolbarModule } from 'primeng/toolbar';
 import { UtilService } from 'src/app/services/util.service';
+
 @Component({
   selector: 'app-promo-simulator',
   providers: [ConfirmationService],
@@ -60,11 +61,13 @@ export class PromoSimulatorComponent implements OnInit {
   selectedPromotions: string[] | undefined;
   promotionsChecked: boolean = false;
 
+  expandedRows = {};
+
   constructor(
     private http: HttpClient,
     private confirmationService: ConfirmationService,
     private utilService: UtilService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     const url = `${this.utilService.evalApiUrl()}/ui/modules/promo-simulator/promotions`;
@@ -77,6 +80,7 @@ export class PromoSimulatorComponent implements OnInit {
 
   emptyItem(): Item {
     return {
+      index: undefined,
       quantity: undefined,
       product: undefined,
       netPrice: undefined,
@@ -84,7 +88,7 @@ export class PromoSimulatorComponent implements OnInit {
       netDiscount: undefined,
       crossDiscount: undefined,
       crossPrice: undefined,
-      promotions: [],
+      details: [],
     };
   }
 
@@ -132,6 +136,7 @@ export class PromoSimulatorComponent implements OnInit {
             this.autoCompleteSuggestions.push({
               oid: product.oid,
               label: `${product.name} - ${product.description}`,
+              netUnitPrice: product.netUnitPrice
             });
           });
         },
@@ -172,52 +177,53 @@ export class PromoSimulatorComponent implements OnInit {
 
   mapResponse() {
     if (this.calcResponse) {
-      this.items.forEach((item) => {
+      this.items.forEach((item, index) => {
+        item.index = undefined
         item.basePrice = undefined;
         item.netPrice = undefined;
         item.netDiscount = undefined;
         item.crossPrice = undefined;
         item.crossDiscount = undefined;
-        item.promotions = [];
+        item.details = [];
       });
 
-      this.calcResponse.positions.forEach((pos, index) => {
-        this.items[index].netPrice = pos.netPrice;
-        this.items[index].crossPrice = pos.crossPrice;
+      this.calcResponse.positions.forEach((pos, idx) => {
+        this.items[idx].index = pos.index
+        this.items[idx].netPrice = pos.netPrice;
+        this.items[idx].crossPrice = pos.crossPrice;
 
         if (this.calcResponse!.promotionInfo) {
-          this.calcResponse!.promotionInfo.details.filter(detail => { return detail.positionIndex == pos.index }).forEach(detail => {
-
-            const url = `${this.utilService.evalApiUrl()}/ui/modules/promo-simulator/promotions/${detail.promotionOid}`;
-            this.http.get<any>(url).subscribe({
-              next: (promotion) => {
-                this.items[index].promotions.push({
-                  oid: promotion.oid,
-                  name: promotion.name,
-                  label: promotion.label,
-                  description: promotion.description,
-                  priority: promotion.priority,
-                  endDateTime: promotion.endDateTime,
-                  startDateTime: promotion.startDateTime,
-                });
-              }
-            })
-          })
+          this.items[idx].netDiscount = 0
+          this.items[idx].crossDiscount = 0
+          this.calcResponse!.promotionInfo.details.filter((detail) => {
+            return detail.positionIndex == pos.index;
+          }).forEach((detail) => {
+            this.items[idx].details.push(detail);
+            this.items[idx].netDiscount = this.items[idx].netDiscount! + detail.netDiscount
+            this.items[idx].crossDiscount = this.items[idx].crossDiscount! + detail.crossDiscount
+          });
         }
-      })
+      });
     }
   }
 
-  showPromotion(promotion: Promotion) {
-    this.displayPromotion = promotion;
-    this.showPromotionModal = true;
+  getPromotionLabel(promotionOid: string) {
+    return this.promotions.find((promo) => promo.oid == promotionOid)?.name;
   }
 
-  toggleDate(event: ToggleSwitchChangeEvent) {
+  showPromotion(promotionOid: string) {
+    var promo = this.promotions.find((promo) => promo.oid == promotionOid);
+    if (promo) {
+      this.displayPromotion = promo;
+      this.showPromotionModal = true;
+    }
+  }
+
+  toggleDate(_event: ToggleSwitchChangeEvent) {
     this.date = undefined;
   }
 
-  togglePromotions(event: ToggleSwitchChangeEvent) {
+  togglePromotions(_event: ToggleSwitchChangeEvent) {
     this.selectedPromotions = undefined;
   }
 }
@@ -233,6 +239,7 @@ export interface Promotion {
 }
 
 export interface Item {
+  index: number | undefined;
   quantity: number | undefined;
   product: Product | undefined;
   netPrice: number | undefined;
@@ -240,12 +247,13 @@ export interface Item {
   netDiscount: number | undefined;
   crossDiscount: number | undefined;
   crossPrice: number | undefined;
-  promotions: Promotion[];
+  details: PromoDetail[];
 }
 
 export interface Product {
   oid: string;
   label: string;
+  netUnitPrice: number | undefined;
 }
 
 export interface PromoDetail {
