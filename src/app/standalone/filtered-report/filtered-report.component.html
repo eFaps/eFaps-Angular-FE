@@ -1,0 +1,27 @@
+<div class="wrapper">
+    <div class="filters" [formGroup]="formGroup">
+        @for (filter of filters; track filter.name;; let indexOfelement = $index) {
+        @switch (filter.type) {
+        @case ('DATE') {
+        <div class="filterElement">
+            <p-floatlabel>
+                <p-datepicker inputId="{{'filter' + indexOfelement}}" [showIcon]="true"
+                    formControlName="{{filter.name}}"></p-datepicker>
+                <label for="{{'filter' + indexOfelement}}">{{filter.label}}</label>
+            </p-floatlabel>
+        </div>
+        }
+        }
+        }
+        <div class="filterButton">
+            <p-button label="Update" icon="pi pi-refresh" [loading]="loading" (onClick)="reload()"
+                [disabled]="!formGroup.valid" />
+        </div>
+    </div>
+    <div class="content">
+        <div class="header">
+            <h2>{{uimodule()?.header}}</h2>
+        </div>
+        <div class="report" [innerHtml]="reportHtml | safeHtml"></div>
+    </div>
+</div>

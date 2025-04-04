@@ -54,7 +54,6 @@ import { TableSectionComponent } from './table-section/table-section.component';
     FormElementComponent,
     ModalContentComponent,
     FormContentComponent,
-    SafeHtmlPipe,
     TableElementComponent,
     SearchContentComponent,
     AttributeSetComponent,
@@ -91,6 +90,7 @@ import { TableSectionComponent } from './table-section/table-section.component';
     TieredMenuModule,
     MessagesModule,
     ScrollPanelModule,
+    SafeHtmlPipe,
   ],
 })
 export class ContentModule {}

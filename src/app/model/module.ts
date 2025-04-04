@@ -3,6 +3,7 @@ export interface UIModule {
   key: string;
   targetMode: 'CONNECT' | 'CREATE' | 'EDIT' | 'SEARCH' | 'UNKNOWN' | 'VIEW';
   properties: any;
+  header?: string;
 }
 
 export interface ModuleData {

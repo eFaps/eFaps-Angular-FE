@@ -69,6 +69,17 @@ export class DynamicComponentService {
           }
         );
         break;
+      case 'FilteredReport':
+        import('../standalone/filtered-report/filtered-report.component').then(
+          (m) => {
+            const ref = viewContainerRef.createComponent(
+              m.FilteredReportComponent
+            );
+            ref.setInput('uimodule', uimodule);
+            ref.setInput('data', data);
+          }
+        );
+        break;
     }
   }
 }

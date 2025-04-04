@@ -136,7 +136,7 @@ export class PromoSimulatorComponent implements OnInit {
             this.autoCompleteSuggestions.push({
               oid: product.oid,
               label: `${product.name} - ${product.description}`,
-              netUnitPrice: product.netUnitPrice
+              netUnitPrice: product.netUnitPrice,
             });
           });
         },
@@ -178,7 +178,7 @@ export class PromoSimulatorComponent implements OnInit {
   mapResponse() {
     if (this.calcResponse) {
       this.items.forEach((item, index) => {
-        item.index = undefined
+        item.index = undefined;
         item.basePrice = undefined;
         item.netPrice = undefined;
         item.netDiscount = undefined;
@@ -188,19 +188,21 @@ export class PromoSimulatorComponent implements OnInit {
       });
 
       this.calcResponse.positions.forEach((pos, idx) => {
-        this.items[idx].index = pos.index
+        this.items[idx].index = pos.index;
         this.items[idx].netPrice = pos.netPrice;
         this.items[idx].crossPrice = pos.crossPrice;
 
         if (this.calcResponse!.promotionInfo) {
-          this.items[idx].netDiscount = 0
-          this.items[idx].crossDiscount = 0
+          this.items[idx].netDiscount = 0;
+          this.items[idx].crossDiscount = 0;
           this.calcResponse!.promotionInfo.details.filter((detail) => {
             return detail.positionIndex == pos.index;
           }).forEach((detail) => {
             this.items[idx].details.push(detail);
-            this.items[idx].netDiscount = this.items[idx].netDiscount! + detail.netDiscount
-            this.items[idx].crossDiscount = this.items[idx].crossDiscount! + detail.crossDiscount
+            this.items[idx].netDiscount =
+              this.items[idx].netDiscount! + detail.netDiscount;
+            this.items[idx].crossDiscount =
+              this.items[idx].crossDiscount! + detail.crossDiscount;
           });
         }
       });
