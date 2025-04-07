@@ -47,7 +47,8 @@ export interface FormItem {
     | 'TEXTAREA'
     | 'TIME'
     | 'BUTTON'
-    | 'CLASSIFICATION';
+    | 'CLASSIFICATION'
+    | 'PICKLIST';
   label: string;
   name: string;
   value?: any;

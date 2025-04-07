@@ -1,17 +1,34 @@
 <div class="wrapper">
     <div class="filters" [formGroup]="formGroup">
         @for (filter of filters; track filter.name;; let indexOfelement = $index) {
-        @switch (filter.type) {
-        @case ('DATE') {
-        <div class="filterElement">
-            <p-floatlabel>
-                <p-datepicker inputId="{{'filter' + indexOfelement}}" [showIcon]="true"
-                    formControlName="{{filter.name}}"></p-datepicker>
-                <label for="{{'filter' + indexOfelement}}">{{filter.label}}</label>
-            </p-floatlabel>
-        </div>
-        }
-        }
+            @switch (filter.type) {
+                @case ('DATE') {
+                <div class="filterElement">
+                    <p-floatlabel>
+                        <p-datepicker inputId="{{'filter' + indexOfelement}}" [showIcon]="true"
+                            formControlName="{{filter.name}}"></p-datepicker>
+                        <label for="{{'filter' + indexOfelement}}">{{filter.label}}</label>
+                    </p-floatlabel>
+                </div>
+                }
+                @case ('PICKLIST') {
+                <div class="filterElement">
+                    <div class="pickListHeader">
+                        <span>{{filter.label}}</span>
+                        <div>
+                            <span>Inactivo</span><span>Activo</span> 
+                        </div>
+                    </div>
+                    <p-picklist [source]="pickListElements[filter.name].source" [target]="pickListElements[filter.name].target" [dragdrop]="true"  
+                        showSourceControls="false" showTargetControls="false" targetHeader="Activo" sourceHeader="Inactivo">
+                        <ng-template let-item #item>
+                                {{ item.label }}
+                        </ng-template>
+                    </p-picklist>
+                
+                </div>
+                }
+            }
         }
         <div class="filterButton">
             <p-button label="Update" icon="pi pi-refresh" [loading]="loading" (onClick)="reload()"

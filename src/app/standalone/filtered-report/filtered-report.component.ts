@@ -9,7 +9,8 @@ import {
 import { ButtonModule } from 'primeng/button';
 import { DatePickerModule } from 'primeng/datepicker';
 import { FloatLabelModule } from 'primeng/floatlabel';
-import { FormItem } from 'src/app/model/content';
+import { PickListModule } from 'primeng/picklist';
+import { FormItem, Option } from 'src/app/model/content';
 import { ModuleData, UIModule } from 'src/app/model/module';
 import { SafeHtmlPipe } from 'src/app/pipes/safe-html.pipe';
 import { UtilService } from 'src/app/services/util.service';
@@ -22,6 +23,7 @@ import { UtilService } from 'src/app/services/util.service';
     DatePickerModule,
     FloatLabelModule,
     ButtonModule,
+    PickListModule,
   ],
   templateUrl: './filtered-report.component.html',
   styleUrl: './filtered-report.component.scss',
@@ -35,6 +37,8 @@ export class FilteredReportComponent implements OnInit {
   reportHtml: string = '';
   filters: FormItem[] = [];
   loading = false;
+
+  pickListElements: any = {};
 
   constructor(private http: HttpClient, private utilService: UtilService) {
     this.formGroup = new FormGroup({});
@@ -69,6 +73,9 @@ export class FilteredReportComponent implements OnInit {
                   formItem.name,
                   new FormControl<Date | null>(value, Validators.required)
                 );
+                break;
+              case 'PICKLIST':
+                this.initPickList(formItem);
                 break;
               case 'DATETIME':
               case 'DATETIMELABEL':
@@ -110,7 +117,46 @@ export class FilteredReportComponent implements OnInit {
       }
       params = params.set(key, val);
     });
-
+    Object.entries(this.pickListElements).forEach(([key, value]) => {
+      console.log(value);
+      var keys: string[] = [];
+      ((value as any).target as Option[]).forEach((option) => {
+        keys.push(option.value);
+      });
+      keys.forEach((value, index) => {
+        if (index == 0) {
+          params = params.set(key, keys[0]);
+        } else {
+          params = params.append(key, value);
+        }
+      });
+    });
     this.loadData(params);
+  }
+
+  initPickList(formItem: FormItem) {
+    if (typeof this.pickListElements[formItem.name] == 'undefined') {
+      this.pickListElements = {
+        ...this.pickListElements,
+        [formItem.name]: { source: [], target: [] },
+      };
+    }
+    this.pickListElements[formItem.name].source = formItem.options;
+    this.pickListElements[formItem.name].target = [];
+    if (formItem.value != null) {
+      (formItem.value as string[]).forEach((entry) => {
+        const selected = formItem.options?.find((opt) => {
+          return opt.value == entry;
+        }) as Option;
+        (this.pickListElements[formItem.name].target as Option[]).push(
+          selected
+        );
+        this.pickListElements[formItem.name].source = (
+          this.pickListElements[formItem.name].source as Option[]
+        ).filter((opt) => {
+          return opt.value != selected.value;
+        });
+      });
+    }
   }
 }
