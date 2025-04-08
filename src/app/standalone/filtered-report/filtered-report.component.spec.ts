@@ -21,6 +21,13 @@ describe('FilteredReportComponent', () => {
     }).compileComponents();
 
     fixture = TestBed.createComponent(FilteredReportComponent);
+    fixture.componentRef.setInput('uimodule', {
+      id: '123-456-456-465',
+      key: 'filtered-report',
+      targetMode: 'VIEW',
+      properties: {},
+      header: 'A header',
+    });
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

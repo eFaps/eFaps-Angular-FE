@@ -30,7 +30,7 @@ import { UtilService } from 'src/app/services/util.service';
   styleUrl: './filtered-report.component.scss',
 })
 export class FilteredReportComponent implements OnInit {
-  readonly uimodule = input<UIModule>();
+  readonly uimodule = input.required<UIModule>();
   readonly data = input<ModuleData>();
 
   formGroup: FormGroup;
@@ -41,12 +41,20 @@ export class FilteredReportComponent implements OnInit {
 
   pickListElements: any = {};
 
-  constructor(private http: HttpClient, private utilService: UtilService, private downloadService: DownloadService) {
+  constructor(
+    private http: HttpClient,
+    private utilService: UtilService,
+    private downloadService: DownloadService
+  ) {
     this.formGroup = new FormGroup({});
   }
 
   ngOnInit(): void {
-    this.loadData(new HttpParams());
+    if (this.restore()) {
+      this.reload();
+    } else {
+      this.loadData(new HttpParams());
+    }
   }
 
   loadData(httpParams: HttpParams) {
@@ -58,49 +66,15 @@ export class FilteredReportComponent implements OnInit {
     this.http.get<any>(url, { params: httpParams }).subscribe({
       next: (reportDto) => {
         if (reportDto.downloadKey) {
-          this.downloadService.download(reportDto.downloadKey)
+          this.downloadService.download(reportDto.downloadKey);
         } else {
           this.reportHtml = reportDto.report;
         }
         if (reportDto.filters != null) {
           const filters: FormItem[] = reportDto.filters;
           this.formGroup = new FormGroup({});
-          filters.forEach((formItem) => {
-            switch (formItem.type) {
-              case 'DATE':
-                let value;
-                if (formItem.value) {
-                  value = new Date(formItem.value);
-                } else {
-                  value = null;
-                }
-                this.formGroup?.addControl(
-                  formItem.name,
-                  new FormControl<Date | null>(value, Validators.required)
-                );
-                break;
-              case 'PICKLIST':
-                this.initPickList(formItem);
-                break;
-              case 'DATETIME':
-              case 'DATETIMELABEL':
-              case 'INPUT':
-              case 'RADIO':
-              case 'DROPDOWN':
-              case 'BITENUM':
-              case 'AUTOCOMPLETE':
-              case 'SNIPPLET':
-              case 'UPLOAD':
-              case 'UPLOADMULTIPLE':
-              case 'ATTRSET':
-              case 'CHECKBOX':
-              case 'TEXTAREA':
-              case 'TIME':
-              case 'BUTTON':
-              case 'CLASSIFICATION':
-            }
-          });
-          this.filters = filters;
+          this.applyFilters(filters);
+          this.persist();
         } else {
           this.filters = [];
           this.formGroup = new FormGroup({});
@@ -111,10 +85,49 @@ export class FilteredReportComponent implements OnInit {
     });
   }
 
+  private applyFilters(filters: FormItem[]) {
+    filters.forEach((formItem) => {
+      switch (formItem.type) {
+        case 'DATE':
+          let value;
+          if (formItem.value) {
+            value = new Date(formItem.value);
+          } else {
+            value = null;
+          }
+          this.formGroup?.addControl(
+            formItem.name,
+            new FormControl<Date | null>(value, Validators.required)
+          );
+          break;
+        case 'PICKLIST':
+          this.initPickList(formItem);
+          break;
+        case 'DATETIME':
+        case 'DATETIMELABEL':
+        case 'INPUT':
+        case 'RADIO':
+        case 'DROPDOWN':
+        case 'BITENUM':
+        case 'AUTOCOMPLETE':
+        case 'SNIPPLET':
+        case 'UPLOAD':
+        case 'UPLOADMULTIPLE':
+        case 'ATTRSET':
+        case 'CHECKBOX':
+        case 'TEXTAREA':
+        case 'TIME':
+        case 'BUTTON':
+        case 'CLASSIFICATION':
+      }
+    });
+    this.filters = filters;
+  }
+
   reload(mime?: string) {
     let params = new HttpParams();
     if (mime) {
-      params = params.set("mime", mime);
+      params = params.set('mime', mime);
     }
     Object.entries(this.formGroup.value).forEach(([key, value]) => {
       let val: string | number;
@@ -126,7 +139,6 @@ export class FilteredReportComponent implements OnInit {
       params = params.set(key, val);
     });
     Object.entries(this.pickListElements).forEach(([key, value]) => {
-      console.log(value);
       var keys: string[] = [];
       ((value as any).target as Option[]).forEach((option) => {
         keys.push(option.value);
@@ -171,4 +183,33 @@ export class FilteredReportComponent implements OnInit {
   export(mime: string) {
     this.reload(mime);
   }
+
+  private persist() {
+    localStorage.setItem(
+      this.uimodule()!.id,
+      JSON.stringify({
+        date: Date.now(),
+        filters: this.filters,
+      })
+    );
+  }
+
+  private restore() {
+    let ret = false;
+    const strVal = localStorage.getItem(this.uimodule()!.id);
+    if (strVal) {
+      const state: FilterReportState = JSON.parse(strVal);
+      const elapsed = new Date().getTime() - state.date;
+      if (elapsed < 3600000) {
+        this.applyFilters(state.filters);
+        ret = true;
+      }
+    }
+    return ret;
+  }
+}
+
+interface FilterReportState {
+  date: number;
+  filters: FormItem[];
 }

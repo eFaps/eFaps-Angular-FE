@@ -17,7 +17,7 @@ import {
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import { RouteReuseStrategy, provideRouter } from '@angular/router';
+import { RouteReuseStrategy } from '@angular/router';
 import { WebStorageModule } from '@efaps/ngx-store';
 import Material from '@primeng/themes/material';
 import {
