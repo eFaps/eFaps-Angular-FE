@@ -33,6 +33,8 @@
         <div class="filterButton">
             <p-button label="Update" icon="pi pi-refresh" [loading]="loading" (onClick)="reload()"
                 [disabled]="!formGroup.valid" />
+            <p-button icon="pi pi-file-excel" [loading]="loading" [disabled]="!formGroup.valid" (onClick)="export('xls')" />   
+            <p-button icon="pi pi-file-pdf" [loading]="loading" [disabled]="!formGroup.valid" (onClick)="export('pdf')" />   
         </div>
     </div>
     <div class="content">

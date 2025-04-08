@@ -13,6 +13,7 @@ import { PickListModule } from 'primeng/picklist';
 import { FormItem, Option } from 'src/app/model/content';
 import { ModuleData, UIModule } from 'src/app/model/module';
 import { SafeHtmlPipe } from 'src/app/pipes/safe-html.pipe';
+import { DownloadService } from 'src/app/services/download.service';
 import { UtilService } from 'src/app/services/util.service';
 
 @Component({
@@ -40,7 +41,7 @@ export class FilteredReportComponent implements OnInit {
 
   pickListElements: any = {};
 
-  constructor(private http: HttpClient, private utilService: UtilService) {
+  constructor(private http: HttpClient, private utilService: UtilService, private downloadService: DownloadService) {
     this.formGroup = new FormGroup({});
   }
 
@@ -56,7 +57,11 @@ export class FilteredReportComponent implements OnInit {
     }`;
     this.http.get<any>(url, { params: httpParams }).subscribe({
       next: (reportDto) => {
-        this.reportHtml = reportDto.report;
+        if (reportDto.downloadKey) {
+          this.downloadService.download(reportDto.downloadKey)
+        } else {
+          this.reportHtml = reportDto.report;
+        }
         if (reportDto.filters != null) {
           const filters: FormItem[] = reportDto.filters;
           this.formGroup = new FormGroup({});
@@ -106,8 +111,11 @@ export class FilteredReportComponent implements OnInit {
     });
   }
 
-  reload() {
+  reload(mime?: string) {
     let params = new HttpParams();
+    if (mime) {
+      params = params.set("mime", mime);
+    }
     Object.entries(this.formGroup.value).forEach(([key, value]) => {
       let val: string | number;
       if (value instanceof Date) {
@@ -158,5 +166,9 @@ export class FilteredReportComponent implements OnInit {
         });
       });
     }
+  }
+
+  export(mime: string) {
+    this.reload(mime);
   }
 }

@@ -25,6 +25,10 @@
 
     .filterButton {
         padding-top: 2rem;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        column-gap: 20px;
     }
 
     .content {
