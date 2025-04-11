@@ -91,7 +91,8 @@ export class FilteredReportComponent implements OnInit {
         case 'DATE':
           let value;
           if (formItem.value) {
-            value = new Date(formItem.value);
+            // date parses "2025-05-20" to a date with timezone, but "2025/05/20" to a localdate
+            value = new Date((formItem.value as string).replaceAll("-", "/"));
           } else {
             value = null;
           }
