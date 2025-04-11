@@ -14,7 +14,9 @@ import { LocalStorage } from '@efaps/ngx-store';
 import { updatePrimaryPalette } from '@primeng/themes';
 import { KEYCLOAK_EVENT_SIGNAL, KeycloakEventType } from 'keycloak-angular';
 import Keycloak from 'keycloak-js';
+import localeEs from 'primelocale/es.json';
 import { MenuItem } from 'primeng/api';
+import { PrimeNG } from 'primeng/config';
 import { DialogService } from 'primeng/dynamicdialog';
 import { Menubar } from 'primeng/menubar';
 import { Popover } from 'primeng/popover';
@@ -41,8 +43,6 @@ import { SearchService } from './services/search.service';
 import { StyleService } from './services/style.service';
 import { UserService } from './services/user.service';
 import { CompanyChooserComponent } from './standalone/company-chooser/company-chooser.component';
-import { PrimeNG } from 'primeng/config';
-import { es } from "primelocale/es.json"
 
 @Component({
   selector: 'app-root',
@@ -52,7 +52,7 @@ import { es } from "primelocale/es.json"
   standalone: false,
 })
 export class AppComponent implements OnInit {
-  private readonly primeng: PrimeNG = inject(PrimeNG)
+  private readonly primeng: PrimeNG = inject(PrimeNG);
   private readonly keycloak = inject(Keycloak);
 
   title = 'eFaps-Angular-FE';
@@ -106,7 +106,7 @@ export class AppComponent implements OnInit {
     this.userService.getCurrentUser().subscribe({
       next: (user) => {
         this.user = user;
-        this.primeng.translation = es
+        this.primeng.translation = localeEs.es;
       },
     });
     var color = 'indigo';
