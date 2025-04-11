@@ -41,6 +41,8 @@ import { SearchService } from './services/search.service';
 import { StyleService } from './services/style.service';
 import { UserService } from './services/user.service';
 import { CompanyChooserComponent } from './standalone/company-chooser/company-chooser.component';
+import { PrimeNG } from 'primeng/config';
+import { es } from "primelocale/es.json"
 
 @Component({
   selector: 'app-root',
@@ -50,9 +52,10 @@ import { CompanyChooserComponent } from './standalone/company-chooser/company-ch
   standalone: false,
 })
 export class AppComponent implements OnInit {
-  title = 'eFaps-Angular-FE';
-
+  private readonly primeng: PrimeNG = inject(PrimeNG)
   private readonly keycloak = inject(Keycloak);
+
+  title = 'eFaps-Angular-FE';
 
   mainMenu: Signal<MenuEntry[] | undefined> = toSignal(
     this.menuService.getMainMenu()
@@ -103,6 +106,7 @@ export class AppComponent implements OnInit {
     this.userService.getCurrentUser().subscribe({
       next: (user) => {
         this.user = user;
+        this.primeng.translation = es
       },
     });
     var color = 'indigo';
