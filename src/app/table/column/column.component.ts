@@ -21,7 +21,7 @@ export class ColumnComponent {
 
   constructor(
     private router: Router,
-    private checkoutService: CheckoutService
+    private checkoutService: CheckoutService,
   ) {}
 
   isCheckout(): boolean {

@@ -1,3 +1,4 @@
+import { TableComponent } from './table.component';
 import {
   provideHttpClient,
   withInterceptorsFromDi,
@@ -12,8 +13,6 @@ import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
 import { InputTextModule } from 'primeng/inputtext';
 import { TableModule } from 'primeng/table';
 import { TieredMenuModule } from 'primeng/tieredmenu';
-
-import { TableComponent } from './table.component';
 
 describe('TableComponent', () => {
   let component: TableComponent;

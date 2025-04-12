@@ -6,14 +6,7 @@ import {
   withInterceptorsFromDi,
 } from '@angular/common/http';
 import localeEs from '@angular/common/locales/es';
-import {
-  APP_INITIALIZER,
-  LOCALE_ID,
-  NgModule,
-  Provider,
-  inject,
-  provideAppInitializer,
-} from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
@@ -26,19 +19,10 @@ import {
   provideKeycloak,
 } from 'keycloak-angular';
 import { MessageService } from 'primeng/api';
-import { BreadcrumbModule } from 'primeng/breadcrumb';
-import { ButtonModule } from 'primeng/button';
-import { providePrimeNG } from 'primeng/config';
-import { DividerModule } from 'primeng/divider';
-import { IconFieldModule } from 'primeng/iconfield';
-import { InputIconModule } from 'primeng/inputicon';
-import { InputTextModule } from 'primeng/inputtext';
-import { MenubarModule } from 'primeng/menubar';
+
 import { PopoverModule } from 'primeng/popover';
 import { ProgressBarModule } from 'primeng/progressbar';
 import { TableModule } from 'primeng/table';
-import { ToastModule } from 'primeng/toast';
-import { environment } from 'src/environments/environment';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -47,6 +31,17 @@ import { CompanyInterceptor } from './interceptors/company.interceptor';
 import { ErrorInterceptor } from './interceptors/error.interceptor';
 import { LoaderInterceptor } from './interceptors/loader.interceptor';
 import { ThemeChooserComponent } from './standalone/theme-chooser/theme-chooser.component';
+import { MenubarModule } from 'primeng/menubar';
+import { ToastModule } from 'primeng/toast';
+import { environment } from 'src/environments/environment';
+
+import { BreadcrumbModule } from 'primeng/breadcrumb';
+import { ButtonModule } from 'primeng/button';
+import { providePrimeNG } from 'primeng/config';
+import { DividerModule } from 'primeng/divider';
+import { IconFieldModule } from 'primeng/iconfield';
+import { InputIconModule } from 'primeng/inputicon';
+import { InputTextModule } from 'primeng/inputtext';
 
 registerLocaleData(localeEs, 'es');
 
@@ -80,7 +75,7 @@ registerLocaleData(localeEs, 'es');
     { provide: LOCALE_ID, useValue: 'es' },
     provideHttpClient(
       withInterceptorsFromDi(),
-      withInterceptors([includeBearerTokenInterceptor])
+      withInterceptors([includeBearerTokenInterceptor]),
     ),
     provideAnimationsAsync(),
     providePrimeNG({

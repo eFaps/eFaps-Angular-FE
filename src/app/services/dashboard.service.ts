@@ -12,7 +12,10 @@ import { UtilService } from './util.service';
 export class DashboardService {
   dashboard: Dashboard | undefined;
 
-  constructor(private http: HttpClient, private utilService: UtilService) {}
+  constructor(
+    private http: HttpClient,
+    private utilService: UtilService,
+  ) {}
 
   getDashboard(): Observable<Dashboard> {
     const url = `${this.utilService.evalApiUrl()}/ui/dashboard`;
@@ -43,7 +46,7 @@ export class DashboardService {
 
   updateItems(page: DashboardPage, items: GridsterItem[]) {
     const existingPage = this.dashboard?.pages.find(
-      (entry) => entry.key == page.key
+      (entry) => entry.key == page.key,
     );
     if (existingPage) {
       existingPage!!.items = items.map((item) => {
@@ -60,11 +63,11 @@ export class DashboardService {
 
   updateItem(page: DashboardPage, item: GridsterItem) {
     const existingPage = this.dashboard?.pages.find(
-      (entry) => entry.key == page.key
+      (entry) => entry.key == page.key,
     );
     if (existingPage) {
       const existingItem = existingPage!!.items.find(
-        (entry) => entry.widget?.identifier == item['widget'].identifier
+        (entry) => entry.widget?.identifier == item['widget'].identifier,
       );
       if (existingItem) {
         existingItem.x = item.x;

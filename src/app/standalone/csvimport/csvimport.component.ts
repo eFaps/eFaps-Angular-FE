@@ -45,7 +45,7 @@ export class CSVImportComponent {
     config: DynamicDialogConfig,
     private http: HttpClient,
     private dialogRef: DynamicDialogRef,
-    private utilService: UtilService
+    private utilService: UtilService,
   ) {
     config.maximizable = true;
     this.dialogData = config.data;

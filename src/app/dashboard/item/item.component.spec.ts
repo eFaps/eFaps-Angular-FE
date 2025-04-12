@@ -1,7 +1,6 @@
+import { ItemComponent } from './item.component';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { DialogService } from 'primeng/dynamicdialog';
-
-import { ItemComponent } from './item.component';
 
 describe('ItemComponent', () => {
   let component: ItemComponent;

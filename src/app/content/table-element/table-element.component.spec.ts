@@ -1,11 +1,10 @@
+import { TableElementComponent } from './table-element.component';
 import {
   provideHttpClient,
   withInterceptorsFromDi,
 } from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { TableElementComponent } from './table-element.component';
 
 describe('TableElementComponent', () => {
   let component: TableElementComponent;

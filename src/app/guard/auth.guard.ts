@@ -1,8 +1,7 @@
-import { Injectable, inject } from '@angular/core';
+import { inject } from '@angular/core';
 import {
   ActivatedRouteSnapshot,
   CanActivateFn,
-  Router,
   RouterStateSnapshot,
   UrlTree,
 } from '@angular/router';
@@ -12,7 +11,7 @@ import Keycloak from 'keycloak-js';
 const isAccessAllowed = async (
   route: ActivatedRouteSnapshot,
   state: RouterStateSnapshot,
-  authData: AuthGuardData
+  authData: AuthGuardData,
 ): Promise<boolean | UrlTree> => {
   const { authenticated } = authData;
 

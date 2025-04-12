@@ -31,7 +31,7 @@ export class SearchContentComponent implements OnInit {
     private valueService: ValueService,
     private searchService: SearchService,
     private execService: ExecService,
-    private messageService: MessageService
+    private messageService: MessageService,
   ) {
     config.closable = true;
     if (config.data.restore) {
@@ -59,7 +59,7 @@ export class SearchContentComponent implements OnInit {
       this.oid = config.data.oid;
       config.header = this.search.label;
       this.searchMenuItems = this.searches.map((search) =>
-        this.getMenuItem(search)
+        this.getMenuItem(search),
       );
       if (!this.isConnect) {
         config.maximizable = true;

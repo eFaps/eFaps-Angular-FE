@@ -1,3 +1,5 @@
+import { SectionsComponent } from '../sections/sections.component';
+import { FormContentComponent } from './form-content.component';
 import {
   provideHttpClient,
   withInterceptorsFromDi,
@@ -8,9 +10,6 @@ import { provideRouter } from '@angular/router';
 import { DialogService } from 'primeng/dynamicdialog';
 import { MenuModule } from 'primeng/menu';
 import { ToolbarModule } from 'primeng/toolbar';
-
-import { SectionsComponent } from '../sections/sections.component';
-import { FormContentComponent } from './form-content.component';
 
 describe('FormContentComponent', () => {
   let component: FormContentComponent;

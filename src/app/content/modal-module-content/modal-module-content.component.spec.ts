@@ -1,7 +1,6 @@
+import { ModalModuleContentComponent } from './modal-module-content.component';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { DynamicDialogConfig } from 'primeng/dynamicdialog';
-
-import { ModalModuleContentComponent } from './modal-module-content.component';
 
 describe('ModalModuleContentComponent', () => {
   let component: ModalModuleContentComponent;

@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 
 import { FieldCommandResponse } from '../model/field-command';
 import { UtilService } from './util.service';
@@ -20,7 +20,7 @@ export class FieldCommandService {
   constructor(
     private http: HttpClient,
     private utilService: UtilService,
-    private valueService: ValueService
+    private valueService: ValueService,
   ) {
     this.valueService.values.subscribe({
       next: (values) => (this.values = values),

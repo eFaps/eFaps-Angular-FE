@@ -1,5 +1,5 @@
 import { FormSection } from './content';
-import { Column, Table } from './table';
+import { Table } from './table';
 
 export interface Search {
   id: string;

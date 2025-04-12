@@ -10,7 +10,10 @@ import { UtilService } from './util.service';
   providedIn: 'root',
 })
 export class DownloadService {
-  constructor(private http: HttpClient, private utilService: UtilService) {}
+  constructor(
+    private http: HttpClient,
+    private utilService: UtilService,
+  ) {}
 
   execute(downloadKey: string): Observable<DownloadFile> {
     const url = `${this.utilService.evalApiUrl()}/ui/download/${downloadKey}`;
@@ -24,7 +27,7 @@ export class DownloadService {
             blob: resp.body!!,
             fileName: match == null ? 'file' : match[1],
           };
-        })
+        }),
       );
   }
 

@@ -10,7 +10,6 @@ import {
 import { ActivatedRoute, Router } from '@angular/router';
 import { ConfirmationService, MenuItem } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
-import { TabViewChangeEvent } from 'primeng/tabview';
 import { Subscription } from 'rxjs';
 import { Classification } from 'src/app/model/classification';
 import { Section, isOutline } from 'src/app/model/content';
@@ -58,7 +57,7 @@ export class ContentComponent implements OnInit, OnDestroy {
     private dialogService: DialogService,
     private contentService: ContentService,
     private execService: ExecService,
-    private styleService: StyleService
+    private styleService: StyleService,
   ) {
     effect(() => {
       this.hasBreadcrumbs = breadcrumbService.breadcrumbs().length > 0;
@@ -199,7 +198,7 @@ export class ContentComponent implements OnInit, OnDestroy {
                   uimodule: outline,
                   oid: this.oid,
                 },
-              }
+              },
             );
             dialogRef.onClose.subscribe({
               next: (execResponse) => {
@@ -248,7 +247,7 @@ export class ContentComponent implements OnInit, OnDestroy {
     if (element) {
       const observer = new ResizeObserver((_entries: ResizeObserverEntry[]) => {
         this.styleService.contentHeaderHeight.set(
-          element.nativeElement.offsetHeight
+          element.nativeElement.offsetHeight,
         );
       });
       observer.observe(element.nativeElement);
@@ -261,7 +260,7 @@ export class ContentComponent implements OnInit, OnDestroy {
     const menuBarHeight = Math.round(this.styleService.menuBarHeight());
     const breadcrumbHeight = Math.round(this.styleService.breadcrumbHeight());
     const contenHeaderHeight = Math.round(
-      this.styleService.contentHeaderHeight()
+      this.styleService.contentHeaderHeight(),
     );
 
     height = height - menuBarHeight - breadcrumbHeight - 2;

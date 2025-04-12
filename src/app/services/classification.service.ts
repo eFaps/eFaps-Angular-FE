@@ -13,7 +13,10 @@ export class ClassificationService {
   private currentValue = new BehaviorSubject<Classification[]>([]);
   classifications = this.currentValue.asObservable();
 
-  constructor(private http: HttpClient, private utilService: UtilService) {}
+  constructor(
+    private http: HttpClient,
+    private utilService: UtilService,
+  ) {}
 
   getClassifications(ids: string[]): Observable<Classification[]> {
     const url = `${this.utilService.evalApiUrl()}/ui/classification`;

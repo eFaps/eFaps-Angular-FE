@@ -1,11 +1,10 @@
-import { Component, EventEmitter, OnInit, effect } from '@angular/core';
+import { Component, EventEmitter, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import FileSaver from 'file-saver';
 import {
   ConfirmationService,
   FilterMetadata,
   MenuItem,
-  ScrollerOptions,
   TableState,
 } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
@@ -64,7 +63,7 @@ export class TableComponent implements OnInit {
     private execService: ExecService,
     private searchService: SearchService,
     private breadcrumbService: BreadcrumbService,
-    private styleService: StyleService
+    private styleService: StyleService,
   ) {}
 
   ngOnInit(): void {
@@ -76,7 +75,7 @@ export class TableComponent implements OnInit {
         this.storageKey = this.id!!;
         this.loadData();
         this.idEmitter.emit(this.id);
-      }
+      },
     );
   }
 
@@ -202,7 +201,7 @@ export class TableComponent implements OnInit {
                   uimodule: outline,
                   parentOid: this.oid,
                 },
-              }
+              },
             );
             dialogRef.onClose.subscribe({
               next: (execResponse) => {
@@ -329,7 +328,7 @@ export class TableComponent implements OnInit {
     const menuBarHeight = Math.round(this.styleService.menuBarHeight());
     const breadcrumbHeight = Math.round(this.styleService.breadcrumbHeight());
     const contenHeaderHeight = Math.round(
-      this.styleService.contentHeaderHeight()
+      this.styleService.contentHeaderHeight(),
     );
 
     const tableCaption = 78;

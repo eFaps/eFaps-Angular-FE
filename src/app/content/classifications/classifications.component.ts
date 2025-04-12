@@ -20,7 +20,7 @@ export class ClassificationsComponent implements OnInit {
   constructor(
     config: DynamicDialogConfig,
     private dialogRef: DynamicDialogRef,
-    private classificationService: ClassificationService
+    private classificationService: ClassificationService,
   ) {
     this.classUUIDs = config.data.classUUIDs;
   }
@@ -106,7 +106,7 @@ export class ClassificationsComponent implements OnInit {
     this.classificationService.setClassifications(
       this.selected.map((treeNode) => {
         return treeNode.data as Classification;
-      })
+      }),
     );
     this.dialogRef.close();
   }

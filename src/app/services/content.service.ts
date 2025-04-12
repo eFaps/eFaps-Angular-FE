@@ -10,7 +10,10 @@ import { UtilService } from './util.service';
   providedIn: 'root',
 })
 export class ContentService {
-  constructor(private http: HttpClient, private utilService: UtilService) {}
+  constructor(
+    private http: HttpClient,
+    private utilService: UtilService,
+  ) {}
 
   getContent(oid: string): Observable<Content | UIModule> {
     const url = `${this.utilService.evalApiUrl()}/ui/content/${oid}`;
@@ -19,7 +22,7 @@ export class ContentService {
 
   getContentWithCmd(
     oid: string,
-    cmdId: string
+    cmdId: string,
   ): Observable<Outline | UIModule> {
     const url = `${this.utilService.evalApiUrl()}/ui/content/${oid}/${cmdId}`;
     return this.http.get<Outline | UIModule>(url);

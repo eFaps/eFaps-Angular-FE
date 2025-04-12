@@ -1,6 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { AutoComplete } from 'primeng/autocomplete';
 import { Observable } from 'rxjs';
 
 import { FieldUpdateResponse } from '../model/field-update';
@@ -16,7 +15,7 @@ export class FieldUpdateService {
   constructor(
     private http: HttpClient,
     private utilService: UtilService,
-    private valueService: ValueService
+    private valueService: ValueService,
   ) {
     this.valueService.values.subscribe({
       next: (values) => (this.values = values),

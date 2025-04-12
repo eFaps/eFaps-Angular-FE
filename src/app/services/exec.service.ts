@@ -13,7 +13,7 @@ export class ExecService {
   constructor(
     private http: HttpClient,
     private downloadService: DownloadService,
-    private utilService: UtilService
+    private utilService: UtilService,
   ) {}
 
   exec(id: string, values?: Map<String, any>): Observable<ExecResponse> {
@@ -29,7 +29,7 @@ export class ExecService {
         if (execResponse.downloadKey != null) {
           this.downloadService.download(execResponse.downloadKey);
         }
-      })
+      }),
     );
   }
 }

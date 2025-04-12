@@ -5,7 +5,7 @@ import {
   ViewContainerRef,
   viewChild,
 } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { MenuItem } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
 import { combineLatest } from 'rxjs';
@@ -43,7 +43,7 @@ export class FormContentComponent implements OnInit, AfterViewInit {
     private route: ActivatedRoute,
     private dialogService: DialogService,
     private contentService: ContentService,
-    private dynamicComponentService: DynamicComponentService
+    private dynamicComponentService: DynamicComponentService,
   ) {
     valueService.reset();
   }
@@ -56,7 +56,7 @@ export class FormContentComponent implements OnInit, AfterViewInit {
         }
         this.id = parameters[1]['id'];
         this.loadData();
-      }
+      },
     );
   }
 

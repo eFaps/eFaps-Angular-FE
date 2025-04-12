@@ -1,3 +1,4 @@
+import { AppComponent } from './app.component';
 import {
   provideHttpClient,
   withInterceptorsFromDi,
@@ -11,8 +12,6 @@ import { MessageService } from 'primeng/api';
 import { MenubarModule } from 'primeng/menubar';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { ToastModule } from 'primeng/toast';
-
-import { AppComponent } from './app.component';
 
 describe('AppComponent', () => {
   beforeEach(() =>
@@ -32,7 +31,7 @@ describe('AppComponent', () => {
         provideHttpClientTesting(),
         { provide: KEYCLOAK_EVENT_SIGNAL, useValue: {} },
       ],
-    })
+    }),
   );
 
   it('should create the app', () => {

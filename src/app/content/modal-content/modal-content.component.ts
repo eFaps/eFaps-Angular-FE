@@ -28,7 +28,7 @@ export class ModalContentComponent implements OnInit {
 
   constructor(
     config: DynamicDialogConfig,
-    private dialogRef: DynamicDialogRef
+    private dialogRef: DynamicDialogRef,
   ) {
     this.valueService.reset();
     this.validationService.reset();
@@ -40,7 +40,7 @@ export class ModalContentComponent implements OnInit {
     config.closable = true;
     if (this.outline.classifications) {
       this.classificationService.setClassifications(
-        this.outline.classifications
+        this.outline.classifications,
       );
     }
     this.dialogRef.onClose.subscribe({

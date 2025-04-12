@@ -9,8 +9,7 @@ import { Router } from '@angular/router';
 import { ToastMessageOptions } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
 import { UploadEvent } from 'primeng/fileupload';
-import { FormItem } from 'src/app/model/content';
-import { Option } from 'src/app/model/content';
+import { FormItem, Option } from 'src/app/model/content';
 import { FieldCommandResponse } from 'src/app/model/field-command';
 import { AutoCompleteService } from 'src/app/services/auto-complete.service';
 import { DynamicComponentService } from 'src/app/services/dynamic-component.service';
@@ -65,7 +64,7 @@ export class FormElementComponent implements OnInit {
     private fieldUpdateService: FieldUpdateService,
     private fieldCommandService: FieldCommandService,
     private dynamicComponentService: DynamicComponentService,
-    private utilService: UtilService
+    private utilService: UtilService,
   ) {}
 
   ngOnInit(): void {

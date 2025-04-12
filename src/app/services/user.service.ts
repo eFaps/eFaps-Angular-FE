@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable, WritableSignal, effect, signal } from '@angular/core';
+import { Injectable, WritableSignal, signal } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable, Subscriber, catchError, map, of, throwError } from 'rxjs';
+import { Observable, catchError, map, of, throwError } from 'rxjs';
 
 import { Company, User } from '../model/user';
 import { UtilService } from './util.service';
@@ -15,7 +15,7 @@ export class UserService {
   constructor(
     private http: HttpClient,
     private router: Router,
-    private utilService: UtilService
+    private utilService: UtilService,
   ) {}
 
   getCurrentUser(sync?: boolean): Observable<User> {
@@ -32,7 +32,7 @@ export class UserService {
           return of();
         }
         return throwError(
-          () => new Error('Something bad happened; please try again later.')
+          () => new Error('Something bad happened; please try again later.'),
         );
       }),
       map((user) => {
@@ -45,7 +45,7 @@ export class UserService {
           this.company.set(undefined);
         }
         return user;
-      })
+      }),
     );
   }
 

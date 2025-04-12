@@ -9,7 +9,7 @@ export const routes: Routes = [
     canActivate: [canActivateAuth],
     loadChildren: () =>
       import('./structure-browser/structure-browser.module').then(
-        (m) => m.StructureBrowserModule
+        (m) => m.StructureBrowserModule,
       ),
   },
   {
@@ -34,7 +34,7 @@ export const routes: Routes = [
     path: 'first-time-user',
     loadComponent: () =>
       import('./standalone/first-time-user/first-time-user.component').then(
-        (mod) => mod.FirstTimeUserComponent
+        (mod) => mod.FirstTimeUserComponent,
       ),
   },
   {

@@ -9,7 +9,10 @@ import { UtilService } from './util.service';
   providedIn: 'root',
 })
 export class AutoCompleteService {
-  constructor(private http: HttpClient, private utilService: UtilService) {}
+  constructor(
+    private http: HttpClient,
+    private utilService: UtilService,
+  ) {}
 
   search(fieldId: string, query: string): Observable<AutoComplete> {
     const url = `${this.utilService.evalApiUrl()}/ui/autocomplete/${fieldId}`;

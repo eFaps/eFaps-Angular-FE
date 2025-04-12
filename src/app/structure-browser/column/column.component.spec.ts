@@ -1,8 +1,7 @@
+import { ColumnComponent } from './column.component';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
-
-import { ColumnComponent } from './column.component';
 
 describe('ColumnComponent', () => {
   let component: ColumnComponent;

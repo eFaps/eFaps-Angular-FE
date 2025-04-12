@@ -1,3 +1,4 @@
+import { FormElementComponent } from './form-element.component';
 import {
   provideHttpClient,
   withInterceptorsFromDi,
@@ -7,8 +8,6 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { DialogModule } from 'primeng/dialog';
 import { DialogService } from 'primeng/dynamicdialog';
 import { MessagesModule } from 'primeng/messages';
-
-import { FormElementComponent } from './form-element.component';
 
 describe('FormElementComponent', () => {
   let component: FormElementComponent;

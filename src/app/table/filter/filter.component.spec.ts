@@ -1,3 +1,4 @@
+import { FilterComponent } from './filter.component';
 import {
   provideHttpClient,
   withInterceptorsFromDi,
@@ -7,8 +8,6 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ButtonModule } from 'primeng/button';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { Observable } from 'rxjs';
-
-import { FilterComponent } from './filter.component';
 
 describe('FilterComponent', () => {
   let component: FilterComponent;

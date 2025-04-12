@@ -43,7 +43,7 @@ export class StructureBrowserComponent implements OnInit {
     private dialogService: DialogService,
     private tableService: TableService,
     private contentService: ContentService,
-    private execService: ExecService
+    private execService: ExecService,
   ) {
     this.loading = true;
   }
@@ -55,7 +55,7 @@ export class StructureBrowserComponent implements OnInit {
         this.oid = parameters[0]['oid'];
 
         this.loadData();
-      }
+      },
     );
   }
 
@@ -147,7 +147,7 @@ export class StructureBrowserComponent implements OnInit {
                   uimodule: outline,
                   parentOid: this.oid,
                 },
-              }
+              },
             );
             dialogRef.onClose.subscribe({
               next: (execResponse) => {
@@ -185,7 +185,7 @@ export class StructureBrowserComponent implements OnInit {
       const oids = (this.selectedElements as TreeTableNode<any>[]).map(
         (element) => {
           return element.data.OID;
-        }
+        },
       );
       map.set('eFapsSelectedOids', oids);
     }

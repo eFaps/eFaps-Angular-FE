@@ -9,7 +9,10 @@ import { UtilService } from './util.service';
   providedIn: 'root',
 })
 export class TableService {
-  constructor(private http: HttpClient, private utilService: UtilService) {}
+  constructor(
+    private http: HttpClient,
+    private utilService: UtilService,
+  ) {}
 
   getTable(id: string, oid?: string): Observable<Table> {
     const url = `${this.utilService.evalApiUrl()}/ui/table/${id}`;

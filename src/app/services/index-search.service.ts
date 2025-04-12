@@ -9,7 +9,10 @@ import { UtilService } from './util.service';
   providedIn: 'root',
 })
 export class IndexSearchService {
-  constructor(private http: HttpClient, private utilService: UtilService) {}
+  constructor(
+    private http: HttpClient,
+    private utilService: UtilService,
+  ) {}
 
   search(query: string): Observable<SearchResult> {
     const url = `${this.utilService.evalApiUrl()}/ui/index`;

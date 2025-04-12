@@ -1,3 +1,4 @@
+import { TableWidgetComponent } from './table-widget.component';
 import {
   provideHttpClient,
   withInterceptorsFromDi,
@@ -5,8 +6,6 @@ import {
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { TableModule } from 'primeng/table';
-
-import { TableWidgetComponent } from './table-widget.component';
 
 describe('TableWidgetComponent', () => {
   let component: TableWidgetComponent;

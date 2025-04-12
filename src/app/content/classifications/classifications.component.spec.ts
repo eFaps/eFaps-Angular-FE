@@ -1,3 +1,4 @@
+import { ClassificationsComponent } from './classifications.component';
 import {
   provideHttpClient,
   withInterceptorsFromDi,
@@ -7,8 +8,6 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ButtonModule } from 'primeng/button';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { TreeModule } from 'primeng/tree';
-
-import { ClassificationsComponent } from './classifications.component';
 
 describe('ClassificationsComponent', () => {
   let component: ClassificationsComponent;

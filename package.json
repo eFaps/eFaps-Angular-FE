@@ -56,18 +56,14 @@
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.0.0",
-    "prettier": "^2.8.8",
-    "prettier-plugin-import-sort": "^0.0.7",
+    "prettier": "^3.5.3",
+    "prettier-plugin-sort-imports": "^1.8.7",
     "typescript": "~5.6.3"
   },
-  "importSort": {
-    ".js, .jsx, .es6, .es": {
-      "parser": "babylon",
-      "style": "eslint"
-    },
-    ".ts, .tsx": {
-      "parser": "typescript",
-      "style": "module"
-    }
+  "prettier": {
+    "plugins": [
+      "prettier-plugin-sort-imports"
+    ],
+    "sortingMethod": "alphabetical"
   }
 }

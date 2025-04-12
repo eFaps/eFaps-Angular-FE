@@ -1,7 +1,6 @@
 import {
   AfterViewInit,
   Component,
-  OnInit,
   ViewContainerRef,
   viewChild,
 } from '@angular/core';
@@ -21,7 +20,7 @@ export class ModalModuleContentComponent implements AfterViewInit {
 
   constructor(
     private config: DynamicDialogConfig,
-    private dynamicComponentService: DynamicComponentService
+    private dynamicComponentService: DynamicComponentService,
   ) {}
 
   ngAfterViewInit(): void {
@@ -30,7 +29,7 @@ export class ModalModuleContentComponent implements AfterViewInit {
       this.dynamicComponentService.loadUIModule(
         this.vcr(),
         this.config.data.uimodule,
-        this.config.data
+        this.config.data,
       );
     }
   }

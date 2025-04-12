@@ -13,12 +13,15 @@ export class BreadcrumbService {
   breadcrumbs: WritableSignal<MenuItem[]> = signal([]);
   currentUrl: string = '';
 
-  constructor(private router: Router, private styleService: StyleService) {
+  constructor(
+    private router: Router,
+    private styleService: StyleService,
+  ) {
     this.router.events
       .pipe(
         filter((event) => {
           return event instanceof NavigationEnd;
-        })
+        }),
       )
       .subscribe((event) => {
         this.currentUrl = (event as NavigationEnd).urlAfterRedirects;

@@ -44,7 +44,7 @@ export class FilteredReportComponent implements OnInit {
   constructor(
     private http: HttpClient,
     private utilService: UtilService,
-    private downloadService: DownloadService
+    private downloadService: DownloadService,
   ) {
     this.formGroup = new FormGroup({});
   }
@@ -98,7 +98,7 @@ export class FilteredReportComponent implements OnInit {
           }
           this.formGroup?.addControl(
             formItem.name,
-            new FormControl<Date | null>(value, Validators.required)
+            new FormControl<Date | null>(value, Validators.required),
           );
           break;
         case 'PICKLIST':
@@ -170,7 +170,7 @@ export class FilteredReportComponent implements OnInit {
           return opt.value == entry;
         }) as Option;
         (this.pickListElements[formItem.name].target as Option[]).push(
-          selected
+          selected,
         );
         this.pickListElements[formItem.name].source = (
           this.pickListElements[formItem.name].source as Option[]
@@ -191,7 +191,7 @@ export class FilteredReportComponent implements OnInit {
       JSON.stringify({
         date: Date.now(),
         filters: this.filters,
-      })
+      }),
     );
   }
 

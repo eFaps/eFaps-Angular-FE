@@ -1,6 +1,5 @@
 import { Component, Input, OnInit, input } from '@angular/core';
-import { TableColumn } from 'src/app/model/content';
-import { Option } from 'src/app/model/content';
+import { Option, TableColumn } from 'src/app/model/content';
 import { AutoCompleteService } from 'src/app/services/auto-complete.service';
 import { FieldUpdateService } from 'src/app/services/field-update.service';
 import { ValueService } from 'src/app/services/value.service';
@@ -26,7 +25,7 @@ export class TableElementComponent implements OnInit {
   constructor(
     private autoCompleteService: AutoCompleteService,
     private fieldUpdateService: FieldUpdateService,
-    private valueService: ValueService
+    private valueService: ValueService,
   ) {}
 
   ngOnInit(): void {
@@ -67,7 +66,7 @@ export class TableElementComponent implements OnInit {
         name: this._column!!.field,
         value: value,
       },
-      this.index()
+      this.index(),
     );
   }
 

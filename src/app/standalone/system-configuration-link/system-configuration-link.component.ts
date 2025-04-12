@@ -51,7 +51,7 @@ export class SystemConfigurationLinkComponent implements OnInit {
     private dialogRef: DynamicDialogRef,
     private http: HttpClient,
     private utilService: UtilService,
-    private userService: UserService
+    private userService: UserService,
   ) {
     config.header = 'Edit SystemConfiguration Attribute';
   }

@@ -9,7 +9,10 @@ import { UserService } from 'src/app/services/user.service';
   styleUrl: './first-time-user.component.scss',
 })
 export class FirstTimeUserComponent implements OnInit {
-  constructor(private router: Router, private userService: UserService) {}
+  constructor(
+    private router: Router,
+    private userService: UserService,
+  ) {}
 
   ngOnInit(): void {
     this.userService.firstTimeUser().subscribe({

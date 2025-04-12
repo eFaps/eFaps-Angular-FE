@@ -11,7 +11,10 @@ import { UtilService } from './util.service';
 export class SearchService {
   private searchContent: any;
 
-  constructor(private http: HttpClient, private utilService: UtilService) {}
+  constructor(
+    private http: HttpClient,
+    private utilService: UtilService,
+  ) {}
 
   getSearch(cmdId: string): Observable<Search[]> {
     const url = `${this.utilService.evalApiUrl()}/ui/search/${cmdId}`;
@@ -20,7 +23,7 @@ export class SearchService {
 
   query(
     cmdId: string,
-    queryParams?: Map<String, any>
+    queryParams?: Map<String, any>,
   ): Observable<SearchResult> {
     const url = `${this.utilService.evalApiUrl()}/ui/search/${cmdId}/query`;
     const params: any =

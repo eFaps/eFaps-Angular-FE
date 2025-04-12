@@ -42,7 +42,7 @@ export class AttributeSetElementComponent {
           rowId: number;
           setName: string;
         }
-      | undefined
+      | undefined,
   ) {
     this._elementData = elementData;
     switch (this.elementData?.formItem.type) {

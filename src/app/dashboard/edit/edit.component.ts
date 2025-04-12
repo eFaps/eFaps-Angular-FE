@@ -28,7 +28,7 @@ export class EditComponent {
 
   constructor(
     config: DynamicDialogConfig,
-    private dialogRef: DynamicDialogRef
+    private dialogRef: DynamicDialogRef,
   ) {
     this.widget = config.data.widget;
     this.type = this.widget.type;

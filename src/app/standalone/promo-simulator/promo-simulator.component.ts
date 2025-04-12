@@ -66,7 +66,7 @@ export class PromoSimulatorComponent implements OnInit {
   constructor(
     private http: HttpClient,
     private confirmationService: ConfirmationService,
-    private utilService: UtilService
+    private utilService: UtilService,
   ) {}
 
   ngOnInit(): void {
@@ -109,7 +109,7 @@ export class PromoSimulatorComponent implements OnInit {
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
         this.items = this.items.filter(
-          (val) => !this.selectedItems?.includes(val)
+          (val) => !this.selectedItems?.includes(val),
         );
         this.selectedItems = [];
       },

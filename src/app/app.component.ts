@@ -58,11 +58,11 @@ export class AppComponent implements OnInit {
   title = 'eFaps-Angular-FE';
 
   mainMenu: Signal<MenuEntry[] | undefined> = toSignal(
-    this.menuService.getMainMenu()
+    this.menuService.getMainMenu(),
   );
   menuItems = computed(() => {
     return this.mainMenu()?.map((item) =>
-      toMenuItem(item, this.actionProvider)
+      toMenuItem(item, this.actionProvider),
     );
   });
 
@@ -90,7 +90,7 @@ export class AppComponent implements OnInit {
     private indexSearchService: IndexSearchService,
     private searchService: SearchService,
     private breadcrumbService: BreadcrumbService,
-    private styleService: StyleService
+    private styleService: StyleService,
   ) {
     console.log('app init');
     const keycloakSignal = inject(KEYCLOAK_EVENT_SIGNAL);
@@ -132,7 +132,7 @@ export class AppComponent implements OnInit {
     if (element) {
       const observer = new ResizeObserver((_entries: ResizeObserverEntry[]) => {
         this.styleService.menuBarHeight.set(
-          element.el.nativeElement.offsetHeight
+          element.el.nativeElement.offsetHeight,
         );
       });
       observer.observe(element.el.nativeElement.childNodes[0]);
@@ -143,7 +143,7 @@ export class AppComponent implements OnInit {
     if (element) {
       const observer = new ResizeObserver((_entries: ResizeObserverEntry[]) => {
         this.styleService.breadcrumbHeight.set(
-          element.nativeElement.offsetHeight
+          element.nativeElement.offsetHeight,
         );
       });
       observer.observe(element.nativeElement);
@@ -246,7 +246,7 @@ export class AppComponent implements OnInit {
                   item,
                   uimodule: outline,
                 },
-              }
+              },
             );
           }
         },

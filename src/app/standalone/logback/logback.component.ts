@@ -37,7 +37,7 @@ export class LogbackComponent implements OnInit {
     config: DynamicDialogConfig,
     private dialogRef: DynamicDialogRef,
     private http: HttpClient,
-    private utilService: UtilService
+    private utilService: UtilService,
   ) {
     config.header = 'Logger Configuration';
   }

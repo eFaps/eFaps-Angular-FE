@@ -16,7 +16,10 @@ export class TableSectionComponent {
   elements: any[] = [];
   editable = false;
 
-  constructor(private router: Router, private valueService: ValueService) {}
+  constructor(
+    private router: Router,
+    private valueService: ValueService,
+  ) {}
 
   @Input()
   set tableSection(tableSection: TableSection) {
@@ -60,7 +63,7 @@ export class TableSectionComponent {
       this.elements.length,
       this.cols.map((column) => {
         return column.field;
-      })
+      }),
     );
   }
 }

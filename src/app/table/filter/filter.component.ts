@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { Filter } from 'src/app/model/table';
 import { TableService } from 'src/app/services/table.service';
@@ -17,7 +17,7 @@ export class FilterComponent implements OnInit {
   constructor(
     private tableService: TableService,
     private config: DynamicDialogConfig,
-    private dialogRef: DynamicDialogRef
+    private dialogRef: DynamicDialogRef,
   ) {
     config.header = 'Filtrar';
   }

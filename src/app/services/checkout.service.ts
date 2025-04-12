@@ -9,7 +9,10 @@ import { UtilService } from './util.service';
   providedIn: 'root',
 })
 export class CheckoutService {
-  constructor(private http: HttpClient, private utilService: UtilService) {}
+  constructor(
+    private http: HttpClient,
+    private utilService: UtilService,
+  ) {}
 
   checkout(oid: string): Observable<DownloadFile> {
     const url = `${this.utilService.evalApiUrl()}/checkout`;
@@ -23,7 +26,7 @@ export class CheckoutService {
             blob: resp.body!!,
             fileName: match == null ? 'file' : match[1],
           };
-        })
+        }),
       );
   }
 }

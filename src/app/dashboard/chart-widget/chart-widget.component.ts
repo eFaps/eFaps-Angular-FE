@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { ChartWidget, DashboardWidget } from 'src/app/model/dashboard';
+import { ChartWidget } from 'src/app/model/dashboard';
 import { DashboardService } from 'src/app/services/dashboard.service';
 
 @Component({

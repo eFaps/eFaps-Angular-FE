@@ -18,7 +18,7 @@ export class CompanyChooserComponent implements OnInit {
 
   constructor(
     private userService: UserService,
-    private dialogRef: DynamicDialogRef
+    private dialogRef: DynamicDialogRef,
   ) {
     this.formGroup = new FormGroup({
       company: new FormControl<Company | undefined>(undefined),

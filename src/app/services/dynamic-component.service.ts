@@ -19,7 +19,7 @@ export class DynamicComponentService {
   loadUIModule(
     viewContainerRef: ViewContainerRef,
     uimodule: UIModule,
-    data: ModuleData
+    data: ModuleData,
   ) {
     switch (uimodule.key) {
       case 'SystemConfigurationAttribute':
@@ -27,7 +27,7 @@ export class DynamicComponentService {
           '../standalone/system-configuration-attribute/system-configuration-attribute.component'
         ).then((m) => {
           const ref = viewContainerRef.createComponent(
-            m.SystemConfigurationAttributeComponent
+            m.SystemConfigurationAttributeComponent,
           );
           ref.setInput('uimodule', uimodule);
           ref.setInput('data', data);
@@ -45,7 +45,7 @@ export class DynamicComponentService {
           '../standalone/system-configuration-link/system-configuration-link.component'
         ).then((m) => {
           const ref = viewContainerRef.createComponent(
-            m.SystemConfigurationLinkComponent
+            m.SystemConfigurationLinkComponent,
           );
           ref.setInput('uimodule', uimodule);
           ref.setInput('data', data);
@@ -62,22 +62,22 @@ export class DynamicComponentService {
         import('../standalone/promo-simulator/promo-simulator.component').then(
           (m) => {
             const ref = viewContainerRef.createComponent(
-              m.PromoSimulatorComponent
+              m.PromoSimulatorComponent,
             );
             ref.setInput('uimodule', uimodule);
             ref.setInput('data', data);
-          }
+          },
         );
         break;
       case 'FilteredReport':
         import('../standalone/filtered-report/filtered-report.component').then(
           (m) => {
             const ref = viewContainerRef.createComponent(
-              m.FilteredReportComponent
+              m.FilteredReportComponent,
             );
             ref.setInput('uimodule', uimodule);
             ref.setInput('data', data);
-          }
+          },
         );
         break;
     }
