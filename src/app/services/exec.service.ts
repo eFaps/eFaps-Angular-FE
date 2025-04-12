@@ -1,9 +1,10 @@
-import { ExecResponse } from '../model/exec';
-import { DownloadService } from './download.service';
-import { UtilService } from './util.service';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, tap } from 'rxjs';
+
+import { ExecResponse } from '../model/exec';
+import { DownloadService } from './download.service';
+import { UtilService } from './util.service';
 
 @Injectable({
   providedIn: 'root',

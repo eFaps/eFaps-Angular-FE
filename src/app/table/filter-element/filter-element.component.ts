@@ -1,4 +1,5 @@
 import { Component, Input, output } from '@angular/core';
+
 import { Option } from 'src/app/model/content';
 import { Filter } from 'src/app/model/table';
 

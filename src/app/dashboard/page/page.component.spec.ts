@@ -1,4 +1,3 @@
-import { PageComponent } from './page.component';
 import {
   provideHttpClient,
   withInterceptorsFromDi,
@@ -6,6 +5,8 @@ import {
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { GridsterModule } from 'angular-gridster2';
+
+import { PageComponent } from './page.component';
 
 describe('PageComponent', () => {
   let component: PageComponent;

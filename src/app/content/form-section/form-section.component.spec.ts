@@ -1,5 +1,6 @@
-import { FormSectionComponent } from './form-section.component';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+
+import { FormSectionComponent } from './form-section.component';
 
 describe('FormSectionComponent', () => {
   let component: FormSectionComponent;

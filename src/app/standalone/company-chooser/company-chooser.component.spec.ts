@@ -1,4 +1,3 @@
-import { CompanyChooserComponent } from './company-chooser.component';
 import {
   provideHttpClient,
   withInterceptorsFromDi,
@@ -6,6 +5,8 @@ import {
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
+
+import { CompanyChooserComponent } from './company-chooser.component';
 
 describe('CompanyChooserComponent', () => {
   let component: CompanyChooserComponent;

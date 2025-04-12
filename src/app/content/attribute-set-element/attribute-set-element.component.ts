@@ -1,4 +1,5 @@
 import { Component, Input, input } from '@angular/core';
+
 import { FormItem } from 'src/app/model/content';
 import { ValueService } from 'src/app/services/value.service';
 

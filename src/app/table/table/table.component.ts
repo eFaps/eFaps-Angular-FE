@@ -1,4 +1,3 @@
-import { FilterComponent } from '../filter/filter.component';
 import { Component, EventEmitter, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import FileSaver from 'file-saver';
@@ -11,6 +10,8 @@ import {
 import { DialogService } from 'primeng/dynamicdialog';
 import { PaginatorState } from 'primeng/paginator';
 import { combineLatest } from 'rxjs';
+
+import { FilterComponent } from '../filter/filter.component';
 import { ModalContentComponent } from 'src/app/content/modal-content/modal-content.component';
 import { ModalModuleContentComponent } from 'src/app/content/modal-module-content/modal-module-content.component';
 import { SearchContentComponent } from 'src/app/content/search-content/search-content.component';

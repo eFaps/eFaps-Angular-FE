@@ -1,6 +1,7 @@
-import { EditComponent } from '../edit/edit.component';
 import { Component, Input } from '@angular/core';
 import { DialogService } from 'primeng/dynamicdialog';
+
+import { EditComponent } from '../edit/edit.component';
 import {
   ChartWidget,
   DashboardWidget,

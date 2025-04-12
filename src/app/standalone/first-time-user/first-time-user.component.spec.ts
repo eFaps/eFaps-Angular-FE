@@ -1,10 +1,11 @@
-import { FirstTimeUserComponent } from './first-time-user.component';
 import {
   provideHttpClient,
   withInterceptorsFromDi,
 } from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+
+import { FirstTimeUserComponent } from './first-time-user.component';
 
 describe('FirstTimeUserComponent', () => {
   let component: FirstTimeUserComponent;

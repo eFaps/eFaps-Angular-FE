@@ -5,6 +5,7 @@ import {
   viewChild,
 } from '@angular/core';
 import { DynamicDialogConfig } from 'primeng/dynamicdialog';
+
 import { DynamicComponentService } from 'src/app/services/dynamic-component.service';
 
 @Component({

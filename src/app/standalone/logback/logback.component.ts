@@ -5,6 +5,7 @@ import { ButtonModule } from 'primeng/button';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { SelectModule } from 'primeng/select';
 import { TableEditCompleteEvent, TableModule } from 'primeng/table';
+
 import { ModuleData, UIModule } from 'src/app/model/module';
 import { UtilService } from 'src/app/services/util.service';
 

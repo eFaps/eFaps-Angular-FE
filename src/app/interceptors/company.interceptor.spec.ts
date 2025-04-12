@@ -1,10 +1,11 @@
-import { CompanyInterceptor } from './company.interceptor';
 import {
   provideHttpClient,
   withInterceptorsFromDi,
 } from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
+
+import { CompanyInterceptor } from './company.interceptor';
 
 describe('CompanyInterceptor', () => {
   beforeEach(() =>

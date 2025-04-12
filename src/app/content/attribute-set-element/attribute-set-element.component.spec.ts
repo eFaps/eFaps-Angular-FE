@@ -1,5 +1,6 @@
-import { AttributeSetElementComponent } from './attribute-set-element.component';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+
+import { AttributeSetElementComponent } from './attribute-set-element.component';
 import { ValueService } from 'src/app/services/value.service';
 
 describe('AttributeSetElementComponent', () => {

@@ -1,9 +1,10 @@
-import { FieldCommandResponse } from '../model/field-command';
-import { UtilService } from './util.service';
-import { ValueService } from './value.service';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+
+import { FieldCommandResponse } from '../model/field-command';
+import { UtilService } from './util.service';
+import { ValueService } from './value.service';
 
 @Injectable({
   providedIn: 'root',

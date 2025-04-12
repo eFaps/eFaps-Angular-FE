@@ -1,5 +1,6 @@
-import { LoaderInterceptor } from './loader.interceptor';
 import { TestBed } from '@angular/core/testing';
+
+import { LoaderInterceptor } from './loader.interceptor';
 
 describe('LoaderInterceptor', () => {
   beforeEach(() =>

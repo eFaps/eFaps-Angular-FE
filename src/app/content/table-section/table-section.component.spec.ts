@@ -1,6 +1,7 @@
-import { TableSectionComponent } from './table-section.component';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { TableModule } from 'primeng/table';
+
+import { TableSectionComponent } from './table-section.component';
 
 describe('TableSectionComponent', () => {
   let component: TableSectionComponent;

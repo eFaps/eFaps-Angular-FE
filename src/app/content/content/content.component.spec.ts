@@ -1,5 +1,3 @@
-import { SectionsComponent } from '../sections/sections.component';
-import { ContentComponent } from './content.component';
 import {
   provideHttpClient,
   withInterceptorsFromDi,
@@ -14,6 +12,9 @@ import { ScrollPanelModule } from 'primeng/scrollpanel';
 import { TabsModule } from 'primeng/tabs';
 import { TieredMenuModule } from 'primeng/tieredmenu';
 import { ToolbarModule } from 'primeng/toolbar';
+
+import { SectionsComponent } from '../sections/sections.component';
+import { ContentComponent } from './content.component';
 
 describe('ContentComponent', () => {
   let component: ContentComponent;

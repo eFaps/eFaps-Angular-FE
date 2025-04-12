@@ -1,9 +1,10 @@
-import { FieldUpdateResponse } from '../model/field-update';
-import { UtilService } from './util.service';
-import { ValueService } from './value.service';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+
+import { FieldUpdateResponse } from '../model/field-update';
+import { UtilService } from './util.service';
+import { ValueService } from './value.service';
 
 @Injectable({
   providedIn: 'root',

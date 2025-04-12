@@ -1,8 +1,9 @@
-import { AutoComplete } from '../model/auto-complete';
-import { UtilService } from './util.service';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+
+import { AutoComplete } from '../model/auto-complete';
+import { UtilService } from './util.service';
 
 @Injectable({
   providedIn: 'root',

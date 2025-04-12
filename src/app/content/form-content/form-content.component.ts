@@ -1,4 +1,3 @@
-import { ModalContentComponent } from '../modal-content/modal-content.component';
 import {
   AfterViewInit,
   Component,
@@ -10,6 +9,8 @@ import { ActivatedRoute } from '@angular/router';
 import { MenuItem } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
 import { combineLatest } from 'rxjs';
+
+import { ModalContentComponent } from '../modal-content/modal-content.component';
 import { Outline, Section, isOutline } from 'src/app/model/content';
 import { MenuEntry } from 'src/app/model/menu';
 import { UIModule } from 'src/app/model/module';

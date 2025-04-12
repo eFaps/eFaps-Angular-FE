@@ -1,10 +1,11 @@
-import { PromoSimulatorComponent } from './promo-simulator.component';
 import {
   provideHttpClient,
   withInterceptorsFromDi,
 } from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+
+import { PromoSimulatorComponent } from './promo-simulator.component';
 
 describe('PromoSimulatorComponent', () => {
   let component: PromoSimulatorComponent;

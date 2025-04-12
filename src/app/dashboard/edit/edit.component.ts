@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
+
 import { ChartWidget, DashboardWidget } from 'src/app/model/dashboard';
 
 @Component({

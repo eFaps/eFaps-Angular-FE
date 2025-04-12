@@ -1,6 +1,3 @@
-import { FormContentComponent } from '../form-content/form-content.component';
-import { ModalContentComponent } from '../modal-content/modal-content.component';
-import { ModalModuleContentComponent } from '../modal-module-content/modal-module-content.component';
 import {
   ChangeDetectorRef,
   Component,
@@ -14,6 +11,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ConfirmationService, MenuItem } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
 import { Subscription } from 'rxjs';
+
+import { FormContentComponent } from '../form-content/form-content.component';
+import { ModalContentComponent } from '../modal-content/modal-content.component';
+import { ModalModuleContentComponent } from '../modal-module-content/modal-module-content.component';
 import { Classification } from 'src/app/model/classification';
 import { Section, isOutline } from 'src/app/model/content';
 import { MenuEntry } from 'src/app/model/menu';

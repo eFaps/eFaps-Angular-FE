@@ -1,5 +1,6 @@
-import { EQLResponseComponent } from './eqlresponse.component';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+
+import { EQLResponseComponent } from './eqlresponse.component';
 
 describe('EQLResponseComponent', () => {
   let component: EQLResponseComponent;

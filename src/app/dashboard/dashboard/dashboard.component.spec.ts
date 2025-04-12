@@ -1,4 +1,3 @@
-import { DashboardComponent } from './dashboard.component';
 import {
   provideHttpClient,
   withInterceptorsFromDi,
@@ -8,6 +7,8 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
 import { ButtonModule } from 'primeng/button';
 import { StepsModule } from 'primeng/steps';
+
+import { DashboardComponent } from './dashboard.component';
 
 describe('DashboardComponent', () => {
   let component: DashboardComponent;

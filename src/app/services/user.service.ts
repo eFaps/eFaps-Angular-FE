@@ -1,9 +1,10 @@
-import { Company, User } from '../model/user';
-import { UtilService } from './util.service';
 import { HttpClient } from '@angular/common/http';
 import { Injectable, WritableSignal, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, catchError, map, of, throwError } from 'rxjs';
+
+import { Company, User } from '../model/user';
+import { UtilService } from './util.service';
 
 @Injectable({
   providedIn: 'root',

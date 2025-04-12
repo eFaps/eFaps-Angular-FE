@@ -1,8 +1,9 @@
-import { StyleService } from './style.service';
 import { Injectable, WritableSignal, signal } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { MenuItem, MenuItemCommandEvent } from 'primeng/api';
 import { filter } from 'rxjs';
+
+import { StyleService } from './style.service';
 
 @Injectable({
   providedIn: 'root',

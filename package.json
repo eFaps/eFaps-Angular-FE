@@ -65,6 +65,12 @@
       "prettier-plugin-sort-imports"
     ],
     "sortingMethod": "alphabetical",
-    "stripNewlines": true
+    "stripNewlines": true,
+    "newlineBetweenTypes": true,
+    "importTypeOrder": [
+      "NPMPackages",
+      "localImportsValue",
+      "localImportsType"
+    ]
   }
 }

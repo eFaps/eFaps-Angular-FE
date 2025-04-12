@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
+
 import { TableSection } from 'src/app/model/content';
 import { Column } from 'src/app/model/table';
 import { ValueService } from 'src/app/services/value.service';

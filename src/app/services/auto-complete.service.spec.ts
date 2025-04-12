@@ -1,10 +1,11 @@
-import { AutoCompleteService } from './auto-complete.service';
 import {
   provideHttpClient,
   withInterceptorsFromDi,
 } from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
+
+import { AutoCompleteService } from './auto-complete.service';
 
 describe('AutoCompleteService', () => {
   let service: AutoCompleteService;

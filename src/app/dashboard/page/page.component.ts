@@ -6,9 +6,10 @@ import {
   GridsterConfig,
   GridsterItem,
 } from 'angular-gridster2';
+import { v4 as uuidv4 } from 'uuid';
+
 import { DashboardPage } from 'src/app/model/dashboard';
 import { DashboardService } from 'src/app/services/dashboard.service';
-import { v4 as uuidv4 } from 'uuid';
 
 @Component({
   selector: 'app-page',

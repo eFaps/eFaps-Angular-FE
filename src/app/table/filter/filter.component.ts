@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
+
 import { Filter } from 'src/app/model/table';
 import { TableService } from 'src/app/services/table.service';
 

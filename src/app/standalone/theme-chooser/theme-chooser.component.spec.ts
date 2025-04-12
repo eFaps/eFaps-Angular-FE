@@ -1,5 +1,6 @@
-import { ThemeChooserComponent } from './theme-chooser.component';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+
+import { ThemeChooserComponent } from './theme-chooser.component';
 
 describe('ThemeChooserComponent', () => {
   let component: ThemeChooserComponent;

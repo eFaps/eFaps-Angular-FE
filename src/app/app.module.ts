@@ -1,10 +1,3 @@
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { RoutePathReuseStrategy } from './init/route-path-reuse-strategy';
-import { CompanyInterceptor } from './interceptors/company.interceptor';
-import { ErrorInterceptor } from './interceptors/error.interceptor';
-import { LoaderInterceptor } from './interceptors/loader.interceptor';
-import { ThemeChooserComponent } from './standalone/theme-chooser/theme-chooser.component';
 import { registerLocaleData } from '@angular/common';
 import {
   HTTP_INTERCEPTORS,
@@ -38,6 +31,14 @@ import { PopoverModule } from 'primeng/popover';
 import { ProgressBarModule } from 'primeng/progressbar';
 import { TableModule } from 'primeng/table';
 import { ToastModule } from 'primeng/toast';
+
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { RoutePathReuseStrategy } from './init/route-path-reuse-strategy';
+import { CompanyInterceptor } from './interceptors/company.interceptor';
+import { ErrorInterceptor } from './interceptors/error.interceptor';
+import { LoaderInterceptor } from './interceptors/loader.interceptor';
+import { ThemeChooserComponent } from './standalone/theme-chooser/theme-chooser.component';
 import { environment } from 'src/environments/environment';
 
 registerLocaleData(localeEs, 'es');

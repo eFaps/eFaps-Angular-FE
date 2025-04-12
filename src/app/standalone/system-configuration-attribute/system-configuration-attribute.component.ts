@@ -12,6 +12,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { SelectModule } from 'primeng/select';
 import { TextareaModule } from 'primeng/textarea';
 import { ToggleButtonModule } from 'primeng/togglebutton';
+
 import { ModuleData, UIModule } from 'src/app/model/module';
 import { Company } from 'src/app/model/user';
 import { UserService } from 'src/app/services/user.service';

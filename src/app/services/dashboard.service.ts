@@ -1,9 +1,10 @@
-import { Dashboard, DashboardPage } from '../model/dashboard';
-import { UtilService } from './util.service';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { GridsterItem } from 'angular-gridster2';
 import { Observable, tap } from 'rxjs';
+
+import { Dashboard, DashboardPage } from '../model/dashboard';
+import { UtilService } from './util.service';
 
 @Injectable({
   providedIn: 'root',

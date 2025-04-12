@@ -1,10 +1,11 @@
-import { FieldUpdateService } from './field-update.service';
 import {
   provideHttpClient,
   withInterceptorsFromDi,
 } from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
+
+import { FieldUpdateService } from './field-update.service';
 
 describe('FieldUpdateService', () => {
   let service: FieldUpdateService;

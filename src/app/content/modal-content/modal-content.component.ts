@@ -1,5 +1,6 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
+
 import { Classification } from 'src/app/model/classification';
 import { Outline, Section } from 'src/app/model/content';
 import { MenuEntry } from 'src/app/model/menu';

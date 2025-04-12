@@ -1,4 +1,5 @@
 import { Component, Input, OnInit, input } from '@angular/core';
+
 import { Option, TableColumn } from 'src/app/model/content';
 import { AutoCompleteService } from 'src/app/services/auto-complete.service';
 import { FieldUpdateService } from 'src/app/services/field-update.service';

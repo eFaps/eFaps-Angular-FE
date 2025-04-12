@@ -12,6 +12,7 @@ import {
 import { MessagesModule } from 'primeng/messages';
 import { ScrollPanelModule } from 'primeng/scrollpanel';
 import { TableModule } from 'primeng/table';
+
 import { ModuleData, UIModule } from 'src/app/model/module';
 import { UtilService } from 'src/app/services/util.service';
 

@@ -1,4 +1,3 @@
-import { ClassificationsComponent } from '../classifications/classifications.component';
 import {
   Component,
   Input,
@@ -10,6 +9,8 @@ import { Router } from '@angular/router';
 import { ToastMessageOptions } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
 import { UploadEvent } from 'primeng/fileupload';
+
+import { ClassificationsComponent } from '../classifications/classifications.component';
 import { FormItem, Option } from 'src/app/model/content';
 import { FieldCommandResponse } from 'src/app/model/field-command';
 import { AutoCompleteService } from 'src/app/services/auto-complete.service';

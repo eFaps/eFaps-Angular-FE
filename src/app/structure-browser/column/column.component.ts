@@ -1,5 +1,6 @@
 import { Component, ElementRef, Input, viewChild } from '@angular/core';
 import { Router } from '@angular/router';
+
 import { Column } from 'src/app/model/table';
 
 @Component({

@@ -1,9 +1,10 @@
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+
 import { canActivateAuth } from '../guard/auth.guard';
 import { TableComponent } from '../table/table/table.component';
 import { ContentComponent } from './content/content.component';
 import { FormContentComponent } from './form-content/form-content.component';
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {

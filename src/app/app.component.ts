@@ -1,24 +1,3 @@
-import { ModalContentComponent } from './content/modal-content/modal-content.component';
-import { ModalModuleContentComponent } from './content/modal-module-content/modal-module-content.component';
-import { SearchContentComponent } from './content/search-content/search-content.component';
-import { isOutline } from './model/content';
-import { ResultElement, SearchResult } from './model/index-search';
-import { MenuEntry } from './model/menu';
-import { Company, User } from './model/user';
-import { BreadcrumbService } from './services/breadcrumb.service';
-import { ContentService } from './services/content.service';
-import { ExecService } from './services/exec.service';
-import { IndexSearchService } from './services/index-search.service';
-import { LoaderService } from './services/loader.service';
-import {
-  MenuActionProvider,
-  MenuService,
-  toMenuItem,
-} from './services/menu.service';
-import { SearchService } from './services/search.service';
-import { StyleService } from './services/style.service';
-import { UserService } from './services/user.service';
-import { CompanyChooserComponent } from './standalone/company-chooser/company-chooser.component';
 import {
   Component,
   ElementRef,
@@ -41,6 +20,28 @@ import { PrimeNG } from 'primeng/config';
 import { DialogService } from 'primeng/dynamicdialog';
 import { Menubar } from 'primeng/menubar';
 import { Popover } from 'primeng/popover';
+
+import { ModalContentComponent } from './content/modal-content/modal-content.component';
+import { ModalModuleContentComponent } from './content/modal-module-content/modal-module-content.component';
+import { SearchContentComponent } from './content/search-content/search-content.component';
+import { isOutline } from './model/content';
+import { ResultElement, SearchResult } from './model/index-search';
+import { MenuEntry } from './model/menu';
+import { Company, User } from './model/user';
+import { BreadcrumbService } from './services/breadcrumb.service';
+import { ContentService } from './services/content.service';
+import { ExecService } from './services/exec.service';
+import { IndexSearchService } from './services/index-search.service';
+import { LoaderService } from './services/loader.service';
+import {
+  MenuActionProvider,
+  MenuService,
+  toMenuItem,
+} from './services/menu.service';
+import { SearchService } from './services/search.service';
+import { StyleService } from './services/style.service';
+import { UserService } from './services/user.service';
+import { CompanyChooserComponent } from './standalone/company-chooser/company-chooser.component';
 import { environment } from 'src/environments/environment';
 
 @Component({

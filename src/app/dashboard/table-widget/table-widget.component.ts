@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+
 import { TableWidget } from 'src/app/model/dashboard';
 import { DashboardService } from 'src/app/services/dashboard.service';
 

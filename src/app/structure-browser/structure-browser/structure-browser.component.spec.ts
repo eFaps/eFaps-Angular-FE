@@ -1,4 +1,3 @@
-import { StructureBrowserComponent } from './structure-browser.component';
 import {
   provideHttpClient,
   withInterceptorsFromDi,
@@ -11,6 +10,8 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { DialogService } from 'primeng/dynamicdialog';
 import { MenuModule } from 'primeng/menu';
 import { TreeTableModule } from 'primeng/treetable';
+
+import { StructureBrowserComponent } from './structure-browser.component';
 
 describe('StructureBrowserComponent', () => {
   let component: StructureBrowserComponent;

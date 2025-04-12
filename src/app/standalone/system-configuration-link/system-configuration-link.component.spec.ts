@@ -1,4 +1,3 @@
-import { SystemConfigurationLinkComponent } from './system-configuration-link.component';
 import {
   provideHttpClient,
   withInterceptorsFromDi,
@@ -6,6 +5,8 @@ import {
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
+
+import { SystemConfigurationLinkComponent } from './system-configuration-link.component';
 
 describe('SystemConfigurationLinkComponent', () => {
   let component: SystemConfigurationLinkComponent;
