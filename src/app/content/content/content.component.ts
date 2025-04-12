@@ -1,3 +1,6 @@
+import { FormContentComponent } from '../form-content/form-content.component';
+import { ModalContentComponent } from '../modal-content/modal-content.component';
+import { ModalModuleContentComponent } from '../modal-module-content/modal-module-content.component';
 import {
   ChangeDetectorRef,
   Component,
@@ -20,10 +23,6 @@ import { ExecService } from 'src/app/services/exec.service';
 import { MenuActionProvider, toMenuItems } from 'src/app/services/menu.service';
 import { StyleService } from 'src/app/services/style.service';
 import { TableComponent } from 'src/app/table/table/table.component';
-
-import { FormContentComponent } from '../form-content/form-content.component';
-import { ModalContentComponent } from '../modal-content/modal-content.component';
-import { ModalModuleContentComponent } from '../modal-module-content/modal-module-content.component';
 
 @Component({
   selector: 'app-content',

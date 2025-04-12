@@ -1,3 +1,4 @@
+import { ModalContentComponent } from '../modal-content/modal-content.component';
 import {
   AfterViewInit,
   Component,
@@ -16,8 +17,6 @@ import { ContentService } from 'src/app/services/content.service';
 import { DynamicComponentService } from 'src/app/services/dynamic-component.service';
 import { MenuActionProvider, toMenuItems } from 'src/app/services/menu.service';
 import { ValueService } from 'src/app/services/value.service';
-
-import { ModalContentComponent } from '../modal-content/modal-content.component';
 
 @Component({
   selector: 'app-form-content',

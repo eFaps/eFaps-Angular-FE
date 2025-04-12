@@ -1,7 +1,6 @@
-import { Injectable, ViewContainerRef } from '@angular/core';
-
 import { FieldCommandResponse } from '../model/field-command';
 import { ModuleData, UIModule } from '../model/module';
+import { Injectable, ViewContainerRef } from '@angular/core';
 
 @Injectable({
   providedIn: 'root',

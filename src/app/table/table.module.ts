@@ -1,3 +1,8 @@
+import { ColumnComponent } from './column/column.component';
+import { FilterElementComponent } from './filter-element/filter-element.component';
+import { FilterComponent } from './filter/filter.component';
+import { TableRoutingModule } from './table-routing.module';
+import { TableComponent } from './table/table.component';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -16,12 +21,6 @@ import { PaginatorModule } from 'primeng/paginator';
 import { TableModule as primeTableModule } from 'primeng/table';
 import { TieredMenuModule } from 'primeng/tieredmenu';
 import { TooltipModule } from 'primeng/tooltip';
-
-import { ColumnComponent } from './column/column.component';
-import { FilterElementComponent } from './filter-element/filter-element.component';
-import { FilterComponent } from './filter/filter.component';
-import { TableRoutingModule } from './table-routing.module';
-import { TableComponent } from './table/table.component';
 
 @NgModule({
   declarations: [

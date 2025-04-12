@@ -1,3 +1,5 @@
+import { Company } from '../model/user';
+import { UserService } from '../services/user.service';
 import {
   HttpEvent,
   HttpHandler,
@@ -7,9 +9,6 @@ import {
 import { Injectable, effect } from '@angular/core';
 import { LocalStorage } from '@efaps/ngx-store';
 import { Observable } from 'rxjs';
-
-import { Company } from '../model/user';
-import { UserService } from '../services/user.service';
 
 @Injectable()
 export class CompanyInterceptor implements HttpInterceptor {

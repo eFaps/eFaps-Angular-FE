@@ -1,9 +1,8 @@
+import { DownloadFile } from '../model/download';
+import { UtilService } from './util.service';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
-
-import { DownloadFile } from '../model/download';
-import { UtilService } from './util.service';
 
 @Injectable({
   providedIn: 'root',

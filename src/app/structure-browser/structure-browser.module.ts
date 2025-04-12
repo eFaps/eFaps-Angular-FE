@@ -1,3 +1,6 @@
+import { ColumnComponent } from './column/column.component';
+import { StructureBrowserRoutingModule } from './structure-browser-routing.module';
+import { StructureBrowserComponent } from './structure-browser/structure-browser.component';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -7,10 +10,6 @@ import { MenuModule } from 'primeng/menu';
 import { MenubarModule } from 'primeng/menubar';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { TreeTableModule } from 'primeng/treetable';
-
-import { ColumnComponent } from './column/column.component';
-import { StructureBrowserRoutingModule } from './structure-browser-routing.module';
-import { StructureBrowserComponent } from './structure-browser/structure-browser.component';
 
 @NgModule({
   declarations: [StructureBrowserComponent, ColumnComponent],

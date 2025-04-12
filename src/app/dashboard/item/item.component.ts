@@ -1,3 +1,4 @@
+import { EditComponent } from '../edit/edit.component';
 import { Component, Input } from '@angular/core';
 import { DialogService } from 'primeng/dynamicdialog';
 import {
@@ -5,8 +6,6 @@ import {
   DashboardWidget,
   TableWidget,
 } from 'src/app/model/dashboard';
-
-import { EditComponent } from '../edit/edit.component';
 
 @Component({
   selector: 'app-item',

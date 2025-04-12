@@ -1,3 +1,4 @@
+import { FilterComponent } from '../filter/filter.component';
 import { Component, EventEmitter, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import FileSaver from 'file-saver';
@@ -23,8 +24,6 @@ import { MenuActionProvider, toMenuItems } from 'src/app/services/menu.service';
 import { SearchService } from 'src/app/services/search.service';
 import { StyleService } from 'src/app/services/style.service';
 import { TableService } from 'src/app/services/table.service';
-
-import { FilterComponent } from '../filter/filter.component';
 
 @Component({
   selector: 'app-table',

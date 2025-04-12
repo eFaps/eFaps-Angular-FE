@@ -1,3 +1,4 @@
+import { ClassificationsComponent } from '../classifications/classifications.component';
 import {
   Component,
   Input,
@@ -18,8 +19,6 @@ import { FieldUpdateService } from 'src/app/services/field-update.service';
 import { UtilService } from 'src/app/services/util.service';
 import { ValidationService } from 'src/app/services/validation.service';
 import { ValueService } from 'src/app/services/value.service';
-
-import { ClassificationsComponent } from '../classifications/classifications.component';
 
 @Component({
   selector: 'app-form-element',

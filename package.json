@@ -64,6 +64,7 @@
     "plugins": [
       "prettier-plugin-sort-imports"
     ],
-    "sortingMethod": "alphabetical"
+    "sortingMethod": "alphabetical",
+    "stripNewlines": true
   }
 }

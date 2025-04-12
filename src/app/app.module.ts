@@ -1,3 +1,10 @@
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { RoutePathReuseStrategy } from './init/route-path-reuse-strategy';
+import { CompanyInterceptor } from './interceptors/company.interceptor';
+import { ErrorInterceptor } from './interceptors/error.interceptor';
+import { LoaderInterceptor } from './interceptors/loader.interceptor';
+import { ThemeChooserComponent } from './standalone/theme-chooser/theme-chooser.component';
 import { registerLocaleData } from '@angular/common';
 import {
   HTTP_INTERCEPTORS,
@@ -19,22 +26,6 @@ import {
   provideKeycloak,
 } from 'keycloak-angular';
 import { MessageService } from 'primeng/api';
-
-import { PopoverModule } from 'primeng/popover';
-import { ProgressBarModule } from 'primeng/progressbar';
-import { TableModule } from 'primeng/table';
-
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { RoutePathReuseStrategy } from './init/route-path-reuse-strategy';
-import { CompanyInterceptor } from './interceptors/company.interceptor';
-import { ErrorInterceptor } from './interceptors/error.interceptor';
-import { LoaderInterceptor } from './interceptors/loader.interceptor';
-import { ThemeChooserComponent } from './standalone/theme-chooser/theme-chooser.component';
-import { MenubarModule } from 'primeng/menubar';
-import { ToastModule } from 'primeng/toast';
-import { environment } from 'src/environments/environment';
-
 import { BreadcrumbModule } from 'primeng/breadcrumb';
 import { ButtonModule } from 'primeng/button';
 import { providePrimeNG } from 'primeng/config';
@@ -42,6 +33,12 @@ import { DividerModule } from 'primeng/divider';
 import { IconFieldModule } from 'primeng/iconfield';
 import { InputIconModule } from 'primeng/inputicon';
 import { InputTextModule } from 'primeng/inputtext';
+import { MenubarModule } from 'primeng/menubar';
+import { PopoverModule } from 'primeng/popover';
+import { ProgressBarModule } from 'primeng/progressbar';
+import { TableModule } from 'primeng/table';
+import { ToastModule } from 'primeng/toast';
+import { environment } from 'src/environments/environment';
 
 registerLocaleData(localeEs, 'es');
 
