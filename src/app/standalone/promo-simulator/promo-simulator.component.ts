@@ -11,6 +11,7 @@ import { DialogModule } from 'primeng/dialog';
 import { FloatLabelModule } from 'primeng/floatlabel';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { ListboxModule } from 'primeng/listbox';
+import { SelectModule } from 'primeng/select';
 import { TableModule } from 'primeng/table';
 import {
   ToggleSwitchChangeEvent,
@@ -37,6 +38,7 @@ import { UtilService } from 'src/app/services/util.service';
     FloatLabelModule,
     ToggleSwitchModule,
     ListboxModule,
+    SelectModule
   ],
   templateUrl: './promo-simulator.component.html',
   styleUrl: './promo-simulator.component.scss',
@@ -62,7 +64,12 @@ export class PromoSimulatorComponent implements OnInit {
   selectedPromotions: string[] | undefined;
   promotionsChecked: boolean = false;
 
+  backends: POSBackend[] = [];
+  selectedBackend: POSBackend | undefined;
+  backendsChecked: boolean = false;
+
   expandedRows = {};
+  
 
   constructor(
     private http: HttpClient,
@@ -75,6 +82,17 @@ export class PromoSimulatorComponent implements OnInit {
     this.http.get<any>(url).subscribe({
       next: (promotions) => {
         this.promotions = promotions;
+      },
+    });
+
+    const url2 = `${this.utilService.evalApiUrl()}/ui/modules/promo-simulator/pos-backends`;
+    this.http.get<POSBackend[]>(url2).subscribe({
+      next: (backends) => {
+        if (backends) {
+          this.backends = backends;
+        } else {
+          this.backends = [];
+        }
       },
     });
   }
@@ -161,19 +179,21 @@ export class PromoSimulatorComponent implements OnInit {
       });
       i++;
     });
+    if (positions.length > 0) {
+      const body = {
+        items: positions,
+        date: this.date,
+        promotionOids: this.selectedPromotions,
+        posBackendOid: this.selectedBackend?.oid
+      };
 
-    const body = {
-      items: positions,
-      date: this.date,
-      promotionOids: this.selectedPromotions,
-    };
-
-    this.http.post<any>(url, body).subscribe({
-      next: (result) => {
-        this.calcResponse = result;
-        this.mapResponse();
-      },
-    });
+      this.http.post<any>(url, body).subscribe({
+        next: (result) => {
+          this.calcResponse = result;
+          this.mapResponse();
+        },
+      });
+    }
   }
 
   mapResponse() {
@@ -229,6 +249,11 @@ export class PromoSimulatorComponent implements OnInit {
   togglePromotions(_event: ToggleSwitchChangeEvent) {
     this.selectedPromotions = undefined;
   }
+
+  toggleBackends(_event: ToggleSwitchChangeEvent) {
+    this.selectedBackend = undefined;
+  }
+  
 }
 
 export interface Promotion {
@@ -284,4 +309,11 @@ export interface CalcResponse {
   crossTotal: number;
   promotionInfo: PromotionInfo;
   positions: CalcPosition[];
+}
+
+export interface POSBackend {
+  oid: string;
+  name: string;
+  identifier: string;
+  description?: string;
 }

@@ -101,6 +101,13 @@
             </p-floatLabel>
             <p-toggleswitch [(ngModel)]="dateChecked" (onChange)="toggleDate($event)"/>
         </div>
+        @if (backends.length > 0) {
+            <div class="confElement">
+                <p-select [options]="backends" [(ngModel)]="selectedBackend" optionLabel="name" class="w-full md:w-56" 
+                    [disabled]="!backendsChecked" placeholder="POS Instancia" />
+                <p-toggleswitch [(ngModel)]="backendsChecked" (onChange)="toggleBackends($event)"/>
+            </div>
+        }
         <div class="confElement">
             <p-listbox styleClass="promotionsConf" [options]="promotions" [(ngModel)]="selectedPromotions" 
                 [multiple]="true" [showToggleAll]="true" [disabled]="!promotionsChecked" optionLabel="name" 
