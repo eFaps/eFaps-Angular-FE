@@ -1,5 +1,6 @@
 import { Component, Input, input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { InputTextModule } from 'primeng/inputtext';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { SelectModule } from 'primeng/select';
 import { TableModule } from 'primeng/table';
@@ -11,7 +12,7 @@ import { ValueService } from 'src/app/services/value.service';
   selector: 'app-attribute-set-element',
   templateUrl: './attribute-set-element.component.html',
   styleUrl: './attribute-set-element.component.scss',
-  imports: [TableModule, FormsModule, RadioButtonModule, SelectModule],
+  imports: [TableModule, FormsModule, RadioButtonModule, SelectModule, InputTextModule],
   standalone: true,
 })
 export class AttributeSetElementComponent {

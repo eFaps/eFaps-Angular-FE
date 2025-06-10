@@ -8,10 +8,10 @@
   }
   @case ('RADIO') {
     @for (option of elementData?.formItem?.options; track option; let indexOfelement = $index) {
-      <div class="field-checkbox">
-        <p-radioButton [inputId]="'opt' + indexOfelement" [value]="option.value" [(ngModel)]="radioValue"
+      <div class="field-radio">
+        <p-radioButton [inputId]="'asopt' + indexOfelement" [value]="option.value" [(ngModel)]="radioValue"
         (onClick)="changeRadio($event.value)"></p-radioButton>
-        <label [for]="'opt' + indexOfelement" class="ml-2">{{ option.label }}</label>
+        <label [for]="'asopt' + indexOfelement">{{ option.label }}</label>
       </div>
     }
   }
