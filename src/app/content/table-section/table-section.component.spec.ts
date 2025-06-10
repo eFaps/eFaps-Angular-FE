@@ -9,7 +9,7 @@ describe('TableSectionComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [TableModule,TableSectionComponent],
+      imports: [TableModule, TableSectionComponent],
     });
     fixture = TestBed.createComponent(TableSectionComponent);
     component = fixture.componentInstance;

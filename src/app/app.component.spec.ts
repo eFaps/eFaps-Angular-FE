@@ -9,7 +9,7 @@ import { KEYCLOAK_EVENT_SIGNAL, KeycloakService } from 'keycloak-angular';
 import Keycloak from 'keycloak-js';
 import { MessageService } from 'primeng/api';
 import { MenubarModule } from 'primeng/menubar';
-import { OverlayPanelModule } from 'primeng/overlaypanel';
+import { PopoverModule } from 'primeng/popover';
 import { ToastModule } from 'primeng/toast';
 
 import { AppComponent } from './app.component';
@@ -18,12 +18,7 @@ describe('AppComponent', () => {
   beforeEach(() =>
     TestBed.configureTestingModule({
       declarations: [AppComponent],
-      imports: [
-        RouterTestingModule,
-        MenubarModule,
-        ToastModule,
-        OverlayPanelModule,
-      ],
+      imports: [RouterTestingModule, MenubarModule, ToastModule, PopoverModule],
       providers: [
         { provide: MessageService, useValue: {} },
         { provide: KeycloakService, useValue: {} },

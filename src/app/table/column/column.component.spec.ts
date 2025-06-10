@@ -5,7 +5,7 @@ import {
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
-import { OverlayPanelModule } from 'primeng/overlaypanel';
+import { PopoverModule } from 'primeng/popover';
 
 import { ColumnComponent } from './column.component';
 
@@ -16,7 +16,7 @@ describe('ColumnComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [ColumnComponent],
-      imports: [OverlayPanelModule],
+      imports: [PopoverModule],
       providers: [
         provideRouter([]),
         provideHttpClient(withInterceptorsFromDi()),

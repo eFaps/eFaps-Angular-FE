@@ -23,7 +23,8 @@ describe('ContentComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
-        ContentComponent, SectionsComponent,
+        ContentComponent,
+        SectionsComponent,
         RouterModule,
         DialogModule,
         ToolbarModule,

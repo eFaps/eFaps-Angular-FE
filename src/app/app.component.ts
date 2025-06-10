@@ -42,9 +42,9 @@ import {
 import { SearchService } from './services/search.service';
 import { StyleService } from './services/style.service';
 import { UserService } from './services/user.service';
+import { isQA } from './services/util.service';
 import { CompanyChooserComponent } from './standalone/company-chooser/company-chooser.component';
 import { environment } from 'src/environments/environment';
-import { isQA } from './services/util.service';
 
 @Component({
   selector: 'app-root',
@@ -56,7 +56,7 @@ import { isQA } from './services/util.service';
 export class AppComponent implements OnInit {
   private readonly primeng: PrimeNG = inject(PrimeNG);
   private readonly keycloak = inject(Keycloak);
-  private readonly renderer= inject(Renderer2);
+  private readonly renderer = inject(Renderer2);
 
   title = 'eFaps-Angular-FE';
 
@@ -129,7 +129,7 @@ export class AppComponent implements OnInit {
       950: `{${color}.950}`,
     });
     if (isQA()) {
-      this.renderer.addClass(document.body, "qa")
+      this.renderer.addClass(document.body, 'qa');
     }
   }
 

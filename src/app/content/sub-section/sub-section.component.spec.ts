@@ -10,7 +10,7 @@ describe('SubSectionComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [PanelModule, NoopAnimationsModule,SubSectionComponent],
+      imports: [PanelModule, NoopAnimationsModule, SubSectionComponent],
     });
     fixture = TestBed.createComponent(SubSectionComponent);
     component = fixture.componentInstance;

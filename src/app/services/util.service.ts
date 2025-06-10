@@ -29,5 +29,5 @@ export function isUUID(val: string): boolean {
 }
 
 export function isQA(): boolean {
- return window.location.hostname.includes("qa")
+  return window.location.hostname.includes('qa');
 }

@@ -5,8 +5,8 @@
 <div #overflowWrapper (mouseenter)="isOverflowing() ? op.show($event) : undefined" (mouseleave)="op.hide()">
   {{value}}
 </div>
-<p-overlayPanel #op>
+<p-popover #op>
   <div class="overlay">
     {{value}}
   </div>
-</p-overlayPanel>
+</p-popover>

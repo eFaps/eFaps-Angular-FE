@@ -11,8 +11,8 @@ import { InputTextModule } from 'primeng/inputtext';
 import { MenuModule } from 'primeng/menu';
 import { MenubarModule } from 'primeng/menubar';
 import { MultiSelectModule } from 'primeng/multiselect';
-import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { PaginatorModule } from 'primeng/paginator';
+import { PopoverModule } from 'primeng/popover';
 import { TableModule as primeTableModule } from 'primeng/table';
 import { TieredMenuModule } from 'primeng/tieredmenu';
 import { TooltipModule } from 'primeng/tooltip';
@@ -44,7 +44,7 @@ import { TableComponent } from './table/table.component';
     InputGroupModule,
     InputGroupAddonModule,
     FormsModule,
-    OverlayPanelModule,
+    PopoverModule,
     TieredMenuModule,
     DatePickerModule,
     PaginatorModule,

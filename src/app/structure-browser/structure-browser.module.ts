@@ -5,7 +5,7 @@ import { ButtonModule } from 'primeng/button';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { MenuModule } from 'primeng/menu';
 import { MenubarModule } from 'primeng/menubar';
-import { OverlayPanelModule } from 'primeng/overlaypanel';
+import { PopoverModule } from 'primeng/popover';
 import { TreeTableModule } from 'primeng/treetable';
 
 import { ColumnComponent } from './column/column.component';
@@ -24,7 +24,7 @@ import { StructureBrowserComponent } from './structure-browser/structure-browser
     MenuModule,
     MenubarModule,
     ConfirmDialogModule,
-    OverlayPanelModule,
+    PopoverModule,
   ],
 })
 export class StructureBrowserModule {}
