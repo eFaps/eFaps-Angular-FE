@@ -18,8 +18,7 @@ describe('SearchContentComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [SearchContentComponent, FormSectionComponent],
-      imports: [DividerModule, ButtonModule],
+      imports: [SearchContentComponent, FormSectionComponent, DividerModule, ButtonModule],
       providers: [
         {
           provide: DynamicDialogConfig,

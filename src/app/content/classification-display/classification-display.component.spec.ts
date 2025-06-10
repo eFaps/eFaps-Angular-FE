@@ -13,8 +13,7 @@ describe('ClassificationDisplayComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [ClassificationDisplayComponent],
-      imports: [],
+      imports: [ClassificationDisplayComponent],
       providers: [
         provideHttpClient(withInterceptorsFromDi()),
         provideHttpClientTesting(),

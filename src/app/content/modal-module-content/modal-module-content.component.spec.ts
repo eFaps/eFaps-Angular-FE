@@ -9,7 +9,7 @@ describe('ModalModuleContentComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [ModalModuleContentComponent],
+      imports: [ModalModuleContentComponent],
       providers: [
         {
           provide: DynamicDialogConfig,

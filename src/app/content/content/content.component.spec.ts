@@ -22,8 +22,8 @@ describe('ContentComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [ContentComponent, SectionsComponent],
       imports: [
+        ContentComponent, SectionsComponent,
         RouterModule,
         DialogModule,
         ToolbarModule,

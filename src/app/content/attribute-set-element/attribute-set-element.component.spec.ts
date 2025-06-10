@@ -9,7 +9,7 @@ describe('AttributeSetElementComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [AttributeSetElementComponent],
+      imports: [AttributeSetElementComponent],
       providers: [{ provide: ValueService, useValue: {} }],
     }).compileComponents();
 

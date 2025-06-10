@@ -18,8 +18,7 @@ describe('FormContentComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [FormContentComponent, SectionsComponent],
-      imports: [ToolbarModule, MenuModule],
+      imports: [FormContentComponent,SectionsComponent, ToolbarModule, MenuModule],
       providers: [
         { provide: DialogService, useValue: {} },
         provideRouter([]),

@@ -16,8 +16,7 @@ describe('FormElementComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [FormElementComponent],
-      imports: [DialogModule, MessagesModule],
+      imports: [FormElementComponent, DialogModule, MessagesModule],
       providers: [
         { provide: DialogService, useValue: {} },
         provideHttpClient(withInterceptorsFromDi()),

@@ -13,8 +13,7 @@ describe('TableElementComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [TableElementComponent],
-      imports: [],
+      imports: [TableElementComponent],
       providers: [
         provideHttpClient(withInterceptorsFromDi()),
         provideHttpClientTesting(),

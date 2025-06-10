@@ -18,12 +18,7 @@ describe('ModalContentComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [
-        ModalContentComponent,
-        SectionsComponent,
-        ClassificationDisplayComponent,
-      ],
-      imports: [ButtonModule],
+      imports: [ModalContentComponent, SectionsComponent, ClassificationDisplayComponent, ButtonModule],
       providers: [
         {
           provide: DynamicDialogConfig,

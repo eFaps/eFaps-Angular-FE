@@ -16,8 +16,7 @@ describe('ClassificationsComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [ClassificationsComponent],
-      imports: [TreeModule, ButtonModule],
+      imports: [ClassificationsComponent, TreeModule, ButtonModule],
       providers: [
         {
           provide: DynamicDialogConfig,

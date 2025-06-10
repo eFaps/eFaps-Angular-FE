@@ -9,8 +9,7 @@ describe('AttributeSetComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [TableModule],
-      declarations: [AttributeSetComponent],
+      imports: [TableModule,AttributeSetComponent]
     });
     fixture = TestBed.createComponent(AttributeSetComponent);
     component = fixture.componentInstance;
