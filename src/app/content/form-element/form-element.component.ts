@@ -18,7 +18,7 @@ import { FileUploadModule, UploadEvent } from 'primeng/fileupload';
 import { ImageModule } from 'primeng/image';
 import { InputTextModule } from 'primeng/inputtext';
 import { SafeHtmlPipe } from 'primeng/menu';
-import { MessagesModule } from 'primeng/messages';
+import { MessageModule } from 'primeng/message';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { SelectModule } from 'primeng/select';
@@ -40,7 +40,7 @@ import { ValueService } from 'src/app/services/value.service';
   templateUrl: './form-element.component.html',
   styleUrls: ['./form-element.component.scss'],
   imports: [
-    MessagesModule,
+    MessageModule,
     ButtonModule,
     ImageModule,
     CheckboxModule,
