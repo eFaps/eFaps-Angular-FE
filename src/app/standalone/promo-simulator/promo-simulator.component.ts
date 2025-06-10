@@ -38,7 +38,7 @@ import { UtilService } from 'src/app/services/util.service';
     FloatLabelModule,
     ToggleSwitchModule,
     ListboxModule,
-    SelectModule
+    SelectModule,
   ],
   templateUrl: './promo-simulator.component.html',
   styleUrl: './promo-simulator.component.scss',
@@ -69,7 +69,6 @@ export class PromoSimulatorComponent implements OnInit {
   backendsChecked: boolean = false;
 
   expandedRows = {};
-  
 
   constructor(
     private http: HttpClient,
@@ -184,7 +183,7 @@ export class PromoSimulatorComponent implements OnInit {
         items: positions,
         date: this.date,
         promotionOids: this.selectedPromotions,
-        posBackendOid: this.selectedBackend?.oid
+        posBackendOid: this.selectedBackend?.oid,
       };
 
       this.http.post<any>(url, body).subscribe({
@@ -253,7 +252,6 @@ export class PromoSimulatorComponent implements OnInit {
   toggleBackends(_event: ToggleSwitchChangeEvent) {
     this.selectedBackend = undefined;
   }
-  
 }
 
 export interface Promotion {

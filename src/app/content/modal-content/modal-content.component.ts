@@ -1,6 +1,10 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, signal, inject, computed } from '@angular/core';
+import { ButtonModule } from 'primeng/button';
+import { DialogModule } from 'primeng/dialog';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 
+import { ClassificationDisplayComponent } from '../classification-display/classification-display.component';
+import { SectionsComponent } from '../sections/sections.component';
 import { Classification } from 'src/app/model/classification';
 import { Outline, Section } from 'src/app/model/content';
 import { MenuEntry } from 'src/app/model/menu';
@@ -13,7 +17,13 @@ import { ValueService } from 'src/app/services/value.service';
   selector: 'app-modal-content',
   templateUrl: './modal-content.component.html',
   styleUrls: ['./modal-content.component.scss'],
-  standalone: false,
+  imports: [
+    ButtonModule,
+    DialogModule,
+    SectionsComponent,
+    ClassificationDisplayComponent,
+  ],
+  standalone: true,
 })
 export class ModalContentComponent implements OnInit {
   private valueService = inject(ValueService);
@@ -21,7 +31,11 @@ export class ModalContentComponent implements OnInit {
   private classificationService = inject(ClassificationService);
   private execService = inject(ExecService);
 
-  outline: Outline;
+  outline = signal<Outline>({ oid: '', sections: [], header: '' });
+  sections = computed(() => {
+    console.log('hier');
+    return this.outline().sections;
+  });
   callingMenu: MenuEntry;
   values: Map<String, any> | undefined;
   classifications: Classification[] | undefined;
@@ -33,16 +47,19 @@ export class ModalContentComponent implements OnInit {
   ) {
     this.valueService.reset();
     this.validationService.reset();
-    this.outline = config.data.outline;
+    this.outline.set(config.data.outline);
+
     this.callingMenu = config.data.item;
     this.parentOid = config.data.parentOid;
-    config.header = this.outline.header;
+    config.header = this.outline()?.header;
     config.maximizable = true;
     config.closable = true;
-    if (this.outline.classifications) {
+    if (this.outline()?.classifications) {
+      /**
       this.classificationService.setClassifications(
-        this.outline.classifications,
+        //this.outline.classifications,
       );
+       */
     }
     this.dialogRef.onClose.subscribe({
       next: (_) => {
@@ -52,15 +69,17 @@ export class ModalContentComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.outline = this.outline;
     this.valueService.values.subscribe({
       next: (values) => {
         console.log(values);
         this.values = values;
       },
     });
-    if (this.outline.oid != 'none') {
-      this.valueService.addEntry({ name: 'eFapsOID', value: this.outline.oid });
+    if (this.outline()?.oid != 'none') {
+      this.valueService.addEntry({
+        name: 'eFapsOID',
+        value: this.outline()!.oid,
+      });
     }
     if (this.parentOid != null) {
       this.valueService.addEntry({
@@ -68,6 +87,7 @@ export class ModalContentComponent implements OnInit {
         value: this.parentOid,
       });
     }
+    /** 
     this.classificationService.classifications.subscribe({
       next: (classifications) => {
         this.classifications = classifications;
@@ -107,6 +127,7 @@ export class ModalContentComponent implements OnInit {
         });
       },
     });
+    */
   }
 
   submit() {

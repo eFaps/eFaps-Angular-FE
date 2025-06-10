@@ -1,6 +1,9 @@
 import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
+import { ButtonModule } from 'primeng/button';
+import { TableModule } from 'primeng/table';
 
+import { TableElementComponent } from '../table-element/table-element.component';
 import { TableSection } from 'src/app/model/content';
 import { Column } from 'src/app/model/table';
 import { ValueService } from 'src/app/services/value.service';
@@ -9,7 +12,8 @@ import { ValueService } from 'src/app/services/value.service';
   selector: 'app-table-section',
   templateUrl: './table-section.component.html',
   styleUrls: ['./table-section.component.scss'],
-  standalone: false,
+  imports: [TableElementComponent, ButtonModule, TableModule],
+  standalone: true,
 })
 export class TableSectionComponent {
   _tableSection: TableSection | undefined;

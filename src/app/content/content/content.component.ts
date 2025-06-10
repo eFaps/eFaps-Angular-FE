@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import {
   ChangeDetectorRef,
   Component,
@@ -7,14 +8,22 @@ import {
   ViewChild,
   effect,
 } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
 import { ConfirmationService, MenuItem } from 'primeng/api';
+import { ButtonModule } from 'primeng/button';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { DialogService } from 'primeng/dynamicdialog';
+import { TabsModule } from 'primeng/tabs';
+import { TieredMenuModule } from 'primeng/tieredmenu';
+import { ToolbarModule } from 'primeng/toolbar';
 import { Subscription } from 'rxjs';
 
+import { ClassificationDisplayComponent } from '../classification-display/classification-display.component';
+import { ContentRoutingModule } from '../content-routing.module';
 import { FormContentComponent } from '../form-content/form-content.component';
 import { ModalContentComponent } from '../modal-content/modal-content.component';
 import { ModalModuleContentComponent } from '../modal-module-content/modal-module-content.component';
+import { SectionsComponent } from '../sections/sections.component';
 import { Classification } from 'src/app/model/classification';
 import { Section, isOutline } from 'src/app/model/content';
 import { MenuEntry } from 'src/app/model/menu';
@@ -29,8 +38,19 @@ import { TableComponent } from 'src/app/table/table/table.component';
   selector: 'app-content',
   templateUrl: './content.component.html',
   styleUrls: ['./content.component.scss'],
+  imports: [
+    ConfirmDialogModule,
+    CommonModule,
+    RouterOutlet,
+    SectionsComponent,
+    ClassificationDisplayComponent,
+    TabsModule,
+    ButtonModule,
+    TieredMenuModule,
+    ToolbarModule,
+  ],
   providers: [ConfirmationService],
-  standalone: false,
+  standalone: true,
 })
 export class ContentComponent implements OnInit, OnDestroy {
   oid: string | undefined;

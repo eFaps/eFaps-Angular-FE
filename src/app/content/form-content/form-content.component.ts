@@ -7,10 +7,16 @@ import {
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MenuItem } from 'primeng/api';
+import { ButtonModule } from 'primeng/button';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { DialogService } from 'primeng/dynamicdialog';
+import { MenuModule } from 'primeng/menu';
+import { ToolbarModule } from 'primeng/toolbar';
 import { combineLatest } from 'rxjs';
 
+import { ClassificationDisplayComponent } from '../classification-display/classification-display.component';
 import { ModalContentComponent } from '../modal-content/modal-content.component';
+import { SectionsComponent } from '../sections/sections.component';
 import { Outline, Section, isOutline } from 'src/app/model/content';
 import { MenuEntry } from 'src/app/model/menu';
 import { UIModule } from 'src/app/model/module';
@@ -23,7 +29,15 @@ import { ValueService } from 'src/app/services/value.service';
   selector: 'app-form-content',
   templateUrl: './form-content.component.html',
   styleUrls: ['./form-content.component.scss'],
-  standalone: false,
+  imports: [
+    SectionsComponent,
+    ClassificationDisplayComponent,
+    ButtonModule,
+    MenuModule,
+    ToolbarModule,
+    ConfirmDialogModule,
+  ],
+  standalone: true,
 })
 export class FormContentComponent implements OnInit, AfterViewInit {
   id: string | undefined;

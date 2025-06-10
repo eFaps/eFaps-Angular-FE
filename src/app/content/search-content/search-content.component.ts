@@ -1,8 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MenuItem, MessageService } from 'primeng/api';
+import { ButtonModule } from 'primeng/button';
+import { CheckboxModule } from 'primeng/checkbox';
+import { DividerModule } from 'primeng/divider';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { MenubarModule } from 'primeng/menubar';
+import { TableModule } from 'primeng/table';
 
+import { FormSectionComponent } from '../form-section/form-section.component';
 import { Search, SearchResult } from 'src/app/model/search';
 import { ExecService } from 'src/app/services/exec.service';
 import { SearchService } from 'src/app/services/search.service';
@@ -12,7 +18,15 @@ import { ValueService } from 'src/app/services/value.service';
   selector: 'app-search-content',
   templateUrl: './search-content.component.html',
   styleUrls: ['./search-content.component.scss'],
-  standalone: false,
+  imports: [
+    ButtonModule,
+    CheckboxModule,
+    TableModule,
+    DividerModule,
+    FormSectionComponent,
+    MenubarModule,
+  ],
+  standalone: true,
 })
 export class SearchContentComponent implements OnInit {
   searches: Search[];

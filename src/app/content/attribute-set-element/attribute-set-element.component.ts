@@ -1,4 +1,8 @@
 import { Component, Input, input } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { RadioButtonModule } from 'primeng/radiobutton';
+import { SelectModule } from 'primeng/select';
+import { TableModule } from 'primeng/table';
 
 import { FormItem } from 'src/app/model/content';
 import { ValueService } from 'src/app/services/value.service';
@@ -7,7 +11,8 @@ import { ValueService } from 'src/app/services/value.service';
   selector: 'app-attribute-set-element',
   templateUrl: './attribute-set-element.component.html',
   styleUrl: './attribute-set-element.component.scss',
-  standalone: false,
+  imports: [TableModule, FormsModule, RadioButtonModule, SelectModule],
+  standalone: true,
 })
 export class AttributeSetElementComponent {
   dropdownValue: any;

@@ -12,7 +12,7 @@ import { DynamicComponentService } from 'src/app/services/dynamic-component.serv
   selector: 'app-modal-module-content',
   templateUrl: './modal-module-content.component.html',
   styleUrls: ['./modal-module-content.component.scss'],
-  standalone: false,
+  standalone: true,
 })
 export class ModalModuleContentComponent implements AfterViewInit {
   readonly vcr = viewChild.required('dynamicComponent', {

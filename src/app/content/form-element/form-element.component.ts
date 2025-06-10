@@ -1,3 +1,4 @@
+import { CommonModule, DatePipe } from '@angular/common';
 import {
   Component,
   Input,
@@ -5,11 +6,24 @@ import {
   ViewContainerRef,
   viewChild,
 } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastMessageOptions } from 'primeng/api';
+import { AutoCompleteModule } from 'primeng/autocomplete';
+import { ButtonModule } from 'primeng/button';
+import { CheckboxModule } from 'primeng/checkbox';
+import { DatePickerModule } from 'primeng/datepicker';
 import { DialogService } from 'primeng/dynamicdialog';
-import { UploadEvent } from 'primeng/fileupload';
+import { FileUploadModule, UploadEvent } from 'primeng/fileupload';
+import { ImageModule } from 'primeng/image';
+import { InputTextModule } from 'primeng/inputtext';
+import { SafeHtmlPipe } from 'primeng/menu';
+import { MessagesModule } from 'primeng/messages';
+import { MultiSelectModule } from 'primeng/multiselect';
+import { RadioButtonModule } from 'primeng/radiobutton';
+import { SelectModule } from 'primeng/select';
 
+import { AttributeSetComponent } from '../attribute-set/attribute-set.component';
 import { ClassificationsComponent } from '../classifications/classifications.component';
 import { FormItem, Option } from 'src/app/model/content';
 import { FieldCommandResponse } from 'src/app/model/field-command';
@@ -25,7 +39,25 @@ import { ValueService } from 'src/app/services/value.service';
   selector: 'app-form-element',
   templateUrl: './form-element.component.html',
   styleUrls: ['./form-element.component.scss'],
-  standalone: false,
+  imports: [
+    MessagesModule,
+    ButtonModule,
+    ImageModule,
+    CheckboxModule,
+    FormsModule,
+    AttributeSetComponent,
+    DatePickerModule,
+    FileUploadModule,
+    AutoCompleteModule,
+    SafeHtmlPipe,
+    MultiSelectModule,
+    SelectModule,
+    RadioButtonModule,
+    DatePipe,
+    CommonModule,
+    InputTextModule,
+  ],
+  standalone: true,
 })
 export class FormElementComponent implements OnInit {
   messages: ToastMessageOptions[] = [];

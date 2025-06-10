@@ -45,23 +45,6 @@ import { TableElementComponent } from './table-element/table-element.component';
 import { TableSectionComponent } from './table-section/table-section.component';
 
 @NgModule({
-  declarations: [
-    ContentComponent,
-    SectionsComponent,
-    SubSectionComponent,
-    TableSectionComponent,
-    FormSectionComponent,
-    FormElementComponent,
-    ModalContentComponent,
-    FormContentComponent,
-    TableElementComponent,
-    SearchContentComponent,
-    AttributeSetComponent,
-    AttributeSetElementComponent,
-    ClassificationsComponent,
-    ClassificationDisplayComponent,
-    ModalModuleContentComponent,
-  ],
   imports: [
     CommonModule,
     ContentRoutingModule,
@@ -91,6 +74,21 @@ import { TableSectionComponent } from './table-section/table-section.component';
     MessagesModule,
     ScrollPanelModule,
     SafeHtmlPipe,
+    ModalContentComponent,
+    SectionsComponent,
+    FormSectionComponent,
+    SubSectionComponent,
+    TableSectionComponent,
+    TableElementComponent,
+    FormElementComponent,
+    AttributeSetComponent,
+    AttributeSetElementComponent,
+    ContentComponent,
+    FormContentComponent,
+    SearchContentComponent,
+    ClassificationsComponent,
+    ClassificationDisplayComponent,
+    ModalModuleContentComponent,
   ],
 })
 export class ContentModule {}

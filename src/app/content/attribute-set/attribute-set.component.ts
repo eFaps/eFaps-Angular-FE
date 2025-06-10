@@ -1,5 +1,10 @@
 import { Component, Input } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { ButtonModule } from 'primeng/button';
+import { MessageModule } from 'primeng/message';
+import { TableModule } from 'primeng/table';
 
+import { AttributeSetElementComponent } from '../attribute-set-element/attribute-set-element.component';
 import { AttributeSetEntry, FormItem } from 'src/app/model/content';
 import { ValueService } from 'src/app/services/value.service';
 
@@ -7,7 +12,14 @@ import { ValueService } from 'src/app/services/value.service';
   selector: 'app-attribute-set',
   templateUrl: './attribute-set.component.html',
   styleUrls: ['./attribute-set.component.scss'],
-  standalone: false,
+  imports: [
+    MessageModule,
+    ButtonModule,
+    AttributeSetElementComponent,
+    TableModule,
+    FormsModule,
+  ],
+  standalone: true,
 })
 export class AttributeSetComponent {
   _formItem: FormItem | undefined;

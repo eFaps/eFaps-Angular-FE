@@ -1,7 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { TreeNode } from 'primeng/api';
+import { ButtonModule } from 'primeng/button';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
-import { TreeNodeSelectEvent, TreeNodeUnSelectEvent } from 'primeng/tree';
+import {
+  TreeModule,
+  TreeNodeSelectEvent,
+  TreeNodeUnSelectEvent,
+} from 'primeng/tree';
 
 import { Classification } from 'src/app/model/classification';
 import { ClassificationService } from 'src/app/services/classification.service';
@@ -10,7 +15,8 @@ import { ClassificationService } from 'src/app/services/classification.service';
   selector: 'app-classifications',
   templateUrl: './classifications.component.html',
   styleUrls: ['./classifications.component.scss'],
-  standalone: false,
+  imports: [TreeModule, ButtonModule],
+  standalone: true,
 })
 export class ClassificationsComponent implements OnInit {
   classUUIDs: string[];

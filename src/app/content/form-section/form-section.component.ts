@@ -1,12 +1,14 @@
 import { Component, Input } from '@angular/core';
 
+import { FormElementComponent } from '../form-element/form-element.component';
 import { FormItem, FormSection } from 'src/app/model/content';
 
 @Component({
   selector: 'app-form-section',
   templateUrl: './form-section.component.html',
   styleUrls: ['./form-section.component.scss'],
-  standalone: false,
+  imports: [FormElementComponent],
+  standalone: true,
 })
 export class FormSectionComponent {
   _formSection: FormSection | undefined;

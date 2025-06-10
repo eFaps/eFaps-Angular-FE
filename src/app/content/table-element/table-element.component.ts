@@ -1,4 +1,7 @@
 import { Component, Input, OnInit, input } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { AutoCompleteModule } from 'primeng/autocomplete';
+import { InputTextModule } from 'primeng/inputtext';
 
 import { Option, TableColumn } from 'src/app/model/content';
 import { AutoCompleteService } from 'src/app/services/auto-complete.service';
@@ -9,7 +12,8 @@ import { ValueService } from 'src/app/services/value.service';
   selector: 'app-table-element',
   templateUrl: './table-element.component.html',
   styleUrls: ['./table-element.component.scss'],
-  standalone: false,
+  imports: [AutoCompleteModule, InputTextModule, FormsModule],
+  standalone: true,
 })
 export class TableElementComponent implements OnInit {
   inputValue: any;

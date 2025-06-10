@@ -1,5 +1,8 @@
 import { Component, input } from '@angular/core';
 
+import { FormSectionComponent } from '../form-section/form-section.component';
+import { SubSectionComponent } from '../sub-section/sub-section.component';
+import { TableSectionComponent } from '../table-section/table-section.component';
 import {
   FormSection,
   HeadingSection,
@@ -11,7 +14,8 @@ import {
   selector: 'app-sections',
   templateUrl: './sections.component.html',
   styleUrls: ['./sections.component.scss'],
-  standalone: false,
+  imports: [FormSectionComponent, TableSectionComponent, SubSectionComponent],
+  standalone: true,
 })
 export class SectionsComponent {
   sections = input.required<Section[]>();
