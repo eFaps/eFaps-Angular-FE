@@ -187,7 +187,7 @@ export class TableComponent implements OnInit {
             });
             dialogRef.onClose.subscribe({
               next: (execResponse) => {
-                if (execResponse.reload) {
+                if (execResponse?.reload) {
                   this.loadData();
                 }
               },
