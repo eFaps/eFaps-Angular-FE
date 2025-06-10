@@ -104,6 +104,6 @@
         <ng-template #dynamicComponent></ng-template>
     </div>
      @for (message of messages; track message) {
-        <p-message [severity]="message.severity" [text]="message.content"></p-message>
+        <p-message [severity]="message.severity" [text]="message.summary"></p-message>
      }
 </div>
