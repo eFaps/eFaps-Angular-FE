@@ -20,5 +20,19 @@ body {
         position: absolute;
         pointer-events: none;
         opacity: 0.05;
+
+
+    }
+
+    &.qa::before {
+        content: "QA";
+        position: absolute;
+        color: #ff000063;
+        font-size: 150pt;
+        pointer-events: none;
+        z-index: 2;
+        top: calc(50% - 75pt);
+        left: calc(50% - 105pt);
+
     }
 }

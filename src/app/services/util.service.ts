@@ -27,3 +27,7 @@ const regexExp =
 export function isUUID(val: string): boolean {
   return regexExp.test(val);
 }
+
+export function isQA(): boolean {
+ return window.location.hostname.includes("qa")
+}

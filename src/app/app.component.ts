@@ -2,6 +2,7 @@ import {
   Component,
   ElementRef,
   OnInit,
+  Renderer2,
   Signal,
   ViewChild,
   computed,
@@ -43,6 +44,7 @@ import { StyleService } from './services/style.service';
 import { UserService } from './services/user.service';
 import { CompanyChooserComponent } from './standalone/company-chooser/company-chooser.component';
 import { environment } from 'src/environments/environment';
+import { isQA } from './services/util.service';
 
 @Component({
   selector: 'app-root',
@@ -54,6 +56,7 @@ import { environment } from 'src/environments/environment';
 export class AppComponent implements OnInit {
   private readonly primeng: PrimeNG = inject(PrimeNG);
   private readonly keycloak = inject(Keycloak);
+  private readonly renderer= inject(Renderer2);
 
   title = 'eFaps-Angular-FE';
 
@@ -92,7 +95,6 @@ export class AppComponent implements OnInit {
     private breadcrumbService: BreadcrumbService,
     private styleService: StyleService,
   ) {
-    console.log('app init');
     const keycloakSignal = inject(KEYCLOAK_EVENT_SIGNAL);
     effect(() => {
       const keycloakEvent = keycloakSignal();
@@ -126,6 +128,9 @@ export class AppComponent implements OnInit {
       900: `{${color}.900}`,
       950: `{${color}.950}`,
     });
+    if (isQA()) {
+      this.renderer.addClass(document.body, "qa")
+    }
   }
 
   @ViewChild(Menubar) set menuBar(element: Menubar) {
