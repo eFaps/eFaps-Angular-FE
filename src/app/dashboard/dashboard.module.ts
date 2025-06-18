@@ -20,27 +20,8 @@ import { PageComponent } from './page/page.component';
 import { TableWidgetComponent } from './table-widget/table-widget.component';
 
 @NgModule({
-  declarations: [
-    DashboardComponent,
-    PageComponent,
-    ItemComponent,
-    TableWidgetComponent,
-    ChartWidgetComponent,
-    EditComponent,
-  ],
   imports: [
-    CommonModule,
     DashboardRoutingModule,
-    GridsterModule,
-    TableModule,
-    ChartModule,
-    ButtonModule,
-    StepsModule,
-    SelectModule,
-    FormsModule,
-    InputTextModule,
-    TextareaModule,
-    AutoComplete,
   ],
 })
 export class DashboardModule {}

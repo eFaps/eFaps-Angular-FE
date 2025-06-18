@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { TableModule } from 'primeng/table';
 
 import { TableWidget } from 'src/app/model/dashboard';
 import { DashboardService } from 'src/app/services/dashboard.service';
@@ -7,7 +8,7 @@ import { DashboardService } from 'src/app/services/dashboard.service';
   selector: 'app-table-widget',
   templateUrl: './table-widget.component.html',
   styleUrls: ['./table-widget.component.scss'],
-  standalone: false,
+  imports:[TableModule]
 })
 export class TableWidgetComponent {
   _widget: TableWidget | undefined;

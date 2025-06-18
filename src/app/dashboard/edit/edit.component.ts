@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { ButtonModule } from 'primeng/button';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { SelectModule } from 'primeng/select';
 
 import { ChartWidget, DashboardWidget } from 'src/app/model/dashboard';
 
@@ -7,7 +10,8 @@ import { ChartWidget, DashboardWidget } from 'src/app/model/dashboard';
   selector: 'app-edit',
   templateUrl: './edit.component.html',
   styleUrls: ['./edit.component.scss'],
-  standalone: false,
+  standalone: true,
+  imports: [SelectModule, FormsModule, ButtonModule]
 })
 export class EditComponent {
   widget: DashboardWidget;

@@ -1,0 +1,47 @@
+<div class="p-dialog-content">
+    <p-table [value]="pages()" [tableStyle]="{ 'min-width': '30rem' }" editMode="row" dataKey="key">
+        <ng-template #header>
+            <tr>
+                <th style="width:3rem"></th>
+                <th>Etiqueta</th>
+                <th>
+                    <button pButton pRipple type="button" icon="pi pi-plus-circle" text rounded
+                        severity="secondary"  (click)="addPage()"></button>
+                </th>
+            </tr>
+        </ng-template>
+        <ng-template #body let-page let-index="rowIndex" let-editing="editing">
+            <tr [pReorderableRow]="index" [pEditableRow]="page">
+                <td>
+                    <span class="pi pi-bars" pReorderableRowHandle></span>
+                </td>
+                <td>
+                    <p-cellEditor>
+                        <ng-template #input>
+                            <input pInputText type="text" [(ngModel)]="page.label" />
+                        </ng-template>
+                        <ng-template #output>
+                            {{page.label}}
+                        </ng-template>
+                    </p-cellEditor>
+
+                </td>
+                <td>
+                    @if (!editing) {
+                    <button pButton pRipple type="button" pInitEditableRow icon="pi pi-pencil" text rounded
+                        severity="secondary"></button>
+
+                    <button pButton pRipple type="button" icon="pi pi-trash" pSaveEditableRow text rounded severity="secondary"
+                        (click)="removePage(index)"></button>
+                    }
+                    @if (editing) {
+                    <button pButton pRipple type="button" pSaveEditableRow icon="pi pi-check" text rounded
+                        severity="secondary"></button>}
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>
+<div class="p-dialog-footer">
+    <p-button label="Actualizar" severity="warn" (click)="submit()"></p-button>
+</div>

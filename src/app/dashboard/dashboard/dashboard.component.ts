@@ -1,16 +1,25 @@
-import { Component, OnInit } from '@angular/core';
-import { MenuItem } from 'primeng/api';
+import { Component, OnInit, inject } from '@angular/core';
+import { MenuItem, PrimeIcons } from 'primeng/api';
 
 import { DashboardPage } from 'src/app/model/dashboard';
 import { DashboardService } from 'src/app/services/dashboard.service';
+import { PageComponent } from '../page/page.component';
+import { StepsModule } from 'primeng/steps';
+import { ButtonModule } from 'primeng/button';
+import { SpeedDialModule } from 'primeng/speeddial';
+import { DialogService } from 'primeng/dynamicdialog';
+import { EditPageComponent } from '../edit-page/edit-page.component';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
-  standalone: false,
+  standalone: true,
+  imports: [PageComponent, StepsModule, ButtonModule, SpeedDialModule]
 })
 export class DashboardComponent implements OnInit {
+  private dialogService = inject(DialogService)
+
   currentPage: DashboardPage | undefined;
   pages: DashboardPage[] = [];
   editMode = false;
@@ -19,11 +28,28 @@ export class DashboardComponent implements OnInit {
   steps: MenuItem[] = [];
   activeStepIdx: number = 0;
   deactivated = false;
-
-  constructor(private dashboardService: DashboardService) {}
+  menuItems = [
+    {
+      icon: PrimeIcons.FILE_EDIT,
+      command: () => {
+        this.editPages();
+      }
+    },
+    {
+      icon: PrimeIcons.PENCIL,
+      command: () => {
+        console.log("1")
+      }
+    },
+  ]
+  constructor(private dashboardService: DashboardService) { }
 
   ngOnInit(): void {
-    this.dashboardService.getDashboard().subscribe({
+    this.load()
+  }
+
+    load() {
+this.dashboardService.getDashboard().subscribe({
       next: (dashboard) => {
         // dashboard is deactivated
         if (dashboard == null) {
@@ -43,7 +69,7 @@ export class DashboardComponent implements OnInit {
         }
       },
     });
-  }
+    }
 
   toggleEditMode() {
     this.editMode = !this.editMode;
@@ -59,5 +85,18 @@ export class DashboardComponent implements OnInit {
 
   onActiveStepChange(idx: number) {
     this.currentPage = this.pages[idx];
+  }
+
+  editPages() {
+    const dialogRef = this.dialogService.open(EditPageComponent, {
+      maximizable: true,
+      closable: true,
+      header: "Editar paginas"
+    });
+    dialogRef.onClose.subscribe({
+      next: () => {
+        this.load()
+      }
+    })
   }
 }

@@ -7,12 +7,16 @@ import {
   DashboardWidget,
   TableWidget,
 } from 'src/app/model/dashboard';
+import { ButtonModule } from 'primeng/button';
+import { ChartWidgetComponent } from '../chart-widget/chart-widget.component';
+import { TableWidgetComponent } from '../table-widget/table-widget.component';
 
 @Component({
   selector: 'app-item',
   templateUrl: './item.component.html',
   styleUrls: ['./item.component.scss'],
-  standalone: false,
+  imports: [ButtonModule, ChartWidgetComponent, 
+    TableWidgetComponent]
 })
 export class ItemComponent {
   _widget: DashboardWidget | undefined;

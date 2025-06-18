@@ -1,15 +1,16 @@
 <div class="wrapper">
   @if (currentPage) {
-    <app-page [page]="currentPage!!" [editMode]="editMode"></app-page>
+  <app-page [page]="currentPage!!" [editMode]="editMode"></app-page>
   }
 </div>
 @if (!editMode) {
-  <div class="steps-wrapper">
-    <p-steps [model]="steps" [readonly]="false" [(activeIndex)]="activeStepIdx" (activeIndexChange)="onActiveStepChange($event)"></p-steps>
-  </div>
+<div class="steps-wrapper">
+  <p-steps [model]="steps" [readonly]="false" [(activeIndex)]="activeStepIdx"
+    (activeIndexChange)="onActiveStepChange($event)"></p-steps>
+</div>
 }
 @if (!deactivated) {
-  <div class="btn">
-    <p-button [icon]="buttonIcon" [styleClass]="buttonClass" (click)="toggleEditMode()" [rounded]="true"></p-button>
-  </div>
+<div class="btn">
+  <p-speeddial [model]="menuItems" showIcon="pi pi-image"  hideIcon="pi pi-times" direction="up" [mask]="true" [style]="{ position: 'absolute', right: '1rem', bottom: '1rem' }" />
+</div>
 }

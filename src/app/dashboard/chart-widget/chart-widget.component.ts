@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { ChartModule } from 'primeng/chart';
 
 import { ChartWidget } from 'src/app/model/dashboard';
 import { DashboardService } from 'src/app/services/dashboard.service';
@@ -7,7 +8,8 @@ import { DashboardService } from 'src/app/services/dashboard.service';
   selector: 'app-chart-widget',
   templateUrl: './chart-widget.component.html',
   styleUrls: ['./chart-widget.component.scss'],
-  standalone: false,
+  standalone: true,
+  imports:[ChartModule]
 })
 export class ChartWidgetComponent {
   _widget: ChartWidget | undefined;
