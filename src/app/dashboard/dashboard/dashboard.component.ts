@@ -1,24 +1,24 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { MenuItem, PrimeIcons } from 'primeng/api';
+import { ButtonModule } from 'primeng/button';
+import { DialogService } from 'primeng/dynamicdialog';
+import { SpeedDialModule } from 'primeng/speeddial';
+import { StepsModule } from 'primeng/steps';
 
+import { EditPageComponent } from '../edit-page/edit-page.component';
+import { PageComponent } from '../page/page.component';
 import { DashboardPage } from 'src/app/model/dashboard';
 import { DashboardService } from 'src/app/services/dashboard.service';
-import { PageComponent } from '../page/page.component';
-import { StepsModule } from 'primeng/steps';
-import { ButtonModule } from 'primeng/button';
-import { SpeedDialModule } from 'primeng/speeddial';
-import { DialogService } from 'primeng/dynamicdialog';
-import { EditPageComponent } from '../edit-page/edit-page.component';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
   standalone: true,
-  imports: [PageComponent, StepsModule, ButtonModule, SpeedDialModule]
+  imports: [PageComponent, StepsModule, ButtonModule, SpeedDialModule],
 })
 export class DashboardComponent implements OnInit {
-  private dialogService = inject(DialogService)
+  private dialogService = inject(DialogService);
 
   currentPage: DashboardPage | undefined;
   pages: DashboardPage[] = [];
@@ -33,23 +33,23 @@ export class DashboardComponent implements OnInit {
       icon: PrimeIcons.FILE_EDIT,
       command: () => {
         this.editPages();
-      }
+      },
     },
     {
       icon: PrimeIcons.PENCIL,
       command: () => {
-        console.log("1")
-      }
+        console.log('1');
+      },
     },
-  ]
-  constructor(private dashboardService: DashboardService) { }
+  ];
+  constructor(private dashboardService: DashboardService) {}
 
   ngOnInit(): void {
-    this.load()
+    this.load();
   }
 
-    load() {
-this.dashboardService.getDashboard().subscribe({
+  load() {
+    this.dashboardService.getDashboard().subscribe({
       next: (dashboard) => {
         // dashboard is deactivated
         if (dashboard == null) {
@@ -69,7 +69,7 @@ this.dashboardService.getDashboard().subscribe({
         }
       },
     });
-    }
+  }
 
   toggleEditMode() {
     this.editMode = !this.editMode;
@@ -91,12 +91,12 @@ this.dashboardService.getDashboard().subscribe({
     const dialogRef = this.dialogService.open(EditPageComponent, {
       maximizable: true,
       closable: true,
-      header: "Editar paginas"
+      header: 'Editar paginas',
     });
     dialogRef.onClose.subscribe({
       next: () => {
-        this.load()
-      }
-    })
+        this.load();
+      },
+    });
   }
 }

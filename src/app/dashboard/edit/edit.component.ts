@@ -11,7 +11,7 @@ import { ChartWidget, DashboardWidget } from 'src/app/model/dashboard';
   templateUrl: './edit.component.html',
   styleUrls: ['./edit.component.scss'],
   standalone: true,
-  imports: [SelectModule, FormsModule, ButtonModule]
+  imports: [SelectModule, FormsModule, ButtonModule],
 })
 export class EditComponent {
   widget: DashboardWidget;

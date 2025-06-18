@@ -14,7 +14,6 @@ describe('TableWidgetComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [TableWidgetComponent],
       imports: [TableModule],
       providers: [
         provideHttpClient(withInterceptorsFromDi()),

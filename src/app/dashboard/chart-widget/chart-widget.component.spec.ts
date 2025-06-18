@@ -14,7 +14,6 @@ describe('ChartWidgetComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [ChartWidgetComponent],
       imports: [ChartModule],
       providers: [
         provideHttpClient(withInterceptorsFromDi()),

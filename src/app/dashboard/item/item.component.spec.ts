@@ -10,7 +10,6 @@ describe('ItemComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [],
-      declarations: [ItemComponent],
       providers: [{ provide: DialogService, useValue: {} }],
     });
     fixture = TestBed.createComponent(ItemComponent);

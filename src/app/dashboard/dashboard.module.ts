@@ -20,8 +20,6 @@ import { PageComponent } from './page/page.component';
 import { TableWidgetComponent } from './table-widget/table-widget.component';
 
 @NgModule({
-  imports: [
-    DashboardRoutingModule,
-  ],
+  imports: [DashboardRoutingModule],
 })
 export class DashboardModule {}

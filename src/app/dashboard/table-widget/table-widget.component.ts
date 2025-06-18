@@ -8,7 +8,7 @@ import { DashboardService } from 'src/app/services/dashboard.service';
   selector: 'app-table-widget',
   templateUrl: './table-widget.component.html',
   styleUrls: ['./table-widget.component.scss'],
-  imports:[TableModule]
+  imports: [TableModule],
 })
 export class TableWidgetComponent {
   _widget: TableWidget | undefined;

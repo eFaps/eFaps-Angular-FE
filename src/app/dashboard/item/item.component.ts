@@ -1,22 +1,21 @@
 import { Component, Input } from '@angular/core';
+import { ButtonModule } from 'primeng/button';
 import { DialogService } from 'primeng/dynamicdialog';
 
+import { ChartWidgetComponent } from '../chart-widget/chart-widget.component';
 import { EditComponent } from '../edit/edit.component';
+import { TableWidgetComponent } from '../table-widget/table-widget.component';
 import {
   ChartWidget,
   DashboardWidget,
   TableWidget,
 } from 'src/app/model/dashboard';
-import { ButtonModule } from 'primeng/button';
-import { ChartWidgetComponent } from '../chart-widget/chart-widget.component';
-import { TableWidgetComponent } from '../table-widget/table-widget.component';
 
 @Component({
   selector: 'app-item',
   templateUrl: './item.component.html',
   styleUrls: ['./item.component.scss'],
-  imports: [ButtonModule, ChartWidgetComponent, 
-    TableWidgetComponent]
+  imports: [ButtonModule, ChartWidgetComponent, TableWidgetComponent],
 })
 export class ItemComponent {
   _widget: DashboardWidget | undefined;

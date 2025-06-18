@@ -12,7 +12,13 @@ import { ValueService } from 'src/app/services/value.service';
   selector: 'app-attribute-set-element',
   templateUrl: './attribute-set-element.component.html',
   styleUrl: './attribute-set-element.component.scss',
-  imports: [TableModule, FormsModule, RadioButtonModule, SelectModule, InputTextModule],
+  imports: [
+    TableModule,
+    FormsModule,
+    RadioButtonModule,
+    SelectModule,
+    InputTextModule,
+  ],
   standalone: true,
 })
 export class AttributeSetElementComponent {

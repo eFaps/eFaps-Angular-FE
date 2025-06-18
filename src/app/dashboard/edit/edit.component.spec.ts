@@ -13,7 +13,6 @@ describe('EditComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [SelectModule, ButtonModule, FormsModule],
-      declarations: [EditComponent],
       providers: [
         {
           provide: DynamicDialogConfig,

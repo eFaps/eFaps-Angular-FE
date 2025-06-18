@@ -9,7 +9,7 @@ import { DashboardService } from 'src/app/services/dashboard.service';
   templateUrl: './chart-widget.component.html',
   styleUrls: ['./chart-widget.component.scss'],
   standalone: true,
-  imports:[ChartModule]
+  imports: [ChartModule],
 })
 export class ChartWidgetComponent {
   _widget: ChartWidget | undefined;

@@ -14,7 +14,6 @@ describe('PageComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [PageComponent],
       imports: [GridsterModule],
       providers: [
         provideHttpClient(withInterceptorsFromDi()),
