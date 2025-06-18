@@ -31,14 +31,16 @@ export class DashboardComponent implements OnInit {
   menuItems = [
     {
       icon: PrimeIcons.FILE_EDIT,
+       label: "Editar paginas",
       command: () => {
         this.editPages();
       },
     },
     {
       icon: PrimeIcons.PENCIL,
+      label: "Editar pagina actual",
       command: () => {
-        console.log('1');
+       this.editCurentPage()
       },
     },
   ];
@@ -71,16 +73,18 @@ export class DashboardComponent implements OnInit {
     });
   }
 
-  toggleEditMode() {
-    this.editMode = !this.editMode;
-    this.buttonClass = 'p-button-rounded';
-    if (this.editMode) {
-      this.buttonClass = this.buttonClass + ' p-button-warning';
-      this.buttonIcon = 'pi pi-lock-open';
-    } else {
-      this.buttonIcon = 'pi pi-lock';
-      this.dashboardService.persist();
-    }
+  editCurentPage() {
+    this.editMode = true;
+  }
+
+  save() {
+    this.editMode = false;
+    this.dashboardService.persist();
+  }
+
+  abort() {
+    this.editMode = false;
+    this.load();
   }
 
   onActiveStepChange(idx: number) {

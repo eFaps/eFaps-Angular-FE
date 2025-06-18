@@ -11,6 +11,13 @@
 }
 @if (!deactivated) {
 <div class="btn">
-  <p-speeddial [model]="menuItems" showIcon="pi pi-image"  hideIcon="pi pi-times" direction="up" [mask]="true" [style]="{ position: 'absolute', right: '1rem', bottom: '1rem' }" />
+
+  @if (editMode) {
+  <p-button icon="pi pi-undo" [rounded]="true" (click)="abort()" severity="danger"></p-button>
+  <p-button icon="pi pi-save" [rounded]="true" (click)="save()"></p-button>
+  } @else {
+  <p-speeddial [model]="menuItems" showIcon="pi pi-image" hideIcon="pi pi-times" direction="up" [mask]="true"
+    [style]="{ position: 'absolute', right: '1rem', bottom: '1rem' }" [tooltipOptions]="{ tooltipPosition: 'left' }" />
+  }
 </div>
 }

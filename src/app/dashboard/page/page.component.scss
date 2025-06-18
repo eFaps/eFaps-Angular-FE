@@ -1,7 +1,7 @@
 .wrapper {
     height: 80vh;
     gridster {
-        background-color: var(--surface-300);
+        background-color: var(--p-gray-200);
 
         .delete-btn {
             position: absolute;
@@ -14,5 +14,5 @@
     position: absolute;
     z-index: 10;
     bottom: 1rem;
-    right: 4.5rem;
+    right: 7.5rem;
 }

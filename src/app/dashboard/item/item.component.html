@@ -1,15 +1,17 @@
-@if (editMode) {
+<div class="wrapper">
+  @if (editMode) {
   <div class="btn">
     <p-button icon="pi pi-cog" [rounded]="true" (click)="edit()"></p-button>
   </div>
-}
-@switch (widget?.type) {
+  }
+  @switch (widget?.type) {
   @case ('CHART') {
-    <app-chart-widget [widget]="chartWidget"></app-chart-widget>
+  <app-chart-widget [widget]="chartWidget"></app-chart-widget>
   }
   @case ('TABLE') {
-    <app-table-widget [widget]="tableWidget"></app-table-widget>
+  <app-table-widget [widget]="tableWidget"></app-table-widget>
   }
   @default {
   }
-}
+  }
+</div>
