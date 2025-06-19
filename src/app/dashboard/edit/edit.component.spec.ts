@@ -1,3 +1,7 @@
+import {
+  provideHttpClient,
+  withInterceptorsFromDi,
+} from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
@@ -23,6 +27,7 @@ describe('EditComponent', () => {
           },
         },
         { provide: DynamicDialogRef, useValue: {} },
+        provideHttpClient(withInterceptorsFromDi()),
       ],
     });
     fixture = TestBed.createComponent(EditComponent);
