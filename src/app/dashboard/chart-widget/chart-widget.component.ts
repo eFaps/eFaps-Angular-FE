@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
 import { ChartModule } from 'primeng/chart';
 
 import { ChartWidget, WidgetData } from 'src/app/model/dashboard';
@@ -12,6 +12,8 @@ import { DashboardService } from 'src/app/services/dashboard.service';
   imports: [ChartModule],
 })
 export class ChartWidgetComponent {
+  private dashboardservice = inject(DashboardService);
+
   _widget: ChartWidget | undefined;
 
   type:
@@ -27,8 +29,6 @@ export class ChartWidgetComponent {
   data: any;
   options: any;
 
-  constructor(private dashboardservice: DashboardService) {}
-
   @Input()
   set widget(widget: any) {
     if (widget) {
@@ -37,17 +37,18 @@ export class ChartWidgetComponent {
         this.eval(widget);
       } else {
         this._widget = widget;
-        this.options = {
-          plugins: {
-            title: {
-              display: widget?.title != null,
-              text: widget.title,
-            },
-          },
-        };
         this.load();
       }
     }
+    this.options = {
+      plugins: {
+        title: {
+          display: this.widget?.title != null,
+          text: this.widget.title,
+        },
+      },
+    };
+    this.type = this.widget.chartType;
   }
 
   get widget() {
@@ -74,7 +75,7 @@ export class ChartWidgetComponent {
     labels.forEach((label) => {
       for (const datasetName in content[label]) {
         let dataset = datasets.find((it) => {
-          return (it.key = datasetName);
+          return it.key == datasetName;
         });
         if (!dataset) {
           dataset = {

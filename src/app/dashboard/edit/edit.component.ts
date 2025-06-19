@@ -1,6 +1,8 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { AutoCompleteModule } from 'primeng/autocomplete';
 import { ButtonModule } from 'primeng/button';
+import { ChipModule } from 'primeng/chip';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { FloatLabelModule } from 'primeng/floatlabel';
 import { InputTextModule } from 'primeng/inputtext';
@@ -26,6 +28,7 @@ import { DashboardService } from 'src/app/services/dashboard.service';
     InputTextModule,
     FloatLabelModule,
     TextareaModule,
+    AutoCompleteModule,
   ],
 })
 export class EditComponent implements OnInit {
@@ -48,6 +51,11 @@ export class EditComponent implements OnInit {
   functions = [{ label: 'Sumar', value: 'SUM' }];
   function = 'SUM';
   key: string | undefined;
+  chartTypes = [
+    { label: 'Gráfico de barras', value: 'bar' },
+    { label: 'Gráfico de líneas', value: 'line' },
+  ];
+  chartType: 'bar' | 'line' = 'bar';
 
   templates: DashboardTemplate[] = [];
   templateOid: string | undefined = undefined;
@@ -65,15 +73,15 @@ export class EditComponent implements OnInit {
       this.eql = this.widget.eql;
     }
     if (this.widget.type == 'CHART') {
-      if ((this.widget as ChartWidget).groupBy != null) {
-        this.groupBy = (this.widget as ChartWidget).groupBy;
+      let chartWidget = this.widget as ChartWidget;
+
+      if (chartWidget.groupBy != null) {
+        this.groupBy = chartWidget.groupBy;
       }
-      if (
-        (this.widget as ChartWidget).metrics != null &&
-        (this.widget as ChartWidget).metrics!!.length > 0
-      ) {
-        this.key = (this.widget as ChartWidget).metrics!![0].key;
+      if (chartWidget.metrics != null && chartWidget.metrics!!.length > 0) {
+        this.key = chartWidget.metrics!![0].key;
       }
+      this.chartType = chartWidget.chartType;
     }
     if (this.widget.type == 'TEMPLATE') {
       this.templateOid = this.widget.eql;
@@ -92,10 +100,10 @@ export class EditComponent implements OnInit {
     this.widget.title = this.title;
     this.widget.eql = this.eql;
     if (this.widget.type == 'CHART') {
-      (this.widget as ChartWidget).groupBy = this.groupBy;
-      (this.widget as ChartWidget).metrics = [
-        { function: 'SUM', key: this.key!! },
-      ];
+      let chartWidget = this.widget as ChartWidget;
+      chartWidget.groupBy = this.groupBy;
+      chartWidget.metrics = [{ function: 'SUM', key: this.key!! }];
+      chartWidget.chartType = this.chartType;
     }
     if (this.widget.type == 'TEMPLATE') {
       this.widget.eql = this.templateOid;

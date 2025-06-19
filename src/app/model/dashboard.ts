@@ -35,6 +35,7 @@ export interface ChartWidget extends DashboardWidget {
   type: 'CHART';
   groupBy?: string[];
   metrics?: Metric[];
+  chartType: 'bar' | 'line';
 }
 
 export interface TemplateWidget extends DashboardWidget {
