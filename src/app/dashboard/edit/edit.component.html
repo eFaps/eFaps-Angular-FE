@@ -1,36 +1,47 @@
 <div class="p-dialog-content">
-  <span class="p-float-label">
-    <p-select id="type" [options]="types" [(ngModel)]="type"></p-select>
-    <label htmlFor="type">Tipo</label>
-  </span>
-  <span class="p-float-label">
-    <input pInputText id="title" [(ngModel)]="title" />
-    <label htmlFor="title">Titulo</label>
-  </span>
-  <span class="p-float-label">
-    <textarea id="eql" rows="15" cols="150" pInputTextarea [(ngModel)]="eql"> </textarea>
-    <label for="eql">EQL</label>
-  </span>
-  @if (widget.type=='CHART') {
-    <div>
-      <span class="p-float-label">
-        <p-chips id="groupBy" [(ngModel)]="groupBy"></p-chips>
-        <label for="groupBy">Agrupar</label>
-      </span>
-    </div>
+  <div class=" wrapper">
+    <p-floatlabel variant="on">
+      <p-select id="type" [options]="types" [(ngModel)]="type" appendTo="body"></p-select>
+      <label htmlFor="type">Tipo</label>
+    </p-floatlabel>
+    <p-floatlabel variant="on">
+      <input pInputText id="title" [(ngModel)]="title" />
+      <label htmlFor="title">Titulo</label>
+    </p-floatlabel>
+    @if (type == 'CHART' || type == 'TABLE') { 
+    <p-floatlabel variant="on">
+      <textarea id="eql" rows="15" cols="150" pTextarea [(ngModel)]="eql"> </textarea>
+      <label for="eql">EQL</label>
+    </p-floatlabel>
+    }
+    @if (type=='CHART') {
+    <p-floatlabel variant="on">
+      <p-chips id="groupBy" [(ngModel)]="groupBy"></p-chips>
+      <label for="groupBy">Agrupar</label>
+    </p-floatlabel>
+    <p-floatlabel variant="on">
+      <p-select id="function" [options]="functions" [(ngModel)]="function"></p-select>
+      <label htmlFor="function">Funcion</label>
+    </p-floatlabel>
+    <p-floatlabel variant="on">
+      <input pInputText id="key" [(ngModel)]="key" />
+      <label htmlFor="key">Llave</label>
+    </p-floatlabel>
+    }
+     @if (type=='TEMPLATE') {
+    <p-floatlabel variant="on">
+      <p-select id="template" [options]="templates" [(ngModel)]="templateOid" appendTo="body" dataKey="oid"
+        optionLabel="name" optionValue="oid" fluid="true">
+        <ng-template let-template #item>
+          <div class="flex items-center gap-2">
+            <div>{{ template.name }} - {{template.description}}</div>
+          </div>
+        </ng-template>
+      </p-select>
+      <label htmlFor="template">Widget</label>
+    </p-floatlabel>
   }
-  @if (widget.type=='CHART') {
-    <div>
-      <span class="p-float-label">
-        <p-select id="function" [options]="functions" [(ngModel)]="function"></p-select>
-        <label htmlFor="function">Funcion</label>
-      </span>
-      <span class="p-float-label">
-        <input pInputText id="key" [(ngModel)]="key" />
-        <label htmlFor="key">Llave</label>
-      </span>
-    </div>
-  }
+  </div>
 </div>
 <div class="p-dialog-footer">
   <p-button label="Actualizar" severity="warn" (click)="submit()"></p-button>

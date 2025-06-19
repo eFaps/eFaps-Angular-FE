@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { ChartModule } from 'primeng/chart';
 
-import { ChartWidget } from 'src/app/model/dashboard';
+import { ChartWidget, WidgetData } from 'src/app/model/dashboard';
 import { DashboardService } from 'src/app/services/dashboard.service';
 
 @Component({
@@ -30,18 +30,23 @@ export class ChartWidgetComponent {
   constructor(private dashboardservice: DashboardService) {}
 
   @Input()
-  set widget(widget: ChartWidget | undefined) {
-    this._widget = widget;
+  set widget(widget: any) {
     if (widget) {
-      this.options = {
-        plugins: {
-          title: {
-            display: widget?.title != null,
-            text: widget.title,
+      if (widget.data) {
+        this._widget = widget.widget;
+        this.eval(widget);
+      } else {
+        this._widget = widget;
+        this.options = {
+          plugins: {
+            title: {
+              display: widget?.title != null,
+              text: widget.title,
+            },
           },
-        },
-      };
-      this.load();
+        };
+        this.load();
+      }
     }
   }
 
@@ -51,36 +56,41 @@ export class ChartWidgetComponent {
 
   load() {
     this.dashboardservice.getWidget(this.widget!!.identifier).subscribe({
-      next: (content) => {
-        let labels = [];
-        const datasets: any[] = [];
-        for (const label in content) {
-          labels.push(label);
-        }
-        labels.sort();
-
-        labels.forEach((label) => {
-          for (const datasetName in content[label]) {
-            let dataset = datasets.find((it) => {
-              return (it.key = datasetName);
-            });
-            if (!dataset) {
-              dataset = {
-                label: datasetName,
-                key: datasetName,
-                data: [],
-              };
-              datasets.push(dataset);
-            }
-            dataset.data.push(content[label][datasetName]);
-          }
-        });
-
-        this.data = {
-          labels: labels,
-          datasets: datasets,
-        };
+      next: (dto) => {
+        this.eval(dto);
       },
     });
+  }
+
+  eval(dto: WidgetData) {
+    let content = dto.data;
+    let labels = [];
+    const datasets: any[] = [];
+    for (const label in content) {
+      labels.push(label);
+    }
+    labels.sort();
+
+    labels.forEach((label) => {
+      for (const datasetName in content[label]) {
+        let dataset = datasets.find((it) => {
+          return (it.key = datasetName);
+        });
+        if (!dataset) {
+          dataset = {
+            label: datasetName,
+            key: datasetName,
+            data: [],
+          };
+          datasets.push(dataset);
+        }
+        dataset.data.push(content[label][datasetName]);
+      }
+    });
+
+    this.data = {
+      labels: labels,
+      datasets: datasets,
+    };
   }
 }

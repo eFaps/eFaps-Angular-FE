@@ -31,16 +31,16 @@ export class DashboardComponent implements OnInit {
   menuItems = [
     {
       icon: PrimeIcons.FILE_EDIT,
-       label: "Editar paginas",
+      label: 'Editar paginas',
       command: () => {
         this.editPages();
       },
     },
     {
       icon: PrimeIcons.PENCIL,
-      label: "Editar pagina actual",
+      label: 'Editar pagina actual',
       command: () => {
-       this.editCurentPage()
+        this.editCurentPage();
       },
     },
   ];

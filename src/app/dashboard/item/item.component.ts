@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
 import { DialogService } from 'primeng/dynamicdialog';
 
@@ -8,8 +8,11 @@ import { TableWidgetComponent } from '../table-widget/table-widget.component';
 import {
   ChartWidget,
   DashboardWidget,
+  PlaceHolderWidget,
   TableWidget,
+  WidgetData,
 } from 'src/app/model/dashboard';
+import { DashboardService } from 'src/app/services/dashboard.service';
 
 @Component({
   selector: 'app-item',
@@ -18,26 +21,38 @@ import {
   imports: [ButtonModule, ChartWidgetComponent, TableWidgetComponent],
 })
 export class ItemComponent {
+  private dashboardService = inject(DashboardService);
+
   _widget: DashboardWidget | undefined;
   private _editMode: boolean = false;
+
+  templateWidgetData: WidgetData | undefined;
 
   constructor(private dialogService: DialogService) {}
 
   @Input()
   set widget(widget: DashboardWidget | undefined) {
     this._widget = widget;
+    if (widget?.type == 'TEMPLATE') {
+      this.evalTemplate();
+    }
   }
 
   get widget() {
     return this._widget;
   }
 
-  get chartWidget(): ChartWidget {
-    return this.widget as ChartWidget;
-  }
-
-  get tableWidget(): TableWidget {
-    return this.widget as TableWidget;
+  evalTemplate() {
+    this.dashboardService.getWidget(this.widget?.eql!!).subscribe({
+      next: (result) => {
+        if (result && result.widget) {
+          if (this.widget?.title) {
+            result.widget.title = this.widget?.title;
+          }
+          this.templateWidgetData = result;
+        }
+      },
+    });
   }
 
   @Input()
@@ -55,6 +70,7 @@ export class ItemComponent {
         widget: this.widget,
       },
       maximizable: true,
+      closable: true,
     });
     dialogRef.onClose.subscribe({
       next: (widget) => {

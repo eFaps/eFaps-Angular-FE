@@ -17,7 +17,7 @@ export interface DashboardItem {
 }
 
 export interface DashboardWidget {
-  type: 'CHART' | 'TABLE' | 'PLACEHOLDER';
+  type: 'CHART' | 'TABLE' | 'PLACEHOLDER' | 'TEMPLATE';
   identifier: string;
   eql?: string;
   title?: string;
@@ -37,7 +37,22 @@ export interface ChartWidget extends DashboardWidget {
   metrics?: Metric[];
 }
 
+export interface TemplateWidget extends DashboardWidget {
+  type: 'TEMPLATE';
+}
+
 export interface Metric {
   function: 'SUM';
   key: string;
+}
+
+export interface DashboardTemplate {
+  oid: string;
+  name: string;
+  description?: string;
+}
+
+export interface WidgetData {
+  widget: DashboardWidget;
+  data: any;
 }

@@ -3,7 +3,12 @@ import { Injectable } from '@angular/core';
 import { GridsterItem } from 'angular-gridster2';
 import { Observable, tap } from 'rxjs';
 
-import { Dashboard, DashboardPage } from '../model/dashboard';
+import {
+  Dashboard,
+  DashboardPage,
+  DashboardTemplate,
+  WidgetData,
+} from '../model/dashboard';
 import { UtilService } from './util.service';
 
 @Injectable({
@@ -24,9 +29,14 @@ export class DashboardService {
       .pipe(tap((dashboard) => (this.dashboard = dashboard)));
   }
 
-  getWidget(widgetId: string): Observable<any> {
+  getWidget(widgetId: string): Observable<WidgetData> {
     const url = `${this.utilService.evalApiUrl()}/ui/dashboard/widgets/${widgetId}`;
-    return this.http.get<any>(url);
+    return this.http.get<WidgetData>(url);
+  }
+
+  getTemplates(): Observable<DashboardTemplate[]> {
+    const url = `${this.utilService.evalApiUrl()}/ui/dashboard/widget-templates`;
+    return this.http.get<DashboardTemplate[]>(url);
   }
 
   updateDashboard(dashboard: Dashboard) {

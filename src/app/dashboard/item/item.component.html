@@ -6,10 +6,27 @@
   }
   @switch (widget?.type) {
   @case ('CHART') {
-  <app-chart-widget [widget]="chartWidget"></app-chart-widget>
+  <app-chart-widget [widget]="widget"></app-chart-widget>
   }
   @case ('TABLE') {
-  <app-table-widget [widget]="tableWidget"></app-table-widget>
+  <app-table-widget [widget]="widget"></app-table-widget>
+  }
+  @case ('PLACEHOLDER') {
+    @if (widget?.title) {
+      <div class="placeholder">
+        {{widget?.title}}
+      </div>
+    }
+  }
+  @case ('TEMPLATE') {
+    @switch (templateWidgetData?.widget?.type) {
+      @case ('CHART') {
+        <app-chart-widget [widget]="templateWidgetData"></app-chart-widget>
+      }
+      @case ('TABLE') {
+        <app-table-widget [widget]="templateWidgetData"></app-table-widget>
+      }
+    }
   }
   @default {
   }
