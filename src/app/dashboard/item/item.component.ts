@@ -71,6 +71,7 @@ export class ItemComponent {
       },
       maximizable: true,
       closable: true,
+      modal: true
     });
     dialogRef.onClose.subscribe({
       next: (widget) => {
