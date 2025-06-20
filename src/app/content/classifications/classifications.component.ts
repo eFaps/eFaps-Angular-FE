@@ -33,11 +33,8 @@ export class ClassificationsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.classificationService.classifications.subscribe({
-      next: (selected) => {
-        this.preSelected = selected;
-      },
-    });
+    this.preSelected = this.classificationService.classifications();
+
     this.classificationService.getClassifications(this.classUUIDs).subscribe({
       next: (tree) => {
         tree.forEach((entry) => {
@@ -110,11 +107,21 @@ export class ClassificationsComponent implements OnInit {
   }
 
   submit() {
-    this.classificationService.setClassifications(
-      this.selected.map((treeNode) => {
-        return treeNode.data as Classification;
-      }),
-    );
+    const classifications = this.flatten(this.treeNodes);
+    this.classificationService.setClassifications(classifications);
     this.dialogRef.close();
+  }
+
+  private flatten(treeNodes: TreeNode[]): Classification[] {
+    const classifications: Classification[] = [];
+    treeNodes.forEach((treeNode) => {
+      if (this.selected.indexOf(treeNode) > -1) {
+        classifications.push(treeNode.data);
+      }
+      if (treeNode.children) {
+        classifications.push(...this.flatten(treeNode.children));
+      }
+    });
+    return classifications;
   }
 }

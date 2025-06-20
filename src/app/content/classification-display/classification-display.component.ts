@@ -11,18 +11,7 @@ import { ClassificationService } from 'src/app/services/classification.service';
   imports: [ChipModule],
   standalone: true,
 })
-export class ClassificationDisplayComponent implements OnInit {
+export class ClassificationDisplayComponent {
   readonly classifications = input<Classification[]>();
-
-  constructor(private classificationService: ClassificationService) {}
-
-  ngOnInit(): void {
-    this.classificationService.classifications.subscribe({
-      next: (classifications) => {
-        if (classifications != null) {
-          // this.classifications = classifications;
-        }
-      },
-    });
-  }
+  readonly editMode = input<Boolean>();
 }

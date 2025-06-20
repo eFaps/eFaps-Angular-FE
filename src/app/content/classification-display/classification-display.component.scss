@@ -2,4 +2,9 @@
     padding: 0.5rem;
     display: inline-flex;
     gap: 0.5rem;
+
+    &.editMode {
+        margin-left: 50px;
+        min-height: 3rem;
+    }
 }

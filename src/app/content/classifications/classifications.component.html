@@ -1,7 +1,11 @@
 <div class="p-dialog-content">
-<p-tree class="w-full md:w-30rem" [metaKeySelection]="false" selectionMode="checkbox" [propagateSelectionUp]="false"
+  @if(treeNodes.length == 0) {
+        ... cargando ...
+  } @else {
+    <p-tree class="w-full md:w-30rem" [metaKeySelection]="false" selectionMode="checkbox" [propagateSelectionUp]="false"
     [propagateSelectionDown]="false" [value]="treeNodes" [(selection)]="selection"
     (onNodeSelect)="nodeSelect($event)" (onNodeUnselect)="nodeUnselect($event)"></p-tree>
+  }
 </div>
 <div class="p-dialog-footer">
     <p-button label="Actualizar" severity="warn" (click)="submit()"></p-button>

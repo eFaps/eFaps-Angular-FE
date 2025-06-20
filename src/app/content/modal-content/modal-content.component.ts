@@ -1,7 +1,15 @@
-import { Component, OnInit, signal, inject, computed } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  signal,
+  inject,
+  effect,
+  computed,
+} from '@angular/core';
 import { ButtonModule } from 'primeng/button';
 import { DialogModule } from 'primeng/dialog';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { forkJoin, Observable, zipAll } from 'rxjs';
 
 import { ClassificationDisplayComponent } from '../classification-display/classification-display.component';
 import { SectionsComponent } from '../sections/sections.component';
@@ -25,126 +33,135 @@ import { ValueService } from 'src/app/services/value.service';
   ],
   standalone: true,
 })
-export class ModalContentComponent implements OnInit {
+export class ModalContentComponent {
   private valueService = inject(ValueService);
   private validationService = inject(ValidationService);
   private classificationService = inject(ClassificationService);
   private execService = inject(ExecService);
+  private dialogRef = inject(DynamicDialogRef);
 
-  outline = signal<Outline>({ oid: '', sections: [], header: '' });
-  sections = computed(() => {
-    console.log('hier');
-    return this.outline().sections;
-  });
+  sections = signal<Section[]>([]);
+  classifications = this.classificationService.classifications;
+
+  outline: Outline;
   callingMenu: MenuEntry;
-  values: Map<String, any> | undefined;
-  classifications: Classification[] | undefined;
   parentOid: string | undefined;
 
-  constructor(
-    config: DynamicDialogConfig,
-    private dialogRef: DynamicDialogRef,
-  ) {
-    this.valueService.reset();
-    this.validationService.reset();
-    this.outline.set(config.data.outline);
+  //values: Map<String, any> | undefined;
 
-    this.callingMenu = config.data.item;
-    this.parentOid = config.data.parentOid;
-    config.header = this.outline()?.header;
+  private sectionsStore: Section[] = [];
+  constructor(config: DynamicDialogConfig) {
+    config.header = config.data.outline.header;
     config.maximizable = true;
     config.closable = true;
-    config.modal = true
-    if (this.outline()?.classifications) {
-      /**
-      this.classificationService.setClassifications(
-        //this.outline.classifications,
-      );
-       */
-    }
-    this.dialogRef.onClose.subscribe({
-      next: (_) => {
-        this.classificationService.setClassifications([]);
-      },
+    config.modal = true;
+
+    const data = config.data;
+    this.callingMenu = data.item;
+    this.outline = data.outline;
+
+    this.init(data);
+    this.sectionsStore = data.outline.sections;
+
+    effect(() => {
+      this.onClassificationChange(this.classificationService.classifications());
     });
+    effect(() => {
+      this.sectionsStore = this.sections();
+    });
+    this.classificationService.setClassifications(data.outline.classifications);
   }
 
-  ngOnInit(): void {
-    this.valueService.values.subscribe({
-      next: (values) => {
-        console.log(values);
-        this.values = values;
-      },
-    });
-    if (this.outline()?.oid != 'none') {
+  private init(data: any) {
+    this.valueService.reset();
+    this.validationService.reset();
+
+    if (this.outline.oid != 'none') {
       this.valueService.addEntry({
         name: 'eFapsOID',
-        value: this.outline()!.oid,
+        value: this.outline.oid,
       });
     }
-    if (this.parentOid != null) {
+    this.parentOid = data.parentOid;
+    if (this.parentOid) {
       this.valueService.addEntry({
         name: 'eFapsParentOID',
         value: this.parentOid,
       });
     }
-    /** 
-    this.classificationService.classifications.subscribe({
-      next: (classifications) => {
-        this.classifications = classifications;
-        const toBeRemoved: Section[] = [];
-        this.outline.sections.forEach((section) => {
-          if (section.ref != null) {
-            if (
-              classifications.find((clazz) => {
-                return clazz.id == section.ref;
-              }) == null
-            ) {
-              toBeRemoved.push(section);
-            }
-          }
-        });
+  }
 
-        toBeRemoved.forEach((section) => {
-          const index = this.outline.sections.indexOf(section);
-          if (index !== -1) {
-            this.outline.sections.splice(index, 1);
-          }
-        });
+  onClassificationChange(classifications: Classification[]) {
+    const currentSections = this.sectionsStore;
+    const targetSections: Section[] = [];
+    const classSections: Map<string, Section[]> = new Map();
 
-        classifications.forEach((classification) => {
-          let existing =
-            this.outline.classifications != null &&
-            this.outline.classifications.find((clazz) => {
-              return clazz.id == classification.id;
-            }) != null;
-          if (!existing) {
-            this.classificationService.getSections(classification).subscribe({
-              next: (sections) => {
-                this.outline.sections.push(...sections);
-              },
-            });
-          }
-        });
-      },
+    // build a temp mapping
+    currentSections.forEach((section) => {
+      if (section.ref != null) {
+        let sections: Section[];
+        if (classSections.has(section.ref)) {
+          sections = classSections.get(section.ref)!;
+        } else {
+          sections = [];
+        }
+        sections.push(section);
+        classSections.set(section.ref, sections);
+      } else {
+        targetSections.push(section);
+      }
     });
-    */
+    const sectionCall: Observable<Section[]>[] = [];
+    // verify that all classification sections are mapped
+    classifications.forEach((clazz) => {
+      if (!classSections.has(clazz.id)) {
+        sectionCall.push(this.classificationService.getSections(clazz));
+      }
+    });
+
+    if (sectionCall.length > 0) {
+      forkJoin(sectionCall).subscribe({
+        next: (sectionsResp) => {
+          sectionsResp.forEach((sections) => {
+            classSections.set(sections[0].ref!!, sections);
+          });
+          this.updateSections(classifications, targetSections, classSections);
+        },
+      });
+    } else {
+      this.updateSections(classifications, targetSections, classSections);
+    }
+  }
+
+  private updateSections(
+    classifications: Classification[],
+    targetSections: Section[],
+    classSections: Map<string, Section[]>,
+  ) {
+    classifications.forEach((clazz) => {
+      targetSections.push(...classSections.get(clazz.id)!!);
+    });
+    this.sections.set(targetSections);
   }
 
   submit() {
-    if (this.validationService.isValid(this.values)) {
-      if (this.classifications != null) {
-        this.values?.set('eFapsClassifications', [
-          ...this.classifications!!.map((clazz) => {
-            return clazz.id;
-          }),
-        ]);
-      }
-      this.execService.exec(this.callingMenu.id, this.values).subscribe({
-        next: (execResponse) => {
-          this.dialogRef.close(execResponse);
-        },
-      });
-    }
+    this.valueService.values.subscribe({
+      next: (values) => {
+        if (this.validationService.isValid(values)) {
+          if (this.classifications != null) {
+            values?.set('eFapsClassifications', [
+              ...this.classifications()!!.map((clazz) => {
+                return clazz.id;
+              }),
+            ]);
+          }
+          this.execService.exec(this.callingMenu.id, values).subscribe({
+            next: (execResponse) => {
+              this.dialogRef.close(execResponse);
+            },
+          });
+        }
+      },
+    });
   }
 }

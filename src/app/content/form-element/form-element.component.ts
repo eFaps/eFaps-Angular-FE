@@ -385,6 +385,8 @@ export class FormElementComponent implements OnInit {
         classUUIDs: this.formItem?.value,
       },
       maximizable: true,
+      closable: true,
+      modal: true,
     });
   }
 

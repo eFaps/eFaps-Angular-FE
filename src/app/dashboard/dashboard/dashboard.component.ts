@@ -96,7 +96,7 @@ export class DashboardComponent implements OnInit {
       maximizable: true,
       closable: true,
       header: 'Editar paginas',
-      modal: true
+      modal: true,
     });
     dialogRef.onClose.subscribe({
       next: () => {

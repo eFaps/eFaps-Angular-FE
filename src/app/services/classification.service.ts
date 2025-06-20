@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { Injectable, signal } from '@angular/core';
+import { Observable } from 'rxjs';
 
 import { Classification } from '../model/classification';
 import { Section } from '../model/content';
@@ -10,8 +10,7 @@ import { UtilService } from './util.service';
   providedIn: 'root',
 })
 export class ClassificationService {
-  private currentValue = new BehaviorSubject<Classification[]>([]);
-  classifications = this.currentValue.asObservable();
+  classifications = signal<Classification[]>([]);
 
   constructor(
     private http: HttpClient,
@@ -26,7 +25,7 @@ export class ClassificationService {
   }
 
   setClassifications(classifications: Classification[]) {
-    this.currentValue.next(classifications);
+    this.classifications.set(classifications);
   }
 
   getSections(classification: Classification): Observable<Section[]> {

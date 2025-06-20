@@ -37,6 +37,7 @@
                 position: inherit;
             }
         }
+
         .field-radio {
             line-height: 1rem;
             padding-bottom: 5px;
@@ -49,7 +50,7 @@
 
     .checkbox {
         line-height: 2rem;
-        
+
         ::ng-deep .p-checkbox {
             vertical-align: middle;
         }
@@ -119,4 +120,16 @@ p-dropdown {
 
 .dragDrop {
     min-height: 100px;
+}
+
+.classification {
+    position: relative;
+    height: 0;
+
+    .move {
+        position: relative;
+        top: -60px;
+        left: -10px;
+    }
+
 }

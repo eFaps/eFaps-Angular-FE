@@ -1,5 +1,5 @@
-<div class="wrapper">
-  @for (classification of classifications(); track classification) {
+<div class="wrapper" [class.editMode]="editMode()">
+  @for (classification of classifications(); track classification.id) {
     <p-chip [label]="classification.label"></p-chip>
   }
 </div>

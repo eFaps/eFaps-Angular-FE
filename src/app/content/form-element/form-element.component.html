@@ -87,7 +87,11 @@
             <p-button [label]="formItem?.label" (click)="executeFieldCmd()"></p-button>
         </ng-container>
         <ng-container *ngSwitchCase="'CLASSIFICATION'">
-            <p-button icon="pi pi-bookmark" size="small" severity="secondary" (click)="classSel()"></p-button>
+            <div class="classification">
+                <div class="move">
+                <p-button icon="pi pi-bookmark" size="small" severity="secondary" (click)="classSel()"></p-button>
+                </div>
+            </div>
         </ng-container>
         <ng-container *ngSwitchCase="'IMAGE'">
             @if(readOnlyValue != null) {

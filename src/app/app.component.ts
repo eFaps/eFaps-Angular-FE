@@ -115,7 +115,7 @@ export class AppComponent implements OnInit {
       },
       error: () => {
         this.userLookuped = true;
-      }
+      },
     });
     var color = 'indigo';
     if (this.palette) {
