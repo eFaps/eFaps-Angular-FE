@@ -1,7 +1,8 @@
 @if (isLoading()) {
   <p-progressBar mode="indeterminate" [style]="{ position: 'absolute', height: '6px', width: '100%', 'z-index':'11'}"></p-progressBar>
 }
-@if (user != undefined) {
+
+@if (user) {
   <p-menubar [model]="menuItems()" [autoDisplay]="true" [autoHide]="true" [style]="{ position: 'relative', 'z-index':'10'}">
     <ng-template #start>
       <img src="assets/logo.svg" height="40" class="mr-2 icon" (click)="home()" />
@@ -74,12 +75,18 @@
       </ng-template>
     </p-table>
   </p-popover>
-}
-<router-outlet></router-outlet>
-@if (showRestoreSearch()) {
+  <router-outlet></router-outlet>
   @if (showRestoreSearch()) {
-    <div class="searchBtn">
-      <p-button icon="pi pi-search" [rounded]="true" severity="success" (click)="restoreSearch()"></p-button>
+    @if (showRestoreSearch()) {
+      <div class="searchBtn">
+        <p-button icon="pi pi-search" [rounded]="true" severity="success" (click)="restoreSearch()"></p-button>
+      </div>
+    }
+  }
+} @else {
+  @if (userLookuped) {
+    <div class="wrongDomain">
+      <p-button label="Sign out" icon="pi pi-sign-out" (click)="signOut()"></p-button>
     </div>
   }
 }

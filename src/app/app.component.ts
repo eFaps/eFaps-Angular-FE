@@ -75,6 +75,8 @@ export class AppComponent implements OnInit {
 
   _user: User | undefined;
 
+  userLookuped = false;
+
   showCompanySelector: boolean = false;
   searchResult: SearchResult | undefined;
   searchElements: any[] = [];
@@ -109,7 +111,11 @@ export class AppComponent implements OnInit {
       next: (user) => {
         this.user = user;
         this.primeng.translation = localeEs.es;
+        this.userLookuped = true;
       },
+      error: () => {
+        this.userLookuped = true;
+      }
     });
     var color = 'indigo';
     if (this.palette) {
