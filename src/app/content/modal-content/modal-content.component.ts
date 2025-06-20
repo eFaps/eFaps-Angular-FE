@@ -64,7 +64,10 @@ export class ModalContentComponent {
     this.sectionsStore = data.outline.sections;
 
     effect(() => {
-      this.onClassificationChange(this.classificationService.classifications());
+      let classifications = this.classificationService.classifications();
+      if (classifications) {
+        this.onClassificationChange(classifications);
+      }
     });
     effect(() => {
       this.sectionsStore = this.sections();
