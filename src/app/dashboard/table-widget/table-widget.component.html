@@ -1,7 +1,7 @@
 <p-table [columns]="cols" [value]="elements" styleClass="p-datatable-sm" scrollHeight="flex" [scrollable]="true">
   <ng-template pTemplate="caption">
     @if (widget?.title) {
-      <div>
+      <div class="title">
         {{widget?.title}}
       </div>
     }
