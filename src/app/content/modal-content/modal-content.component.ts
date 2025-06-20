@@ -61,18 +61,22 @@ export class ModalContentComponent {
     this.outline = data.outline;
 
     this.init(data);
-    this.sectionsStore = data.outline.sections;
+    if (this.outline.classifications) {
+      this.sectionsStore = data.outline.sections;
 
-    effect(() => {
-      let classifications = this.classificationService.classifications();
-      if (classifications) {
-        this.onClassificationChange(classifications);
-      }
-    });
-    effect(() => {
-      this.sectionsStore = this.sections();
-    });
-    this.classificationService.setClassifications(data.outline.classifications);
+      effect(() => {
+        let classifications = this.classificationService.classifications();
+        if (classifications) {
+          this.onClassificationChange(classifications);
+        }
+      });
+      effect(() => {
+        this.sectionsStore = this.sections();
+      });
+      this.classificationService.setClassifications(data.outline.classifications);
+    } else {
+      this.sections.set(data.outline.sections);
+    }
   }
 
   private init(data: any) {
