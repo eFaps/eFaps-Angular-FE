@@ -1,11 +1,4 @@
-import {
-  Component,
-  OnInit,
-  signal,
-  inject,
-  effect,
-  computed,
-} from '@angular/core';
+import { Component, signal, inject, effect } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
 import { DialogModule } from 'primeng/dialog';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
@@ -73,7 +66,9 @@ export class ModalContentComponent {
       effect(() => {
         this.sectionsStore = this.sections();
       });
-      this.classificationService.setClassifications(data.outline.classifications);
+      this.classificationService.setClassifications(
+        data.outline.classifications,
+      );
     } else {
       this.sections.set(data.outline.sections);
     }
@@ -152,23 +147,20 @@ export class ModalContentComponent {
   }
 
   submit() {
-    this.valueService.values.subscribe({
-      next: (values) => {
-        if (this.validationService.isValid(values)) {
-          if (this.classifications != null) {
-            values?.set('eFapsClassifications', [
-              ...this.classifications()!!.map((clazz) => {
-                return clazz.id;
-              }),
-            ]);
-          }
-          this.execService.exec(this.callingMenu.id, values).subscribe({
-            next: (execResponse) => {
-              this.dialogRef.close(execResponse);
-            },
-          });
-        }
-      },
-    });
+    let values = this.valueService.values();
+    if (this.validationService.isValid(values)) {
+      if (this.classifications != null) {
+        values?.set('eFapsClassifications', [
+          ...this.classifications()!!.map((clazz) => {
+            return clazz.id;
+          }),
+        ]);
+      }
+      this.execService.exec(this.callingMenu.id, values).subscribe({
+        next: (execResponse) => {
+          this.dialogRef.close(execResponse);
+        },
+      });
+    }
   }
 }

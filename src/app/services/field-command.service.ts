@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { inject, Injectable, linkedSignal } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
 import { FieldCommandResponse } from '../model/field-command';
@@ -10,27 +10,19 @@ import { ValueService } from './value.service';
   providedIn: 'root',
 })
 export class FieldCommandService {
-  private values: Map<String, any> | undefined;
+  private http = inject(HttpClient);
+  private utilService = inject(UtilService);
+  private valueService = inject(ValueService);
 
   private currentResponse = new BehaviorSubject<
     FieldCommandResponse | undefined
   >(undefined);
   response = this.currentResponse.asObservable();
 
-  constructor(
-    private http: HttpClient,
-    private utilService: UtilService,
-    private valueService: ValueService,
-  ) {
-    this.valueService.values.subscribe({
-      next: (values) => (this.values = values),
-    });
-  }
-
   execute(fieldId: string, index?: number) {
     const url = `${this.utilService.evalApiUrl()}/ui/field-command/${fieldId}`;
-    const values: any =
-      this.values != null ? Object.fromEntries(this.values) : {};
+    const val = this.valueService.values();
+    const values: any = val != null ? Object.fromEntries(val) : {};
     if (index != null) {
       values['eFapsRSR'] = index;
     }

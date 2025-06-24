@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { FieldUpdateResponse } from '../model/field-update';
@@ -10,23 +10,14 @@ import { ValueService } from './value.service';
   providedIn: 'root',
 })
 export class FieldUpdateService {
-  values: Map<String, any> | undefined;
-
-  constructor(
-    private http: HttpClient,
-    private utilService: UtilService,
-    private valueService: ValueService,
-  ) {
-    this.valueService.values.subscribe({
-      next: (values) => (this.values = values),
-    });
-  }
+  private http = inject(HttpClient);
+  private utilService = inject(UtilService);
+  private valueService = inject(ValueService);
 
   execute(fieldId: string, index?: number): Observable<FieldUpdateResponse> {
     const url = `${this.utilService.evalApiUrl()}/ui/field-update/${fieldId}`;
-
-    const values: any =
-      this.values != null ? Object.fromEntries(this.values) : {};
+    const val = this.valueService.values();
+    const values: any = val != null ? Object.fromEntries(val) : {};
     if (index != null) {
       values['eFapsRSR'] = index;
     }

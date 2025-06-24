@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
@@ -7,15 +7,12 @@ import { BehaviorSubject } from 'rxjs';
 export class ValueService {
   private valueMap: Map<String, any> | undefined;
 
-  private currentValue = new BehaviorSubject<Map<String, any>>(new Map());
-  values = this.currentValue.asObservable();
+  values = signal<Map<String, any>>(new Map());
 
   private currentUpdate = new BehaviorSubject<
     { name: string; value: any; index?: number } | undefined
   >(undefined);
   update = this.currentUpdate.asObservable();
-
-  constructor() {}
 
   addEntry(entry: { name: string; value: any }, index?: number) {
     if (this.valueMap == null) {
@@ -33,7 +30,7 @@ export class ValueService {
     } else {
       this.valueMap.set(entry.name, entry.value);
     }
-    this.currentValue.next(this.valueMap);
+    this.values.set(this.valueMap);
   }
 
   reset() {
@@ -58,7 +55,7 @@ export class ValueService {
         this.valueMap.set(name, newArray);
       }
     });
-    this.currentValue.next(this.valueMap);
+    this.values.set(this.valueMap);
   }
 
   addSetEntry(entry: {
@@ -78,7 +75,7 @@ export class ValueService {
       setValue[entry.rowId] = new Map();
     }
     setValue[entry.rowId][entry.name] = entry.value;
-    this.currentValue.next(this.valueMap);
+    this.values.set(this.valueMap);
   }
 
   removeSetEntry(setName: string, rowId: string | number) {
@@ -88,7 +85,7 @@ export class ValueService {
         delete setValue[rowId];
         console.log();
       }
-      this.currentValue.next(this.valueMap);
+      this.values.set(this.valueMap);
     }
   }
 }

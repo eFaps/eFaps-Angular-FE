@@ -89,9 +89,7 @@ export class SearchContentComponent implements OnInit {
 
   ngOnInit(): void {
     this.valueService.reset();
-    this.valueService.values.subscribe({
-      next: (values) => (this.values = values),
-    });
+    this.values = this.valueService.values();
   }
 
   getMenuItem(item: Search): MenuItem {
