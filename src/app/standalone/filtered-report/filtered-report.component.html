@@ -13,8 +13,8 @@
                 }
                 @case ('PICKLIST') {
                 <div class="filterElement">
-                    <div class="pickListHeader">
-                        <span>{{filter.label}}</span>
+                  <div class="pickListHeader">
+                    <span>{{filter.label}}</span>
                   </div>
                   <p-picklist [source]="pickListElements[filter.name].source" 
                         [target]="pickListElements[filter.name].target" 
@@ -30,6 +30,19 @@
                                 {{ item.label }}
                         </ng-template>
                     </p-picklist>
+                </div>
+                }
+                @case ('RADIO') {
+                <div class="filterElement">
+                    <div class="radioHeader">
+                    <span>{{filter.label}}</span>
+                  </div>
+                @for (option of optionElements[filter.name]; track option;  let idx = $index) {
+                    <div class="field-radio">
+                        <p-radioButton [inputId]="filter.name + 'opt' + idx" [value]="option.value" formControlName="{{filter.name}}"/>
+                        <label [for]="filter.name + 'opt' + idx">{{ option.label }}</label>
+                    </div>    
+                }
                 </div>
                 }
             }

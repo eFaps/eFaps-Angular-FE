@@ -1,15 +1,18 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Component, OnInit, input } from '@angular/core';
+import { Component, OnInit, inject, input } from '@angular/core';
 import {
   FormControl,
   FormGroup,
+  FormsModule,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { LocalStorageService } from 'ngx-localstorage';
 import { ButtonModule } from 'primeng/button';
 import { DatePickerModule } from 'primeng/datepicker';
 import { FloatLabelModule } from 'primeng/floatlabel';
 import { PickListModule } from 'primeng/picklist';
+import { RadioButtonModule } from 'primeng/radiobutton';
 
 import { FormItem, Option } from 'src/app/model/content';
 import { ModuleData, UIModule } from 'src/app/model/module';
@@ -20,17 +23,20 @@ import { UtilService } from 'src/app/services/util.service';
 @Component({
   selector: 'app-filtered-report',
   imports: [
+    FormsModule,
     ReactiveFormsModule,
     SafeHtmlPipe,
     DatePickerModule,
     FloatLabelModule,
     ButtonModule,
     PickListModule,
+    RadioButtonModule
   ],
   templateUrl: './filtered-report.component.html',
   styleUrl: './filtered-report.component.scss',
 })
 export class FilteredReportComponent implements OnInit {
+  private readonly storageService = inject(LocalStorageService);
   readonly uimodule = input.required<UIModule>();
   readonly data = input<ModuleData>();
 
@@ -41,6 +47,8 @@ export class FilteredReportComponent implements OnInit {
   loading = false;
 
   pickListElements: any = {};
+
+  optionElements: any = {}
 
   sourceStyle = "{ height: '20rem', display: 'block' }";
   constructor(
@@ -106,10 +114,16 @@ export class FilteredReportComponent implements OnInit {
         case 'PICKLIST':
           this.initPickList(formItem);
           break;
+        case 'RADIO':
+          this.initOptions(formItem);
+          this.formGroup?.addControl(
+            formItem.name,
+            new FormControl<string | null>(formItem.value),
+          );
+          break;
         case 'DATETIME':
         case 'DATETIMELABEL':
         case 'INPUT':
-        case 'RADIO':
         case 'DROPDOWN':
         case 'BITENUM':
         case 'AUTOCOMPLETE':
@@ -183,25 +197,32 @@ export class FilteredReportComponent implements OnInit {
     }
   }
 
+  initOptions(formItem: FormItem) {
+    if (typeof this.optionElements[formItem.name] == 'undefined') {
+        this.optionElements = {
+          ...this.optionElements,
+          [formItem.name]: []
+        };
+    }
+     this.optionElements[formItem.name] = formItem.options;
+  }
+
   export(mime: string) {
     this.reload(mime);
   }
 
   private persist() {
-    localStorage.setItem(
-      this.uimodule()!.id,
-      JSON.stringify({
+
+    this.storageService.set<FilterReportState>(this.uimodule()!.id, {
         date: Date.now(),
         filters: this.filters,
-      }),
-    );
+      })
   }
 
   private restore() {
     let ret = false;
-    const strVal = localStorage.getItem(this.uimodule()!.id);
-    if (strVal) {
-      const state: FilterReportState = JSON.parse(strVal);
+    const state = this.storageService.get<FilterReportState>(this.uimodule()!.id)
+    if (state)  {
       const elapsed = new Date().getTime() - state.date;
       if (elapsed < 3600000) {
         this.applyFilters(state.filters);
