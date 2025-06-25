@@ -1,5 +1,5 @@
 <div class="wrapper">
-    <p-button [icon]="icon" (onClick)="toggleDarkMode()"/>
+    <p-button [icon]="icon()" (onClick)="toggleDarkMode()"/>
     <p-button [rounded]="true" id="blue" title="blue" (click)="updateColor('blue')">&nbsp;</p-button>
     <p-button [rounded]="true" id="indigo" title="indigo" (click)="updateColor('indigo')">&nbsp;</p-button>
     <p-button [rounded]="true" id="purple" title="purple" (click)="updateColor('purple')">&nbsp;</p-button>

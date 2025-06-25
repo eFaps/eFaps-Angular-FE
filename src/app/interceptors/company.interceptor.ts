@@ -4,8 +4,8 @@ import {
   HttpInterceptor,
   HttpRequest,
 } from '@angular/common/http';
-import { Injectable, effect } from '@angular/core';
-import { LocalStorage } from '@efaps/ngx-store';
+import { Injectable, effect, inject } from '@angular/core';
+import { LocalStorageService } from 'ngx-localstorage';
 import { Observable } from 'rxjs';
 
 import { Company } from '../model/user';
@@ -13,12 +13,20 @@ import { UserService } from '../services/user.service';
 
 @Injectable()
 export class CompanyInterceptor implements HttpInterceptor {
-  @LocalStorage() currentCompany: Company | undefined;
+  private readonly storageService = inject(LocalStorageService);
+  private readonly userService = inject(UserService);
 
-  constructor(private userService: UserService) {
-    localStorage.getItem('');
+  currentCompany: Company | null | undefined =
+    this.storageService.get<Company>('currentCompany');
+
+  constructor() {
     effect(() => {
       this.currentCompany = this.userService.company();
+      if (this.currentCompany) {
+        this.storageService.set<Company>('currentCompany', this.currentCompany);
+      } else {
+        this.storageService.remove('currentCompany');
+      }
     });
   }
 

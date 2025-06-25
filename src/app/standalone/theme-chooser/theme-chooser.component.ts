@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { LocalStorage } from '@efaps/ngx-store';
-import { updatePrimaryPalette } from '@primeng/themes';
+import { Component, inject, linkedSignal, OnInit } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
 import { TooltipModule } from 'primeng/tooltip';
+
+import { Theme, ThemeService } from 'src/app/services/theme.service';
 
 @Component({
   selector: 'app-theme-chooser',
@@ -10,50 +10,19 @@ import { TooltipModule } from 'primeng/tooltip';
   templateUrl: './theme-chooser.component.html',
   styleUrls: ['./theme-chooser.component.scss'],
 })
-export class ThemeChooserComponent implements OnInit {
-  icon: string = 'pi pi-sun';
+export class ThemeChooserComponent {
+  private readonly themeService = inject(ThemeService);
 
-  @LocalStorage() palette: string | undefined;
-
-  constructor() {}
-
-  ngOnInit(): void {
-    const element = document.querySelector('html');
-    if (element) {
-      if (element.classList.contains('dark-mode')) {
-        this.icon = 'pi pi-sun';
-      } else {
-        this.icon = 'pi pi-moon';
-      }
-    }
-  }
+  icon = linkedSignal<string>(() => {
+    const theme = this.themeService.theme();
+    return theme.darkMode ? 'pi pi-sun' : 'pi pi-moon';
+  });
 
   toggleDarkMode() {
-    const element = document.querySelector('html');
-    if (element) {
-      element.classList.toggle('dark-mode');
-      if (element.classList.contains('dark-mode')) {
-        this.icon = 'pi pi-sun';
-      } else {
-        this.icon = 'pi pi-moon';
-      }
-    }
+    this.themeService.toggleDarkMode();
   }
 
   updateColor(color: string) {
-    this.palette = color;
-    updatePrimaryPalette({
-      50: `{${color}.50}`,
-      100: `{${color}.100}`,
-      200: `{${color}.200}`,
-      300: `{${color}.300}`,
-      400: `{${color}.400}`,
-      500: `{${color}.500}`,
-      600: `{${color}.600}`,
-      700: `{${color}.700}`,
-      800: `{${color}.800}`,
-      900: `{${color}.900}`,
-      950: `{${color}.950}`,
-    });
+    this.themeService.updateColor(color);
   }
 }

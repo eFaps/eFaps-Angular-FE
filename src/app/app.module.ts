@@ -11,13 +11,13 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { RouteReuseStrategy } from '@angular/router';
-import { WebStorageModule } from '@efaps/ngx-store';
 import Material from '@primeng/themes/material';
 import {
   INCLUDE_BEARER_TOKEN_INTERCEPTOR_CONFIG,
   includeBearerTokenInterceptor,
   provideKeycloak,
 } from 'keycloak-angular';
+import { NGX_LOCAL_STORAGE_CONFIG } from 'ngx-localstorage';
 import { MessageService } from 'primeng/api';
 import { BreadcrumbModule } from 'primeng/breadcrumb';
 import { ButtonModule } from 'primeng/button';
@@ -61,7 +61,6 @@ registerLocaleData(localeEs, 'es');
     TableModule,
     DividerModule,
     ThemeChooserComponent,
-    WebStorageModule,
     BreadcrumbModule,
   ],
   providers: [
@@ -70,6 +69,13 @@ registerLocaleData(localeEs, 'es');
     { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     { provide: RouteReuseStrategy, useClass: RoutePathReuseStrategy },
+    {
+      provide: NGX_LOCAL_STORAGE_CONFIG,
+      useValue: {
+        prefix: 'sc',
+        delimiter: '_',
+      },
+    },
     { provide: LOCALE_ID, useValue: 'es' },
     provideHttpClient(
       withInterceptorsFromDi(),

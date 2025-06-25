@@ -11,8 +11,6 @@ import {
 } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { Router } from '@angular/router';
-import { LocalStorage } from '@efaps/ngx-store';
-import { updatePrimaryPalette } from '@primeng/themes';
 import { KEYCLOAK_EVENT_SIGNAL, KeycloakEventType } from 'keycloak-angular';
 import Keycloak from 'keycloak-js';
 import localeEs from 'primelocale/es.json';
@@ -41,6 +39,7 @@ import {
 } from './services/menu.service';
 import { SearchService } from './services/search.service';
 import { StyleService } from './services/style.service';
+import { ThemeService } from './services/theme.service';
 import { UserService } from './services/user.service';
 import { isQA } from './services/util.service';
 import { CompanyChooserComponent } from './standalone/company-chooser/company-chooser.component';
@@ -57,6 +56,7 @@ export class AppComponent implements OnInit {
   private readonly primeng: PrimeNG = inject(PrimeNG);
   private readonly keycloak = inject(Keycloak);
   private readonly renderer = inject(Renderer2);
+  private readonly themeService = inject(ThemeService);
 
   title = 'eFaps-Angular-FE';
 
@@ -81,8 +81,6 @@ export class AppComponent implements OnInit {
   searchResult: SearchResult | undefined;
   searchElements: any[] = [];
   version = environment.version;
-
-  @LocalStorage() palette: string | undefined;
 
   constructor(
     private router: Router,
@@ -117,23 +115,7 @@ export class AppComponent implements OnInit {
         this.userLookuped = true;
       },
     });
-    var color = 'indigo';
-    if (this.palette) {
-      color = this.palette;
-    }
-    updatePrimaryPalette({
-      50: `{${color}.50}`,
-      100: `{${color}.100}`,
-      200: `{${color}.200}`,
-      300: `{${color}.300}`,
-      400: `{${color}.400}`,
-      500: `{${color}.500}`,
-      600: `{${color}.600}`,
-      700: `{${color}.700}`,
-      800: `{${color}.800}`,
-      900: `{${color}.900}`,
-      950: `{${color}.950}`,
-    });
+    this.themeService.init();
     if (isQA()) {
       this.renderer.addClass(document.body, 'qa');
     }
