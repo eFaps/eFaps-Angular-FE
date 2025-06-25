@@ -11,15 +11,6 @@
 
         .pickListHeader {
             min-width: 350px;
-            >span {
-                padding: 0.5rem;
-                font-weight: bolder;
-            }
-            div {
-                display: flex; 
-                justify-content: space-around;
-            }
-
         }
     }
 
@@ -40,5 +31,7 @@
         }
      
     }
-
+}
+::ng-deep .p-listbox-header {
+    background-color: var(--p-primary-50);
 }

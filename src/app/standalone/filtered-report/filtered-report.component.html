@@ -15,17 +15,21 @@
                 <div class="filterElement">
                     <div class="pickListHeader">
                         <span>{{filter.label}}</span>
-                        <div>
-                            <span>Inactivo</span><span>Activo</span> 
-                        </div>
-                    </div>
-                    <p-picklist [source]="pickListElements[filter.name].source" [target]="pickListElements[filter.name].target" [dragdrop]="true"  
-                        showSourceControls="false" showTargetControls="false" targetHeader="Activo" sourceHeader="Inactivo">
+                  </div>
+                  <p-picklist [source]="pickListElements[filter.name].source" 
+                        [target]="pickListElements[filter.name].target" 
+                        [dragdrop]="true"  
+                        showSourceControls="false" 
+                        showTargetControls="false" 
+                        targetHeader="Activo" 
+                        sourceHeader="Inactivo" 
+                        stripedRows="false"
+                        [responsive]="false"
+                        [sourceStyle]="{ height: '20rem', display: 'block' }">
                         <ng-template let-item #item>
                                 {{ item.label }}
                         </ng-template>
                     </p-picklist>
-                
                 </div>
                 }
             }
