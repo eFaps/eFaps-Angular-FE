@@ -26,7 +26,6 @@ import { UtilService } from 'src/app/services/util.service';
     FloatLabelModule,
     ButtonModule,
     PickListModule,
-    
   ],
   templateUrl: './filtered-report.component.html',
   styleUrl: './filtered-report.component.scss',
@@ -43,7 +42,7 @@ export class FilteredReportComponent implements OnInit {
 
   pickListElements: any = {};
 
-  sourceStyle = "{ height: '20rem', display: 'block' }"
+  sourceStyle = "{ height: '20rem', display: 'block' }";
   constructor(
     private http: HttpClient,
     private utilService: UtilService,
