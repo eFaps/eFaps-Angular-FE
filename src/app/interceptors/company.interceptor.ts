@@ -21,11 +21,10 @@ export class CompanyInterceptor implements HttpInterceptor {
 
   constructor() {
     effect(() => {
-      this.currentCompany = this.userService.company();
-      if (this.currentCompany) {
+      const company = this.userService.company();
+      if (company) {
+        this.currentCompany = company;
         this.storageService.set<Company>('currentCompany', this.currentCompany);
-      } else {
-        this.storageService.remove('currentCompany');
       }
     });
   }

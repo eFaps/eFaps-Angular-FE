@@ -1,4 +1,5 @@
 import { Component, OnInit, inject } from '@angular/core';
+import { LocalStorageService } from 'ngx-localstorage';
 import { MenuItem, PrimeIcons } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
 import { DialogService } from 'primeng/dynamicdialog';
@@ -19,6 +20,8 @@ import { DashboardService } from 'src/app/services/dashboard.service';
 })
 export class DashboardComponent implements OnInit {
   private dialogService = inject(DialogService);
+  private readonly storageService = inject(LocalStorageService);
+  private storedStepIdx = this.storageService.get<number>('dashboardStepIdx');
 
   currentPage: DashboardPage | undefined;
   pages: DashboardPage[] = [];
@@ -26,7 +29,9 @@ export class DashboardComponent implements OnInit {
   buttonClass = 'p-button-rounded';
   buttonIcon = 'pi pi-lock';
   steps: MenuItem[] = [];
-  activeStepIdx: number = 0;
+
+  activeStepIdx: number = this.storedStepIdx ? this.storedStepIdx : 0;
+
   deactivated = false;
   menuItems = [
     {
@@ -59,7 +64,7 @@ export class DashboardComponent implements OnInit {
         } else {
           this.pages = dashboard.pages;
           if (this.pages && this.pages.length > 0) {
-            this.currentPage = this.pages[0];
+            this.currentPage = this.pages[this.activeStepIdx];
             if (this.pages.length > 1) {
               let tmpStep: MenuItem[] = [];
               this.pages.forEach((page) => {
@@ -89,6 +94,7 @@ export class DashboardComponent implements OnInit {
 
   onActiveStepChange(idx: number) {
     this.currentPage = this.pages[idx];
+    this.storageService.set('dashboardStepIdx', idx);
   }
 
   editPages() {

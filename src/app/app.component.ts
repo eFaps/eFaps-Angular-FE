@@ -202,6 +202,7 @@ export class AppComponent implements OnInit {
     const ref = this.dialogService.open(CompanyChooserComponent, {
       header: 'Compania',
       width: '300px',
+      modal: true,
     });
     ref.onClose.subscribe((company: Company) => {
       if (company) {
