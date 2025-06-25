@@ -45,13 +45,7 @@ export class DashboardService {
   }
 
   persist() {
-    if (this.dashboard) {
-      this.updateDashboard(this.dashboard).subscribe({
-        next: (_) => {
-          console.log('persisted ' + this.dashboard);
-        },
-      });
-    }
+    return this.updateDashboard(this.dashboard!);
   }
 
   updateItems(page: DashboardPage, items: GridsterItem[]) {

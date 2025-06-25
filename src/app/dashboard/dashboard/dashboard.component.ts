@@ -84,7 +84,9 @@ export class DashboardComponent implements OnInit {
 
   save() {
     this.editMode = false;
-    this.dashboardService.persist();
+    this.dashboardService.persist().subscribe((_) => {
+      this.load();
+    });
   }
 
   abort() {
