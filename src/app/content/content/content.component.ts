@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import {
   ChangeDetectorRef,
   Component,
@@ -40,15 +40,14 @@ import { TableComponent } from 'src/app/table/table/table.component';
   styleUrls: ['./content.component.scss'],
   imports: [
     ConfirmDialogModule,
-    CommonModule,
     RouterOutlet,
     SectionsComponent,
     ClassificationDisplayComponent,
     TabsModule,
     ButtonModule,
     TieredMenuModule,
-    ToolbarModule,
-  ],
+    ToolbarModule
+],
   providers: [ConfirmationService],
   standalone: true,
 })
