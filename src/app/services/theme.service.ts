@@ -1,5 +1,6 @@
 import { effect, inject, Injectable, signal } from '@angular/core';
-import { updatePrimaryPalette } from '@primeuix/themes';
+import { Theme, updatePrimaryPalette } from '@primeuix/themes';
+import { primitive } from '@primeuix/themes/material/base';
 import { LocalStorageService } from 'ngx-localstorage';
 
 @Injectable({
@@ -9,13 +10,15 @@ export class ThemeService {
   private readonly storageService = inject(LocalStorageService);
   private storedTheme = this.storageService.get<Theme>('theme');
 
+  colors: { name: string, color: string }[] = []
+
   theme = signal<Theme>(
     this.storedTheme
       ? this.storedTheme
       : {
-          color: 'indigo',
-          darkMode: false,
-        },
+        color: 'indigo',
+        darkMode: false,
+      },
   );
 
   constructor() {
@@ -25,9 +28,25 @@ export class ThemeService {
       this.setDarkMode(theme.darkMode);
       this.storageService.set('theme', theme);
     });
+    this.init()
   }
 
-  init() {}
+  init() {
+    this.colors = []
+    Object.keys(primitive).forEach(key => {
+
+      const attr = (primitive as any)[key]
+      if (attr.hasOwnProperty('500')) {
+        console.log(key)
+        this.colors.push({
+          name: key,
+          color: attr['500']
+        })
+      }
+    })
+
+
+  }
 
   updateColor(color: string) {
     this.theme.update((theme) => {
@@ -48,19 +67,7 @@ export class ThemeService {
   }
 
   private updatePrimaryPalette(color: string) {
-    updatePrimaryPalette({
-      50: `{${color}.50}`,
-      100: `{${color}.100}`,
-      200: `{${color}.200}`,
-      300: `{${color}.300}`,
-      400: `{${color}.400}`,
-      500: `{${color}.500}`,
-      600: `{${color}.600}`,
-      700: `{${color}.700}`,
-      800: `{${color}.800}`,
-      900: `{${color}.900}`,
-      950: `{${color}.950}`,
-    });
+    updatePrimaryPalette((primitive as any)[color])
   }
 
   private setDarkMode(darkMode: boolean) {

@@ -1,29 +1,26 @@
 .wrapper {
-    display: flex;
+    text-align: center;
     width: 15rem;
-    column-gap: 5px;
-    justify-content: center;
+    
+    .color-buttons {
+        margin-top: 0.5rem;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-content: center;
+        gap: 6px;
+
+        .color-button {
+            border: 0;
+            border-radius: 50%;
+            height: 1.3rem;
+            width: 1.3rem;
+            cursor: pointer;
+        }
+    }
+
 }
 
 .custom-icon {
     height: 2rem;
-}
-
-::ng-deep p-button#blue {
-    button {
-        background-color: var(--p-blue-500);
-        border: 1px solid var(--p-blue-500);
-    }
-}
-::ng-deep p-button#indigo {
-    button {
-        background-color: var(--p-indigo-500);
-        border: 1px solid var(--p-indigo-500);
-    }
-}
-::ng-deep p-button#purple {
-    button {
-        background-color: var(--p-purple-500);
-        border: 1px solid var(--p-purple-500);
-    }
 }

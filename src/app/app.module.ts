@@ -40,7 +40,8 @@ import { ErrorInterceptor } from './interceptors/error.interceptor';
 import { LoaderInterceptor } from './interceptors/loader.interceptor';
 import { ThemeChooserComponent } from './standalone/theme-chooser/theme-chooser.component';
 import { environment } from 'src/environments/environment';
-import Material from '@primeuix/themes/aura';
+import Material from '@primeuix/themes/material';
+
 registerLocaleData(localeEs, 'es');
 
 @NgModule({
