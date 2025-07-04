@@ -1,6 +1,6 @@
 @switch (filter?.kind) {
   @case ('DATE') {
-    <p-datepicker [(ngModel)]="rangeDates" selectionMode="range" appendTo="body"></p-datepicker>
+    <p-datepicker [(ngModel)]="rangeDates" selectionMode="range" appendTo="body" />
   }
   @case ('STATUS') {
     @for (status of statusList; track status) {

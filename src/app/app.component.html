@@ -1,5 +1,5 @@
 @if (isLoading()) {
-  <p-progressBar mode="indeterminate" [style]="{ position: 'absolute', height: '6px', width: '100%', 'z-index':'11'}"></p-progressBar>
+  <p-progressBar mode="indeterminate" [style]="{ position: 'absolute', height: '6px', width: '100%', 'z-index':'11'}" />
 }
 
 @if (user) {
@@ -55,7 +55,7 @@
       </p-breadcrumb>
     </div>
   }
-  <p-toast></p-toast>
+  <p-toast />
   <p-popover #searchOp [style]="{'width': '450px'}">
     <p-table [value]="searchElements" selectionMode="single" [paginator]="true" [rows]="10" responsiveLayout="scroll">
       <ng-template pTemplate="header">
@@ -75,7 +75,7 @@
       </ng-template>
     </p-table>
   </p-popover>
-  <router-outlet></router-outlet>
+  <router-outlet />
   @if (showRestoreSearch()) {
     @if (showRestoreSearch()) {
       <div class="searchBtn">

@@ -1,11 +1,11 @@
 @if (isCheckout()) {
-  <p-button  icon="pi pi-globe" [rounded]="true" [outlined]="true" (click)="checkout()"
-  [style]="{ width:'2rem', height: '2rem' }"></p-button>
+  <p-button icon="pi pi-globe" [rounded]="true" [outlined]="true" (click)="checkout()"
+  [style]="{ width:'2rem', height: '2rem' }" />
 }
 @if (!isCheckout()) {
   @if (showLink()) {
     <p-button icon="pi pi-link" [rounded]="true" [outlined]="true" (click)="followLink()"
-    [style]="{ width:'2rem', height: '2rem' }"></p-button>
+    [style]="{ width:'2rem', height: '2rem' }" />
   }
   <div #overflowWrapper (mouseenter)="isOverflowing() ? op.show($event) : undefined" (mouseleave)="op.hide()">
     {{value}}

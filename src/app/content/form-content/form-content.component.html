@@ -2,9 +2,9 @@
 @if(!isModule()){
   <p-toolbar class="toolbar">
     <ng-template #start>
-      <p-menu #menu [model]="menuItems" [popup]="true"></p-menu>
+      <p-menu #menu [model]="menuItems" [popup]="true" />
       @if (menuItems.length > 0) {
-        <p-button (click)="menu.toggle($event)" icon="pi pi-bars"></p-button>
+        <p-button (click)="menu.toggle($event)" icon="pi pi-bars" />
       }
       <div class="mainHeader">{{outline?.header}}</div>
     </ng-template>
@@ -16,4 +16,4 @@
     <app-sections [sections]="sections"></app-sections>
   </div>
 }
-<ng-template #dynamicComponent></ng-template>
+<ng-template #dynamicComponent />
