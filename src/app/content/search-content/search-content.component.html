@@ -3,7 +3,7 @@
     <p-menubar [model]="searchMenuItems"></p-menubar>
   }
   <app-form-section [formSection]="search.formSection"></app-form-section>
-  <p-divider></p-divider>
+  <p-divider>Resultado</p-divider>
   @if (cols && cols.length > 0) {
     <div>
       <p-table [columns]="cols" [value]="elements" [paginator]="true" [rows]="5" [rowsPerPageOptions]="[5, 10, 20]"

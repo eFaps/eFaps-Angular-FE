@@ -1,4 +1,3 @@
-
 import {
   ChangeDetectorRef,
   Component,
@@ -46,8 +45,8 @@ import { TableComponent } from 'src/app/table/table/table.component';
     TabsModule,
     ButtonModule,
     TieredMenuModule,
-    ToolbarModule
-],
+    ToolbarModule,
+  ],
   providers: [ConfirmationService],
   standalone: true,
 })

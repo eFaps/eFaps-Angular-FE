@@ -13,7 +13,7 @@ import { Theme, ThemeService } from 'src/app/services/theme.service';
 export class ThemeChooserComponent {
   private readonly themeService = inject(ThemeService);
 
-  colors = this.themeService.colors
+  colors = this.themeService.colors;
 
   icon = linkedSignal<string>(() => {
     const theme = this.themeService.theme();

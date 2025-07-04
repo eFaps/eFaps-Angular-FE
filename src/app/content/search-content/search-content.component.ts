@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { MenuItem, MessageService } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
 import { CheckboxModule } from 'primeng/checkbox';
-import { DividerModule } from 'primeng/divider';
+import { Divider, DividerModule } from 'primeng/divider';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { MenubarModule } from 'primeng/menubar';
 import { TableModule } from 'primeng/table';
@@ -22,9 +22,9 @@ import { ValueService } from 'src/app/services/value.service';
     ButtonModule,
     CheckboxModule,
     TableModule,
-    DividerModule,
     FormSectionComponent,
     MenubarModule,
+    DividerModule,
   ],
   standalone: true,
 })

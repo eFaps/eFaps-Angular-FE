@@ -23,7 +23,7 @@ import { UtilService } from 'src/app/services/util.service';
     FileUploadModule,
     TableModule,
     ScrollPanelModule,
-    MessageModule
+    MessageModule,
   ],
   templateUrl: './csvimport.component.html',
   styleUrl: './csvimport.component.scss',

@@ -30,7 +30,7 @@ import { UtilService } from 'src/app/services/util.service';
     FloatLabelModule,
     ButtonModule,
     PickListModule,
-    RadioButtonModule
+    RadioButtonModule,
   ],
   templateUrl: './filtered-report.component.html',
   styleUrl: './filtered-report.component.scss',
@@ -48,7 +48,7 @@ export class FilteredReportComponent implements OnInit {
 
   pickListElements: any = {};
 
-  optionElements: any = {}
+  optionElements: any = {};
 
   sourceStyle = "{ height: '20rem', display: 'block' }";
   constructor(
@@ -199,12 +199,12 @@ export class FilteredReportComponent implements OnInit {
 
   initOptions(formItem: FormItem) {
     if (typeof this.optionElements[formItem.name] == 'undefined') {
-        this.optionElements = {
-          ...this.optionElements,
-          [formItem.name]: []
-        };
+      this.optionElements = {
+        ...this.optionElements,
+        [formItem.name]: [],
+      };
     }
-     this.optionElements[formItem.name] = formItem.options;
+    this.optionElements[formItem.name] = formItem.options;
   }
 
   export(mime: string) {
@@ -212,17 +212,18 @@ export class FilteredReportComponent implements OnInit {
   }
 
   private persist() {
-
     this.storageService.set<FilterReportState>(this.uimodule()!.id, {
-        date: Date.now(),
-        filters: this.filters,
-      })
+      date: Date.now(),
+      filters: this.filters,
+    });
   }
 
   private restore() {
     let ret = false;
-    const state = this.storageService.get<FilterReportState>(this.uimodule()!.id)
-    if (state)  {
+    const state = this.storageService.get<FilterReportState>(
+      this.uimodule()!.id,
+    );
+    if (state) {
       const elapsed = new Date().getTime() - state.date;
       if (elapsed < 3600000) {
         this.applyFilters(state.filters);

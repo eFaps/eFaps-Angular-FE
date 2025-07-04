@@ -252,7 +252,7 @@ export class TableComponent implements OnInit {
         cmdId,
       },
       closable: true,
-      modal: true
+      modal: true,
     });
     dialogRef.onClose.subscribe({
       next: (_) => {

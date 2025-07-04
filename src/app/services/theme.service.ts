@@ -10,15 +10,15 @@ export class ThemeService {
   private readonly storageService = inject(LocalStorageService);
   private storedTheme = this.storageService.get<Theme>('theme');
 
-  colors: { name: string, color: string }[] = []
+  colors: { name: string; color: string }[] = [];
 
   theme = signal<Theme>(
     this.storedTheme
       ? this.storedTheme
       : {
-        color: 'indigo',
-        darkMode: false,
-      },
+          color: 'indigo',
+          darkMode: false,
+        },
   );
 
   constructor() {
@@ -28,24 +28,20 @@ export class ThemeService {
       this.setDarkMode(theme.darkMode);
       this.storageService.set('theme', theme);
     });
-    this.init()
+    this.init();
   }
 
   init() {
-    this.colors = []
-    Object.keys(primitive).forEach(key => {
-
-      const attr = (primitive as any)[key]
+    this.colors = [];
+    Object.keys(primitive).forEach((key) => {
+      const attr = (primitive as any)[key];
       if (attr.hasOwnProperty('500')) {
-        console.log(key)
         this.colors.push({
           name: key,
-          color: attr['500']
-        })
+          color: attr['500'],
+        });
       }
-    })
-
-
+    });
   }
 
   updateColor(color: string) {
@@ -67,7 +63,7 @@ export class ThemeService {
   }
 
   private updatePrimaryPalette(color: string) {
-    updatePrimaryPalette((primitive as any)[color])
+    updatePrimaryPalette((primitive as any)[color]);
   }
 
   private setDarkMode(darkMode: boolean) {

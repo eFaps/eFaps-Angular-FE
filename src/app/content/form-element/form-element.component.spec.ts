@@ -6,7 +6,6 @@ import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { DialogModule } from 'primeng/dialog';
 import { DialogService } from 'primeng/dynamicdialog';
-import { MessagesModule } from 'primeng/messages';
 
 import { FormElementComponent } from './form-element.component';
 
@@ -16,7 +15,7 @@ describe('FormElementComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [FormElementComponent, DialogModule, MessagesModule],
+      imports: [FormElementComponent, DialogModule],
       providers: [
         { provide: DialogService, useValue: {} },
         provideHttpClient(withInterceptorsFromDi()),
