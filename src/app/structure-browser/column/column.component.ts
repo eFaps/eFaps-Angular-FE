@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, viewChild } from '@angular/core';
+import { Component, ElementRef, Input, viewChild, inject } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { Column } from 'src/app/model/table';
@@ -10,14 +10,14 @@ import { Column } from 'src/app/model/table';
   standalone: false,
 })
 export class ColumnComponent {
+  private router = inject(Router);
+
   @Input()
   rowData: any | undefined;
   @Input()
   column: Column | undefined;
 
   readonly overflowElement = viewChild<ElementRef>('overflowWrapper');
-
-  constructor(private router: Router) {}
 
   get value(): any {
     return this.rowData[this.column!!.field];

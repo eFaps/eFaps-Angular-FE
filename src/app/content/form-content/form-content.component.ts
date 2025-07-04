@@ -4,6 +4,7 @@ import {
   OnInit,
   ViewContainerRef,
   viewChild,
+  inject,
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MenuItem } from 'primeng/api';
@@ -40,6 +41,11 @@ import { ValueService } from 'src/app/services/value.service';
   standalone: true,
 })
 export class FormContentComponent implements OnInit, AfterViewInit {
+  private route = inject(ActivatedRoute);
+  private dialogService = inject(DialogService);
+  private contentService = inject(ContentService);
+  private dynamicComponentService = inject(DynamicComponentService);
+
   id: string | undefined;
   oid: string = 'none';
   outline: Outline | undefined;
@@ -52,13 +58,9 @@ export class FormContentComponent implements OnInit, AfterViewInit {
   module: UIModule | undefined;
   moduleLoaded = false;
 
-  constructor(
-    valueService: ValueService,
-    private route: ActivatedRoute,
-    private dialogService: DialogService,
-    private contentService: ContentService,
-    private dynamicComponentService: DynamicComponentService,
-  ) {
+  constructor() {
+    const valueService = inject(ValueService);
+
     valueService.reset();
   }
 

@@ -19,6 +19,8 @@ import { DashboardService } from 'src/app/services/dashboard.service';
   imports: [PageComponent, StepsModule, ButtonModule, SpeedDialModule],
 })
 export class DashboardComponent implements OnInit {
+  private dashboardService = inject(DashboardService);
+
   private dialogService = inject(DialogService);
   private readonly storageService = inject(LocalStorageService);
   private storedStepIdx = this.storageService.get<number>('dashboardStepIdx');
@@ -49,7 +51,6 @@ export class DashboardComponent implements OnInit {
       },
     },
   ];
-  constructor(private dashboardService: DashboardService) {}
 
   ngOnInit(): void {
     this.load();

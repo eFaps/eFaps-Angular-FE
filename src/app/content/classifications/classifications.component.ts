@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { TreeNode } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
@@ -19,16 +19,17 @@ import { ClassificationService } from 'src/app/services/classification.service';
   standalone: true,
 })
 export class ClassificationsComponent implements OnInit {
+  private dialogRef = inject(DynamicDialogRef);
+  private classificationService = inject(ClassificationService);
+
   classUUIDs: string[];
   treeNodes: TreeNode[] = [];
   selection: TreeNode<any> | TreeNode<any>[] | null = [];
   preSelected: Classification[] = [];
 
-  constructor(
-    config: DynamicDialogConfig,
-    private dialogRef: DynamicDialogRef,
-    private classificationService: ClassificationService,
-  ) {
+  constructor() {
+    const config = inject(DynamicDialogConfig);
+
     this.classUUIDs = config.data.classUUIDs;
   }
 

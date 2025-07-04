@@ -5,6 +5,7 @@ import {
   OnInit,
   ViewContainerRef,
   viewChild,
+  inject,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -60,6 +61,16 @@ import { ValueService } from 'src/app/services/value.service';
   standalone: true,
 })
 export class FormElementComponent implements OnInit {
+  private router = inject(Router);
+  private dialogService = inject(DialogService);
+  private valueService = inject(ValueService);
+  private validationService = inject(ValidationService);
+  private autoCompleteService = inject(AutoCompleteService);
+  private fieldUpdateService = inject(FieldUpdateService);
+  private fieldCommandService = inject(FieldCommandService);
+  private dynamicComponentService = inject(DynamicComponentService);
+  private utilService = inject(UtilService);
+
   messages: ToastMessageOptions[] = [];
 
   inputValue: any;
@@ -86,18 +97,6 @@ export class FormElementComponent implements OnInit {
   readonly vcr = viewChild.required('dynamicComponent', {
     read: ViewContainerRef,
   });
-
-  constructor(
-    private router: Router,
-    private dialogService: DialogService,
-    private valueService: ValueService,
-    private validationService: ValidationService,
-    private autoCompleteService: AutoCompleteService,
-    private fieldUpdateService: FieldUpdateService,
-    private fieldCommandService: FieldCommandService,
-    private dynamicComponentService: DynamicComponentService,
-    private utilService: UtilService,
-  ) {}
 
   ngOnInit(): void {
     this.validationService.registerValidation((values) => {

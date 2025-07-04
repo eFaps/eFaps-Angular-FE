@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { MenuItem, MenuItemCommandEvent } from 'primeng/api';
 import { Observable } from 'rxjs';
 
@@ -10,10 +10,8 @@ import { UtilService } from './util.service';
   providedIn: 'root',
 })
 export class MenuService {
-  constructor(
-    private http: HttpClient,
-    private utilService: UtilService,
-  ) {}
+  private http = inject(HttpClient);
+  private utilService = inject(UtilService);
 
   getMainMenu(): Observable<MenuEntry[]> {
     const url = `${this.utilService.evalApiUrl()}/ui/nav`;

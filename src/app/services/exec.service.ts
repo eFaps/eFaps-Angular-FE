@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Observable, tap } from 'rxjs';
 
 import { ExecResponse } from '../model/exec';
@@ -10,11 +10,9 @@ import { UtilService } from './util.service';
   providedIn: 'root',
 })
 export class ExecService {
-  constructor(
-    private http: HttpClient,
-    private downloadService: DownloadService,
-    private utilService: UtilService,
-  ) {}
+  private http = inject(HttpClient);
+  private downloadService = inject(DownloadService);
+  private utilService = inject(UtilService);
 
   exec(id: string, values?: Map<String, any>): Observable<ExecResponse> {
     const url = `${this.utilService.evalApiUrl()}/ui/exec/${id}`;

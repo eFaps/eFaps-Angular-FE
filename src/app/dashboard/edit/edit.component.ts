@@ -32,6 +32,8 @@ import { DashboardService } from 'src/app/services/dashboard.service';
   ],
 })
 export class EditComponent implements OnInit {
+  private dialogRef = inject(DynamicDialogRef);
+
   private dashboardService = inject(DashboardService);
 
   widget: DashboardWidget;
@@ -60,10 +62,9 @@ export class EditComponent implements OnInit {
   templates: DashboardTemplate[] = [];
   templateOid: string | undefined = undefined;
 
-  constructor(
-    config: DynamicDialogConfig,
-    private dialogRef: DynamicDialogRef,
-  ) {
+  constructor() {
+    const config = inject(DynamicDialogConfig);
+
     this.widget = config.data.widget;
     this.type = this.widget.type;
     if (this.widget.title != null) {

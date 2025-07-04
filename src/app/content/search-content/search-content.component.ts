@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { MenuItem, MessageService } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
@@ -29,6 +29,14 @@ import { ValueService } from 'src/app/services/value.service';
   standalone: true,
 })
 export class SearchContentComponent implements OnInit {
+  private router = inject(Router);
+  private config = inject(DynamicDialogConfig);
+  private dialogRef = inject(DynamicDialogRef);
+  private valueService = inject(ValueService);
+  private searchService = inject(SearchService);
+  private execService = inject(ExecService);
+  private messageService = inject(MessageService);
+
   searches: Search[];
   search: Search;
   menuItem: any;
@@ -39,15 +47,9 @@ export class SearchContentComponent implements OnInit {
   oid: string | undefined;
   values: Map<String, any> | undefined;
 
-  constructor(
-    private router: Router,
-    private config: DynamicDialogConfig,
-    private dialogRef: DynamicDialogRef,
-    private valueService: ValueService,
-    private searchService: SearchService,
-    private execService: ExecService,
-    private messageService: MessageService,
-  ) {
+  constructor() {
+    const config = this.config;
+
     config.closable = true;
     if (config.data.restore) {
       const searchContent = this.searchService.restore();

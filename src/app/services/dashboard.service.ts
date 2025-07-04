@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { GridsterItem } from 'angular-gridster2';
 import { Observable, tap } from 'rxjs';
 
@@ -15,12 +15,10 @@ import { UtilService } from './util.service';
   providedIn: 'root',
 })
 export class DashboardService {
-  dashboard: Dashboard | undefined;
+  private http = inject(HttpClient);
+  private utilService = inject(UtilService);
 
-  constructor(
-    private http: HttpClient,
-    private utilService: UtilService,
-  ) {}
+  dashboard: Dashboard | undefined;
 
   getDashboard(): Observable<Dashboard> {
     const url = `${this.utilService.evalApiUrl()}/ui/dashboard`;

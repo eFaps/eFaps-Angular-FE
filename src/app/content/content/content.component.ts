@@ -6,6 +6,7 @@ import {
   OnInit,
   ViewChild,
   effect,
+  inject,
 } from '@angular/core';
 import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
 import { ConfirmationService, MenuItem } from 'primeng/api';
@@ -51,6 +52,15 @@ import { TableComponent } from 'src/app/table/table/table.component';
   standalone: true,
 })
 export class ContentComponent implements OnInit, OnDestroy {
+  private changeDetectorRef = inject(ChangeDetectorRef);
+  private router = inject(Router);
+  private route = inject(ActivatedRoute);
+  private confirmationService = inject(ConfirmationService);
+  private dialogService = inject(DialogService);
+  private contentService = inject(ContentService);
+  private execService = inject(ExecService);
+  private styleService = inject(StyleService);
+
   oid: string | undefined;
   tabs: MenuEntry[] = [];
   menuItems: MenuItem[] = [];
@@ -66,17 +76,9 @@ export class ContentComponent implements OnInit, OnDestroy {
   contentOutletId: string | undefined;
   contentHeight: string = '500px';
 
-  constructor(
-    breadcrumbService: BreadcrumbService,
-    private changeDetectorRef: ChangeDetectorRef,
-    private router: Router,
-    private route: ActivatedRoute,
-    private confirmationService: ConfirmationService,
-    private dialogService: DialogService,
-    private contentService: ContentService,
-    private execService: ExecService,
-    private styleService: StyleService,
-  ) {
+  constructor() {
+    const breadcrumbService = inject(BreadcrumbService);
+
     effect(() => {
       this.hasBreadcrumbs = breadcrumbService.breadcrumbs().length > 0;
     });

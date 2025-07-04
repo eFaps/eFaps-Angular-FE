@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { MessageModule } from 'primeng/message';
@@ -22,13 +22,13 @@ import { ValueService } from 'src/app/services/value.service';
   standalone: true,
 })
 export class AttributeSetComponent {
+  private valueService = inject(ValueService);
+
   _formItem: FormItem | undefined;
   cols: any[] = [];
   items: FormItem[] = [];
   elements: any[] = [];
   editable = false;
-
-  constructor(private valueService: ValueService) {}
 
   @Input()
   set formItem(mainFormItem: FormItem | undefined) {

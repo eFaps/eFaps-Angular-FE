@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { SearchResult } from '../model/index-search';
@@ -9,10 +9,8 @@ import { UtilService } from './util.service';
   providedIn: 'root',
 })
 export class IndexSearchService {
-  constructor(
-    private http: HttpClient,
-    private utilService: UtilService,
-  ) {}
+  private http = inject(HttpClient);
+  private utilService = inject(UtilService);
 
   search(query: string): Observable<SearchResult> {
     const url = `${this.utilService.evalApiUrl()}/ui/index`;

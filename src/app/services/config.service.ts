@@ -1,10 +1,12 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ConfigService {
+  private http = inject(HttpClient);
+
   public sso:
     | {
         url: string;
@@ -12,8 +14,6 @@ export class ConfigService {
         clientId: string;
       }
     | undefined;
-
-  constructor(private http: HttpClient) {}
 
   load(): Promise<any> {
     return new Promise<any>((resolve) => {

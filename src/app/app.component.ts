@@ -53,6 +53,18 @@ import { environment } from 'src/environments/environment';
   standalone: false,
 })
 export class AppComponent implements OnInit {
+  private router = inject(Router);
+  private dialogService = inject(DialogService);
+  private loaderService = inject(LoaderService);
+  private menuService = inject(MenuService);
+  private userService = inject(UserService);
+  private execService = inject(ExecService);
+  private contentService = inject(ContentService);
+  private indexSearchService = inject(IndexSearchService);
+  private searchService = inject(SearchService);
+  private breadcrumbService = inject(BreadcrumbService);
+  private styleService = inject(StyleService);
+
   private readonly primeng: PrimeNG = inject(PrimeNG);
   private readonly keycloak = inject(Keycloak);
   private readonly renderer = inject(Renderer2);
@@ -82,19 +94,9 @@ export class AppComponent implements OnInit {
   searchElements: any[] = [];
   version = environment.version;
 
-  constructor(
-    private router: Router,
-    private dialogService: DialogService,
-    private loaderService: LoaderService,
-    private menuService: MenuService,
-    private userService: UserService,
-    private execService: ExecService,
-    private contentService: ContentService,
-    private indexSearchService: IndexSearchService,
-    private searchService: SearchService,
-    private breadcrumbService: BreadcrumbService,
-    private styleService: StyleService,
-  ) {
+  constructor() {
+    const userService = this.userService;
+
     const keycloakSignal = inject(KEYCLOAK_EVENT_SIGNAL);
     effect(() => {
       const keycloakEvent = keycloakSignal();

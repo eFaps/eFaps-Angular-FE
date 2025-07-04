@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit, input } from '@angular/core';
+import { Component, OnInit, input, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
@@ -16,6 +16,10 @@ import { UtilService } from 'src/app/services/util.service';
   styleUrls: ['./logback.component.scss'],
 })
 export class LogbackComponent implements OnInit {
+  private dialogRef = inject(DynamicDialogRef);
+  private http = inject(HttpClient);
+  private utilService = inject(UtilService);
+
   readonly uimodule = input<UIModule>();
   readonly data = input<ModuleData>();
 
@@ -34,12 +38,9 @@ export class LogbackComponent implements OnInit {
 
   alteredLoggers: any[] = [];
 
-  constructor(
-    config: DynamicDialogConfig,
-    private dialogRef: DynamicDialogRef,
-    private http: HttpClient,
-    private utilService: UtilService,
-  ) {
+  constructor() {
+    const config = inject(DynamicDialogConfig);
+
     config.header = 'Logger Configuration';
   }
 

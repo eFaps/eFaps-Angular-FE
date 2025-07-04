@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { ButtonModule } from 'primeng/button';
 import { TableModule } from 'primeng/table';
@@ -16,15 +16,13 @@ import { ValueService } from 'src/app/services/value.service';
   standalone: true,
 })
 export class TableSectionComponent {
+  private router = inject(Router);
+  private valueService = inject(ValueService);
+
   _tableSection: TableSection | undefined;
   cols: any[] = [];
   elements: any[] = [];
   editable = false;
-
-  constructor(
-    private router: Router,
-    private valueService: ValueService,
-  ) {}
 
   @Input()
   set tableSection(tableSection: TableSection) {

@@ -1,4 +1,4 @@
-import { Injectable, WritableSignal, signal } from '@angular/core';
+import { Injectable, WritableSignal, signal, inject } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { MenuItem, MenuItemCommandEvent } from 'primeng/api';
 import { filter } from 'rxjs';
@@ -9,14 +9,14 @@ import { StyleService } from './style.service';
   providedIn: 'root',
 })
 export class BreadcrumbService {
+  private router = inject(Router);
+  private styleService = inject(StyleService);
+
   maxEntries = 7;
   breadcrumbs: WritableSignal<MenuItem[]> = signal([]);
   currentUrl: string = '';
 
-  constructor(
-    private router: Router,
-    private styleService: StyleService,
-  ) {
+  constructor() {
     this.router.events
       .pipe(
         filter((event) => {

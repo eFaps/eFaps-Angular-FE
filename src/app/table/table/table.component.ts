@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import FileSaver from 'file-saver';
 import {
@@ -34,6 +34,16 @@ import { TableService } from 'src/app/services/table.service';
   standalone: false,
 })
 export class TableComponent implements OnInit {
+  private route = inject(ActivatedRoute);
+  private confirmationService = inject(ConfirmationService);
+  private dialogService = inject(DialogService);
+  private contentService = inject(ContentService);
+  private tableService = inject(TableService);
+  private execService = inject(ExecService);
+  private searchService = inject(SearchService);
+  private breadcrumbService = inject(BreadcrumbService);
+  private styleService = inject(StyleService);
+
   id: string | undefined;
   oid: string | undefined;
   cols: any[] = [];
@@ -53,18 +63,6 @@ export class TableComponent implements OnInit {
   idEmitter = new EventEmitter<string>();
 
   scrollHeight: string = '500px';
-
-  constructor(
-    private route: ActivatedRoute,
-    private confirmationService: ConfirmationService,
-    private dialogService: DialogService,
-    private contentService: ContentService,
-    private tableService: TableService,
-    private execService: ExecService,
-    private searchService: SearchService,
-    private breadcrumbService: BreadcrumbService,
-    private styleService: StyleService,
-  ) {}
 
   ngOnInit(): void {
     this.loading = true;

@@ -36,6 +36,10 @@ import { UtilService } from 'src/app/services/util.service';
   styleUrl: './filtered-report.component.scss',
 })
 export class FilteredReportComponent implements OnInit {
+  private http = inject(HttpClient);
+  private utilService = inject(UtilService);
+  private downloadService = inject(DownloadService);
+
   private readonly storageService = inject(LocalStorageService);
   readonly uimodule = input.required<UIModule>();
   readonly data = input<ModuleData>();
@@ -51,11 +55,7 @@ export class FilteredReportComponent implements OnInit {
   optionElements: any = {};
 
   sourceStyle = "{ height: '20rem', display: 'block' }";
-  constructor(
-    private http: HttpClient,
-    private utilService: UtilService,
-    private downloadService: DownloadService,
-  ) {
+  constructor() {
     this.formGroup = new FormGroup({});
   }
 

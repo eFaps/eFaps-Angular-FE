@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import {
   ConfirmationService,
@@ -26,6 +26,13 @@ import { TableService } from 'src/app/services/table.service';
   standalone: false,
 })
 export class StructureBrowserComponent implements OnInit {
+  private route = inject(ActivatedRoute);
+  private confirmationService = inject(ConfirmationService);
+  private dialogService = inject(DialogService);
+  private tableService = inject(TableService);
+  private contentService = inject(ContentService);
+  private execService = inject(ExecService);
+
   loading: boolean;
   id: any;
   oid: any;
@@ -38,14 +45,7 @@ export class StructureBrowserComponent implements OnInit {
   selectedElements: TreeTableNode<any> | TreeTableNode<any>[] | null = [];
   togglerColIdx = 0;
 
-  constructor(
-    private route: ActivatedRoute,
-    private confirmationService: ConfirmationService,
-    private dialogService: DialogService,
-    private tableService: TableService,
-    private contentService: ContentService,
-    private execService: ExecService,
-  ) {
+  constructor() {
     this.loading = true;
   }
 

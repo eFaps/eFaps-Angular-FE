@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable, WritableSignal, signal } from '@angular/core';
+import { Injectable, WritableSignal, signal, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, catchError, map, of, throwError } from 'rxjs';
 
@@ -10,13 +10,11 @@ import { UtilService } from './util.service';
   providedIn: 'root',
 })
 export class UserService {
-  company: WritableSignal<Company | undefined> = signal(undefined);
+  private http = inject(HttpClient);
+  private router = inject(Router);
+  private utilService = inject(UtilService);
 
-  constructor(
-    private http: HttpClient,
-    private router: Router,
-    private utilService: UtilService,
-  ) {}
+  company: WritableSignal<Company | undefined> = signal(undefined);
 
   getCurrentUser(sync?: boolean): Observable<User> {
     const url = `${this.utilService.evalApiUrl()}/ui/user/current`;

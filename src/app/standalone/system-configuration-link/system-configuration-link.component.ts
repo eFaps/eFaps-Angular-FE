@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit, input } from '@angular/core';
+import { Component, OnInit, input, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import {
   AutoCompleteCompleteEvent,
@@ -32,6 +32,12 @@ import { UtilService } from 'src/app/services/util.service';
   styleUrl: './system-configuration-link.component.scss',
 })
 export class SystemConfigurationLinkComponent implements OnInit {
+  private config = inject(DynamicDialogConfig);
+  private dialogRef = inject(DynamicDialogRef);
+  private http = inject(HttpClient);
+  private utilService = inject(UtilService);
+  private userService = inject(UserService);
+
   readonly uimodule = input<UIModule>();
   readonly data = input<ModuleData>();
 
@@ -47,13 +53,9 @@ export class SystemConfigurationLinkComponent implements OnInit {
 
   appKey: string | undefined;
 
-  constructor(
-    private config: DynamicDialogConfig,
-    private dialogRef: DynamicDialogRef,
-    private http: HttpClient,
-    private utilService: UtilService,
-    private userService: UserService,
-  ) {
+  constructor() {
+    const config = this.config;
+
     config.header = 'Edit SystemConfiguration Attribute';
   }
 

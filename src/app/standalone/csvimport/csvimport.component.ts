@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, input, viewChild } from '@angular/core';
+import { Component, input, viewChild, inject } from '@angular/core';
 import Papa, { ParseResult } from 'papaparse';
 import { ToastMessageOptions } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
@@ -29,6 +29,10 @@ import { UtilService } from 'src/app/services/util.service';
   styleUrl: './csvimport.component.scss',
 })
 export class CSVImportComponent {
+  private http = inject(HttpClient);
+  private dialogRef = inject(DynamicDialogRef);
+  private utilService = inject(UtilService);
+
   readonly uimodule = input<UIModule>();
   readonly data = input<ModuleData>();
 
@@ -42,12 +46,9 @@ export class CSVImportComponent {
   verified: Boolean = false;
   messages: ToastMessageOptions[] = [];
 
-  constructor(
-    config: DynamicDialogConfig,
-    private http: HttpClient,
-    private dialogRef: DynamicDialogRef,
-    private utilService: UtilService,
-  ) {
+  constructor() {
+    const config = inject(DynamicDialogConfig);
+
     config.maximizable = true;
     this.dialogData = config.data;
   }

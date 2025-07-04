@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Observable, map } from 'rxjs';
 
 import { DownloadFile } from '../model/download';
@@ -9,10 +9,8 @@ import { UtilService } from './util.service';
   providedIn: 'root',
 })
 export class CheckoutService {
-  constructor(
-    private http: HttpClient,
-    private utilService: UtilService,
-  ) {}
+  private http = inject(HttpClient);
+  private utilService = inject(UtilService);
 
   checkout(oid: string): Observable<DownloadFile> {
     const url = `${this.utilService.evalApiUrl()}/checkout`;

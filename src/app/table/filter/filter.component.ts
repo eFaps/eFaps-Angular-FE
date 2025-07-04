@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 
 import { Filter } from 'src/app/model/table';
@@ -11,15 +11,17 @@ import { TableService } from 'src/app/services/table.service';
   standalone: false,
 })
 export class FilterComponent implements OnInit {
+  private tableService = inject(TableService);
+  private config = inject(DynamicDialogConfig);
+  private dialogRef = inject(DynamicDialogRef);
+
   id: string | undefined;
   filters: Filter[] | undefined;
   updatedFilters: Filter[] = [];
 
-  constructor(
-    private tableService: TableService,
-    private config: DynamicDialogConfig,
-    private dialogRef: DynamicDialogRef,
-  ) {
+  constructor() {
+    const config = this.config;
+
     config.header = 'Filtrar';
   }
 

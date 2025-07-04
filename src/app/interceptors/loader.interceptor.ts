@@ -4,7 +4,7 @@ import {
   HttpInterceptor,
   HttpRequest,
 } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 
@@ -12,9 +12,9 @@ import { LoaderService } from '../services/loader.service';
 
 @Injectable()
 export class LoaderInterceptor implements HttpInterceptor {
-  private requests: HttpRequest<any>[] = [];
+  private loaderService = inject(LoaderService);
 
-  constructor(private loaderService: LoaderService) {}
+  private requests: HttpRequest<any>[] = [];
 
   intercept(
     request: HttpRequest<any>,

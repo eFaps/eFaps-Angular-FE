@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, inject } from '@angular/core';
 import {
   CompactType,
   DisplayGrid,
@@ -22,14 +22,14 @@ import { DashboardService } from 'src/app/services/dashboard.service';
   imports: [GridsterModule, ItemComponent, ButtonModule],
 })
 export class PageComponent {
+  private dashboardService = inject(DashboardService);
+
   _page: DashboardPage = { key: 'not a key', items: [] };
 
   options: GridsterConfig | undefined;
   items: GridsterItem[] = [];
 
   _editMode = false;
-
-  constructor(private dashboardService: DashboardService) {}
 
   @Input()
   set editMode(editMode: boolean) {

@@ -43,7 +43,9 @@ export class ModalContentComponent {
   //values: Map<String, any> | undefined;
 
   private sectionsStore: Section[] = [];
-  constructor(config: DynamicDialogConfig) {
+  constructor() {
+    const config = inject(DynamicDialogConfig);
+
     config.header = config.data.outline.header;
     config.maximizable = true;
     config.closable = true;

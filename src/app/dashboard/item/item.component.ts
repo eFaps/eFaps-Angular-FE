@@ -21,14 +21,14 @@ import { DashboardService } from 'src/app/services/dashboard.service';
   imports: [ButtonModule, ChartWidgetComponent, TableWidgetComponent],
 })
 export class ItemComponent {
+  private dialogService = inject(DialogService);
+
   private dashboardService = inject(DashboardService);
 
   _widget: DashboardWidget | undefined;
   private _editMode: boolean = false;
 
   templateWidgetData: WidgetData | undefined;
-
-  constructor(private dialogService: DialogService) {}
 
   @Input()
   set widget(widget: DashboardWidget | undefined) {

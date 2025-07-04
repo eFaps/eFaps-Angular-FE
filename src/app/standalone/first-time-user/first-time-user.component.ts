@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { UserService } from 'src/app/services/user.service';
@@ -10,10 +10,8 @@ import { UserService } from 'src/app/services/user.service';
   styleUrl: './first-time-user.component.scss',
 })
 export class FirstTimeUserComponent implements OnInit {
-  constructor(
-    private router: Router,
-    private userService: UserService,
-  ) {}
+  private router = inject(Router);
+  private userService = inject(UserService);
 
   ngOnInit(): void {
     this.userService.firstTimeUser().subscribe({

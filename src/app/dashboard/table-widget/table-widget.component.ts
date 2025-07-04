@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, inject } from '@angular/core';
 import { TableModule } from 'primeng/table';
 
 import { TableWidget, WidgetData } from 'src/app/model/dashboard';
@@ -11,11 +11,11 @@ import { DashboardService } from 'src/app/services/dashboard.service';
   imports: [TableModule],
 })
 export class TableWidgetComponent {
+  private dashboardservice = inject(DashboardService);
+
   _widget: TableWidget | undefined;
   cols: any[] = [];
   elements: any[] = [];
-
-  constructor(private dashboardservice: DashboardService) {}
 
   @Input()
   set widget(widget: any) {

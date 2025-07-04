@@ -1,4 +1,4 @@
-import { Component, Input, input } from '@angular/core';
+import { Component, Input, input, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
 import { RadioButtonModule } from 'primeng/radiobutton';
@@ -22,6 +22,8 @@ import { ValueService } from 'src/app/services/value.service';
   standalone: true,
 })
 export class AttributeSetElementComponent {
+  private valueService = inject(ValueService);
+
   dropdownValue: any;
   readOnlyValue: string | undefined;
   private _elementData:
@@ -34,8 +36,6 @@ export class AttributeSetElementComponent {
   inputValue: any;
   readonly rowId = input<number>();
   radioValue: any;
-
-  constructor(private valueService: ValueService) {}
 
   get elementData():
     | {

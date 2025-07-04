@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, input } from '@angular/core';
+import { Component, Input, OnInit, input, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import { InputTextModule } from 'primeng/inputtext';
@@ -16,6 +16,10 @@ import { ValueService } from 'src/app/services/value.service';
   standalone: true,
 })
 export class TableElementComponent implements OnInit {
+  private autoCompleteService = inject(AutoCompleteService);
+  private fieldUpdateService = inject(FieldUpdateService);
+  private valueService = inject(ValueService);
+
   inputValue: any;
   autoCompleteValue: any;
 
@@ -26,12 +30,6 @@ export class TableElementComponent implements OnInit {
   autoCompleteSuggestions: any[] = [];
 
   readonly index = input<number>(0);
-
-  constructor(
-    private autoCompleteService: AutoCompleteService,
-    private fieldUpdateService: FieldUpdateService,
-    private valueService: ValueService,
-  ) {}
 
   ngOnInit(): void {
     this.valueService.update.subscribe({

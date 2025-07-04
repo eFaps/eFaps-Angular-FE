@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ConfirmationService } from 'primeng/api';
 import { AutoCompleteModule } from 'primeng/autocomplete';
@@ -44,6 +44,10 @@ import { UtilService } from 'src/app/services/util.service';
   styleUrl: './promo-simulator.component.scss',
 })
 export class PromoSimulatorComponent implements OnInit {
+  private http = inject(HttpClient);
+  private confirmationService = inject(ConfirmationService);
+  private utilService = inject(UtilService);
+
   items: Item[] = [];
   editDialog = false;
 
@@ -69,12 +73,6 @@ export class PromoSimulatorComponent implements OnInit {
   backendsChecked: boolean = false;
 
   expandedRows = {};
-
-  constructor(
-    private http: HttpClient,
-    private confirmationService: ConfirmationService,
-    private utilService: UtilService,
-  ) {}
 
   ngOnInit(): void {
     const url = `${this.utilService.evalApiUrl()}/ui/modules/promo-simulator/promotions`;

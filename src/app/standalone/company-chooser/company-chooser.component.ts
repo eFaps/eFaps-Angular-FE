@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
@@ -14,13 +14,13 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./company-chooser.component.scss'],
 })
 export class CompanyChooserComponent implements OnInit {
+  private userService = inject(UserService);
+  private dialogRef = inject(DynamicDialogRef);
+
   companies: Company[] = [];
   formGroup: FormGroup;
 
-  constructor(
-    private userService: UserService,
-    private dialogRef: DynamicDialogRef,
-  ) {
+  constructor() {
     this.formGroup = new FormGroup({
       company: new FormControl<Company | undefined>(undefined),
     });

@@ -5,14 +5,14 @@ import {
   HttpInterceptor,
   HttpRequest,
 } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { MessageService } from 'primeng/api';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
-  constructor(private messageService: MessageService) {}
+  private messageService = inject(MessageService);
 
   intercept(
     request: HttpRequest<unknown>,

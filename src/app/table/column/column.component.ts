@@ -1,4 +1,11 @@
-import { Component, ElementRef, Input, output, viewChild } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  Input,
+  output,
+  viewChild,
+  inject,
+} from '@angular/core';
 import { Router } from '@angular/router';
 import { saveAs } from 'file-saver';
 
@@ -12,6 +19,9 @@ import { CheckoutService } from 'src/app/services/checkout.service';
   standalone: false,
 })
 export class ColumnComponent {
+  private router = inject(Router);
+  private checkoutService = inject(CheckoutService);
+
   @Input()
   rowData: any | undefined;
   @Input()
@@ -19,11 +29,6 @@ export class ColumnComponent {
   readonly navEvent = output();
 
   readonly overflowElement = viewChild<ElementRef>('overflowWrapper');
-
-  constructor(
-    private router: Router,
-    private checkoutService: CheckoutService,
-  ) {}
 
   isCheckout(): boolean {
     return this.column?.field == 'checkout';
