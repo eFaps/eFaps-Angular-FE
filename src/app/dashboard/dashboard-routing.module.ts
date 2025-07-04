@@ -3,12 +3,14 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { canActivateAuth } from '../guard/auth.guard';
 
-
 const routes: Routes = [
   {
     path: '',
     canActivate: [canActivateAuth],
-    loadComponent: () => import('./dashboard/dashboard.component').then(m => m.DashboardComponent),
+    loadComponent: () =>
+      import('./dashboard/dashboard.component').then(
+        (m) => m.DashboardComponent,
+      ),
   },
 ];
 
