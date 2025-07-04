@@ -48,7 +48,8 @@ export interface FormItem {
     | 'TIME'
     | 'BUTTON'
     | 'CLASSIFICATION'
-    | 'PICKLIST';
+    | 'PICKLIST'
+    | 'IMAGE';
   label: string;
   name: string;
   value?: any;
