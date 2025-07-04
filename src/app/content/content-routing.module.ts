@@ -3,14 +3,14 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { canActivateAuth } from '../guard/auth.guard';
 import { TableComponent } from '../table/table/table.component';
-import { ContentComponent } from './content/content.component';
-import { FormContentComponent } from './form-content/form-content.component';
+
+
 
 const routes: Routes = [
   {
     path: ':oid',
     canActivate: [canActivateAuth],
-    component: ContentComponent,
+    loadComponent: () => import('./content/content.component').then(m => m.ContentComponent),
 
     children: [
       {
@@ -22,7 +22,7 @@ const routes: Routes = [
       {
         path: 'form/:id',
         canActivate: [canActivateAuth],
-        component: FormContentComponent,
+        loadComponent: () => import('./form-content/form-content.component').then(m => m.FormContentComponent),
         outlet: 'contentOutlet',
       },
     ],
@@ -30,7 +30,7 @@ const routes: Routes = [
   {
     path: 'form/:id',
     canActivate: [canActivateAuth],
-    component: FormContentComponent,
+    loadComponent: () => import('./form-content/form-content.component').then(m => m.FormContentComponent),
   },
 ];
 
