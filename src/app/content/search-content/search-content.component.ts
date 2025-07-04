@@ -45,7 +45,6 @@ export class SearchContentComponent implements OnInit {
   elements: any[] = [];
   selectedElements: any[] = [];
   oid: string | undefined;
-  values: Map<String, any> | undefined;
 
   constructor() {
     const config = this.config;
@@ -91,7 +90,6 @@ export class SearchContentComponent implements OnInit {
 
   ngOnInit(): void {
     this.valueService.reset();
-    this.values = this.valueService.values();
   }
 
   getMenuItem(item: Search): MenuItem {
@@ -118,7 +116,8 @@ export class SearchContentComponent implements OnInit {
   }
 
   query() {
-    this.searchService.query(this.search!!.id, this.values).subscribe({
+    const values = this.valueService.values()
+    this.searchService.query(this.search!!.id, values).subscribe({
       next: (searchResult) => {
         this.cols = searchResult.columns;
         this.elements = searchResult.values;
