@@ -26,8 +26,8 @@
       </ng-template>
     </p-table>
   </div>
-  @if (messages.length > 0) {
-    <p-messages [(value)]="messages" [enableService]="false" [closable]="false" />
+  @for (message of messages; track message) {
+    <p-message severity="{{message.severity}}" [closable]="false" >{{message.text}}</p-message>
   }
   <div class="footer">
     <p-button label="Verificar" [disabled]="cols.length == 0" (onClick)="verify()"></p-button>

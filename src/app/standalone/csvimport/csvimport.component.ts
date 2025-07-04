@@ -9,7 +9,7 @@ import {
   FileUpload,
   FileUploadModule,
 } from 'primeng/fileupload';
-import { MessagesModule } from 'primeng/messages';
+import { MessageModule } from 'primeng/message';
 import { ScrollPanelModule } from 'primeng/scrollpanel';
 import { TableModule } from 'primeng/table';
 
@@ -21,9 +21,9 @@ import { UtilService } from 'src/app/services/util.service';
   imports: [
     ButtonModule,
     FileUploadModule,
-    MessagesModule,
     TableModule,
     ScrollPanelModule,
+    MessageModule
   ],
   templateUrl: './csvimport.component.html',
   styleUrl: './csvimport.component.scss',

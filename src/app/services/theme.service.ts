@@ -1,5 +1,5 @@
 import { effect, inject, Injectable, signal } from '@angular/core';
-import { updatePrimaryPalette } from '@primeng/themes';
+import { updatePrimaryPalette } from '@primeuix/themes';
 import { LocalStorageService } from 'ngx-localstorage';
 
 @Injectable({

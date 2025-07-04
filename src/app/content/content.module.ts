@@ -13,7 +13,6 @@ import { ImageModule } from 'primeng/image';
 import { InputTextModule } from 'primeng/inputtext';
 import { MenuModule } from 'primeng/menu';
 import { MenubarModule } from 'primeng/menubar';
-import { MessagesModule } from 'primeng/messages';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { PanelModule } from 'primeng/panel';
 import { RadioButtonModule } from 'primeng/radiobutton';
@@ -71,7 +70,6 @@ import { TableSectionComponent } from './table-section/table-section.component';
     TreeModule,
     ChipModule,
     TieredMenuModule,
-    MessagesModule,
     ScrollPanelModule,
     SafeHtmlPipe,
     ModalContentComponent,
