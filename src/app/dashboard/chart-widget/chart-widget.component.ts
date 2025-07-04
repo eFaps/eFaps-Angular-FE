@@ -1,4 +1,7 @@
 import { Component, inject, Input } from '@angular/core';
+import { $dt } from '@primeuix/themes';
+
+import { Chart } from 'chart.js';
 import { ChartModule } from 'primeng/chart';
 
 import { ChartWidget, WidgetData } from 'src/app/model/dashboard';
@@ -49,6 +52,10 @@ export class ChartWidgetComponent {
       },
     };
     this.type = this.widget.chartType;
+    
+    const documentStyle = getComputedStyle(document.documentElement);
+    const textColor = documentStyle.getPropertyValue('--p-text-color');
+    Chart.defaults.color = textColor;
   }
 
   get widget() {
