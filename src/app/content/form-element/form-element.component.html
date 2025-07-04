@@ -72,7 +72,7 @@
           #textArea
           [(ngModel)]="textareaValue"
           (keyup)="onKey(textArea.value)"
-          (blur)="fieldUpdate()"></textarea>
+          (blur)="fieldUpdate()" [autoResize]="true"></textarea>
       }
       @case ("SNIPPLET") {
         <div class="snipplet" [innerHtml]="snippletValue | safeHtml"></div>
