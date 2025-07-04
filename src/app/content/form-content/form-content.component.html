@@ -1,17 +1,17 @@
-
-@if(!isModule()){
+@if (!isModule()) {
   <p-toolbar class="toolbar">
     <ng-template #start>
       <p-menu #menu [model]="menuItems" [popup]="true" />
       @if (menuItems.length > 0) {
         <p-button (click)="menu.toggle($event)" icon="pi pi-bars" />
       }
-      <div class="mainHeader">{{outline?.header}}</div>
+      <div class="mainHeader">{{ outline?.header }}</div>
     </ng-template>
   </p-toolbar>
   <div class="p-dialog-content">
     @if (outline?.classifications) {
-      <app-classification-display [classifications]="outline?.classifications"></app-classification-display>
+      <app-classification-display
+        [classifications]="outline?.classifications"></app-classification-display>
     }
     <app-sections [sections]="sections"></app-sections>
   </div>

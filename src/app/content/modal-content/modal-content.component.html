@@ -1,9 +1,15 @@
 <div class="p-dialog-content">
   @if (classifications()) {
-    <app-classification-display [classifications]="classifications()" [editMode]="true"></app-classification-display>
+    <app-classification-display
+      [classifications]="classifications()"
+      [editMode]="true"></app-classification-display>
   }
   <app-sections [sections]="sections()"></app-sections>
 </div>
 <div class="p-dialog-footer">
-  <p-button [label]="outline.action?.label" severity="warn" (click)="submit()" tabindex="0"></p-button>
+  <p-button
+    [label]="outline.action?.label"
+    severity="warn"
+    (click)="submit()"
+    tabindex="0"></p-button>
 </div>

@@ -1,10 +1,12 @@
 <div class="p-dialog-content">
-    @for (filter of filters; track filter.field) {
-        <app-filter-element [filter]="filter" (filterEvent)="onFilterEvent($event)"></app-filter-element>
-    } @empty {
-        <span>Loading</span>
-    }   
+  @for (filter of filters; track filter.field) {
+    <app-filter-element
+      [filter]="filter"
+      (filterEvent)="onFilterEvent($event)"></app-filter-element>
+  } @empty {
+    <span>Loading</span>
+  }
 </div>
 <div class="p-dialog-footer">
-    <p-button label="aplicar" severity="warn" (click)="submit()"></p-button>
+  <p-button label="aplicar" severity="warn" (click)="submit()"></p-button>
 </div>

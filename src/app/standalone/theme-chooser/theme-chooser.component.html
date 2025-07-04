@@ -1,11 +1,16 @@
 <div class="wrapper">
-    <div>
-        <p-button [icon]="icon()" (onClick)="toggleDarkMode()" />
-    </div>
-    <div class="color-buttons">
-        @for (color of colors; track color.name) {
-        <button type="button" (click)="updateColor(color.name)" class="color-button"
-            [style]="{'background-color': color.color}" tooltipPosition="left" pTooltip="{{color.name}}"></button>
-        }
-    </div>
+  <div>
+    <p-button [icon]="icon()" (onClick)="toggleDarkMode()" />
+  </div>
+  <div class="color-buttons">
+    @for (color of colors; track color.name) {
+      <button
+        type="button"
+        (click)="updateColor(color.name)"
+        class="color-button"
+        [style]="{ 'background-color': color.color }"
+        tooltipPosition="left"
+        pTooltip="{{ color.name }}"></button>
+    }
+  </div>
 </div>

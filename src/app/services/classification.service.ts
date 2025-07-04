@@ -27,9 +27,7 @@ export class ClassificationService {
   }
 
   getSections(classification: Classification): Observable<Section[]> {
-    const url = `${this.utilService.evalApiUrl()}/ui/classification/${
-      classification.id
-    }/sections`;
+    const url = `${this.utilService.evalApiUrl()}/ui/classification/${classification.id}/sections`;
     return this.http.get<Section[]>(url);
   }
 }

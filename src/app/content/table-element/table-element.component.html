@@ -1,16 +1,32 @@
 <div class="value">
   @switch (column?.type) {
-    @case ('INPUT') {
-      <input type="text" pInputText #textInput [(ngModel)]="inputValue" (keyup)="onKey(textInput.value)" (blur)="fieldUpdate()" />
+    @case ("INPUT") {
+      <input
+        type="text"
+        pInputText
+        #textInput
+        [(ngModel)]="inputValue"
+        (keyup)="onKey(textInput.value)"
+        (blur)="fieldUpdate()" />
     }
-    @case ('AUTOCOMPLETE') {
-      <p-autoComplete [(ngModel)]="autoCompleteValue" [suggestions]="autoCompleteSuggestions"
-        (completeMethod)="search($event.query)" (onSelect)="changeAutoComplete($event)"
-        (onUnselect)="changeAutoComplete($event)" field="label" [lazy]="true" placeholder="buscar"
-      [forceSelection]="true" [showEmptyMessage]="true" appendTo="body" (onBlur)="fieldUpdate()"> </p-autoComplete>
+    @case ("AUTOCOMPLETE") {
+      <p-autoComplete
+        [(ngModel)]="autoCompleteValue"
+        [suggestions]="autoCompleteSuggestions"
+        (completeMethod)="search($event.query)"
+        (onSelect)="changeAutoComplete($event)"
+        (onUnselect)="changeAutoComplete($event)"
+        field="label"
+        [lazy]="true"
+        placeholder="buscar"
+        [forceSelection]="true"
+        [showEmptyMessage]="true"
+        appendTo="body"
+        (onBlur)="fieldUpdate()">
+      </p-autoComplete>
     }
     @default {
-      {{readOnlyValue}}
+      {{ readOnlyValue }}
     }
   }
 </div>

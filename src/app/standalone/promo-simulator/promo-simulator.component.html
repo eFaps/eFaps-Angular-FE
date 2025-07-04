@@ -1,177 +1,235 @@
 <div class="wrapper">
-    <div class="document">
-        <div>
-            <p-toolbar styleClass="mb-4 gap-2">
-                <ng-template #start>
-                    <div class="buttons">
-                        <p-button severity="success" label="Añadir" icon="pi pi-plus" (onClick)="add()" />
-                        <p-button severity="danger" label="Borrar" icon="pi pi-trash" (onClick)="delete()"
-                            [disabled]="!selectedItems || !selectedItems.length" />
-                    </div>
-                </ng-template>
-                <ng-template #end>
-                    <p-button severity="success" label="Calcular" icon="pi pi-calculator" (onClick)="calculate()" />
-                </ng-template>
-            </p-toolbar>
-            <p-table [value]="items" dataKey="index" [tableStyle]="{ 'min-width': '50rem' }" [(selection)]="selectedItems" [expandedRowKeys]="expandedRows">
+  <div class="document">
+    <div>
+      <p-toolbar styleClass="mb-4 gap-2">
+        <ng-template #start>
+          <div class="buttons">
+            <p-button severity="success" label="Añadir" icon="pi pi-plus" (onClick)="add()" />
+            <p-button
+              severity="danger"
+              label="Borrar"
+              icon="pi pi-trash"
+              (onClick)="delete()"
+              [disabled]="!selectedItems || !selectedItems.length" />
+          </div>
+        </ng-template>
+        <ng-template #end>
+          <p-button
+            severity="success"
+            label="Calcular"
+            icon="pi pi-calculator"
+            (onClick)="calculate()" />
+        </ng-template>
+      </p-toolbar>
+      <p-table
+        [value]="items"
+        dataKey="index"
+        [tableStyle]="{ 'min-width': '50rem' }"
+        [(selection)]="selectedItems"
+        [expandedRowKeys]="expandedRows">
+        <ng-template #header>
+          <tr>
+            <th style="width: 4rem"><p-tableHeaderCheckbox /></th>
+            <th></th>
+            <th>Candidad</th>
+            <th>Producto</th>
+            <th>Precio Lista</th>
+            <th>Precio Neto</th>
+            <th>Descuento Neto Total</th>
+            <th>Precio Bruto</th>
+            <th>Descuento Bruto Total</th>
+          </tr>
+        </ng-template>
+        <ng-template #body let-item let-expanded="expanded">
+          <tr>
+            <td>
+              <p-tableCheckbox [value]="item" />
+            </td>
+            <td>
+              <p-button
+                type="button"
+                pRipple
+                [pRowToggler]="item"
+                [text]="true"
+                [rounded]="true"
+                [plain]="true"
+                [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'" />
+            </td>
+            <td>{{ item.quantity }}</td>
+            <td>{{ item.product.label }}</td>
+            <td>{{ item.product.netUnitPrice }}</td>
+            <td>{{ item.netPrice }}</td>
+            <td>{{ item.netDiscount }}</td>
+            <td>{{ item.crossPrice }}</td>
+            <td>{{ item.crossDiscount }}</td>
+          </tr>
+        </ng-template>
+        <ng-template #expandedrow let-item>
+          <tr>
+            <td colspan="9">
+              <h5>Promociones de {{ item.product.label }}</h5>
+              <p-table [value]="item.details" dataKey="id">
                 <ng-template #header>
-                    <tr>
-                        <th style="width: 4rem"><p-tableHeaderCheckbox /></th>
-                        <th></th>
-                        <th>Candidad</th>
-                        <th>Producto</th>
-                        <th>Precio Lista</th>
-                        <th>Precio Neto</th>
-                        <th>Descuento Neto Total</th>
-                        <th>Precio Bruto</th>
-                        <th>Descuento Bruto Total</th>
-                    </tr>
+                  <tr>
+                    <th>Precio Neto Base</th>
+                    <th>Descuento Neto</th>
+                    <th>Descuento Bruto</th>
+                    <th>Promocion</th>
+                  </tr>
                 </ng-template>
-                <ng-template #body let-item let-expanded="expanded">
-                    <tr>
-                        <td>
-                            <p-tableCheckbox [value]="item" />
-                        </td>
-                        <td>
-                            <p-button type="button" pRipple [pRowToggler]="item" [text]="true" [rounded]="true" [plain]="true" 
-                                [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'" />
-                        </td>
-                        <td>{{ item.quantity }}</td>
-                        <td>{{ item.product.label }}</td>
-                        <td>{{ item.product.netUnitPrice }}</td>
-                        <td>{{ item.netPrice }}</td>
-                        <td>{{ item.netDiscount }}</td>
-                        <td>{{ item.crossPrice }}</td>
-                        <td>{{ item.crossDiscount }}</td>
-                    </tr>
+                <ng-template #body let-detail>
+                  <tr>
+                    <td>{{ detail.netBase }}</td>
+                    <td>{{ detail.netDiscount }}</td>
+                    <td>{{ detail.crossDiscount }}</td>
+                    <td>
+                      <p-button
+                        severity="info"
+                        label="{{ getPromotionLabel(detail.promotionOid) }}"
+                        (onClick)="showPromotion(detail.promotionOid)" />
+                    </td>
+                  </tr>
                 </ng-template>
-                <ng-template #expandedrow let-item>
-                    <tr>
-                        <td colspan="9">
-                            <h5>Promociones de {{ item.product.label }}</h5>
-                            <p-table [value]="item.details" dataKey="id">
-                                <ng-template #header>
-                                    <tr>
-                                        <th>Precio Neto Base</th>
-                                        <th>Descuento Neto </th>
-                                        <th>Descuento Bruto </th>
-                                        <th>Promocion</th>
-                                    </tr>
-                                </ng-template>
-                                <ng-template #body let-detail>
-                                    <tr>
-                                        <td>{{ detail.netBase }}</td>
-                                        <td>{{ detail.netDiscount}}</td>
-                                        <td>{{ detail.crossDiscount}}</td>
-                                        <td>
-                                            <p-button severity="info" label="{{getPromotionLabel(detail.promotionOid)}}"
-                                            (onClick)="showPromotion(detail.promotionOid)" />
-                                        </td>
-                                    </tr>
-                                </ng-template>     
-                                <ng-template #emptymessage>
-                                    <tr>
-                                        <td colspan="9">Ninguna Promocion aplicada.</td>
-                                    </tr>
-                                </ng-template>
-                            </p-table>
-                        </td>
-                    </tr>
+                <ng-template #emptymessage>
+                  <tr>
+                    <td colspan="9">Ninguna Promocion aplicada.</td>
+                  </tr>
                 </ng-template>
-            </p-table>
-        </div>
-        <div class="totals">
-            <div><span class="totalLabel">Total neto:</span><span class="totalValue">{{calcResponse?.netTotal}}</span>
-            </div>
-            <div><span class="totalLabel">Descuento total neto:</span> <span
-                    class="totalValue">{{calcResponse?.promotionInfo?.netTotalDiscount}}</span></div>
-            <div><span class="totalLabel">Total bruto:</span><span
-                    class="totalValue">{{calcResponse?.crossTotal}}</span>
-            </div>
-            <div><span class="totalLabel">Descuento Total bruto:</span><span class="totalValue">
-                    {{calcResponse?.promotionInfo?.crossTotalDiscount}}</span></div>
-        </div>
+              </p-table>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
     </div>
-    <div class="config">
-        <h3>Configuraciones:</h3>
-        <div class="confElement">
-            <p-floatLabel>
-                <p-datepicker [(ngModel)]="date" [showIcon]="true" [disabled]="!dateChecked" />
-                <label for="username">Fecha</label>
-            </p-floatLabel>
-            <p-toggleswitch [(ngModel)]="dateChecked" (onChange)="toggleDate($event)"/>
-        </div>
-        @if (backends.length > 0) {
-            <div class="confElement">
-                <p-select [options]="backends" [(ngModel)]="selectedBackend" optionLabel="name" class="w-full md:w-56" 
-                    [disabled]="!backendsChecked" placeholder="POS Instancia" />
-                <p-toggleswitch [(ngModel)]="backendsChecked" (onChange)="toggleBackends($event)"/>
-            </div>
-        }
-        <div class="confElement">
-            <p-listbox styleClass="promotionsConf" [options]="promotions" [(ngModel)]="selectedPromotions" 
-                [multiple]="true" [showToggleAll]="true" [disabled]="!promotionsChecked" optionLabel="name" 
-                optionValue="oid" [checkmark]="true"/>
-            <p-toggleswitch [(ngModel)]="promotionsChecked" (onChange)="togglePromotions($event)"/>
-        </div>
+    <div class="totals">
+      <div>
+        <span class="totalLabel">Total neto:</span
+        ><span class="totalValue">{{ calcResponse?.netTotal }}</span>
+      </div>
+      <div>
+        <span class="totalLabel">Descuento total neto:</span>
+        <span class="totalValue">{{ calcResponse?.promotionInfo?.netTotalDiscount }}</span>
+      </div>
+      <div>
+        <span class="totalLabel">Total bruto:</span
+        ><span class="totalValue">{{ calcResponse?.crossTotal }}</span>
+      </div>
+      <div>
+        <span class="totalLabel">Descuento Total bruto:</span
+        ><span class="totalValue"> {{ calcResponse?.promotionInfo?.crossTotalDiscount }}</span>
+      </div>
     </div>
+  </div>
+  <div class="config">
+    <h3>Configuraciones:</h3>
+    <div class="confElement">
+      <p-floatLabel>
+        <p-datepicker [(ngModel)]="date" [showIcon]="true" [disabled]="!dateChecked" />
+        <label for="username">Fecha</label>
+      </p-floatLabel>
+      <p-toggleswitch [(ngModel)]="dateChecked" (onChange)="toggleDate($event)" />
+    </div>
+    @if (backends.length > 0) {
+      <div class="confElement">
+        <p-select
+          [options]="backends"
+          [(ngModel)]="selectedBackend"
+          optionLabel="name"
+          class="w-full md:w-56"
+          [disabled]="!backendsChecked"
+          placeholder="POS Instancia" />
+        <p-toggleswitch [(ngModel)]="backendsChecked" (onChange)="toggleBackends($event)" />
+      </div>
+    }
+    <div class="confElement">
+      <p-listbox
+        styleClass="promotionsConf"
+        [options]="promotions"
+        [(ngModel)]="selectedPromotions"
+        [multiple]="true"
+        [showToggleAll]="true"
+        [disabled]="!promotionsChecked"
+        optionLabel="name"
+        optionValue="oid"
+        [checkmark]="true" />
+      <p-toggleswitch [(ngModel)]="promotionsChecked" (onChange)="togglePromotions($event)" />
+    </div>
+  </div>
 </div>
 
-<p-dialog [(visible)]="editDialog" [style]="{ width: '450px' }" header="Editar" [modal]="true" styleClass="p-fluid">
-    <ng-template #content>
-        <div class="editDialog">
-            <p-floatlabel>
-                <p-inputNumber pInputText id="quantity" [(ngModel)]="item.quantity" required autofocus />
-                <label for="quantity">Candidad</label>
-            </p-floatlabel>
-            <p-floatlabel>
-                <p-autoComplete id="product" [(ngModel)]="autoCompleteValue" [suggestions]="autoCompleteSuggestions"
-                    (completeMethod)="search($event.query)" optionLabel="label" [lazy]="true" 
-                    [forceSelection]="true" [showEmptyMessage]="true" appendTo="body"
-                    (onSelect)="onSelect($event.value)" required>
-                </p-autoComplete>
-                <label for="product">Producto</label>
-            </p-floatlabel>
-        </div>
-    </ng-template>
-    <ng-template #footer>
-        <p-button label="Cerrar" icon="pi pi-times" [text]="true" (onClick)="cancel()" />
-        <p-button label="Guardar" icon="pi pi-check" [text]="true" (onClick)="save()" [disabled]="!isValid()"/>
-    </ng-template>
+<p-dialog
+  [(visible)]="editDialog"
+  [style]="{ width: '450px' }"
+  header="Editar"
+  [modal]="true"
+  styleClass="p-fluid">
+  <ng-template #content>
+    <div class="editDialog">
+      <p-floatlabel>
+        <p-inputNumber pInputText id="quantity" [(ngModel)]="item.quantity" required autofocus />
+        <label for="quantity">Candidad</label>
+      </p-floatlabel>
+      <p-floatlabel>
+        <p-autoComplete
+          id="product"
+          [(ngModel)]="autoCompleteValue"
+          [suggestions]="autoCompleteSuggestions"
+          (completeMethod)="search($event.query)"
+          optionLabel="label"
+          [lazy]="true"
+          [forceSelection]="true"
+          [showEmptyMessage]="true"
+          appendTo="body"
+          (onSelect)="onSelect($event.value)"
+          required>
+        </p-autoComplete>
+        <label for="product">Producto</label>
+      </p-floatlabel>
+    </div>
+  </ng-template>
+  <ng-template #footer>
+    <p-button label="Cerrar" icon="pi pi-times" [text]="true" (onClick)="cancel()" />
+    <p-button
+      label="Guardar"
+      icon="pi pi-check"
+      [text]="true"
+      (onClick)="save()"
+      [disabled]="!isValid()" />
+  </ng-template>
 </p-dialog>
 <p-confirmDialog [style]="{ width: '450px' }" />
 
 <p-dialog [(visible)]="showPromotionModal" header="Promocion" [modal]="true" styleClass="p-fluid">
-    <ng-template #content>
-        <div class="promotionModal">
-            <div>
-                <span>OID</span>
-                <span>{{displayPromotion?.oid}}</span>
-            </div>
-            <div>
-                <span>Nombre</span>
-                <span>{{displayPromotion?.name}}</span>
-            </div>
-            <div>
-                <span>Descripción</span>
-                <span>{{displayPromotion?.description}}</span>
-            </div>
-            <div>
-                <span>Etiqueta</span>
-                <span>{{displayPromotion?.label}}</span>
-            </div>
-            <div>
-                <span>Prioridad</span>
-                <span>{{displayPromotion?.priority}}</span>
-            </div>
-            <div>
-                <span>Fecha/Hora Inicio</span>
-                <span>{{displayPromotion?.startDateTime}}</span>
-            </div>
-            <div>
-                <span> Fecha/Hora Fin</span>
-                <span>{{displayPromotion?.endDateTime}}</span>
-            </div>
-        </div>
-    </ng-template>
+  <ng-template #content>
+    <div class="promotionModal">
+      <div>
+        <span>OID</span>
+        <span>{{ displayPromotion?.oid }}</span>
+      </div>
+      <div>
+        <span>Nombre</span>
+        <span>{{ displayPromotion?.name }}</span>
+      </div>
+      <div>
+        <span>Descripción</span>
+        <span>{{ displayPromotion?.description }}</span>
+      </div>
+      <div>
+        <span>Etiqueta</span>
+        <span>{{ displayPromotion?.label }}</span>
+      </div>
+      <div>
+        <span>Prioridad</span>
+        <span>{{ displayPromotion?.priority }}</span>
+      </div>
+      <div>
+        <span>Fecha/Hora Inicio</span>
+        <span>{{ displayPromotion?.startDateTime }}</span>
+      </div>
+      <div>
+        <span> Fecha/Hora Fin</span>
+        <span>{{ displayPromotion?.endDateTime }}</span>
+      </div>
+    </div>
+  </ng-template>
 </p-dialog>

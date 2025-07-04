@@ -1,63 +1,81 @@
 <div class="wrapper">
-    <div class="filters" [formGroup]="formGroup">
-        @for (filter of filters; track filter.name;; let indexOfelement = $index) {
-            @switch (filter.type) {
-                @case ('DATE') {
-                <div class="filterElement">
-                    <p-floatlabel>
-                        <p-datepicker inputId="{{'filter' + indexOfelement}}" [showIcon]="true"
-                            formControlName="{{filter.name}}"></p-datepicker>
-                        <label for="{{'filter' + indexOfelement}}">{{filter.label}}</label>
-                    </p-floatlabel>
-                </div>
-                }
-                @case ('PICKLIST') {
-                <div class="filterElement">
-                  <div class="pickListHeader">
-                    <span>{{filter.label}}</span>
-                  </div>
-                  <p-picklist [source]="pickListElements[filter.name].source" 
-                        [target]="pickListElements[filter.name].target" 
-                        [dragdrop]="true"  
-                        showSourceControls="false" 
-                        showTargetControls="false" 
-                        targetHeader="Activo" 
-                        sourceHeader="Inactivo" 
-                        stripedRows="false"
-                        [responsive]="false"
-                        [sourceStyle]="{ height: '20rem', display: 'block' }">
-                        <ng-template let-item #item>
-                                {{ item.label }}
-                        </ng-template>
-                    </p-picklist>
-                </div>
-                }
-                @case ('RADIO') {
-                <div class="filterElement">
-                    <div class="radioHeader">
-                    <span>{{filter.label}}</span>
-                  </div>
-                @for (option of optionElements[filter.name]; track option;  let idx = $index) {
-                    <div class="field-radio">
-                        <p-radioButton [inputId]="filter.name + 'opt' + idx" [value]="option.value" formControlName="{{filter.name}}"/>
-                        <label [for]="filter.name + 'opt' + idx">{{ option.label }}</label>
-                    </div>    
-                }
-                </div>
-                }
-            }
+  <div class="filters" [formGroup]="formGroup">
+    @for (filter of filters; track filter.name; let indexOfelement = $index) {
+      @switch (filter.type) {
+        @case ("DATE") {
+          <div class="filterElement">
+            <p-floatlabel>
+              <p-datepicker
+                inputId="{{ 'filter' + indexOfelement }}"
+                [showIcon]="true"
+                formControlName="{{ filter.name }}"></p-datepicker>
+              <label for="{{ 'filter' + indexOfelement }}">{{ filter.label }}</label>
+            </p-floatlabel>
+          </div>
         }
-        <div class="filterButton">
-            <p-button label="Update" icon="pi pi-refresh" [loading]="loading" (onClick)="reload()"
-                [disabled]="!formGroup.valid" />
-            <p-button icon="pi pi-file-excel" [loading]="loading" [disabled]="!formGroup.valid" (onClick)="export('xls')" />   
-            <p-button icon="pi pi-file-pdf" [loading]="loading" [disabled]="!formGroup.valid" (onClick)="export('pdf')" />   
-        </div>
+        @case ("PICKLIST") {
+          <div class="filterElement">
+            <div class="pickListHeader">
+              <span>{{ filter.label }}</span>
+            </div>
+            <p-picklist
+              [source]="pickListElements[filter.name].source"
+              [target]="pickListElements[filter.name].target"
+              [dragdrop]="true"
+              showSourceControls="false"
+              showTargetControls="false"
+              targetHeader="Activo"
+              sourceHeader="Inactivo"
+              stripedRows="false"
+              [responsive]="false"
+              [sourceStyle]="{ height: '20rem', display: 'block' }">
+              <ng-template let-item #item>
+                {{ item.label }}
+              </ng-template>
+            </p-picklist>
+          </div>
+        }
+        @case ("RADIO") {
+          <div class="filterElement">
+            <div class="radioHeader">
+              <span>{{ filter.label }}</span>
+            </div>
+            @for (option of optionElements[filter.name]; track option; let idx = $index) {
+              <div class="field-radio">
+                <p-radioButton
+                  [inputId]="filter.name + 'opt' + idx"
+                  [value]="option.value"
+                  formControlName="{{ filter.name }}" />
+                <label [for]="filter.name + 'opt' + idx">{{ option.label }}</label>
+              </div>
+            }
+          </div>
+        }
+      }
+    }
+    <div class="filterButton">
+      <p-button
+        label="Update"
+        icon="pi pi-refresh"
+        [loading]="loading"
+        (onClick)="reload()"
+        [disabled]="!formGroup.valid" />
+      <p-button
+        icon="pi pi-file-excel"
+        [loading]="loading"
+        [disabled]="!formGroup.valid"
+        (onClick)="export('xls')" />
+      <p-button
+        icon="pi pi-file-pdf"
+        [loading]="loading"
+        [disabled]="!formGroup.valid"
+        (onClick)="export('pdf')" />
     </div>
-    <div class="content">
-        <div class="header">
-            <h2>{{uimodule().header}}</h2>
-        </div>
-        <div class="report" [innerHtml]="reportHtml | safeHtml"></div>
+  </div>
+  <div class="content">
+    <div class="header">
+      <h2>{{ uimodule().header }}</h2>
     </div>
+    <div class="report" [innerHtml]="reportHtml | safeHtml"></div>
+  </div>
 </div>

@@ -86,9 +86,7 @@ export class CSVImportComponent {
   }
 
   verify() {
-    const url = `${this.utilService.evalApiUrl()}/ui/modules/csvimport/${
-      this.dialogData.item.id
-    }/validate`;
+    const url = `${this.utilService.evalApiUrl()}/ui/modules/csvimport/${this.dialogData.item.id}/validate`;
     this.http
       .post<any>(url, {
         parentOid: this.data()?.parentOid,
@@ -109,9 +107,7 @@ export class CSVImportComponent {
   }
 
   execute() {
-    const url = `${this.utilService.evalApiUrl()}/ui/modules/csvimport/${
-      this.dialogData.item.id
-    }/execute`;
+    const url = `${this.utilService.evalApiUrl()}/ui/modules/csvimport/${this.dialogData.item.id}/execute`;
     this.http
       .post<any>(url, {
         parentOid: this.data()?.parentOid,

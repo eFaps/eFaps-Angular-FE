@@ -6,9 +6,17 @@
   <p-divider>Resultado</p-divider>
   @if (cols && cols.length > 0) {
     <div>
-      <p-table [columns]="cols" [value]="elements" [paginator]="true" [rows]="5" [rowsPerPageOptions]="[5, 10, 20]"
-        [showCurrentPageReport]="true" currentPageReportTemplate="{first} - {last} de {totalRecords}"
-        paginatorDropdownAppendTo="body" [(selection)]="selectedElements" styleClass="p-datatable-gridlines"
+      <p-table
+        [columns]="cols"
+        [value]="elements"
+        [paginator]="true"
+        [rows]="5"
+        [rowsPerPageOptions]="[5, 10, 20]"
+        [showCurrentPageReport]="true"
+        currentPageReportTemplate="{first} - {last} de {totalRecords}"
+        paginatorDropdownAppendTo="body"
+        [(selection)]="selectedElements"
+        styleClass="p-datatable-gridlines"
         stripedRows>
         <ng-template pTemplate="header" let-columns>
           <tr>
@@ -28,14 +36,18 @@
                 <p-tableCheckbox [value]="rowData"></p-tableCheckbox>
               }
               @if (!isConnect) {
-                <p-button icon="pi pi-link" [rounded]="true" [outlined]="true"
-                (click)="followLink(rowData)" [style]="{ width:'2rem', height: '2rem' }"></p-button>
+                <p-button
+                  icon="pi pi-link"
+                  [rounded]="true"
+                  [outlined]="true"
+                  (click)="followLink(rowData)"
+                  [style]="{ width: '2rem', height: '2rem' }"></p-button>
               }
             </td>
             @for (col of columns; track col) {
               <td>
                 <div>
-                  {{rowData[col.field]}}
+                  {{ rowData[col.field] }}
                 </div>
               </td>
             }

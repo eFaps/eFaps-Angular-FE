@@ -1,25 +1,38 @@
 <p-confirmDialog />
 <div #wrapperDiv style="height: calc(100vh - 100px)">
-  <p-treeTable #dt [scrollable]="true" [columns]="cols" [value]="elements" [selectionMode]="selectionMode"
+  <p-treeTable
+    #dt
+    [scrollable]="true"
+    [columns]="cols"
+    [value]="elements"
+    [selectionMode]="selectionMode"
     [(selection)]="selectedElements">
     <ng-template pTemplate="caption">
       <div class="table-header">
         <div class="left">
           <p-menu #menu [model]="menuItems" [popup]="true" [appendTo]="wrapperDiv"></p-menu>
           @if (menuItems.length > 0) {
-            <button pButton type="button" (click)="menu.toggle($event)" icon="pi pi-bars"
-            ></button>
+            <button pButton type="button" (click)="menu.toggle($event)" icon="pi pi-bars"></button>
           }
-          {{title}}
+          {{ title }}
         </div>
         <div></div>
         <div>
           <div class="p-inputgroup">
             <span class="p-inputgroup-addon"><i class="pi pi-search"></i></span>
-            <input pInputText type="text" #searchInput [(ngModel)]="globalSearch"
-              (input)="dt.filterGlobal(searchInput.value, 'contains')" placeholder="buscar" />
-            <button type="button" pButton icon="pi pi-times" styleClass="p-button-danger"
-            (click)="searchInput.value='';dt.filterGlobal('', 'contains')"></button>
+            <input
+              pInputText
+              type="text"
+              #searchInput
+              [(ngModel)]="globalSearch"
+              (input)="dt.filterGlobal(searchInput.value, 'contains')"
+              placeholder="buscar" />
+            <button
+              type="button"
+              pButton
+              icon="pi pi-times"
+              styleClass="p-button-danger"
+              (click)="searchInput.value = ''; dt.filterGlobal('', 'contains')"></button>
           </div>
         </div>
       </div>
@@ -28,7 +41,7 @@
       <tr>
         @for (col of columns; track col; let i = $index) {
           <th [ttSortableColumn]="col.field" pResizableColumn>
-            @if (selectionMode=='checkbox' && i === 0) {
+            @if (selectionMode == "checkbox" && i === 0) {
               <p-treeTableHeaderCheckbox></p-treeTableHeaderCheckbox>
             }
             {{ col.header }}
@@ -42,9 +55,8 @@
         @for (col of columns; track col; let i = $index) {
           <td>
             <div class="columnWrapper">
-              @if (selectionMode=='checkbox' && i === 0) {
-                <p-treeTableCheckbox [value]="rowNode"
-                ></p-treeTableCheckbox>
+              @if (selectionMode == "checkbox" && i === 0) {
+                <p-treeTableCheckbox [value]="rowNode"></p-treeTableCheckbox>
               }
               @if (i === togglerColIdx) {
                 <p-treeTableToggler [rowNode]="rowNode"></p-treeTableToggler>

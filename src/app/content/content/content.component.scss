@@ -1,20 +1,20 @@
 .contentWrapper {
-   overflow: auto;
-   position: relative;
+  overflow: auto;
+  position: relative;
 }
 .mainHeader {
-   height: 3rem;
-   line-height: 3rem;
-   margin-left: 5px;
+  height: 3rem;
+  line-height: 3rem;
+  margin-left: 5px;
 }
 .tabs {
-   width: 100%;
+  width: 100%;
 }
 
 ::ng-deep .p-tabview-panels {
-   display: none;
+  display: none;
 }
 
 .tabLabel {
-   text-wrap: nowrap;
+  text-wrap: nowrap;
 }

@@ -1,42 +1,42 @@
 .wrapper {
-    margin-left: 0.5rem;
-    margin-right: 0.5rem;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
 }
 .steps-wrapper {
-    position: absolute;
-    bottom: 1rem;
-    width: 99%;
-    display: flex;
-    justify-content: center;
+  position: absolute;
+  bottom: 1rem;
+  width: 99%;
+  display: flex;
+  justify-content: center;
 
-    ::ng-deep .p-steps {
-        min-width: 50vh;
-        padding: 0;
-        z-index: 1;
-    }
+  ::ng-deep .p-steps {
+    min-width: 50vh;
+    padding: 0;
+    z-index: 1;
+  }
 
-    ::ng-deep .p-steps-item:before {
-        margin-top: -1rem;
-    }
+  ::ng-deep .p-steps-item:before {
+    margin-top: -1rem;
+  }
 
-    ::ng-deep .p-menuitem-link {
-        flex-direction: column !important;
-        
-        .p-steps-title {
-            margin-left: 0;
-            padding-left: 0;
-        }
+  ::ng-deep .p-menuitem-link {
+    flex-direction: column !important;
+
+    .p-steps-title {
+      margin-left: 0;
+      padding-left: 0;
     }
+  }
 }
 .btn {
-    position: absolute;
-    bottom: 1rem;
-    right: 1rem;
-    z-index: 1;
-    p-button:first-child {
-        margin-right: 0.25rem;
-    }
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+  z-index: 1;
+  p-button:first-child {
+    margin-right: 0.25rem;
+  }
 }
 .p-speeddial-mask {
-    position: fixed;
+  position: fixed;
 }

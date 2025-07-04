@@ -1,14 +1,22 @@
 <div>
-  <p-table styleClass="p-datatable-gridlines p-datatable-sm" stripedRows
-    [columns]="cols" [value]="elements"  >
+  <p-table
+    styleClass="p-datatable-gridlines p-datatable-sm"
+    stripedRows
+    [columns]="cols"
+    [value]="elements">
     <ng-template pTemplate="header" let-columns>
       <tr>
         @for (col of columns; track col) {
-          <th>{{col.label}}</th>
+          <th>{{ col.label }}</th>
         }
-        @if (editable){
+        @if (editable) {
           <th>
-            <p-button icon="pi pi-plus-circle" [rounded]="true" [raised]="true" [text]="true" (click)="addRow()"/>
+            <p-button
+              icon="pi pi-plus-circle"
+              [rounded]="true"
+              [raised]="true"
+              [text]="true"
+              (click)="addRow()" />
           </th>
         }
       </tr>
@@ -18,13 +26,21 @@
         @for (col of columns; track col) {
           <td>
             <div>
-              <app-attribute-set-element [elementData]="rowData[col.name]" class="element"></app-attribute-set-element>
+              <app-attribute-set-element
+                [elementData]="rowData[col.name]"
+                class="element"></app-attribute-set-element>
             </div>
           </td>
         }
-        @if (editable){
+        @if (editable) {
           <td>
-            <p-button icon="pi pi-times-circle" [rounded]="true" [raised]="true" [text]="true" severity="danger" (click)="removeRow(rowData)"/>
+            <p-button
+              icon="pi pi-times-circle"
+              [rounded]="true"
+              [raised]="true"
+              [text]="true"
+              severity="danger"
+              (click)="removeRow(rowData)" />
           </td>
         }
       </tr>

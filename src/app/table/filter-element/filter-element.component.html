@@ -1,19 +1,22 @@
 @switch (filter?.kind) {
-  @case ('DATE') {
+  @case ("DATE") {
     <p-datepicker [(ngModel)]="rangeDates" selectionMode="range" appendTo="body" />
   }
-  @case ('STATUS') {
+  @case ("STATUS") {
     @for (status of statusList; track status) {
       <div class="field-checkbox">
         <p-checkbox
           [(ngModel)]="selectedStatus"
           name="statusFilter"
           [value]="status"
-          [inputId]="status.value"
-          />
-        <label for="{{status.value}}" class="ml-2"> {{status.label}} </label>
+          [inputId]="status.value" />
+        <label for="{{ status.value }}" class="ml-2">
+          {{ status.label }}
+        </label>
       </div>
     }
   }
-  @default { <span>What is going on</span> }
+  @default {
+    <span>What is going on</span>
+  }
 }

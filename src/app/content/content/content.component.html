@@ -6,15 +6,15 @@
         @if (menuItems.length > 0) {
           <p-button (click)="menu.toggle($event)" icon="pi pi-bars"></p-button>
         }
-        <div class="mainHeader">{{mainHeader}}</div>
+        <div class="mainHeader">{{ mainHeader }}</div>
       </ng-template>
     </p-toolbar>
     <div class="tabs">
       <p-tabs [(value)]="activeTab" [scrollable]="true">
         <p-tablist>
-          @for(tab of tabs; track tab.id){
+          @for (tab of tabs; track tab.id) {
             <p-tab [value]="tab.id" (click)="onSelect(tab)">
-              <span class="tabLabel">{{tab.label}}</span>
+              <span class="tabLabel">{{ tab.label }}</span>
             </p-tab>
           }
         </p-tablist>
@@ -22,8 +22,7 @@
     </div>
   </div>
   @if (isMainActive() && classifications) {
-    <app-classification-display
-    [classifications]="classifications"></app-classification-display>
+    <app-classification-display [classifications]="classifications"></app-classification-display>
   }
   @if (isMainActive()) {
     <app-sections [sections]="sections"></app-sections>

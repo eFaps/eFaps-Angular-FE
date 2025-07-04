@@ -1,135 +1,132 @@
 .wrapper {
+  flex-grow: 1;
+  display: flex;
+  gap: 5px;
+
+  .label {
     flex-grow: 1;
-    display: flex;
-    gap: 5px;
+    flex-shrink: 0;
+    background-color: var(--p-highlight-background);
+    color: var(--p-primary-color);
+    padding: var(--p-button-gap);
+    border-radius: var(--p-border-radius-sm);
+    border-color: var(--p-primary-100);
+    border-style: solid;
+    border-width: 1px;
+    width: 200px;
+    max-width: 200px;
+    line-height: 3rem;
+  }
 
-    .label {
-        flex-grow: 1;
-        flex-shrink: 0;
-        background-color: var(--p-highlight-background);
-        color: var(--p-primary-color);
-        padding: var(--p-button-gap);
-        border-radius: var(--p-border-radius-sm);
-        border-color: var(--p-primary-100);
-        border-style: solid;
-        border-width: 1px;
-        width: 200px;
-        max-width: 200px;
-        line-height: 3rem;
+  .value {
+    flex-grow: 1;
+    color: var(--text-color);
+    background-color: var(--surface-section);
+    padding: 0.5rem;
+    line-height: 3rem;
+    white-space-collapse: preserve;
+
+    .navRef {
+      height: 2rem;
+      display: inline-block;
+      position: relative;
+      top: 0.5rem;
+
+      p-button {
+        top: -1rem;
+        position: inherit;
+      }
     }
 
-    .value {
-        flex-grow: 1;
-        color: var(--text-color);
-        background-color: var(--surface-section);
-        padding: 0.5rem;
-        line-height: 3rem;
-        white-space-collapse: preserve;
+    .field-radio {
+      line-height: 1rem;
+      padding-bottom: 5px;
+    }
+  }
 
-        .navRef {
-            height: 2rem;
-            display: inline-block;
-            position: relative;
-            top: 0.5rem;
+  .placeholder {
+    flex-grow: 1;
+  }
 
-            p-button {
-                top: -1rem;
-                position: inherit;
-            }
-        }
+  .checkbox {
+    line-height: 2rem;
 
-        .field-radio {
-            line-height: 1rem;
-            padding-bottom: 5px;
-        }
+    ::ng-deep .p-checkbox {
+      vertical-align: middle;
     }
 
-    .placeholder {
-        flex-grow: 1;
+    label {
+      margin-left: 5px;
     }
-
-    .checkbox {
-        line-height: 2rem;
-
-        ::ng-deep .p-checkbox {
-            vertical-align: middle;
-        }
-
-        label {
-            margin-left: 5px;
-        }
-    }
+  }
 }
 
 ::ng-deep .p-fileupload {
-    min-width: 700px;
+  min-width: 700px;
 }
 
 ::ng-deep .p-fileupload,
 p-dropdown {
-    line-height: 1rem;
+  line-height: 1rem;
 }
 
 ::ng-deep p-radiobutton {
-    vertical-align: middle;
-    margin-right: 0.5rem;
+  vertical-align: middle;
+  margin-right: 0.5rem;
 }
 
-
 ::ng-deep .p-fileupload-row {
-    div:nth-child(1) {
-        flex-basis: 75%;
-    }
+  div:nth-child(1) {
+    flex-basis: 75%;
+  }
 
-    div:nth-child(2) {
-        flex-basis: 25%;
-    }
+  div:nth-child(2) {
+    flex-basis: 25%;
+  }
 
-    div:nth-child(3) {
-        flex-basis: 20px;
-    }
+  div:nth-child(3) {
+    flex-basis: 20px;
+  }
 }
 
 .snipplet {
+  ::ng-deep table {
+    border: 1px solid;
+    border-collapse: collapse;
 
-    ::ng-deep table {
-        border: 1px solid;
-        border-collapse: collapse;
+    ::ng-deep td,
+    th {
+      border: 1px solid;
+      padding: 5px;
+    }
+  }
 
-        ::ng-deep td,
-        th {
-            border: 1px solid;
-            padding: 5px;
-        }
+  ::ng-deep {
+    .eFapsJR {
+      margin-top: 20px;
+      margin-bottom: 20px;
+      width: calc(100vw - 38px);
     }
 
-    ::ng-deep {
-        .eFapsJR {
-            margin-top: 20px;
-            margin-bottom: 20px;
-            width: calc(100vw - 38px)
-        }
-
-        .jrPage {
-            margin-left: auto;
-            margin-right: auto;
-            white-space: normal;
-        }
+    .jrPage {
+      margin-left: auto;
+      margin-right: auto;
+      white-space: normal;
     }
+  }
 }
 
 .dragDrop {
-    min-height: 100px;
+  min-height: 100px;
 }
 
 .classification {
+  position: relative;
+  height: 0;
+
+  .move {
     position: relative;
-    height: 0;
-
-    .move {
-        position: relative;
-        top: -60px;
-        left: -10px;
-    }
-
+    top: -60px;
+    left: -10px;
+  }
 }

@@ -1,18 +1,18 @@
 .wrapper {
-    height: 80vh;
-    gridster {
-        background-color: var(--p-gray-200);
+  height: 80vh;
+  gridster {
+    background-color: var(--p-gray-200);
 
-        .delete-btn {
-            position: absolute;
-            top: calc(50% - 8px);
-            right: calc(50% - 8px);
-        }
+    .delete-btn {
+      position: absolute;
+      top: calc(50% - 8px);
+      right: calc(50% - 8px);
     }
+  }
 }
 .add-btn {
-    position: absolute;
-    z-index: 10;
-    bottom: 1rem;
-    right: 7.5rem;
+  position: absolute;
+  z-index: 10;
+  bottom: 1rem;
+  right: 7.5rem;
 }

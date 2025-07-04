@@ -74,9 +74,7 @@ export class SystemConfigurationLinkComponent implements OnInit {
       this.config.header = 'Create SystemConfiguration Attribute';
     } else {
       const data = this.data();
-      const url = `${this.utilService.evalApiUrl()}/ui/modules/system-configurations/${
-        data?.parentOid
-      }/links/${data?.oid}`;
+      const url = `${this.utilService.evalApiUrl()}/ui/modules/system-configurations/${data?.parentOid}/links/${data?.oid}`;
       this.http.get<any>(url).subscribe({
         next: (link) => {
           this.key = link.key;
@@ -91,9 +89,7 @@ export class SystemConfigurationLinkComponent implements OnInit {
 
   submit() {
     if (this.uimodule()?.targetMode == 'CREATE') {
-      const url = `${this.utilService.evalApiUrl()}/ui/modules/system-configurations/${
-        this.data()?.parentOid
-      }/links`;
+      const url = `${this.utilService.evalApiUrl()}/ui/modules/system-configurations/${this.data()?.parentOid}/links`;
       this.http
         .post(url, {
           key: this.keyStr,
@@ -109,9 +105,7 @@ export class SystemConfigurationLinkComponent implements OnInit {
         });
     } else {
       const data = this.data();
-      const url = `${this.utilService.evalApiUrl()}/ui/modules/system-configurations/${
-        data?.parentOid
-      }/links/${data?.oid}`;
+      const url = `${this.utilService.evalApiUrl()}/ui/modules/system-configurations/${data?.parentOid}/links/${data?.oid}`;
       this.http
         .put(url, {
           key: this.keyStr,
@@ -157,9 +151,7 @@ export class SystemConfigurationLinkComponent implements OnInit {
   }
 
   loadKeys(event: AutoCompleteCompleteEvent) {
-    const url = `${this.utilService.evalApiUrl()}/ui/modules/system-configurations/${
-      this.data()?.parentOid
-    }/links`;
+    const url = `${this.utilService.evalApiUrl()}/ui/modules/system-configurations/${this.data()?.parentOid}/links`;
     this.http.get<any>(url).subscribe({
       next: (keys) => (this.keys = keys),
     });

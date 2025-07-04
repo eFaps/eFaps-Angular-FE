@@ -1,34 +1,33 @@
 <div class="wrapper">
   @if (editMode) {
-  <div class="btn">
-    <p-button icon="pi pi-cog" [rounded]="true" (click)="edit()"></p-button>
-  </div>
+    <div class="btn">
+      <p-button icon="pi pi-cog" [rounded]="true" (click)="edit()"></p-button>
+    </div>
   }
   @switch (widget?.type) {
-  @case ('CHART') {
-  <app-chart-widget [widget]="widget"></app-chart-widget>
-  }
-  @case ('TABLE') {
-  <app-table-widget [widget]="widget"></app-table-widget>
-  }
-  @case ('PLACEHOLDER') {
-    @if (widget?.title) {
-      <div class="placeholder">
-        {{widget?.title}}
-      </div>
+    @case ("CHART") {
+      <app-chart-widget [widget]="widget"></app-chart-widget>
     }
-  }
-  @case ('TEMPLATE') {
-    @switch (templateWidgetData?.widget?.type) {
-      @case ('CHART') {
-        <app-chart-widget [widget]="templateWidgetData"></app-chart-widget>
-      }
-      @case ('TABLE') {
-        <app-table-widget [widget]="templateWidgetData"></app-table-widget>
+    @case ("TABLE") {
+      <app-table-widget [widget]="widget"></app-table-widget>
+    }
+    @case ("PLACEHOLDER") {
+      @if (widget?.title) {
+        <div class="placeholder">
+          {{ widget?.title }}
+        </div>
       }
     }
-  }
-  @default {
-  }
+    @case ("TEMPLATE") {
+      @switch (templateWidgetData?.widget?.type) {
+        @case ("CHART") {
+          <app-chart-widget [widget]="templateWidgetData"></app-chart-widget>
+        }
+        @case ("TABLE") {
+          <app-table-widget [widget]="templateWidgetData"></app-table-widget>
+        }
+      }
+    }
+    @default {}
   }
 </div>

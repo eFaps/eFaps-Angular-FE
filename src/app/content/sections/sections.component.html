@@ -1,14 +1,13 @@
 @for (section of sections(); track section) {
   <div class="sectionWrapper">
-    @if (section.type=='FORM') {
+    @if (section.type == "FORM") {
       <app-form-section [formSection]="toFormSection(section)"></app-form-section>
     }
-    @if (section.type=='TABLE') {
+    @if (section.type == "TABLE") {
       <app-table-section [tableSection]="toTableSection(section)"></app-table-section>
     }
-    @if (section.type=='HEADING') {
+    @if (section.type == "HEADING") {
       <app-sub-section [headingSection]="toHeaderSection(section)"></app-sub-section>
     }
   </div>
 }
-

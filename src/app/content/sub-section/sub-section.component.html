@@ -1,10 +1,10 @@
 <p-panel [header]="headingSection()?.header" [toggleable]="true">
   @for (section of headingSection()?.sections; track section) {
     <div>
-      @if (section.type=='FORM') {
+      @if (section.type == "FORM") {
         <app-form-section [formSection]="toFormSection(section)"></app-form-section>
       }
-      @if (section.type=='TABLE') {
+      @if (section.type == "TABLE") {
         <app-table-section [tableSection]="toTableSection(section)"></app-table-section>
       }
     </div>

@@ -9,7 +9,10 @@
     "build-demo": "ng build --configuration demo",
     "watch": "ng build --watch --configuration development",
     "test": "ng test --browsers ChromeHeadlessNoSandbox --no-progress --no-watch",
-    "prettier": "prettier --write \"src/**/*.ts\""
+    "prettier-html": "prettier --print-width 100 --write \"src/**/*.html\" ",
+    "prettier-scss": "prettier --write \"src/**/*.scss\" ",
+    "prettier-ts": "prettier --write \"src/**/*.ts\"",  
+    "prettier": "npm run prettier-html && npm run prettier-scss && npm run prettier-ts"
   },
   "private": true,
   "dependencies": {
@@ -72,6 +75,7 @@
       "NPMPackages",
       "localImportsValue",
       "localImportsType"
-    ]
+    ],
+    "bracketSameLine": true
   }
 }

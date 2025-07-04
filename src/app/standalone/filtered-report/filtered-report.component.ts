@@ -70,9 +70,7 @@ export class FilteredReportComponent implements OnInit {
   loadData(httpParams: HttpParams) {
     this.loading = true;
     const module = this.uimodule();
-    const url = `${this.utilService.evalApiUrl()}/ui/modules/filtered-report/${
-      module?.id
-    }`;
+    const url = `${this.utilService.evalApiUrl()}/ui/modules/filtered-report/${module?.id}`;
     this.http.get<any>(url, { params: httpParams }).subscribe({
       next: (reportDto) => {
         if (reportDto.downloadKey) {

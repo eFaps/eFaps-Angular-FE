@@ -1,80 +1,79 @@
 .wrapper {
-    padding: 5px;
-    display: flex;
-    flex-wrap: nowrap;
-    flex-direction: row;
-    gap: 10px;
+  padding: 5px;
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  gap: 10px;
 
-    .config {
-        flex-grow: 1;
-        
-        .confElement {
-            margin-top: 25px;
-            display: flex;
-            gap: 15px;
-            align-items: center;
-   
-        }
-        ::ng-deep .promotionsConf {
-            min-width: 16rem;
-        }
+  .config {
+    flex-grow: 1;
+
+    .confElement {
+      margin-top: 25px;
+      display: flex;
+      gap: 15px;
+      align-items: center;
+    }
+    ::ng-deep .promotionsConf {
+      min-width: 16rem;
+    }
+  }
+
+  .document {
+    flex-grow: 2;
+
+    .buttons {
+      display: flex;
+      gap: 10px;
     }
 
-    .document {
-        flex-grow: 2;
-        
-        .buttons {
-            display: flex;
-            gap: 10px;
+    .totals {
+      margin-top: 50px;
+      margin-left: 20px;
+      font-family: var(--font-family);
+      font-feature-settings: var(--font-feature-settings, normal);
+      font-size: 1.1rem;
+
+      div {
+        display: flex;
+
+        .totalLabel {
+          width: 200px;
         }
 
-        .totals {
-            margin-top: 50px;
-            margin-left: 20px;
-            font-family: var(--font-family);
-            font-feature-settings: var(--font-feature-settings, normal);
-            font-size: 1.1rem;
-
-            div {
-                display: flex;
-
-                .totalLabel {
-                    width: 200px;
-                }
-
-                .totalValue {
-                    text-align: right;
-                    width: 50px;
-                }
-            }
+        .totalValue {
+          text-align: right;
+          width: 50px;
         }
-
-        .promoDetail {
-            display: flex;
-            flex-direction: column;
-        }
+      }
     }
+
+    .promoDetail {
+      display: flex;
+      flex-direction: column;
+    }
+  }
 }
 
 .editDialog {
-    padding-top: 25px;
-    padding-bottom: 25px;
-    display: flex;
-    flex-direction: column;
-    gap: 45px;
+  padding-top: 25px;
+  padding-bottom: 25px;
+  display: flex;
+  flex-direction: column;
+  gap: 45px;
 }
 
 .promotionModal {
+  display: flex;
+  flex-direction: column;
+
+  div {
     display: flex;
     flex-direction: column;
+    margin-bottom: 10px;
 
-    div {
-        display: flex;
-        flex-direction: column;
-        margin-bottom: 10px;
-
-        span:first-child {
-            font-weight: bold;
-        }
+    span:first-child {
+      font-weight: bold;
     }
+  }
 }

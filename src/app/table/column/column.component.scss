@@ -1,21 +1,21 @@
 :host {
-    align-items: center;
-    display: flex;
-    gap: 5px;
+  align-items: center;
+  display: flex;
+  gap: 5px;
 
-    div {
-        overflow: hidden;
-        text-overflow: ellipsis;
+  div {
+    overflow: hidden;
+    text-overflow: ellipsis;
 
-        spran {
-            width: 100%;
-            display: inline-block;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
+    spran {
+      width: 100%;
+      display: inline-block;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
+  }
 }
 
 .overlay {
-    white-space:pre;
+  white-space: pre;
 }

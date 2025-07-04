@@ -1,4 +1,4 @@
-@if(!editable) {
+@if (!editable) {
   <p-table [columns]="cols" [value]="elements" styleClass="p-datatable-gridlines" stripedRows>
     @if (editable) {
       <ng-template pTemplate="caption">
@@ -22,12 +22,15 @@
         @for (col of columns; track col) {
           <td>
             <div>
-              @if (showLink(rowData,col)) {
-                <p-button icon="pi pi-link"
-                  [rounded]="true" [outlined]="true" (click)="followLink(rowData,col)"
-                [style]="{ width:'2rem', height: '2rem' }"></p-button>
+              @if (showLink(rowData, col)) {
+                <p-button
+                  icon="pi pi-link"
+                  [rounded]="true"
+                  [outlined]="true"
+                  (click)="followLink(rowData, col)"
+                  [style]="{ width: '2rem', height: '2rem' }"></p-button>
               }
-              {{rowData[col.field]}}
+              {{ rowData[col.field] }}
             </div>
           </td>
         }
@@ -35,7 +38,12 @@
     </ng-template>
   </p-table>
 } @else {
-  <p-table [columns]="cols" [value]="elements" styleClass="p-datatable-gridlines" stripedRows [resizableColumns]="true">
+  <p-table
+    [columns]="cols"
+    [value]="elements"
+    styleClass="p-datatable-gridlines"
+    stripedRows
+    [resizableColumns]="true">
     @if (editable) {
       <ng-template pTemplate="caption">
         <div class="flex align-items-center justify-content-between">

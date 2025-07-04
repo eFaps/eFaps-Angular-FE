@@ -1,8 +1,19 @@
 <div class="wrapper">
   <div class="header">
-    <p-fileUpload #upload mode="basic" chooseLabel="Selecionar csv" chooseIcon="pi pi-upload" name="demo[]"
-      accept=".csv" maxFileSize="1000000" (onSelect)="onSelect($event)" />
-    <p-button label="Resetar" severity="secondary" [disabled]="cols.length == 0" (onClick)="clear()"></p-button>
+    <p-fileUpload
+      #upload
+      mode="basic"
+      chooseLabel="Selecionar csv"
+      chooseIcon="pi pi-upload"
+      name="demo[]"
+      accept=".csv"
+      maxFileSize="1000000"
+      (onSelect)="onSelect($event)" />
+    <p-button
+      label="Resetar"
+      severity="secondary"
+      [disabled]="cols.length == 0"
+      (onClick)="clear()"></p-button>
   </div>
   <div class="tableWrapper">
     <p-table [columns]="cols" [value]="items" [tableStyle]="{ 'min-width': '50rem' }">
@@ -27,10 +38,14 @@
     </p-table>
   </div>
   @for (message of messages; track message) {
-    <p-message severity="{{message.severity}}" [closable]="false" >{{message.text}}</p-message>
+    <p-message severity="{{ message.severity }}" [closable]="false">{{ message.text }}</p-message>
   }
   <div class="footer">
     <p-button label="Verificar" [disabled]="cols.length == 0" (onClick)="verify()"></p-button>
-    <p-button label="Importar" [disabled]="!verified" (onClick)="execute()" severity="danger"></p-button>
+    <p-button
+      label="Importar"
+      [disabled]="!verified"
+      (onClick)="execute()"
+      severity="danger"></p-button>
   </div>
 </div>

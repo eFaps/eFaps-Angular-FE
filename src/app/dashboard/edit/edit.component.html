@@ -1,5 +1,5 @@
 <div class="p-dialog-content">
-  <div class=" wrapper">
+  <div class="wrapper">
     <p-floatlabel variant="on">
       <p-select id="type" [options]="types" [(ngModel)]="type" appendTo="body"></p-select>
       <label htmlFor="type">Tipo</label>
@@ -8,43 +8,50 @@
       <input pInputText id="title" [(ngModel)]="title" />
       <label htmlFor="title">Titulo</label>
     </p-floatlabel>
-    @if (type == 'CHART' || type == 'TABLE') { 
-    <p-floatlabel variant="on">
-      <textarea id="eql" rows="10" cols="120" pTextarea [(ngModel)]="eql"> </textarea>
-      <label for="eql">EQL</label>
-    </p-floatlabel>
+    @if (type == "CHART" || type == "TABLE") {
+      <p-floatlabel variant="on">
+        <textarea id="eql" rows="10" cols="120" pTextarea [(ngModel)]="eql"> </textarea>
+        <label for="eql">EQL</label>
+      </p-floatlabel>
     }
-    @if (type=='CHART') {
-    <p-floatlabel variant="on">
-      <p-select id="chartType" [options]="chartTypes" [(ngModel)]="chartType"></p-select>
-      <label htmlFor="chartType">Tipo de Gráfico</label>
-    </p-floatlabel>
-    <p-floatlabel variant="on">
-      <p-autocomplete [(ngModel)]="groupBy" inputId="groupBy" multiple [typeahead]="false" />
-      <label for="groupBy">Agrupar</label>
-    </p-floatlabel>
-    <p-floatlabel variant="on">
-      <p-select id="function" [options]="functions" [(ngModel)]="function"></p-select>
-      <label htmlFor="function">Funcion</label>
-    </p-floatlabel>
-    <p-floatlabel variant="on">
-      <input pInputText id="key" [(ngModel)]="key" />
-      <label htmlFor="key">Llave</label>
-    </p-floatlabel>
+    @if (type == "CHART") {
+      <p-floatlabel variant="on">
+        <p-select id="chartType" [options]="chartTypes" [(ngModel)]="chartType"></p-select>
+        <label htmlFor="chartType">Tipo de Gráfico</label>
+      </p-floatlabel>
+      <p-floatlabel variant="on">
+        <p-autocomplete [(ngModel)]="groupBy" inputId="groupBy" multiple [typeahead]="false" />
+        <label for="groupBy">Agrupar</label>
+      </p-floatlabel>
+      <p-floatlabel variant="on">
+        <p-select id="function" [options]="functions" [(ngModel)]="function"></p-select>
+        <label htmlFor="function">Funcion</label>
+      </p-floatlabel>
+      <p-floatlabel variant="on">
+        <input pInputText id="key" [(ngModel)]="key" />
+        <label htmlFor="key">Llave</label>
+      </p-floatlabel>
     }
-     @if (type=='TEMPLATE') {
-    <p-floatlabel variant="on">
-      <p-select id="template" [options]="templates" [(ngModel)]="templateOid" appendTo="body" dataKey="oid"
-        optionLabel="name" optionValue="oid" fluid="true">
-        <ng-template let-template #item>
-          <div class="flex items-center gap-2">
-            <div>{{ template.name }} - {{template.description}}</div>
-          </div>
-        </ng-template>
-      </p-select>
-      <label htmlFor="template">Widget</label>
-    </p-floatlabel>
-  }
+    @if (type == "TEMPLATE") {
+      <p-floatlabel variant="on">
+        <p-select
+          id="template"
+          [options]="templates"
+          [(ngModel)]="templateOid"
+          appendTo="body"
+          dataKey="oid"
+          optionLabel="name"
+          optionValue="oid"
+          fluid="true">
+          <ng-template let-template #item>
+            <div class="flex items-center gap-2">
+              <div>{{ template.name }} - {{ template.description }}</div>
+            </div>
+          </ng-template>
+        </p-select>
+        <label htmlFor="template">Widget</label>
+      </p-floatlabel>
+    }
   </div>
 </div>
 <div class="p-dialog-footer">

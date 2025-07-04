@@ -1,21 +1,32 @@
 @switch (elementData?.formItem?.type) {
-  @case ('DROPDOWN') {
-    <p-select [options]="elementData?.formItem?.options" [(ngModel)]="dropdownValue" appendTo="body"
-    (onChange)="changeDropdown($event.value)" />
+  @case ("DROPDOWN") {
+    <p-select
+      [options]="elementData?.formItem?.options"
+      [(ngModel)]="dropdownValue"
+      appendTo="body"
+      (onChange)="changeDropdown($event.value)" />
   }
-  @case ('INPUT') {
-    <input type="text" pInputText #textInput [(ngModel)]="inputValue" (keyup)="onKey(textInput.value)"/>
+  @case ("INPUT") {
+    <input
+      type="text"
+      pInputText
+      #textInput
+      [(ngModel)]="inputValue"
+      (keyup)="onKey(textInput.value)" />
   }
-  @case ('RADIO') {
+  @case ("RADIO") {
     @for (option of elementData?.formItem?.options; track option; let indexOfelement = $index) {
       <div class="field-radio">
-        <p-radioButton [inputId]="'asopt' + indexOfelement" [value]="option.value" [(ngModel)]="radioValue"
-        (onClick)="changeRadio($event.value)"></p-radioButton>
+        <p-radioButton
+          [inputId]="'asopt' + indexOfelement"
+          [value]="option.value"
+          [(ngModel)]="radioValue"
+          (onClick)="changeRadio($event.value)"></p-radioButton>
         <label [for]="'asopt' + indexOfelement">{{ option.label }}</label>
       </div>
     }
   }
   @default {
-    {{readOnlyValue}}
+    {{ readOnlyValue }}
   }
 }

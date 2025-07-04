@@ -1,48 +1,89 @@
 <p-confirmDialog />
 @if (tableLoaded) {
   <div #wrapperDiv>
-    <p-table #dt [columns]="cols" [value]="elements" styleClass="p-datatable-gridlines" stripedRows
-      [scrollable]="true" [scrollHeight]="scrollHeight" [virtualScroll]="true" [virtualScrollItemSize]="42"
-      [tableStyle]="{ 'min-width': '50rem' }" sortMode="multiple" [selectionMode]="selectionMode"
-      [(selection)]="selectedElements" [resizableColumns]="true" [loading]="loading" stateStorage="local"
-      [stateKey]="storageKey" (onStateRestore)="stateRestore($event)" [reorderableColumns]="true" [exportFilename]="title">
+    <p-table
+      #dt
+      [columns]="cols"
+      [value]="elements"
+      styleClass="p-datatable-gridlines"
+      stripedRows
+      [scrollable]="true"
+      [scrollHeight]="scrollHeight"
+      [virtualScroll]="true"
+      [virtualScrollItemSize]="42"
+      [tableStyle]="{ 'min-width': '50rem' }"
+      sortMode="multiple"
+      [selectionMode]="selectionMode"
+      [(selection)]="selectedElements"
+      [resizableColumns]="true"
+      [loading]="loading"
+      stateStorage="local"
+      [stateKey]="storageKey"
+      (onStateRestore)="stateRestore($event)"
+      [reorderableColumns]="true"
+      [exportFilename]="title">
       <ng-template #caption>
-        <div class="table-header" >
-          <div class="left" >
+        <div class="table-header">
+          <div class="left">
             <p-tieredMenu #menu [model]="menuItems" popup="true" appendTo="body"></p-tieredMenu>
             @if (menuItems.length > 0) {
-              <p-button (click)="menu.toggle($event)" icon="pi pi-bars"
-              ></p-button>
+              <p-button (click)="menu.toggle($event)" icon="pi pi-bars"></p-button>
             }
-            {{title}}
+            {{ title }}
           </div>
           <div></div>
           <div class="right">
             @if (!paginated) {
-              <span class="quantity">Cantidad: {{dt.filteredValue?.length ? dt.filteredValue?.length + ' /' : ''}} {{elements.length}}</span>
+              <span class="quantity"
+                >Cantidad:
+                {{ dt.filteredValue?.length ? dt.filteredValue?.length + " /" : "" }}
+                {{ elements.length }}</span
+              >
             }
-            <p-button type="button" icon="pi pi-file" (click)="dt.exportCSV({})" pTooltip="CSV" tooltipPosition="bottom"></p-button>
-            <p-button type="button" icon="pi pi-file-excel" (click)="exportExcel()"  pTooltip="XLS" tooltipPosition="bottom"></p-button>
-            <p-button type="button" icon="pi pi-file-pdf" (click)="exportPdf()" pTooltip="PDF" tooltipPosition="bottom"></p-button>
+            <p-button
+              type="button"
+              icon="pi pi-file"
+              (click)="dt.exportCSV({})"
+              pTooltip="CSV"
+              tooltipPosition="bottom"></p-button>
+            <p-button
+              type="button"
+              icon="pi pi-file-excel"
+              (click)="exportExcel()"
+              pTooltip="XLS"
+              tooltipPosition="bottom"></p-button>
+            <p-button
+              type="button"
+              icon="pi pi-file-pdf"
+              (click)="exportPdf()"
+              pTooltip="PDF"
+              tooltipPosition="bottom"></p-button>
 
-            @if (filtered){
-              <p-button icon="pi pi-filter" variant="outlined" (click)="filter()"></p-button >
+            @if (filtered) {
+              <p-button icon="pi pi-filter" variant="outlined" (click)="filter()"></p-button>
             }
             <p-inputGroup>
               <p-inputGroupAddon>
                 <i class="pi pi-search"></i>
               </p-inputGroupAddon>
-              <input pInputText type="text" #searchInput [(ngModel)]="globalSearch"
-                (input)="dt.filterGlobal(searchInput.value, 'contains')" placeholder="buscar" class="p-inputtext-sm"/>
-              <p-button icon="pi pi-times"
-              (click)="searchInput.value='';dt.filterGlobal('', 'contains')"></p-button>
+              <input
+                pInputText
+                type="text"
+                #searchInput
+                [(ngModel)]="globalSearch"
+                (input)="dt.filterGlobal(searchInput.value, 'contains')"
+                placeholder="buscar"
+                class="p-inputtext-sm" />
+              <p-button
+                icon="pi pi-times"
+                (click)="searchInput.value = ''; dt.filterGlobal('', 'contains')"></p-button>
             </p-inputGroup>
           </div>
         </div>
       </ng-template>
       <ng-template #header let-columns>
         <tr>
-          @if (selectionMode=='multiple') {
+          @if (selectionMode == "multiple") {
             <th style="width: 4rem">
               <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
             </th>
@@ -59,15 +100,18 @@
         </tr>
       </ng-template>
       <ng-template #body let-rowData let-columns="columns">
-        <tr style="height:42px">
-          @if (selectionMode=='multiple') {
+        <tr style="height: 42px">
+          @if (selectionMode == "multiple") {
             <td>
               <p-tableCheckbox [value]="rowData"></p-tableCheckbox>
             </td>
           }
           @for (col of columns; track col) {
             <td>
-              <app-column [rowData]="rowData" [column]="col" (navEvent)="onNavEvent($event)"></app-column>
+              <app-column
+                [rowData]="rowData"
+                [column]="col"
+                (navEvent)="onNavEvent($event)"></app-column>
             </td>
           }
         </tr>
@@ -88,5 +132,3 @@
     </p-table>
   </div>
 }
-
-

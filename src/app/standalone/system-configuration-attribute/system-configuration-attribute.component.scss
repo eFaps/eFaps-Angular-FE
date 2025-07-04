@@ -1,26 +1,26 @@
 .wrapper {
-    padding: 25px;
-    display: flex;
-    flex-direction: column;
-    gap: 40px;
+  padding: 25px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
 
-    span {
-        min-width: 400px;
-        margin: 10px;
-    }
-    input {
-        width: 100%;
-    }
+  span {
+    min-width: 400px;
+    margin: 10px;
+  }
+  input {
+    width: 100%;
+  }
 
-    ::ng-deep .p-autocomplete {
-        width: 100%;
-    }
+  ::ng-deep .p-autocomplete {
+    width: 100%;
+  }
 
-    ::ng-deep .p-select {
-        width: 100%;
-    }
- }
+  ::ng-deep .p-select {
+    width: 100%;
+  }
+}
 
 ::ng-deep .p-select-panel {
-    width: 100%;
+  width: 100%;
 }

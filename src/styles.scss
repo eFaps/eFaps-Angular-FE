@@ -1,38 +1,35 @@
 @import "primeicons/primeicons.css";
 
 body {
-    padding: 0;
-    margin: 0;
-    min-height: 100%;
-    font-size: 14px;
-    font-family: 'Roboto';
-    color: var(--p-text-color);
-    background-color: var(--p-content-background);
+  padding: 0;
+  margin: 0;
+  min-height: 100%;
+  font-size: 14px;
+  font-family: "Roboto";
+  color: var(--p-text-color);
+  background-color: var(--p-content-background);
 
-    .watermark {
-        background-image: url(./assets/logo.svg);
-        background-repeat: no-repeat;
-        background-position-x: center;
-        background-position-y: center;
-        height: 100%;
-        width: 100%;
-        z-index: 2;
-        position: absolute;
-        pointer-events: none;
-        opacity: 0.05;
+  .watermark {
+    background-image: url(./assets/logo.svg);
+    background-repeat: no-repeat;
+    background-position-x: center;
+    background-position-y: center;
+    height: 100%;
+    width: 100%;
+    z-index: 2;
+    position: absolute;
+    pointer-events: none;
+    opacity: 0.05;
+  }
 
-
-    }
-
-    &.qa::before {
-        content: "QA";
-        position: absolute;
-        color: #ff000063;
-        font-size: 150pt;
-        pointer-events: none;
-        z-index: 2;
-        top: calc(50% - 75pt);
-        left: calc(50% - 105pt);
-
-    }
+  &.qa::before {
+    content: "QA";
+    position: absolute;
+    color: #ff000063;
+    font-size: 150pt;
+    pointer-events: none;
+    z-index: 2;
+    top: calc(50% - 75pt);
+    left: calc(50% - 105pt);
+  }
 }
