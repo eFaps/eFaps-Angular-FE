@@ -6,6 +6,8 @@ import {
   ViewContainerRef,
   viewChild,
   inject,
+  ViewChild,
+  ElementRef,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -15,7 +17,11 @@ import { ButtonModule } from 'primeng/button';
 import { CheckboxModule } from 'primeng/checkbox';
 import { DatePickerModule } from 'primeng/datepicker';
 import { DialogService } from 'primeng/dynamicdialog';
-import { FileUploadModule, UploadEvent } from 'primeng/fileupload';
+import {
+  FileSelectEvent,
+  FileUploadModule,
+  UploadEvent,
+} from 'primeng/fileupload';
 import { ImageModule } from 'primeng/image';
 import { InputTextModule } from 'primeng/inputtext';
 import { SafeHtmlPipe } from 'primeng/menu';
@@ -23,6 +29,7 @@ import { MessageModule } from 'primeng/message';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { SelectModule } from 'primeng/select';
+import { TextareaModule } from 'primeng/textarea';
 
 import { AttributeSetComponent } from '../attribute-set/attribute-set.component';
 import { ClassificationsComponent } from '../classifications/classifications.component';
@@ -35,7 +42,6 @@ import { FieldUpdateService } from 'src/app/services/field-update.service';
 import { UtilService } from 'src/app/services/util.service';
 import { ValidationService } from 'src/app/services/validation.service';
 import { ValueService } from 'src/app/services/value.service';
-import { TextareaModule } from 'primeng/textarea';
 
 @Component({
   selector: 'app-form-element',
@@ -58,7 +64,7 @@ import { TextareaModule } from 'primeng/textarea';
     DatePipe,
     CommonModule,
     InputTextModule,
-    TextareaModule
+    TextareaModule,
   ],
   standalone: true,
 })
@@ -93,8 +99,13 @@ export class FormElementComponent implements OnInit {
 
   showMultiSelectFilter = false;
   autoCompleteSuggestions: any[] = [];
+
+  @ViewChild('uploadMultiple') uploadMultiple: ElementRef | undefined | any;
+  @ViewChild('upload') upload: ElementRef | undefined | any;
+
   uploadUrl: string | undefined;
   uploadKeys: string[] | undefined;
+  uploadedFiles: any[] = [];
 
   readonly vcr = viewChild.required('dynamicComponent', {
     read: ViewContainerRef,
@@ -443,5 +454,22 @@ export class FormElementComponent implements OnInit {
   evalImageUrl(): string {
     const url = `${this.utilService.evalApiUrl()}${this.readOnlyValue}`;
     return url;
+  }
+
+  removeFile(event: any, index: number) {
+    if (this.uploadMultiple) {
+      this.uploadMultiple.remove(event, index);
+    } else if (this.upload) {
+      this.upload.remove(event, index);
+    }
+  }
+
+  formatBytes(bytes: number, decimals: number) {
+    if (bytes == 0) return '0 Bytes';
+    var k = 1024,
+      dm = decimals || 2,
+      sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'],
+      i = Math.floor(Math.log(bytes) / Math.log(k));
+    return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
   }
 }
