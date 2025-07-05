@@ -19,7 +19,6 @@ describe('StructureBrowserComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [StructureBrowserComponent],
       imports: [ConfirmDialogModule, TreeTableModule, MenuModule, FormsModule],
       providers: [
         { provide: DialogService, useValue: {} },

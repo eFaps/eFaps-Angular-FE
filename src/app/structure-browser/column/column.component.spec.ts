@@ -11,7 +11,6 @@ describe('ColumnComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [PopoverModule],
-      declarations: [ColumnComponent],
       providers: [provideRouter([])],
     });
     fixture = TestBed.createComponent(ColumnComponent);
