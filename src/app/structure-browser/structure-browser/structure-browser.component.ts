@@ -25,10 +25,10 @@ import { ModalModuleContentComponent } from 'src/app/content/modal-module-conten
 import { isOutline } from 'src/app/model/content';
 import { MenuEntry } from 'src/app/model/menu';
 import { StructureBrowserEntry } from 'src/app/model/table';
+import { BreadcrumbService } from 'src/app/services/breadcrumb.service';
 import { ContentService } from 'src/app/services/content.service';
 import { ExecService } from 'src/app/services/exec.service';
 import { TableService } from 'src/app/services/table.service';
-import { BreadcrumbService } from 'src/app/services/breadcrumb.service';
 
 @Component({
   selector: 'app-structure-browser',
@@ -237,7 +237,7 @@ export class StructureBrowserComponent implements OnInit {
     });
   }
 
-   onNavEvent(event: any) {
+  onNavEvent(event: any) {
     this.breadcrumbService.addEntry({
       label: this.title,
     });

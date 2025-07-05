@@ -1,3 +1,8 @@
+import {
+  provideHttpClient,
+  withInterceptorsFromDi,
+} from '@angular/common/http';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ProductFamilyComponent } from './product-family.component';
@@ -8,9 +13,12 @@ describe('ProductFamilyComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ProductFamilyComponent]
-    })
-    .compileComponents();
+      imports: [ProductFamilyComponent],
+      providers: [
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting(),
+      ],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(ProductFamilyComponent);
     component = fixture.componentInstance;

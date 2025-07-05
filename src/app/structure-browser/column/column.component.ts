@@ -1,4 +1,11 @@
-import { Component, ElementRef, Input, viewChild, inject, output } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  Input,
+  viewChild,
+  inject,
+  output,
+} from '@angular/core';
 import { Router } from '@angular/router';
 import { ButtonModule } from 'primeng/button';
 import { PopoverModule } from 'primeng/popover';
@@ -40,7 +47,7 @@ export class ColumnComponent {
   }
 
   followLink() {
-     this.navEvent.emit();
+    this.navEvent.emit();
     const alternativeOid = this.rowData[this.column!!.field + '_AOID'];
     if (alternativeOid) {
       this.router.navigate(['content', alternativeOid]);

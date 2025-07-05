@@ -1,17 +1,27 @@
 <div class="wrapper">
-    <p-button label="Asignar Familia" (click)="select()"/>
+  Codigo: {{ familyCode() }}
+  <div class="labels">
+    @for (label of familyLabels(); track label) {
+      <p-tag severity="secondary" value="{{ label }}" />
+    }
+  </div>
+  <p-button label="Asignar Familia" (click)="select()" />
 </div>
 
-<p-dialog  [(visible)]="dialogVisible" header="Asignar Familia" [modal]="true">
-    <ng-template #content>
-        <div class="treeWrapper">
-    <p-tree [value]="nodes()" selectionMode="single" [(selection)] ="selection" [loading]="loading()" loadingMode="icon" highlightOnSelect="true"/>
+<p-dialog [(visible)]="dialogVisible" header="Asignar Familia" [modal]="true">
+  <ng-template #content>
+    <div class="treeWrapper">
+      <p-tree
+        [value]="nodes()"
+        selectionMode="single"
+        [(selection)]="selection"
+        [loading]="loading()"
+        loadingMode="icon"
+        highlightOnSelect="true" />
     </div>
-    </ng-template>
-
-    
-     <ng-template #footer>
-        <p-button label="Cancelar" [text]="true" severity="secondary" (click)="dialogVisible = false" />
-        <p-button label="Actualisar" (click)="dialogVisible = false" [disabled]="!isValid()" />
-    </ng-template>
+  </ng-template>
+  <ng-template #footer>
+    <p-button label="Cancelar" [text]="true" severity="secondary" (click)="dialogVisible = false" />
+    <p-button label="Actualisar" (click)="update()" [disabled]="!isValid()" />
+  </ng-template>
 </p-dialog>

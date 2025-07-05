@@ -112,10 +112,9 @@ export class FormElementComponent implements OnInit, AfterViewInit {
     read: ViewContainerRef,
   });
 
- readonly moduleVcr = viewChild.required('moduleComponent', {
+  readonly moduleVcr = viewChild.required('moduleComponent', {
     read: ViewContainerRef,
   });
-
 
   ngOnInit(): void {
     this.validationService.registerValidation((values) => {
@@ -170,18 +169,19 @@ export class FormElementComponent implements OnInit, AfterViewInit {
         this.evalFieldCmdResp(cmdResp);
       },
     });
-   
   }
 
- ngAfterViewInit(): void {
-  if (this.formItem?.type == 'UIMODULE') {
-    this.moduleVcr().clear();
+  ngAfterViewInit(): void {
+    if (this.formItem?.type == 'UIMODULE') {
+      this.moduleVcr().clear();
 
-        this.dynamicComponentService.loadUIModule(
-        this.moduleVcr(), this.formItem?.value, {oid:undefined, parentOid:undefined});
+      this.dynamicComponentService.loadUIModule(
+        this.moduleVcr(),
+        this.formItem?.value,
+        { oid: undefined, parentOid: undefined },
+      );
     }
-}
-
+  }
 
   @Input()
   set formItem(formItem: FormItem | undefined) {
@@ -280,7 +280,7 @@ export class FormElementComponent implements OnInit, AfterViewInit {
         }
         break;
       case 'UIMODULE':
-        break;  
+        break;
       default:
         if (this.formItem?.value && this.formItem?.value instanceof Array) {
           this.readOnlyValue = this.formItem.value.join(', ');

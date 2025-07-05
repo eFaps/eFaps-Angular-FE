@@ -61,7 +61,10 @@
               @if (i === togglerColIdx) {
                 <p-treeTableToggler [rowNode]="rowNode"></p-treeTableToggler>
               }
-              <app-column [rowData]="rowData" [column]="col" (navEvent)="onNavEvent($event)"></app-column>
+              <app-column
+                [rowData]="rowData"
+                [column]="col"
+                (navEvent)="onNavEvent($event)"></app-column>
             </div>
           </td>
         }

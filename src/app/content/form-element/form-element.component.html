@@ -73,7 +73,8 @@
           [(ngModel)]="textareaValue"
           (keyup)="onKey(textArea.value)"
           (blur)="fieldUpdate()"
-          [autoResize]="true"></textarea>
+          [autoResize]="true"
+          fluid></textarea>
       }
       @case ("SNIPPLET") {
         <div class="snipplet" [innerHtml]="snippletValue | safeHtml"></div>
@@ -195,7 +196,7 @@
           <p-image [src]="evalImageUrl()" alt="Image" width="250" [preview]="true" />
         }
       }
-      @case ('UIMODULE') {
+      @case ("UIMODULE") {
         <ng-template #moduleComponent></ng-template>
       }
       @default {

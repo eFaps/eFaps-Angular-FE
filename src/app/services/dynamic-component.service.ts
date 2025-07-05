@@ -80,7 +80,7 @@ export class DynamicComponentService {
           },
         );
         break;
-      case 'ProductFamily': 
+      case 'ProductFamily':
         import('../ui-modules/product-family/product-family.component').then(
           (m) => {
             const ref = viewContainerRef.createComponent(
@@ -88,7 +88,8 @@ export class DynamicComponentService {
             );
             ref.setInput('uimodule', uimodule);
             ref.setInput('data', data);
-          });
+          },
+        );
         break;
     }
   }
