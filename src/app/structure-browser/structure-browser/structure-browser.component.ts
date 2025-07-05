@@ -28,6 +28,7 @@ import { StructureBrowserEntry } from 'src/app/model/table';
 import { ContentService } from 'src/app/services/content.service';
 import { ExecService } from 'src/app/services/exec.service';
 import { TableService } from 'src/app/services/table.service';
+import { BreadcrumbService } from 'src/app/services/breadcrumb.service';
 
 @Component({
   selector: 'app-structure-browser',
@@ -55,6 +56,7 @@ export class StructureBrowserComponent implements OnInit {
   private tableService = inject(TableService);
   private contentService = inject(ContentService);
   private execService = inject(ExecService);
+  private breadcrumbService = inject(BreadcrumbService);
 
   loading: boolean;
   id: any;
@@ -232,6 +234,12 @@ export class StructureBrowserComponent implements OnInit {
       error: (_) => {
         this.selectedElements = [];
       },
+    });
+  }
+
+   onNavEvent(event: any) {
+    this.breadcrumbService.addEntry({
+      label: this.title,
     });
   }
 }

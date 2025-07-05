@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, viewChild, inject } from '@angular/core';
+import { Component, ElementRef, Input, viewChild, inject, output } from '@angular/core';
 import { Router } from '@angular/router';
 import { ButtonModule } from 'primeng/button';
 import { PopoverModule } from 'primeng/popover';
@@ -18,6 +18,7 @@ export class ColumnComponent {
   rowData: any | undefined;
   @Input()
   column: Column | undefined;
+  readonly navEvent = output();
 
   readonly overflowElement = viewChild<ElementRef>('overflowWrapper');
 
@@ -39,6 +40,7 @@ export class ColumnComponent {
   }
 
   followLink() {
+     this.navEvent.emit();
     const alternativeOid = this.rowData[this.column!!.field + '_AOID'];
     if (alternativeOid) {
       this.router.navigate(['content', alternativeOid]);
