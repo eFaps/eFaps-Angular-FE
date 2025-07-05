@@ -8,6 +8,7 @@ import {
   inject,
   ViewChild,
   ElementRef,
+  AfterViewInit,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -68,7 +69,7 @@ import { ValueService } from 'src/app/services/value.service';
   ],
   standalone: true,
 })
-export class FormElementComponent implements OnInit {
+export class FormElementComponent implements OnInit, AfterViewInit {
   private router = inject(Router);
   private dialogService = inject(DialogService);
   private valueService = inject(ValueService);
@@ -110,6 +111,11 @@ export class FormElementComponent implements OnInit {
   readonly vcr = viewChild.required('dynamicComponent', {
     read: ViewContainerRef,
   });
+
+ readonly moduleVcr = viewChild.required('moduleComponent', {
+    read: ViewContainerRef,
+  });
+
 
   ngOnInit(): void {
     this.validationService.registerValidation((values) => {
@@ -164,7 +170,18 @@ export class FormElementComponent implements OnInit {
         this.evalFieldCmdResp(cmdResp);
       },
     });
+   
   }
+
+ ngAfterViewInit(): void {
+  if (this.formItem?.type == 'UIMODULE') {
+    this.moduleVcr().clear();
+
+        this.dynamicComponentService.loadUIModule(
+        this.moduleVcr(), this.formItem?.value, {oid:undefined, parentOid:undefined});
+    }
+}
+
 
   @Input()
   set formItem(formItem: FormItem | undefined) {
@@ -262,6 +279,8 @@ export class FormElementComponent implements OnInit {
           this.changeTime(this.timeValue);
         }
         break;
+      case 'UIMODULE':
+        break;  
       default:
         if (this.formItem?.value && this.formItem?.value instanceof Array) {
           this.readOnlyValue = this.formItem.value.join(', ');

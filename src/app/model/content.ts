@@ -49,7 +49,8 @@ export interface FormItem {
     | 'BUTTON'
     | 'CLASSIFICATION'
     | 'PICKLIST'
-    | 'IMAGE';
+    | 'IMAGE'
+    | 'UIMODULE';
   label: string;
   name: string;
   value?: any;

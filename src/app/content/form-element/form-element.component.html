@@ -195,6 +195,9 @@
           <p-image [src]="evalImageUrl()" alt="Image" width="250" [preview]="true" />
         }
       }
+      @case ('UIMODULE') {
+        <ng-template #moduleComponent></ng-template>
+      }
       @default {
         <div *ngIf="formItem?.navRef != null" class="navRef">
           <p-button

@@ -1,0 +1,10 @@
+.treeWrapper {
+    border-color: var(--p-form-field-color);
+    border-style: solid;
+    border-width: 1px;
+
+
+    ::ng-deep .p-tree-node-content {
+        padding: 0;
+    }
+}

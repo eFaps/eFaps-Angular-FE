@@ -80,6 +80,16 @@ export class DynamicComponentService {
           },
         );
         break;
+      case 'ProductFamily': 
+        import('../ui-modules/product-family/product-family.component').then(
+          (m) => {
+            const ref = viewContainerRef.createComponent(
+              m.ProductFamilyComponent,
+            );
+            ref.setInput('uimodule', uimodule);
+            ref.setInput('data', data);
+          });
+        break;
     }
   }
 }
