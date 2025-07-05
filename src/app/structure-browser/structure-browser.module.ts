@@ -13,18 +13,6 @@ import { StructureBrowserRoutingModule } from './structure-browser-routing.modul
 import { StructureBrowserComponent } from './structure-browser/structure-browser.component';
 
 @NgModule({
-  declarations: [StructureBrowserComponent, ColumnComponent],
-  imports: [
-    CommonModule,
-    StructureBrowserRoutingModule,
-    TreeTableModule,
-    MenuModule,
-    FormsModule,
-    ButtonModule,
-    MenuModule,
-    MenubarModule,
-    ConfirmDialogModule,
-    PopoverModule,
-  ],
+  imports: [StructureBrowserRoutingModule],
 })
 export class StructureBrowserModule {}

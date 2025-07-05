@@ -18,8 +18,8 @@
         </div>
         <div></div>
         <div>
-          <div class="p-inputgroup">
-            <span class="p-inputgroup-addon"><i class="pi pi-search"></i></span>
+          <p-inputgroup>
+            <p-inputgroup-addon><i class="pi pi-search"></i></p-inputgroup-addon>
             <input
               pInputText
               type="text"
@@ -33,7 +33,7 @@
               icon="pi pi-times"
               styleClass="p-button-danger"
               (click)="searchInput.value = ''; dt.filterGlobal('', 'contains')"></button>
-          </div>
+          </p-inputgroup>
         </div>
       </div>
     </ng-template>

@@ -1,5 +1,7 @@
 import { Component, ElementRef, Input, viewChild, inject } from '@angular/core';
 import { Router } from '@angular/router';
+import { ButtonModule } from 'primeng/button';
+import { PopoverModule } from 'primeng/popover';
 
 import { Column } from 'src/app/model/table';
 
@@ -7,7 +9,7 @@ import { Column } from 'src/app/model/table';
   selector: 'app-column',
   templateUrl: './column.component.html',
   styleUrls: ['./column.component.scss'],
-  standalone: false,
+  imports: [PopoverModule, ButtonModule],
 })
 export class ColumnComponent {
   private router = inject(Router);

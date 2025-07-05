@@ -1,4 +1,5 @@
 import { Component, OnInit, inject } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import {
   ConfirmationService,
@@ -6,9 +7,19 @@ import {
   TreeNode,
   TreeTableNode,
 } from 'primeng/api';
+import { ButtonModule } from 'primeng/button';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { DialogService } from 'primeng/dynamicdialog';
+import { InputGroupModule } from 'primeng/inputgroup';
+import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
+import { InputTextModule } from 'primeng/inputtext';
+import { MenuModule } from 'primeng/menu';
+import { MenubarModule } from 'primeng/menubar';
+import { PopoverModule } from 'primeng/popover';
+import { TreeTableModule } from 'primeng/treetable';
 import { combineLatest } from 'rxjs';
 
+import { ColumnComponent } from '../column/column.component';
 import { ModalContentComponent } from 'src/app/content/modal-content/modal-content.component';
 import { ModalModuleContentComponent } from 'src/app/content/modal-module-content/modal-module-content.component';
 import { isOutline } from 'src/app/model/content';
@@ -23,7 +34,19 @@ import { TableService } from 'src/app/services/table.service';
   templateUrl: './structure-browser.component.html',
   styleUrls: ['./structure-browser.component.scss'],
   providers: [ConfirmationService],
-  standalone: false,
+  imports: [
+    TreeTableModule,
+    ButtonModule,
+    ColumnComponent,
+    FormsModule,
+    ButtonModule,
+    MenuModule,
+    MenubarModule,
+    ConfirmDialogModule,
+    InputTextModule,
+    InputGroupModule,
+    InputGroupAddonModule,
+  ],
 })
 export class StructureBrowserComponent implements OnInit {
   private route = inject(ActivatedRoute);
@@ -126,10 +149,19 @@ export class StructureBrowserComponent implements OnInit {
       this.contentService.getContentWithCmd('none', item.id).subscribe({
         next: (outline) => {
           if (isOutline(outline)) {
+            let eFapsSelectedOids: string[] | undefined;
+            if (this.selectedElements != null) {
+              eFapsSelectedOids = (
+                this.selectedElements as TreeTableNode<any>[]
+              ).map((element) => {
+                return element.data.OID;
+              });
+            }
             const dialogRef = this.dialogService.open(ModalContentComponent, {
               data: {
                 item,
                 outline,
+                eFapsSelectedOids,
               },
             });
             dialogRef.onClose.subscribe({

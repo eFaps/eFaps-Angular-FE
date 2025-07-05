@@ -93,6 +93,12 @@ export class ModalContentComponent {
         value: this.parentOid,
       });
     }
+    if (data.eFapsSelectedOids) {
+      this.valueService.addEntry({
+        name: 'eFapsSelectedOids',
+        value: data.eFapsSelectedOids,
+      });
+    }
   }
 
   onClassificationChange(classifications: Classification[]) {
