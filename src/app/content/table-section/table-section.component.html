@@ -31,27 +31,34 @@
     </ng-template>
   </p-table>
 } @else {
+  <div class="editable">
   <p-table
     [columns]="cols"
     [value]="elements"
-    styleClass="p-datatable-gridlines"
+    showGridlines
     stripedRows
-    [resizableColumns]="true">
-    <ng-template pTemplate="caption">
-      <div class="captionRow">
-        <p-button icon="pi pi-plus" (click)="addEmptyRow()"></p-button>
-      </div>
-    </ng-template>
-    <ng-template pTemplate="header" let-columns>
+    resizableColumns="true"
+    size="small"
+    stateStorage="local"
+    [stateKey]="stateKey"
+    [scrollable]="true"
+    >
+    <ng-template  #header let-columns>
       <tr>
         @for (col of columns; track col) {
           <th pResizableColumn>
             {{ col.header }}
           </th>
         }
+        <th alignFrozen="right" pFrozenColumn [frozen]="true" style="width: 20px">
+           <p-button  icon="pi pi-plus-circle"
+              [rounded]="true"
+              [raised]="true"
+              [text]="true"(click)="addEmptyRow()"></p-button>
+        </th>
       </tr>
     </ng-template>
-    <ng-template pTemplate="body" let-rowData let-columns="columns" let-i="rowIndex">
+    <ng-template #body  let-rowData let-columns="columns" let-i="rowIndex">
       <tr>
         @for (col of columns; track col) {
           <td>
@@ -60,7 +67,15 @@
             </div>
           </td>
         }
+        <td pFrozenColumn alignFrozen="right" [frozen]="true"  style="width: 20px">
+          <p-button  icon="pi pi-times-circle"
+              [rounded]="true"
+              [raised]="true"
+              [text]="true"
+              severity="danger" (click)="removeRow(i)"></p-button>
+        </td>
       </tr>
     </ng-template>
   </p-table>
+  </div>
 }

@@ -1,4 +1,4 @@
-import { Component, Input, inject } from '@angular/core';
+import { Component, Input, inject, input } from '@angular/core';
 import { Router } from '@angular/router';
 import { ButtonModule } from 'primeng/button';
 import { TableModule } from 'primeng/table';
@@ -20,6 +20,9 @@ export class TableSectionComponent {
   private valueService = inject(ValueService);
 
   _tableSection: TableSection | undefined;
+  
+  stateKey: string| undefined
+
   cols: any[] = [];
   elements: any[] = [];
   editable = false;
@@ -27,6 +30,7 @@ export class TableSectionComponent {
   @Input()
   set tableSection(tableSection: TableSection) {
     this._tableSection = tableSection;
+    this.stateKey = tableSection.id;
     this.cols = tableSection.columns;
     this.elements = tableSection.values;
     this.editable = tableSection.editable;
@@ -35,6 +39,7 @@ export class TableSectionComponent {
     }
   }
 
+  
   showLink(rowData: any, column: Column) {
     if (this.editable) {
       return false;
@@ -63,6 +68,16 @@ export class TableSectionComponent {
   addEmptyRow() {
     this.elements.push([]);
     this.valueService.resize(
+      this.elements.length,
+      this.cols.map((column) => {
+        return column.field;
+      }),
+    );
+  }
+
+  removeRow(index: number) {
+this.elements.splice(index,1)
+ this.valueService.resize(
       this.elements.length,
       this.cols.map((column) => {
         return column.field;

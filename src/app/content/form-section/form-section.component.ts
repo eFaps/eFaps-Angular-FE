@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, input, Input } from '@angular/core';
 
 import { FormElementComponent } from '../form-element/form-element.component';
 import { FormItem, FormSection } from 'src/app/model/content';

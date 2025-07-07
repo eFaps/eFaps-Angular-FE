@@ -1,7 +1,7 @@
 import { Component, signal, inject, effect } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
 import { DialogModule } from 'primeng/dialog';
-import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { DynamicDialogConfig, DynamicDialogModule, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { forkJoin, Observable, zipAll } from 'rxjs';
 
 import { ClassificationDisplayComponent } from '../classification-display/classification-display.component';
@@ -21,10 +21,10 @@ import { ValueService } from 'src/app/services/value.service';
   imports: [
     ButtonModule,
     DialogModule,
+    DynamicDialogModule,
     SectionsComponent,
     ClassificationDisplayComponent,
-  ],
-  standalone: true,
+  ]
 })
 export class ModalContentComponent {
   private valueService = inject(ValueService);
@@ -50,6 +50,7 @@ export class ModalContentComponent {
     config.maximizable = true;
     config.closable = true;
     config.modal = true;
+    config.style = {"max-width": "99vw"}
 
     const data = config.data;
     this.callingMenu = data.item;
