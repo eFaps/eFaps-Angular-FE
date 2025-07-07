@@ -6,7 +6,8 @@
         pInputText
         #textInput
         [(ngModel)]="inputValue"
-        (keyup)="onKey(textInput.value)"/>
+        (keyup)="onKey(textInput.value)"
+        (blur)="onInputBlur($event)"/>
     }
     @case ("AUTOCOMPLETE") {
       <p-autoComplete

@@ -26,7 +26,7 @@ export class TableElementComponent implements OnInit, OnDestroy {
   readonly index = input<number>(0);
   column = input.required<TableColumn>();
 
-  _inputValue: any;
+  inputValue: any;
   autoCompleteValue: any;
   autoCompleteSuggestions: any[] = [];
   dropdownValue: any;
@@ -49,17 +49,6 @@ export class TableElementComponent implements OnInit, OnDestroy {
     }
   }
 
-  get inputValue(): any {
-    return this._inputValue
-  }
-
-  set inputValue(value: any) {
-    this._inputValue = value
-    this.addEntry(value)
-    this.fieldUpdate();
-  }
-
-
   updateValue(value: any) {
     switch (this.column().type) {
       case 'INPUT':
@@ -68,8 +57,8 @@ export class TableElementComponent implements OnInit, OnDestroy {
         ) {
           this.convertToDropdown(value);
         } else {
-          this._inputValue = value;
-          this.addEntry(this._inputValue);
+          this.inputValue = value;
+          this.addEntry(this.inputValue);
         }
         break;
       case 'DROPDOWN':
@@ -91,6 +80,10 @@ export class TableElementComponent implements OnInit, OnDestroy {
 
   onKey(value: string) {
     this.addEntry(value);
+  }
+
+  onInputBlur(event: FocusEvent) {
+    this.fieldUpdate();
   }
 
   changeAutoComplete(event: AutoCompleteSelectEvent) {
