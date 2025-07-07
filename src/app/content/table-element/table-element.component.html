@@ -1,13 +1,12 @@
 <div class="value">
-  @switch (column?.type) {
+  @switch (column().type) {
     @case ("INPUT") {
       <input
         type="text"
         pInputText
         #textInput
         [(ngModel)]="inputValue"
-        (keyup)="onKey(textInput.value)"
-        (blur)="fieldUpdate()" />
+        (keyup)="onKey(textInput.value)"/>
     }
     @case ("AUTOCOMPLETE") {
       <p-autoComplete
@@ -16,15 +15,21 @@
         (completeMethod)="search($event.query)"
         (onSelect)="changeAutoComplete($event)"
         (onUnselect)="changeAutoComplete($event)"
-        field="label"
         [lazy]="true"
         placeholder="buscar"
         [forceSelection]="true"
         [showEmptyMessage]="true"
         appendTo="body"
-        (onBlur)="fieldUpdate()">
+        optionLabel="label">
       </p-autoComplete>
     }
+    @case ("DROPDOWN") {
+        <p-select
+          [options]="column().options"
+          [(ngModel)]="dropdownValue"
+          appendTo="body"
+          (onChange)="changeDropdown($event.value)"></p-select>
+      }
     @default {
       {{ readOnlyValue }}
     }

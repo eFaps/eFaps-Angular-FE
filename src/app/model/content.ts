@@ -74,15 +74,17 @@ export interface TableSection extends Section {
 
 export interface Option {
   label?: string;
+  display?: string;
   value: any;
 }
 
 export interface TableColumn {
+  type?: 'INPUT' | 'AUTOCOMPLETE' | 'DROPDOWN';
   header: string;
   field: string;
   ref?: string;
-  type?: 'INPUT' | 'AUTOCOMPLETE';
   updateRef?: string;
+  options?: Option[];
 }
 
 export interface AttributeSetEntry {

@@ -1,12 +1,5 @@
 @if (!editable) {
   <p-table [columns]="cols" [value]="elements" styleClass="p-datatable-gridlines" stripedRows>
-    @if (editable) {
-      <ng-template pTemplate="caption">
-        <div class="flex align-items-center justify-content-between">
-          <p-button icon="pi pi-plus" (click)="addEmptyRow()"></p-button>
-        </div>
-      </ng-template>
-    }
     <ng-template pTemplate="header" let-columns>
       <tr>
         @for (col of columns; track col) {
@@ -44,13 +37,11 @@
     styleClass="p-datatable-gridlines"
     stripedRows
     [resizableColumns]="true">
-    @if (editable) {
-      <ng-template pTemplate="caption">
-        <div class="flex align-items-center justify-content-between">
-          <p-button icon="pi pi-plus" (click)="addEmptyRow()"></p-button>
-        </div>
-      </ng-template>
-    }
+    <ng-template pTemplate="caption">
+      <div class="captionRow">
+        <p-button icon="pi pi-plus" (click)="addEmptyRow()"></p-button>
+      </div>
+    </ng-template>
     <ng-template pTemplate="header" let-columns>
       <tr>
         @for (col of columns; track col) {

@@ -1,5 +1,6 @@
 import { Injectable, signal } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { Entry } from '../model/value';
 
 @Injectable({
   providedIn: 'root',
@@ -9,27 +10,28 @@ export class ValueService {
 
   values = signal<Map<String, any>>(new Map());
 
-  private currentUpdate = new BehaviorSubject<
-    { name: string; value: any; index?: number } | undefined
-  >(undefined);
+  private currentUpdate = new BehaviorSubject<Entry | undefined>(undefined);
   update = this.currentUpdate.asObservable();
 
-  addEntry(entry: { name: string; value: any }, index?: number) {
+  addEntry(entry: Entry) {
     if (this.valueMap == null) {
       this.valueMap = new Map();
     }
-    if (index != null) {
-      let valueArr: Array<any>;
-      if (this.valueMap.has(entry.name)) {
-        valueArr = this.valueMap.get(entry.name);
-      } else {
-        valueArr = new Array();
-      }
-      valueArr[index] = entry.value;
-      this.valueMap.set(entry.name, valueArr);
+    if (typeof entry.index === "undefined") {
+        this.valueMap.set(entry.name, entry.value);
+      
     } else {
-      this.valueMap.set(entry.name, entry.value);
+        let valueArr: Array<any>;
+          if (this.valueMap.has(entry.name)) {
+            valueArr = this.valueMap.get(entry.name);
+          } else {
+            valueArr = new Array();
+          }
+          valueArr[entry.index] = entry.value;
+          this.valueMap.set(entry.name, valueArr);
+      
     }
+
     this.values.set(this.valueMap);
   }
 
@@ -37,7 +39,7 @@ export class ValueService {
     this.valueMap?.clear();
   }
 
-  updateEntry(entry: { name: string; value: any; index?: number }) {
+  updateEntry(entry: Entry) {
     this.currentUpdate.next(entry);
   }
 
