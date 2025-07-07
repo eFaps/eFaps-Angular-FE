@@ -51,7 +51,8 @@
       }
 
       :nth-child(2) {
-        flex-basis: 10%;
+        flex-basis: 15%;
+        white-space: nowrap; 
       }
 
       :nth-child(3) {

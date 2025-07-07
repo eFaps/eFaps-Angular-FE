@@ -101,7 +101,7 @@ export class FormContentComponent implements OnInit, AfterViewInit {
       this.moduleLoaded = true;
       this.vcr().clear();
       this.dynamicComponentService.loadUIModule(this.vcr(), this.module!!, {
-        oid: undefined,
+        oid: this.oid,
         parentOid: undefined,
       });
     }

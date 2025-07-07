@@ -1,12 +1,14 @@
-import { HttpClient } from '@angular/common/http';
-import { Component, inject, signal } from '@angular/core';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { Component, inject, input, OnInit, signal } from '@angular/core';
 import { TreeNode } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
 import { DialogModule } from 'primeng/dialog';
 import { TagModule } from 'primeng/tag';
 import { TreeModule, TreeNodeSelectEvent } from 'primeng/tree';
+import { ModuleData, UIModule } from 'src/app/model/module';
 
 import { UtilService } from 'src/app/services/util.service';
+import { ValueService } from 'src/app/services/value.service';
 
 @Component({
   selector: 'app-product-family',
@@ -14,10 +16,13 @@ import { UtilService } from 'src/app/services/util.service';
   templateUrl: './product-family.component.html',
   styleUrl: './product-family.component.scss',
 })
-export class ProductFamilyComponent {
+export class ProductFamilyComponent implements OnInit {
   private http = inject(HttpClient);
   private utilService = inject(UtilService);
+  private valueService = inject(ValueService);
 
+  readonly uimodule = input<UIModule>();
+  
   familyCode = signal<string>('');
   familyLabels = signal<string[]>([]);
   dialogVisible: boolean = false;
@@ -25,36 +30,61 @@ export class ProductFamilyComponent {
   nodes = signal<TreeNode[]>([]);
   selection: TreeNode | undefined;
 
+  productOid: string| undefined
+
+
+   ngOnInit(): void {
+    const module = this.uimodule()
+    if (module?.targetMode == "EDIT") {
+       this.productOid = this.valueService.values().get("eFapsOID")
+       this.loadTree(true)
+    }
+  }
+
+
   select() {
-    this.loadTree();
+    this.loadTree(false);
     this.dialogVisible = true;
   }
 
-  loadTree() {
+  loadTree(update: boolean) {
     if (this.loading()) {
       const url = `${this.utilService.evalApiUrl()}/ui/modules/product-family`;
-      this.http.get<any>(url).subscribe({
-        next: (families) => {
+      const params: any = this.productOid ? { productOid: this.productOid } : {};
+
+      this.http.get<any>(url, { params}).subscribe({
+        next: (response) => {
           const nodes: TreeNode[] = [];
-          families.forEach((element: ProductFamily) => {
-            nodes.push(this.toTreeNode(element));
+          response.families.forEach((element: ProductFamily) => {
+            nodes.push(this.toTreeNode(element, response.current));
           });
           this.nodes.set(nodes);
           this.loading.set(false);
+          if (update) {
+            this.update()
+          }
         },
       });
     }
   }
 
-  toTreeNode(element: ProductFamily): TreeNode {
-    return {
-      label: element.label,
+  private toTreeNode(element: ProductFamily, current?: string): TreeNode {
+   const node = {
+     label: element.label,
       key: element.oid,
       data: element.codePart,
-      children: element.children.map((xx) => {
-        return this.toTreeNode(xx);
+      children: element.children.map((child) => {
+        return this.toTreeNode(child, current);
       }),
-    };
+    }
+    node.children.forEach(child => {
+      child.parent = node
+    })
+
+    if (current &&node.key ==  current) {
+      this.selection = node
+    }
+    return node;
   }
 
   isValid() {
@@ -77,6 +107,7 @@ export class ProductFamilyComponent {
     }
     this.familyCode.set(parts.reverse().join(''));
     this.familyLabels.set(labels.reverse());
+    this.valueService.addEntry({name: "productFamilyLink",value: this.selection?.key})
   }
 }
 interface ProductFamily {

@@ -1,5 +1,5 @@
 <div class="wrapper">
-  Codigo: {{ familyCode() }}
+  <span class="code">{{ familyCode() }}</span>
   <div class="labels">
     @for (label of familyLabels(); track label) {
       <p-tag severity="secondary" value="{{ label }}" />
@@ -16,7 +16,8 @@
         selectionMode="single"
         [(selection)]="selection"
         [loading]="loading()"
-        loadingMode="icon"
+        loadingMode="mask"
+        loadingIcon="pi-spinner"
         highlightOnSelect="true" />
     </div>
   </ng-template>
