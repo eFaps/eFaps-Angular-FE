@@ -1,7 +1,8 @@
-import { Component, inject, Input } from '@angular/core';
+import { Component, inject, Input, signal } from '@angular/core';
 import { $dt } from '@primeuix/themes';
 import { Chart } from 'chart.js';
 import { ChartModule } from 'primeng/chart';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
 
 import { ChartWidget, WidgetData } from 'src/app/model/dashboard';
 import { DashboardService } from 'src/app/services/dashboard.service';
@@ -11,10 +12,12 @@ import { DashboardService } from 'src/app/services/dashboard.service';
   templateUrl: './chart-widget.component.html',
   styleUrls: ['./chart-widget.component.scss'],
   standalone: true,
-  imports: [ChartModule],
+  imports: [ChartModule, ProgressSpinnerModule],
 })
 export class ChartWidgetComponent {
   private dashboardservice = inject(DashboardService);
+
+  loading = signal<boolean>(true);
 
   _widget: ChartWidget | undefined;
 
@@ -37,6 +40,7 @@ export class ChartWidgetComponent {
       if (widget.data) {
         this._widget = widget.widget;
         this.eval(widget);
+        this.loading.set(false);
       } else {
         this._widget = widget;
         this.load();
@@ -65,6 +69,7 @@ export class ChartWidgetComponent {
     this.dashboardservice.getWidget(this.widget!!.identifier).subscribe({
       next: (dto) => {
         this.eval(dto);
+        this.loading.set(false);
       },
     });
   }

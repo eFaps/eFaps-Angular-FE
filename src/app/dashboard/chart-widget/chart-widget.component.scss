@@ -3,4 +3,12 @@
   width: 100%;
   padding-left: 1rem;
   padding-right: 1rem;
+
+  .loading {
+    display: flex;
+    text-align: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+  }
 }

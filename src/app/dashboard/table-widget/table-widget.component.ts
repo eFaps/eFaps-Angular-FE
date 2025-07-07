@@ -1,4 +1,4 @@
-import { Component, Input, inject } from '@angular/core';
+import { Component, Input, inject, signal } from '@angular/core';
 import { TableModule } from 'primeng/table';
 
 import { TableWidget, WidgetData } from 'src/app/model/dashboard';
@@ -16,6 +16,7 @@ export class TableWidgetComponent {
   _widget: TableWidget | undefined;
   cols: any[] = [];
   elements: any[] = [];
+  loading = signal<boolean>(true);
 
   @Input()
   set widget(widget: any) {
@@ -23,6 +24,7 @@ export class TableWidgetComponent {
       if (widget.data) {
         this._widget = widget.widget;
         this.eval(widget);
+        this.loading.set(false);
       } else {
         this._widget = widget;
         this.load();
@@ -38,6 +40,7 @@ export class TableWidgetComponent {
     this.dashboardservice.getWidget(this.widget!!.identifier).subscribe({
       next: (dto) => {
         this.eval(dto);
+        this.loading.set(false);
       },
     });
   }

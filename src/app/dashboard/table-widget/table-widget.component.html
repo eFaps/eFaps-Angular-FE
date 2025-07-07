@@ -3,7 +3,8 @@
   [value]="elements"
   styleClass="p-datatable-sm"
   scrollHeight="flex"
-  [scrollable]="true">
+  [scrollable]="true"
+  [loading]="loading()">
   <ng-template pTemplate="caption">
     @if (widget?.title) {
       <div class="title">
