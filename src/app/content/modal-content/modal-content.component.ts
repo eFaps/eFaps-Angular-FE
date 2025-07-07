@@ -35,6 +35,7 @@ export class ModalContentComponent {
 
   sections = signal<Section[]>([]);
   classifications = this.classificationService.classifications;
+  loading = signal<Boolean>(false);
 
   outline: Outline;
   callingMenu: MenuEntry;
@@ -158,6 +159,7 @@ export class ModalContentComponent {
   submit() {
     let values = this.valueService.values();
     if (this.validationService.isValid(values)) {
+      this.loading.set(true)
       if (this.classifications != null) {
         values?.set('eFapsClassifications', [
           ...this.classifications()!!.map((clazz) => {
@@ -168,7 +170,11 @@ export class ModalContentComponent {
       this.execService.exec(this.callingMenu.id, values).subscribe({
         next: (execResponse) => {
           this.dialogRef.close(execResponse);
+          this.loading.set(false)
         },
+        error: ()=> {
+          this.loading.set(false)
+        }
       });
     }
   }

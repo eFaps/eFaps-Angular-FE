@@ -200,7 +200,8 @@
         <ng-template #moduleComponent></ng-template>
       }
       @default {
-        <div *ngIf="formItem?.navRef != null" class="navRef">
+        @if (formItem?.navRef != null) {
+        <div class="navRef">
           <p-button
             icon="pi pi-link"
             [rounded]="true"
@@ -208,6 +209,7 @@
             (click)="followLink()"
             [style]="{ width: '2rem', height: '2rem' }"></p-button>
         </div>
+        }
         {{ readOnlyValue }}
       }
     }

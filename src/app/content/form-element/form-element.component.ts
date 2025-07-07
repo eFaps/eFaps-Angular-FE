@@ -187,7 +187,6 @@ export class FormElementComponent implements OnInit, AfterViewInit {
   @Input()
   set formItem(formItem: FormItem | undefined) {
     this._formItem = formItem;
-
     switch (this.formItem?.type) {
       case 'INPUT':
         if (this.formItem?.value != null) {
