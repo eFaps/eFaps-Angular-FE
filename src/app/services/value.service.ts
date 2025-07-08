@@ -1,5 +1,6 @@
 import { Injectable, signal } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+
 import { Entry } from '../model/value';
 
 @Injectable({
@@ -17,19 +18,17 @@ export class ValueService {
     if (this.valueMap == null) {
       this.valueMap = new Map();
     }
-    if (typeof entry.index === "undefined") {
-        this.valueMap.set(entry.name, entry.value);
-      
+    if (typeof entry.index === 'undefined') {
+      this.valueMap.set(entry.name, entry.value);
     } else {
-        let valueArr: Array<any>;
-          if (this.valueMap.has(entry.name)) {
-            valueArr = this.valueMap.get(entry.name);
-          } else {
-            valueArr = new Array();
-          }
-          valueArr[entry.index] = entry.value;
-          this.valueMap.set(entry.name, valueArr);
-      
+      let valueArr: Array<any>;
+      if (this.valueMap.has(entry.name)) {
+        valueArr = this.valueMap.get(entry.name);
+      } else {
+        valueArr = new Array();
+      }
+      valueArr[entry.index] = entry.value;
+      this.valueMap.set(entry.name, valueArr);
     }
 
     this.values.set(this.valueMap);

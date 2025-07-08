@@ -1,6 +1,18 @@
-import { Component, Input, OnInit, input, inject, effect, OnDestroy } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnInit,
+  input,
+  inject,
+  effect,
+  OnDestroy,
+  signal,
+} from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { AutoCompleteModule, AutoCompleteSelectEvent } from 'primeng/autocomplete';
+import {
+  AutoCompleteModule,
+  AutoCompleteSelectEvent,
+} from 'primeng/autocomplete';
 import { InputTextModule } from 'primeng/inputtext';
 import { SelectModule } from 'primeng/select';
 import { Subscription } from 'rxjs';
@@ -18,41 +30,55 @@ import { ValueService } from 'src/app/services/value.service';
   standalone: true,
 })
 export class TableElementComponent implements OnInit, OnDestroy {
-  
   private autoCompleteService = inject(AutoCompleteService);
   private fieldUpdateService = inject(FieldUpdateService);
   private valueService = inject(ValueService);
 
   readonly index = input<number>(0);
   column = input.required<TableColumn>();
+  rowData = input<any>();
+
+  dropdownValue = signal<any | undefined>(undefined);
 
   inputValue: any;
   autoCompleteValue: any;
   autoCompleteSuggestions: any[] = [];
-  dropdownValue: any;
+
   readOnlyValue: any;
   valueSub: Subscription | undefined;
 
+  constructor() {
+    effect(() => {
+      const rowData = this.rowData();
+      this.updateValue(rowData[this.column().field]);
+    });
+  }
+
   ngOnInit(): void {
-    this.valueSub =  this.valueService.update.subscribe({
+    this.valueSub = this.valueService.update.subscribe({
       next: (entry) => {
-         if (entry && entry?.name == this.column().field && this.index() == entry?.index) {
+        if (
+          entry &&
+          entry?.name == this.column().field &&
+          this.index() == entry?.index
+        ) {
           this.updateValue(entry?.value);
         }
-      }
-    })
+      },
+    });
   }
 
   ngOnDestroy(): void {
     if (this.valueSub) {
-      this.valueSub.unsubscribe()
+      this.valueSub.unsubscribe();
     }
   }
 
   updateValue(value: any) {
     switch (this.column().type) {
       case 'INPUT':
-        if (typeof value == 'string' &&
+        if (
+          typeof value == 'string' &&
           (value as string).startsWith('new Array')
         ) {
           this.convertToDropdown(value);
@@ -62,6 +88,24 @@ export class TableElementComponent implements OnInit, OnDestroy {
         }
         break;
       case 'DROPDOWN':
+        if (value) {
+          if (
+            typeof value == 'string' &&
+            (value as string).startsWith('new Array')
+          ) {
+            this.convertToDropdown(value);
+          } else {
+            this.dropdownValue.set(value);
+            this.addEntry(this.dropdownValue());
+          }
+        }
+        break;
+      case 'AUTOCOMPLETE':
+        if (value) {
+          this.autoCompleteValue = value;
+          const aoid = this.rowData()[this.column().field + '_AOID'];
+          this.addEntry(aoid);
+        }
         break;
       default:
         this.readOnlyValue = value;
@@ -69,13 +113,11 @@ export class TableElementComponent implements OnInit, OnDestroy {
   }
 
   addEntry(value: any) {
-    this.valueService.addEntry(
-      {
-        name: this.column().field,
-        value: value,
-        index: this.index()
-      }
-    );
+    this.valueService.addEntry({
+      name: this.column().field,
+      value: value,
+      index: this.index(),
+    });
   }
 
   onKey(value: string) {
@@ -89,7 +131,7 @@ export class TableElementComponent implements OnInit, OnDestroy {
   changeAutoComplete(event: AutoCompleteSelectEvent) {
     this.addEntry(event.value.value);
     if (event.value.display) {
-      this.autoCompleteValue = event.value.display
+      this.autoCompleteValue = event.value.display;
     }
     this.fieldUpdate();
   }
@@ -114,11 +156,13 @@ export class TableElementComponent implements OnInit, OnDestroy {
         .subscribe({
           next: (response) => {
             if (response.values) {
-              Object.entries(response.values).forEach(([key, value]) => {
-                this.valueService.updateEntry({
-                  name: key,
-                  value,
-                  index: this.index(),
+              response.values.forEach((entry, index) => {
+                Object.entries(entry).forEach(([key, value]) => {
+                  this.valueService.updateEntry({
+                    name: key,
+                    value,
+                    index: index,
+                  });
                 });
               });
             }
@@ -127,7 +171,7 @@ export class TableElementComponent implements OnInit, OnDestroy {
     }
   }
 
-   convertToDropdown(jsString: string) {
+  convertToDropdown(jsString: string) {
     const regex = /\s*new\sArray\s*\((.*)\)/;
     const result = jsString.match(regex);
     if (result != null) {
@@ -143,8 +187,8 @@ export class TableElementComponent implements OnInit, OnDestroy {
           value: entries[i].slice(1, -1),
         });
       }
-      this.dropdownValue = defVal;
-      this.addEntry(this.dropdownValue);
+      this.dropdownValue.set(defVal);
+      this.addEntry(this.dropdownValue());
     }
   }
 }

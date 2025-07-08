@@ -20,8 +20,8 @@ export class TableSectionComponent {
   private valueService = inject(ValueService);
 
   _tableSection: TableSection | undefined;
-  
-  stateKey: string| undefined
+
+  stateKey: string | undefined;
 
   cols: any[] = [];
   elements: any[] = [];
@@ -34,12 +34,11 @@ export class TableSectionComponent {
     this.cols = tableSection.columns;
     this.elements = tableSection.values;
     this.editable = tableSection.editable;
-    if (this.editable) {
+    if (this.editable && this.elements.length == 0) {
       this.addEmptyRow();
     }
   }
 
-  
   showLink(rowData: any, column: Column) {
     if (this.editable) {
       return false;
@@ -76,8 +75,8 @@ export class TableSectionComponent {
   }
 
   removeRow(index: number) {
-this.elements.splice(index,1)
- this.valueService.resize(
+    this.elements.splice(index, 1);
+    this.valueService.resize(
       this.elements.length,
       this.cols.map((column) => {
         return column.field;

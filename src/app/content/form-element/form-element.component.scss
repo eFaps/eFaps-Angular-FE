@@ -64,6 +64,13 @@
       flex-grow: 1;
     }
 
+    .dropdown {
+      ::ng-deep .p-select-label {
+        padding-top: unset;
+        padding-bottom: unset;
+      }
+    }
+
     .checkbox {
       line-height: 2rem;
 
@@ -74,6 +81,11 @@
       label {
         margin-left: 5px;
       }
+    }
+    .single-checkbox {
+      display: flex;
+      align-items: center;
+      height: 100%;
     }
   }
 }

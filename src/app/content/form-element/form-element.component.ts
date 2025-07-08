@@ -230,7 +230,11 @@ export class FormElementComponent implements OnInit, AfterViewInit {
         if (this.formItem.options) {
           this.autoCompleteSuggestions = this.formItem.options;
           this.autoCompleteValue = this.formItem.options[0];
-          this.addEntry(this.autoCompleteValue?.value);
+          if (Array.isArray(this.formItem.options[0].value)) {
+            this.addEntry(this.autoCompleteValue?.value[0]);
+          } else {
+            this.addEntry(this.autoCompleteValue?.value);
+          }
         }
         break;
 
@@ -280,6 +284,8 @@ export class FormElementComponent implements OnInit, AfterViewInit {
         }
         break;
       case 'UIMODULE':
+        break;
+      case 'CHECKBOX':
         break;
       default:
         if (this.formItem?.value && this.formItem?.value instanceof Array) {
@@ -378,10 +384,13 @@ export class FormElementComponent implements OnInit, AfterViewInit {
       this.fieldUpdateService.execute(this._formItem.updateRef).subscribe({
         next: (response) => {
           if (response.values) {
-            Object.entries(response.values).forEach(([key, value]) => {
-              this.valueService.updateEntry({
-                name: key,
-                value,
+            response.values.forEach((entry, index) => {
+              Object.entries(entry).forEach(([key, value]) => {
+                this.valueService.updateEntry({
+                  name: key,
+                  value,
+                  index: index,
+                });
               });
             });
           }

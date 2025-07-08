@@ -1,2 +1,5 @@
-export interface Entry 
-{ name: string; value: any; index?: number }
+export interface Entry {
+  name: string;
+  value: any;
+  index?: number;
+}

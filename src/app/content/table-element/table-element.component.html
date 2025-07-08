@@ -7,7 +7,7 @@
         #textInput
         [(ngModel)]="inputValue"
         (keyup)="onKey(textInput.value)"
-        (blur)="onInputBlur($event)"/>
+        (blur)="onInputBlur($event)" />
     }
     @case ("AUTOCOMPLETE") {
       <p-autoComplete
@@ -25,12 +25,12 @@
       </p-autoComplete>
     }
     @case ("DROPDOWN") {
-        <p-select
-          [options]="column().options"
-          [(ngModel)]="dropdownValue"
-          appendTo="body"
-          (onChange)="changeDropdown($event.value)"></p-select>
-      }
+      <p-select
+        [options]="column().options"
+        [(ngModel)]="dropdownValue"
+        appendTo="body"
+        (onChange)="changeDropdown($event.value)"></p-select>
+    }
     @default {
       {{ readOnlyValue }}
     }

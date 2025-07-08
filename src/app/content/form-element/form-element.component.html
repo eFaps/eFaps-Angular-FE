@@ -20,11 +20,13 @@
         </div>
       }
       @case ("DROPDOWN") {
-        <p-select
-          [options]="formItem?.options"
-          [(ngModel)]="dropdownValue"
-          appendTo="body"
-          (onChange)="changeDropdown($event.value)"></p-select>
+        <div class="dropdown">
+          <p-select
+            [options]="formItem?.options"
+            [(ngModel)]="dropdownValue"
+            appendTo="body"
+            (onChange)="changeDropdown($event.value)"></p-select>
+        </div>
       }
       @case ("BITENUM") {
         <p-multiSelect
@@ -166,16 +168,31 @@
         <app-attribute-set [formItem]="formItem"></app-attribute-set>
       }
       @case ("CHECKBOX") {
-        <div *ngFor="let option of formItem?.options" class="checkbox">
-          <p-checkbox
-            name="group"
-            [value]="option.value"
-            [(ngModel)]="checkboxValue"
-            (onChange)="changeCheckbox($event.checked)"
-            [inputId]="option.value">
-          </p-checkbox>
-          <label for="{{ option.value }}">{{ option.label }}</label>
-        </div>
+        @if (formItem!.options && formItem!.options.length > 0) {
+          @for (option of formItem?.options; track option) {
+            <div class="checkbox">
+              <p-checkbox
+                name="group"
+                [value]="option.value"
+                [(ngModel)]="checkboxValue"
+                (onChange)="changeCheckbox($event.checked)"
+                [inputId]="option.value">
+              </p-checkbox>
+              <label for="{{ option.value }}">{{ option.label }}</label>
+            </div>
+          }
+        } @else {
+          <div class="single-checkbox">
+            <p-checkbox
+              name="formItem?.name"
+              [binary]="true"
+              [value]="formItem?.value"
+              [(ngModel)]="checkboxValue"
+              (onChange)="changeCheckbox($event.checked)"
+              [inputId]="formItem?.name">
+            </p-checkbox>
+          </div>
+        }
       }
       @case ("BUTTON") {
         <p-button [label]="formItem?.label" (click)="executeFieldCmd()"></p-button>
@@ -201,14 +218,14 @@
       }
       @default {
         @if (formItem?.navRef != null) {
-        <div class="navRef">
-          <p-button
-            icon="pi pi-link"
-            [rounded]="true"
-            [outlined]="true"
-            (click)="followLink()"
-            [style]="{ width: '2rem', height: '2rem' }"></p-button>
-        </div>
+          <div class="navRef">
+            <p-button
+              icon="pi pi-link"
+              [rounded]="true"
+              [outlined]="true"
+              (click)="followLink()"
+              [style]="{ width: '2rem', height: '2rem' }"></p-button>
+          </div>
         }
         {{ readOnlyValue }}
       }
