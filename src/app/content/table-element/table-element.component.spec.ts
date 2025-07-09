@@ -20,7 +20,16 @@ describe('TableElementComponent', () => {
       ],
     });
     fixture = TestBed.createComponent(TableElementComponent);
+
     component = fixture.componentInstance;
+
+    fixture.componentRef.setInput('rowData', {
+      field: 'something',
+    });
+    fixture.componentRef.setInput('column', {
+      header: 'header',
+      field: 'field',
+    });
     fixture.detectChanges();
   });
 
