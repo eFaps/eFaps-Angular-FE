@@ -130,7 +130,7 @@ export class AppComponent implements OnInit {
           element.el.nativeElement.offsetHeight,
         );
       });
-      observer.observe(element.el.nativeElement.childNodes[0]);
+      observer.observe(element.el.nativeElement);
     }
   }
 

@@ -352,6 +352,6 @@ export class TableComponent implements OnInit {
       breadcrumbHeight: ${breadcrumbHeight}, 
       contenHeaderHeight: ${contenHeaderHeight},
       scrollHeight: ${this.scrollHeight}`);
-       **/
+     */
   }
 }
