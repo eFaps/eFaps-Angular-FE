@@ -203,7 +203,11 @@ export class FormElementComponent implements OnInit, AfterViewInit {
       case 'DROPDOWN':
         if (this.formItem.options) {
           if (this.formItem?.value != null) {
-            this.dropdownValue = this.formItem?.value;
+            if (Array.isArray(this.formItem.value)) {
+              this.dropdownValue = this.formItem.value[0];
+            } else {
+              this.dropdownValue = this.formItem?.value;
+            }
           } else {
             this.dropdownValue = this.formItem.options[0].value;
           }
