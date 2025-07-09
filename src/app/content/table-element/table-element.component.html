@@ -26,7 +26,7 @@
     }
     @case ("DROPDOWN") {
       <p-select
-        [options]="column().options"
+        [options]="dropdownOptions()"
         [(ngModel)]="dropdownValue"
         appendTo="body"
         (onChange)="changeDropdown($event.value)"></p-select>

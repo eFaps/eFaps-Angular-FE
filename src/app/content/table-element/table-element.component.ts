@@ -39,6 +39,7 @@ export class TableElementComponent implements OnInit, OnDestroy {
   rowData = input<any>();
 
   dropdownValue = signal<any | undefined>(undefined);
+  dropdownOptions = signal<Option[] | undefined>(undefined)
 
   inputValue: any;
   autoCompleteValue: any;
@@ -55,6 +56,7 @@ export class TableElementComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    //this.dropdownOptions.set(this.column().options)
     this.valueSub = this.valueService.update.subscribe({
       next: (entry) => {
         if (
@@ -94,6 +96,21 @@ export class TableElementComponent implements OnInit, OnDestroy {
             (value as string).startsWith('new Array')
           ) {
             this.convertToDropdown(value);
+          } else if (Array.isArray(value)) {
+            let options :Option[]= []
+            value.forEach( val => {
+                if (val.selected == true) {
+                  this.dropdownValue.set(val.value)
+                }
+                options.push({
+                  label: val.option,
+                  value: val.value
+                })
+            }
+
+            ) 
+            this.addEntry(this.dropdownValue());
+           this.dropdownOptions.set(options)
           } else {
             this.dropdownValue.set(value);
             this.addEntry(this.dropdownValue());
@@ -177,16 +194,17 @@ export class TableElementComponent implements OnInit, OnDestroy {
     if (result != null) {
       let item = this.column();
       item.type = 'DROPDOWN';
-      item.options = [];
+      const options = [];
       const entries = result[1].split(',');
       const defVal = entries[0].slice(1, -1);
 
       for (let i = 1; i < entries.length; i = i + 2) {
-        item.options.push({
+        options.push({
           label: entries[i + 1].slice(1, -1),
           value: entries[i].slice(1, -1),
         });
       }
+      this.dropdownOptions.set(options);
       this.dropdownValue.set(defVal);
       this.addEntry(this.dropdownValue());
     }
