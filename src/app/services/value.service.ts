@@ -51,7 +51,9 @@ export class ValueService {
         const currentArray = this.valueMap.get(name) as Array<any>;
         const newArray = new Array<any>(length);
         currentArray.forEach((val, index) => {
-          newArray[index] = val;
+          if (index < length) {
+            newArray[index] = val;
+          }
         });
         this.valueMap.set(name, newArray);
       }
