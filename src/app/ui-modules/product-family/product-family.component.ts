@@ -1,14 +1,22 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Component, inject, input, OnInit, signal } from '@angular/core';
 import { TreeNode } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
 import { DialogModule } from 'primeng/dialog';
 import { TagModule } from 'primeng/tag';
-import { TreeModule, TreeNodeSelectEvent } from 'primeng/tree';
+import { TreeModule } from 'primeng/tree';
 
-import { ModuleData, UIModule } from 'src/app/model/module';
+import { UIModule } from 'src/app/model/module';
 import { UtilService } from 'src/app/services/util.service';
 import { ValueService } from 'src/app/services/value.service';
+
+interface ProductFamily {
+  oid: string;
+  label: string;
+  codePart: string;
+  parentOid?: string;
+  children: ProductFamily[];
+}
 
 @Component({
   selector: 'app-product-family',
@@ -124,11 +132,4 @@ export class ProductFamilyComponent implements OnInit {
       }
     }
   }
-}
-interface ProductFamily {
-  oid: string;
-  label: string;
-  codePart: string;
-  parentOid?: string;
-  children: ProductFamily[];
 }

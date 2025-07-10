@@ -91,6 +91,15 @@ export class DynamicComponentService {
           },
         );
         break;
+      case 'POS-StatusReport':
+        import(
+          '../ui-modules/pos-status-report/pos-status-report.component'
+        ).then((m) => {
+          const ref = viewContainerRef.createComponent(
+            m.PosStatusReportComponent,
+          );
+        });
+        break;
     }
   }
 }

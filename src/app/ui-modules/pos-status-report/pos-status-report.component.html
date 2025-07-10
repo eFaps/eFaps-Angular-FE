@@ -1,0 +1,26 @@
+<div class="wrapper">
+  @if (report()) {
+    <div class="header">
+      <h2>Estatus</h2>
+      Ultima evaluacion: {{ report()?.date | date: "medium" }}
+    </div>
+    @for (status of report()?.backendStatus; track status) {
+      <div class="statusWrapper">
+        <div class="status">
+          <span class="name"> {{ status.name }} </span>
+          <span>{{ status.timeAgo }}</span>
+          <span>
+            @switch (evalStaus(status)) {
+              @case ("OK") {
+                <i class="pi pi-thumbs-up" style="font-size: 2.5rem"></i>
+              }
+              @case ("UNKNOWN") {
+                <i class="pi pi-exclamation-triangle" style="font-size: 2.5rem"></i>
+              }
+            }
+          </span>
+        </div>
+      </div>
+    }
+  }
+</div>

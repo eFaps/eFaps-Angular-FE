@@ -1,0 +1,31 @@
+.wrapper {
+  .header {
+    text-align: center;
+  }
+  .statusWrapper {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+    flex-flow: row wrap;
+    gap: 2rem;
+
+    .status {
+      background-color: var(--p-primary-active-color);
+      border-style: solid;
+      border-color: var(--p-primary-700);
+      color: var(--p-button-primary-color);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 15rem;
+      border-radius: 3rem;
+      min-height: 4rem;
+      gap: 1rem;
+      padding: 1rem;
+      .name {
+        font-weight: bold;
+      }
+    }
+  }
+}

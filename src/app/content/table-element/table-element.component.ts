@@ -39,7 +39,7 @@ export class TableElementComponent implements OnInit, OnDestroy {
   rowData = input<any>();
 
   dropdownValue = signal<any | undefined>(undefined);
-  dropdownOptions = signal<Option[] | undefined>(undefined)
+  dropdownOptions = signal<Option[] | undefined>(undefined);
 
   inputValue: any;
   autoCompleteValue: any;
@@ -97,20 +97,18 @@ export class TableElementComponent implements OnInit, OnDestroy {
           ) {
             this.convertToDropdown(value);
           } else if (Array.isArray(value)) {
-            let options :Option[]= []
-            value.forEach( val => {
-                if (val.selected == true) {
-                  this.dropdownValue.set(val.value)
-                }
-                options.push({
-                  label: val.option,
-                  value: val.value
-                })
-            }
-
-            ) 
+            let options: Option[] = [];
+            value.forEach((val) => {
+              if (val.selected == true) {
+                this.dropdownValue.set(val.value);
+              }
+              options.push({
+                label: val.option,
+                value: val.value,
+              });
+            });
             this.addEntry(this.dropdownValue());
-           this.dropdownOptions.set(options)
+            this.dropdownOptions.set(options);
           } else {
             this.dropdownValue.set(value);
             this.addEntry(this.dropdownValue());
