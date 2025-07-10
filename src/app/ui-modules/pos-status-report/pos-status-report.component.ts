@@ -57,6 +57,7 @@ export class PosStatusReportComponent implements OnInit {
             val.timeAgo = new TimeAgo('es').format(date);
           }
         });
+        report.backendStatus.sort((a, b) => { return a.name.localeCompare(b.name) })
         this.report.set(report);
         if (init) {
           interval(report.reloadInterval * 1000 * 60).subscribe((res) =>
