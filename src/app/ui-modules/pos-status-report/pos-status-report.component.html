@@ -4,8 +4,9 @@
       <h2>Estatus</h2>
       Ultima evaluacion: {{ report()?.date | date: "medium" }}
     </div>
+    <div class="statusWrapper">
     @for (status of report()?.backendStatus; track status) {
-      <div class="statusWrapper">
+      
         <div class="status">
           <span class="name"> {{ status.name }} </span>
           <span>{{ status.timeAgo }}</span>
@@ -20,7 +21,7 @@
             }
           </span>
         </div>
-      </div>
     }
+    </div>
   }
 </div>
