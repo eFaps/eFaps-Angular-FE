@@ -29,6 +29,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { SafeHtmlPipe } from 'primeng/menu';
 import { MessageModule } from 'primeng/message';
 import { MultiSelectModule } from 'primeng/multiselect';
+import { ProgressBarModule } from 'primeng/progressbar';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { SelectModule } from 'primeng/select';
 import { TextareaModule } from 'primeng/textarea';
@@ -44,7 +45,6 @@ import { FieldUpdateService } from 'src/app/services/field-update.service';
 import { UtilService } from 'src/app/services/util.service';
 import { ValidationService } from 'src/app/services/validation.service';
 import { ValueService } from 'src/app/services/value.service';
-import { ProgressBarModule } from 'primeng/progressbar';
 
 @Component({
   selector: 'app-form-element',
@@ -68,7 +68,7 @@ import { ProgressBarModule } from 'primeng/progressbar';
     CommonModule,
     InputTextModule,
     TextareaModule,
-    ProgressBarModule
+    ProgressBarModule,
   ],
   standalone: true,
 })
