@@ -52,12 +52,13 @@ export class PosStatusReportComponent implements OnInit {
         report.date = Date.parse(report.dateTime);
         report.backendStatus.forEach((val) => {
           if (val.lastSeenAt) {
-            console.log(val.lastSeenAt);
             var date = Date.parse(val.lastSeenAt);
             val.timeAgo = new TimeAgo('es').format(date);
           }
         });
-        report.backendStatus.sort((a, b) => { return a.name.localeCompare(b.name) })
+        report.backendStatus.sort((a, b) => {
+          return a.name.localeCompare(b.name);
+        });
         this.report.set(report);
         if (init) {
           interval(report.reloadInterval * 1000 * 60).subscribe((res) =>

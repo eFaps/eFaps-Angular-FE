@@ -1,4 +1,5 @@
 import { Component, Input, inject, signal } from '@angular/core';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { TableModule } from 'primeng/table';
 
 import { TableWidget, WidgetData } from 'src/app/model/dashboard';
@@ -8,7 +9,7 @@ import { DashboardService } from 'src/app/services/dashboard.service';
   selector: 'app-table-widget',
   templateUrl: './table-widget.component.html',
   styleUrls: ['./table-widget.component.scss'],
-  imports: [TableModule],
+  imports: [TableModule, ProgressSpinnerModule],
 })
 export class TableWidgetComponent {
   private dashboardservice = inject(DashboardService);

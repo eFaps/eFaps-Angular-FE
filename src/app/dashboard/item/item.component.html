@@ -19,6 +19,11 @@
       }
     }
     @case ("TEMPLATE") {
+      @if (templateLoading()) {
+        <div class="loading">
+          <p-progress-spinner ariaLabel="loading" />
+        </div>
+      }
       @switch (templateWidgetData?.widget?.type) {
         @case ("CHART") {
           <app-chart-widget [widget]="templateWidgetData"></app-chart-widget>
@@ -28,6 +33,5 @@
         }
       }
     }
-    @default {}
   }
 </div>

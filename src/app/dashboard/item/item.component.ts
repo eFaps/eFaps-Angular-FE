@@ -1,29 +1,31 @@
-import { Component, inject, Input } from '@angular/core';
+import { Component, inject, Input, signal } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
 import { DialogService } from 'primeng/dynamicdialog';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
 
 import { ChartWidgetComponent } from '../chart-widget/chart-widget.component';
 import { EditComponent } from '../edit/edit.component';
 import { TableWidgetComponent } from '../table-widget/table-widget.component';
-import {
-  ChartWidget,
-  DashboardWidget,
-  PlaceHolderWidget,
-  TableWidget,
-  WidgetData,
-} from 'src/app/model/dashboard';
+import { DashboardWidget, WidgetData } from 'src/app/model/dashboard';
 import { DashboardService } from 'src/app/services/dashboard.service';
 
 @Component({
   selector: 'app-item',
   templateUrl: './item.component.html',
   styleUrls: ['./item.component.scss'],
-  imports: [ButtonModule, ChartWidgetComponent, TableWidgetComponent],
+  imports: [
+    ButtonModule,
+    ChartWidgetComponent,
+    TableWidgetComponent,
+    ProgressSpinnerModule,
+  ],
 })
 export class ItemComponent {
   private dialogService = inject(DialogService);
 
   private dashboardService = inject(DashboardService);
+
+  templateLoading = signal<boolean>(false);
 
   _widget: DashboardWidget | undefined;
   private _editMode: boolean = false;
@@ -43,6 +45,7 @@ export class ItemComponent {
   }
 
   evalTemplate() {
+    this.templateLoading.set(true);
     this.dashboardService.getWidget(this.widget?.eql!!).subscribe({
       next: (result) => {
         if (result && result.widget) {
@@ -51,6 +54,7 @@ export class ItemComponent {
           }
           this.templateWidgetData = result;
         }
+        this.templateLoading.set(false);
       },
     });
   }
