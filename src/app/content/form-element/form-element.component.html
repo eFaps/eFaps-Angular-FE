@@ -82,27 +82,9 @@
         <div class="snipplet" [innerHtml]="snippletValue | safeHtml"></div>
       }
       @case ("UPLOAD") {
-        <p-fileUpload #upload [url]="uploadUrl" (onUpload)="onUpload($event)">
+        <p-fileUpload #upload [url]="uploadUrl" (onUpload)="onUpload($event)" [previewWidth]="0">
           <ng-template #empty>
             <div class="dragDrop">Arrastre y suelte el archivo aquí para cargarlo.</div>
-          </ng-template>
-          <ng-template #content let-files>
-            @for (file of files; track file?.name; let index = $index) {
-              <div class="fileUploadList">
-                <span>{{ file.name }}</span>
-                <span>{{ formatBytes(file.size, 3) }}</span>
-
-                <p-button
-                  icon="pi pi-times"
-                  [rounded]="true"
-                  [text]="true"
-                  severity="danger"
-                  (click)="removeFile($event, index)" />
-              </div>
-            }
-            @if (uploadKeys) {
-              <div *ngIf="uploadKeys">Subido con &#233;xito</div>
-            }
           </ng-template>
         </p-fileUpload>
       }
@@ -111,27 +93,10 @@
           #uploadMultiple
           [url]="uploadUrl"
           (onUpload)="onUpload($event)"
-          [multiple]="true">
+          [multiple]="true"
+          [previewWidth]="0">
           <ng-template #empty>
             <div class="dragDrop">Arrastre y suelte archivos aquí para cargarlos.</div>
-          </ng-template>
-          <ng-template #content let-files>
-            @for (file of files; track file?.name; let index = $index) {
-              <div class="fileUploadList">
-                <span>{{ file.name }}</span>
-                <span>{{ formatBytes(file.size, 3) }}</span>
-
-                <p-button
-                  icon="pi pi-times"
-                  [rounded]="true"
-                  [text]="true"
-                  severity="danger"
-                  (click)="removeFile($event, index)" />
-              </div>
-            }
-            @if (uploadKeys) {
-              <div *ngIf="uploadKeys">Subido con &#233;xito</div>
-            }
           </ng-template>
         </p-fileUpload>
       }
