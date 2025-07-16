@@ -43,21 +43,9 @@
       padding-bottom: 5px;
     }
 
-    .fileUploadList {
-      display: flex;
-      align-items: center;
-      :nth-child(1) {
-        flex-basis: 90%;
-      }
 
-      :nth-child(2) {
-        flex-basis: 15%;
-        white-space: nowrap;
-      }
-
-      :nth-child(3) {
-        flex-basis: 20px;
-      }
+    ::ng-deep .p-fileupload-file-thumbnail {
+      display: none;
     }
 
     .placeholder {
