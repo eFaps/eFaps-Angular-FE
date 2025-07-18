@@ -9,9 +9,9 @@ export const routes: Routes = [
     canActivate: [canActivateAuth],
     pathMatch: 'full',
     loadComponent: () =>
-      import('./structure-browser/structure-browser/structure-browser.component').then(
-        (m) => m.StructureBrowserComponent,
-      ),
+      import(
+        './structure-browser/structure-browser/structure-browser.component'
+      ).then((m) => m.StructureBrowserComponent),
   },
   {
     path: 'table',
@@ -29,7 +29,9 @@ export const routes: Routes = [
     path: 'dashboard',
     canActivate: [canActivateAuth],
     loadComponent: () =>
-      import('./dashboard/dashboard/dashboard.component').then((m) => m.DashboardComponent),
+      import('./dashboard/dashboard/dashboard.component').then(
+        (m) => m.DashboardComponent,
+      ),
   },
   {
     path: 'first-time-user',
@@ -42,7 +44,9 @@ export const routes: Routes = [
     path: '',
     canActivate: [canActivateAuth],
     loadComponent: () =>
-      import('./dashboard/dashboard/dashboard.component').then((m) => m.DashboardComponent),
+      import('./dashboard/dashboard/dashboard.component').then(
+        (m) => m.DashboardComponent,
+      ),
   },
   { path: '**', redirectTo: '' },
 ];

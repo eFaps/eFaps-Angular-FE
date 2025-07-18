@@ -36,19 +36,22 @@
           </div>
         }
         @case ("RADIO") {
-          <div class="filterElement">
-            <div class="radioHeader">
+          <div class="filterElement radio">
+            <div class="radio-header">
               <span>{{ filter.label }}</span>
             </div>
-            @for (option of optionElements[filter.name]; track option; let idx = $index) {
-              <div class="field-radio">
-                <p-radioButton
-                  [inputId]="filter.name + 'opt' + idx"
-                  [value]="option.value"
-                  formControlName="{{ filter.name }}" />
-                <label [for]="filter.name + 'opt' + idx">{{ option.label }}</label>
-              </div>
-            }
+            <div class="radio-group">
+              @for (option of optionElements[filter.name]; track option; let idx = $index) {
+                <div class="radio-field">
+                  <p-radioButton
+                    [inputId]="filter.name + 'opt' + idx"
+                    [value]="option.value"
+                    name="{{ filter.name }}"
+                    formControlName="{{ filter.name }}" />
+                  <label [for]="filter.name + 'opt' + idx">{{ option.label }}</label>
+                </div>
+              }
+            </div>
           </div>
         }
       }

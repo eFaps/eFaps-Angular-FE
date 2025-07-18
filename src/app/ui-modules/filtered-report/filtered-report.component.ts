@@ -30,7 +30,7 @@ import { UtilService } from 'src/app/services/util.service';
     FloatLabelModule,
     ButtonModule,
     PickListModule,
-    RadioButtonModule
+    RadioButtonModule,
   ],
   templateUrl: './filtered-report.component.html',
   styleUrl: './filtered-report.component.scss',
