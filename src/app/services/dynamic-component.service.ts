@@ -52,7 +52,7 @@ export class DynamicComponentService {
         });
         break;
       case 'CSVImport':
-        import('../standalone/csvimport/csvimport.component').then((m) => {
+        import('../ui-modules/csvimport/csvimport.component').then((m) => {
           const ref = viewContainerRef.createComponent(m.CSVImportComponent);
           ref.setInput('uimodule', uimodule);
           ref.setInput('data', data);
