@@ -70,7 +70,7 @@ export class DynamicComponentService {
         );
         break;
       case 'FilteredReport':
-        import('../standalone/filtered-report/filtered-report.component').then(
+        import('../ui-modules/filtered-report/filtered-report.component').then(
           (m) => {
             const ref = viewContainerRef.createComponent(
               m.FilteredReportComponent,

@@ -5,7 +5,15 @@
   height: calc(100vh - 80px);
   position: relative;
   overflow: hidden;
-
+  width: 100%;
+  
+  .filters {
+    background-color: var(--p-surface-200);
+    padding: 0.5rem;
+    border-style: solid;
+    border-width: 1px;
+    border-color: var(--p-primary-700);
+      
   .filterElement {
     padding-top: 1.5rem;
 
@@ -26,14 +34,20 @@
     align-items: center;
     column-gap: 20px;
   }
-
+  }
   .content {
+    display: inline-flex;
+    flex-direction: column;
+    flex-grow: 2;
     margin-left: 1rem;
     min-width: 50%;
     overflow: auto;
+    align-items: center;
+
     .header {
       text-align: center;
     }
+    
   }
 }
 ::ng-deep .p-listbox-header {
