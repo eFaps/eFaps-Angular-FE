@@ -58,7 +58,9 @@ export class ChartWidgetComponent {
 
     const documentStyle = getComputedStyle(document.documentElement);
     const textColor = documentStyle.getPropertyValue('--p-text-color');
+    const bckgrColor = documentStyle.getPropertyValue('--p-primary-200');
     Chart.defaults.color = textColor;
+    Chart.defaults.backgroundColor = bckgrColor;
   }
 
   get widget() {
