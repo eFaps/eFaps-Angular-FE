@@ -9,20 +9,19 @@
         <div class="status">
           <span class="name"> {{ status.name }} </span>
           <span>{{ status.timeAgo }}</span>
-          
-            @switch (evalStaus(status)) {
-              @case ("OK") {
-               <span class="statusOk">
+
+          @switch (evalStaus(status)) {
+            @case ("OK") {
+              <span class="statusOk">
                 <i class="pi pi-thumbs-up" style="font-size: 2.5rem"></i>
-                </span>
-              }
-              @case ("UNKNOWN") {
-                <span class="statusUnknown">
-                <i class="pi pi-exclamation-triangle" style="font-size: 2.5rem"></i>
-                </span>
-              }
+              </span>
             }
-          
+            @case ("UNKNOWN") {
+              <span class="statusUnknown">
+                <i class="pi pi-exclamation-triangle" style="font-size: 2.5rem"></i>
+              </span>
+            }
+          }
         </div>
       }
     </div>
