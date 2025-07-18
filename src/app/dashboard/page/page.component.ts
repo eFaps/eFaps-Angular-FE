@@ -18,7 +18,6 @@ import { DashboardService } from 'src/app/services/dashboard.service';
   selector: 'app-page',
   templateUrl: './page.component.html',
   styleUrls: ['./page.component.scss'],
-  standalone: true,
   imports: [GridsterModule, ItemComponent, ButtonModule],
 })
 export class PageComponent {

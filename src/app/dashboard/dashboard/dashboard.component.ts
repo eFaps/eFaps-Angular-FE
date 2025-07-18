@@ -15,7 +15,6 @@ import { DashboardService } from 'src/app/services/dashboard.service';
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
-  standalone: true,
   imports: [PageComponent, StepsModule, ButtonModule, SpeedDialModule],
 })
 export class DashboardComponent implements OnInit {

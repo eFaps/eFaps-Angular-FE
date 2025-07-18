@@ -27,8 +27,8 @@ export const routes: Routes = [
   {
     path: 'dashboard',
     canActivate: [canActivateAuth],
-    loadChildren: () =>
-      import('./dashboard/dashboard.module').then((m) => m.DashboardModule),
+    loadComponent: () =>
+      import('./dashboard/dashboard/dashboard.component').then((m) => m.DashboardComponent),
   },
   {
     path: 'first-time-user',
@@ -40,8 +40,8 @@ export const routes: Routes = [
   {
     path: '',
     canActivate: [canActivateAuth],
-    loadChildren: () =>
-      import('./dashboard/dashboard.module').then((m) => m.DashboardModule),
+    loadComponent: () =>
+      import('./dashboard/dashboard/dashboard.component').then((m) => m.DashboardComponent),
   },
   { path: '**', redirectTo: '' },
 ];

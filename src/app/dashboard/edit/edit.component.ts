@@ -2,7 +2,6 @@ import { Component, inject, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import { ButtonModule } from 'primeng/button';
-import { ChipModule } from 'primeng/chip';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { FloatLabelModule } from 'primeng/floatlabel';
 import { InputTextModule } from 'primeng/inputtext';
@@ -20,7 +19,6 @@ import { DashboardService } from 'src/app/services/dashboard.service';
   selector: 'app-edit',
   templateUrl: './edit.component.html',
   styleUrls: ['./edit.component.scss'],
-  standalone: true,
   imports: [
     SelectModule,
     FormsModule,
