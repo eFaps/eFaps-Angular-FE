@@ -15,7 +15,6 @@ import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
 import { InputTextModule } from 'primeng/inputtext';
 import { MenuModule } from 'primeng/menu';
 import { MenubarModule } from 'primeng/menubar';
-import { PopoverModule } from 'primeng/popover';
 import { TreeTableModule } from 'primeng/treetable';
 import { combineLatest } from 'rxjs';
 

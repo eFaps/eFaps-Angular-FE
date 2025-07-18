@@ -5,11 +5,12 @@ import { canActivateAuth } from './guard/auth.guard';
 
 export const routes: Routes = [
   {
-    path: 'strctbrws',
+    path: 'strctbrws/:id',
     canActivate: [canActivateAuth],
-    loadChildren: () =>
-      import('./structure-browser/structure-browser.module').then(
-        (m) => m.StructureBrowserModule,
+    pathMatch: 'full',
+    loadComponent: () =>
+      import('./structure-browser/structure-browser/structure-browser.component').then(
+        (m) => m.StructureBrowserComponent,
       ),
   },
   {

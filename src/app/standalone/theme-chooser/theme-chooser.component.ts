@@ -2,7 +2,7 @@ import { Component, inject, linkedSignal, OnInit } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
 import { TooltipModule } from 'primeng/tooltip';
 
-import { Theme, ThemeService } from 'src/app/services/theme.service';
+import { ThemeService } from 'src/app/services/theme.service';
 
 @Component({
   selector: 'app-theme-chooser',
