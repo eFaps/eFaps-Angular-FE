@@ -59,7 +59,7 @@ export class DynamicComponentService {
         });
         break;
       case 'PromoSimulator':
-        import('../standalone/promo-simulator/promo-simulator.component').then(
+        import('../ui-modules/promo-simulator/promo-simulator.component').then(
           (m) => {
             const ref = viewContainerRef.createComponent(
               m.PromoSimulatorComponent,
