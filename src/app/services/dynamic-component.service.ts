@@ -24,7 +24,7 @@ export class DynamicComponentService {
     switch (uimodule.key) {
       case 'SystemConfigurationAttribute':
         import(
-          '../standalone/system-configuration-attribute/system-configuration-attribute.component'
+          '../ui-modules/system-configuration-attribute/system-configuration-attribute.component'
         ).then((m) => {
           const ref = viewContainerRef.createComponent(
             m.SystemConfigurationAttributeComponent,
@@ -34,7 +34,7 @@ export class DynamicComponentService {
         });
         break;
       case 'Logback':
-        import('../standalone/logback/logback.component').then((m) => {
+        import('../ui-modules/logback/logback.component').then((m) => {
           const ref = viewContainerRef.createComponent(m.LogbackComponent);
           ref.setInput('uimodule', uimodule);
           ref.setInput('data', data);
@@ -42,7 +42,7 @@ export class DynamicComponentService {
         break;
       case 'SystemConfigurationLink':
         import(
-          '../standalone/system-configuration-link/system-configuration-link.component'
+          '../ui-modules/system-configuration-link/system-configuration-link.component'
         ).then((m) => {
           const ref = viewContainerRef.createComponent(
             m.SystemConfigurationLinkComponent,
