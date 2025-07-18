@@ -1,6 +1,7 @@
 import { DatePipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, inject, OnInit, signal } from '@angular/core';
+import { Router } from '@angular/router';
 import TimeAgo from 'javascript-time-ago';
 import es from 'javascript-time-ago/locale/es';
 import { delay, interval } from 'rxjs';
@@ -17,6 +18,7 @@ interface StatusReport {
 }
 
 interface BackendStatus {
+  oid: string;
   name: string;
   lastSeenAt: string;
   timeAgo: string;
@@ -36,6 +38,7 @@ export enum Status {
 export class PosStatusReportComponent implements OnInit {
   private http = inject(HttpClient);
   private utilService = inject(UtilService);
+  private router = inject(Router);
 
   x = new TimeAgo('es').format(new Date());
 
@@ -79,5 +82,9 @@ export class PosStatusReportComponent implements OnInit {
     } else {
       return Status.UNKNOWN;
     }
+  }
+
+  navigate(oid: string) {
+    this.router.navigate(['content', oid]);
   }
 }

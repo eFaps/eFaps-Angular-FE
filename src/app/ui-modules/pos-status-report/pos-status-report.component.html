@@ -7,7 +7,7 @@
     <div class="statusWrapper">
       @for (status of report()?.backendStatus; track status) {
         <div class="status">
-          <span class="name"> {{ status.name }} </span>
+          <span class="name" (click)="navigate(status.oid)"> {{ status.name }} </span>
           <span>{{ status.timeAgo }}</span>
 
           @switch (evalStaus(status)) {

@@ -25,14 +25,18 @@
       min-height: 4rem;
       gap: 1rem;
       padding: 1rem;
+
       .name {
         font-weight: bold;
         font-size: larger;
         text-align: center;
+        cursor: pointer;
       }
+
       .statusOk {
         color: var(--p-button-success-background);
       }
+
       .statusUnknown {
         color: var(--p-button-danger-background);
       }
