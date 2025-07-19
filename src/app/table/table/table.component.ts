@@ -1,4 +1,5 @@
 import { Component, EventEmitter, OnInit, inject } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import FileSaver from 'file-saver';
 import {
@@ -7,10 +8,17 @@ import {
   MenuItem,
   TableState,
 } from 'primeng/api';
+import { ButtonModule } from 'primeng/button';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { DialogService } from 'primeng/dynamicdialog';
-import { PaginatorState } from 'primeng/paginator';
+import { InputGroupModule } from 'primeng/inputgroup';
+import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
+import { PaginatorModule, PaginatorState } from 'primeng/paginator';
+import { TableModule } from 'primeng/table';
+import { TieredMenuModule } from 'primeng/tieredmenu';
 import { combineLatest } from 'rxjs';
 
+import { ColumnComponent } from '../column/column.component';
 import { FilterComponent } from '../filter/filter.component';
 import { ModalContentComponent } from 'src/app/content/modal-content/modal-content.component';
 import { ModalModuleContentComponent } from 'src/app/content/modal-module-content/modal-module-content.component';
@@ -31,7 +39,18 @@ import { TableService } from 'src/app/services/table.service';
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.scss'],
   providers: [ConfirmationService, DialogService],
-  standalone: false,
+  imports: [
+    TableModule,
+    PaginatorModule,
+    ColumnComponent,
+    ButtonModule,
+    FormsModule,
+    InputGroupModule,
+    InputGroupAddonModule,
+    TieredMenuModule,
+    ConfirmDialogModule,
+    ButtonModule,
+  ],
 })
 export class TableComponent implements OnInit {
   private route = inject(ActivatedRoute);
@@ -260,14 +279,29 @@ export class TableComponent implements OnInit {
   }
 
   exportPdf() {
-    import('jspdf').then((jsPDF) => {
-      import('jspdf-autotable').then((x) => {
+    import('jspdf').then((jspdf) => {
+      import('jspdf-autotable').then((jspdfAutoTable) => {
         const exportColumns = this.cols.map((col) => ({
-          title: col.header,
+          header: col.header,
           dataKey: col.field,
         }));
-        const doc = new jsPDF.default('landscape');
-        (doc as any).autoTable(exportColumns, this.elements);
+        const doc = new jspdf.jsPDF('landscape');
+        const totalPagesExp = '{total_pages_count_string}';
+        jspdfAutoTable.autoTable(doc, {
+          columns: exportColumns,
+          body: this.elements,
+          rowPageBreak: 'auto',
+          didDrawPage: function (data) {
+            let str =
+              'Pagina ' + doc.getNumberOfPages() + ' de ' + totalPagesExp;
+            doc.setFontSize(10);
+            const pageSize = doc.internal.pageSize;
+            const pageHeight = pageSize.getHeight();
+            doc.text(str, data.settings.margin.left, pageHeight - 10);
+          },
+          margin: { top: 30 },
+        });
+        doc.putTotalPages(totalPagesExp);
         doc.save(this.title + '.pdf');
       });
     });

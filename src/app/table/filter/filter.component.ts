@@ -1,6 +1,9 @@
 import { Component, OnInit, inject } from '@angular/core';
+import { ButtonModule } from 'primeng/button';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { PopoverModule } from 'primeng/popover';
 
+import { FilterElementComponent } from '../filter-element/filter-element.component';
 import { Filter } from 'src/app/model/table';
 import { TableService } from 'src/app/services/table.service';
 
@@ -8,7 +11,7 @@ import { TableService } from 'src/app/services/table.service';
   selector: 'app-filter',
   templateUrl: './filter.component.html',
   styleUrl: './filter.component.scss',
-  standalone: false,
+  imports: [FilterElementComponent, ButtonModule, PopoverModule],
 })
 export class FilterComponent implements OnInit {
   private tableService = inject(TableService);

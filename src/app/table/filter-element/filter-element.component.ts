@@ -1,4 +1,7 @@
 import { Component, Input, output } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { CheckboxModule } from 'primeng/checkbox';
+import { DatePickerModule } from 'primeng/datepicker';
 
 import { Option } from 'src/app/model/content';
 import { Filter } from 'src/app/model/table';
@@ -7,7 +10,7 @@ import { Filter } from 'src/app/model/table';
   selector: 'app-filter-element',
   templateUrl: './filter-element.component.html',
   styleUrl: './filter-element.component.scss',
-  standalone: false,
+  imports: [DatePickerModule, FormsModule, CheckboxModule],
 })
 export class FilterElementComponent {
   _filter: Filter | undefined;

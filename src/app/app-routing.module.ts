@@ -14,10 +14,11 @@ export const routes: Routes = [
       ).then((m) => m.StructureBrowserComponent),
   },
   {
-    path: 'table',
+    path: 'table/:id',
     canActivate: [canActivateAuth],
-    loadChildren: () =>
-      import('./table/table.module').then((m) => m.TableModule),
+    pathMatch: 'full',
+    loadComponent: () =>
+      import('./table/table/table.component').then((m) => m.TableComponent),
   },
   {
     path: 'content',

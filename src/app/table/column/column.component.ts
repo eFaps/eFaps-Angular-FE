@@ -8,6 +8,8 @@ import {
 } from '@angular/core';
 import { Router } from '@angular/router';
 import { saveAs } from 'file-saver';
+import { ButtonModule } from 'primeng/button';
+import { PopoverModule } from 'primeng/popover';
 
 import { Column } from 'src/app/model/table';
 import { CheckoutService } from 'src/app/services/checkout.service';
@@ -16,7 +18,7 @@ import { CheckoutService } from 'src/app/services/checkout.service';
   selector: 'app-column',
   templateUrl: './column.component.html',
   styleUrls: ['./column.component.scss'],
-  standalone: false,
+  imports: [PopoverModule, ButtonModule],
 })
 export class ColumnComponent {
   private router = inject(Router);
