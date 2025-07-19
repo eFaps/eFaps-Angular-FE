@@ -21,7 +21,6 @@ describe('TableComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [TableComponent],
       imports: [
         RouterTestingModule,
         ConfirmDialogModule,

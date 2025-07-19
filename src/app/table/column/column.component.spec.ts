@@ -15,7 +15,6 @@ describe('ColumnComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [ColumnComponent],
       imports: [PopoverModule],
       providers: [
         provideRouter([]),
