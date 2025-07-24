@@ -75,6 +75,10 @@
       height: 100%;
     }
   }
+
+  ::ng-deep app-eqlresponse {
+    flex-grow: 1;
+  }
 }
 
 ::ng-deep .p-fileupload {
