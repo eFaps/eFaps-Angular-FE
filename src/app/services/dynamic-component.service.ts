@@ -10,7 +10,7 @@ export class DynamicComponentService {
   constructor() {}
 
   load(viewContainerRef: ViewContainerRef, fieldCmdResp: FieldCommandResponse) {
-    import('../standalone/eqlresponse/eqlresponse.component').then((m) => {
+    import('../ui-modules/eqlresponse/eqlresponse.component').then((m) => {
       const ref = viewContainerRef.createComponent(m.EQLResponseComponent);
       ref.setInput('fieldCmdResp', fieldCmdResp);
     });

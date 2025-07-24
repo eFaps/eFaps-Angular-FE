@@ -9,7 +9,7 @@ import {
   ViewChild,
   ElementRef,
   AfterViewInit,
-  input,
+  signal,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -19,11 +19,7 @@ import { ButtonModule } from 'primeng/button';
 import { CheckboxModule } from 'primeng/checkbox';
 import { DatePickerModule } from 'primeng/datepicker';
 import { DialogService } from 'primeng/dynamicdialog';
-import {
-  FileSelectEvent,
-  FileUploadModule,
-  UploadEvent,
-} from 'primeng/fileupload';
+import { FileUploadModule, UploadEvent } from 'primeng/fileupload';
 import { ImageModule } from 'primeng/image';
 import { InputTextModule } from 'primeng/inputtext';
 import { SafeHtmlPipe } from 'primeng/menu';
@@ -82,6 +78,8 @@ export class FormElementComponent implements OnInit, AfterViewInit {
   private fieldCommandService = inject(FieldCommandService);
   private dynamicComponentService = inject(DynamicComponentService);
   private utilService = inject(UtilService);
+
+  isDynamic = signal<boolean>(false);
 
   messages: ToastMessageOptions[] = [];
 
@@ -420,6 +418,7 @@ export class FormElementComponent implements OnInit, AfterViewInit {
     ) {
       vcr.clear();
       this.dynamicComponentService.load(vcr, fieldCmdResp);
+      this.isDynamic.set(true);
     }
   }
 

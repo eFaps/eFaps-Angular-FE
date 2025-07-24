@@ -1,201 +1,203 @@
 <div class="wrapper">
-  <div class="label" *ngIf="formItem?.label != null && formItem?.type != 'BUTTON'">
-    {{ formItem?.label }}
-  </div>
-  <div class="value">
-    @switch (formItem?.type) {
-      @case ("DATETIMELABEL") {
-        {{ formItem?.value | date: "medium" }}
-      }
-      @case ("RADIO") {
-        <div
-          *ngFor="let option of formItem?.options; let indexOfelement = index"
-          class="field-radio">
-          <p-radioButton
-            [inputId]="formItem?.name + 'opt' + indexOfelement"
-            [value]="option.value"
-            [(ngModel)]="radioValue"
-            (onClick)="changeRadio($event.value)"></p-radioButton>
-          <label [for]="formItem?.name + 'opt' + indexOfelement">{{ option.label }}</label>
-        </div>
-      }
-      @case ("DROPDOWN") {
-        <div class="dropdown">
-          <p-select
+  @if (!isDynamic()) {
+    <div class="label" *ngIf="formItem?.label != null && formItem?.type != 'BUTTON'">
+      {{ formItem?.label }}
+    </div>
+    <div class="value">
+      @switch (formItem?.type) {
+        @case ("DATETIMELABEL") {
+          {{ formItem?.value | date: "medium" }}
+        }
+        @case ("RADIO") {
+          <div
+            *ngFor="let option of formItem?.options; let indexOfelement = index"
+            class="field-radio">
+            <p-radioButton
+              [inputId]="formItem?.name + 'opt' + indexOfelement"
+              [value]="option.value"
+              [(ngModel)]="radioValue"
+              (onClick)="changeRadio($event.value)"></p-radioButton>
+            <label [for]="formItem?.name + 'opt' + indexOfelement">{{ option.label }}</label>
+          </div>
+        }
+        @case ("DROPDOWN") {
+          <div class="dropdown">
+            <p-select
+              [options]="formItem?.options"
+              [(ngModel)]="dropdownValue"
+              appendTo="body"
+              (onChange)="changeDropdown($event.value)"></p-select>
+          </div>
+        }
+        @case ("BITENUM") {
+          <p-multiSelect
             [options]="formItem?.options"
-            [(ngModel)]="dropdownValue"
+            [(ngModel)]="bitEnumValue"
+            display="chip"
+            [filter]="showMultiSelectFilter"
+            [showToggleAll]="true"
+            [showClear]="true"
+            (onChange)="changeBitEnum($event.value)"
+            appendTo="body"></p-multiSelect>
+        }
+        @case ("AUTOCOMPLETE") {
+          <p-autoComplete
+            [(ngModel)]="autoCompleteValue"
+            [suggestions]="autoCompleteSuggestions"
+            (completeMethod)="search($event.query)"
+            (onSelect)="changeAutoComplete($event)"
+            (onUnselect)="changeAutoComplete($event)"
+            optionLabel="label"
+            optionValue="value"
+            dataKey="value"
+            [lazy]="true"
+            placeholder="buscar"
+            [forceSelection]="true"
+            [showEmptyMessage]="true"
+            [showClear]="!formItem?.required"
+            appendTo="body">
+          </p-autoComplete>
+        }
+        @case ("INPUT") {
+          <input
+            type="text"
+            pInputText
+            #textInput
+            [(ngModel)]="inputValue"
+            (keyup)="onKey(textInput.value)"
+            (blur)="fieldUpdate()" />
+        }
+        @case ("TEXTAREA") {
+          <textarea
+            rows="5"
+            cols="30"
+            pInputTextarea
+            #textArea
+            [(ngModel)]="textareaValue"
+            (keyup)="onKey(textArea.value)"
+            (blur)="fieldUpdate()"
+            [autoResize]="true"
+            fluid></textarea>
+        }
+        @case ("SNIPPLET") {
+          <div class="snipplet" [innerHtml]="snippletValue | safeHtml"></div>
+        }
+        @case ("UPLOAD") {
+          <p-fileUpload #upload [url]="uploadUrl" (onUpload)="onUpload($event)" [previewWidth]="0">
+            <ng-template #empty>
+              <div class="dragDrop">Arrastre y suelte el archivo aquí para cargarlo.</div>
+            </ng-template>
+          </p-fileUpload>
+        }
+        @case ("UPLOADMULTIPLE") {
+          <p-fileUpload
+            #uploadMultiple
+            [url]="uploadUrl"
+            (onUpload)="onUpload($event)"
+            [multiple]="true"
+            [previewWidth]="0">
+            <ng-template #empty>
+              <div class="dragDrop">Arrastre y suelte archivos aquí para cargarlos.</div>
+            </ng-template>
+          </p-fileUpload>
+        }
+        @case ("DATE") {
+          <p-datepicker
+            [(ngModel)]="dateValue"
+            #date
+            [showIcon]="true"
+            (onBlur)="changeDate(date.value)"
+            (onSelect)="changeDate($event)"
+            appendTo="body"></p-datepicker>
+        }
+        @case ("DATETIME") {
+          <p-datepicker
+            [(ngModel)]="dateTimeValue"
+            #date
+            [showIcon]="true"
+            (onBlur)="changeDateTime(date.value)"
+            (onSelect)="changeDateTime($event)"
+            [showTime]="true"
+            appendTo="body"></p-datepicker>
+        }
+        @case ("TIME") {
+          <p-datepicker
+            [(ngModel)]="timeValue"
+            #date
+            [showIcon]="true"
+            (onBlur)="changeTime(date.value)"
+            (onSelect)="changeTime($event)"
             appendTo="body"
-            (onChange)="changeDropdown($event.value)"></p-select>
-        </div>
-      }
-      @case ("BITENUM") {
-        <p-multiSelect
-          [options]="formItem?.options"
-          [(ngModel)]="bitEnumValue"
-          display="chip"
-          [filter]="showMultiSelectFilter"
-          [showToggleAll]="true"
-          [showClear]="true"
-          (onChange)="changeBitEnum($event.value)"
-          appendTo="body"></p-multiSelect>
-      }
-      @case ("AUTOCOMPLETE") {
-        <p-autoComplete
-          [(ngModel)]="autoCompleteValue"
-          [suggestions]="autoCompleteSuggestions"
-          (completeMethod)="search($event.query)"
-          (onSelect)="changeAutoComplete($event)"
-          (onUnselect)="changeAutoComplete($event)"
-          optionLabel="label"
-          optionValue="value"
-          dataKey="value"
-          [lazy]="true"
-          placeholder="buscar"
-          [forceSelection]="true"
-          [showEmptyMessage]="true"
-          [showClear]="!formItem?.required"
-          appendTo="body">
-        </p-autoComplete>
-      }
-      @case ("INPUT") {
-        <input
-          type="text"
-          pInputText
-          #textInput
-          [(ngModel)]="inputValue"
-          (keyup)="onKey(textInput.value)"
-          (blur)="fieldUpdate()" />
-      }
-      @case ("TEXTAREA") {
-        <textarea
-          rows="5"
-          cols="30"
-          pInputTextarea
-          #textArea
-          [(ngModel)]="textareaValue"
-          (keyup)="onKey(textArea.value)"
-          (blur)="fieldUpdate()"
-          [autoResize]="true"
-          fluid></textarea>
-      }
-      @case ("SNIPPLET") {
-        <div class="snipplet" [innerHtml]="snippletValue | safeHtml"></div>
-      }
-      @case ("UPLOAD") {
-        <p-fileUpload #upload [url]="uploadUrl" (onUpload)="onUpload($event)" [previewWidth]="0">
-          <ng-template #empty>
-            <div class="dragDrop">Arrastre y suelte el archivo aquí para cargarlo.</div>
-          </ng-template>
-        </p-fileUpload>
-      }
-      @case ("UPLOADMULTIPLE") {
-        <p-fileUpload
-          #uploadMultiple
-          [url]="uploadUrl"
-          (onUpload)="onUpload($event)"
-          [multiple]="true"
-          [previewWidth]="0">
-          <ng-template #empty>
-            <div class="dragDrop">Arrastre y suelte archivos aquí para cargarlos.</div>
-          </ng-template>
-        </p-fileUpload>
-      }
-      @case ("DATE") {
-        <p-datepicker
-          [(ngModel)]="dateValue"
-          #date
-          [showIcon]="true"
-          (onBlur)="changeDate(date.value)"
-          (onSelect)="changeDate($event)"
-          appendTo="body"></p-datepicker>
-      }
-      @case ("DATETIME") {
-        <p-datepicker
-          [(ngModel)]="dateTimeValue"
-          #date
-          [showIcon]="true"
-          (onBlur)="changeDateTime(date.value)"
-          (onSelect)="changeDateTime($event)"
-          [showTime]="true"
-          appendTo="body"></p-datepicker>
-      }
-      @case ("TIME") {
-        <p-datepicker
-          [(ngModel)]="timeValue"
-          #date
-          [showIcon]="true"
-          (onBlur)="changeTime(date.value)"
-          (onSelect)="changeTime($event)"
-          appendTo="body"
-          [timeOnly]="true"></p-datepicker>
-      }
-      @case ("ATTRSET") {
-        <app-attribute-set [formItem]="formItem"></app-attribute-set>
-      }
-      @case ("CHECKBOX") {
-        @if (formItem!.options && formItem!.options.length > 0) {
-          @for (option of formItem?.options; track option) {
-            <div class="checkbox">
+            [timeOnly]="true"></p-datepicker>
+        }
+        @case ("ATTRSET") {
+          <app-attribute-set [formItem]="formItem"></app-attribute-set>
+        }
+        @case ("CHECKBOX") {
+          @if (formItem!.options && formItem!.options.length > 0) {
+            @for (option of formItem?.options; track option) {
+              <div class="checkbox">
+                <p-checkbox
+                  name="group"
+                  [value]="option.value"
+                  [(ngModel)]="checkboxValue"
+                  (onChange)="changeCheckbox($event.checked)"
+                  [inputId]="option.value">
+                </p-checkbox>
+                <label for="{{ option.value }}">{{ option.label }}</label>
+              </div>
+            }
+          } @else {
+            <div class="single-checkbox">
               <p-checkbox
-                name="group"
-                [value]="option.value"
+                name="formItem?.name"
+                [binary]="true"
+                [value]="formItem?.value"
                 [(ngModel)]="checkboxValue"
                 (onChange)="changeCheckbox($event.checked)"
-                [inputId]="option.value">
+                [inputId]="formItem?.name">
               </p-checkbox>
-              <label for="{{ option.value }}">{{ option.label }}</label>
             </div>
           }
-        } @else {
-          <div class="single-checkbox">
-            <p-checkbox
-              name="formItem?.name"
-              [binary]="true"
-              [value]="formItem?.value"
-              [(ngModel)]="checkboxValue"
-              (onChange)="changeCheckbox($event.checked)"
-              [inputId]="formItem?.name">
-            </p-checkbox>
+        }
+        @case ("BUTTON") {
+          <p-button [label]="formItem?.label" (click)="executeFieldCmd()"></p-button>
+        }
+        @case ("CLASSIFICATION") {
+          <div class="classification">
+            <div class="move">
+              <p-button
+                icon="pi pi-bookmark"
+                size="small"
+                severity="secondary"
+                (click)="classSel()"></p-button>
+            </div>
           </div>
         }
-      }
-      @case ("BUTTON") {
-        <p-button [label]="formItem?.label" (click)="executeFieldCmd()"></p-button>
-      }
-      @case ("CLASSIFICATION") {
-        <div class="classification">
-          <div class="move">
-            <p-button
-              icon="pi pi-bookmark"
-              size="small"
-              severity="secondary"
-              (click)="classSel()"></p-button>
-          </div>
-        </div>
-      }
-      @case ("IMAGE") {
-        @if (readOnlyValue != null) {
-          <p-image [src]="evalImageUrl()" alt="Image" width="250" [preview]="true" />
+        @case ("IMAGE") {
+          @if (readOnlyValue != null) {
+            <p-image [src]="evalImageUrl()" alt="Image" width="250" [preview]="true" />
+          }
+        }
+        @case ("UIMODULE") {
+          <ng-template #moduleComponent></ng-template>
+        }
+        @default {
+          @if (formItem?.navRef != null) {
+            <div class="navRef">
+              <p-button
+                icon="pi pi-link"
+                [rounded]="true"
+                [outlined]="true"
+                (click)="followLink()"
+                [style]="{ width: '2rem', height: '2rem' }"></p-button>
+            </div>
+          }
+          {{ readOnlyValue }}
         }
       }
-      @case ("UIMODULE") {
-        <ng-template #moduleComponent></ng-template>
-      }
-      @default {
-        @if (formItem?.navRef != null) {
-          <div class="navRef">
-            <p-button
-              icon="pi pi-link"
-              [rounded]="true"
-              [outlined]="true"
-              (click)="followLink()"
-              [style]="{ width: '2rem', height: '2rem' }"></p-button>
-          </div>
-        }
-        {{ readOnlyValue }}
-      }
-    }
-  </div>
+    </div>
+  }
   <ng-template #dynamicComponent></ng-template>
 
   @for (message of messages; track message) {
