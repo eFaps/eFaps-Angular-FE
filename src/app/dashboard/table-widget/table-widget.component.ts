@@ -48,7 +48,7 @@ export class TableWidgetComponent {
 
   eval(dto: WidgetData) {
     const values = dto.data;
-    if (Array.isArray(values)) {
+    if (Array.isArray(values) && values.length > 0) {
       (values[0].values as Array<any>).forEach((entry) => {
         this.cols.push({ header: entry.key });
       });
@@ -59,6 +59,8 @@ export class TableWidgetComponent {
         });
         this.elements.push(row);
       });
+    } else {
+      this.cols.push({header: ""})
     }
   }
 }
