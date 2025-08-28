@@ -18,14 +18,12 @@ import { Company } from 'src/app/model/user';
 import { UserService } from 'src/app/services/user.service';
 import { UtilService } from 'src/app/services/util.service';
 
-
 interface SysConfAttr {
-  key: string,
-  type: 'PROPERTIES' | 'BOOLEAN' | 'LIST',
-  defaultValue?: string,
-  description?: string
+  key: string;
+  type: 'PROPERTIES' | 'BOOLEAN' | 'LIST';
+  defaultValue?: string;
+  description?: string;
 }
-
 
 @Component({
   selector: 'app-system-configuration-attribute',
@@ -216,7 +214,7 @@ export class SystemConfigurationAttributeComponent implements OnInit {
   loadKeys(event: AutoCompleteCompleteEvent) {
     const url = `${this.utilService.evalApiUrl()}/ui/modules/system-configurations/${this.data()?.parentOid}/attributes`;
     this.http.get<any>(url).subscribe({
-      next: keys => this.keys = keys,
+      next: (keys) => (this.keys = keys),
     });
   }
 

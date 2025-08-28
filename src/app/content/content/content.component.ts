@@ -7,6 +7,7 @@ import {
   ViewChild,
   effect,
   inject,
+  signal,
 } from '@angular/core';
 import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
 import { ConfirmationService, MenuItem } from 'primeng/api';
@@ -19,7 +20,6 @@ import { ToolbarModule } from 'primeng/toolbar';
 import { Subscription } from 'rxjs';
 
 import { ClassificationDisplayComponent } from '../classification-display/classification-display.component';
-import { ContentRoutingModule } from '../content-routing.module';
 import { FormContentComponent } from '../form-content/form-content.component';
 import { ModalContentComponent } from '../modal-content/modal-content.component';
 import { ModalModuleContentComponent } from '../modal-module-content/modal-module-content.component';
@@ -244,6 +244,7 @@ export class ContentComponent implements OnInit, OnDestroy {
   navigate(tab: MenuEntry) {
     if (tab.id == this.tabs[0].id) {
       this.router.navigate(['../../content', this.oid]);
+      this.contentOutletId = undefined;
     } else {
       const link = this.evalRouterLink(tab);
       this.router.navigate(['../../content', this.oid, link], {
@@ -260,6 +261,7 @@ export class ContentComponent implements OnInit, OnDestroy {
         },
       });
     } else if (event instanceof FormContentComponent) {
+      this.contentOutletId = undefined;
     }
   }
 
