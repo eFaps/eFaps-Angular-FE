@@ -286,7 +286,7 @@ export class AppComponent implements OnInit {
   }
 
   home() {
-    this.router.navigate(['/dashboard']);
+    this.router.navigate(['/dashboard'], { onSameUrlNavigation: 'reload' });
   }
 
   showRestoreSearch(): boolean {

@@ -60,7 +60,7 @@ export class TableWidgetComponent {
         this.elements.push(row);
       });
     } else {
-      this.cols.push({header: ""})
+      this.cols.push({ header: '' });
     }
   }
 }

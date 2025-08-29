@@ -8,6 +8,17 @@ export class RoutePathReuseStrategy extends BaseRouteReuseStrategy {
     future: ActivatedRouteSnapshot,
     curr: ActivatedRouteSnapshot,
   ): boolean {
+    // reload dashboard case
+    if (
+      future.routeConfig &&
+      curr.routeConfig &&
+      future.routeConfig.path == curr.routeConfig.path &&
+      future.routeConfig.path == 'dashboard'
+    ) {
+      return false;
+    }
+
+    // table and forms by id
     if (
       future.params &&
       future.params['id'] &&
