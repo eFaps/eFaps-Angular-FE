@@ -8,7 +8,8 @@
     [value]="elements"
     styleClass="p-datatable-sm"
     scrollHeight="flex"
-    [scrollable]="true">
+    [scrollable]="true"
+    stripedRows>
     <ng-template pTemplate="caption">
       @if (widget?.title) {
         <div class="title">
@@ -29,7 +30,16 @@
       <tr>
         @for (col of columns; track col) {
           <td class="small">
-            {{ rowData[col.header] }}
+            @if (isLink(col.key)) {
+              <p-button
+                icon="pi pi-link"
+                [rounded]="true"
+                [outlined]="true"
+                (click)="followLink(rowData[col.key])"
+                [style]="{ width: '1.5rem', height: '1.5rem' }"></p-button>
+            } @else {
+              {{ rowData[col.key] }}
+            }
           </td>
         }
       </tr>

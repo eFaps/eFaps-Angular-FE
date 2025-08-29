@@ -29,6 +29,7 @@ export interface PlaceHolderWidget extends DashboardWidget {
 
 export interface TableWidget extends DashboardWidget {
   type: 'TABLE';
+  links?: string[];
 }
 
 export interface ChartWidget extends DashboardWidget {

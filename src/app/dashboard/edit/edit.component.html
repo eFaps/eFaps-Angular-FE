@@ -14,6 +14,12 @@
         <label for="eql">EQL</label>
       </p-floatlabel>
     }
+    @if (type == "TABLE") {
+      <p-floatlabel variant="on">
+        <p-autocomplete [(ngModel)]="links" inputId="links" multiple [typeahead]="false" />
+        <label for="links">Enlaces</label>
+      </p-floatlabel>
+    }
     @if (type == "CHART") {
       <p-floatlabel variant="on">
         <p-select id="chartType" [options]="chartTypes" [(ngModel)]="chartType"></p-select>

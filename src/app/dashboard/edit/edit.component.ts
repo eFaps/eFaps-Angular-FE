@@ -12,6 +12,7 @@ import {
   ChartWidget,
   DashboardWidget,
   DashboardTemplate,
+  TableWidget,
 } from 'src/app/model/dashboard';
 import { DashboardService } from 'src/app/services/dashboard.service';
 
@@ -46,6 +47,9 @@ export class EditComponent implements OnInit {
 
   title: string | undefined;
   eql: string | undefined;
+
+  links: string[] | undefined;
+
   groupBy: string[] | undefined;
 
   functions = [{ label: 'Sumar', value: 'SUM' }];
@@ -70,6 +74,12 @@ export class EditComponent implements OnInit {
     }
     if (this.widget.eql != null) {
       this.eql = this.widget.eql;
+    }
+    if (this.widget.type == 'TABLE') {
+      let tableWidget = this.widget as TableWidget;
+      if (tableWidget.links != null) {
+        this.links = tableWidget.links;
+      }
     }
     if (this.widget.type == 'CHART') {
       let chartWidget = this.widget as ChartWidget;
@@ -98,12 +108,19 @@ export class EditComponent implements OnInit {
     this.widget.type = this.type;
     this.widget.title = this.title;
     this.widget.eql = this.eql;
+
+    if (this.widget.type == 'TABLE') {
+      let tableWidget = this.widget as TableWidget;
+      tableWidget.links = this.links;
+    }
+
     if (this.widget.type == 'CHART') {
       let chartWidget = this.widget as ChartWidget;
       chartWidget.groupBy = this.groupBy;
       chartWidget.metrics = [{ function: 'SUM', key: this.key!! }];
       chartWidget.chartType = this.chartType;
     }
+
     if (this.widget.type == 'TEMPLATE') {
       this.widget.eql = this.templateOid;
     }

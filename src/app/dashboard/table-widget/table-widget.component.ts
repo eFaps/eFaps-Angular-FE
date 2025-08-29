@@ -1,4 +1,6 @@
 import { Component, Input, inject, signal } from '@angular/core';
+import { Router } from '@angular/router';
+import { ButtonModule } from 'primeng/button';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { TableModule } from 'primeng/table';
 
@@ -9,9 +11,10 @@ import { DashboardService } from 'src/app/services/dashboard.service';
   selector: 'app-table-widget',
   templateUrl: './table-widget.component.html',
   styleUrls: ['./table-widget.component.scss'],
-  imports: [TableModule, ProgressSpinnerModule],
+  imports: [TableModule, ProgressSpinnerModule, ButtonModule],
 })
 export class TableWidgetComponent {
+  private router = inject(Router);
   private dashboardservice = inject(DashboardService);
 
   _widget: TableWidget | undefined;
@@ -46,11 +49,19 @@ export class TableWidgetComponent {
     });
   }
 
+  isLink(key: string): boolean {
+    if (this._widget && this._widget!!.links) {
+      return this._widget!!.links!!.findIndex((val) => val == key) > -1;
+    }
+    return false;
+  }
+
   eval(dto: WidgetData) {
     const values = dto.data;
     if (Array.isArray(values) && values.length > 0) {
       (values[0].values as Array<any>).forEach((entry) => {
-        this.cols.push({ header: entry.key });
+        const header = this.isLink(entry.key) ? '' : entry.key;
+        this.cols.push({ header: header, key: entry.key });
       });
       values.forEach((rowEntry) => {
         const row: any = {};
@@ -62,5 +73,9 @@ export class TableWidgetComponent {
     } else {
       this.cols.push({ header: '' });
     }
+  }
+
+  followLink(oid: string) {
+    this.router.navigate(['content', oid]);
   }
 }
