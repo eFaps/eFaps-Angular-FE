@@ -446,7 +446,8 @@ export class FormElementComponent implements OnInit, AfterViewInit {
         ) {
           this.convertToDropdown(value);
         } else {
-          this.readOnlyValue = value;
+          this.inputValue = value;
+          this.addEntry(value);
         }
         break;
       case 'DROPDOWN':
@@ -455,6 +456,10 @@ export class FormElementComponent implements OnInit, AfterViewInit {
           (value as string).startsWith('new Array')
         ) {
           this.convertToDropdown(value);
+        } else if (value.options) {
+          this.dropdownValue = value.value;
+          this.addEntry(value.value);
+          this.formItem.options = value.options;
         }
         break;
       default:
