@@ -64,7 +64,13 @@ export class ColumnComponent {
   }
 
   checkout() {
-    this.checkoutService.checkout(this.rowData['OID']).subscribe({
+    let oid;
+    if (this.rowData.hasOwnProperty(this.column!!.field + '_AOID')) {
+      oid = this.rowData[this.column!!.field + '_AOID'];
+    } else {
+      oid = this.rowData['OID'];
+    }
+    this.checkoutService.checkout(oid).subscribe({
       next: (downloadFile) => {
         saveAs(downloadFile.blob, downloadFile.fileName);
       },
