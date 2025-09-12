@@ -4,7 +4,7 @@ import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { PopoverModule } from 'primeng/popover';
 
 import { FilterElementComponent } from '../filter-element/filter-element.component';
-import { Filter } from 'src/app/model/table';
+import { Column, Filter } from 'src/app/model/table';
 import { TableService } from 'src/app/services/table.service';
 
 @Component({
@@ -19,9 +19,10 @@ export class FilterComponent implements OnInit {
   private dialogRef = inject(DynamicDialogRef);
 
   id: string | undefined;
-  filters: Filter[] | undefined;
-  updatedFilters: Filter[] = [];
-
+  filters: Filter[] = [];
+  private updatedFilters: Filter[] = [];
+  private cols: Column[] = [];
+  
   constructor() {
     const config = this.config;
 
@@ -30,15 +31,30 @@ export class FilterComponent implements OnInit {
 
   ngOnInit(): void {
     this.id = this.config.data.cmdId;
+    this.cols = this.config.data.cols;
     this.tableService.getFilters(this.id!!).subscribe({
       next: (filters) => (this.filters = filters),
     });
   }
 
+  getLabel(filter: Filter): string {
+    const col = this.cols.find(col => {return col.field == filter.field})
+    return col ? col.header : ""
+  }
+
   submit() {
-    console.log(this.id);
-    console.log(this.updatedFilters);
-    this.tableService.updateFilters(this.id!!, this.updatedFilters).subscribe({
+    const sf: Filter[] = [];
+    this.filters.forEach((filter) => {
+      const index = this.updatedFilters.findIndex((uf) => {
+        return filter.field == uf.field;
+      });
+      if (index > -1) {
+        sf.push(this.updatedFilters!![index]);
+      } else {
+        sf.push(filter);
+      }
+    });
+    this.tableService.updateFilters(this.id!!, sf).subscribe({
       next: (_) => {
         this.dialogRef.close();
       },

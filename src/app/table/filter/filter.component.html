@@ -1,5 +1,6 @@
 <div class="p-dialog-content">
   @for (filter of filters; track filter.field) {
+    <h3>{{getLabel(filter)}}:</h3>
     <app-filter-element
       [filter]="filter"
       (filterEvent)="onFilterEvent($event)"></app-filter-element>

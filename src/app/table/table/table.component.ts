@@ -266,7 +266,8 @@ export class TableComponent implements OnInit {
     const cmdId = this.id;
     const dialogRef = this.dialogService.open(FilterComponent, {
       data: {
-        cmdId,
+        cmdId: cmdId,
+        cols: this.cols
       },
       closable: true,
       modal: true,
