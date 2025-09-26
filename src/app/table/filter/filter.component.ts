@@ -22,7 +22,7 @@ export class FilterComponent implements OnInit {
   filters: Filter[] = [];
   private updatedFilters: Filter[] = [];
   private cols: Column[] = [];
-  
+
   constructor() {
     const config = this.config;
 
@@ -38,8 +38,10 @@ export class FilterComponent implements OnInit {
   }
 
   getLabel(filter: Filter): string {
-    const col = this.cols.find(col => {return col.field == filter.field})
-    return col ? col.header : ""
+    const col = this.cols.find((col) => {
+      return col.field == filter.field;
+    });
+    return col ? col.header : '';
   }
 
   submit() {

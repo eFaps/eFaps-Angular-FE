@@ -462,6 +462,13 @@ export class FormElementComponent implements OnInit, AfterViewInit {
           this.formItem.options = value.options;
         }
         break;
+      case 'DATE':
+        const hours = -Math.floor(new Date().getTimezoneOffset() / 60);
+        const minutes = new Date().getTimezoneOffset() % 60;
+        const dateStr = `${value}GMT${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
+        this.dateValue = new Date(dateStr);
+        this.changeDate(this.dateValue);
+        break;
       default:
         this.readOnlyValue = value;
     }
