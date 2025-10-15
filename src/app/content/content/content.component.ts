@@ -90,6 +90,7 @@ export class ContentComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
       this.oid = params['oid'];
+      this.contentOutletId = undefined
       this.loadData();
     });
   }
