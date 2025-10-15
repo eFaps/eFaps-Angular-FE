@@ -131,7 +131,7 @@ export class FormContentComponent implements OnInit, AfterViewInit {
               outline,
             },
           });
-          dialogRef.onClose.subscribe({
+          dialogRef?.onClose.subscribe({
             next: (execResponse) => {
               if (execResponse != null && execResponse.reload) {
                 this.loadData();

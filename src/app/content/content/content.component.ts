@@ -90,7 +90,7 @@ export class ContentComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
       this.oid = params['oid'];
-      this.contentOutletId = undefined
+      this.contentOutletId = undefined;
       this.loadData();
     });
   }
@@ -203,7 +203,7 @@ export class ContentComponent implements OnInit, OnDestroy {
                 outline,
               },
             });
-            dialogRef.onClose.subscribe({
+            dialogRef?.onClose.subscribe({
               next: (execResponse) => {
                 if (execResponse != null && execResponse.reload) {
                   this.loadData();
@@ -221,7 +221,7 @@ export class ContentComponent implements OnInit, OnDestroy {
                 },
               },
             );
-            dialogRef.onClose.subscribe({
+            dialogRef?.onClose.subscribe({
               next: (execResponse) => {
                 if (execResponse != null && execResponse.reload) {
                   this.loadData();

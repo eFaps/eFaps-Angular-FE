@@ -81,7 +81,7 @@ export class FormElementComponent implements OnInit, AfterViewInit {
 
   isDynamic = signal<boolean>(false);
 
-  messages: ToastMessageOptions[] = [];
+  messages = signal<any[]>([]);
 
   inputValue: any;
   radioValue: any;
@@ -151,9 +151,9 @@ export class FormElementComponent implements OnInit, AfterViewInit {
         }
       }
       if (valid) {
-        this.messages = [];
+        this.messages.set([]);
       } else {
-        this.messages = [{ severity: 'error', summary: 'Valor requerido' }];
+        this.messages.set([{ severity: 'error', summary: 'Valor requerido' }]);
       }
       return valid;
     });

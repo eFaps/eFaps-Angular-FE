@@ -206,7 +206,7 @@ export class AppComponent implements OnInit {
       width: '300px',
       modal: true,
     });
-    ref.onClose.subscribe((company: Company) => {
+    ref!.onClose.subscribe((company: Company) => {
       if (company) {
         if (company.uuid != this.company()?.uuid) {
           this.userService.setCompany(company).subscribe({

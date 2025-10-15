@@ -77,7 +77,7 @@ export class ItemComponent {
       closable: true,
       modal: true,
     });
-    dialogRef.onClose.subscribe({
+    dialogRef?.onClose.subscribe({
       next: (widget) => {
         if (widget) {
           console.log(widget);

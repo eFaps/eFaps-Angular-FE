@@ -202,7 +202,7 @@ export class TableComponent implements OnInit {
                 parentOid: this.oid,
               },
             });
-            dialogRef.onClose.subscribe({
+            dialogRef!.onClose.subscribe({
               next: (execResponse) => {
                 if (execResponse?.reload) {
                   this.loadData();
@@ -220,7 +220,7 @@ export class TableComponent implements OnInit {
                 },
               },
             );
-            dialogRef.onClose.subscribe({
+            dialogRef?.onClose.subscribe({
               next: (execResponse) => {
                 if (execResponse != null && execResponse.reload) {
                   this.loadData();
@@ -244,7 +244,7 @@ export class TableComponent implements OnInit {
               oid: this.oid,
             },
           });
-          dialogRef.onClose.subscribe({
+          dialogRef!.onClose.subscribe({
             next: (execResponse) => {
               if (execResponse.reload) {
                 this.loadData();
@@ -272,7 +272,7 @@ export class TableComponent implements OnInit {
       closable: true,
       modal: true,
     });
-    dialogRef.onClose.subscribe({
+    dialogRef!.onClose.subscribe({
       next: (_) => {
         this.loadData();
       },

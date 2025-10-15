@@ -165,7 +165,7 @@ export class StructureBrowserComponent implements OnInit {
                 eFapsSelectedOids,
               },
             });
-            dialogRef.onClose.subscribe({
+            dialogRef?.onClose.subscribe({
               next: (execResponse) => {
                 if (execResponse.reload) {
                   this.loadData();
@@ -183,7 +183,7 @@ export class StructureBrowserComponent implements OnInit {
                 },
               },
             );
-            dialogRef.onClose.subscribe({
+            dialogRef?.onClose.subscribe({
               next: (execResponse) => {
                 if (execResponse != null && execResponse.reload) {
                   this.loadData();

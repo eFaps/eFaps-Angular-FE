@@ -200,7 +200,7 @@
   }
   <ng-template #dynamicComponent></ng-template>
 
-  @for (message of messages; track message) {
+  @for (message of messages(); track message) {
     <p-message [severity]="message.severity" [text]="message.summary"></p-message>
   }
 </div>

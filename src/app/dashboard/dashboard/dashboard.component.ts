@@ -106,7 +106,7 @@ export class DashboardComponent implements OnInit {
       header: 'Editar paginas',
       modal: true,
     });
-    dialogRef.onClose.subscribe({
+    dialogRef?.onClose.subscribe({
       next: () => {
         this.load();
       },

@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, input, viewChild, inject } from '@angular/core';
+import { Component, input, viewChild, inject, signal } from '@angular/core';
 import Papa, { ParseResult } from 'papaparse';
 import { ToastMessageOptions } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
@@ -9,6 +9,7 @@ import {
   FileUpload,
   FileUploadModule,
 } from 'primeng/fileupload';
+import { Message } from 'primeng/message';
 import { MessageModule } from 'primeng/message';
 import { ScrollPanelModule } from 'primeng/scrollpanel';
 import { TableModule } from 'primeng/table';
@@ -44,7 +45,7 @@ export class CSVImportComponent {
   results: ParseResult<any> | undefined;
   dialogData: any;
   verified: Boolean = false;
-  messages: ToastMessageOptions[] = [];
+  messages = signal<any[]>([]);
 
   constructor() {
     const config = inject(DynamicDialogConfig);
@@ -82,7 +83,7 @@ export class CSVImportComponent {
     this.cols = [];
     this.items = [];
     this.upload()?.clear();
-    this.messages = [];
+    this.messages.set([]);
   }
 
   verify() {
@@ -99,7 +100,10 @@ export class CSVImportComponent {
             this.verified = true;
           } else {
             (body as string[]).forEach((msg) => {
-              this.messages.push({ severity: 'error', detail: msg });
+              this.messages.update((current) => {
+                current.push({ severity: 'error', content: msg });
+                return [...current];
+              });
             });
           }
         },
@@ -116,7 +120,10 @@ export class CSVImportComponent {
       .subscribe({
         next: (body) => {
           if (body && body.message) {
-            this.messages.push({ severity: 'error', detail: body.message });
+            this.messages.update((current) => {
+              current.push({ severity: 'error', content: body.message });
+              return [...current];
+            });
           } else {
             this.dialogRef.close({ reload: true });
           }
