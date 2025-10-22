@@ -33,7 +33,8 @@ export class CompanyInterceptor implements HttpInterceptor {
     request: HttpRequest<unknown>,
     next: HttpHandler,
   ): Observable<HttpEvent<unknown>> {
-    if (this.currentCompany && this.currentCompany.uuid) {
+    // exclude the call for user current to not use any company
+    if (this.currentCompany && this.currentCompany.uuid && !request.url.endsWith("/ui/user/current")) {
       request = request.clone({
         setHeaders: {
           'X-CONTEXT-COMPANY': this.currentCompany.uuid,
