@@ -31,7 +31,11 @@ export class CompanyChooserComponent implements OnInit {
       next: (user) => {
         this.companies = user.companies;
         const selected = this.companies.find((company) => {
-          return company.current == true;
+          if (this.userService.company()) {
+            return this.userService.company()?.uuid == company.uuid;
+          } else {
+            return company.current;
+          }
         });
         this.formGroup.controls['company'].setValue(selected);
       },
