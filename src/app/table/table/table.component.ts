@@ -20,14 +20,11 @@ import { combineLatest } from 'rxjs';
 
 import { ColumnComponent } from '../column/column.component';
 import { FilterComponent } from '../filter/filter.component';
-import { ModalContentComponent } from 'src/app/content/modal-content/modal-content.component';
-import { ModalModuleContentComponent } from 'src/app/content/modal-module-content/modal-module-content.component';
 import { SearchContentComponent } from 'src/app/content/search-content/search-content.component';
-import { isOutline } from 'src/app/model/content';
 import { MenuEntry } from 'src/app/model/menu';
 import { Column, Page } from 'src/app/model/table';
+import { ActionService } from 'src/app/services/action.service';
 import { BreadcrumbService } from 'src/app/services/breadcrumb.service';
-import { ContentService } from 'src/app/services/content.service';
 import { ExecService } from 'src/app/services/exec.service';
 import { MenuActionProvider, toMenuItems } from 'src/app/services/menu.service';
 import { SearchService } from 'src/app/services/search.service';
@@ -56,12 +53,12 @@ export class TableComponent implements OnInit {
   private route = inject(ActivatedRoute);
   private confirmationService = inject(ConfirmationService);
   private dialogService = inject(DialogService);
-  private contentService = inject(ContentService);
   private tableService = inject(TableService);
   private execService = inject(ExecService);
   private searchService = inject(SearchService);
   private breadcrumbService = inject(BreadcrumbService);
   private styleService = inject(StyleService);
+  private actionService = inject(ActionService);
 
   id: string | undefined;
   oid: string | undefined;
@@ -145,7 +142,15 @@ export class TableComponent implements OnInit {
 
       case 'FORM':
         return (event) => {
-          this.formAction(item);
+          this.actionService
+            .runFormAction(item, this.oid, this.selectedElements as any[])
+            .subscribe({
+              next: (execResponse) => {
+                if (execResponse != null && execResponse.reload) {
+                  this.loadData();
+                }
+              },
+            });
         };
 
       case 'SEARCH':
@@ -188,49 +193,6 @@ export class TableComponent implements OnInit {
         this.selectedElements = [];
       },
     });
-  }
-
-  formAction(item: MenuEntry) {
-    if (item.action.modal) {
-      this.contentService.getContentWithCmd('none', item.id).subscribe({
-        next: (outline) => {
-          if (isOutline(outline)) {
-            const dialogRef = this.dialogService.open(ModalContentComponent, {
-              data: {
-                item,
-                outline,
-                parentOid: this.oid,
-              },
-            });
-            dialogRef!.onClose.subscribe({
-              next: (execResponse) => {
-                if (execResponse?.reload) {
-                  this.loadData();
-                }
-              },
-            });
-          } else {
-            const dialogRef = this.dialogService.open(
-              ModalModuleContentComponent,
-              {
-                data: {
-                  item,
-                  uimodule: outline,
-                  parentOid: this.oid,
-                },
-              },
-            );
-            dialogRef?.onClose.subscribe({
-              next: (execResponse) => {
-                if (execResponse != null && execResponse.reload) {
-                  this.loadData();
-                }
-              },
-            });
-          }
-        },
-      });
-    }
   }
 
   searchAction(item: MenuEntry) {

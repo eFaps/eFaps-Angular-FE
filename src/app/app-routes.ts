@@ -51,9 +51,3 @@ export const routes: Routes = [
   },
   { path: '**', redirectTo: '' },
 ];
-
-@NgModule({
-  imports: [RouterModule.forRoot(routes, { enableTracing: false })],
-  exports: [RouterModule],
-})
-export class AppRoutingModule {}

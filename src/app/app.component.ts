@@ -10,15 +10,24 @@ import {
   inject,
 } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { Router } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
 import { KEYCLOAK_EVENT_SIGNAL, KeycloakEventType } from 'keycloak-angular';
 import Keycloak from 'keycloak-js';
 import localeEs from 'primelocale/es.json';
 import { MenuItem } from 'primeng/api';
+import { BreadcrumbModule } from 'primeng/breadcrumb';
+import { ButtonModule } from 'primeng/button';
 import { PrimeNG } from 'primeng/config';
+import { DividerModule } from 'primeng/divider';
 import { DialogService } from 'primeng/dynamicdialog';
-import { Menubar } from 'primeng/menubar';
-import { Popover } from 'primeng/popover';
+import { IconFieldModule } from 'primeng/iconfield';
+import { InputIconModule } from 'primeng/inputicon';
+import { InputTextModule } from 'primeng/inputtext';
+import { Menubar, MenubarModule } from 'primeng/menubar';
+import { Popover, PopoverModule } from 'primeng/popover';
+import { ProgressBarModule } from 'primeng/progressbar';
+import { TableModule } from 'primeng/table';
+import { ToastModule } from 'primeng/toast';
 
 import { ModalContentComponent } from './content/modal-content/modal-content.component';
 import { ModalModuleContentComponent } from './content/modal-module-content/modal-module-content.component';
@@ -43,6 +52,7 @@ import { ThemeService } from './services/theme.service';
 import { UserService } from './services/user.service';
 import { isQA } from './services/util.service';
 import { CompanyChooserComponent } from './standalone/company-chooser/company-chooser.component';
+import { ThemeChooserComponent } from './standalone/theme-chooser/theme-chooser.component';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -50,7 +60,21 @@ import { environment } from 'src/environments/environment';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
   providers: [DialogService],
-  standalone: false,
+  imports: [
+    RouterOutlet,
+    ProgressBarModule,
+    MenubarModule,
+    ToastModule,
+    TableModule,
+    IconFieldModule,
+    InputIconModule,
+    InputTextModule,
+    PopoverModule,
+    ButtonModule,
+    DividerModule,
+    ThemeChooserComponent,
+    BreadcrumbModule,
+  ],
 })
 export class AppComponent implements OnInit {
   private router = inject(Router);

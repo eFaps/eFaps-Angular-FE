@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, importProvidersFrom, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import {
@@ -9,7 +9,7 @@ import {
 } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
-import { DialogService } from 'primeng/dynamicdialog';
+import { DialogService, DynamicDialogModule } from 'primeng/dynamicdialog';
 import { InputGroupModule } from 'primeng/inputgroup';
 import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
 import { InputTextModule } from 'primeng/inputtext';
@@ -19,14 +19,12 @@ import { TreeTableModule } from 'primeng/treetable';
 import { combineLatest } from 'rxjs';
 
 import { ColumnComponent } from '../column/column.component';
-import { ModalContentComponent } from 'src/app/content/modal-content/modal-content.component';
-import { ModalModuleContentComponent } from 'src/app/content/modal-module-content/modal-module-content.component';
-import { isOutline } from 'src/app/model/content';
 import { MenuEntry } from 'src/app/model/menu';
 import { StructureBrowserEntry } from 'src/app/model/table';
+import { ActionService } from 'src/app/services/action.service';
 import { BreadcrumbService } from 'src/app/services/breadcrumb.service';
-import { ContentService } from 'src/app/services/content.service';
 import { ExecService } from 'src/app/services/exec.service';
+import { MenuActionProvider, toMenuItems } from 'src/app/services/menu.service';
 import { TableService } from 'src/app/services/table.service';
 
 @Component({
@@ -51,11 +49,11 @@ import { TableService } from 'src/app/services/table.service';
 export class StructureBrowserComponent implements OnInit {
   private route = inject(ActivatedRoute);
   private confirmationService = inject(ConfirmationService);
-  private dialogService = inject(DialogService);
   private tableService = inject(TableService);
-  private contentService = inject(ContentService);
   private execService = inject(ExecService);
   private breadcrumbService = inject(BreadcrumbService);
+
+  private actionService = inject(ActionService);
 
   loading: boolean;
   id: any;
@@ -95,9 +93,7 @@ export class StructureBrowserComponent implements OnInit {
         } else {
           this.selectionMode = val.selectionMode;
         }
-        this.menuItems = val.menu
-          ? val.menu.map((item) => this.toMenuItem(item))
-          : [];
+        this.menuItems = toMenuItems(val.menu, this.actionProvider);
         const toggleIndex = this.cols.findIndex((col) => {
           return col.field === val.toggleColumn;
         });
@@ -113,88 +109,31 @@ export class StructureBrowserComponent implements OnInit {
     };
   }
 
-  toMenuItem(item: MenuEntry): MenuItem {
-    return {
-      id: item.id,
-      label: item.label,
-      items:
-        item.children && item.children.length > 0
-          ? item.children.map((item) => this.toMenuItem(item))
-          : undefined,
-      command: this.evalAction(item),
-    };
-  }
-
-  evalAction(item: MenuEntry): ((event?: any) => void) | undefined {
+  actionProvider: MenuActionProvider = (item: MenuEntry) => {
     switch (item.action.type) {
       case 'EXEC':
-        return (_event) => {
+        return (event) => {
           this.execAction(item);
         };
-
       case 'FORM':
-        return (_event) => {
-          this.formAction(item);
-        };
-
-      case 'SEARCH':
         return (event) => {
-          console.log(event);
-        };
-    }
-    return undefined;
-  }
-
-  formAction(item: MenuEntry) {
-    if (item.action.modal) {
-      this.contentService.getContentWithCmd('none', item.id).subscribe({
-        next: (outline) => {
-          if (isOutline(outline)) {
-            let eFapsSelectedOids: string[] | undefined;
-            if (this.selectedElements != null) {
-              eFapsSelectedOids = (
-                this.selectedElements as TreeTableNode<any>[]
-              ).map((element) => {
-                return element.data.OID;
-              });
-            }
-            const dialogRef = this.dialogService.open(ModalContentComponent, {
-              data: {
-                item,
-                outline,
-                eFapsSelectedOids,
-              },
-            });
-            dialogRef?.onClose.subscribe({
-              next: (execResponse) => {
-                if (execResponse.reload) {
-                  this.loadData();
-                }
-              },
-            });
-          } else {
-            const dialogRef = this.dialogService.open(
-              ModalModuleContentComponent,
-              {
-                data: {
-                  item,
-                  uimodule: outline,
-                  parentOid: this.oid,
-                },
-              },
-            );
-            dialogRef?.onClose.subscribe({
+          this.actionService
+            .runFormAction(item, this.oid, this.selectedElements as any[])
+            .subscribe({
               next: (execResponse) => {
                 if (execResponse != null && execResponse.reload) {
                   this.loadData();
                 }
               },
             });
-          }
-        },
-      });
+        };
+      case 'SEARCH':
+        return (event) => {
+          console.log(event);
+        };
     }
-  }
+    return undefined;
+  };
 
   execAction(item: MenuEntry) {
     if (item.action.verify) {
