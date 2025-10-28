@@ -16,7 +16,7 @@ import {
   provideKeycloak,
 } from 'keycloak-angular';
 import { NGX_LOCAL_STORAGE_CONFIG } from 'ngx-localstorage';
-import { MessageService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
 import { providePrimeNG } from 'primeng/config';
 import { DialogService } from 'primeng/dynamicdialog';
 
@@ -59,6 +59,7 @@ export const appConfig: ApplicationConfig = {
     }),
     MessageService,
     DialogService,
+    ConfirmationService,
     provideKeycloak({
       config: {
         url: environment.sso.url,

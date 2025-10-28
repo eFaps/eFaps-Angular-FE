@@ -1,4 +1,5 @@
 import { inject, Injectable } from '@angular/core';
+import { MessageService } from 'primeng/api';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { Observable } from 'rxjs';
 
@@ -14,6 +15,7 @@ import { ContentService } from './content.service';
 export class ActionService {
   private readonly contentService = inject(ContentService);
   private readonly dialogService = inject(DialogService);
+  private readonly messageService = inject(MessageService);
 
   runFormAction(
     item: MenuEntry,
@@ -35,17 +37,23 @@ export class ActionService {
                   }
                 });
               }
-              this.validate(item, eFapsSelectedOids);
-              const dialogRef = this.dialogService.open(ModalContentComponent, {
-                data: {
-                  item,
-                  outline,
-                  eFapsSelectedOids,
-                },
-              });
-              dialogRef?.onClose.subscribe({
-                next: (execResponse) => subscriber.next(execResponse),
-              });
+              if (this.validate(item, eFapsSelectedOids)) {
+                const dialogRef = this.dialogService.open(
+                  ModalContentComponent,
+                  {
+                    data: {
+                      item,
+                      outline,
+                      eFapsSelectedOids,
+                    },
+                  },
+                );
+                dialogRef?.onClose.subscribe({
+                  next: (execResponse) => subscriber.next(execResponse),
+                });
+              } else {
+                subscriber.next(undefined);
+              }
             } else {
               const dialogRef = this.dialogService.open(
                 ModalModuleContentComponent,
@@ -70,28 +78,34 @@ export class ActionService {
     });
   }
 
-  private validate(item: MenuEntry, selectedOids: string[] | undefined) {
+  private validate(
+    item: MenuEntry,
+    selectedOids: string[] | undefined,
+  ): boolean {
+    var ret = false;
     if (item != null) {
       if (item.action.verify && item.action.verify.selectedRows) {
-        var alfine;
         if (selectedOids) {
           // if 0 just check that something is selected
           if (item.action.verify.selectedRows == 0 && selectedOids.length > 0) {
-            alfine = true;
+            ret = true;
           } else if (item.action.verify.selectedRows == selectedOids.length) {
-            alfine = true;
+            ret = true;
           } else {
-            alfine = false;
+            ret = false;
           }
         } else {
-          alfine = false;
+          ret = false;
         }
-        if (!alfine) {
-          const dialogRef = this.dialogService.open(ModalContentComponent, {
-            data: {},
+        if (!ret) {
+          this.messageService.add({
+            severity: 'warn',
+            summary: 'Advertencia',
+            detail: item.action.verify.question,
           });
         }
       }
     }
+    return ret;
   }
 }
