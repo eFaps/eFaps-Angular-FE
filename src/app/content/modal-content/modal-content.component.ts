@@ -7,7 +7,7 @@ import {
   DynamicDialogModule,
   DynamicDialogRef,
 } from 'primeng/dynamicdialog';
-import { forkJoin, Observable, zipAll } from 'rxjs';
+import { forkJoin, Observable } from 'rxjs';
 
 import { ClassificationDisplayComponent } from '../classification-display/classification-display.component';
 import { SectionsComponent } from '../sections/sections.component';
@@ -37,7 +37,6 @@ export class ModalContentComponent {
   private classificationService = inject(ClassificationService);
   private execService = inject(ExecService);
   private dialogRef = inject(DynamicDialogRef);
-  private dialogService = inject(DialogService);
 
   sections = signal<Section[]>([]);
   classifications = this.classificationService.classifications;
@@ -64,7 +63,6 @@ export class ModalContentComponent {
     this.outline = data.outline;
 
     this.init(data);
-    this.validate(data);
     if (this.outline.classifications) {
       this.sectionsStore = data.outline.sections;
 
@@ -107,38 +105,6 @@ export class ModalContentComponent {
         name: 'eFapsSelectedOids',
         value: data.eFapsSelectedOids,
       });
-    }
-  }
-
-  private validate(data: any) {
-    if (this.callingMenu != null) {
-      const menuEntry = this.callingMenu as MenuEntry;
-      if (menuEntry.action.verify && menuEntry.action.verify.selectedRows) {
-        var alfine;
-        if (Array.isArray(data.eFapsSelectedOids)) {
-          // if 0 just check that something is selected
-          if (
-            menuEntry.action.verify.selectedRows == 0 &&
-            data.eFapsSelectedOids.length > 0
-          ) {
-            alfine = true;
-          } else if (
-            menuEntry.action.verify.selectedRows ==
-            data.eFapsSelectedOids.length
-          ) {
-            alfine = true;
-          } else {
-            alfine = false;
-          }
-        } else {
-          alfine = false;
-        }
-        if (!alfine) {
-          const dialogRef = this.dialogService.open(ModalContentComponent, {
-            data: {},
-          });
-        }
-      }
     }
   }
 

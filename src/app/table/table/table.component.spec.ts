@@ -14,6 +14,8 @@ import { TableModule } from 'primeng/table';
 import { TieredMenuModule } from 'primeng/tieredmenu';
 
 import { TableComponent } from './table.component';
+import { MessageService } from 'primeng/api';
+import { DialogService } from 'primeng/dynamicdialog';
 
 describe('TableComponent', () => {
   let component: TableComponent;
@@ -32,6 +34,8 @@ describe('TableComponent', () => {
         InputGroupAddonModule,
       ],
       providers: [
+        { provide: DialogService, useValue: {} },
+        { provide: MessageService, useValue: {} },
         provideHttpClient(withInterceptorsFromDi()),
         provideHttpClientTesting(),
       ],

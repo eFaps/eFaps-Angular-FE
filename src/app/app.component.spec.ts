@@ -16,7 +16,6 @@ import { AppComponent } from './app.component';
 describe('AppComponent', () => {
   beforeEach(() =>
     TestBed.configureTestingModule({
-      declarations: [AppComponent],
       imports: [MenubarModule, ToastModule, PopoverModule],
       providers: [
         { provide: MessageService, useValue: {} },

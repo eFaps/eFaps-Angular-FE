@@ -12,6 +12,7 @@ import { MenuModule } from 'primeng/menu';
 import { TreeTableModule } from 'primeng/treetable';
 
 import { StructureBrowserComponent } from './structure-browser.component';
+import { MessageService } from 'primeng/api';
 
 describe('StructureBrowserComponent', () => {
   let component: StructureBrowserComponent;
@@ -22,6 +23,7 @@ describe('StructureBrowserComponent', () => {
       imports: [ConfirmDialogModule, TreeTableModule, MenuModule, FormsModule],
       providers: [
         { provide: DialogService, useValue: {} },
+        { provide: MessageService, useValue: {} },
         provideRouter([]),
         provideHttpClient(withInterceptorsFromDi()),
         provideHttpClientTesting(),
