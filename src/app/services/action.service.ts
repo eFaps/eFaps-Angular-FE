@@ -82,15 +82,13 @@ export class ActionService {
     item: MenuEntry,
     selectedOids: string[] | undefined,
   ): boolean {
-    var ret = false;
+    var ret = true;
     if (item != null) {
       if (item.action.verify && item.action.verify.selectedRows) {
         if (selectedOids) {
           // if 0 just check that something is selected
           if (item.action.verify.selectedRows == 0 && selectedOids.length > 0) {
-            ret = true;
           } else if (item.action.verify.selectedRows == selectedOids.length) {
-            ret = true;
           } else {
             ret = false;
           }
