@@ -88,8 +88,8 @@ export class ActionService {
       if (item.action.verify && typeof item.action.verify.selectedRows != 'undefined') {
         if (selectedOids) {
           // if 0 just check that something is selected
-          if (item.action.verify.selectedRows == 0 && selectedOids.length > 0) {
-          } else if (item.action.verify.selectedRows == selectedOids.length) {
+          if (item.action.verify.selectedRows == 0 && selectedOids.length > 0
+            || item.action.verify.selectedRows > 0 && item.action.verify.selectedRows == selectedOids.length) {
           } else {
             ret = false;
           }
