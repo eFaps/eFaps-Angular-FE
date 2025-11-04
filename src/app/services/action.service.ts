@@ -85,11 +85,17 @@ export class ActionService {
   ): boolean {
     var ret = true;
     if (item != null) {
-      if (item.action.verify && typeof item.action.verify.selectedRows != 'undefined') {
+      if (
+        item.action.verify &&
+        typeof item.action.verify.selectedRows != 'undefined'
+      ) {
         if (selectedOids) {
           // if 0 just check that something is selected
-          if (item.action.verify.selectedRows == 0 && selectedOids.length > 0
-            || item.action.verify.selectedRows > 0 && item.action.verify.selectedRows == selectedOids.length) {
+          if (
+            (item.action.verify.selectedRows == 0 && selectedOids.length > 0) ||
+            (item.action.verify.selectedRows > 0 &&
+              item.action.verify.selectedRows == selectedOids.length)
+          ) {
           } else {
             ret = false;
           }

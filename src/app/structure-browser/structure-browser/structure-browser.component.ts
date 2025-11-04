@@ -1,15 +1,16 @@
 import { Component, OnInit, importProvidersFrom, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { LocalStorageService } from 'ngx-localstorage';
 import {
   ConfirmationService,
   MenuItem,
+  SortMeta,
   TreeNode,
   TreeTableNode,
 } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
-import { DialogService, DynamicDialogModule } from 'primeng/dynamicdialog';
 import { InputGroupModule } from 'primeng/inputgroup';
 import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
 import { InputTextModule } from 'primeng/inputtext';
@@ -25,6 +26,7 @@ import { ActionService } from 'src/app/services/action.service';
 import { BreadcrumbService } from 'src/app/services/breadcrumb.service';
 import { ExecService } from 'src/app/services/exec.service';
 import { MenuActionProvider, toMenuItems } from 'src/app/services/menu.service';
+import { StyleService } from 'src/app/services/style.service';
 import { TableService } from 'src/app/services/table.service';
 
 @Component({
@@ -49,10 +51,11 @@ import { TableService } from 'src/app/services/table.service';
 export class StructureBrowserComponent implements OnInit {
   private route = inject(ActivatedRoute);
   private confirmationService = inject(ConfirmationService);
+  private readonly storageService = inject(LocalStorageService);
   private tableService = inject(TableService);
   private execService = inject(ExecService);
   private breadcrumbService = inject(BreadcrumbService);
-
+  private styleService = inject(StyleService);
   private actionService = inject(ActionService);
 
   loading: boolean;
@@ -66,6 +69,10 @@ export class StructureBrowserComponent implements OnInit {
   elements: TreeNode[] = [];
   selectedElements: TreeTableNode<any> | TreeTableNode<any>[] | null = [];
   togglerColIdx = 0;
+  scrollHeight: string = '500px';
+  tableLoaded = false;
+  storageKey = 'temp';
+  multiSortMeta: SortMeta[] = [];
 
   constructor() {
     this.loading = true;
@@ -76,7 +83,11 @@ export class StructureBrowserComponent implements OnInit {
       (parameters) => {
         this.id = parameters[1]['id'];
         this.oid = parameters[0]['oid'];
-
+        this.storageKey = this.id!!;
+        const persisted: any = this.storageService.get(this.storageKey);
+        if (persisted && persisted.multiSortMeta) {
+          this.multiSortMeta = persisted.multiSortMeta;
+        }
         this.loadData();
       },
     );
@@ -87,6 +98,7 @@ export class StructureBrowserComponent implements OnInit {
       next: (val) => {
         this.title = val.header;
         this.cols = val.columns;
+        this.evalContentHeight();
         this.elements = val.values.map((entry) => this.toTreeNode(entry));
         if ('multiple' == val.selectionMode) {
           this.selectionMode = 'checkbox';
@@ -98,6 +110,8 @@ export class StructureBrowserComponent implements OnInit {
           return col.field === val.toggleColumn;
         });
         this.togglerColIdx = toggleIndex > -1 ? toggleIndex : 0;
+        this.loading = false;
+        this.tableLoaded = true;
       },
     });
   }
@@ -179,5 +193,36 @@ export class StructureBrowserComponent implements OnInit {
     this.breadcrumbService.addEntry({
       label: this.title,
     });
+  }
+
+  evalContentHeight() {
+    let height = window.innerHeight;
+
+    const menuBarHeight = Math.round(this.styleService.menuBarHeight());
+    const breadcrumbHeight = Math.round(this.styleService.breadcrumbHeight());
+    const contenHeaderHeight = Math.round(
+      this.styleService.contentHeaderHeight(),
+    );
+
+    const tableCaption = 78;
+    const scrtFact = 50; // some more correction
+    height =
+      height -
+      menuBarHeight -
+      breadcrumbHeight -
+      contenHeaderHeight -
+      tableCaption -
+      scrtFact;
+
+    this.scrollHeight = `${height}px`;
+    console.log(this.scrollHeight);
+  }
+
+  onSort(event: any) {
+    if (event.multisortmeta) {
+      this.storageService.set(this.storageKey, {
+        multiSortMeta: event.multisortmeta,
+      });
+    }
   }
 }
