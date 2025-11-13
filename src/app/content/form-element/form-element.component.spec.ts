@@ -8,6 +8,7 @@ import { DialogModule } from 'primeng/dialog';
 import { DialogService } from 'primeng/dynamicdialog';
 
 import { FormElementComponent } from './form-element.component';
+import { provideZonelessChangeDetection } from '@angular/core';
 
 describe('FormElementComponent', () => {
   let component: FormElementComponent;
@@ -18,6 +19,7 @@ describe('FormElementComponent', () => {
       imports: [FormElementComponent, DialogModule],
       providers: [
         { provide: DialogService, useValue: {} },
+        provideZonelessChangeDetection(),
         provideHttpClient(withInterceptorsFromDi()),
         provideHttpClientTesting(),
       ],

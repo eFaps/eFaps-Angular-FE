@@ -7,6 +7,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 
 import { CSVImportComponent } from './csvimport.component';
+import { provideZonelessChangeDetection } from '@angular/core';
 
 describe('CSVImportComponent', () => {
   let component: CSVImportComponent;
@@ -23,6 +24,7 @@ describe('CSVImportComponent', () => {
           },
         },
         { provide: DynamicDialogRef, useValue: {} },
+        provideZonelessChangeDetection(),
         provideHttpClient(withInterceptorsFromDi()),
         provideHttpClientTesting(),
       ],

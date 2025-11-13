@@ -11,6 +11,7 @@ import { Observable } from 'rxjs';
 import { ClassificationDisplayComponent } from '../classification-display/classification-display.component';
 import { SectionsComponent } from '../sections/sections.component';
 import { ModalContentComponent } from './modal-content.component';
+import { provideZonelessChangeDetection } from '@angular/core';
 
 describe('ModalContentComponent', () => {
   let component: ModalContentComponent;
@@ -45,6 +46,7 @@ describe('ModalContentComponent', () => {
             },
           },
         },
+        provideZonelessChangeDetection(),
         provideHttpClient(withInterceptorsFromDi()),
         provideHttpClientTesting(),
       ],

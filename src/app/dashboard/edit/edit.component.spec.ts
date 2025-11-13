@@ -9,6 +9,7 @@ import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { SelectModule } from 'primeng/select';
 
 import { EditComponent } from './edit.component';
+import { provideZonelessChangeDetection } from '@angular/core';
 
 describe('EditComponent', () => {
   let component: EditComponent;
@@ -27,6 +28,7 @@ describe('EditComponent', () => {
           },
         },
         { provide: DynamicDialogRef, useValue: {} },
+        provideZonelessChangeDetection(),
         provideHttpClient(withInterceptorsFromDi()),
       ],
     });

@@ -6,6 +6,7 @@ import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ClassificationDisplayComponent } from './classification-display.component';
+import { provideZonelessChangeDetection } from '@angular/core';
 
 describe('ClassificationDisplayComponent', () => {
   let component: ClassificationDisplayComponent;
@@ -15,6 +16,7 @@ describe('ClassificationDisplayComponent', () => {
     TestBed.configureTestingModule({
       imports: [ClassificationDisplayComponent],
       providers: [
+        provideZonelessChangeDetection(),
         provideHttpClient(withInterceptorsFromDi()),
         provideHttpClientTesting(),
       ],

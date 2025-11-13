@@ -15,6 +15,7 @@ import { ToolbarModule } from 'primeng/toolbar';
 
 import { SectionsComponent } from '../sections/sections.component';
 import { ContentComponent } from './content.component';
+import { provideZonelessChangeDetection } from '@angular/core';
 
 describe('ContentComponent', () => {
   let component: ContentComponent;
@@ -35,6 +36,7 @@ describe('ContentComponent', () => {
       ],
       providers: [
         { provide: DialogService, useValue: {} },
+        provideZonelessChangeDetection(),
         provideRouter([]),
         provideHttpClient(withInterceptorsFromDi()),
         provideHttpClientTesting(),

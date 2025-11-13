@@ -6,6 +6,7 @@ import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 
 import { CheckoutService } from './checkout.service';
+import { provideZonelessChangeDetection } from '@angular/core';
 
 describe('CheckoutService', () => {
   let service: CheckoutService;
@@ -14,6 +15,7 @@ describe('CheckoutService', () => {
     TestBed.configureTestingModule({
       imports: [],
       providers: [
+        provideZonelessChangeDetection(),
         provideHttpClient(withInterceptorsFromDi()),
         provideHttpClientTesting(),
       ],

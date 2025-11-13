@@ -9,6 +9,7 @@ import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { TreeModule } from 'primeng/tree';
 
 import { ClassificationsComponent } from './classifications.component';
+import { provideZonelessChangeDetection } from '@angular/core';
 
 describe('ClassificationsComponent', () => {
   let component: ClassificationsComponent;
@@ -27,6 +28,7 @@ describe('ClassificationsComponent', () => {
           },
         },
         { provide: DynamicDialogRef, useValue: {} },
+        provideZonelessChangeDetection(),
         provideHttpClient(withInterceptorsFromDi()),
         provideHttpClientTesting(),
       ],

@@ -12,6 +12,7 @@ import { PopoverModule } from 'primeng/popover';
 import { ToastModule } from 'primeng/toast';
 
 import { AppComponent } from './app.component';
+import { provideZonelessChangeDetection } from '@angular/core';
 
 describe('AppComponent', () => {
   beforeEach(() =>
@@ -20,6 +21,7 @@ describe('AppComponent', () => {
       providers: [
         { provide: MessageService, useValue: {} },
         { provide: Keycloak, useValue: {} },
+        provideZonelessChangeDetection(),
         provideHttpClient(withInterceptorsFromDi()),
         provideHttpClientTesting(),
         { provide: KEYCLOAK_EVENT_SIGNAL, useValue: {} },

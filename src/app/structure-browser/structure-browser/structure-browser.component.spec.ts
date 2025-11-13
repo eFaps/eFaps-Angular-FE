@@ -13,6 +13,7 @@ import { MenuModule } from 'primeng/menu';
 import { TreeTableModule } from 'primeng/treetable';
 
 import { StructureBrowserComponent } from './structure-browser.component';
+import { provideZonelessChangeDetection } from '@angular/core';
 
 describe('StructureBrowserComponent', () => {
   let component: StructureBrowserComponent;
@@ -24,6 +25,7 @@ describe('StructureBrowserComponent', () => {
       providers: [
         { provide: DialogService, useValue: {} },
         { provide: MessageService, useValue: {} },
+        provideZonelessChangeDetection(),
         provideRouter([]),
         provideHttpClient(withInterceptorsFromDi()),
         provideHttpClientTesting(),

@@ -6,6 +6,7 @@ import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { PromoSimulatorComponent } from './promo-simulator.component';
+import { provideZonelessChangeDetection } from '@angular/core';
 
 describe('PromoSimulatorComponent', () => {
   let component: PromoSimulatorComponent;
@@ -15,6 +16,7 @@ describe('PromoSimulatorComponent', () => {
     await TestBed.configureTestingModule({
       imports: [PromoSimulatorComponent],
       providers: [
+        provideZonelessChangeDetection(),
         provideHttpClient(withInterceptorsFromDi()),
         provideHttpClientTesting(),
       ],

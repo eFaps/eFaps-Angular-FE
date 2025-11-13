@@ -7,6 +7,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 
 import { LogbackComponent } from './logback.component';
+import { provideZonelessChangeDetection } from '@angular/core';
 
 describe('LogbackComponent', () => {
   let component: LogbackComponent;
@@ -23,6 +24,7 @@ describe('LogbackComponent', () => {
           },
         },
         { provide: DynamicDialogRef, useValue: {} },
+        provideZonelessChangeDetection(),
         provideHttpClient(withInterceptorsFromDi()),
         provideHttpClientTesting(),
       ],

@@ -6,6 +6,7 @@ import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TableElementComponent } from './table-element.component';
+import { provideZonelessChangeDetection } from '@angular/core';
 
 describe('TableElementComponent', () => {
   let component: TableElementComponent;
@@ -15,6 +16,7 @@ describe('TableElementComponent', () => {
     TestBed.configureTestingModule({
       imports: [TableElementComponent],
       providers: [
+        provideZonelessChangeDetection(),
         provideHttpClient(withInterceptorsFromDi()),
         provideHttpClientTesting(),
       ],

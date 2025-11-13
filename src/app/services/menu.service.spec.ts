@@ -6,6 +6,7 @@ import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 
 import { MenuService } from './menu.service';
+import { provideZonelessChangeDetection } from '@angular/core';
 
 describe('MenuService', () => {
   let service: MenuService;
@@ -14,6 +15,7 @@ describe('MenuService', () => {
     TestBed.configureTestingModule({
       imports: [],
       providers: [
+        provideZonelessChangeDetection(),
         provideHttpClient(withInterceptorsFromDi()),
         provideHttpClientTesting(),
       ],

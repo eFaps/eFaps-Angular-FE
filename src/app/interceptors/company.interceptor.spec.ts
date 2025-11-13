@@ -6,6 +6,7 @@ import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 
 import { CompanyInterceptor } from './company.interceptor';
+import { provideZonelessChangeDetection } from '@angular/core';
 
 describe('CompanyInterceptor', () => {
   beforeEach(() =>
@@ -13,6 +14,7 @@ describe('CompanyInterceptor', () => {
       imports: [],
       providers: [
         CompanyInterceptor,
+        provideZonelessChangeDetection(),
         provideHttpClient(withInterceptorsFromDi()),
         provideHttpClientTesting(),
       ],

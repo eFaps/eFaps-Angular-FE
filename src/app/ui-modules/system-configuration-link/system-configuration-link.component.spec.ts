@@ -7,6 +7,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 
 import { SystemConfigurationLinkComponent } from './system-configuration-link.component';
+import { provideZonelessChangeDetection } from '@angular/core';
 
 describe('SystemConfigurationLinkComponent', () => {
   let component: SystemConfigurationLinkComponent;
@@ -23,6 +24,7 @@ describe('SystemConfigurationLinkComponent', () => {
           },
         },
         { provide: DynamicDialogRef, useValue: {} },
+        provideZonelessChangeDetection(),
         provideHttpClient(withInterceptorsFromDi()),
         provideHttpClientTesting(),
       ],

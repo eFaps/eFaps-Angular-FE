@@ -6,6 +6,7 @@ import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { FilteredReportComponent } from './filtered-report.component';
+import { provideZonelessChangeDetection } from '@angular/core';
 
 describe('FilteredReportComponent', () => {
   let component: FilteredReportComponent;
@@ -15,6 +16,7 @@ describe('FilteredReportComponent', () => {
     await TestBed.configureTestingModule({
       imports: [FilteredReportComponent],
       providers: [
+        provideZonelessChangeDetection(),
         provideHttpClient(withInterceptorsFromDi()),
         provideHttpClientTesting(),
       ],

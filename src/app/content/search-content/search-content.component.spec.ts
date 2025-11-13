@@ -11,6 +11,7 @@ import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 
 import { FormSectionComponent } from '../form-section/form-section.component';
 import { SearchContentComponent } from './search-content.component';
+import { provideZonelessChangeDetection } from '@angular/core';
 
 describe('SearchContentComponent', () => {
   let component: SearchContentComponent;
@@ -36,6 +37,7 @@ describe('SearchContentComponent', () => {
           },
         },
         { provide: DynamicDialogRef, useValue: {} },
+        provideZonelessChangeDetection(),
         provideHttpClient(withInterceptorsFromDi()),
         provideHttpClientTesting(),
         MessageService,

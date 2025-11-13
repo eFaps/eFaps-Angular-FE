@@ -7,6 +7,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
 
 import { CompanyChooserComponent } from './company-chooser.component';
+import { provideZonelessChangeDetection } from '@angular/core';
 
 describe('CompanyChooserComponent', () => {
   let component: CompanyChooserComponent;
@@ -17,6 +18,7 @@ describe('CompanyChooserComponent', () => {
       imports: [CompanyChooserComponent],
       providers: [
         { provide: DynamicDialogRef, useValue: {} },
+        provideZonelessChangeDetection(),
         provideHttpClient(withInterceptorsFromDi()),
         provideHttpClientTesting(),
       ],

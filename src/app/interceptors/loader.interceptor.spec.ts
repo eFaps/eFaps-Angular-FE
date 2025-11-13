@@ -1,11 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
 import { LoaderInterceptor } from './loader.interceptor';
+import { provideZonelessChangeDetection } from '@angular/core';
 
 describe('LoaderInterceptor', () => {
   beforeEach(() =>
     TestBed.configureTestingModule({
-      providers: [LoaderInterceptor],
+      providers: [provideZonelessChangeDetection(),LoaderInterceptor],
     }),
   );
 

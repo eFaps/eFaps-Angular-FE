@@ -6,7 +6,7 @@ import {
   withInterceptorsFromDi,
 } from '@angular/common/http';
 import localeEs from '@angular/common/locales/es';
-import { ApplicationConfig, LOCALE_ID } from '@angular/core';
+import { ApplicationConfig, LOCALE_ID, provideZonelessChangeDetection } from '@angular/core';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { provideRouter, RouteReuseStrategy } from '@angular/router';
 import Material from '@primeuix/themes/material';
@@ -48,6 +48,7 @@ export const appConfig: ApplicationConfig = {
       withInterceptors([includeBearerTokenInterceptor]),
     ),
     provideRouter(routes),
+    provideZonelessChangeDetection(),
     provideAnimationsAsync(), // required from PrimeNG
     providePrimeNG({
       theme: {

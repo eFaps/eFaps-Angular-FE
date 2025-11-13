@@ -8,6 +8,7 @@ import { provideRouter } from '@angular/router';
 import { PopoverModule } from 'primeng/popover';
 
 import { ColumnComponent } from './column.component';
+import { provideZonelessChangeDetection } from '@angular/core';
 
 describe('ColumnComponent', () => {
   let component: ColumnComponent;
@@ -17,6 +18,7 @@ describe('ColumnComponent', () => {
     TestBed.configureTestingModule({
       imports: [PopoverModule],
       providers: [
+        provideZonelessChangeDetection(),
         provideRouter([]),
         provideHttpClient(withInterceptorsFromDi()),
         provideHttpClientTesting(),

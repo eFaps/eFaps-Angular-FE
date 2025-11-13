@@ -6,6 +6,7 @@ import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 
 import { ConfigService } from './config.service';
+import { provideZonelessChangeDetection } from '@angular/core';
 
 describe('ConfigService', () => {
   let service: ConfigService;
@@ -14,6 +15,7 @@ describe('ConfigService', () => {
     TestBed.configureTestingModule({
       imports: [],
       providers: [
+        provideZonelessChangeDetection(),
         provideHttpClient(withInterceptorsFromDi()),
         provideHttpClientTesting(),
       ],

@@ -7,6 +7,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { TableModule } from 'primeng/table';
 
 import { TableWidgetComponent } from './table-widget.component';
+import { provideZonelessChangeDetection } from '@angular/core';
 
 describe('TableWidgetComponent', () => {
   let component: TableWidgetComponent;
@@ -16,6 +17,7 @@ describe('TableWidgetComponent', () => {
     TestBed.configureTestingModule({
       imports: [TableModule],
       providers: [
+        provideZonelessChangeDetection(),
         provideHttpClient(withInterceptorsFromDi()),
         provideHttpClientTesting(),
       ],

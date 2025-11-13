@@ -8,6 +8,7 @@ import { MessageService } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
 
 import { ActionService } from './action.service';
+import { provideZonelessChangeDetection } from '@angular/core';
 
 describe('ActionService', () => {
   let service: ActionService;
@@ -17,6 +18,7 @@ describe('ActionService', () => {
       providers: [
         { provide: DialogService, useValue: {} },
         { provide: MessageService, useValue: {} },
+        provideZonelessChangeDetection(),
         provideHttpClient(withInterceptorsFromDi()),
         provideHttpClientTesting(),
       ],

@@ -7,6 +7,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ChartModule } from 'primeng/chart';
 
 import { ChartWidgetComponent } from './chart-widget.component';
+import { provideZonelessChangeDetection } from '@angular/core';
 
 describe('ChartWidgetComponent', () => {
   let component: ChartWidgetComponent;
@@ -16,6 +17,7 @@ describe('ChartWidgetComponent', () => {
     TestBed.configureTestingModule({
       imports: [ChartModule],
       providers: [
+        provideZonelessChangeDetection(),
         provideHttpClient(withInterceptorsFromDi()),
         provideHttpClientTesting(),
       ],

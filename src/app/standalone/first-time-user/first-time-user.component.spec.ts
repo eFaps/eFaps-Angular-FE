@@ -6,6 +6,7 @@ import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { FirstTimeUserComponent } from './first-time-user.component';
+import { provideZonelessChangeDetection } from '@angular/core';
 
 describe('FirstTimeUserComponent', () => {
   let component: FirstTimeUserComponent;
@@ -15,6 +16,7 @@ describe('FirstTimeUserComponent', () => {
     await TestBed.configureTestingModule({
       imports: [FirstTimeUserComponent],
       providers: [
+        provideZonelessChangeDetection(),
         provideHttpClient(withInterceptorsFromDi()),
         provideHttpClientTesting(),
       ],

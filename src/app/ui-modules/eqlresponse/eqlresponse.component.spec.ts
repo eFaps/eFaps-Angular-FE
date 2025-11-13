@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { EQLResponseComponent } from './eqlresponse.component';
+import { provideZonelessChangeDetection } from '@angular/core';
 
 describe('EQLResponseComponent', () => {
   let component: EQLResponseComponent;
@@ -9,6 +10,7 @@ describe('EQLResponseComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [EQLResponseComponent],
+      providers: [provideZonelessChangeDetection()]
     });
     fixture = TestBed.createComponent(EQLResponseComponent);
     component = fixture.componentInstance;

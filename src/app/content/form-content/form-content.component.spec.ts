@@ -11,6 +11,7 @@ import { ToolbarModule } from 'primeng/toolbar';
 
 import { SectionsComponent } from '../sections/sections.component';
 import { FormContentComponent } from './form-content.component';
+import { provideZonelessChangeDetection } from '@angular/core';
 
 describe('FormContentComponent', () => {
   let component: FormContentComponent;
@@ -26,6 +27,7 @@ describe('FormContentComponent', () => {
       ],
       providers: [
         { provide: DialogService, useValue: {} },
+        provideZonelessChangeDetection(),
         provideRouter([]),
         provideHttpClient(withInterceptorsFromDi()),
         provideHttpClientTesting(),

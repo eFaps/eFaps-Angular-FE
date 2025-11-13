@@ -6,6 +6,7 @@ import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 
 import { IndexSearchService } from './index-search.service';
+import { provideZonelessChangeDetection } from '@angular/core';
 
 describe('IndexSearchService', () => {
   let service: IndexSearchService;
@@ -14,6 +15,7 @@ describe('IndexSearchService', () => {
     TestBed.configureTestingModule({
       imports: [],
       providers: [
+        provideZonelessChangeDetection(),
         provideHttpClient(withInterceptorsFromDi()),
         provideHttpClientTesting(),
       ],

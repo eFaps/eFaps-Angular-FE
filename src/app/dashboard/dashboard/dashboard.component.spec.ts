@@ -15,6 +15,7 @@ import {
 import { StepsModule } from 'primeng/steps';
 
 import { DashboardComponent } from './dashboard.component';
+import { provideZonelessChangeDetection } from '@angular/core';
 
 describe('DashboardComponent', () => {
   let component: DashboardComponent;
@@ -26,6 +27,7 @@ describe('DashboardComponent', () => {
       providers: [
         DialogService,
         provideRouter([]),
+        provideZonelessChangeDetection(),
         provideHttpClient(withInterceptorsFromDi()),
         provideHttpClientTesting(),
       ],

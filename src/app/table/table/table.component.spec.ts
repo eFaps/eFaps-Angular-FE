@@ -16,6 +16,7 @@ import { TableModule } from 'primeng/table';
 import { TieredMenuModule } from 'primeng/tieredmenu';
 
 import { TableComponent } from './table.component';
+import { provideZonelessChangeDetection } from '@angular/core';
 
 describe('TableComponent', () => {
   let component: TableComponent;
@@ -36,6 +37,7 @@ describe('TableComponent', () => {
       providers: [
         { provide: DialogService, useValue: {} },
         { provide: MessageService, useValue: {} },
+        provideZonelessChangeDetection(),
         provideHttpClient(withInterceptorsFromDi()),
         provideHttpClientTesting(),
       ],

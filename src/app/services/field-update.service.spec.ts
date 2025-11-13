@@ -6,6 +6,7 @@ import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 
 import { FieldUpdateService } from './field-update.service';
+import { provideZonelessChangeDetection } from '@angular/core';
 
 describe('FieldUpdateService', () => {
   let service: FieldUpdateService;
@@ -14,6 +15,7 @@ describe('FieldUpdateService', () => {
     TestBed.configureTestingModule({
       imports: [],
       providers: [
+        provideZonelessChangeDetection(),
         provideHttpClient(withInterceptorsFromDi()),
         provideHttpClientTesting(),
       ],

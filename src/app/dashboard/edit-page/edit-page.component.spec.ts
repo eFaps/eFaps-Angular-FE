@@ -8,6 +8,7 @@ import { provideRouter } from '@angular/router';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
 
 import { EditPageComponent } from './edit-page.component';
+import { provideZonelessChangeDetection } from '@angular/core';
 
 describe('EditPageComponent', () => {
   let component: EditPageComponent;
@@ -18,6 +19,7 @@ describe('EditPageComponent', () => {
       imports: [EditPageComponent],
       providers: [
         { provide: DynamicDialogRef, useValue: {} },
+        provideZonelessChangeDetection(),
         provideRouter([]),
         provideHttpClient(withInterceptorsFromDi()),
         provideHttpClientTesting(),

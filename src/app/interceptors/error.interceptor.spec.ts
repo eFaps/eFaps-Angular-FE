@@ -7,6 +7,7 @@ import { TestBed } from '@angular/core/testing';
 import { MessageService } from 'primeng/api';
 
 import { ErrorInterceptor } from './error.interceptor';
+import { provideZonelessChangeDetection } from '@angular/core';
 
 describe('ErrorInterceptor', () => {
   beforeEach(() =>
@@ -15,6 +16,7 @@ describe('ErrorInterceptor', () => {
       providers: [
         ErrorInterceptor,
         MessageService,
+        provideZonelessChangeDetection(),
         provideHttpClient(withInterceptorsFromDi()),
         provideHttpClientTesting(),
       ],
