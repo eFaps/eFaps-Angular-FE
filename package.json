@@ -52,7 +52,7 @@
     "@angular/compiler-cli": "^20.3.11",
     "@types/file-saver": "^2.0.7",
     "@types/jasmine": "~5.1.12",
-    "@types/papaparse": "^5.3.16",
+    "@types/papaparse": "^5.5.0",
     "@types/uuid": "^11.0.0",
     "import-sort-style-module": "^6.0.0",
     "jasmine-core": "~5.10.0",
