@@ -3,6 +3,7 @@ import {
   withInterceptorsFromDi,
 } from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideZonelessChangeDetection } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { KEYCLOAK_EVENT_SIGNAL } from 'keycloak-angular';
 import Keycloak from 'keycloak-js';
@@ -12,7 +13,6 @@ import { PopoverModule } from 'primeng/popover';
 import { ToastModule } from 'primeng/toast';
 
 import { AppComponent } from './app.component';
-import { provideZonelessChangeDetection } from '@angular/core';
 
 describe('AppComponent', () => {
   beforeEach(() =>

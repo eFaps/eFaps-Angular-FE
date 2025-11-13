@@ -3,11 +3,11 @@ import {
   withInterceptorsFromDi,
 } from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideZonelessChangeDetection } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { GridsterModule } from 'angular-gridster2';
 
 import { PageComponent } from './page.component';
-import { provideZonelessChangeDetection } from '@angular/core';
 
 describe('PageComponent', () => {
   let component: PageComponent;

@@ -3,6 +3,7 @@ import {
   withInterceptorsFromDi,
 } from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideZonelessChangeDetection } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { provideRouter } from '@angular/router';
@@ -13,7 +14,6 @@ import { MenuModule } from 'primeng/menu';
 import { TreeTableModule } from 'primeng/treetable';
 
 import { StructureBrowserComponent } from './structure-browser.component';
-import { provideZonelessChangeDetection } from '@angular/core';
 
 describe('StructureBrowserComponent', () => {
   let component: StructureBrowserComponent;

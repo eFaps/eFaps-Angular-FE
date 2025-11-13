@@ -3,10 +3,10 @@ import {
   withInterceptorsFromDi,
 } from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideZonelessChangeDetection } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 
 import { AutoCompleteService } from './auto-complete.service';
-import { provideZonelessChangeDetection } from '@angular/core';
 
 describe('AutoCompleteService', () => {
   let service: AutoCompleteService;

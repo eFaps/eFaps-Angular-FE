@@ -3,10 +3,10 @@ import {
   withInterceptorsFromDi,
 } from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideZonelessChangeDetection } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 
 import { DashboardService } from './dashboard.service';
-import { provideZonelessChangeDetection } from '@angular/core';
 
 describe('DashboardService', () => {
   let service: DashboardService;

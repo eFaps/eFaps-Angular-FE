@@ -75,7 +75,7 @@ export class TableComponent implements OnInit {
   storageKey = 'temp';
   globalSearch = '';
   filtered: boolean = false;
-  
+
   page: Page | undefined = undefined;
 
   idEmitter = new EventEmitter<string>();

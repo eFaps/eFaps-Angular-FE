@@ -3,10 +3,10 @@ import {
   withInterceptorsFromDi,
 } from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideZonelessChangeDetection } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { PosStatusReportComponent } from './pos-status-report.component';
-import { provideZonelessChangeDetection } from '@angular/core';
 
 describe('PosStatusReportComponent', () => {
   let component: PosStatusReportComponent;

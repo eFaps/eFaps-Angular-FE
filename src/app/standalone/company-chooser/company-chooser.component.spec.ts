@@ -3,11 +3,11 @@ import {
   withInterceptorsFromDi,
 } from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideZonelessChangeDetection } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
 
 import { CompanyChooserComponent } from './company-chooser.component';
-import { provideZonelessChangeDetection } from '@angular/core';
 
 describe('CompanyChooserComponent', () => {
   let component: CompanyChooserComponent;

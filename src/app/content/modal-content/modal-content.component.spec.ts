@@ -3,6 +3,7 @@ import {
   withInterceptorsFromDi,
 } from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideZonelessChangeDetection } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ButtonModule } from 'primeng/button';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
@@ -11,7 +12,6 @@ import { Observable } from 'rxjs';
 import { ClassificationDisplayComponent } from '../classification-display/classification-display.component';
 import { SectionsComponent } from '../sections/sections.component';
 import { ModalContentComponent } from './modal-content.component';
-import { provideZonelessChangeDetection } from '@angular/core';
 
 describe('ModalContentComponent', () => {
   let component: ModalContentComponent;

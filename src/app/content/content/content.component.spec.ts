@@ -3,6 +3,7 @@ import {
   withInterceptorsFromDi,
 } from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideZonelessChangeDetection } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterModule, provideRouter } from '@angular/router';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
@@ -15,7 +16,6 @@ import { ToolbarModule } from 'primeng/toolbar';
 
 import { SectionsComponent } from '../sections/sections.component';
 import { ContentComponent } from './content.component';
-import { provideZonelessChangeDetection } from '@angular/core';
 
 describe('ContentComponent', () => {
   let component: ContentComponent;

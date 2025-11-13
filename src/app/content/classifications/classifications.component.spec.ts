@@ -3,13 +3,13 @@ import {
   withInterceptorsFromDi,
 } from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideZonelessChangeDetection } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ButtonModule } from 'primeng/button';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { TreeModule } from 'primeng/tree';
 
 import { ClassificationsComponent } from './classifications.component';
-import { provideZonelessChangeDetection } from '@angular/core';
 
 describe('ClassificationsComponent', () => {
   let component: ClassificationsComponent;

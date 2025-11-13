@@ -1,8 +1,8 @@
+import { provideZonelessChangeDetection } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { DynamicDialogConfig } from 'primeng/dynamicdialog';
 
 import { ModalModuleContentComponent } from './modal-module-content.component';
-import { provideZonelessChangeDetection } from '@angular/core';
 
 describe('ModalModuleContentComponent', () => {
   let component: ModalModuleContentComponent;

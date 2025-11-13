@@ -1,7 +1,7 @@
+import { provideZonelessChangeDetection } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 
 import { ValidationService } from './validation.service';
-import { provideZonelessChangeDetection } from '@angular/core';
 
 describe('ValidationService', () => {
   let service: ValidationService;

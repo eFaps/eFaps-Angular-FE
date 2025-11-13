@@ -3,11 +3,11 @@ import {
   withInterceptorsFromDi,
 } from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideZonelessChangeDetection } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 
 import { LogbackComponent } from './logback.component';
-import { provideZonelessChangeDetection } from '@angular/core';
 
 describe('LogbackComponent', () => {
   let component: LogbackComponent;

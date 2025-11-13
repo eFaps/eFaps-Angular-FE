@@ -3,11 +3,11 @@ import {
   withInterceptorsFromDi,
 } from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideZonelessChangeDetection } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { MessageService } from 'primeng/api';
 
 import { ErrorInterceptor } from './error.interceptor';
-import { provideZonelessChangeDetection } from '@angular/core';
 
 describe('ErrorInterceptor', () => {
   beforeEach(() =>

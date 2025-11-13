@@ -3,11 +3,11 @@ import {
   withInterceptorsFromDi,
 } from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideZonelessChangeDetection } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { DialogService } from 'primeng/dynamicdialog';
 
 import { ItemComponent } from './item.component';
-import { provideZonelessChangeDetection } from '@angular/core';
 
 describe('ItemComponent', () => {
   let component: ItemComponent;

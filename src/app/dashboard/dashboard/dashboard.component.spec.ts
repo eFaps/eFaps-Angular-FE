@@ -3,6 +3,7 @@ import {
   withInterceptorsFromDi,
 } from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideZonelessChangeDetection } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
 import { ButtonModule } from 'primeng/button';
@@ -15,7 +16,6 @@ import {
 import { StepsModule } from 'primeng/steps';
 
 import { DashboardComponent } from './dashboard.component';
-import { provideZonelessChangeDetection } from '@angular/core';
 
 describe('DashboardComponent', () => {
   let component: DashboardComponent;

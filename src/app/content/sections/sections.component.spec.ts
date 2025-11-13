@@ -1,7 +1,7 @@
+import { provideZonelessChangeDetection } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SectionsComponent } from './sections.component';
-import { provideZonelessChangeDetection } from '@angular/core';
 
 describe('SectionsComponent', () => {
   let component: SectionsComponent;
@@ -10,7 +10,7 @@ describe('SectionsComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [SectionsComponent],
-      providers: [provideZonelessChangeDetection()]
+      providers: [provideZonelessChangeDetection()],
     });
     fixture = TestBed.createComponent(SectionsComponent);
     component = fixture.componentInstance;

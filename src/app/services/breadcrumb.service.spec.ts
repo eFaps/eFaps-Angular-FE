@@ -1,14 +1,14 @@
+import { provideZonelessChangeDetection } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 
 import { BreadcrumbService } from './breadcrumb.service';
-import { provideZonelessChangeDetection } from '@angular/core';
 
 describe('BreadcrumbService', () => {
   let service: BreadcrumbService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers:[provideZonelessChangeDetection(),]
+      providers: [provideZonelessChangeDetection()],
     });
     service = TestBed.inject(BreadcrumbService);
   });

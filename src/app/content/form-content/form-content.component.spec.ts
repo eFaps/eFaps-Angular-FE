@@ -3,6 +3,7 @@ import {
   withInterceptorsFromDi,
 } from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideZonelessChangeDetection } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
 import { DialogService } from 'primeng/dynamicdialog';
@@ -11,7 +12,6 @@ import { ToolbarModule } from 'primeng/toolbar';
 
 import { SectionsComponent } from '../sections/sections.component';
 import { FormContentComponent } from './form-content.component';
-import { provideZonelessChangeDetection } from '@angular/core';
 
 describe('FormContentComponent', () => {
   let component: FormContentComponent;

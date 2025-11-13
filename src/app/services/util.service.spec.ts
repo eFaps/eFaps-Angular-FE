@@ -1,14 +1,14 @@
+import { provideZonelessChangeDetection } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 
 import { UtilService } from './util.service';
-import { provideZonelessChangeDetection } from '@angular/core';
 
 describe('UtilService', () => {
   let service: UtilService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [provideZonelessChangeDetection()]
+      providers: [provideZonelessChangeDetection()],
     });
     service = TestBed.inject(UtilService);
   });

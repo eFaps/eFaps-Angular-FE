@@ -3,6 +3,7 @@ import {
   withInterceptorsFromDi,
 } from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideZonelessChangeDetection } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MessageService } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
@@ -11,7 +12,6 @@ import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 
 import { FormSectionComponent } from '../form-section/form-section.component';
 import { SearchContentComponent } from './search-content.component';
-import { provideZonelessChangeDetection } from '@angular/core';
 
 describe('SearchContentComponent', () => {
   let component: SearchContentComponent;

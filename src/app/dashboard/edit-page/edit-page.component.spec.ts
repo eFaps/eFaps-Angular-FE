@@ -3,12 +3,12 @@ import {
   withInterceptorsFromDi,
 } from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideZonelessChangeDetection } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
 
 import { EditPageComponent } from './edit-page.component';
-import { provideZonelessChangeDetection } from '@angular/core';
 
 describe('EditPageComponent', () => {
   let component: EditPageComponent;
