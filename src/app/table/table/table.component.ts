@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, inject } from '@angular/core';
+import { Component, EventEmitter, OnInit, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import FileSaver from 'file-saver';
@@ -60,6 +60,8 @@ export class TableComponent implements OnInit {
   private styleService = inject(StyleService);
   private actionService = inject(ActionService);
 
+  tableLoaded = signal(false);
+
   id: string | undefined;
   oid: string | undefined;
   cols: any[] = [];
@@ -73,7 +75,7 @@ export class TableComponent implements OnInit {
   storageKey = 'temp';
   globalSearch = '';
   filtered: boolean = false;
-  tableLoaded = false;
+  
   page: Page | undefined = undefined;
 
   idEmitter = new EventEmitter<string>();
@@ -113,8 +115,8 @@ export class TableComponent implements OnInit {
         this.filtered = val.filtered;
         this.elements = val.values;
         this.selectionMode = val.selectionMode;
-        this.tableLoaded = true;
         this.loading = false;
+        this.tableLoaded.set(true);
         this.menuItems = toMenuItems(val.menu, this.actionProvider);
       },
     });
