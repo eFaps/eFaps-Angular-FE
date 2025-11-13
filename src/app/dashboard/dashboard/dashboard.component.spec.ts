@@ -7,12 +7,7 @@ import { provideZonelessChangeDetection } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
 import { ButtonModule } from 'primeng/button';
-import { DialogModule } from 'primeng/dialog';
-import {
-  DialogService,
-  DynamicDialogConfig,
-  DynamicDialogRef,
-} from 'primeng/dynamicdialog';
+import { DialogService } from 'primeng/dynamicdialog';
 import { StepsModule } from 'primeng/steps';
 
 import { DashboardComponent } from './dashboard.component';

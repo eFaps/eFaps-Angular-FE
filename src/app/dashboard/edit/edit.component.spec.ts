@@ -8,8 +8,17 @@ import { FormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { SelectModule } from 'primeng/select';
+import { Observable } from 'rxjs';
 
 import { EditComponent } from './edit.component';
+import { DashboardTemplate } from 'src/app/model/dashboard';
+import { DashboardService } from 'src/app/services/dashboard.service';
+
+class DashboardServiceStub {
+  getTemplates(): Observable<DashboardTemplate[]> {
+    return new Observable();
+  }
+}
 
 describe('EditComponent', () => {
   let component: EditComponent;
@@ -28,6 +37,7 @@ describe('EditComponent', () => {
           },
         },
         { provide: DynamicDialogRef, useValue: {} },
+        { provide: DashboardService, useClass: DashboardServiceStub },
         provideZonelessChangeDetection(),
         provideHttpClient(withInterceptorsFromDi()),
       ],
