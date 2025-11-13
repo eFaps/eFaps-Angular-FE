@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit, input, inject } from '@angular/core';
+import { Component, OnInit, input, inject, model } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import {
   AutoCompleteCompleteEvent,
@@ -53,7 +53,7 @@ export class SystemConfigurationAttributeComponent implements OnInit {
   buttonLabel: string = 'Update';
 
   keys: SysConfAttr[] = [];
-  key: any = undefined;
+  key = model<any>(undefined);
   description: string = '';
   strValue: string = '';
   booleanValue: boolean = false;
@@ -91,10 +91,10 @@ export class SystemConfigurationAttributeComponent implements OnInit {
       const url = `${this.utilService.evalApiUrl()}/ui/modules/system-configurations/${data?.parentOid}/attributes/${data?.oid}`;
       this.http.get<any>(url).subscribe({
         next: (attr) => {
-          this.key = {
+          this.key.set({
             key: attr.key,
             type: attr.type,
-          };
+          });
           this.description = attr.description;
           this.type = attr.type;
           this.setValue(attr.value);
@@ -219,20 +219,20 @@ export class SystemConfigurationAttributeComponent implements OnInit {
   }
 
   onKeySelect(value: any) {
-    this.type = this.key.type;
-    this.description = this.key.description;
-    this.setValue(this.key.defaultValue);
+    this.type = this.key().type;
+    this.description = this.key().description;
+    this.setValue(this.key().defaultValue);
   }
 
   onKeyBlur(event: Event) {
     if (typeof this.key == 'string') {
       this.type = 'UNDEFINED';
     } else {
-      this.type = this.key.type;
+      this.type = this.key().type;
     }
   }
 
   get keyStr(): string {
-    return typeof this.key == 'string' ? this.key : this.key.key;
+    return typeof this.key() == 'string' ? this.key() : this.key().key;
   }
 }
