@@ -1,4 +1,5 @@
 <div class="p-dialog-content">
+  @if (loaded()) {
   <p-table
     [value]="loggers"
     [tableStyle]="{ 'min-width': '50rem' }"
@@ -36,7 +37,11 @@
       </tr>
     </ng-template>
   </p-table>
+} @else {
+  loading...
+}
 </div>
 <div class="p-dialog-footer">
+  <p-button label="Cancel" (click)="close()"></p-button>
   <p-button label="Update" severity="warn" (click)="submit()"></p-button>
 </div>

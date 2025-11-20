@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit, input, inject } from '@angular/core';
+import { Component, OnInit, input, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
@@ -23,6 +23,8 @@ export class LogbackComponent implements OnInit {
   readonly uimodule = input<UIModule>();
   readonly data = input<ModuleData>();
 
+  loaded = signal<boolean>(false);
+
   loggers: [] = [];
 
   levels: string[] = [
@@ -40,7 +42,6 @@ export class LogbackComponent implements OnInit {
 
   constructor() {
     const config = inject(DynamicDialogConfig);
-
     config.header = 'Logger Configuration';
   }
 
@@ -49,6 +50,7 @@ export class LogbackComponent implements OnInit {
     this.http.get<any>(url).subscribe({
       next: (loggers) => {
         this.loggers = loggers;
+        this.loaded.set(true)
       },
     });
   }
@@ -68,5 +70,9 @@ export class LogbackComponent implements OnInit {
         },
       });
     }
+  }
+
+  close() {
+    this.dialogRef.close();
   }
 }
