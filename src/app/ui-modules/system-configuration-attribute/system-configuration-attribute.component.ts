@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit, input, inject, model } from '@angular/core';
+import { Component, OnInit, input, inject, model, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import {
   AutoCompleteCompleteEvent,
@@ -52,7 +52,7 @@ export class SystemConfigurationAttributeComponent implements OnInit {
 
   buttonLabel: string = 'Update';
 
-  keys: SysConfAttr[] = [];
+  keys = signal<SysConfAttr[]>([]);
   key = model<any>(undefined);
   description: string = '';
   strValue: string = '';
@@ -212,9 +212,18 @@ export class SystemConfigurationAttributeComponent implements OnInit {
   }
 
   loadKeys(event: AutoCompleteCompleteEvent) {
-    const url = `${this.utilService.evalApiUrl()}/ui/modules/system-configurations/${this.data()?.parentOid}/attributes`;
-    this.http.get<any>(url).subscribe({
-      next: (keys) => (this.keys = keys),
+   var url 
+    const params: any = {};
+    
+    if (this.data()?.parentOid) {
+      url = `${this.utilService.evalApiUrl()}/ui/modules/system-configurations/${this.data()!!.parentOid}/attributes`;
+    } else {
+      url = `${this.utilService.evalApiUrl()}/ui/modules/system-configurations/none/attributes`;
+      params.attrOid = this.data()?.oid;
+    }
+    
+    this.http.get<any>(url,{params}).subscribe({
+      next: (keys) => this.keys.set(keys)
     });
   }
 

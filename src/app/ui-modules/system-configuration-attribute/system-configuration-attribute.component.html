@@ -4,12 +4,13 @@
       <p-autoComplete
         [(ngModel)]="key"
         [dropdown]="true"
-        [suggestions]="keys"
+        [suggestions]="keys()"
         (completeMethod)="loadKeys($event)"
         (onSelect)="onKeySelect($event)"
         (onBlur)="onKeyBlur($event)"
         optionLabel="key"
-        appendTo="body"></p-autoComplete>
+        appendTo="body"
+        [fluid]="true"></p-autoComplete>
       <label for="key">Key</label>
     </p-floatlabel>
     @if (type == "STRING" || type == "UNDEFINED") {
