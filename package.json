@@ -27,7 +27,7 @@
     "@fontsource/roboto": "^5.2.8",
     "@primeuix/styled": "^0.7.4",
     "@primeuix/themes": "^1.2.5",
-    "angular-gridster2": "^20.2.3",
+    "angular-gridster2": "^20.2.4",
     "chart.js": "^4.5.1",
     "file-saver": "^2.0.5",
     "javascript-time-ago": "^2.5.12",
