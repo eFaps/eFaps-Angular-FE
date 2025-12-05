@@ -212,18 +212,18 @@ export class SystemConfigurationAttributeComponent implements OnInit {
   }
 
   loadKeys(event: AutoCompleteCompleteEvent) {
-   var url 
+    var url;
     const params: any = {};
-    
+
     if (this.data()?.parentOid) {
       url = `${this.utilService.evalApiUrl()}/ui/modules/system-configurations/${this.data()!!.parentOid}/attributes`;
     } else {
       url = `${this.utilService.evalApiUrl()}/ui/modules/system-configurations/none/attributes`;
       params.attrOid = this.data()?.oid;
     }
-    
-    this.http.get<any>(url,{params}).subscribe({
-      next: (keys) => this.keys.set(keys)
+
+    this.http.get<any>(url, { params }).subscribe({
+      next: (keys) => this.keys.set(keys),
     });
   }
 

@@ -5,8 +5,9 @@ import {
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { provideZonelessChangeDetection } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { PageComponent } from './page.component';
 import { Gridster, GridsterItem } from 'angular-gridster2';
+
+import { PageComponent } from './page.component';
 
 describe('PageComponent', () => {
   let component: PageComponent;

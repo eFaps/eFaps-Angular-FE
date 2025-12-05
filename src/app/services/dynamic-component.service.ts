@@ -23,15 +23,15 @@ export class DynamicComponentService {
   ) {
     switch (uimodule.key) {
       case 'SystemConfigurationAttribute':
-        import(
-          '../ui-modules/system-configuration-attribute/system-configuration-attribute.component'
-        ).then((m) => {
-          const ref = viewContainerRef.createComponent(
-            m.SystemConfigurationAttributeComponent,
-          );
-          ref.setInput('uimodule', uimodule);
-          ref.setInput('data', data);
-        });
+        import('../ui-modules/system-configuration-attribute/system-configuration-attribute.component').then(
+          (m) => {
+            const ref = viewContainerRef.createComponent(
+              m.SystemConfigurationAttributeComponent,
+            );
+            ref.setInput('uimodule', uimodule);
+            ref.setInput('data', data);
+          },
+        );
         break;
       case 'Logback':
         import('../ui-modules/logback/logback.component').then((m) => {
@@ -41,15 +41,15 @@ export class DynamicComponentService {
         });
         break;
       case 'SystemConfigurationLink':
-        import(
-          '../ui-modules/system-configuration-link/system-configuration-link.component'
-        ).then((m) => {
-          const ref = viewContainerRef.createComponent(
-            m.SystemConfigurationLinkComponent,
-          );
-          ref.setInput('uimodule', uimodule);
-          ref.setInput('data', data);
-        });
+        import('../ui-modules/system-configuration-link/system-configuration-link.component').then(
+          (m) => {
+            const ref = viewContainerRef.createComponent(
+              m.SystemConfigurationLinkComponent,
+            );
+            ref.setInput('uimodule', uimodule);
+            ref.setInput('data', data);
+          },
+        );
         break;
       case 'CSVImport':
         import('../ui-modules/csvimport/csvimport.component').then((m) => {
@@ -92,13 +92,13 @@ export class DynamicComponentService {
         );
         break;
       case 'POS-StatusReport':
-        import(
-          '../ui-modules/pos-status-report/pos-status-report.component'
-        ).then((m) => {
-          const ref = viewContainerRef.createComponent(
-            m.PosStatusReportComponent,
-          );
-        });
+        import('../ui-modules/pos-status-report/pos-status-report.component').then(
+          (m) => {
+            const ref = viewContainerRef.createComponent(
+              m.PosStatusReportComponent,
+            );
+          },
+        );
         break;
     }
   }

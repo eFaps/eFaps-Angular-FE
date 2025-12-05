@@ -50,7 +50,7 @@ export class LogbackComponent implements OnInit {
     this.http.get<any>(url).subscribe({
       next: (loggers) => {
         this.loggers = loggers;
-        this.loaded.set(true)
+        this.loaded.set(true);
       },
     });
   }

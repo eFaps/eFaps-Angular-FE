@@ -67,20 +67,23 @@ export class PageComponent {
       disableAutoPositionOnConflict: false,
       defaultItemCols: 1,
       defaultItemRows: 1,
-      itemChangeCallback: (item: GridsterItemConfig, itemComponent: GridsterItem) => {
+      itemChangeCallback: (
+        item: GridsterItemConfig,
+        itemComponent: GridsterItem,
+      ) => {
         this.itemChanged(item);
       },
     };
-    this.dashboard = page.items.map(item => {
+    this.dashboard = page.items.map((item) => {
       const gridsterItemConfig = {
         x: item.x,
         y: item.y,
         cols: item.cols,
         rows: item.rows,
-      } as GridsterItemConfig
+      } as GridsterItemConfig;
       gridsterItemConfig['widget'] = item.widget;
-      return gridsterItemConfig
-    })
+      return gridsterItemConfig;
+    });
   }
 
   get page(): DashboardPage {

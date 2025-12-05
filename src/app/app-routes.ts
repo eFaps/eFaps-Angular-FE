@@ -9,9 +9,9 @@ export const routes: Routes = [
     canActivate: [canActivateAuth],
     pathMatch: 'full',
     loadComponent: () =>
-      import(
-        './structure-browser/structure-browser/structure-browser.component'
-      ).then((m) => m.StructureBrowserComponent),
+      import('./structure-browser/structure-browser/structure-browser.component').then(
+        (m) => m.StructureBrowserComponent,
+      ),
   },
   {
     path: 'table/:id',

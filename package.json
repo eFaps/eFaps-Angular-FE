@@ -77,5 +77,13 @@
       "localImportsType"
     ],
     "bracketSameLine": true
+  },
+  "overrides": {
+    "keycloak-angular": {
+      "@angular/common": "21.0.3",
+      "@angular/core": "^21.0.3",
+      "@angular/router": "^21.0.3",
+      "rxjs": "~7.8.2"
+    }
   }
 }

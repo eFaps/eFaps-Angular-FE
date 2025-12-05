@@ -33,7 +33,7 @@ export class FilterComponent implements OnInit {
     this.id = this.config.data.cmdId;
     this.cols = this.config.data.cols;
     this.tableService.getFilters(this.id!!).subscribe({
-      next: filters => this.filters.set(filters)
+      next: (filters) => this.filters.set(filters),
     });
   }
 
