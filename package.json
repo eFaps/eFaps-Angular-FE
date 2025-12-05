@@ -54,7 +54,7 @@
     "@types/papaparse": "^5.5.1",
     "@types/uuid": "^11.0.0",
     "import-sort-style-module": "^6.0.0",
-    "jasmine-core": "~5.10.0",
+    "jasmine-core": "~5.13.0",
     "karma": "~6.4.4",
     "karma-chrome-launcher": "~3.2.0",
     "karma-coverage": "~2.2.1",
