@@ -5,9 +5,8 @@ import {
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { provideZonelessChangeDetection } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { GridsterModule } from 'angular-gridster2';
-
 import { PageComponent } from './page.component';
+import { Gridster, GridsterItem } from 'angular-gridster2';
 
 describe('PageComponent', () => {
   let component: PageComponent;
@@ -15,7 +14,7 @@ describe('PageComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [GridsterModule],
+      imports: [Gridster, GridsterItem],
       providers: [
         provideZonelessChangeDetection(),
         provideHttpClient(withInterceptorsFromDi()),
