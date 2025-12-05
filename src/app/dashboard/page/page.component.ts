@@ -3,9 +3,10 @@ import {
   CompactType,
   DisplayGrid,
   GridType,
+  Gridster,
   GridsterConfig,
   GridsterItem,
-  GridsterModule,
+  GridsterItemConfig,
 } from 'angular-gridster2';
 import { ButtonModule } from 'primeng/button';
 import { v4 as uuidv4 } from 'uuid';
@@ -18,7 +19,7 @@ import { DashboardService } from 'src/app/services/dashboard.service';
   selector: 'app-page',
   templateUrl: './page.component.html',
   styleUrls: ['./page.component.scss'],
-  imports: [GridsterModule, ItemComponent, ButtonModule],
+  imports: [ItemComponent, ButtonModule, Gridster, GridsterItem],
 })
 export class PageComponent {
   private dashboardService = inject(DashboardService);
@@ -26,7 +27,7 @@ export class PageComponent {
   _page: DashboardPage = { key: 'not a key', items: [] };
 
   options: GridsterConfig | undefined;
-  items: GridsterItem[] = [];
+  dashboard: GridsterItemConfig[] = [];
 
   _editMode = false;
 
@@ -36,9 +37,7 @@ export class PageComponent {
     if (this.options) {
       this.options!!.draggable!!.enabled = editMode;
       this.options!!.resizable!!.enabled = editMode;
-      if (this.options!!.api) {
-        this.options!!.api!!.optionsChanged!!();
-      }
+      this.options = Object.assign({}, this.options);
     }
   }
 
@@ -68,20 +67,20 @@ export class PageComponent {
       disableAutoPositionOnConflict: false,
       defaultItemCols: 1,
       defaultItemRows: 1,
-      itemChangeCallback: (item: GridsterItem) => {
+      itemChangeCallback: (item: GridsterItemConfig, itemComponent: GridsterItem) => {
         this.itemChanged(item);
       },
     };
-    this.items = page.items.map((item) => {
-      const gridsterItem = {
+    this.dashboard = page.items.map(item => {
+      const gridsterItemConfig = {
         x: item.x,
         y: item.y,
         cols: item.cols,
         rows: item.rows,
-      } as GridsterItem;
-      gridsterItem['widget'] = item.widget;
-      return gridsterItem;
-    });
+      } as GridsterItemConfig
+      gridsterItemConfig['widget'] = item.widget;
+      return gridsterItemConfig
+    })
   }
 
   get page(): DashboardPage {
@@ -89,7 +88,7 @@ export class PageComponent {
   }
 
   addItem(): void {
-    this.items?.push({
+    this.dashboard.push({
       x: 0,
       y: 0,
       cols: 1,
@@ -99,16 +98,15 @@ export class PageComponent {
         identifier: uuidv4(),
       },
     });
-    this.options!!.api!!.resize!!();
-    this.dashboardService.updateItems(this.page, this.items);
+    this.dashboardService.updateItems(this.page, this.dashboard);
   }
 
-  removeItem(item: GridsterItem) {
-    this.items.splice(this.items.indexOf(item), 1);
-    this.dashboardService.updateItems(this.page, this.items);
+  removeItem(item: GridsterItemConfig) {
+    this.dashboard.splice(this.dashboard.indexOf(item), 1);
+    this.dashboardService.updateItems(this.page, this.dashboard);
   }
 
-  itemChanged(item: GridsterItem) {
+  itemChanged(item: GridsterItemConfig) {
     this.dashboardService.updateItem(this.page, item);
   }
 }

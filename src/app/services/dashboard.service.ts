@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-import { GridsterItem } from 'angular-gridster2';
+import { GridsterItem, GridsterItemConfig } from 'angular-gridster2';
 import { Observable, tap } from 'rxjs';
 
 import {
@@ -46,7 +46,7 @@ export class DashboardService {
     return this.updateDashboard(this.dashboard!);
   }
 
-  updateItems(page: DashboardPage, items: GridsterItem[]) {
+  updateItems(page: DashboardPage, items: GridsterItemConfig[]) {
     const existingPage = this.dashboard?.pages.find(
       (entry) => entry.key == page.key,
     );
@@ -63,7 +63,7 @@ export class DashboardService {
     }
   }
 
-  updateItem(page: DashboardPage, item: GridsterItem) {
+  updateItem(page: DashboardPage, item: GridsterItemConfig) {
     const existingPage = this.dashboard?.pages.find(
       (entry) => entry.key == page.key,
     );

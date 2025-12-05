@@ -1,6 +1,6 @@
 <div class="wrapper">
   <gridster [options]="options!!">
-    @for (item of items; track item) {
+    @for (item of dashboard; track item) {
       <gridster-item [item]="item">
         <app-item [widget]="item['widget']" [editMode]="editMode"></app-item>
         @if (editMode) {
