@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject, signal } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { PopoverModule } from 'primeng/popover';
@@ -19,7 +19,7 @@ export class FilterComponent implements OnInit {
   private dialogRef = inject(DynamicDialogRef);
 
   id: string | undefined;
-  filters: Filter[] = [];
+  filters = signal<Filter[]>([]);
   private updatedFilters: Filter[] = [];
   private cols: Column[] = [];
 
@@ -33,7 +33,7 @@ export class FilterComponent implements OnInit {
     this.id = this.config.data.cmdId;
     this.cols = this.config.data.cols;
     this.tableService.getFilters(this.id!!).subscribe({
-      next: (filters) => (this.filters = filters),
+      next: filters => this.filters.set(filters)
     });
   }
 
@@ -46,7 +46,7 @@ export class FilterComponent implements OnInit {
 
   submit() {
     const sf: Filter[] = [];
-    this.filters.forEach((filter) => {
+    this.filters().forEach((filter) => {
       const index = this.updatedFilters.findIndex((uf) => {
         return filter.field == uf.field;
       });
