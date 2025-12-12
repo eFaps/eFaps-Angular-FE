@@ -16,6 +16,15 @@
       </div>
     }
   }
+  @case ("TEXT") {
+    <p-fluid>
+      <input type="text" pInputText [(ngModel)]="text" required="filter.required" />
+      <div class="ignoreCase">
+        <p-toggleswitch [(ngModel)]="ignoreCase" inputId="switch1" fluid />
+        <label for="switch1">ignorar mayúsculas y minúsculas</label>
+      </div>
+    </p-fluid>
+  }
   @default {
     <span>What is going on</span>
   }

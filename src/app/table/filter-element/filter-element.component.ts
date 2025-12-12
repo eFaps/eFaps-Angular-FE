@@ -2,6 +2,9 @@ import { Component, Input, output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CheckboxModule } from 'primeng/checkbox';
 import { DatePickerModule } from 'primeng/datepicker';
+import { FluidModule } from 'primeng/fluid';
+import { InputTextModule } from 'primeng/inputtext';
+import { ToggleSwitchModule } from 'primeng/toggleswitch';
 
 import { Option } from 'src/app/model/content';
 import { Filter } from 'src/app/model/table';
@@ -10,7 +13,14 @@ import { Filter } from 'src/app/model/table';
   selector: 'app-filter-element',
   templateUrl: './filter-element.component.html',
   styleUrl: './filter-element.component.scss',
-  imports: [DatePickerModule, FormsModule, CheckboxModule],
+  imports: [
+    DatePickerModule,
+    FormsModule,
+    CheckboxModule,
+    InputTextModule,
+    ToggleSwitchModule,
+    FluidModule,
+  ],
 })
 export class FilterElementComponent {
   _filter: Filter | undefined;
@@ -19,19 +29,21 @@ export class FilterElementComponent {
   _selectedStatus: Option[] = [];
   statusList: Option[] = [];
 
+  _text: string | undefined;
+  _ignoreCase: boolean = true;
+
   readonly filterEvent = output<Filter>();
 
   @Input()
   set filter(filter: Filter) {
     this._filter = filter;
     switch (filter.kind) {
-      case 'DATE': {
+      case 'DATE':
         const date1 = this.toDate(filter.value1!);
         const date2 = this.toDate(filter.value2!);
         this.rangeDates = [date1, date2];
         break;
-      }
-      case 'STATUS': {
+      case 'STATUS':
         this.statusList = filter.value1! as Option[];
         this.statusList.sort((a, b) => (a.label! > b.label! ? 1 : -1));
         if (filter.value2 != null) {
@@ -43,7 +55,10 @@ export class FilterElementComponent {
           });
         }
         break;
-      }
+      case 'TEXT':
+        this.text = filter.value1;
+        this.ignoreCase = filter.value2;
+        break;
     }
   }
 
@@ -76,6 +91,7 @@ export class FilterElementComponent {
         field: this._filter!!.field,
         value1: rangeDates[0].toISOString().substring(0, 10),
         value2: rangeDates[1].toISOString().substring(0, 10),
+        required: this._filter!!.required,
       });
     }
   }
@@ -92,6 +108,39 @@ export class FilterElementComponent {
       field: this._filter!!.field,
       value1: this.statusList,
       value2: this.selectedStatus.map((opt) => opt.value),
+      required: this._filter!!.required,
+    });
+  }
+
+  get text(): string | undefined {
+    return this._text;
+  }
+
+  set text(value: string) {
+    this._text = value;
+    this.filterEvent.emit({
+      kind: this._filter!!.kind,
+      attribute: this._filter!!.attribute,
+      field: this._filter!!.field,
+      value1: this.text,
+      value2: this.ignoreCase,
+      required: this._filter!!.required,
+    });
+  }
+
+  get ignoreCase(): boolean {
+    return this._ignoreCase;
+  }
+
+  set ignoreCase(ic: boolean) {
+    this._ignoreCase = ic;
+    this.filterEvent.emit({
+      kind: this._filter!!.kind,
+      attribute: this._filter!!.attribute,
+      field: this._filter!!.field,
+      value1: this.text,
+      value2: this.ignoreCase,
+      required: this._filter!!.required,
     });
   }
 }

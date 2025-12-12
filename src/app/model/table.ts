@@ -29,11 +29,12 @@ export interface StructureBrowserEntry {
 }
 
 export interface Filter {
-  kind: 'DATE' | 'STATUS';
+  kind: 'DATE' | 'STATUS' | 'TEXT';
   attribute: string;
   field: string;
   value1?: any;
   value2?: any;
+  required: boolean;
 }
 
 export interface Page {
