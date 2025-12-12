@@ -104,15 +104,13 @@
     <router-outlet />
   </div>
   @if (showRestoreSearch()) {
-    @if (showRestoreSearch()) {
-      <div class="searchBtn">
-        <p-button
-          icon="pi pi-search"
-          [rounded]="true"
-          severity="success"
-          (click)="restoreSearch()"></p-button>
-      </div>
-    }
+    <div class="searchBtn">
+      <p-button
+        icon="pi pi-search"
+        [rounded]="true"
+        severity="success"
+        (click)="restoreSearch()"></p-button>
+    </div>
   }
 } @else {
   @if (userLookuped) {

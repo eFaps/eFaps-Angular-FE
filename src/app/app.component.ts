@@ -118,6 +118,8 @@ export class AppComponent implements OnInit {
   searchElements: any[] = [];
   version = environment.version;
 
+  showRestoreSearch = this.searchService.hasPersistedSearch;
+
   constructor() {
     const userService = this.userService;
 
@@ -311,10 +313,6 @@ export class AppComponent implements OnInit {
 
   home() {
     this.router.navigate(['/dashboard'], { onSameUrlNavigation: 'reload' });
-  }
-
-  showRestoreSearch(): boolean {
-    return this.searchService.hasPersistedSearch();
   }
 
   restoreSearch() {

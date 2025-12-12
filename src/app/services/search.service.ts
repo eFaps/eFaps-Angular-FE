@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable, inject } from '@angular/core';
+import { Injectable, inject, signal } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { Search, SearchResult } from '../model/search';
@@ -13,6 +13,8 @@ export class SearchService {
   private utilService = inject(UtilService);
 
   private searchContent: any;
+
+  hasPersistedSearch = signal<boolean>(false);
 
   getSearch(cmdId: string): Observable<Search[]> {
     const url = `${this.utilService.evalApiUrl()}/ui/search/${cmdId}`;
@@ -31,6 +33,7 @@ export class SearchService {
 
   persist(searchContent: any) {
     this.searchContent = searchContent;
+    this.hasPersistedSearch.set(true);
   }
 
   restore(): any {
@@ -39,9 +42,6 @@ export class SearchService {
 
   clear() {
     this.searchContent = undefined;
-  }
-
-  hasPersistedSearch(): boolean {
-    return this.searchContent != null;
+    this.hasPersistedSearch.set(false);
   }
 }

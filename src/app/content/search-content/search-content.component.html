@@ -4,7 +4,7 @@
   }
   <app-form-section [formSection]="search.formSection"></app-form-section>
   <p-divider>Resultado</p-divider>
-  @if (cols && cols.length > 0) {
+  @if (showResult()) {
     <div>
       <p-table
         [columns]="cols"

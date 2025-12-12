@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { MenuItem, MessageService } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
@@ -45,6 +45,7 @@ export class SearchContentComponent implements OnInit {
   elements: any[] = [];
   selectedElements: any[] = [];
   oid: string | undefined;
+  showResult = signal<boolean>(false);
 
   constructor() {
     const config = this.config;
@@ -53,6 +54,7 @@ export class SearchContentComponent implements OnInit {
     if (config.data.restore) {
       const searchContent = this.searchService.restore();
       this.searchMenuItems = searchContent.search.menuItems;
+      this.searchMenuItems.forEach((menuItem) => this.restoreAction(menuItem));
       this.search = searchContent.search.current;
       this.cols = searchContent.result.cols;
       this.elements = searchContent.result.elements;
@@ -61,6 +63,7 @@ export class SearchContentComponent implements OnInit {
       config.maximizable = true;
       config.draggable = true;
       this.searchService.clear();
+      this.showResult.set(true);
     } else {
       this.searches = config.data.searches;
       this.search = this.searches
@@ -101,6 +104,7 @@ export class SearchContentComponent implements OnInit {
           ? item.children.map((item) => this.getMenuItem(item))
           : undefined,
       command: this.evalAction(item),
+      search: item,
     };
   }
 
@@ -112,7 +116,23 @@ export class SearchContentComponent implements OnInit {
           this.config.header = item.label;
           this.cols = [];
           this.elements = [];
+          this.showResult.set(false);
         };
+  }
+
+  restoreAction(menuItem: MenuItem) {
+    if (menuItem.command) {
+      menuItem.command = () => {
+        this.search = menuItem['search'];
+        this.config.header = menuItem.label;
+        this.cols = [];
+        this.elements = [];
+        this.showResult.set(false);
+      };
+    }
+    if (menuItem.items) {
+      menuItem.items.forEach((item) => this.restoreAction(item));
+    }
   }
 
   query() {
@@ -122,6 +142,7 @@ export class SearchContentComponent implements OnInit {
         this.cols = searchResult.columns;
         this.elements = searchResult.values;
         this.evalMax(searchResult);
+        this.showResult.set(true);
       },
     });
   }
