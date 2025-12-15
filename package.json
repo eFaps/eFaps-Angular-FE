@@ -34,7 +34,7 @@
     "jspdf": "^3.0.4",
     "jspdf-autotable": "^5.0.2",
     "keycloak-angular": "^20.0.0",
-    "keycloak-js": "^26.2.1",
+    "keycloak-js": "^26.2.2",
     "ngx-localstorage": "^6.0.0",
     "papaparse": "^5.5.3",
     "primeicons": "^7.0.0",
