@@ -80,7 +80,7 @@ export class TableComponent implements OnInit {
 
   idEmitter = new EventEmitter<string>();
 
-  scrollHeight: string = '500px';
+  scrollHeight = signal<string>('500px');
 
   ngOnInit(): void {
     this.loading = true;
@@ -149,6 +149,7 @@ export class TableComponent implements OnInit {
             .subscribe({
               next: (execResponse) => {
                 if (execResponse != null && execResponse.reload) {
+                  this.tableLoaded.set(false);
                   this.loadData();
                 }
               },
@@ -344,7 +345,7 @@ export class TableComponent implements OnInit {
       height = height - paginatorHeight;
     }
 
-    this.scrollHeight = `${height}px`;
+    this.scrollHeight.set(`${height}px`);
     /**
     console.log(`innerHeight: ${window.innerHeight}
       menuBarHeight: ${menuBarHeight}, 
