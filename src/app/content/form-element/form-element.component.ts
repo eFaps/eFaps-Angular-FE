@@ -13,7 +13,6 @@ import {
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ToastMessageOptions } from 'primeng/api';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import { ButtonModule } from 'primeng/button';
 import { CheckboxModule } from 'primeng/checkbox';
@@ -100,7 +99,7 @@ export class FormElementComponent implements OnInit, AfterViewInit {
   _formItem: FormItem | undefined;
 
   showMultiSelectFilter = false;
-  autoCompleteSuggestions: any[] = [];
+  autoCompleteSuggestions = signal<any[]>([]);
 
   @ViewChild('uploadMultiple') uploadMultiple: ElementRef | undefined | any;
   @ViewChild('upload') upload: ElementRef | undefined | any;
@@ -232,7 +231,7 @@ export class FormElementComponent implements OnInit, AfterViewInit {
         break;
       case 'AUTOCOMPLETE':
         if (this.formItem.options) {
-          this.autoCompleteSuggestions = this.formItem.options;
+          this.autoCompleteSuggestions.set(this.formItem.options);
           this.autoCompleteValue = this.formItem.options[0];
           if (Array.isArray(this.formItem.options[0].value)) {
             this.addEntry(this.autoCompleteValue?.value[0]);
@@ -359,7 +358,7 @@ export class FormElementComponent implements OnInit, AfterViewInit {
   search(query: string) {
     this.autoCompleteService.search(this.formItem!!.ref!!, query).subscribe({
       next: (result) => {
-        this.autoCompleteSuggestions = result.options;
+        this.autoCompleteSuggestions.set(result.options);
       },
     });
   }

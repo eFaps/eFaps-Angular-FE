@@ -43,7 +43,7 @@
         @case ("AUTOCOMPLETE") {
           <p-autoComplete
             [(ngModel)]="autoCompleteValue"
-            [suggestions]="autoCompleteSuggestions"
+            [suggestions]="autoCompleteSuggestions()"
             (completeMethod)="search($event.query)"
             (onSelect)="changeAutoComplete($event)"
             (onUnselect)="changeAutoComplete($event)"
