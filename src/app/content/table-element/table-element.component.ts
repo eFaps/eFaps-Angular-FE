@@ -7,9 +7,12 @@ import {
   effect,
   OnDestroy,
   signal,
+  viewChild,
+  ElementRef,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import {
+  AutoComplete,
   AutoCompleteModule,
   AutoCompleteSelectEvent,
 } from 'primeng/autocomplete';
@@ -43,7 +46,9 @@ export class TableElementComponent implements OnInit, OnDestroy {
 
   inputValue: any;
   autoCompleteValue: any;
-  autoCompleteSuggestions: any[] = [];
+  autoCompleteLabel: string | undefined;
+  autoCompleteSuggestions = signal<any[]>([]);
+  autoCompleteRef = viewChild<AutoComplete>('autocomplete');
 
   readOnlyValue: any;
   valueSub: Subscription | undefined;
@@ -146,9 +151,16 @@ export class TableElementComponent implements OnInit, OnDestroy {
   changeAutoComplete(event: AutoCompleteSelectEvent) {
     this.addEntry(event.value.value);
     if (event.value.display) {
-      this.autoCompleteValue = event.value.display;
+      this.autoCompleteLabel = event.value.display;
     }
     this.fieldUpdate();
+  }
+
+  callback() {
+    if (this.autoCompleteLabel) {
+      (this.autoCompleteRef()?.inputEL?.nativeElement as any).value =
+        this.autoCompleteLabel;
+    }
   }
 
   changeDropdown(value: any) {
@@ -159,7 +171,7 @@ export class TableElementComponent implements OnInit, OnDestroy {
   search(query: string) {
     this.autoCompleteService.search(this.column().ref!!, query).subscribe({
       next: (result) => {
-        this.autoCompleteSuggestions = result.options;
+        this.autoCompleteSuggestions.set(result.options);
       },
     });
   }
@@ -181,6 +193,7 @@ export class TableElementComponent implements OnInit, OnDestroy {
                 });
               });
             }
+            this.callback();
           },
         });
     }
