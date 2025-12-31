@@ -20,6 +20,7 @@
       stateStorage="local"
       [stateKey]="storageKey"
       (onStateRestore)="stateRestore($event)"
+      (onFilter)="onFilter($event)"
       [reorderableColumns]="true"
       [exportFilename]="title">
       <ng-template #caption>
@@ -76,7 +77,7 @@
                 class="p-inputtext-sm" />
               <p-button
                 icon="pi pi-times"
-                (click)="searchInput.value = ''; dt.filterGlobal('', 'contains')"></p-button>
+                (click)="searchInput.value = ''; dt.filterGlobal('', 'contains');"></p-button>
             </p-inputGroup>
           </div>
         </div>
