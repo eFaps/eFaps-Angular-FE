@@ -230,7 +230,7 @@ export class FormElementComponent implements OnInit, AfterViewInit {
         }
         break;
       case 'AUTOCOMPLETE':
-        if (this.formItem.options) {
+        if (this.formItem.options && this.formItem.options.length > 0) {
           this.autoCompleteSuggestions.set(this.formItem.options);
           this.autoCompleteValue = this.formItem.options[0];
           if (Array.isArray(this.formItem.options[0].value)) {
