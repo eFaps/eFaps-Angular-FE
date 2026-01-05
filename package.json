@@ -32,7 +32,7 @@
     "file-saver": "^2.0.5",
     "javascript-time-ago": "^2.5.12",
     "jspdf": "^3.0.4",
-    "jspdf-autotable": "^5.0.2",
+    "jspdf-autotable": "^5.0.7",
     "keycloak-angular": "^20.0.0",
     "keycloak-js": "^26.2.2",
     "ngx-localstorage": "^6.0.0",
