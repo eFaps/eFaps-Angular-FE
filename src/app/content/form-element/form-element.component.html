@@ -42,6 +42,7 @@
         }
         @case ("AUTOCOMPLETE") {
           <p-autoComplete
+            #autocomplete
             [(ngModel)]="autoCompleteValue"
             [suggestions]="autoCompleteSuggestions()"
             (completeMethod)="search($event.query)"
@@ -50,7 +51,6 @@
             optionLabel="label"
             optionValue="value"
             dataKey="value"
-            [lazy]="true"
             placeholder="buscar"
             [forceSelection]="true"
             [showEmptyMessage]="true"

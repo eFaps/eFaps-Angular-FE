@@ -1,6 +1,5 @@
 import {
   Component,
-  Input,
   OnInit,
   input,
   inject,
@@ -8,7 +7,6 @@ import {
   OnDestroy,
   signal,
   viewChild,
-  ElementRef,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import {

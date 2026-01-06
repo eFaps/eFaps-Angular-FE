@@ -1,4 +1,11 @@
-import { Component, EventEmitter, OnInit, inject, signal, viewChild } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  OnInit,
+  inject,
+  signal,
+  viewChild,
+} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import FileSaver from 'file-saver';
@@ -14,11 +21,10 @@ import { DialogService } from 'primeng/dynamicdialog';
 import { InputGroupModule } from 'primeng/inputgroup';
 import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
 import { PaginatorModule, PaginatorState } from 'primeng/paginator';
+import { Scroller, ScrollerModule } from 'primeng/scroller';
 import { Table, TableModule } from 'primeng/table';
 import { TieredMenuModule } from 'primeng/tieredmenu';
 import { combineLatest } from 'rxjs';
-import { Scroller, ScrollerModule } from 'primeng/scroller';
-
 
 import { ColumnComponent } from '../column/column.component';
 import { FilterComponent } from '../filter/filter.component';
@@ -249,7 +255,7 @@ export class TableComponent implements OnInit {
   }
 
   onFilter(event: any) {
-    const table = this.tableRef()
+    const table = this.tableRef();
     if (table && table.scroller) {
       table.scroller.scrollHeight = this.scrollHeight();
     }

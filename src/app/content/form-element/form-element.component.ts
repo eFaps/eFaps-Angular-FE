@@ -13,7 +13,13 @@ import {
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AutoCompleteModule } from 'primeng/autocomplete';
+import {
+  AutoComplete,
+  AutoCompleteAddEvent,
+  AutoCompleteLazyLoadEvent,
+  AutoCompleteModule,
+  AutoCompleteSelectEvent,
+} from 'primeng/autocomplete';
 import { ButtonModule } from 'primeng/button';
 import { CheckboxModule } from 'primeng/checkbox';
 import { DatePickerModule } from 'primeng/datepicker';
@@ -99,7 +105,9 @@ export class FormElementComponent implements OnInit, AfterViewInit {
   _formItem: FormItem | undefined;
 
   showMultiSelectFilter = false;
+  autoCompleteRef = viewChild<AutoComplete>('autocomplete');
   autoCompleteSuggestions = signal<any[]>([]);
+  autoCompleteLabel: string | undefined;
 
   @ViewChild('uploadMultiple') uploadMultiple: ElementRef | undefined | any;
   @ViewChild('upload') upload: ElementRef | undefined | any;
@@ -363,13 +371,23 @@ export class FormElementComponent implements OnInit, AfterViewInit {
     });
   }
 
-  changeAutoComplete(option: Option) {
-    if (typeof option.value === 'object') {
-      this.addEntry(option.value['value']);
+  changeAutoComplete(event: AutoCompleteSelectEvent) {
+    if (typeof event.value.value === 'object') {
+      this.addEntry(event.value['value']);
     } else {
-      this.addEntry(option.value);
+      this.addEntry(event.value.value);
+    }
+    if (event.value.display) {
+      this.autoCompleteLabel = event.value.display;
     }
     this.fieldUpdate();
+  }
+
+  callback() {
+    if (this.autoCompleteLabel) {
+      (this.autoCompleteRef()?.inputEL?.nativeElement as any).value =
+        this.autoCompleteLabel;
+    }
   }
 
   onUpload(event: UploadEvent) {
@@ -397,8 +415,13 @@ export class FormElementComponent implements OnInit, AfterViewInit {
               });
             });
           }
+          this.callback();
         },
       });
+    } else {
+      setTimeout(() => {
+        this.callback();
+      }, 50);
     }
   }
 
