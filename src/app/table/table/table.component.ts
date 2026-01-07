@@ -7,7 +7,7 @@ import {
   viewChild,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import FileSaver from 'file-saver';
 import {
   ConfirmationService,
@@ -21,7 +21,6 @@ import { DialogService } from 'primeng/dynamicdialog';
 import { InputGroupModule } from 'primeng/inputgroup';
 import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
 import { PaginatorModule, PaginatorState } from 'primeng/paginator';
-import { Scroller, ScrollerModule } from 'primeng/scroller';
 import { Table, TableModule } from 'primeng/table';
 import { TieredMenuModule } from 'primeng/tieredmenu';
 import { combineLatest } from 'rxjs';
@@ -59,6 +58,7 @@ import { TableService } from 'src/app/services/table.service';
 })
 export class TableComponent implements OnInit {
   private route = inject(ActivatedRoute);
+  private router = inject(Router);
   private confirmationService = inject(ConfirmationService);
   private dialogService = inject(DialogService);
   private tableService = inject(TableService);
@@ -158,9 +158,15 @@ export class TableComponent implements OnInit {
             .runFormAction(item, this.oid, this.selectedElements as any[])
             .subscribe({
               next: (execResponse) => {
-                if (execResponse != null && execResponse.reload) {
-                  this.tableLoaded.set(false);
-                  this.loadData();
+                if (execResponse != null) {
+                  // if a targetOid is returned jump to that object
+                  if (execResponse.targetOid) {
+                    this.onNavEvent({})
+                    this.router.navigate(['content', execResponse.targetOid]);
+                  } else if (execResponse.reload) {
+                    this.tableLoaded.set(false);
+                    this.loadData();
+                  }
                 }
               },
             });
