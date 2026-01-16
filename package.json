@@ -8,7 +8,7 @@
     "build": "ng build --configuration production",
     "build-demo": "ng build --configuration demo",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test --browsers ChromeHeadlessNoSandbox --no-progress --no-watch",
+    "test": "ng test --browsers chromiumHeadless --no-progress --no-watch",
     "prettier-html": "prettier --print-width 100 --write \"src/**/*.html\" ",
     "prettier-scss": "prettier --write \"src/**/*.scss\" ",
     "prettier-ts": "prettier --write \"src/**/*.ts\"",
@@ -52,16 +52,14 @@
     "@types/file-saver": "^2.0.7",
     "@types/jasmine": "~5.1.13",
     "@types/papaparse": "^5.5.2",
+    "@vitest/browser-playwright": "^4.0.17",
     "import-sort-style-module": "^6.0.0",
     "jasmine-core": "~5.10.0",
-    "karma": "~6.4.4",
-    "karma-chrome-launcher": "~3.2.0",
-    "karma-coverage": "~2.2.1",
-    "karma-jasmine": "~5.1.0",
-    "karma-jasmine-html-reporter": "~2.1.0",
+    "jsdom": "^27.4.0",
     "prettier": "^3.7.4",
     "prettier-plugin-sort-imports": "^1.8.9",
-    "typescript": "~5.9.3"
+    "typescript": "~5.9.3",
+    "vitest": "^4.0.17"
   },
   "prettier": {
     "plugins": [
@@ -85,5 +83,4 @@
       "rxjs": "~7.8.2"
     }
   }
-  
 }
