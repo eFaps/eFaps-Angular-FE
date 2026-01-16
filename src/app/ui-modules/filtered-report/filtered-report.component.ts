@@ -16,12 +16,12 @@ import { MultiSelectModule } from 'primeng/multiselect';
 import { PickListModule } from 'primeng/picklist';
 import { RadioButtonModule } from 'primeng/radiobutton';
 
+import { AutoCompleteComponent } from './auto-complete/auto-complete.component';
 import { FormItem, Option } from 'src/app/model/content';
 import { ModuleData, UIModule } from 'src/app/model/module';
 import { SafeHtmlPipe } from 'src/app/pipes/safe-html.pipe';
 import { DownloadService } from 'src/app/services/download.service';
 import { UtilService } from 'src/app/services/util.service';
-import { AutoCompleteComponent } from './auto-complete/auto-complete.component';
 
 @Component({
   selector: 'app-filtered-report',
@@ -36,7 +36,7 @@ import { AutoCompleteComponent } from './auto-complete/auto-complete.component';
     RadioButtonModule,
     MultiSelectModule,
     AutoCompleteModule,
-    AutoCompleteComponent
+    AutoCompleteComponent,
   ],
   templateUrl: './filtered-report.component.html',
   styleUrl: './filtered-report.component.scss',
@@ -60,7 +60,7 @@ export class FilteredReportComponent implements OnInit {
 
   optionElements: any = {};
 
-  autoCompletes = signal<Map<String,FormItem>>(new Map());
+  autoCompletes = signal<Map<String, FormItem>>(new Map());
 
   sourceStyle = "{ height: '20rem', display: 'block' }";
   constructor() {
@@ -137,9 +137,9 @@ export class FilteredReportComponent implements OnInit {
           );
           break;
         case 'AUTOCOMPLETE':
-          this.autoCompletes.update(map => {
-            return map.set(formItem.name, formItem)
-          })
+          this.autoCompletes.update((map) => {
+            return map.set(formItem.name, formItem);
+          });
           this.formGroup?.addControl(
             formItem.name,
             formItem.required
@@ -186,7 +186,7 @@ export class FilteredReportComponent implements OnInit {
           });
         }
       } else if (value != null) {
-        let val: string
+        let val: string;
         if (typeof value == 'object' && 'value' in (value as any)) {
           val = (value as any).value as string;
         } else {

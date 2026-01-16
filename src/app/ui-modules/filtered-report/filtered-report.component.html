@@ -70,7 +70,10 @@
         }
         @case ("AUTOCOMPLETE") {
           <div class="filterElement autocomplete">
-            <app-auto-complete [formGroup]="formGroup" [formItem]="autoCompletes().get(filter.name)" [uimodule]="uimodule()"></app-auto-complete>
+            <app-auto-complete
+              [formGroup]="formGroup"
+              [formItem]="autoCompletes().get(filter.name)"
+              [uimodule]="uimodule()"></app-auto-complete>
           </div>
         }
       }
