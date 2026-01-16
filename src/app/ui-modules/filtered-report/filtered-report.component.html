@@ -54,6 +54,14 @@
             </div>
           </div>
         }
+        @case("CHECKBOX") {
+          <div class="filterElement checkbox">
+            <p-floatlabel>
+              <p-multiselect formControlName="{{ filter.name }}" id="{{ 'filter' + indexOfelement }}" [options]="optionElements[filter.name]" optionLabel="label" optionValue="value" fluid/>
+              <label for="{{ 'filter' + indexOfelement }}">{{ filter.label }}</label>
+            </p-floatlabel>
+          </div>
+        }
       }
     }
     <div class="filterButton">

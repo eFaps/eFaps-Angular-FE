@@ -11,6 +11,7 @@ import { LocalStorageService } from 'ngx-localstorage';
 import { ButtonModule } from 'primeng/button';
 import { DatePickerModule } from 'primeng/datepicker';
 import { FloatLabelModule } from 'primeng/floatlabel';
+import { MultiSelectModule } from 'primeng/multiselect';
 import { PickListModule } from 'primeng/picklist';
 import { RadioButtonModule } from 'primeng/radiobutton';
 
@@ -31,6 +32,7 @@ import { UtilService } from 'src/app/services/util.service';
     ButtonModule,
     PickListModule,
     RadioButtonModule,
+    MultiSelectModule
   ],
   templateUrl: './filtered-report.component.html',
   styleUrl: './filtered-report.component.scss',
@@ -119,6 +121,13 @@ export class FilteredReportComponent implements OnInit {
             new FormControl<string | null>(formItem.value),
           );
           break;
+           case 'CHECKBOX':
+          this.initOptions(formItem);
+          this.formGroup?.addControl(
+            formItem.name,
+            formItem.required ? new FormControl<string[]>(formItem.value, Validators.required) : new FormControl<string[]>(formItem.value),
+          );
+          break;
         case 'DATETIME':
         case 'DATETIMELABEL':
         case 'INPUT':
@@ -129,7 +138,6 @@ export class FilteredReportComponent implements OnInit {
         case 'UPLOAD':
         case 'UPLOADMULTIPLE':
         case 'ATTRSET':
-        case 'CHECKBOX':
         case 'TEXTAREA':
         case 'TIME':
         case 'BUTTON':
@@ -145,13 +153,24 @@ export class FilteredReportComponent implements OnInit {
       params = params.set('mime', mime);
     }
     Object.entries(this.formGroup.value).forEach(([key, value]) => {
-      let val: string | number;
       if (value instanceof Date) {
-        val = value.toISOString().substring(0, 10);
-      } else {
-        val = value as string;
+        const val = value.toISOString().substring(0, 10);
+        params =params.set(key, val);
+      } else if (Array.isArray(value)) {
+         if (Number.isFinite(value[0])) {
+           (value as number[]).forEach( val => {
+          params =params.append(key, val);
+        })
+         } else {
+
+        (value as string[]).forEach( val => {
+          params =params.append(key, val);
+        })
       }
-      params = params.set(key, val);
+      } else {
+        const val = value as string;
+        params =params.set(key, val);
+      }
     });
     Object.entries(this.pickListElements).forEach(([key, value]) => {
       var keys: string[] = [];
