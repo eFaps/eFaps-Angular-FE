@@ -161,7 +161,7 @@ export class TableComponent implements OnInit {
                 if (execResponse != null) {
                   // if a targetOid is returned jump to that object
                   if (execResponse.targetOid) {
-                    this.onNavEvent({})
+                    this.onNavEvent({});
                     this.router.navigate(['content', execResponse.targetOid]);
                   } else if (execResponse.reload) {
                     this.tableLoaded.set(false);

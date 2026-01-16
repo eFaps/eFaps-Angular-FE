@@ -1,5 +1,5 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Component, OnInit, inject, input } from '@angular/core';
+import { Component, OnInit, inject, input, signal } from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -8,6 +8,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { LocalStorageService } from 'ngx-localstorage';
+import { AutoCompleteModule } from 'primeng/autocomplete';
 import { ButtonModule } from 'primeng/button';
 import { DatePickerModule } from 'primeng/datepicker';
 import { FloatLabelModule } from 'primeng/floatlabel';
@@ -20,6 +21,7 @@ import { ModuleData, UIModule } from 'src/app/model/module';
 import { SafeHtmlPipe } from 'src/app/pipes/safe-html.pipe';
 import { DownloadService } from 'src/app/services/download.service';
 import { UtilService } from 'src/app/services/util.service';
+import { AutoCompleteComponent } from './auto-complete/auto-complete.component';
 
 @Component({
   selector: 'app-filtered-report',
@@ -32,7 +34,9 @@ import { UtilService } from 'src/app/services/util.service';
     ButtonModule,
     PickListModule,
     RadioButtonModule,
-    MultiSelectModule
+    MultiSelectModule,
+    AutoCompleteModule,
+    AutoCompleteComponent
   ],
   templateUrl: './filtered-report.component.html',
   styleUrl: './filtered-report.component.scss',
@@ -55,6 +59,8 @@ export class FilteredReportComponent implements OnInit {
   pickListElements: any = {};
 
   optionElements: any = {};
+
+  autoCompletes = signal<Map<String,FormItem>>(new Map());
 
   sourceStyle = "{ height: '20rem', display: 'block' }";
   constructor() {
@@ -121,19 +127,32 @@ export class FilteredReportComponent implements OnInit {
             new FormControl<string | null>(formItem.value),
           );
           break;
-           case 'CHECKBOX':
+        case 'CHECKBOX':
           this.initOptions(formItem);
           this.formGroup?.addControl(
             formItem.name,
-            formItem.required ? new FormControl<string[]>(formItem.value, Validators.required) : new FormControl<string[]>(formItem.value),
+            formItem.required
+              ? new FormControl<string[]>(formItem.value, Validators.required)
+              : new FormControl<string[]>(formItem.value),
           );
           break;
+        case 'AUTOCOMPLETE':
+          this.autoCompletes.update(map => {
+            return map.set(formItem.name, formItem)
+          })
+          this.formGroup?.addControl(
+            formItem.name,
+            formItem.required
+              ? new FormControl<Option>(formItem.value, Validators.required)
+              : new FormControl<Option>(formItem.value),
+          );
+          break;
+
         case 'DATETIME':
         case 'DATETIMELABEL':
         case 'INPUT':
         case 'DROPDOWN':
         case 'BITENUM':
-        case 'AUTOCOMPLETE':
         case 'SNIPPLET':
         case 'UPLOAD':
         case 'UPLOADMULTIPLE':
@@ -155,21 +174,25 @@ export class FilteredReportComponent implements OnInit {
     Object.entries(this.formGroup.value).forEach(([key, value]) => {
       if (value instanceof Date) {
         const val = value.toISOString().substring(0, 10);
-        params =params.set(key, val);
+        params = params.set(key, val);
       } else if (Array.isArray(value)) {
-         if (Number.isFinite(value[0])) {
-           (value as number[]).forEach( val => {
-          params =params.append(key, val);
-        })
-         } else {
-
-        (value as string[]).forEach( val => {
-          params =params.append(key, val);
-        })
-      }
-      } else {
-        const val = value as string;
-        params =params.set(key, val);
+        if (Number.isFinite(value[0])) {
+          (value as number[]).forEach((val) => {
+            params = params.append(key, val);
+          });
+        } else {
+          (value as string[]).forEach((val) => {
+            params = params.append(key, val);
+          });
+        }
+      } else if (value != null) {
+        let val: string
+        if (typeof value == 'object' && 'value' in (value as any)) {
+          val = (value as any).value as string;
+        } else {
+          val = value as string;
+        }
+        params = params.set(key, val);
       }
     });
     Object.entries(this.pickListElements).forEach(([key, value]) => {

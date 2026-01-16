@@ -15,8 +15,6 @@ import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import {
   AutoComplete,
-  AutoCompleteAddEvent,
-  AutoCompleteLazyLoadEvent,
   AutoCompleteModule,
   AutoCompleteSelectEvent,
 } from 'primeng/autocomplete';

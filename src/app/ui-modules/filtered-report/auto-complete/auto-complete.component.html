@@ -1,0 +1,6 @@
+<div [formGroup]="formGroup()">
+<p-floatlabel>
+    <p-autocomplete #ac  [(ngModel)]="selectedOption"  formControlName="{{ formItem()?.name }}" [suggestions]="autoCompleteSuggestions()" (completeMethod)="search($event.query)" [showClear]="true" fluid/>
+     <label for="ac">{{formItem()?.label}}</label>
+</p-floatlabel>
+</div>

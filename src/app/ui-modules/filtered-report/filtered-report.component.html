@@ -54,12 +54,23 @@
             </div>
           </div>
         }
-        @case("CHECKBOX") {
+        @case ("CHECKBOX") {
           <div class="filterElement checkbox">
             <p-floatlabel>
-              <p-multiselect formControlName="{{ filter.name }}" id="{{ 'filter' + indexOfelement }}" [options]="optionElements[filter.name]" optionLabel="label" optionValue="value" fluid/>
+              <p-multiselect
+                formControlName="{{ filter.name }}"
+                id="{{ 'filter' + indexOfelement }}"
+                [options]="optionElements[filter.name]"
+                optionLabel="label"
+                optionValue="value"
+                fluid />
               <label for="{{ 'filter' + indexOfelement }}">{{ filter.label }}</label>
             </p-floatlabel>
+          </div>
+        }
+        @case ("AUTOCOMPLETE") {
+          <div class="filterElement autocomplete">
+            <app-auto-complete [formGroup]="formGroup" [formItem]="autoCompletes().get(filter.name)" [uimodule]="uimodule()"></app-auto-complete>
           </div>
         }
       }
