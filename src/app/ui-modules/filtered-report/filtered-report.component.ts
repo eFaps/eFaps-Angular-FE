@@ -54,6 +54,8 @@ export class FilteredReportComponent implements OnInit {
 
   reportHtml: string = '';
   filters: FormItem[] = [];
+  exportXls= signal<boolean>(false)
+  exportPdf= signal<boolean>(false)
   loading = false;
 
   pickListElements: any = {};
@@ -63,6 +65,7 @@ export class FilteredReportComponent implements OnInit {
   autoCompletes = signal<Map<String, FormItem>>(new Map());
 
   sourceStyle = "{ height: '20rem', display: 'block' }";
+
   constructor() {
     this.formGroup = new FormGroup({});
   }
@@ -81,6 +84,8 @@ export class FilteredReportComponent implements OnInit {
     const url = `${this.utilService.evalApiUrl()}/ui/modules/filtered-report/${module?.id}`;
     this.http.get<any>(url, { params: httpParams }).subscribe({
       next: (reportDto) => {
+        this.exportXls.set(reportDto.exportXls)
+        this.exportPdf.set(reportDto.exportPdf)
         if (reportDto.downloadKey) {
           this.downloadService.download(reportDto.downloadKey);
         } else {

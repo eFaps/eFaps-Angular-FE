@@ -8,7 +8,9 @@
               <p-datepicker
                 inputId="{{ 'filter' + indexOfelement }}"
                 [showIcon]="true"
-                formControlName="{{ filter.name }}"></p-datepicker>
+                formControlName="{{ filter.name }}"
+                appendTo="body"
+                ></p-datepicker>
               <label for="{{ 'filter' + indexOfelement }}">{{ filter.label }}</label>
             </p-floatlabel>
           </div>
@@ -63,6 +65,7 @@
                 [options]="optionElements[filter.name]"
                 optionLabel="label"
                 optionValue="value"
+                appendTo="body"
                 fluid />
               <label for="{{ 'filter' + indexOfelement }}">{{ filter.label }}</label>
             </p-floatlabel>
@@ -85,16 +88,20 @@
         [loading]="loading"
         (onClick)="reload()"
         [disabled]="!formGroup.valid" />
+        @if(exportXls()) {
       <p-button
         icon="pi pi-file-excel"
         [loading]="loading"
         [disabled]="!formGroup.valid"
         (onClick)="export('xls')" />
+        }
+        @if(exportPdf()) {
       <p-button
         icon="pi pi-file-pdf"
         [loading]="loading"
         [disabled]="!formGroup.valid"
         (onClick)="export('pdf')" />
+        }
     </div>
   </div>
   <div class="content">
