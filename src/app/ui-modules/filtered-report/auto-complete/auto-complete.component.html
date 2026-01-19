@@ -7,6 +7,7 @@
       [suggestions]="autoCompleteSuggestions()"
       (completeMethod)="search($event.query)"
       [showClear]="true"
+      appendTo="body"
       fluid />
     <label for="ac">{{ formItem()?.label }}</label>
   </p-floatlabel>
