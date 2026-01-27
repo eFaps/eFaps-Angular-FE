@@ -3,13 +3,12 @@ import {
   ElementRef,
   OnInit,
   Renderer2,
-  Signal,
   ViewChild,
   computed,
   effect,
   inject,
+  signal,
 } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
 import { Router, RouterOutlet } from '@angular/router';
 import { KEYCLOAK_EVENT_SIGNAL, KeycloakEventType } from 'keycloak-angular';
 import Keycloak from 'keycloak-js';
@@ -96,9 +95,8 @@ export class AppComponent implements OnInit {
 
   title = 'eFaps-Angular-FE';
 
-  mainMenu: Signal<MenuEntry[] | undefined> = toSignal(
-    this.menuService.getMainMenu(),
-  );
+  mainMenu = signal<MenuEntry[]>([]);
+
   menuItems = computed(() => {
     return this.mainMenu()?.map((item) =>
       toMenuItem(item, this.actionProvider),
@@ -128,6 +126,13 @@ export class AppComponent implements OnInit {
       const keycloakEvent = keycloakSignal();
       if (keycloakEvent.type === KeycloakEventType.AuthSuccess) {
         userService.getCurrentUser(true).subscribe();
+      }
+    });
+    effect(() => {
+      const company = this.userService.company();
+      if (company) {
+        this.loadMenu();
+        this.home();
       }
     });
   }
@@ -182,6 +187,7 @@ export class AppComponent implements OnInit {
       this.showCompanySelector = false;
     }
     this._user = user;
+    this.loadMenu();
   }
 
   get user(): User | undefined {
@@ -218,6 +224,12 @@ export class AppComponent implements OnInit {
     return undefined;
   };
 
+  loadMenu() {
+    this.menuService.getMainMenu().subscribe({
+      next: (entries) => this.mainMenu.set(entries),
+    });
+  }
+
   strctBrwsrAction(item: MenuEntry) {
     this.router.navigate(['strctbrws', item.id]);
   }
@@ -235,15 +247,7 @@ export class AppComponent implements OnInit {
     ref!.onClose.subscribe((company: Company) => {
       if (company) {
         if (company.uuid != this.company()?.uuid) {
-          this.userService.setCompany(company).subscribe({
-            next: () => {
-              this.router
-                .navigateByUrl('/', { onSameUrlNavigation: 'reload' })
-                .then(() => {
-                  this.menuService.getMainMenu().subscribe();
-                });
-            },
-          });
+          this.userService.setCompany(company);
         }
       }
     });

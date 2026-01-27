@@ -26,7 +26,20 @@ export class UserService {
   currentCompany: Company | null | undefined =
     this.storageService.get<Company>('currentCompany');
 
-  company: WritableSignal<Company | undefined> = signal(undefined);
+  company: WritableSignal<Company | undefined> = signal(undefined, {
+    equal: (a: Company | undefined, b: Company | undefined) => {
+      if (a === undefined && b === undefined) {
+        return true;
+      }
+      if (
+        (a === undefined && b !== undefined) ||
+        (a !== undefined && b === undefined)
+      ) {
+        return false;
+      }
+      return a!.uuid == b!.uuid;
+    },
+  });
 
   constructor() {
     if (this.currentCompany != null) {
@@ -77,11 +90,8 @@ export class UserService {
     );
   }
 
-  setCompany(company: Company): Observable<void> {
+  setCompany(company: Company) {
     this.company.set(company);
-    return new Observable((subscriber) => {
-      subscriber.next();
-    });
   }
 
   getCompanies(): Observable<Company[]> {

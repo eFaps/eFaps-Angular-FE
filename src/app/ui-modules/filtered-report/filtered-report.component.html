@@ -9,8 +9,7 @@
                 inputId="{{ 'filter' + indexOfelement }}"
                 [showIcon]="true"
                 formControlName="{{ filter.name }}"
-                appendTo="body"
-                ></p-datepicker>
+                appendTo="body"></p-datepicker>
               <label for="{{ 'filter' + indexOfelement }}">{{ filter.label }}</label>
             </p-floatlabel>
           </div>
@@ -88,20 +87,20 @@
         [loading]="loading"
         (onClick)="reload()"
         [disabled]="!formGroup.valid" />
-        @if(exportXls()) {
-      <p-button
-        icon="pi pi-file-excel"
-        [loading]="loading"
-        [disabled]="!formGroup.valid"
-        (onClick)="export('xls')" />
-        }
-        @if(exportPdf()) {
-      <p-button
-        icon="pi pi-file-pdf"
-        [loading]="loading"
-        [disabled]="!formGroup.valid"
-        (onClick)="export('pdf')" />
-        }
+      @if (exportXls()) {
+        <p-button
+          icon="pi pi-file-excel"
+          [loading]="loading"
+          [disabled]="!formGroup.valid"
+          (onClick)="export('xls')" />
+      }
+      @if (exportPdf()) {
+        <p-button
+          icon="pi pi-file-pdf"
+          [loading]="loading"
+          [disabled]="!formGroup.valid"
+          (onClick)="export('pdf')" />
+      }
     </div>
   </div>
   <div class="content">
