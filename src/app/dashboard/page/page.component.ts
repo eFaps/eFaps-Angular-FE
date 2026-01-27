@@ -11,9 +11,9 @@ import {
 import { ButtonModule } from 'primeng/button';
 import { v4 as uuidv4 } from 'uuid';
 
+import { DashboardPage } from '../../model/dashboard';
+import { DashboardService } from '../../services/dashboard.service';
 import { ItemComponent } from '../item/item.component';
-import { DashboardPage } from 'src/app/model/dashboard';
-import { DashboardService } from 'src/app/services/dashboard.service';
 
 @Component({
   selector: 'app-page',

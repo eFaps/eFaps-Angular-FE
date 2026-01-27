@@ -1,12 +1,12 @@
-import { Component, Input, input, inject } from '@angular/core';
+import { Component, inject, Input, input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { SelectModule } from 'primeng/select';
 import { TableModule } from 'primeng/table';
 
-import { FormItem } from 'src/app/model/content';
-import { ValueService } from 'src/app/services/value.service';
+import { FormItem } from '../../model/content';
+import { ValueService } from '../../services/value.service';
 
 @Component({
   selector: 'app-attribute-set-element',

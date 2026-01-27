@@ -1,15 +1,15 @@
 import { CommonModule, DatePipe } from '@angular/common';
 import {
+  AfterViewInit,
   Component,
+  ElementRef,
+  inject,
   Input,
   OnInit,
-  ViewContainerRef,
-  viewChild,
-  inject,
-  ViewChild,
-  ElementRef,
-  AfterViewInit,
   signal,
+  viewChild,
+  ViewChild,
+  ViewContainerRef,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -33,17 +33,17 @@ import { RadioButtonModule } from 'primeng/radiobutton';
 import { SelectModule } from 'primeng/select';
 import { TextareaModule } from 'primeng/textarea';
 
+import { FormItem } from '../../model/content';
+import { FieldCommandResponse } from '../../model/field-command';
+import { AutoCompleteService } from '../../services/auto-complete.service';
+import { DynamicComponentService } from '../../services/dynamic-component.service';
+import { FieldCommandService } from '../../services/field-command.service';
+import { FieldUpdateService } from '../../services/field-update.service';
+import { UtilService } from '../../services/util.service';
+import { ValidationService } from '../../services/validation.service';
+import { ValueService } from '../../services/value.service';
 import { AttributeSetComponent } from '../attribute-set/attribute-set.component';
 import { ClassificationsComponent } from '../classifications/classifications.component';
-import { FormItem, Option } from 'src/app/model/content';
-import { FieldCommandResponse } from 'src/app/model/field-command';
-import { AutoCompleteService } from 'src/app/services/auto-complete.service';
-import { DynamicComponentService } from 'src/app/services/dynamic-component.service';
-import { FieldCommandService } from 'src/app/services/field-command.service';
-import { FieldUpdateService } from 'src/app/services/field-update.service';
-import { UtilService } from 'src/app/services/util.service';
-import { ValidationService } from 'src/app/services/validation.service';
-import { ValueService } from 'src/app/services/value.service';
 
 @Component({
   selector: 'app-form-element',

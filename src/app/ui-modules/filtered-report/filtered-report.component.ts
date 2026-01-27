@@ -16,12 +16,12 @@ import { MultiSelectModule } from 'primeng/multiselect';
 import { PickListModule } from 'primeng/picklist';
 import { RadioButtonModule } from 'primeng/radiobutton';
 
-import { AutoCompleteComponent } from './auto-complete/auto-complete.component';
-import { FormItem, Option } from 'src/app/model/content';
-import { ModuleData, UIModule } from 'src/app/model/module';
 import { SafeHtmlPipe } from 'src/app/pipes/safe-html.pipe';
-import { DownloadService } from 'src/app/services/download.service';
-import { UtilService } from 'src/app/services/util.service';
+import { FormItem, Option } from '../../model/content';
+import { ModuleData, UIModule } from '../../model/module';
+import { DownloadService } from '../../services/download.service';
+import { UtilService } from '../../services/util.service';
+import { AutoCompleteComponent } from './auto-complete/auto-complete.component';
 
 @Component({
   selector: 'app-filtered-report',

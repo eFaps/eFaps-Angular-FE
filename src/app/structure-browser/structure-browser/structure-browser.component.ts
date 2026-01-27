@@ -1,4 +1,4 @@
-import { Component, OnInit, importProvidersFrom, inject } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { LocalStorageService } from 'ngx-localstorage';
@@ -19,15 +19,15 @@ import { MenubarModule } from 'primeng/menubar';
 import { TreeTableModule } from 'primeng/treetable';
 import { combineLatest } from 'rxjs';
 
+import { MenuEntry } from '../../model/menu';
+import { StructureBrowserEntry } from '../../model/table';
+import { ActionService } from '../../services/action.service';
+import { BreadcrumbService } from '../../services/breadcrumb.service';
+import { ExecService } from '../../services/exec.service';
+import { MenuActionProvider, toMenuItems } from '../../services/menu.service';
+import { StyleService } from '../../services/style.service';
+import { TableService } from '../../services/table.service';
 import { ColumnComponent } from '../column/column.component';
-import { MenuEntry } from 'src/app/model/menu';
-import { StructureBrowserEntry } from 'src/app/model/table';
-import { ActionService } from 'src/app/services/action.service';
-import { BreadcrumbService } from 'src/app/services/breadcrumb.service';
-import { ExecService } from 'src/app/services/exec.service';
-import { MenuActionProvider, toMenuItems } from 'src/app/services/menu.service';
-import { StyleService } from 'src/app/services/style.service';
-import { TableService } from 'src/app/services/table.service';
 
 @Component({
   selector: 'app-structure-browser',

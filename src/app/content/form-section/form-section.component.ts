@@ -1,7 +1,7 @@
-import { Component, input, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
+import { FormItem, FormSection } from '../../model/content';
 import { FormElementComponent } from '../form-element/form-element.component';
-import { FormItem, FormSection } from 'src/app/model/content';
 
 @Component({
   selector: 'app-form-section',

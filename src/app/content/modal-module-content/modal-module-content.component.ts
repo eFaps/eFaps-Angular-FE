@@ -2,12 +2,12 @@ import {
   AfterViewInit,
   Component,
   ViewContainerRef,
-  viewChild,
   inject,
+  viewChild,
 } from '@angular/core';
 import { DynamicDialogConfig } from 'primeng/dynamicdialog';
 
-import { DynamicComponentService } from 'src/app/services/dynamic-component.service';
+import { DynamicComponentService } from '../../services/dynamic-component.service';
 
 @Component({
   selector: 'app-modal-module-content',

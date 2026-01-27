@@ -1,16 +1,16 @@
 import {
   Component,
   ElementRef,
-  Input,
-  viewChild,
   inject,
+  Input,
   output,
+  viewChild,
 } from '@angular/core';
 import { Router } from '@angular/router';
 import { ButtonModule } from 'primeng/button';
 import { PopoverModule } from 'primeng/popover';
 
-import { Column } from 'src/app/model/table';
+import { Column } from '../../model/table';
 
 @Component({
   selector: 'app-column',

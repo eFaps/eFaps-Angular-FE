@@ -5,8 +5,8 @@ import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { InputTextModule } from 'primeng/inputtext';
 import { TableModule } from 'primeng/table';
 
-import { Dashboard, DashboardPage } from 'src/app/model/dashboard';
-import { DashboardService } from 'src/app/services/dashboard.service';
+import { Dashboard, DashboardPage } from '../../model/dashboard';
+import { DashboardService } from '../../services/dashboard.service';
 
 @Component({
   selector: 'app-edit-page',

@@ -1,8 +1,8 @@
-import { Component, inject, linkedSignal, OnInit } from '@angular/core';
+import { Component, inject, linkedSignal } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
 import { TooltipModule } from 'primeng/tooltip';
 
-import { ThemeService } from 'src/app/services/theme.service';
+import { ThemeService } from '../../services/theme.service';
 
 @Component({
   selector: 'app-theme-chooser',

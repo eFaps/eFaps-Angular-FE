@@ -57,21 +57,13 @@
     "jasmine-core": "~5.10.0",
     "jsdom": "^27.4.0",
     "prettier": "^3.8.0",
-    "prettier-plugin-sort-imports": "^1.8.9",
+    "prettier-plugin-organize-imports": "^4.3.0",
     "typescript": "~5.9.3",
     "vitest": "^4.0.17"
   },
   "prettier": {
     "plugins": [
-      "prettier-plugin-sort-imports"
-    ],
-    "sortingMethod": "alphabetical",
-    "stripNewlines": true,
-    "newlineBetweenTypes": true,
-    "importTypeOrder": [
-      "NPMPackages",
-      "localImportsValue",
-      "localImportsType"
+      "prettier-plugin-organize-imports"
     ],
     "bracketSameLine": true
   },

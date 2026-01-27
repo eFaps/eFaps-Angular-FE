@@ -3,11 +3,11 @@ import { ButtonModule } from 'primeng/button';
 import { DialogService } from 'primeng/dynamicdialog';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 
+import { DashboardWidget, WidgetData } from '../../model/dashboard';
+import { DashboardService } from '../../services/dashboard.service';
 import { ChartWidgetComponent } from '../chart-widget/chart-widget.component';
 import { EditComponent } from '../edit/edit.component';
 import { TableWidgetComponent } from '../table-widget/table-widget.component';
-import { DashboardWidget, WidgetData } from 'src/app/model/dashboard';
-import { DashboardService } from 'src/app/services/dashboard.service';
 
 @Component({
   selector: 'app-item',

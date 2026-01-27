@@ -1,13 +1,13 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit, input, inject, signal } from '@angular/core';
+import { Component, OnInit, inject, input, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { SelectModule } from 'primeng/select';
 import { TableEditCompleteEvent, TableModule } from 'primeng/table';
 
-import { ModuleData, UIModule } from 'src/app/model/module';
-import { UtilService } from 'src/app/services/util.service';
+import { ModuleData, UIModule } from '../../model/module';
+import { UtilService } from '../../services/util.service';
 
 @Component({
   selector: 'app-logback',

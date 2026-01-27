@@ -1,8 +1,7 @@
-import { Component, OnInit, input } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { ChipModule } from 'primeng/chip';
 
-import { Classification } from 'src/app/model/classification';
-import { ClassificationService } from 'src/app/services/classification.service';
+import { Classification } from '../../model/classification';
 
 @Component({
   selector: 'app-classification-display',

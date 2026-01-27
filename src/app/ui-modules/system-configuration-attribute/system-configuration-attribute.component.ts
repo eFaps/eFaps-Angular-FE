@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit, input, inject, model, signal } from '@angular/core';
+import { Component, OnInit, inject, input, model, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import {
   AutoCompleteCompleteEvent,
@@ -13,10 +13,10 @@ import { SelectModule } from 'primeng/select';
 import { TextareaModule } from 'primeng/textarea';
 import { ToggleButtonModule } from 'primeng/togglebutton';
 
-import { ModuleData, UIModule } from 'src/app/model/module';
-import { Company } from 'src/app/model/user';
-import { UserService } from 'src/app/services/user.service';
-import { UtilService } from 'src/app/services/util.service';
+import { ModuleData, UIModule } from '../../model/module';
+import { Company } from '../../model/user';
+import { UserService } from '../../services/user.service';
+import { UtilService } from '../../services/util.service';
 
 interface SysConfAttr {
   key: string;

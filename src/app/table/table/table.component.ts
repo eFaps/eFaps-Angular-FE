@@ -25,18 +25,18 @@ import { Table, TableModule } from 'primeng/table';
 import { TieredMenuModule } from 'primeng/tieredmenu';
 import { combineLatest } from 'rxjs';
 
+import { SearchContentComponent } from '../../content/search-content/search-content.component';
+import { MenuEntry } from '../../model/menu';
+import { Column, Page } from '../../model/table';
+import { ActionService } from '../../services/action.service';
+import { BreadcrumbService } from '../../services/breadcrumb.service';
+import { ExecService } from '../../services/exec.service';
+import { MenuActionProvider, toMenuItems } from '../../services/menu.service';
+import { SearchService } from '../../services/search.service';
+import { StyleService } from '../../services/style.service';
+import { TableService } from '../../services/table.service';
 import { ColumnComponent } from '../column/column.component';
 import { FilterComponent } from '../filter/filter.component';
-import { SearchContentComponent } from 'src/app/content/search-content/search-content.component';
-import { MenuEntry } from 'src/app/model/menu';
-import { Column, Page } from 'src/app/model/table';
-import { ActionService } from 'src/app/services/action.service';
-import { BreadcrumbService } from 'src/app/services/breadcrumb.service';
-import { ExecService } from 'src/app/services/exec.service';
-import { MenuActionProvider, toMenuItems } from 'src/app/services/menu.service';
-import { SearchService } from 'src/app/services/search.service';
-import { StyleService } from 'src/app/services/style.service';
-import { TableService } from 'src/app/services/table.service';
 
 @Component({
   selector: 'app-table',

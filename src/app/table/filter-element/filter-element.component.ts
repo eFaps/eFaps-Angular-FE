@@ -6,8 +6,8 @@ import { FluidModule } from 'primeng/fluid';
 import { InputTextModule } from 'primeng/inputtext';
 import { ToggleSwitchModule } from 'primeng/toggleswitch';
 
-import { Option } from 'src/app/model/content';
-import { Filter } from 'src/app/model/table';
+import { Option } from '../../model/content';
+import { Filter } from '../../model/table';
 
 @Component({
   selector: 'app-filter-element',

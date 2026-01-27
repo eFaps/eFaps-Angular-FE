@@ -4,8 +4,8 @@ import { ButtonModule } from 'primeng/button';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { SelectModule } from 'primeng/select';
 
-import { Company } from 'src/app/model/user';
-import { UserService } from 'src/app/services/user.service';
+import { Company } from '../../model/user';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-company-chooser',

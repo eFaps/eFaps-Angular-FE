@@ -24,12 +24,12 @@ import { ConfirmationService, MessageService } from 'primeng/api';
 import { providePrimeNG } from 'primeng/config';
 import { DialogService } from 'primeng/dynamicdialog';
 
+import { environment } from 'src/environments/environment';
 import { routes } from './app-routes';
 import { RoutePathReuseStrategy } from './init/route-path-reuse-strategy';
 import { CompanyInterceptor } from './interceptors/company.interceptor';
 import { ErrorInterceptor } from './interceptors/error.interceptor';
 import { LoaderInterceptor } from './interceptors/loader.interceptor';
-import { environment } from 'src/environments/environment';
 
 registerLocaleData(localeEs, 'es');
 

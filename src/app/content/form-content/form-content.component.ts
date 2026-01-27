@@ -3,8 +3,8 @@ import {
   Component,
   OnInit,
   ViewContainerRef,
-  viewChild,
   inject,
+  viewChild,
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MenuItem } from 'primeng/api';
@@ -15,16 +15,16 @@ import { MenuModule } from 'primeng/menu';
 import { ToolbarModule } from 'primeng/toolbar';
 import { combineLatest } from 'rxjs';
 
+import { Outline, Section, isOutline } from '../../model/content';
+import { MenuEntry } from '../../model/menu';
+import { UIModule } from '../../model/module';
+import { ContentService } from '../../services/content.service';
+import { DynamicComponentService } from '../../services/dynamic-component.service';
+import { MenuActionProvider, toMenuItems } from '../../services/menu.service';
+import { ValueService } from '../../services/value.service';
 import { ClassificationDisplayComponent } from '../classification-display/classification-display.component';
 import { ModalContentComponent } from '../modal-content/modal-content.component';
 import { SectionsComponent } from '../sections/sections.component';
-import { Outline, Section, isOutline } from 'src/app/model/content';
-import { MenuEntry } from 'src/app/model/menu';
-import { UIModule } from 'src/app/model/module';
-import { ContentService } from 'src/app/services/content.service';
-import { DynamicComponentService } from 'src/app/services/dynamic-component.service';
-import { MenuActionProvider, toMenuItems } from 'src/app/services/menu.service';
-import { ValueService } from 'src/app/services/value.service';
 
 @Component({
   selector: 'app-form-content',

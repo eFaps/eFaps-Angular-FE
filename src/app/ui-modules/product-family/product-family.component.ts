@@ -6,9 +6,9 @@ import { DialogModule } from 'primeng/dialog';
 import { TagModule } from 'primeng/tag';
 import { TreeModule } from 'primeng/tree';
 
-import { UIModule } from 'src/app/model/module';
-import { UtilService } from 'src/app/services/util.service';
-import { ValueService } from 'src/app/services/value.service';
+import { UIModule } from '../../model/module';
+import { UtilService } from '../../services/util.service';
+import { ValueService } from '../../services/value.service';
 
 interface ProductFamily {
   oid: string;

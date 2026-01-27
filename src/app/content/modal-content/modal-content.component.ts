@@ -1,23 +1,22 @@
-import { Component, signal, inject, effect } from '@angular/core';
+import { Component, effect, inject, signal } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
 import { DialogModule } from 'primeng/dialog';
 import {
-  DialogService,
   DynamicDialogConfig,
   DynamicDialogModule,
   DynamicDialogRef,
 } from 'primeng/dynamicdialog';
 import { forkJoin, Observable } from 'rxjs';
 
+import { Classification } from '../../model/classification';
+import { Outline, Section } from '../../model/content';
+import { MenuEntry } from '../../model/menu';
+import { ClassificationService } from '../../services/classification.service';
+import { ExecService } from '../../services/exec.service';
+import { ValidationService } from '../../services/validation.service';
+import { ValueService } from '../../services/value.service';
 import { ClassificationDisplayComponent } from '../classification-display/classification-display.component';
 import { SectionsComponent } from '../sections/sections.component';
-import { Classification } from 'src/app/model/classification';
-import { Outline, Section } from 'src/app/model/content';
-import { MenuEntry } from 'src/app/model/menu';
-import { ClassificationService } from 'src/app/services/classification.service';
-import { ExecService } from 'src/app/services/exec.service';
-import { ValidationService } from 'src/app/services/validation.service';
-import { ValueService } from 'src/app/services/value.service';
 
 @Component({
   selector: 'app-modal-content',

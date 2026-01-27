@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, input, viewChild, inject, signal } from '@angular/core';
+import { Component, inject, input, signal, viewChild } from '@angular/core';
 import Papa, { ParseResult } from 'papaparse';
-import { ToastMessageOptions } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import {
@@ -9,13 +8,12 @@ import {
   FileUpload,
   FileUploadModule,
 } from 'primeng/fileupload';
-import { Message } from 'primeng/message';
 import { MessageModule } from 'primeng/message';
 import { ScrollPanelModule } from 'primeng/scrollpanel';
 import { TableModule } from 'primeng/table';
 
-import { ModuleData, UIModule } from 'src/app/model/module';
-import { UtilService } from 'src/app/services/util.service';
+import { ModuleData, UIModule } from '../../model/module';
+import { UtilService } from '../../services/util.service';
 
 @Component({
   selector: 'app-csvimport',

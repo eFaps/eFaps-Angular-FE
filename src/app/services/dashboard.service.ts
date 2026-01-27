@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-import { GridsterItem, GridsterItemConfig } from 'angular-gridster2';
+import { GridsterItemConfig } from 'angular-gridster2';
 import { Observable, tap } from 'rxjs';
 
 import {

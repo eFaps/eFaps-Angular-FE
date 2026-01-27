@@ -19,7 +19,7 @@ import {
 } from 'primeng/toggleswitch';
 import { ToolbarModule } from 'primeng/toolbar';
 
-import { UtilService } from 'src/app/services/util.service';
+import { UtilService } from '../../services/util.service';
 
 @Component({
   selector: 'app-promo-simulator',

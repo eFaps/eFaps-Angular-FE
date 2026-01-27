@@ -7,7 +7,6 @@ import {
   ViewChild,
   effect,
   inject,
-  signal,
 } from '@angular/core';
 import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
 import { ConfirmationService, MenuItem } from 'primeng/api';
@@ -19,20 +18,20 @@ import { TieredMenuModule } from 'primeng/tieredmenu';
 import { ToolbarModule } from 'primeng/toolbar';
 import { Subscription } from 'rxjs';
 
+import { TableComponent } from 'src/app/table/table/table.component';
+import { Classification } from '../../model/classification';
+import { Section, isOutline } from '../../model/content';
+import { MenuEntry } from '../../model/menu';
+import { BreadcrumbService } from '../../services/breadcrumb.service';
+import { ContentService } from '../../services/content.service';
+import { ExecService } from '../../services/exec.service';
+import { MenuActionProvider, toMenuItems } from '../../services/menu.service';
+import { StyleService } from '../../services/style.service';
 import { ClassificationDisplayComponent } from '../classification-display/classification-display.component';
 import { FormContentComponent } from '../form-content/form-content.component';
 import { ModalContentComponent } from '../modal-content/modal-content.component';
 import { ModalModuleContentComponent } from '../modal-module-content/modal-module-content.component';
 import { SectionsComponent } from '../sections/sections.component';
-import { Classification } from 'src/app/model/classification';
-import { Section, isOutline } from 'src/app/model/content';
-import { MenuEntry } from 'src/app/model/menu';
-import { BreadcrumbService } from 'src/app/services/breadcrumb.service';
-import { ContentService } from 'src/app/services/content.service';
-import { ExecService } from 'src/app/services/exec.service';
-import { MenuActionProvider, toMenuItems } from 'src/app/services/menu.service';
-import { StyleService } from 'src/app/services/style.service';
-import { TableComponent } from 'src/app/table/table/table.component';
 
 @Component({
   selector: 'app-content',

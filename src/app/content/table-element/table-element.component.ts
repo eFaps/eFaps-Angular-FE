@@ -1,10 +1,10 @@
 import {
   Component,
-  OnInit,
-  input,
-  inject,
   effect,
+  inject,
+  input,
   OnDestroy,
+  OnInit,
   signal,
   viewChild,
 } from '@angular/core';
@@ -18,10 +18,10 @@ import { InputTextModule } from 'primeng/inputtext';
 import { SelectModule } from 'primeng/select';
 import { Subscription } from 'rxjs';
 
-import { Option, TableColumn } from 'src/app/model/content';
-import { AutoCompleteService } from 'src/app/services/auto-complete.service';
-import { FieldUpdateService } from 'src/app/services/field-update.service';
-import { ValueService } from 'src/app/services/value.service';
+import { Option, TableColumn } from '../../model/content';
+import { AutoCompleteService } from '../../services/auto-complete.service';
+import { FieldUpdateService } from '../../services/field-update.service';
+import { ValueService } from '../../services/value.service';
 
 @Component({
   selector: 'app-table-element',

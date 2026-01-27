@@ -10,9 +10,9 @@ import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { SelectModule } from 'primeng/select';
 import { Observable } from 'rxjs';
 
+import { DashboardTemplate } from '../../model/dashboard';
+import { DashboardService } from '../../services/dashboard.service';
 import { EditComponent } from './edit.component';
-import { DashboardTemplate } from 'src/app/model/dashboard';
-import { DashboardService } from 'src/app/services/dashboard.service';
 
 class DashboardServiceStub {
   getTemplates(): Observable<DashboardTemplate[]> {

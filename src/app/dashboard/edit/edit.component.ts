@@ -10,11 +10,11 @@ import { TextareaModule } from 'primeng/textarea';
 
 import {
   ChartWidget,
-  DashboardWidget,
   DashboardTemplate,
+  DashboardWidget,
   TableWidget,
-} from 'src/app/model/dashboard';
-import { DashboardService } from 'src/app/services/dashboard.service';
+} from '../../model/dashboard';
+import { DashboardService } from '../../services/dashboard.service';
 
 @Component({
   selector: 'app-edit',

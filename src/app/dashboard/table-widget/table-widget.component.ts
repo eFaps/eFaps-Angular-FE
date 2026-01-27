@@ -4,8 +4,8 @@ import { ButtonModule } from 'primeng/button';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { TableModule } from 'primeng/table';
 
-import { TableWidget, WidgetData } from 'src/app/model/dashboard';
-import { DashboardService } from 'src/app/services/dashboard.service';
+import { TableWidget, WidgetData } from '../../model/dashboard';
+import { DashboardService } from '../../services/dashboard.service';
 
 @Component({
   selector: 'app-table-widget',

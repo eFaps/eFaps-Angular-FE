@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { TableModule } from 'primeng/table';
 
-import { FieldCommandResponse } from 'src/app/model/field-command';
+import { FieldCommandResponse } from '../../model/field-command';
 
 @Component({
   selector: 'app-eqlresponse',

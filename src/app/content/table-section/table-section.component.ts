@@ -1,12 +1,12 @@
-import { Component, Input, inject, input } from '@angular/core';
+import { Component, Input, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { ButtonModule } from 'primeng/button';
 import { TableModule } from 'primeng/table';
 
+import { TableSection } from '../../model/content';
+import { Column } from '../../model/table';
+import { ValueService } from '../../services/value.service';
 import { TableElementComponent } from '../table-element/table-element.component';
-import { TableSection } from 'src/app/model/content';
-import { Column } from 'src/app/model/table';
-import { ValueService } from 'src/app/services/value.service';
 
 @Component({
   selector: 'app-table-section',

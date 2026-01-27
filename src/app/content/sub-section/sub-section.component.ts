@@ -1,14 +1,14 @@
 import { Component, input } from '@angular/core';
 import { PanelModule } from 'primeng/panel';
 
-import { FormSectionComponent } from '../form-section/form-section.component';
-import { TableSectionComponent } from '../table-section/table-section.component';
 import {
   FormSection,
   HeadingSection,
   Section,
   TableSection,
-} from 'src/app/model/content';
+} from '../../model/content';
+import { FormSectionComponent } from '../form-section/form-section.component';
+import { TableSectionComponent } from '../table-section/table-section.component';
 
 @Component({
   selector: 'app-sub-section',

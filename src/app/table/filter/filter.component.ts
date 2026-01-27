@@ -3,9 +3,9 @@ import { ButtonModule } from 'primeng/button';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { PopoverModule } from 'primeng/popover';
 
+import { Column, Filter } from '../../model/table';
+import { TableService } from '../../services/table.service';
 import { FilterElementComponent } from '../filter-element/filter-element.component';
-import { Column, Filter } from 'src/app/model/table';
-import { TableService } from 'src/app/services/table.service';
 
 @Component({
   selector: 'app-filter',

@@ -8,8 +8,8 @@ import {
   TreeNodeUnSelectEvent,
 } from 'primeng/tree';
 
-import { Classification } from 'src/app/model/classification';
-import { ClassificationService } from 'src/app/services/classification.service';
+import { Classification } from '../../model/classification';
+import { ClassificationService } from '../../services/classification.service';
 
 @Component({
   selector: 'app-classifications',

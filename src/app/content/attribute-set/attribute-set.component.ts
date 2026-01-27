@@ -4,9 +4,9 @@ import { ButtonModule } from 'primeng/button';
 import { MessageModule } from 'primeng/message';
 import { TableModule } from 'primeng/table';
 
+import { AttributeSetEntry, FormItem } from '../../model/content';
+import { ValueService } from '../../services/value.service';
 import { AttributeSetElementComponent } from '../attribute-set-element/attribute-set-element.component';
-import { AttributeSetEntry, FormItem } from 'src/app/model/content';
-import { ValueService } from 'src/app/services/value.service';
 
 @Component({
   selector: 'app-attribute-set',

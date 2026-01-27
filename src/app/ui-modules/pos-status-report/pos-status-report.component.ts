@@ -4,9 +4,9 @@ import { Component, inject, OnInit, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import TimeAgo from 'javascript-time-ago';
 import es from 'javascript-time-ago/locale/es';
-import { delay, interval } from 'rxjs';
+import { interval } from 'rxjs';
 
-import { UtilService } from 'src/app/services/util.service';
+import { UtilService } from '../../services/util.service';
 
 TimeAgo.addDefaultLocale(es);
 

@@ -1,4 +1,4 @@
-import { Injectable, WritableSignal, signal, inject } from '@angular/core';
+import { Injectable, WritableSignal, inject, signal } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { MenuItem, MenuItemCommandEvent } from 'primeng/api';
 import { filter } from 'rxjs';

@@ -28,6 +28,7 @@ import { ProgressBarModule } from 'primeng/progressbar';
 import { TableModule } from 'primeng/table';
 import { ToastModule } from 'primeng/toast';
 
+import { environment } from 'src/environments/environment';
 import { ModalContentComponent } from './content/modal-content/modal-content.component';
 import { ModalModuleContentComponent } from './content/modal-module-content/modal-module-content.component';
 import { SearchContentComponent } from './content/search-content/search-content.component';
@@ -52,7 +53,6 @@ import { UserService } from './services/user.service';
 import { isQA } from './services/util.service';
 import { CompanyChooserComponent } from './standalone/company-chooser/company-chooser.component';
 import { ThemeChooserComponent } from './standalone/theme-chooser/theme-chooser.component';
-import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-root',

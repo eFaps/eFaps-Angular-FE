@@ -1,21 +1,13 @@
 import { HttpClient } from '@angular/common/http';
-import {
-  Component,
-  effect,
-  inject,
-  input,
-  signal,
-  viewChild,
-} from '@angular/core';
+import { Component, effect, inject, input, signal } from '@angular/core';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import { FloatLabelModule } from 'primeng/floatlabel';
 
-import { AutoComplete as AutoCompleteResponse } from 'src/app/model/auto-complete';
-import { FormItem } from 'src/app/model/content';
-import { Option } from 'src/app/model/content';
-import { UIModule } from 'src/app/model/module';
-import { UtilService } from 'src/app/services/util.service';
+import { AutoComplete as AutoCompleteResponse } from '../../../model/auto-complete';
+import { FormItem, Option } from '../../../model/content';
+import { UIModule } from '../../../model/module';
+import { UtilService } from '../../../services/util.service';
 
 @Component({
   selector: 'app-auto-complete',

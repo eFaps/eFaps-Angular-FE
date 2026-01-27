@@ -1,18 +1,18 @@
 import {
   Component,
   ElementRef,
+  inject,
   Input,
   output,
   viewChild,
-  inject,
 } from '@angular/core';
 import { Router } from '@angular/router';
 import { saveAs } from 'file-saver';
 import { ButtonModule } from 'primeng/button';
 import { PopoverModule } from 'primeng/popover';
 
-import { Column } from 'src/app/model/table';
-import { CheckoutService } from 'src/app/services/checkout.service';
+import { Column } from '../../model/table';
+import { CheckoutService } from '../../services/checkout.service';
 
 @Component({
   selector: 'app-column',

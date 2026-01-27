@@ -1,8 +1,8 @@
 import { provideZonelessChangeDetection } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { ValueService } from '../../services/value.service';
 import { AttributeSetElementComponent } from './attribute-set-element.component';
-import { ValueService } from 'src/app/services/value.service';
 
 describe('AttributeSetElementComponent', () => {
   let component: AttributeSetElementComponent;

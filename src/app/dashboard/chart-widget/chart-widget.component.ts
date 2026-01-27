@@ -1,11 +1,10 @@
 import { Component, inject, Input, signal } from '@angular/core';
-import { $dt } from '@primeuix/themes';
 import { Chart } from 'chart.js';
 import { ChartModule } from 'primeng/chart';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 
-import { ChartWidget, WidgetData } from 'src/app/model/dashboard';
-import { DashboardService } from 'src/app/services/dashboard.service';
+import { ChartWidget, WidgetData } from '../../model/dashboard';
+import { DashboardService } from '../../services/dashboard.service';
 
 @Component({
   selector: 'app-chart-widget',
