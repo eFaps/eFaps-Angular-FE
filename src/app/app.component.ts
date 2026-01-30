@@ -93,6 +93,10 @@ export class AppComponent implements OnInit {
   private readonly renderer = inject(Renderer2);
   private readonly themeService = inject(ThemeService);
 
+  company = this.userService.company;
+
+  currentCompany = this.company()
+
   title = 'eFaps-Angular-FE';
 
   mainMenu = signal<MenuEntry[]>([]);
@@ -104,7 +108,7 @@ export class AppComponent implements OnInit {
   });
 
   isLoading = this.loaderService.isLoading;
-  company = this.userService.company;
+  
   breadcrumbs = this.breadcrumbService.breadcrumbs;
 
   _user: User | undefined;
@@ -129,8 +133,7 @@ export class AppComponent implements OnInit {
       }
     });
     effect(() => {
-      const company = this.userService.company();
-      if (company) {
+      if (this.userService.companySwitched()) {
         this.loadMenu();
         this.home();
       }
@@ -181,7 +184,7 @@ export class AppComponent implements OnInit {
       if (user.companies.length > 1) {
         this.showCompanySelector = true;
       } else {
-        this.company.set(user.companies[0]);
+        this.userService.setCompany(user.companies[0]);
       }
     } else {
       this.showCompanySelector = false;
@@ -246,9 +249,7 @@ export class AppComponent implements OnInit {
     });
     ref!.onClose.subscribe((company: Company) => {
       if (company) {
-        if (company.uuid != this.company()?.uuid) {
-          this.userService.setCompany(company);
-        }
+        this.userService.setCompany(company);
       }
     });
   }

@@ -4,6 +4,7 @@ import {
   WritableSignal,
   effect,
   inject,
+  linkedSignal,
   signal,
 } from '@angular/core';
 import { Router } from '@angular/router';
@@ -23,10 +24,10 @@ export class UserService {
 
   private utilService = inject(UtilService);
 
-  currentCompany: Company | null | undefined =
+  private currentCompany: Company | null | undefined =
     this.storageService.get<Company>('currentCompany');
 
-  company: WritableSignal<Company | undefined> = signal(undefined, {
+  private _company: WritableSignal<Company | undefined> = signal(undefined, {
     equal: (a: Company | undefined, b: Company | undefined) => {
       if (a === undefined && b === undefined) {
         return true;
@@ -41,12 +42,23 @@ export class UserService {
     },
   });
 
+  readonly company = this._company.asReadonly();
+
+  companySwitched = linkedSignal<Company | undefined, boolean>({
+    source: this.company,
+    computation: (newOptions, previous) => {
+      console.log("")
+      // return true if we change bewteen two companies
+      return previous !== undefined;
+    }
+  });
+
   constructor() {
     if (this.currentCompany != null) {
-      this.company.set(this.currentCompany as Company);
+      this._company.set(this.currentCompany as Company);
     }
     effect(() => {
-      const comp = this.company();
+      const comp = this._company();
       if (comp) {
         this.storageService.set<Company>('currentCompany', comp);
       } else {
@@ -75,15 +87,15 @@ export class UserService {
       map((user) => {
         if (user.companies.length > 1) {
           var currentCompany = user.companies.find((element) => {
-            if (this.company()) {
-              return this.company()?.uuid == element.uuid;
+            if (this._company()) {
+              return this._company()?.uuid == element.uuid;
             } else {
               return element.current;
             }
           });
-          this.company.set(currentCompany);
+          this._company.set(currentCompany);
         } else {
-          this.company.set(undefined);
+          this._company.set(undefined);
         }
         return user;
       }),
@@ -91,7 +103,7 @@ export class UserService {
   }
 
   setCompany(company: Company) {
-    this.company.set(company);
+    this._company.set(company);
   }
 
   getCompanies(): Observable<Company[]> {
