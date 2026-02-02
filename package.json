@@ -30,7 +30,7 @@
     "angular-gridster2": "^21.0.1",
     "chart.js": "^4.5.1",
     "file-saver": "^2.0.5",
-    "javascript-time-ago": "^2.5.12",
+    "javascript-time-ago": "^2.6.2",
     "jspdf": "^4.0.0",
     "jspdf-autotable": "^5.0.7",
     "keycloak-angular": "^21.0.0",
