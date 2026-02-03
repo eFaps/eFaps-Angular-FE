@@ -44,8 +44,8 @@
               <div class="infoOverlay">{{ user.firstName }} {{ user.lastName }}</div>
               <p-divider></p-divider>
               <div class="infoOverlay">Version: {{ version }}</div>
-              <p-divider></p-divider>
               @if (showCompanySelector) {
+                <p-divider></p-divider>
                 <div class="companies">
                   <p-button icon="pi pi-building" (click)="switchCompany()"></p-button>
                 </div>

@@ -6,12 +6,12 @@
 export const environment = {
   production: false,
   version: '1.0.0-dev',
-  apiHostname: 'http://localhost:8080',
-  xapiHostname: 'https://demo.lite.synercom.pe',
+  xapiHostname: 'http://localhost:8080',
+  apiHostname: 'https://pu.synercom.pe',
   apiBaseUrl: '/api',
   sso: {
     url: 'https://sso.synercom.pe/auth',
-    realm: 'demo',
-    clientId: 'localhost-test',
+    realm: 'SynerCOM',
+    clientId: 'app',
   },
 };

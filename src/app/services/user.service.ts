@@ -24,9 +24,6 @@ export class UserService {
 
   private utilService = inject(UtilService);
 
-  private currentCompany: Company | null | undefined =
-    this.storageService.get<Company>('currentCompany');
-
   private _company: WritableSignal<Company | undefined> = signal(undefined, {
     equal: (a: Company | undefined, b: Company | undefined) => {
       if (a === undefined && b === undefined) {
@@ -47,18 +44,18 @@ export class UserService {
   companySwitched = linkedSignal<Company | undefined, boolean>({
     source: this.company,
     computation: (newOptions, previous) => {
-      console.log("")
       // return true if we change bewteen two companies
       return previous !== undefined;
-    }
+    },
   });
 
   constructor() {
-    if (this.currentCompany != null) {
-      this._company.set(this.currentCompany as Company);
+    const currentCompany = this.storageService.get<Company>('currentCompany');
+    if (currentCompany != null) {
+      this.setCompany(currentCompany);
     }
     effect(() => {
-      const comp = this._company();
+      const comp = this.company();
       if (comp) {
         this.storageService.set<Company>('currentCompany', comp);
       } else {
@@ -85,24 +82,26 @@ export class UserService {
         );
       }),
       map((user) => {
-        if (user.companies.length > 1) {
+        if (user.companies.length == 1) {
+          this.setCompany(user.companies[0]);
+        } else if (user.companies.length > 1) {
           var currentCompany = user.companies.find((element) => {
-            if (this._company()) {
-              return this._company()?.uuid == element.uuid;
+            if (this.company()) {
+              return this.company()?.uuid == element.uuid;
             } else {
               return element.current;
             }
           });
-          this._company.set(currentCompany);
+          this.setCompany(currentCompany);
         } else {
-          this._company.set(undefined);
+          this.setCompany(undefined);
         }
         return user;
       }),
     );
   }
 
-  setCompany(company: Company) {
+  setCompany(company: Company | undefined) {
     this._company.set(company);
   }
 

@@ -95,7 +95,7 @@ export class AppComponent implements OnInit {
 
   company = this.userService.company;
 
-  currentCompany = this.company()
+  currentCompany = this.company();
 
   title = 'eFaps-Angular-FE';
 
@@ -108,7 +108,7 @@ export class AppComponent implements OnInit {
   });
 
   isLoading = this.loaderService.isLoading;
-  
+
   breadcrumbs = this.breadcrumbService.breadcrumbs;
 
   _user: User | undefined;
