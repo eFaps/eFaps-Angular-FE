@@ -52,7 +52,7 @@ export class EditComponent implements OnInit {
 
   groupBy: string[] | undefined;
 
-  functions = [{ label: 'Sumar', value: 'SUM' }];
+  functions = [{ label: 'Sumar', value: 'SUM' }, { label: 'Contar', value: 'COUNT' }];
   function = 'SUM';
   key: string | undefined;
   chartTypes = [

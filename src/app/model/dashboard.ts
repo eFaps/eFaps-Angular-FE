@@ -44,7 +44,7 @@ export interface TemplateWidget extends DashboardWidget {
 }
 
 export interface Metric {
-  function: 'SUM';
+  function: 'SUM' | 'COUNT';
   key: string;
 }
 
