@@ -53,7 +53,7 @@ export class EditComponent implements OnInit {
   groupBy: string[] | undefined;
 
   functions = [{ label: 'Sumar', value: 'SUM' }, { label: 'Contar', value: 'COUNT' }];
-  function = 'SUM';
+  function: 'SUM' | 'COUNT' = 'SUM';
   key: string | undefined;
   chartTypes = [
     { label: 'Gráfico de barras', value: 'bar' },
@@ -117,7 +117,7 @@ export class EditComponent implements OnInit {
     if (this.widget.type == 'CHART') {
       let chartWidget = this.widget as ChartWidget;
       chartWidget.groupBy = this.groupBy;
-      chartWidget.metrics = [{ function: 'SUM', key: this.key!! }];
+      chartWidget.metrics = [{ function: this.function, key: this.key!! }];
       chartWidget.chartType = this.chartType;
     }
 
