@@ -12,6 +12,6 @@ export const environment = {
   sso: {
     url: 'https://sso.synercom.pe/auth',
     realm: 'demo',
-    clientId: 'lite',
+    clientId: 'localhost-test',
   },
 };
