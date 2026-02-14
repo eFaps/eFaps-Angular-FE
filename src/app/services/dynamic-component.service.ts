@@ -100,6 +100,17 @@ export class DynamicComponentService {
           },
         );
         break;
+      case 'JasperReportCreateReport':
+        import('../ui-modules/jasper-report-create-report/jasper-report-create-report.component').then(
+          (m) => {
+            const ref = viewContainerRef.createComponent(
+              m.JasperReportCreateReportComponent,
+            );
+            ref.setInput('uimodule', uimodule);
+            ref.setInput('data', data);
+          },
+        );
+        break;
     }
   }
 }

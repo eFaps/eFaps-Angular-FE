@@ -1,0 +1,16 @@
+<div class="p-dialog-content">
+  <p-floatlabel>
+    <p-select
+      id="mime"
+      [options]="mimes"
+      [(ngModel)]="mime"
+      optionLabel="label"
+      optionValue="value"
+      appendTo="body"></p-select>
+    <label for="mime">Mime</label>
+  </p-floatlabel>
+</div>
+<div class="p-dialog-footer">
+  <p-button label="Cancel" (click)="close()"></p-button>
+  <p-button label="Exportar" severity="warn" (click)="submit()"></p-button>
+</div>
