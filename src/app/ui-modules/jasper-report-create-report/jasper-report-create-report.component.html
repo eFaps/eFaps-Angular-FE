@@ -1,14 +1,30 @@
-<div class="p-dialog-content">
-  <p-floatlabel>
-    <p-select
-      id="mime"
-      [options]="mimes"
-      [(ngModel)]="mime"
-      optionLabel="label"
-      optionValue="value"
-      appendTo="body"></p-select>
-    <label for="mime">Mime</label>
-  </p-floatlabel>
+<div class="p-dialog-content" [formGroup]="formGroup">
+  <div class="mime">
+    <p-floatlabel>
+      <p-select
+        id="mime"
+        [options]="mimes"
+        optionLabel="label"
+        optionValue="value"
+        appendTo="body"
+        formControlName="mime"
+        fluid></p-select>
+      <label for="mime">Mime</label>
+    </p-floatlabel>
+  </div>
+  @for (jrParameter of jrParameters(); track jrParameter.name) {
+    <div class="jrParameter">
+      <p-floatlabel>
+        <input
+          pInputText
+          id="jrParameter.name"
+          autocomplete="off"
+          formControlName="{{ jrParameter.name }}"
+          fluid />
+        <label for="jrParameter.name">{{ jrParameter.name }}</label>
+      </p-floatlabel>
+    </div>
+  }
 </div>
 <div class="p-dialog-footer">
   <p-button label="Cancel" (click)="close()"></p-button>

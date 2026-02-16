@@ -29,6 +29,9 @@ describe('JasperReportCreateReportComponent', () => {
     }).compileComponents();
 
     fixture = TestBed.createComponent(JasperReportCreateReportComponent);
+    fixture.componentRef.setInput('data', {
+      oid: '123.',
+    });
     component = fixture.componentInstance;
     await fixture.whenStable();
   });
