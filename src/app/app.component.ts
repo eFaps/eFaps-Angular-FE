@@ -10,7 +10,12 @@ import {
   signal,
 } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
-import { KEYCLOAK_EVENT_SIGNAL, KeycloakEventType } from 'keycloak-angular';
+import {
+  KEYCLOAK_EVENT_SIGNAL,
+  KeycloakEventType,
+  ReadyArgs,
+  typeEventArgs,
+} from 'keycloak-angular';
 import Keycloak from 'keycloak-js';
 import localeEs from 'primelocale/es.json';
 import { MenuItem } from 'primeng/api';
@@ -129,7 +134,12 @@ export class AppComponent implements OnInit {
     effect(() => {
       const keycloakEvent = keycloakSignal();
       if (keycloakEvent.type === KeycloakEventType.AuthSuccess) {
-        userService.getCurrentUser(true).subscribe();
+      }
+      if (keycloakEvent.type === KeycloakEventType.Ready) {
+        const authenticated = typeEventArgs<ReadyArgs>(keycloakEvent.args);
+        if (authenticated) {
+          userService.getCurrentUser(true).subscribe();
+        }
       }
     });
     effect(() => {
@@ -147,7 +157,7 @@ export class AppComponent implements OnInit {
         this.primeng.translation = localeEs.es;
         this.userLookuped = true;
       },
-      error: () => {
+      error: (err) => {
         this.userLookuped = true;
       },
     });

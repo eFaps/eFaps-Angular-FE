@@ -114,6 +114,7 @@
   }
 } @else {
   @if (userLookuped) {
+    <router-outlet />
     <div class="wrongDomain">
       <p-button label="Sign out" icon="pi pi-sign-out" (click)="signOut()"></p-button>
     </div>

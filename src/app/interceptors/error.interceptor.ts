@@ -24,7 +24,7 @@ export class ErrorInterceptor implements HttpInterceptor {
           if (error instanceof HttpErrorResponse) {
             this.messageService.add({
               severity: 'error',
-              summary: error.statusText,
+              summary: '' + error.status,
               detail: error.message,
             });
           }
