@@ -93,21 +93,22 @@ export class EQL2Component {
       this.stmts().forEach((stmt, index) => {
         this.stmts.update((current) => {
           current[index].status = 'Started';
-          return current;
+          return [...current];
         });
 
         this.http.post<any>(url, stmt.stmt).subscribe({
           next: (resp) => {
-            this.stmts.update((current) => {
+            this.stmts.update(current => {
               current[index].result = resp.msg;
               current[index].status = 'OK';
-              return current;
-            });
+              return [...current]
+            }
+            );
           },
           error: (err) => {
             this.stmts.update((current) => {
               current[index].status = err.code;
-              return current;
+              return [...current];
             });
           },
         });
