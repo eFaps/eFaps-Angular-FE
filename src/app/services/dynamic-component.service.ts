@@ -111,6 +111,13 @@ export class DynamicComponentService {
           },
         );
         break;
+      case 'EQL2':
+        import('../ui-modules/eql2/eql2.component').then((m) => {
+          const ref = viewContainerRef.createComponent(m.EQL2Component);
+        });
+        break;
+      default:
+        console.log(`No Dynamic Component found for ${uimodule.key}`);
     }
   }
 }

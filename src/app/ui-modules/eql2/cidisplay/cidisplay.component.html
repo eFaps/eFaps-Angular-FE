@@ -1,0 +1,26 @@
+<div class="wrapper">
+  <p-accordion [multiple]="true" [value]="['0']">
+    <p-accordion-panel value="0">
+      <p-accordion-header>Header</p-accordion-header>
+      <p-accordion-content>
+        <div>Type: {{ eqlCIResponse().type }}</div>
+        <div>Name: {{ eqlCIResponse().name }}</div>
+        <div>ID: {{ eqlCIResponse().id }}</div>
+        <div>UUID: {{ eqlCIResponse().uuid }}</div>
+      </p-accordion-content>
+    </p-accordion-panel>
+    <p-accordion-panel value="1">
+      <p-accordion-header>Attributes</p-accordion-header>
+      <p-accordion-content>
+        <ul>
+          @for (attribute of eqlCIResponse().attributes; track attribute.name) {
+            <li>
+              <div>Name: {{ attribute.name }}</div>
+              <div>Type: {{ attribute.type.name }} - {{ attribute.type.info }}</div>
+            </li>
+          }
+        </ul>
+      </p-accordion-content>
+    </p-accordion-panel>
+  </p-accordion>
+</div>

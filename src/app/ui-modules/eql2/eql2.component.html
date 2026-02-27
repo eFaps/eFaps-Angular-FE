@@ -1,0 +1,81 @@
+<div class="p-dialog-content">
+  <div class="wrapper">
+    <p-floatlabel>
+      <textarea id="stmt" rows="5" cols="30" pTextarea [(ngModel)]="stmt" fluid></textarea>
+      <label for="stmt">Statement</label>
+    </p-floatlabel>
+    @if (stmts().length > 0) {
+      <p-table [value]="stmts()">
+        <ng-template #header>
+          <tr>
+            <th>Stmt to run</th>
+            <th>Status</th>
+            <th>Result</th>
+          </tr>
+        </ng-template>
+        <ng-template #body let-entry>
+          <tr>
+            <td>{{ entry.stmt }}</td>
+            <td>{{ entry.status }}</td>
+            <td>{{ entry.result }}</td>
+          </tr>
+        </ng-template>
+      </p-table>
+    }
+    <p-button label="Execute" severity="danger" [disabled]="!valid" (click)="execute()" />
+
+    @if (results().length > 0) {
+      <p-table
+        #dt
+        [value]="results()"
+        [columns]="resultColumns()"
+        [paginator]="true"
+        [rows]="10"
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+        [showCurrentPageReport]="true"
+        [rowsPerPageOptions]="[5, 10, 20]"
+        size="small"
+        showGridlines
+        stripedRows>
+        <ng-template #caption>
+          <div class="exportCSV">
+            <p-button icon="pi pi-external-link" label="Export" (click)="dt.exportCSV()" />
+          </div>
+        </ng-template>
+        <ng-template pTemplate="header" let-columns>
+          <tr>
+            @for (col of columns; track col) {
+              <th>
+                {{ col.header }}
+              </th>
+            }
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-rowData let-columns="columns">
+          <tr>
+            @for (col of columns; track col) {
+              <td class="small">
+                {{ rowData[col.field] }}
+              </td>
+            }
+          </tr>
+        </ng-template>
+      </p-table>
+    }
+    @if (ciResponse()) {
+      <app-cidisplay [eqlCIResponse]="ciResponse()!!"></app-cidisplay>
+    }
+    @if (msgs()) {
+      <ul>
+        @for (msg of msgs(); track msg) {
+          <li>
+            <div>{{ msg.msg }}</div>
+          </li>
+        }
+      </ul>
+    }
+    <p-panel header="History" [toggleable]="true" [collapsed]="true" toggler="header">
+      <app-eql2-history></app-eql2-history>
+    </p-panel>
+  </div>
+</div>

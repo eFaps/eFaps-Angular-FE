@@ -1,0 +1,37 @@
+<div class="wrapper">
+  <div class="filters">
+    <p-floatlabel>
+      <p-inputnumber [(ngModel)]="limit" inputId="limit" />
+      <label for="limit">Limit</label>
+    </p-floatlabel>
+
+    <p-floatlabel>
+      <input pInputText [(ngModel)]="term" id="term" />
+      <label for="term">Term</label>
+    </p-floatlabel>
+
+    <p-togglebutton [(ngModel)]="own" onLabel="Own" offLabel="All" />
+    <p-button label="load" (click)="load()" />
+  </div>
+
+  <p-table
+    [value]="entries()"
+    size="small"
+    [tableStyle]="{ 'max-width': '50%' }"
+    [resizableColumns]="true">
+    <ng-template #header>
+      <tr>
+        <th pSortableColumn="creator">Creator</th>
+        <th pSortableColumn="created">Created</th>
+        <th pSortableColumn="stmt">Stmt</th>
+      </tr>
+    </ng-template>
+    <ng-template #body let-entry>
+      <tr>
+        <td>{{ entry.creator }}</td>
+        <td>{{ entry.created }}</td>
+        <td>{{ entry.stmt }}</td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>
