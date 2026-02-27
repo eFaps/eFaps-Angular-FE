@@ -58,9 +58,9 @@ export class EQL2Component {
     config.header = 'Execute EQL2';
     config.closable = true;
     config.maximizable = true;
-    config.resizable = false;
-    config.width = '80vW';
-    config.height = '90vH';
+    config.resizable = true;
+    config.width = '90vw';
+    config.height = '90vh';
   }
 
   set stmt(stmt: string) {
@@ -142,6 +142,8 @@ export class EQL2Component {
         this.results.set(response.values);
       } else if (response.id) {
         this.ciResponse.set(response);
+      } else if (response.msg) {
+        this.msgs.set([response]);
       }
     }
   }
