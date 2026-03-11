@@ -1,22 +1,44 @@
 <div class="wrapper">
   @if (report()) {
     <div class="header">
-      <h2>Estatus</h2>
-      Ultima evaluacion: {{ report()?.date | date: "medium" }}
+      <div class="title">
+        <h2>Estatus</h2>
+        <span>Ultima evaluacion: {{ report()?.date | date: "medium" }}</span>
+      </div>
+      <div class="timeframe">
+        <p-floatlabel>
+          <p-select
+            [options]="timeFrames"
+            [(ngModel)]="selectedTimeFrame"
+            [checkmark]="true"
+            inputId="timeFrame"
+            fluid />
+          <label for="timeFrame">Actualización automática</label>
+        </p-floatlabel>
+        @if (counter() > 0) {
+          <span class="counter">{{ counter() }}s</span>
+        }
+      </div>
     </div>
+
     <div class="statusWrapper">
       @for (status of report()?.backendStatus; track status) {
         <div class="status">
           <span class="name" (click)="navigate(status.oid)"> {{ status.name }} </span>
           <span>{{ status.timeAgo }}</span>
 
-          @switch (evalStaus(status)) {
-            @case ("OK") {
+          @switch (status.status) {
+            @case (3) {
               <span class="statusOk">
                 <i class="pi pi-thumbs-up" style="font-size: 2.5rem"></i>
               </span>
             }
-            @case ("UNKNOWN") {
+            @case (2) {
+              <span class="statusWarning">
+                <i class="pi pi-exclamation-triangle" style="font-size: 2.5rem"></i>
+              </span>
+            }
+            @case (1) {
               <span class="statusUnknown">
                 <i class="pi pi-exclamation-triangle" style="font-size: 2.5rem"></i>
               </span>

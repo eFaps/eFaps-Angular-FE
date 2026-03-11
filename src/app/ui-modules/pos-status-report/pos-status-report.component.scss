@@ -1,7 +1,26 @@
 .wrapper {
   .header {
-    text-align: center;
+    display: flex;
+    align-content: stretch;
+
+    .title {
+      flex-grow: 100;
+      position: static;
+      text-align: center;
+    }
+
+    .timeframe {
+      flex-grow: 1;
+      margin-top: 25px;
+      min-width: 170px;
+      text-align: right;
+
+      .counter {
+        font-size: smaller;
+      }
+    }
   }
+
   .statusWrapper {
     margin-top: 1rem;
     display: flex;
@@ -39,6 +58,10 @@
 
       .statusUnknown {
         color: var(--p-button-danger-background);
+      }
+
+      .statusWarning {
+        color: var(--p-button-warn-background);
       }
     }
   }
