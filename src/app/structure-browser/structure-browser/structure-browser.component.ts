@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { LocalStorageService } from 'ngx-localstorage';
@@ -69,7 +69,8 @@ export class StructureBrowserComponent implements OnInit {
   elements: TreeNode[] = [];
   selectedElements: TreeTableNode<any> | TreeTableNode<any>[] | null = [];
   togglerColIdx = 0;
-  scrollHeight: string = '500px';
+  scrollHeight = signal('100px');
+  virtualScroll = signal(true);
   tableLoaded = false;
   storageKey = 'temp';
   multiSortMeta: SortMeta[] = [];
@@ -100,6 +101,7 @@ export class StructureBrowserComponent implements OnInit {
         this.cols = val.columns;
         this.evalContentHeight();
         this.elements = val.values.map((entry) => this.toTreeNode(entry));
+        this.virtualScroll.set(this.elements.length > 2);
         if ('multiple' == val.selectionMode) {
           this.selectionMode = 'checkbox';
         } else {
@@ -214,7 +216,7 @@ export class StructureBrowserComponent implements OnInit {
       tableCaption -
       scrtFact;
 
-    this.scrollHeight = `${height}px`;
+    this.scrollHeight.set(`${height}px`);
     console.log(this.scrollHeight);
   }
 

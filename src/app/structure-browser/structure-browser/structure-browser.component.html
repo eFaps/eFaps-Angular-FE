@@ -3,11 +3,13 @@
   <div #wrapperDiv>
     <p-treeTable
       #dt
-      [scrollable]="true"
-      [scrollHeight]="scrollHeight"
-      [virtualScroll]="true"
+      autoLayout="true"
+      scrollable="true"
+      [scrollHeight]="scrollHeight()"
+      [virtualScroll]="virtualScroll()"
       [virtualScrollItemSize]="42"
       [columns]="cols"
+      [resizableColumns]="true"
       [value]="elements"
       [selectionMode]="selectionMode"
       [(selection)]="selectedElements"
@@ -64,7 +66,7 @@
           }
         </tr>
       </ng-template>
-      <ng-template pTemplate="body" let-rowNode let-rowData="rowData" let-columns="columns">
+      <ng-template #body let-rowNode let-rowData="rowData" let-columns="columns">
         <tr>
           @for (col of columns; track col; let i = $index) {
             <td>
