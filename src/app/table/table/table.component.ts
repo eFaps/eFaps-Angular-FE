@@ -25,6 +25,7 @@ import { Table, TableModule } from 'primeng/table';
 import { TieredMenuModule } from 'primeng/tieredmenu';
 import { combineLatest } from 'rxjs';
 
+import { deepEqual } from 'fast-equals';
 import { SearchContentComponent } from '../../content/search-content/search-content.component';
 import { MenuEntry } from '../../model/menu';
 import { Column, Page } from '../../model/table';
@@ -111,6 +112,21 @@ export class TableComponent implements OnInit {
     }
     if (event.columnOrder) {
       this.columnOrder = event.columnOrder;
+    }
+    if (event.selection) {
+      // verify that the selections are even in the ui
+      const verifiedSelection: any[] = [];
+
+      (event.selection as Array<any>).forEach((element) => {
+        if (
+          this.elements.findIndex((val) => {
+            return deepEqual(element, val);
+          }) > -1
+        ) {
+          verifiedSelection.push(element);
+        }
+      });
+      event.selection = verifiedSelection;
     }
   }
 
