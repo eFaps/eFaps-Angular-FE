@@ -13,6 +13,16 @@
         [fluid]="true"></p-autoComplete>
       <label for="key">Key</label>
     </p-floatlabel>
+     @if (type == "INTEGER") {
+      <p-floatlabel>
+        <p-inputnumber
+          id="intValue"
+          [autoResize]="true"
+          [(ngModel)]="intValue"
+          [fluid]="true"></inputnumber>
+        <label for="intValue">Value</label>
+      </p-floatlabel>
+    }
     @if (type == "STRING" || type == "UNDEFINED") {
       <p-floatlabel>
         <textarea
