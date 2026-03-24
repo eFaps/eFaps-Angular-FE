@@ -13,12 +13,9 @@
         [fluid]="true"></p-autoComplete>
       <label for="key">Key</label>
     </p-floatlabel>
-     @if (type == "INTEGER") {
+    @if (type == "INTEGER") {
       <p-floatlabel>
-        <p-inputnumber
-          id="intValue"
-          [(ngModel)]="intValue"
-          [fluid]="true"></p-inputnumber>
+        <p-inputnumber id="intValue" [(ngModel)]="intValue" [fluid]="true"></p-inputnumber>
         <label for="intValue">Value</label>
       </p-floatlabel>
     }

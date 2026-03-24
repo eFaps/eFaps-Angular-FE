@@ -13,11 +13,11 @@ import { SelectModule } from 'primeng/select';
 import { TextareaModule } from 'primeng/textarea';
 import { ToggleButtonModule } from 'primeng/togglebutton';
 
+import { InputNumberModule } from 'primeng/inputnumber';
 import { ModuleData, UIModule } from '../../model/module';
 import { Company } from '../../model/user';
 import { UserService } from '../../services/user.service';
 import { UtilService } from '../../services/util.service';
-import { InputNumberModule } from 'primeng/inputnumber';
 
 interface SysConfAttr {
   key: string;
@@ -37,7 +37,7 @@ interface SysConfAttr {
     TextareaModule,
     ToggleButtonModule,
     FloatLabelModule,
-    InputNumberModule
+    InputNumberModule,
   ],
   templateUrl: './system-configuration-attribute.component.html',
   styleUrls: ['./system-configuration-attribute.component.scss'],
@@ -154,9 +154,9 @@ export class SystemConfigurationAttributeComponent implements OnInit {
       case 'LIST':
         value = JSON.stringify(('' + this.strValue).split('\n'));
         break;
-       case 'INTEGER':
-        value = "" + this.intValue;
-        break;  
+      case 'INTEGER':
+        value = '' + this.intValue;
+        break;
       default:
         value = this.strValue;
     }
@@ -192,9 +192,9 @@ export class SystemConfigurationAttributeComponent implements OnInit {
           this.strValue = value;
         }
         break;
-      case 'INTEGER': 
-        this.intValue = parseInt(value)
-        break; 
+      case 'INTEGER':
+        this.intValue = parseInt(value);
+        break;
       default:
         this.strValue = value;
     }

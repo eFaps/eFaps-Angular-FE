@@ -23,6 +23,6 @@
   </ng-template>
   <ng-template #footer>
     <p-button label="Cancelar" [text]="true" severity="secondary" (click)="dialogVisible = false" />
-    <p-button label="Actualisar" (click)="update()" [disabled]="!isValid()" />
+    <p-button label="Actualisar" (click)="update(true)" [disabled]="!isValid()" />
   </ng-template>
 </p-dialog>

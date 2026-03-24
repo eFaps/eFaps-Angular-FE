@@ -69,7 +69,7 @@ export class ProductFamilyComponent implements OnInit {
           this.nodes.set(nodes);
           this.loading.set(false);
           if (update) {
-            this.update();
+            this.update(false);
             this.expandSelected();
           }
         },
@@ -100,7 +100,7 @@ export class ProductFamilyComponent implements OnInit {
     return this.selection && this.selection.children?.length == 0;
   }
 
-  update() {
+  update(evalSuffix: boolean) {
     this.dialogVisible = false;
     const parts: string[] = [];
     const labels: string[] = [];
@@ -120,6 +120,9 @@ export class ProductFamilyComponent implements OnInit {
       name: 'productFamilyLink',
       value: this.selection?.key,
     });
+    if (evalSuffix) {
+      this.evaluateSuffix();
+    }
   }
 
   expandSelected() {
@@ -131,5 +134,20 @@ export class ProductFamilyComponent implements OnInit {
         current.expanded = true;
       }
     }
+  }
+
+  evaluateSuffix() {
+    const url = `${this.utilService.evalApiUrl()}/ui/modules/product-family/product-suffix`;
+
+    const params: any = { productFamilyOid: this.selection?.key };
+
+    this.http.get<any>(url, { params: params }).subscribe({
+      next: (response) => {
+        this.valueService.updateEntry({
+          name: this.productOid ? 'nameSuffix4Edit' : 'nameSuffix',
+          value: response.suffix,
+        });
+      },
+    });
   }
 }
