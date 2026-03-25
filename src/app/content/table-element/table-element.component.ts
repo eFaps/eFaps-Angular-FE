@@ -59,7 +59,7 @@ export class TableElementComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    //this.dropdownOptions.set(this.column().options)
+    this.dropdownOptions.set(this.column().options)
     this.valueSub = this.valueService.update.subscribe({
       next: (entry) => {
         if (
