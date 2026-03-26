@@ -7,9 +7,9 @@ import { Entry } from '../model/value';
   providedIn: 'root',
 })
 export class ValueService {
-  private valueMap: Map<String, any> | undefined;
+  private valueMap: Map<string, any> | undefined;
 
-  values = signal<Map<String, any>>(new Map());
+  values = signal<Map<string, any>>(new Map());
 
   private currentUpdate = new BehaviorSubject<Entry | undefined>(undefined);
   update = this.currentUpdate.asObservable();
@@ -62,7 +62,7 @@ export class ValueService {
   }
 
   addSetEntry(entry: {
-    setName: String;
+    setName: string;
     rowId: number;
     name: string;
     value: any;

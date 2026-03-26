@@ -362,11 +362,13 @@ export class FormElementComponent implements OnInit, AfterViewInit {
   }
 
   search(query: string) {
-    this.autoCompleteService.search(this.formItem!!.ref!!, query).subscribe({
-      next: (result) => {
-        this.autoCompleteSuggestions.set(result.options);
-      },
-    });
+    this.autoCompleteService
+      .search(this.formItem!!.ref!!, query, this.valueService.values())
+      .subscribe({
+        next: (result) => {
+          this.autoCompleteSuggestions.set(result.options);
+        },
+      });
   }
 
   changeAutoComplete(event: AutoCompleteSelectEvent) {
