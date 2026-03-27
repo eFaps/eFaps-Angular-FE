@@ -34,7 +34,7 @@ export class TableElementComponent implements OnInit, OnDestroy {
   private autoCompleteService = inject(AutoCompleteService);
   private fieldUpdateService = inject(FieldUpdateService);
   private valueService = inject(ValueService);
-
+  
   readonly index = input<number>(0);
   column = input.required<TableColumn>();
   rowData = input<any>();
@@ -176,17 +176,18 @@ export class TableElementComponent implements OnInit, OnDestroy {
 
   fieldUpdate() {
     if (this.column().updateRef) {
+      const rowIndex = this.index()
       this.fieldUpdateService
-        .execute(this.column().updateRef!, this.index())
+        .execute(this.column().updateRef!, rowIndex)
         .subscribe({
           next: (response) => {
             if (response.values) {
-              response.values.forEach((entry, index) => {
+              response.values.forEach((entry) => {
                 Object.entries(entry).forEach(([key, value]) => {
                   this.valueService.updateEntry({
                     name: key,
                     value,
-                    index: index,
+                    index: rowIndex,
                   });
                 });
               });
