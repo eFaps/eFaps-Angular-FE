@@ -1,108 +1,144 @@
 <div class="wrapper">
-  <div class="filters" [formGroup]="formGroup">
-    @for (filter of filters; track filter.name; let indexOfelement = $index) {
-      @switch (filter.type) {
-        @case ("DATE") {
-          <div class="filterElement">
-            <p-floatlabel>
-              <p-datepicker
-                inputId="{{ 'filter' + indexOfelement }}"
-                [showIcon]="true"
-                formControlName="{{ filter.name }}"
-                appendTo="body"></p-datepicker>
-              <label for="{{ 'filter' + indexOfelement }}">{{ filter.label }}</label>
-            </p-floatlabel>
-          </div>
-        }
-        @case ("PICKLIST") {
-          <div class="filterElement">
-            <div class="pickListHeader">
-              <span>{{ filter.label }}</span>
-            </div>
-            <p-picklist
-              [source]="pickListElements[filter.name].source"
-              [target]="pickListElements[filter.name].target"
-              [dragdrop]="true"
-              showSourceControls="false"
-              showTargetControls="false"
-              targetHeader="Activo"
-              sourceHeader="Inactivo"
-              stripedRows="false"
-              [responsive]="false"
-              [sourceStyle]="{ height: '20rem', display: 'block' }">
-              <ng-template let-item #item>
-                {{ item.label }}
-              </ng-template>
-            </p-picklist>
-          </div>
-        }
-        @case ("RADIO") {
-          <div class="filterElement radio">
-            <div class="radio-header">
-              <span>{{ filter.label }}</span>
-            </div>
-            <div class="radio-group">
-              @for (option of optionElements[filter.name]; track option; let idx = $index) {
-                <div class="radio-field">
-                  <p-radioButton
-                    [inputId]="filter.name + 'opt' + idx"
-                    [value]="option.value"
-                    name="{{ filter.name }}"
-                    formControlName="{{ filter.name }}" />
-                  <label [for]="filter.name + 'opt' + idx">{{ option.label }}</label>
-                </div>
-              }
-            </div>
-          </div>
-        }
-        @case ("CHECKBOX") {
-          <div class="filterElement checkbox">
-            <p-floatlabel>
-              <p-multiselect
-                formControlName="{{ filter.name }}"
-                id="{{ 'filter' + indexOfelement }}"
-                [options]="optionElements[filter.name]"
-                optionLabel="label"
-                optionValue="value"
-                appendTo="body"
-                fluid />
-              <label for="{{ 'filter' + indexOfelement }}">{{ filter.label }}</label>
-            </p-floatlabel>
-          </div>
-        }
-        @case ("AUTOCOMPLETE") {
-          <div class="filterElement autocomplete">
-            <app-auto-complete
-              [formGroup]="formGroup"
-              [formItem]="autoCompletes().get(filter.name)"
-              [uimodule]="uimodule()"></app-auto-complete>
-          </div>
-        }
-      }
-    }
-    <div class="filterButton">
-      <p-button
-        label="Update"
-        icon="pi pi-refresh"
-        [loading]="loading"
-        (onClick)="reload()"
-        [disabled]="!formGroup.valid" />
-      @if (exportXls()) {
+  @if (show) {
+    <div class="filters" [formGroup]="formGroup" [class.stretched]="stretched">
+      <div class="filterHeader">
+        <h2>Filtros</h2>
         <p-button
-          icon="pi pi-file-excel"
-          [loading]="loading"
-          [disabled]="!formGroup.valid"
-          (onClick)="export('xls')" />
+          icon="pi pi-chevron-left"
+          severity="secondary"
+          [rounded]="true"
+          class="toggleButton"
+          (click)="toggle()"
+          pTooltip="ocultar filtros" />
+      </div>
+      @for (filter of filters; track filter.name; let indexOfelement = $index) {
+        @switch (filter.type) {
+          @case ("DATE") {
+            <div class="filterElement">
+              <p-floatlabel>
+                <p-datepicker
+                  inputId="{{ 'filter' + indexOfelement }}"
+                  [showIcon]="true"
+                  formControlName="{{ filter.name }}"
+                  appendTo="body"
+                  fluid></p-datepicker>
+                <label for="{{ 'filter' + indexOfelement }}">{{ filter.label }}</label>
+              </p-floatlabel>
+            </div>
+          }
+          @case ("PICKLIST") {
+            <div class="filterElement">
+              <div class="pickListHeader">
+                <span>{{ filter.label }}</span>
+              </div>
+              <p-picklist
+                [source]="pickListElements[filter.name].source"
+                [target]="pickListElements[filter.name].target"
+                [dragdrop]="true"
+                showSourceControls="false"
+                showTargetControls="false"
+                targetHeader="Activo"
+                sourceHeader="Inactivo"
+                stripedRows="false"
+                [responsive]="false"
+                [sourceStyle]="{ height: '20rem', display: 'block' }">
+                <ng-template let-item #item>
+                  {{ item.label }}
+                </ng-template>
+              </p-picklist>
+            </div>
+          }
+          @case ("RADIO") {
+            <div class="filterElement radio">
+              <div class="radio-header">
+                <span>{{ filter.label }}</span>
+              </div>
+              <div class="radio-group">
+                @for (option of optionElements[filter.name]; track option; let idx = $index) {
+                  <div class="radio-field">
+                    <p-radioButton
+                      [inputId]="filter.name + 'opt' + idx"
+                      [value]="option.value"
+                      name="{{ filter.name }}"
+                      formControlName="{{ filter.name }}" />
+                    <label [for]="filter.name + 'opt' + idx">{{ option.label }}</label>
+                  </div>
+                }
+              </div>
+            </div>
+          }
+          @case ("CHECKBOX") {
+            <div class="filterElement checkbox">
+              <p-floatlabel>
+                <p-multiselect
+                  formControlName="{{ filter.name }}"
+                  id="{{ 'filter' + indexOfelement }}"
+                  [options]="optionElements[filter.name]"
+                  optionLabel="label"
+                  optionValue="value"
+                  appendTo="body"
+                  fluid />
+                <label for="{{ 'filter' + indexOfelement }}">{{ filter.label }}</label>
+              </p-floatlabel>
+            </div>
+          }
+          @case ("AUTOCOMPLETE") {
+            <div class="filterElement autocomplete">
+              <app-auto-complete
+                [formGroup]="formGroup"
+                [formItem]="autoCompletes().get(filter.name)"
+                [uimodule]="uimodule()"></app-auto-complete>
+            </div>
+          }
+          @case ("DROPDOWN") {
+            <div class="filterElement dropdown">
+              <p-floatlabel>
+                <p-select
+                  [options]="optionElements[filter.name]"
+                  formControlName="{{ filter.name }}"
+                  optionLabel="label"
+                  optionValue="value"
+                  appendTo="body"
+                  fluid
+                  id="{{ 'filter' + indexOfelement }}" />
+                <label for="{{ 'filter' + indexOfelement }}">{{ filter.label }}</label>
+              </p-floatlabel>
+            </div>
+          }
+        }
       }
-      @if (exportPdf()) {
+      <div class="filterButton">
         <p-button
-          icon="pi pi-file-pdf"
+          label="Update"
+          icon="pi pi-refresh"
           [loading]="loading"
-          [disabled]="!formGroup.valid"
-          (onClick)="export('pdf')" />
-      }
+          (onClick)="reload()"
+          [disabled]="!formGroup.valid" />
+        @if (exportXls()) {
+          <p-button
+            icon="pi pi-file-excel"
+            [loading]="loading"
+            [disabled]="!formGroup.valid"
+            (onClick)="export('xls')" />
+        }
+        @if (exportPdf()) {
+          <p-button
+            icon="pi pi-file-pdf"
+            [loading]="loading"
+            [disabled]="!formGroup.valid"
+            (onClick)="export('pdf')" />
+        }
+      </div>
     </div>
-  </div>
+  } @else {
+    <p-button
+      icon="pi pi-chevron-right"
+      severity="secondary"
+      [rounded]="true"
+      class="toggleButton"
+      (click)="toggle()"
+      pTooltip="mostrar filtros" />
+  }
   <div class="content">
     <div class="header">
       <h2>{{ uimodule().header }}</h2>

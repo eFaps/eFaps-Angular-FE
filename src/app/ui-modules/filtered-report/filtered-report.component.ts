@@ -16,6 +16,8 @@ import { MultiSelectModule } from 'primeng/multiselect';
 import { PickListModule } from 'primeng/picklist';
 import { RadioButtonModule } from 'primeng/radiobutton';
 
+import { SelectModule } from 'primeng/select';
+import { TooltipModule } from 'primeng/tooltip';
 import { SafeHtmlPipe } from 'src/app/pipes/safe-html.pipe';
 import { FormItem, Option } from '../../model/content';
 import { ModuleData, UIModule } from '../../model/module';
@@ -37,6 +39,8 @@ import { AutoCompleteComponent } from './auto-complete/auto-complete.component';
     MultiSelectModule,
     AutoCompleteModule,
     AutoCompleteComponent,
+    SelectModule,
+    TooltipModule,
   ],
   templateUrl: './filtered-report.component.html',
   styleUrl: './filtered-report.component.scss',
@@ -57,6 +61,8 @@ export class FilteredReportComponent implements OnInit {
   exportXls = signal<boolean>(false);
   exportPdf = signal<boolean>(false);
   loading = false;
+  stretched = false;
+  show = true;
 
   pickListElements: any = {};
 
@@ -124,6 +130,7 @@ export class FilteredReportComponent implements OnInit {
           break;
         case 'PICKLIST':
           this.initPickList(formItem);
+          this.stretched = true;
           break;
         case 'RADIO':
           this.initOptions(formItem);
@@ -152,11 +159,19 @@ export class FilteredReportComponent implements OnInit {
               : new FormControl<Option>(formItem.value),
           );
           break;
+        case 'DROPDOWN':
+          this.initOptions(formItem);
+          this.formGroup?.addControl(
+            formItem.name,
+            formItem.required
+              ? new FormControl<string[]>(formItem.value, Validators.required)
+              : new FormControl<string[]>(formItem.value),
+          );
+          break;
 
         case 'DATETIME':
         case 'DATETIMELABEL':
         case 'INPUT':
-        case 'DROPDOWN':
         case 'BITENUM':
         case 'SNIPPLET':
         case 'UPLOAD':
@@ -186,8 +201,14 @@ export class FilteredReportComponent implements OnInit {
             params = params.append(key, val);
           });
         } else {
-          (value as string[]).forEach((val) => {
-            params = params.append(key, val);
+          (value as any[]).forEach((val) => {
+            let strVal: string;
+            if (typeof val == 'object' && 'value' in (val as any)) {
+              strVal = (val as any).value as string;
+            } else {
+              strVal = val as string;
+            }
+            params = params.append(key, strVal);
           });
         }
       } else if (value != null) {
@@ -276,6 +297,10 @@ export class FilteredReportComponent implements OnInit {
       }
     }
     return ret;
+  }
+
+  toggle() {
+    this.show = !this.show;
   }
 }
 

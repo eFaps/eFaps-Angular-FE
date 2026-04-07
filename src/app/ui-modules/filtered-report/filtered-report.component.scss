@@ -7,6 +7,10 @@
   overflow: hidden;
   width: 100%;
 
+  .stretched {
+    width: 600px;
+  }
+
   .filters {
     background-color: var(--p-surface-200);
     padding: 0.5rem;
@@ -15,6 +19,21 @@
     border-color: var(--p-primary-700);
     overflow: auto;
     min-width: 290px;
+
+    .filterHeader {
+      height: 25px;
+
+      h2 {
+        margin-top: 0;
+      }
+
+      .toggleButton {
+        position: relative;
+        z-index: 100;
+        top: calc(var(--p-button-icon-only-width) * -1 + 2px);
+        left: calc(100% - var(--p-button-icon-only-width));
+      }
+    }
 
     .filterElement {
       padding-top: 1.5rem;
@@ -30,12 +49,15 @@
         color: var(--p-floatlabel-active-color);
         margin-left: 5px;
       }
+
       .radio-group {
         padding: 3px;
         background-color: var(--p-inputtext-background);
+
         .radio-field {
           margin-top: 2px;
           background-color: var(--p-inputtext-background);
+
           label {
             padding-left: 0.25rem;
           }
@@ -54,6 +76,7 @@
       bottom: 0;
     }
   }
+
   .content {
     margin-left: 1rem;
     min-width: 50%;
@@ -64,6 +87,7 @@
       text-align: center;
       width: 100%;
     }
+
     .report {
       text-align: center;
       width: 100%;
@@ -75,6 +99,7 @@
     }
   }
 }
+
 ::ng-deep .p-listbox-header {
   background-color: var(--p-primary-50);
 }

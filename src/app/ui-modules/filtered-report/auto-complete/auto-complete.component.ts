@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, effect, inject, input, signal } from '@angular/core';
+import { Component, effect, inject, input, model, signal } from '@angular/core';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import { FloatLabelModule } from 'primeng/floatlabel';
@@ -23,14 +23,18 @@ export class AutoCompleteComponent {
   readonly formGroup = input.required<FormGroup>();
   readonly formItem = input<FormItem>();
 
+  multiple = false;
   autoCompleteSuggestions = signal<Option[]>([]);
-  selectedOption: Option | undefined;
+  selectedOptions = model<Option[]>([]);
 
   constructor() {
     effect(() => {
       var item = this.formItem();
-      if (item && item.options && item.options.length == 1) {
-        this.selectedOption = item.options[0];
+      if (item && item.options && item.value) {
+        this.selectedOptions.set(item.options);
+      }
+      if (item && item.config) {
+        this.multiple = item.config.multiple;
       }
     });
   }

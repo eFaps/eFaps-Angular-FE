@@ -2,12 +2,15 @@
   <p-floatlabel>
     <p-autocomplete
       #ac
-      [(ngModel)]="selectedOption"
+      [(ngModel)]="selectedOptions"
       formControlName="{{ formItem()?.name }}"
       [suggestions]="autoCompleteSuggestions()"
       (completeMethod)="search($event.query)"
+      [multiple]="multiple"
       [showClear]="true"
       appendTo="body"
+      optionLabel="label"
+      optionValue="value"
       fluid />
     <label for="ac">{{ formItem()?.label }}</label>
   </p-floatlabel>
