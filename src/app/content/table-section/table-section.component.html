@@ -3,14 +3,20 @@
     <ng-template pTemplate="header" let-columns>
       <tr>
         @for (col of columns; track col) {
+          @if (isSortable()) {
           <th [pSortableColumn]="col.field" pResizableColumn>
             {{ col.header }}
             <p-sortIcon [field]="col.field"></p-sortIcon>
           </th>
+          } @else {
+            <th pResizableColumn>
+              {{ col.header }}
+            </th>
+          }
         }
       </tr>
     </ng-template>
-    <ng-template pTemplate="body" let-rowData let-columns="columns">
+    <ng-template pTemplate="body" let-rowData let-columns="columns" let-i="rowIndex">
       <tr>
         @for (col of columns; track col) {
           <td>
@@ -23,7 +29,10 @@
                   (click)="followLink(rowData, col)"
                   [style]="{ width: '2rem', height: '2rem' }"></p-button>
               }
-              {{ rowData[col.field] }}
+                <app-table-element
+                  [rowData]="rowData"
+                  [column]="col"
+                  [index]="i"></app-table-element>
             </div>
           </td>
         }

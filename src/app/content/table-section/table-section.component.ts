@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { ButtonModule } from 'primeng/button';
 import { TableModule } from 'primeng/table';
 
-import { TableSection } from '../../model/content';
+import { TableColumn, TableSection } from '../../model/content';
 import { Column } from '../../model/table';
 import { ValueService } from '../../services/value.service';
 import { TableElementComponent } from '../table-element/table-element.component';
@@ -23,7 +23,7 @@ export class TableSectionComponent {
 
   stateKey: string | undefined;
 
-  cols: any[] = [];
+  cols: TableColumn[] = [];
   elements: any[] = [];
   editable = false;
 
@@ -82,5 +82,10 @@ export class TableSectionComponent {
         return column.field;
       }),
     );
+  }
+
+  isSortable() : boolean{
+    this.cols.some(col => col.type == 'AUTOCOMPLETE' || col.type == 'DROPDOWN' || col.type == 'INPUT' )
+    return false;
   }
 }

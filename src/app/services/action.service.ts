@@ -22,39 +22,27 @@ export class ActionService {
     parentOid?: string,
     selectedElements?: any[],
   ): Observable<any> {
-    if (item.action.modal) {
+
+    const selectedOids = this.toOids(selectedElements)
+    if (item.action.modal && this.validate(item, selectedOids)) {
       return new Observable((subscriber) => {
-        this.contentService.getContentWithCmd('none', item.id).subscribe({
+        this.contentService.getContentWithCmd('none', item.id, selectedOids).subscribe({
           next: (outline) => {
             if (isOutline(outline)) {
-              let eFapsSelectedOids: string[] | undefined;
-              if (selectedElements != null) {
-                eFapsSelectedOids = [];
-                selectedElements.forEach((element) => {
-                  if (element.data?.OID) {
-                    let oid = element.data?.OID as string;
-                    eFapsSelectedOids!!.push(oid);
-                  }
-                });
-              }
-              if (this.validate(item, eFapsSelectedOids)) {
                 const dialogRef = this.dialogService.open(
                   ModalContentComponent,
                   {
                     data: {
                       item,
                       outline,
-                      eFapsSelectedOids,
                       parentOid: parentOid,
+                      eFapsSelectedOids: selectedOids
                     },
                   },
-                );
+                )
                 dialogRef?.onClose.subscribe({
                   next: (execResponse) => subscriber.next(execResponse),
-                });
-              } else {
-                subscriber.next(undefined);
-              }
+                })
             } else {
               const dialogRef = this.dialogService.open(
                 ModalModuleContentComponent,
@@ -78,6 +66,24 @@ export class ActionService {
       subscriber.next(undefined);
     });
   }
+
+  private toOids(selectedElements?: any[]): string[] | undefined {
+    if (selectedElements) {
+      const oids: string[] = [];
+      selectedElements.forEach((element) => {
+        if (element.data?.OID) {
+          let oid = element.data?.OID as string;
+          oids.push(oid);
+        } else if (element.OID) {
+          oids.push(element.OID);
+        }
+      });
+      return oids
+    } else {
+      return undefined
+    }
+  }
+
 
   private validate(
     item: MenuEntry,

@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
 
@@ -21,8 +21,15 @@ export class ContentService {
   getContentWithCmd(
     oid: string,
     cmdId: string,
+    selectedOids?: string[]
   ): Observable<Outline | UIModule> {
     const url = `${this.utilService.evalApiUrl()}/ui/content/${oid}/${cmdId}`;
-    return this.http.get<Outline | UIModule>(url);
+    let params = new HttpParams();
+    if (selectedOids) {
+      selectedOids.forEach((val) => {
+        params = params.append("selOids", val);
+      });
+    }
+    return this.http.get<Outline | UIModule>(url, { params: params });
   }
 }
