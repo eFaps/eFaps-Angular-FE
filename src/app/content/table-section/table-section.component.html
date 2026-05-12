@@ -4,10 +4,10 @@
       <tr>
         @for (col of columns; track col) {
           @if (isSortable()) {
-          <th [pSortableColumn]="col.field" pResizableColumn>
-            {{ col.header }}
-            <p-sortIcon [field]="col.field"></p-sortIcon>
-          </th>
+            <th [pSortableColumn]="col.field" pResizableColumn>
+              {{ col.header }}
+              <p-sortIcon [field]="col.field"></p-sortIcon>
+            </th>
           } @else {
             <th pResizableColumn>
               {{ col.header }}
@@ -29,10 +29,7 @@
                   (click)="followLink(rowData, col)"
                   [style]="{ width: '2rem', height: '2rem' }"></p-button>
               }
-                <app-table-element
-                  [rowData]="rowData"
-                  [column]="col"
-                  [index]="i"></app-table-element>
+              <app-table-element [rowData]="rowData" [column]="col" [index]="i"></app-table-element>
             </div>
           </td>
         }

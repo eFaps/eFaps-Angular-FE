@@ -22,13 +22,14 @@ export class ActionService {
     parentOid?: string,
     selectedElements?: any[],
   ): Observable<any> {
-
-    const selectedOids = this.toOids(selectedElements)
+    const selectedOids = this.toOids(selectedElements);
     if (item.action.modal && this.validate(item, selectedOids)) {
       return new Observable((subscriber) => {
-        this.contentService.getContentWithCmd('none', item.id, selectedOids).subscribe({
-          next: (outline) => {
-            if (isOutline(outline)) {
+        this.contentService
+          .getContentWithCmd('none', item.id, selectedOids)
+          .subscribe({
+            next: (outline) => {
+              if (isOutline(outline)) {
                 const dialogRef = this.dialogService.open(
                   ModalContentComponent,
                   {
@@ -36,30 +37,30 @@ export class ActionService {
                       item,
                       outline,
                       parentOid: parentOid,
-                      eFapsSelectedOids: selectedOids
+                      eFapsSelectedOids: selectedOids,
                     },
                   },
-                )
+                );
                 dialogRef?.onClose.subscribe({
                   next: (execResponse) => subscriber.next(execResponse),
-                })
-            } else {
-              const dialogRef = this.dialogService.open(
-                ModalModuleContentComponent,
-                {
-                  data: {
-                    item,
-                    uimodule: outline,
-                    parentOid: parentOid,
+                });
+              } else {
+                const dialogRef = this.dialogService.open(
+                  ModalModuleContentComponent,
+                  {
+                    data: {
+                      item,
+                      uimodule: outline,
+                      parentOid: parentOid,
+                    },
                   },
-                },
-              );
-              dialogRef?.onClose.subscribe({
-                next: (execResponse) => subscriber.next(execResponse),
-              });
-            }
-          },
-        });
+                );
+                dialogRef?.onClose.subscribe({
+                  next: (execResponse) => subscriber.next(execResponse),
+                });
+              }
+            },
+          });
       });
     }
     return new Observable((subscriber) => {
@@ -78,12 +79,11 @@ export class ActionService {
           oids.push(element.OID);
         }
       });
-      return oids
+      return oids;
     } else {
-      return undefined
+      return undefined;
     }
   }
-
 
   private validate(
     item: MenuEntry,

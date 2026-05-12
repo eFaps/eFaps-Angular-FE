@@ -21,13 +21,13 @@ export class ContentService {
   getContentWithCmd(
     oid: string,
     cmdId: string,
-    selectedOids?: string[]
+    selectedOids?: string[],
   ): Observable<Outline | UIModule> {
     const url = `${this.utilService.evalApiUrl()}/ui/content/${oid}/${cmdId}`;
     let params = new HttpParams();
     if (selectedOids) {
       selectedOids.forEach((val) => {
-        params = params.append("selOids", val);
+        params = params.append('selOids', val);
       });
     }
     return this.http.get<Outline | UIModule>(url, { params: params });

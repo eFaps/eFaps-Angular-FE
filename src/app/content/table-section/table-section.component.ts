@@ -84,8 +84,13 @@ export class TableSectionComponent {
     );
   }
 
-  isSortable() : boolean{
-    this.cols.some(col => col.type == 'AUTOCOMPLETE' || col.type == 'DROPDOWN' || col.type == 'INPUT' )
+  isSortable(): boolean {
+    this.cols.some(
+      (col) =>
+        col.type == 'AUTOCOMPLETE' ||
+        col.type == 'DROPDOWN' ||
+        col.type == 'INPUT',
+    );
     return false;
   }
 }

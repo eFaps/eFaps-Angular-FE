@@ -3,7 +3,6 @@ import {
   effect,
   inject,
   input,
-  model,
   OnDestroy,
   OnInit,
   signal,
@@ -39,7 +38,7 @@ export class TableElementComponent implements OnInit, OnDestroy {
   readonly index = input<number>(0);
   column = input.required<TableColumn>();
   rowData = input<any>();
-  
+
   dropdownValue: any | undefined;
   dropdownOptions = signal<Option[] | undefined>(undefined);
 
@@ -49,15 +48,15 @@ export class TableElementComponent implements OnInit, OnDestroy {
   autoCompleteSuggestions = signal<any[]>([]);
   autoCompleteRef = viewChild<AutoComplete>('autocomplete');
 
-  readOnlyValue = signal<any>("");
+  readOnlyValue = signal<any>('');
   valueSub: Subscription | undefined;
 
   constructor() {
-    effect(() => {
+    const effectRef = effect(() => {
       const rowData = this.rowData();
       this.updateValue(rowData[this.column().field]);
+      effectRef.destroy();
     });
-
   }
 
   ngOnInit(): void {
@@ -184,12 +183,12 @@ export class TableElementComponent implements OnInit, OnDestroy {
         .subscribe({
           next: (response) => {
             if (response.values) {
-              response.values.forEach((entry) => {
+              response.values.forEach((entry, index) => {
                 Object.entries(entry).forEach(([key, value]) => {
                   this.valueService.updateEntry({
                     name: key,
                     value,
-                    index: rowIndex,
+                    index: index,
                   });
                 });
               });
