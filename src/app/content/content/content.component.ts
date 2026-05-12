@@ -116,14 +116,15 @@ export class ContentComponent implements OnInit, OnDestroy {
               this.activeTab = selected.id;
             }
           } else if (val.selected != this.tabs[0].id) {
-            let navIndex;
+            let targetTab: MenuEntry | undefined;
             this.tabs.forEach((item, index) => {
               if (item.id == val.selected) {
-                navIndex = index;
+                targetTab = item;
               }
             });
-            if (navIndex) {
-              this.navigate(navIndex);
+            if (targetTab) {
+              this.navigate(targetTab);
+              this.activeTab = targetTab.id;
             }
           }
           this.evaluateContentHeight();
