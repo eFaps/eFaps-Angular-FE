@@ -9,6 +9,13 @@
       text-align: center;
     }
 
+    .size {
+      flex-grow: 1;
+      min-width: 100px;
+      text-align: center;
+      padding-top: 27px;
+    }
+
     .timeframe {
       flex-grow: 1;
       margin-top: 25px;
@@ -64,6 +71,30 @@
       .statusWarning {
         color: var(--p-button-warn-background);
       }
+    }
+  }
+}
+
+.sizePopover {
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  div {
+    height: 50px;
+    padding-top: 25px;
+    display: inline-flex;
+
+    i {
+      bottom: 6px;
+      position: relative;
+      margin-right: 15px;
+    }
+
+    .p-slider {
+      width: 160px;
     }
   }
 }

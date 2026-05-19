@@ -5,6 +5,21 @@
         <h2>Estatus</h2>
         <span>Ultima evaluacion: {{ report()?.date | date: "medium" }}</span>
       </div>
+      <div class="size">
+        <p-button icon="pi pi-arrows-alt" (click)="op.toggle($event)" />
+        <p-popover #op>
+          <div class="flex sizePopover">
+            <div>
+              <i class="pi pi-arrows-v"></i>
+              <p-slider [(ngModel)]="height" [min]="7" [max]="20" [step]="0.5" />
+            </div>
+            <div>
+              <i class="pi pi-arrows-h"></i>
+              <p-slider [(ngModel)]="width" [min]="10" [max]="30" [step]="0.5" />
+            </div>
+          </div>
+        </p-popover>
+      </div>
       <div class="timeframe">
         <p-floatlabel>
           <p-select
@@ -23,7 +38,7 @@
 
     <div class="statusWrapper">
       @for (status of report()?.backendStatus; track status) {
-        <div class="status">
+        <div class="status" [style.width]="width() + 'rem'" [style.height]="height() + 'rem'">
           <span class="name" (click)="navigate(status.oid)"> {{ status.name }} </span>
           <span>{{ status.timeAgo }}</span>
 

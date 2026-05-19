@@ -1,12 +1,23 @@
 import { DatePipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { Component, effect, inject, OnInit, signal } from '@angular/core';
+import {
+  Component,
+  effect,
+  inject,
+  model,
+  OnInit,
+  signal,
+} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import TimeAgo from 'javascript-time-ago';
 import es from 'javascript-time-ago/locale/es';
+import { LocalStorageService } from 'ngx-localstorage';
+import { ButtonModule } from 'primeng/button';
 import { FloatLabelModule } from 'primeng/floatlabel';
+import { PopoverModule } from 'primeng/popover';
 import { SelectModule } from 'primeng/select';
+import { SliderModule } from 'primeng/slider';
 import { interval, Subscription } from 'rxjs';
 import { UtilService } from '../../services/util.service';
 
@@ -35,7 +46,15 @@ export enum Status {
 
 @Component({
   selector: 'app-pos-status-report',
-  imports: [FormsModule, DatePipe, SelectModule, FloatLabelModule],
+  imports: [
+    FormsModule,
+    DatePipe,
+    SelectModule,
+    FloatLabelModule,
+    SliderModule,
+    ButtonModule,
+    PopoverModule,
+  ],
   templateUrl: './pos-status-report.component.html',
   styleUrl: './pos-status-report.component.scss',
 })
@@ -43,6 +62,10 @@ export class PosStatusReportComponent implements OnInit {
   private http = inject(HttpClient);
   private utilService = inject(UtilService);
   private router = inject(Router);
+  private readonly storageService = inject(LocalStorageService);
+
+  height = model<number>(9);
+  width = model<number>(15);
 
   x = new TimeAgo('es').format(new Date());
 
@@ -80,9 +103,23 @@ export class PosStatusReportComponent implements OnInit {
         });
       }
     });
+    effect(() => {
+      this.storageService.set('pos-status-height', this.height());
+    });
+    effect(() => {
+      this.storageService.set('pos-status-width', this.width());
+    });
   }
 
   ngOnInit(): void {
+    const persitedHeight = this.storageService.get<number>('pos-status-height');
+    if (persitedHeight) {
+      this.height.set(persitedHeight);
+    }
+    const persitedWidth = this.storageService.get<number>('pos-status-width');
+    if (persitedWidth) {
+      this.width.set(persitedWidth);
+    }
     this.load(true);
   }
 
