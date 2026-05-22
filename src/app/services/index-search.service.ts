@@ -15,7 +15,7 @@ export class IndexSearchService {
   search(query: string): Observable<SearchResult> {
     const escaped = this.escape(query);
     const url = `${this.utilService.evalApiUrl()}/ui/index`;
-    const params: any = { escaped };
+    const params: any = { query: escaped };
     return this.http.get<SearchResult>(url, { params: params });
   }
 
