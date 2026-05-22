@@ -13,8 +13,13 @@ export class IndexSearchService {
   private utilService = inject(UtilService);
 
   search(query: string): Observable<SearchResult> {
+    const escaped = this.escape(query);
     const url = `${this.utilService.evalApiUrl()}/ui/index`;
-    const params: any = { query };
+    const params: any = { escaped };
     return this.http.get<SearchResult>(url, { params: params });
+  }
+
+  escape(query: string): string {
+    return query.replaceAll(/(?<!\\)@/g, '\\@');
   }
 }
