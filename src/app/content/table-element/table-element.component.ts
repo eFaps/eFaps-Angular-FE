@@ -104,7 +104,7 @@ export class TableElementComponent implements OnInit, OnDestroy {
             let options: Option[] = [];
             value.forEach((val) => {
               if (val.selected == true) {
-                this.dropdownValue.set(val.value);
+                this.dropdownValue = val.value;
               }
               options.push({
                 label: val.option,
