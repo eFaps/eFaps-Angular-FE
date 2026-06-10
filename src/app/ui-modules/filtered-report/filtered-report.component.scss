@@ -29,7 +29,7 @@
 
       .toggleButton {
         position: relative;
-        z-index: 100;
+        z-index: 5;
         top: calc(var(--p-button-icon-only-width) * -1 + 2px);
         left: calc(100% - var(--p-button-icon-only-width));
       }
