@@ -72,6 +72,8 @@ export class FilteredReportComponent implements OnInit {
 
   sourceStyle = "{ height: '20rem', display: 'block' }";
 
+  configs: any = {}
+
   constructor() {
     this.formGroup = new FormGroup({});
   }
@@ -167,6 +169,9 @@ export class FilteredReportComponent implements OnInit {
               ? new FormControl<string[]>(formItem.value, Validators.required)
               : new FormControl<string[]>(formItem.value),
           );
+          if (formItem.config) {
+            this.configs[formItem.name] = formItem.config
+          }
           break;
 
         case 'DATETIME':

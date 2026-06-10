@@ -100,6 +100,7 @@
                   optionValue="value"
                   appendTo="body"
                   fluid
+                  [showClear]="configs[filter.name]?.showClear"
                   id="{{ 'filter' + indexOfelement }}" />
                 <label for="{{ 'filter' + indexOfelement }}">{{ filter.label }}</label>
               </p-floatlabel>
