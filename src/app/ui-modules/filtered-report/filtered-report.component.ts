@@ -16,7 +16,9 @@ import { MultiSelectModule } from 'primeng/multiselect';
 import { PickListModule } from 'primeng/picklist';
 import { RadioButtonModule } from 'primeng/radiobutton';
 
+import { MenuItem } from 'primeng/api';
 import { SelectModule } from 'primeng/select';
+import { SplitButtonModule } from 'primeng/splitbutton';
 import { TooltipModule } from 'primeng/tooltip';
 import { SafeHtmlPipe } from 'src/app/pipes/safe-html.pipe';
 import { FormItem, Option } from '../../model/content';
@@ -41,6 +43,7 @@ import { AutoCompleteComponent } from './auto-complete/auto-complete.component';
     AutoCompleteComponent,
     SelectModule,
     TooltipModule,
+    SplitButtonModule,
   ],
   templateUrl: './filtered-report.component.html',
   styleUrl: './filtered-report.component.scss',
@@ -72,7 +75,9 @@ export class FilteredReportComponent implements OnInit {
 
   sourceStyle = "{ height: '20rem', display: 'block' }";
 
-  configs: any = {}
+  configs: any = {};
+
+  updateItems = signal<MenuItem[]>([]);
 
   constructor() {
     this.formGroup = new FormGroup({});
@@ -109,9 +114,34 @@ export class FilteredReportComponent implements OnInit {
           this.formGroup = new FormGroup({});
         }
         this.loading = false;
+        this.setMenu();
       },
       error: () => (this.loading = false),
     });
+  }
+
+  setMenu() {
+    const items = [];
+    if (this.exportXls()) {
+      items.push({
+        label: 'Exportar xls',
+        icon: 'pi pi-file-excel',
+        command: () => {
+          this.export('xls');
+        },
+      });
+    }
+
+    if (this.exportPdf()) {
+      items.push({
+        label: 'Exportar pdf',
+        icon: 'pi pi-file-pdf',
+        command: () => {
+          this.export('pdf');
+        },
+      });
+    }
+    this.updateItems.set(items);
   }
 
   private applyFilters(filters: FormItem[]) {
@@ -170,7 +200,7 @@ export class FilteredReportComponent implements OnInit {
               : new FormControl<string[]>(formItem.value),
           );
           if (formItem.config) {
-            this.configs[formItem.name] = formItem.config
+            this.configs[formItem.name] = formItem.config;
           }
           break;
 

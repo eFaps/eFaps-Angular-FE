@@ -109,12 +109,22 @@
         }
       }
       <div class="filterButton">
-        <p-button
-          label="Update"
-          icon="pi pi-refresh"
-          [loading]="loading"
-          (onClick)="reload()"
-          [disabled]="!formGroup.valid" />
+        @if (updateItems().length > 0) {
+          <p-splitbutton
+            label="Actualizar"
+            icon="pi pi-refresh"
+            (onClick)="reload()"
+            [disabled]="!formGroup.valid || loading"
+            [model]="updateItems()" />
+        } @else {
+          <p-button
+            label="Actualizar"
+            icon="pi pi-refresh"
+            [loading]="loading"
+            (onClick)="reload()"
+            [disabled]="!formGroup.valid" />
+        }
+
         @if (exportXls()) {
           <p-button
             icon="pi pi-file-excel"

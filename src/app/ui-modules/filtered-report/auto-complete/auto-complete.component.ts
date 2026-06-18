@@ -43,7 +43,7 @@ export class AutoCompleteComponent {
       }
     });
   }
-  
+
   search(query: string) {
     const url = `${this.utilService.evalApiUrl()}/ui/modules/filtered-report/${this.uimodule().id}/autocomplete/${this.formItem()!!.name}`;
     const values: any = {};
