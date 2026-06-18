@@ -18,7 +18,7 @@
     border-width: 1px;
     border-color: var(--p-primary-700);
     overflow: auto;
-    min-width: 290px;
+    min-width: 300px;
 
     .filterHeader {
       height: 25px;
@@ -71,7 +71,7 @@
       flex-direction: row;
       align-items: center;
       justify-content: center;
-      column-gap: 20px;
+      column-gap: 5px;
       position: sticky;
       bottom: 0;
     }
