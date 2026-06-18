@@ -177,6 +177,8 @@
         @case ("IMAGE") {
           @if (readOnlyValue != null) {
             <p-image [src]="evalImageUrl()" alt="Image" width="250" [preview]="true" />
+          } @else {
+            <i class="pi pi-ban"></i>
           }
         }
         @case ("UIMODULE") {
