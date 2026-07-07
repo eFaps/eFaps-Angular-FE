@@ -20,7 +20,7 @@
       <tr>
         @for (col of columns; track col) {
           <td>
-            <div>
+            <div class="column" [class.link]="showLink(rowData, col)">
               @if (showLink(rowData, col)) {
                 <p-button
                   icon="pi pi-link"
