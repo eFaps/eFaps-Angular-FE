@@ -1,12 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ButtonModule } from 'primeng/button';
-import { FloatLabelModule } from 'primeng/floatlabel';
-import { InputNumberModule } from 'primeng/inputnumber';
-import { InputTextModule } from 'primeng/inputtext';
-import { TableModule } from 'primeng/table';
-import { ToggleButtonModule } from 'primeng/togglebutton';
+import { ButtonModule } from '@openng/optimus-ui/button';
+import { FloatLabelModule } from '@openng/optimus-ui/floatlabel';
+import { InputNumberModule } from '@openng/optimus-ui/inputnumber';
+import { InputTextModule } from '@openng/optimus-ui/inputtext';
+import { TableModule } from '@openng/optimus-ui/table';
+import { ToggleButtonModule } from '@openng/optimus-ui/togglebutton';
 import { UtilService } from 'src/app/services/util.service';
 interface Entry {
   stmt: string;

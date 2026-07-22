@@ -6,9 +6,9 @@ import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { provideZonelessChangeDetection } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
-import { DialogService } from 'primeng/dynamicdialog';
-import { MenuModule } from 'primeng/menu';
-import { ToolbarModule } from 'primeng/toolbar';
+import { DialogService } from '@openng/optimus-ui/dynamicdialog';
+import { MenuModule } from '@openng/optimus-ui/menu';
+import { ToolbarModule } from '@openng/optimus-ui/toolbar';
 
 import { SectionsComponent } from '../sections/sections.component';
 import { FormContentComponent } from './form-content.component';

@@ -2,22 +2,22 @@ import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ConfirmationService } from 'primeng/api';
-import { AutoCompleteModule } from 'primeng/autocomplete';
-import { ButtonModule } from 'primeng/button';
-import { ConfirmDialogModule } from 'primeng/confirmdialog';
-import { DatePickerModule } from 'primeng/datepicker';
-import { DialogModule } from 'primeng/dialog';
-import { FloatLabelModule } from 'primeng/floatlabel';
-import { InputNumberModule } from 'primeng/inputnumber';
-import { ListboxModule } from 'primeng/listbox';
-import { SelectModule } from 'primeng/select';
-import { TableModule } from 'primeng/table';
+import { ConfirmationService } from '@openng/optimus-ui/api';
+import { AutoCompleteModule } from '@openng/optimus-ui/autocomplete';
+import { ButtonModule } from '@openng/optimus-ui/button';
+import { ConfirmDialogModule } from '@openng/optimus-ui/confirmdialog';
+import { DatePickerModule } from '@openng/optimus-ui/datepicker';
+import { DialogModule } from '@openng/optimus-ui/dialog';
+import { FloatLabelModule } from '@openng/optimus-ui/floatlabel';
+import { InputNumberModule } from '@openng/optimus-ui/inputnumber';
+import { ListboxModule } from '@openng/optimus-ui/listbox';
+import { SelectModule } from '@openng/optimus-ui/select';
+import { TableModule } from '@openng/optimus-ui/table';
 import {
   ToggleSwitchChangeEvent,
   ToggleSwitchModule,
-} from 'primeng/toggleswitch';
-import { ToolbarModule } from 'primeng/toolbar';
+} from '@openng/optimus-ui/toggleswitch';
+import { ToolbarModule } from '@openng/optimus-ui/toolbar';
 
 import { UtilService } from '../../services/util.service';
 

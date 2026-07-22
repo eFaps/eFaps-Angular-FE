@@ -1,7 +1,7 @@
 import { Component, inject, Input, signal } from '@angular/core';
+import { ChartModule } from '@openng/optimus-ui/chart';
+import { ProgressSpinnerModule } from '@openng/optimus-ui/progressspinner';
 import { Chart } from 'chart.js';
-import { ChartModule } from 'primeng/chart';
-import { ProgressSpinnerModule } from 'primeng/progressspinner';
 
 import { ChartWidget, WidgetData } from '../../model/dashboard';
 import { DashboardService } from '../../services/dashboard.service';

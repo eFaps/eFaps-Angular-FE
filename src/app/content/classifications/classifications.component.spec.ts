@@ -5,9 +5,12 @@ import {
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { provideZonelessChangeDetection } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ButtonModule } from 'primeng/button';
-import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
-import { TreeModule } from 'primeng/tree';
+import { ButtonModule } from '@openng/optimus-ui/button';
+import {
+  DynamicDialogConfig,
+  DynamicDialogRef,
+} from '@openng/optimus-ui/dynamicdialog';
+import { TreeModule } from '@openng/optimus-ui/tree';
 
 import { ClassificationsComponent } from './classifications.component';
 

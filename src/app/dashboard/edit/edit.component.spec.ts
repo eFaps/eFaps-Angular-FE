@@ -5,9 +5,12 @@ import {
 import { provideZonelessChangeDetection } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
-import { ButtonModule } from 'primeng/button';
-import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
-import { SelectModule } from 'primeng/select';
+import { ButtonModule } from '@openng/optimus-ui/button';
+import {
+  DynamicDialogConfig,
+  DynamicDialogRef,
+} from '@openng/optimus-ui/dynamicdialog';
+import { SelectModule } from '@openng/optimus-ui/select';
 import { Observable } from 'rxjs';
 
 import { DashboardTemplate } from '../../model/dashboard';

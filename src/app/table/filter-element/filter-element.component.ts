@@ -1,10 +1,10 @@
 import { Component, Input, output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { CheckboxModule } from 'primeng/checkbox';
-import { DatePickerModule } from 'primeng/datepicker';
-import { FluidModule } from 'primeng/fluid';
-import { InputTextModule } from 'primeng/inputtext';
-import { ToggleSwitchModule } from 'primeng/toggleswitch';
+import { CheckboxModule } from '@openng/optimus-ui/checkbox';
+import { DatePickerModule } from '@openng/optimus-ui/datepicker';
+import { FluidModule } from '@openng/optimus-ui/fluid';
+import { InputTextModule } from '@openng/optimus-ui/inputtext';
+import { ToggleSwitchModule } from '@openng/optimus-ui/toggleswitch';
 
 import { Option } from '../../model/content';
 import { Filter } from '../../model/table';

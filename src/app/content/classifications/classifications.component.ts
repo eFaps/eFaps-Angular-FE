@@ -1,12 +1,15 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { TreeNode } from 'primeng/api';
-import { ButtonModule } from 'primeng/button';
-import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { TreeNode } from '@openng/optimus-ui/api';
+import { ButtonModule } from '@openng/optimus-ui/button';
+import {
+  DynamicDialogConfig,
+  DynamicDialogRef,
+} from '@openng/optimus-ui/dynamicdialog';
 import {
   TreeModule,
   TreeNodeSelectEvent,
   TreeNodeUnSelectEvent,
-} from 'primeng/tree';
+} from '@openng/optimus-ui/tree';
 
 import { Classification } from '../../model/classification';
 import { ClassificationService } from '../../services/classification.service';

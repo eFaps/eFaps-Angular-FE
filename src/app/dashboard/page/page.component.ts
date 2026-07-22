@@ -1,4 +1,5 @@
 import { Component, Input, inject } from '@angular/core';
+import { ButtonModule } from '@openng/optimus-ui/button';
 import {
   CompactType,
   DisplayGrid,
@@ -8,7 +9,6 @@ import {
   GridsterItem,
   GridsterItemConfig,
 } from 'angular-gridster2';
-import { ButtonModule } from 'primeng/button';
 import { v4 as uuidv4 } from 'uuid';
 
 import { DashboardPage } from '../../model/dashboard';

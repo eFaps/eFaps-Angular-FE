@@ -1,9 +1,9 @@
 import { Component, inject, Input, input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { InputTextModule } from 'primeng/inputtext';
-import { RadioButtonModule } from 'primeng/radiobutton';
-import { SelectModule } from 'primeng/select';
-import { TableModule } from 'primeng/table';
+import { InputTextModule } from '@openng/optimus-ui/inputtext';
+import { RadioButtonModule } from '@openng/optimus-ui/radiobutton';
+import { SelectModule } from '@openng/optimus-ui/select';
+import { TableModule } from '@openng/optimus-ui/table';
 
 import { FormItem } from '../../model/content';
 import { ValueService } from '../../services/value.service';

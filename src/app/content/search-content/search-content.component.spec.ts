@@ -5,8 +5,11 @@ import {
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { provideZonelessChangeDetection } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { MessageService } from 'primeng/api';
-import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { MessageService } from '@openng/optimus-ui/api';
+import {
+  DynamicDialogConfig,
+  DynamicDialogRef,
+} from '@openng/optimus-ui/dynamicdialog';
 
 import { SearchContentComponent } from './search-content.component';
 

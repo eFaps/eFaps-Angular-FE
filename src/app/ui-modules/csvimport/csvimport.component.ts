@@ -1,16 +1,19 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, inject, input, signal, viewChild } from '@angular/core';
-import Papa, { ParseResult } from 'papaparse';
-import { ButtonModule } from 'primeng/button';
-import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { ButtonModule } from '@openng/optimus-ui/button';
+import {
+  DynamicDialogConfig,
+  DynamicDialogRef,
+} from '@openng/optimus-ui/dynamicdialog';
 import {
   FileSelectEvent,
   FileUpload,
   FileUploadModule,
-} from 'primeng/fileupload';
-import { MessageModule } from 'primeng/message';
-import { ScrollPanelModule } from 'primeng/scrollpanel';
-import { TableModule } from 'primeng/table';
+} from '@openng/optimus-ui/fileupload';
+import { MessageModule } from '@openng/optimus-ui/message';
+import { ScrollPanelModule } from '@openng/optimus-ui/scrollpanel';
+import { TableModule } from '@openng/optimus-ui/table';
+import Papa, { ParseResult } from 'papaparse';
 
 import { ModuleData, UIModule } from '../../model/module';
 import { UtilService } from '../../services/util.service';

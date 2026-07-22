@@ -1,10 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, inject, input, OnInit, signal } from '@angular/core';
-import { TreeNode } from 'primeng/api';
-import { ButtonModule } from 'primeng/button';
-import { DialogModule } from 'primeng/dialog';
-import { TagModule } from 'primeng/tag';
-import { TreeModule } from 'primeng/tree';
+import { TreeNode } from '@openng/optimus-ui/api';
+import { ButtonModule } from '@openng/optimus-ui/button';
+import { DialogModule } from '@openng/optimus-ui/dialog';
+import { TagModule } from '@openng/optimus-ui/tag';
+import { TreeModule } from '@openng/optimus-ui/tree';
 
 import { UIModule } from '../../model/module';
 import { UtilService } from '../../services/util.service';

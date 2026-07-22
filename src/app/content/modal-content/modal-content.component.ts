@@ -1,11 +1,11 @@
 import { Component, effect, inject, signal } from '@angular/core';
-import { ButtonModule } from 'primeng/button';
-import { DialogModule } from 'primeng/dialog';
+import { ButtonModule } from '@openng/optimus-ui/button';
+import { DialogModule } from '@openng/optimus-ui/dialog';
 import {
   DynamicDialogConfig,
   DynamicDialogModule,
   DynamicDialogRef,
-} from 'primeng/dynamicdialog';
+} from '@openng/optimus-ui/dynamicdialog';
 import { forkJoin, Observable } from 'rxjs';
 
 import { Classification } from '../../model/classification';

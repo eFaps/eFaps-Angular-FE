@@ -7,11 +7,11 @@ import { provideZonelessChangeDetection } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { provideRouter } from '@angular/router';
-import { MessageService } from 'primeng/api';
-import { ConfirmDialogModule } from 'primeng/confirmdialog';
-import { DialogService } from 'primeng/dynamicdialog';
-import { MenuModule } from 'primeng/menu';
-import { TreeTableModule } from 'primeng/treetable';
+import { MessageService } from '@openng/optimus-ui/api';
+import { ConfirmDialogModule } from '@openng/optimus-ui/confirmdialog';
+import { DialogService } from '@openng/optimus-ui/dynamicdialog';
+import { MenuModule } from '@openng/optimus-ui/menu';
+import { TreeTableModule } from '@openng/optimus-ui/treetable';
 
 import { StructureBrowserComponent } from './structure-browser.component';
 

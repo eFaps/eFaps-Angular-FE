@@ -5,8 +5,8 @@ import {
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { provideZonelessChangeDetection } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { DialogModule } from 'primeng/dialog';
-import { DialogService } from 'primeng/dynamicdialog';
+import { DialogModule } from '@openng/optimus-ui/dialog';
+import { DialogService } from '@openng/optimus-ui/dynamicdialog';
 
 import { FormElementComponent } from './form-element.component';
 

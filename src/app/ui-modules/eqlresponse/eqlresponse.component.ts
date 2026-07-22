@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { TableModule } from 'primeng/table';
+import { TableModule } from '@openng/optimus-ui/table';
 
 import { FieldCommandResponse } from '../../model/field-command';
 

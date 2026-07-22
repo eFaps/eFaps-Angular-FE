@@ -1,7 +1,7 @@
 import { Component, inject, Input, signal } from '@angular/core';
-import { ButtonModule } from 'primeng/button';
-import { DialogService } from 'primeng/dynamicdialog';
-import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { ButtonModule } from '@openng/optimus-ui/button';
+import { DialogService } from '@openng/optimus-ui/dynamicdialog';
+import { ProgressSpinnerModule } from '@openng/optimus-ui/progressspinner';
 
 import { DashboardWidget, WidgetData } from '../../model/dashboard';
 import { DashboardService } from '../../services/dashboard.service';

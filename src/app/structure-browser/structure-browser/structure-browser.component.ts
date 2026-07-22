@@ -1,22 +1,22 @@
 import { Component, OnInit, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { LocalStorageService } from 'ngx-localstorage';
 import {
   ConfirmationService,
   MenuItem,
   SortMeta,
   TreeNode,
   TreeTableNode,
-} from 'primeng/api';
-import { ButtonModule } from 'primeng/button';
-import { ConfirmDialogModule } from 'primeng/confirmdialog';
-import { InputGroupModule } from 'primeng/inputgroup';
-import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
-import { InputTextModule } from 'primeng/inputtext';
-import { MenuModule } from 'primeng/menu';
-import { MenubarModule } from 'primeng/menubar';
-import { TreeTableModule } from 'primeng/treetable';
+} from '@openng/optimus-ui/api';
+import { ButtonModule } from '@openng/optimus-ui/button';
+import { ConfirmDialogModule } from '@openng/optimus-ui/confirmdialog';
+import { InputGroupModule } from '@openng/optimus-ui/inputgroup';
+import { InputGroupAddonModule } from '@openng/optimus-ui/inputgroupaddon';
+import { InputTextModule } from '@openng/optimus-ui/inputtext';
+import { MenuModule } from '@openng/optimus-ui/menu';
+import { MenubarModule } from '@openng/optimus-ui/menubar';
+import { TreeTableModule } from '@openng/optimus-ui/treetable';
+import { LocalStorageService } from 'ngx-localstorage';
 import { combineLatest } from 'rxjs';
 
 import { MenuEntry } from '../../model/menu';

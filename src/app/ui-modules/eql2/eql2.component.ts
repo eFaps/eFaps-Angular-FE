@@ -1,13 +1,13 @@
 import { Component, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ButtonModule } from 'primeng/button';
-import { DynamicDialogConfig } from 'primeng/dynamicdialog';
-import { FloatLabelModule } from 'primeng/floatlabel';
-import { TextareaModule } from 'primeng/textarea';
+import { ButtonModule } from '@openng/optimus-ui/button';
+import { DynamicDialogConfig } from '@openng/optimus-ui/dynamicdialog';
+import { FloatLabelModule } from '@openng/optimus-ui/floatlabel';
+import { TextareaModule } from '@openng/optimus-ui/textarea';
 
 import { HttpClient } from '@angular/common/http';
-import { PanelModule } from 'primeng/panel';
-import { TableModule } from 'primeng/table';
+import { PanelModule } from '@openng/optimus-ui/panel';
+import { TableModule } from '@openng/optimus-ui/table';
 import { UtilService } from 'src/app/services/util.service';
 import {
   CIDisplayComponent,

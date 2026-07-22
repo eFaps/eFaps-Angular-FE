@@ -1,7 +1,7 @@
 import { Component, Input, inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { ButtonModule } from 'primeng/button';
-import { TableModule } from 'primeng/table';
+import { ButtonModule } from '@openng/optimus-ui/button';
+import { TableModule } from '@openng/optimus-ui/table';
 
 import { TableColumn, TableSection } from '../../model/content';
 import { Column } from '../../model/table';

@@ -1,6 +1,6 @@
 import { provideZonelessChangeDetection } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { DynamicDialogConfig } from 'primeng/dynamicdialog';
+import { DynamicDialogConfig } from '@openng/optimus-ui/dynamicdialog';
 
 import { ModalModuleContentComponent } from './modal-module-content.component';
 

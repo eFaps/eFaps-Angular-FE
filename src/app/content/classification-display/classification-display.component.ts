@@ -1,5 +1,5 @@
 import { Component, input } from '@angular/core';
-import { ChipModule } from 'primeng/chip';
+import { ChipModule } from '@openng/optimus-ui/chip';
 
 import { Classification } from '../../model/classification';
 

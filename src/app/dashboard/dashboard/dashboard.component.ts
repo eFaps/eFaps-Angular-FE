@@ -1,10 +1,10 @@
 import { Component, OnInit, inject } from '@angular/core';
+import { MenuItem, OpenngIcons } from '@openng/optimus-ui/api';
+import { ButtonModule } from '@openng/optimus-ui/button';
+import { DialogService } from '@openng/optimus-ui/dynamicdialog';
+import { SpeedDialModule } from '@openng/optimus-ui/speeddial';
+import { StepsModule } from '@openng/optimus-ui/steps';
 import { LocalStorageService } from 'ngx-localstorage';
-import { MenuItem, PrimeIcons } from 'primeng/api';
-import { ButtonModule } from 'primeng/button';
-import { DialogService } from 'primeng/dynamicdialog';
-import { SpeedDialModule } from 'primeng/speeddial';
-import { StepsModule } from 'primeng/steps';
 
 import { DashboardPage } from '../../model/dashboard';
 import { DashboardService } from '../../services/dashboard.service';
@@ -36,14 +36,14 @@ export class DashboardComponent implements OnInit {
   deactivated = false;
   menuItems = [
     {
-      icon: PrimeIcons.FILE_EDIT,
+      icon: OpenngIcons.FILE_EDIT,
       label: 'Editar paginas',
       command: () => {
         this.editPages();
       },
     },
     {
-      icon: PrimeIcons.PENCIL,
+      icon: OpenngIcons.PENCIL,
       label: 'Editar pagina actual',
       command: () => {
         this.editCurentPage();

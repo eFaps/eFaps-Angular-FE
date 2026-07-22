@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-import { MenuItem, MenuItemCommandEvent } from 'primeng/api';
+import { MenuItem, MenuItemCommandEvent } from '@openng/optimus-ui/api';
 import { Observable } from 'rxjs';
 
 import { MenuEntry } from '../model/menu';

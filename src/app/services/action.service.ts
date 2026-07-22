@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
-import { MessageService } from 'primeng/api';
-import { DialogService } from 'primeng/dynamicdialog';
+import { MessageService } from '@openng/optimus-ui/api';
+import { DialogService } from '@openng/optimus-ui/dynamicdialog';
 import { Observable } from 'rxjs';
 
 import { ModalContentComponent } from '../content/modal-content/modal-content.component';

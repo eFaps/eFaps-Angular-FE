@@ -1,12 +1,15 @@
 import { Component, OnInit, inject, signal } from '@angular/core';
 import { Router } from '@angular/router';
-import { MenuItem, MessageService } from 'primeng/api';
-import { ButtonModule } from 'primeng/button';
-import { CheckboxModule } from 'primeng/checkbox';
-import { DividerModule } from 'primeng/divider';
-import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
-import { MenubarModule } from 'primeng/menubar';
-import { TableModule } from 'primeng/table';
+import { MenuItem, MessageService } from '@openng/optimus-ui/api';
+import { ButtonModule } from '@openng/optimus-ui/button';
+import { CheckboxModule } from '@openng/optimus-ui/checkbox';
+import { DividerModule } from '@openng/optimus-ui/divider';
+import {
+  DynamicDialogConfig,
+  DynamicDialogRef,
+} from '@openng/optimus-ui/dynamicdialog';
+import { MenubarModule } from '@openng/optimus-ui/menubar';
+import { TableModule } from '@openng/optimus-ui/table';
 
 import { Search, SearchResult } from '../../model/search';
 import { ExecService } from '../../services/exec.service';

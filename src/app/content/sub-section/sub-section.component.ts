@@ -1,5 +1,5 @@
 import { Component, input } from '@angular/core';
-import { PanelModule } from 'primeng/panel';
+import { PanelModule } from '@openng/optimus-ui/panel';
 
 import {
   FormSection,

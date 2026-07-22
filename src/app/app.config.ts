@@ -13,16 +13,16 @@ import {
 } from '@angular/core';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { provideRouter, RouteReuseStrategy } from '@angular/router';
-import Material from '@primeuix/themes/material';
+import Material from '@openng/optimus-ui-themes/material';
+import { ConfirmationService, MessageService } from '@openng/optimus-ui/api';
+import { provideOptimus } from '@openng/optimus-ui/config';
+import { DialogService } from '@openng/optimus-ui/dynamicdialog';
 import {
   INCLUDE_BEARER_TOKEN_INTERCEPTOR_CONFIG,
   includeBearerTokenInterceptor,
   provideKeycloak,
 } from 'keycloak-angular';
 import { NGX_LOCAL_STORAGE_CONFIG } from 'ngx-localstorage';
-import { ConfirmationService, MessageService } from 'primeng/api';
-import { providePrimeNG } from 'primeng/config';
-import { DialogService } from 'primeng/dynamicdialog';
 
 import { environment } from 'src/environments/environment';
 import { routes } from './app-routes';
@@ -53,8 +53,8 @@ export const appConfig: ApplicationConfig = {
     ),
     provideRouter(routes),
     provideZonelessChangeDetection(),
-    provideAnimationsAsync(), // required from PrimeNG
-    providePrimeNG({
+    provideAnimationsAsync(), // required from optimus
+    provideOptimus({
       theme: {
         preset: Material,
         options: {

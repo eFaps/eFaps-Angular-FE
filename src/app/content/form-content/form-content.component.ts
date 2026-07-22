@@ -7,12 +7,12 @@ import {
   viewChild,
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { MenuItem } from 'primeng/api';
-import { ButtonModule } from 'primeng/button';
-import { ConfirmDialogModule } from 'primeng/confirmdialog';
-import { DialogService } from 'primeng/dynamicdialog';
-import { MenuModule } from 'primeng/menu';
-import { ToolbarModule } from 'primeng/toolbar';
+import { MenuItem } from '@openng/optimus-ui/api';
+import { ButtonModule } from '@openng/optimus-ui/button';
+import { ConfirmDialogModule } from '@openng/optimus-ui/confirmdialog';
+import { DialogService } from '@openng/optimus-ui/dynamicdialog';
+import { MenuModule } from '@openng/optimus-ui/menu';
+import { ToolbarModule } from '@openng/optimus-ui/toolbar';
 import { combineLatest } from 'rxjs';
 
 import { Outline, Section, isOutline } from '../../model/content';

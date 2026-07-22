@@ -1,6 +1,6 @@
 import { Component, inject, linkedSignal } from '@angular/core';
-import { ButtonModule } from 'primeng/button';
-import { TooltipModule } from 'primeng/tooltip';
+import { ButtonModule } from '@openng/optimus-ui/button';
+import { TooltipModule } from '@openng/optimus-ui/tooltip';
 
 import { ThemeService } from '../../services/theme.service';
 

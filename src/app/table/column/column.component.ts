@@ -7,9 +7,9 @@ import {
   viewChild,
 } from '@angular/core';
 import { Router } from '@angular/router';
+import { ButtonModule } from '@openng/optimus-ui/button';
+import { PopoverModule } from '@openng/optimus-ui/popover';
 import { saveAs } from 'file-saver';
-import { ButtonModule } from 'primeng/button';
-import { PopoverModule } from 'primeng/popover';
 
 import { Column } from '../../model/table';
 import { CheckoutService } from '../../services/checkout.service';

@@ -13,9 +13,9 @@ import {
   AutoComplete,
   AutoCompleteModule,
   AutoCompleteSelectEvent,
-} from 'primeng/autocomplete';
-import { InputTextModule } from 'primeng/inputtext';
-import { SelectModule } from 'primeng/select';
+} from '@openng/optimus-ui/autocomplete';
+import { InputTextModule } from '@openng/optimus-ui/inputtext';
+import { SelectModule } from '@openng/optimus-ui/select';
 import { Subscription } from 'rxjs';
 
 import { Option, TableColumn } from '../../model/content';

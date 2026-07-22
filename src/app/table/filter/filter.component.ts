@@ -1,7 +1,10 @@
 import { Component, OnInit, inject, signal } from '@angular/core';
-import { ButtonModule } from 'primeng/button';
-import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
-import { PopoverModule } from 'primeng/popover';
+import { ButtonModule } from '@openng/optimus-ui/button';
+import {
+  DynamicDialogConfig,
+  DynamicDialogRef,
+} from '@openng/optimus-ui/dynamicdialog';
+import { PopoverModule } from '@openng/optimus-ui/popover';
 
 import { Column, Filter } from '../../model/table';
 import { TableService } from '../../services/table.service';

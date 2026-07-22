@@ -7,14 +7,14 @@ import { provideZonelessChangeDetection } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
-import { MessageService } from 'primeng/api';
-import { ConfirmDialogModule } from 'primeng/confirmdialog';
-import { DialogService } from 'primeng/dynamicdialog';
-import { InputGroupModule } from 'primeng/inputgroup';
-import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
-import { InputTextModule } from 'primeng/inputtext';
-import { TableModule } from 'primeng/table';
-import { TieredMenuModule } from 'primeng/tieredmenu';
+import { MessageService } from '@openng/optimus-ui/api';
+import { ConfirmDialogModule } from '@openng/optimus-ui/confirmdialog';
+import { DialogService } from '@openng/optimus-ui/dynamicdialog';
+import { InputGroupModule } from '@openng/optimus-ui/inputgroup';
+import { InputGroupAddonModule } from '@openng/optimus-ui/inputgroupaddon';
+import { InputTextModule } from '@openng/optimus-ui/inputtext';
+import { TableModule } from '@openng/optimus-ui/table';
+import { TieredMenuModule } from '@openng/optimus-ui/tieredmenu';
 
 import { TableComponent } from './table.component';
 

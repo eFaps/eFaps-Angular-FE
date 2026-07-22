@@ -9,13 +9,13 @@ import {
   inject,
 } from '@angular/core';
 import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
-import { ConfirmationService, MenuItem } from 'primeng/api';
-import { ButtonModule } from 'primeng/button';
-import { ConfirmDialogModule } from 'primeng/confirmdialog';
-import { DialogService } from 'primeng/dynamicdialog';
-import { TabsModule } from 'primeng/tabs';
-import { TieredMenuModule } from 'primeng/tieredmenu';
-import { ToolbarModule } from 'primeng/toolbar';
+import { ConfirmationService, MenuItem } from '@openng/optimus-ui/api';
+import { ButtonModule } from '@openng/optimus-ui/button';
+import { ConfirmDialogModule } from '@openng/optimus-ui/confirmdialog';
+import { DialogService } from '@openng/optimus-ui/dynamicdialog';
+import { TabsModule } from '@openng/optimus-ui/tabs';
+import { TieredMenuModule } from '@openng/optimus-ui/tieredmenu';
+import { ToolbarModule } from '@openng/optimus-ui/toolbar';
 import { Subscription } from 'rxjs';
 
 import { TableComponent } from 'src/app/table/table/table.component';

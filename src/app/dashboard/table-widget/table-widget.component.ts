@@ -1,8 +1,8 @@
 import { Component, Input, inject, signal } from '@angular/core';
 import { Router } from '@angular/router';
-import { ButtonModule } from 'primeng/button';
-import { ProgressSpinnerModule } from 'primeng/progressspinner';
-import { TableModule } from 'primeng/table';
+import { ButtonModule } from '@openng/optimus-ui/button';
+import { ProgressSpinnerModule } from '@openng/optimus-ui/progressspinner';
+import { TableModule } from '@openng/optimus-ui/table';
 
 import { TableWidget, WidgetData } from '../../model/dashboard';
 import { DashboardService } from '../../services/dashboard.service';

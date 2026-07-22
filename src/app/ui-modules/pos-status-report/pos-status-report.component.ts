@@ -10,14 +10,14 @@ import {
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ButtonModule } from '@openng/optimus-ui/button';
+import { FloatLabelModule } from '@openng/optimus-ui/floatlabel';
+import { PopoverModule } from '@openng/optimus-ui/popover';
+import { SelectModule } from '@openng/optimus-ui/select';
+import { SliderModule } from '@openng/optimus-ui/slider';
 import TimeAgo from 'javascript-time-ago';
 import es from 'javascript-time-ago/locale/es';
 import { LocalStorageService } from 'ngx-localstorage';
-import { ButtonModule } from 'primeng/button';
-import { FloatLabelModule } from 'primeng/floatlabel';
-import { PopoverModule } from 'primeng/popover';
-import { SelectModule } from 'primeng/select';
-import { SliderModule } from 'primeng/slider';
 import { interval, Subscription } from 'rxjs';
 import { UtilService } from '../../services/util.service';
 

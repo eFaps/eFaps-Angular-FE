@@ -6,7 +6,7 @@ import {
 } from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { provideZonelessChangeDetection } from '@angular/core';
-import { DynamicDialogConfig } from 'primeng/dynamicdialog';
+import { DynamicDialogConfig } from '@openng/optimus-ui/dynamicdialog';
 import { EQL2Component } from './eql2.component';
 
 describe('EQL2Component', () => {

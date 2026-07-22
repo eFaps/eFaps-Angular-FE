@@ -1,6 +1,6 @@
 import { Injectable, WritableSignal, inject, signal } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
-import { MenuItem, MenuItemCommandEvent } from 'primeng/api';
+import { MenuItem, MenuItemCommandEvent } from '@openng/optimus-ui/api';
 import { filter } from 'rxjs';
 
 import { StyleService } from './style.service';

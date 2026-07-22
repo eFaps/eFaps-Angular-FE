@@ -1,5 +1,5 @@
 import { Component, input } from '@angular/core';
-import { AccordionModule } from 'primeng/accordion';
+import { AccordionModule } from '@openng/optimus-ui/accordion';
 
 export interface EQL2CIResponse {
   id: number;

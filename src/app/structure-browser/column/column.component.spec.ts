@@ -1,7 +1,7 @@
 import { provideZonelessChangeDetection } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
-import { PopoverModule } from 'primeng/popover';
+import { PopoverModule } from '@openng/optimus-ui/popover';
 
 import { ColumnComponent } from './column.component';
 

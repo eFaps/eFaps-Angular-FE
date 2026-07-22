@@ -7,19 +7,19 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { AutoCompleteModule } from '@openng/optimus-ui/autocomplete';
+import { ButtonModule } from '@openng/optimus-ui/button';
+import { DatePickerModule } from '@openng/optimus-ui/datepicker';
+import { FloatLabelModule } from '@openng/optimus-ui/floatlabel';
+import { MultiSelectModule } from '@openng/optimus-ui/multiselect';
+import { PickListModule } from '@openng/optimus-ui/picklist';
+import { RadioButtonModule } from '@openng/optimus-ui/radiobutton';
 import { LocalStorageService } from 'ngx-localstorage';
-import { AutoCompleteModule } from 'primeng/autocomplete';
-import { ButtonModule } from 'primeng/button';
-import { DatePickerModule } from 'primeng/datepicker';
-import { FloatLabelModule } from 'primeng/floatlabel';
-import { MultiSelectModule } from 'primeng/multiselect';
-import { PickListModule } from 'primeng/picklist';
-import { RadioButtonModule } from 'primeng/radiobutton';
 
-import { MenuItem } from 'primeng/api';
-import { SelectModule } from 'primeng/select';
-import { SplitButtonModule } from 'primeng/splitbutton';
-import { TooltipModule } from 'primeng/tooltip';
+import { MenuItem } from '@openng/optimus-ui/api';
+import { SelectModule } from '@openng/optimus-ui/select';
+import { SplitButtonModule } from '@openng/optimus-ui/splitbutton';
+import { TooltipModule } from '@openng/optimus-ui/tooltip';
 import { SafeHtmlPipe } from 'src/app/pipes/safe-html.pipe';
 import { FormItem, Option } from '../../model/content';
 import { ModuleData, UIModule } from '../../model/module';

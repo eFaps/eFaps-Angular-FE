@@ -10,6 +10,20 @@ import {
   signal,
 } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
+import { MenuItem } from '@openng/optimus-ui/api';
+import { BreadcrumbModule } from '@openng/optimus-ui/breadcrumb';
+import { ButtonModule } from '@openng/optimus-ui/button';
+import { Optimus } from '@openng/optimus-ui/config';
+import { DividerModule } from '@openng/optimus-ui/divider';
+import { DialogService } from '@openng/optimus-ui/dynamicdialog';
+import { IconFieldModule } from '@openng/optimus-ui/iconfield';
+import { InputIconModule } from '@openng/optimus-ui/inputicon';
+import { InputTextModule } from '@openng/optimus-ui/inputtext';
+import { Menubar, MenubarModule } from '@openng/optimus-ui/menubar';
+import { Popover, PopoverModule } from '@openng/optimus-ui/popover';
+import { ProgressBarModule } from '@openng/optimus-ui/progressbar';
+import { TableModule } from '@openng/optimus-ui/table';
+import { ToastModule } from '@openng/optimus-ui/toast';
 import {
   KEYCLOAK_EVENT_SIGNAL,
   KeycloakEventType,
@@ -18,20 +32,6 @@ import {
 } from 'keycloak-angular';
 import Keycloak from 'keycloak-js';
 import localeEs from 'primelocale/es.json';
-import { MenuItem } from 'primeng/api';
-import { BreadcrumbModule } from 'primeng/breadcrumb';
-import { ButtonModule } from 'primeng/button';
-import { PrimeNG } from 'primeng/config';
-import { DividerModule } from 'primeng/divider';
-import { DialogService } from 'primeng/dynamicdialog';
-import { IconFieldModule } from 'primeng/iconfield';
-import { InputIconModule } from 'primeng/inputicon';
-import { InputTextModule } from 'primeng/inputtext';
-import { Menubar, MenubarModule } from 'primeng/menubar';
-import { Popover, PopoverModule } from 'primeng/popover';
-import { ProgressBarModule } from 'primeng/progressbar';
-import { TableModule } from 'primeng/table';
-import { ToastModule } from 'primeng/toast';
 
 import { environment } from 'src/environments/environment';
 import { ModalContentComponent } from './content/modal-content/modal-content.component';
@@ -93,7 +93,7 @@ export class AppComponent implements OnInit {
   private breadcrumbService = inject(BreadcrumbService);
   private styleService = inject(StyleService);
 
-  private readonly primeng: PrimeNG = inject(PrimeNG);
+  private readonly optimus: Optimus = inject(Optimus);
   private readonly keycloak = inject(Keycloak);
   private readonly renderer = inject(Renderer2);
   private readonly themeService = inject(ThemeService);
@@ -154,7 +154,7 @@ export class AppComponent implements OnInit {
     this.userService.getCurrentUser().subscribe({
       next: (user) => {
         this.user = user;
-        this.primeng.translation = localeEs.es;
+        this.optimus.translation = localeEs.es;
         this.userLookuped = true;
       },
       error: (err) => {

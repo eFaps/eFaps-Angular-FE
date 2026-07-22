@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, effect, inject, input, model, signal } from '@angular/core';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { AutoCompleteModule } from 'primeng/autocomplete';
-import { FloatLabelModule } from 'primeng/floatlabel';
+import { AutoCompleteModule } from '@openng/optimus-ui/autocomplete';
+import { FloatLabelModule } from '@openng/optimus-ui/floatlabel';
 
 import { AutoComplete as AutoCompleteResponse } from '../../../model/auto-complete';
 import { FormItem, Option } from '../../../model/content';

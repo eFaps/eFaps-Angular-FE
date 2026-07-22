@@ -5,7 +5,7 @@ import {
   inject,
   viewChild,
 } from '@angular/core';
-import { DynamicDialogConfig } from 'primeng/dynamicdialog';
+import { DynamicDialogConfig } from '@openng/optimus-ui/dynamicdialog';
 
 import { DynamicComponentService } from '../../services/dynamic-component.service';
 

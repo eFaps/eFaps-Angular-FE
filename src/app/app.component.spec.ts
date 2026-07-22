@@ -5,12 +5,12 @@ import {
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { provideZonelessChangeDetection } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
+import { MessageService } from '@openng/optimus-ui/api';
+import { MenubarModule } from '@openng/optimus-ui/menubar';
+import { PopoverModule } from '@openng/optimus-ui/popover';
+import { ToastModule } from '@openng/optimus-ui/toast';
 import { KEYCLOAK_EVENT_SIGNAL } from 'keycloak-angular';
 import Keycloak from 'keycloak-js';
-import { MessageService } from 'primeng/api';
-import { MenubarModule } from 'primeng/menubar';
-import { PopoverModule } from 'primeng/popover';
-import { ToastModule } from 'primeng/toast';
 
 import { AppComponent } from './app.component';
 

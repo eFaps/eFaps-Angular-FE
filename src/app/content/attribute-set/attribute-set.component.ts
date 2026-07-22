@@ -1,8 +1,8 @@
 import { Component, Input, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ButtonModule } from 'primeng/button';
-import { MessageModule } from 'primeng/message';
-import { TableModule } from 'primeng/table';
+import { ButtonModule } from '@openng/optimus-ui/button';
+import { MessageModule } from '@openng/optimus-ui/message';
+import { TableModule } from '@openng/optimus-ui/table';
 
 import { AttributeSetEntry, FormItem } from '../../model/content';
 import { ValueService } from '../../services/value.service';

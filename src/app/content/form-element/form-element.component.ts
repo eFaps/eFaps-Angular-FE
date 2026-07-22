@@ -17,21 +17,21 @@ import {
   AutoComplete,
   AutoCompleteModule,
   AutoCompleteSelectEvent,
-} from 'primeng/autocomplete';
-import { ButtonModule } from 'primeng/button';
-import { CheckboxModule } from 'primeng/checkbox';
-import { DatePickerModule } from 'primeng/datepicker';
-import { DialogService } from 'primeng/dynamicdialog';
-import { FileUploadModule, UploadEvent } from 'primeng/fileupload';
-import { ImageModule } from 'primeng/image';
-import { InputTextModule } from 'primeng/inputtext';
-import { SafeHtmlPipe } from 'primeng/menu';
-import { MessageModule } from 'primeng/message';
-import { MultiSelectModule } from 'primeng/multiselect';
-import { ProgressBarModule } from 'primeng/progressbar';
-import { RadioButtonModule } from 'primeng/radiobutton';
-import { SelectModule } from 'primeng/select';
-import { TextareaModule } from 'primeng/textarea';
+} from '@openng/optimus-ui/autocomplete';
+import { ButtonModule } from '@openng/optimus-ui/button';
+import { CheckboxModule } from '@openng/optimus-ui/checkbox';
+import { DatePickerModule } from '@openng/optimus-ui/datepicker';
+import { DialogService } from '@openng/optimus-ui/dynamicdialog';
+import { FileUploadModule, UploadEvent } from '@openng/optimus-ui/fileupload';
+import { ImageModule } from '@openng/optimus-ui/image';
+import { InputTextModule } from '@openng/optimus-ui/inputtext';
+import { SafeHtmlPipe } from '@openng/optimus-ui/menu';
+import { MessageModule } from '@openng/optimus-ui/message';
+import { MultiSelectModule } from '@openng/optimus-ui/multiselect';
+import { ProgressBarModule } from '@openng/optimus-ui/progressbar';
+import { RadioButtonModule } from '@openng/optimus-ui/radiobutton';
+import { SelectModule } from '@openng/optimus-ui/select';
+import { TextareaModule } from '@openng/optimus-ui/textarea';
 
 import { FormItem } from '../../model/content';
 import { FieldCommandResponse } from '../../model/field-command';

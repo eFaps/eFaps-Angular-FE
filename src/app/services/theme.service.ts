@@ -1,6 +1,6 @@
 import { effect, inject, Injectable, signal } from '@angular/core';
-import { Theme, updatePrimaryPalette } from '@primeuix/themes';
-import { primitive } from '@primeuix/themes/material/base';
+import { Theme, updatePrimaryPalette } from '@openng/optimus-ui-themes';
+import { primitive } from '@openng/optimus-ui-themes/material/base';
 import { LocalStorageService } from 'ngx-localstorage';
 
 @Injectable({
