@@ -56,7 +56,7 @@
     "@vitest/browser-playwright": "^4.0.8",
     "import-sort-style-module": "^6.0.0",
     "jasmine-core": "~6.1.0",
-    "jsdom": "^28.1.0",
+    "jsdom": "^29.1.1",
     "prettier": "^3.8.4",
     "prettier-plugin-organize-imports": "^4.3.0",
     "typescript": "~5.9.3",
