@@ -43,9 +43,9 @@ export class EQL2HistoryComponent {
   load() {
     const url = `${this.utilService.evalApiUrl()}/ui/modules/console-eql2/history`;
     this.http
-      .get<
-        Entry[]
-      >(url, { params: { term: this.term, own: this.own, limit: this.limit } })
+      .get<Entry[]>(url, {
+        params: { term: this.term, own: this.own, limit: this.limit },
+      })
       .subscribe({
         next: (resp) => {
           this.entries.set(resp);

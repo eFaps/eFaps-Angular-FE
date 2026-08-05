@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit, inject, input } from '@angular/core';
+import { Component, OnInit, inject, input, model, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import {
   AutoCompleteCompleteEvent,
@@ -15,10 +15,17 @@ import { SelectModule } from '@openng/optimus-ui/select';
 import { TextareaModule } from '@openng/optimus-ui/textarea';
 import { ToggleButtonModule } from '@openng/optimus-ui/togglebutton';
 
+import { FloatLabelModule } from '@openng/optimus-ui/floatlabel';
 import { ModuleData, UIModule } from '../../model/module';
 import { Company } from '../../model/user';
 import { UserService } from '../../services/user.service';
 import { UtilService } from '../../services/util.service';
+
+interface SysConfLink {
+  key: string;
+  defaultValue?: string;
+  description?: string;
+}
 
 @Component({
   selector: 'app-system-configuration-link',
@@ -30,6 +37,7 @@ import { UtilService } from '../../services/util.service';
     InputTextModule,
     TextareaModule,
     ToggleButtonModule,
+    FloatLabelModule,
   ],
   templateUrl: './system-configuration-link.component.html',
   styleUrl: './system-configuration-link.component.scss',
@@ -46,8 +54,8 @@ export class SystemConfigurationLinkComponent implements OnInit {
 
   buttonLabel: string = 'Update';
 
-  keys: [] = [];
-  key: any = undefined;
+  keys = signal<SysConfLink[]>([]);
+  key = model<any>(undefined);
   description: string = '';
   strValue: string = '';
 
@@ -59,7 +67,9 @@ export class SystemConfigurationLinkComponent implements OnInit {
   constructor() {
     const config = this.config;
 
-    config.header = 'Edit SystemConfiguration Attribute';
+    config.header = 'Edit SystemConfiguration Link';
+    config.closable = true;
+    config.width = '800px';
   }
 
   ngOnInit(): void {
@@ -74,13 +84,15 @@ export class SystemConfigurationLinkComponent implements OnInit {
 
     if (this.uimodule()?.targetMode == 'CREATE') {
       this.buttonLabel = 'Create';
-      this.config.header = 'Create SystemConfiguration Attribute';
+      this.config.header = 'Create SystemConfiguration Link';
     } else {
       const data = this.data();
       const url = `${this.utilService.evalApiUrl()}/ui/modules/system-configurations/${data?.parentOid}/links/${data?.oid}`;
       this.http.get<any>(url).subscribe({
         next: (link) => {
-          this.key = link.key;
+          this.key.set({
+            key: link.key,
+          });
           this.description = link.description;
           this.setValue(link.value);
           this.appKey = link.appKey;
@@ -154,18 +166,27 @@ export class SystemConfigurationLinkComponent implements OnInit {
   }
 
   loadKeys(event: AutoCompleteCompleteEvent) {
-    const url = `${this.utilService.evalApiUrl()}/ui/modules/system-configurations/${this.data()?.parentOid}/links`;
-    this.http.get<any>(url).subscribe({
-      next: (keys) => (this.keys = keys),
+    var url;
+    const params: any = {};
+
+    if (this.data()?.parentOid) {
+      url = `${this.utilService.evalApiUrl()}/ui/modules/system-configurations/${this.data()!!.parentOid}/links`;
+    } else {
+      url = `${this.utilService.evalApiUrl()}/ui/modules/system-configurations/none/links`;
+      params.linkOid = this.data()?.oid;
+    }
+
+    this.http.get<any>(url, { params }).subscribe({
+      next: (keys) => this.keys.set(keys),
     });
   }
 
   onKeySelect(value: any) {
-    this.description = this.key.description;
-    this.setValue(this.key.defaultValue);
+    this.description = this.key().description;
+    this.setValue(this.key().defaultValue);
   }
 
   get keyStr(): string {
-    return typeof this.key == 'string' ? this.key : this.key.key;
+    return typeof this.key() == 'string' ? this.key() : this.key().key;
   }
 }
