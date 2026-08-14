@@ -217,7 +217,7 @@ export class TableElementComponent implements OnInit, OnDestroy {
       }
       this.dropdownOptions.set(options);
       this.dropdownValue = defVal;
-      this.addEntry(this.dropdownValue());
+      this.addEntry(this.dropdownValue);
     }
   }
 }
