@@ -72,6 +72,9 @@ export class TableElementComponent implements OnInit, OnDestroy {
         }
       },
     });
+    if (this.column().defaultValue) {
+      this.updateValue(this.column().defaultValue);
+    }
   }
 
   ngOnDestroy(): void {

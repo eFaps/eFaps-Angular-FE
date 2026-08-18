@@ -87,6 +87,7 @@ export interface TableColumn {
   ref?: string;
   updateRef?: string;
   options?: Option[];
+  defaultValue?: any;
 }
 
 export interface AttributeSetEntry {
