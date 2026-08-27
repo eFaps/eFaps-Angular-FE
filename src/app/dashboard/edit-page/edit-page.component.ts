@@ -1,4 +1,10 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  OnInit,
+  signal,
+} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ButtonModule } from '@openng/optimus-ui/button';
 import { DynamicDialogRef } from '@openng/optimus-ui/dynamicdialog';
@@ -12,6 +18,7 @@ import { DashboardService } from '../../services/dashboard.service';
   selector: 'app-edit-page',
   imports: [FormsModule, ButtonModule, TableModule, InputTextModule],
   templateUrl: './edit-page.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './edit-page.component.scss',
 })
 export class EditPageComponent implements OnInit {

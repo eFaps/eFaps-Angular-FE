@@ -1,5 +1,13 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, effect, inject, input, model, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  effect,
+  inject,
+  input,
+  model,
+  signal,
+} from '@angular/core';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { AutoCompleteModule } from '@openng/optimus-ui/autocomplete';
 import { FloatLabelModule } from '@openng/optimus-ui/floatlabel';
@@ -13,6 +21,7 @@ import { UtilService } from '../../../services/util.service';
   selector: 'app-auto-complete',
   imports: [ReactiveFormsModule, AutoCompleteModule, FloatLabelModule],
   templateUrl: './auto-complete.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './auto-complete.component.scss',
 })
 export class AutoCompleteComponent {

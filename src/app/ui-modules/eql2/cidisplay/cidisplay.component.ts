@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { AccordionModule } from '@openng/optimus-ui/accordion';
 
 export interface EQL2CIResponse {
@@ -23,6 +23,7 @@ interface AttributeType {
   selector: 'app-cidisplay',
   imports: [AccordionModule],
   templateUrl: './cidisplay.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './cidisplay.component.scss',
 })
 export class CIDisplayComponent {

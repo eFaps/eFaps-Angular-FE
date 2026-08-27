@@ -1,4 +1,9 @@
-import { Component, OnInit, inject } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnInit,
+  inject,
+} from '@angular/core';
 import { Router } from '@angular/router';
 
 import { UserService } from '../../services/user.service';
@@ -7,6 +12,7 @@ import { UserService } from '../../services/user.service';
   selector: 'app-first-time-user',
   imports: [],
   templateUrl: './first-time-user.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './first-time-user.component.scss',
 })
 export class FirstTimeUserComponent implements OnInit {

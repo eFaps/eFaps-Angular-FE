@@ -1,4 +1,9 @@
-import { Component, OnInit, inject } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnInit,
+  inject,
+} from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { ButtonModule } from '@openng/optimus-ui/button';
 import { DynamicDialogRef } from '@openng/optimus-ui/dynamicdialog';
@@ -11,6 +16,7 @@ import { UserService } from '../../services/user.service';
   selector: 'app-company-chooser',
   imports: [SelectModule, ButtonModule, ReactiveFormsModule],
   templateUrl: './company-chooser.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrls: ['./company-chooser.component.scss'],
 })
 export class CompanyChooserComponent implements OnInit {

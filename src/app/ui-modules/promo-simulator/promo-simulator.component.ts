@@ -1,6 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit, inject } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnInit,
+  inject,
+} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ConfirmationService } from '@openng/optimus-ui/api';
 import { AutoCompleteModule } from '@openng/optimus-ui/autocomplete';
@@ -41,6 +46,7 @@ import { UtilService } from '../../services/util.service';
     SelectModule,
   ],
   templateUrl: './promo-simulator.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './promo-simulator.component.scss',
 })
 export class PromoSimulatorComponent implements OnInit {

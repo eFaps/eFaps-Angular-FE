@@ -1,4 +1,5 @@
 import {
+  ChangeDetectionStrategy,
   Component,
   ElementRef,
   inject,
@@ -16,6 +17,7 @@ import { Column } from '../../model/table';
   selector: 'app-column',
   templateUrl: './column.component.html',
   styleUrls: ['./column.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [PopoverModule, ButtonModule],
 })
 export class ColumnComponent {

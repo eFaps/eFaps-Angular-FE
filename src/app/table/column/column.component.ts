@@ -1,4 +1,5 @@
 import {
+  ChangeDetectionStrategy,
   Component,
   ElementRef,
   inject,
@@ -18,6 +19,7 @@ import { CheckoutService } from '../../services/checkout.service';
   selector: 'app-column',
   templateUrl: './column.component.html',
   styleUrls: ['./column.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [PopoverModule, ButtonModule],
 })
 export class ColumnComponent {

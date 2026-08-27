@@ -1,6 +1,7 @@
 import { DatePipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import {
+  ChangeDetectionStrategy,
   Component,
   effect,
   inject,
@@ -56,6 +57,7 @@ export enum Status {
     PopoverModule,
   ],
   templateUrl: './pos-status-report.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './pos-status-report.component.scss',
 })
 export class PosStatusReportComponent implements OnInit {

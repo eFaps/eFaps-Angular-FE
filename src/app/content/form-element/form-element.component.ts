@@ -1,6 +1,7 @@
 import { CommonModule, DatePipe } from '@angular/common';
 import {
   AfterViewInit,
+  ChangeDetectionStrategy,
   Component,
   ElementRef,
   inject,
@@ -69,6 +70,7 @@ import { ClassificationsComponent } from '../classifications/classifications.com
     TextareaModule,
     ProgressBarModule,
   ],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: true,
 })
 export class FormElementComponent implements OnInit, AfterViewInit {

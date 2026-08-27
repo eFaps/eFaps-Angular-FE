@@ -1,4 +1,10 @@
-import { Component, OnInit, inject, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnInit,
+  inject,
+  signal,
+} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import {
@@ -34,6 +40,7 @@ import { ColumnComponent } from '../column/column.component';
   templateUrl: './structure-browser.component.html',
   styleUrls: ['./structure-browser.component.scss'],
   providers: [ConfirmationService],
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [
     TreeTableModule,
     ButtonModule,

@@ -1,4 +1,10 @@
-import { Component, inject, Input, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  Input,
+  signal,
+} from '@angular/core';
 import { ChartModule } from '@openng/optimus-ui/chart';
 import { ProgressSpinnerModule } from '@openng/optimus-ui/progressspinner';
 import { Chart } from 'chart.js';
@@ -11,6 +17,7 @@ import { DashboardService } from '../../services/dashboard.service';
   templateUrl: './chart-widget.component.html',
   styleUrls: ['./chart-widget.component.scss'],
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [ChartModule, ProgressSpinnerModule],
 })
 export class ChartWidgetComponent {

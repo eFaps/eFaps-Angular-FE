@@ -1,5 +1,12 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit, inject, input, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnInit,
+  inject,
+  input,
+  signal,
+} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ButtonModule } from '@openng/optimus-ui/button';
 import {
@@ -16,6 +23,7 @@ import { UtilService } from '../../services/util.service';
   selector: 'app-logback',
   imports: [ButtonModule, SelectModule, FormsModule, TableModule],
   templateUrl: './logback.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrls: ['./logback.component.scss'],
 })
 export class LogbackComponent implements OnInit {

@@ -1,4 +1,10 @@
-import { Component, OnInit, inject, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnInit,
+  inject,
+  signal,
+} from '@angular/core';
 import { ButtonModule } from '@openng/optimus-ui/button';
 import {
   DynamicDialogConfig,
@@ -14,6 +20,7 @@ import { FilterElementComponent } from '../filter-element/filter-element.compone
   selector: 'app-filter',
   templateUrl: './filter.component.html',
   styleUrl: './filter.component.scss',
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [FilterElementComponent, ButtonModule, PopoverModule],
 })
 export class FilterComponent implements OnInit {

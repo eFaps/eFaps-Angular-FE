@@ -1,5 +1,12 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Component, OnInit, inject, input, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnInit,
+  inject,
+  input,
+  signal,
+} from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -46,6 +53,7 @@ import { AutoCompleteComponent } from './auto-complete/auto-complete.component';
     SplitButtonModule,
   ],
   templateUrl: './filtered-report.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './filtered-report.component.scss',
 })
 export class FilteredReportComponent implements OnInit {

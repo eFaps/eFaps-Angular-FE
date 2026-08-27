@@ -1,4 +1,9 @@
-import { Component, inject, linkedSignal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  linkedSignal,
+} from '@angular/core';
 import { ButtonModule } from '@openng/optimus-ui/button';
 import { TooltipModule } from '@openng/optimus-ui/tooltip';
 
@@ -8,6 +13,7 @@ import { ThemeService } from '../../services/theme.service';
   selector: 'app-theme-chooser',
   imports: [ButtonModule, TooltipModule],
   templateUrl: './theme-chooser.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrls: ['./theme-chooser.component.scss'],
 })
 export class ThemeChooserComponent {

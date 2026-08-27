@@ -4,6 +4,7 @@ import {
   provideHttpClient,
   withInterceptors,
   withInterceptorsFromDi,
+  withXhr,
 } from '@angular/common/http';
 import localeEs from '@angular/common/locales/es';
 import {
@@ -48,6 +49,7 @@ export const appConfig: ApplicationConfig = {
     },
     { provide: LOCALE_ID, useValue: 'es' },
     provideHttpClient(
+      withXhr(),
       withInterceptorsFromDi(),
       withInterceptors([includeBearerTokenInterceptor]),
     ),

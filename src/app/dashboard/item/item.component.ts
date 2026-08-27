@@ -1,4 +1,10 @@
-import { Component, inject, Input, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  Input,
+  signal,
+} from '@angular/core';
 import { ButtonModule } from '@openng/optimus-ui/button';
 import { DialogService } from '@openng/optimus-ui/dynamicdialog';
 import { ProgressSpinnerModule } from '@openng/optimus-ui/progressspinner';
@@ -13,6 +19,7 @@ import { TableWidgetComponent } from '../table-widget/table-widget.component';
   selector: 'app-item',
   templateUrl: './item.component.html',
   styleUrls: ['./item.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [
     ButtonModule,
     ChartWidgetComponent,

@@ -1,4 +1,5 @@
 import {
+  ChangeDetectionStrategy,
   Component,
   ElementRef,
   OnInit,
@@ -64,6 +65,7 @@ import { ThemeChooserComponent } from './standalone/theme-chooser/theme-chooser.
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
   providers: [DialogService],
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [
     RouterOutlet,
     ProgressBarModule,

@@ -1,4 +1,9 @@
-import { Component, Input, inject } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  inject,
+} from '@angular/core';
 import { Router } from '@angular/router';
 import { ButtonModule } from '@openng/optimus-ui/button';
 import { TableModule } from '@openng/optimus-ui/table';
@@ -13,6 +18,7 @@ import { TableElementComponent } from '../table-element/table-element.component'
   templateUrl: './table-section.component.html',
   styleUrls: ['./table-section.component.scss'],
   imports: [TableElementComponent, ButtonModule, TableModule],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: true,
 })
 export class TableSectionComponent {

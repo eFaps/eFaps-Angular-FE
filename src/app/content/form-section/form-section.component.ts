@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
 import { FormItem, FormSection } from '../../model/content';
 import { FormElementComponent } from '../form-element/form-element.component';
@@ -8,6 +8,7 @@ import { FormElementComponent } from '../form-element/form-element.component';
   templateUrl: './form-section.component.html',
   styleUrls: ['./form-section.component.scss'],
   imports: [FormElementComponent],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: true,
 })
 export class FormSectionComponent {

@@ -1,7 +1,7 @@
 @switch (elementData?.formItem?.type) {
   @case ("DROPDOWN") {
     <p-select
-      [options]="elementData?.formItem?.options"
+      [options]="$safeNavigationMigration(elementData?.formItem?.options)"
       [(ngModel)]="dropdownValue"
       appendTo="body"
       (onChange)="changeDropdown($event.value)" />
@@ -15,7 +15,11 @@
       (keyup)="onKey(textInput.value)" />
   }
   @case ("RADIO") {
-    @for (option of elementData?.formItem?.options; track option; let indexOfelement = $index) {
+    @for (
+      option of elementData?.formItem?.options;
+      track option;
+      let indexOfelement = $index
+    ) {
       <div class="field-radio">
         <p-radioButton
           [inputId]="'asopt' + indexOfelement"

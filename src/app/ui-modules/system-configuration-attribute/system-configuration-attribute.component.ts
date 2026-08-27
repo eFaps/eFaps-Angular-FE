@@ -1,5 +1,13 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit, inject, input, model, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnInit,
+  inject,
+  input,
+  model,
+  signal,
+} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import {
   AutoCompleteCompleteEvent,
@@ -43,6 +51,7 @@ interface SysConfAttr {
     InputNumberModule,
   ],
   templateUrl: './system-configuration-attribute.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrls: ['./system-configuration-attribute.component.scss'],
 })
 export class SystemConfigurationAttributeComponent implements OnInit {

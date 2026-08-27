@@ -1,4 +1,9 @@
-import { Component, Input, output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  output,
+} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CheckboxModule } from '@openng/optimus-ui/checkbox';
 import { DatePickerModule } from '@openng/optimus-ui/datepicker';
@@ -13,6 +18,7 @@ import { Filter } from '../../model/table';
   selector: 'app-filter-element',
   templateUrl: './filter-element.component.html',
   styleUrl: './filter-element.component.scss',
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [
     DatePickerModule,
     FormsModule,

@@ -1,4 +1,5 @@
 import {
+  ChangeDetectionStrategy,
   Component,
   effect,
   inject,
@@ -28,6 +29,7 @@ import { ValueService } from '../../services/value.service';
   templateUrl: './table-element.component.html',
   styleUrls: ['./table-element.component.scss'],
   imports: [AutoCompleteModule, InputTextModule, FormsModule, SelectModule],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: true,
 })
 export class TableElementComponent implements OnInit, OnDestroy {

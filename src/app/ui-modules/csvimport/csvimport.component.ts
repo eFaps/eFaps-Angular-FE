@@ -1,5 +1,12 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, inject, input, signal, viewChild } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  input,
+  signal,
+  viewChild,
+} from '@angular/core';
 import { ButtonModule } from '@openng/optimus-ui/button';
 import {
   DynamicDialogConfig,
@@ -28,6 +35,7 @@ import { UtilService } from '../../services/util.service';
     MessageModule,
   ],
   templateUrl: './csvimport.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './csvimport.component.scss',
 })
 export class CSVImportComponent {

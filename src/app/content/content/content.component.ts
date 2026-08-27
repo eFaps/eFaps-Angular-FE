@@ -1,4 +1,5 @@
 import {
+  ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
   ElementRef,
@@ -48,6 +49,7 @@ import { SectionsComponent } from '../sections/sections.component';
     ToolbarModule,
   ],
   providers: [ConfirmationService],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: true,
 })
 export class ContentComponent implements OnInit, OnDestroy {

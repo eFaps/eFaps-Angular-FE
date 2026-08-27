@@ -1,5 +1,10 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, inject, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  signal,
+} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ButtonModule } from '@openng/optimus-ui/button';
 import { FloatLabelModule } from '@openng/optimus-ui/floatlabel';
@@ -26,6 +31,7 @@ interface Entry {
     ToggleButtonModule,
   ],
   templateUrl: './eql2-history.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './eql2-history.component.scss',
 })
 export class EQL2HistoryComponent {

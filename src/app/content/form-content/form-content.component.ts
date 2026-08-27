@@ -1,5 +1,6 @@
 import {
   AfterViewInit,
+  ChangeDetectionStrategy,
   Component,
   OnInit,
   ViewContainerRef,
@@ -38,6 +39,7 @@ import { SectionsComponent } from '../sections/sections.component';
     ToolbarModule,
     ConfirmDialogModule,
   ],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: true,
 })
 export class FormContentComponent implements OnInit, AfterViewInit {

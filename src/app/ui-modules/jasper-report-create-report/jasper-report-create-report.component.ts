@@ -1,5 +1,12 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, inject, input, OnInit, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  input,
+  OnInit,
+  signal,
+} from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { ButtonModule } from '@openng/optimus-ui/button';
 import {
@@ -23,6 +30,7 @@ import { UtilService } from 'src/app/services/util.service';
     InputTextModule,
   ],
   templateUrl: './jasper-report-create-report.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './jasper-report-create-report.component.scss',
 })
 export class JasperReportCreateReportComponent implements OnInit {

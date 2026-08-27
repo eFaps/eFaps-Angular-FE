@@ -1,5 +1,12 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, inject, input, OnInit, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  input,
+  OnInit,
+  signal,
+} from '@angular/core';
 import { TreeNode } from '@openng/optimus-ui/api';
 import { ButtonModule } from '@openng/optimus-ui/button';
 import { DialogModule } from '@openng/optimus-ui/dialog';
@@ -22,6 +29,7 @@ interface ProductFamily {
   selector: 'app-product-family',
   imports: [ButtonModule, DialogModule, TreeModule, TagModule],
   templateUrl: './product-family.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './product-family.component.scss',
 })
 export class ProductFamilyComponent implements OnInit {

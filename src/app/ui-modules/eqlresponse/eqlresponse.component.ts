@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { TableModule } from '@openng/optimus-ui/table';
 
 import { FieldCommandResponse } from '../../model/field-command';
@@ -7,6 +7,7 @@ import { FieldCommandResponse } from '../../model/field-command';
   selector: 'app-eqlresponse',
   templateUrl: './eqlresponse.component.html',
   imports: [TableModule],
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrls: ['./eqlresponse.component.scss'],
 })
 export class EQLResponseComponent {

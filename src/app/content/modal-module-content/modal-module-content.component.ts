@@ -1,5 +1,6 @@
 import {
   AfterViewInit,
+  ChangeDetectionStrategy,
   Component,
   ViewContainerRef,
   inject,
@@ -13,6 +14,7 @@ import { DynamicComponentService } from '../../services/dynamic-component.servic
   selector: 'app-modal-module-content',
   templateUrl: './modal-module-content.component.html',
   styleUrls: ['./modal-module-content.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: true,
 })
 export class ModalModuleContentComponent implements AfterViewInit {

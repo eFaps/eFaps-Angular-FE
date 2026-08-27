@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { ChipModule } from '@openng/optimus-ui/chip';
 
 import { Classification } from '../../model/classification';
@@ -8,6 +8,7 @@ import { Classification } from '../../model/classification';
   templateUrl: './classification-display.component.html',
   styleUrls: ['./classification-display.component.scss'],
   imports: [ChipModule],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: true,
 })
 export class ClassificationDisplayComponent {

@@ -1,5 +1,13 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit, inject, input, model, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnInit,
+  inject,
+  input,
+  model,
+  signal,
+} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import {
   AutoCompleteCompleteEvent,
@@ -40,6 +48,7 @@ interface SysConfLink {
     FloatLabelModule,
   ],
   templateUrl: './system-configuration-link.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './system-configuration-link.component.scss',
 })
 export class SystemConfigurationLinkComponent implements OnInit {

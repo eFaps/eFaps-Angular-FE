@@ -1,4 +1,9 @@
-import { Component, inject, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  signal,
+} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ButtonModule } from '@openng/optimus-ui/button';
 import { DynamicDialogConfig } from '@openng/optimus-ui/dynamicdialog';
@@ -34,6 +39,7 @@ interface StmtEntry {
     PanelModule,
   ],
   templateUrl: './eql2.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './eql2.component.scss',
 })
 export class EQL2Component {

@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 
 import {
   FormSection,
@@ -15,6 +15,7 @@ import { TableSectionComponent } from '../table-section/table-section.component'
   templateUrl: './sections.component.html',
   styleUrls: ['./sections.component.scss'],
   imports: [FormSectionComponent, TableSectionComponent, SubSectionComponent],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: true,
 })
 export class SectionsComponent {

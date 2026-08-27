@@ -1,4 +1,9 @@
-import { Component, Input, inject } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  inject,
+} from '@angular/core';
 import { ButtonModule } from '@openng/optimus-ui/button';
 import {
   CompactType,
@@ -19,6 +24,7 @@ import { ItemComponent } from '../item/item.component';
   selector: 'app-page',
   templateUrl: './page.component.html',
   styleUrls: ['./page.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [ItemComponent, ButtonModule, Gridster, GridsterItem],
 })
 export class PageComponent {

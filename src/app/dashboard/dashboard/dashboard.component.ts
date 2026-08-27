@@ -1,4 +1,9 @@
-import { Component, OnInit, inject } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnInit,
+  inject,
+} from '@angular/core';
 import { MenuItem, OpenngIcons } from '@openng/optimus-ui/api';
 import { ButtonModule } from '@openng/optimus-ui/button';
 import { DialogService } from '@openng/optimus-ui/dynamicdialog';
@@ -15,6 +20,7 @@ import { PageComponent } from '../page/page.component';
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [PageComponent, StepsModule, ButtonModule, SpeedDialModule],
 })
 export class DashboardComponent implements OnInit {

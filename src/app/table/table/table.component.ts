@@ -1,4 +1,5 @@
 import {
+  ChangeDetectionStrategy,
   Component,
   EventEmitter,
   OnInit,
@@ -44,6 +45,7 @@ import { FilterComponent } from '../filter/filter.component';
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.scss'],
   providers: [ConfirmationService, DialogService],
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [
     TableModule,
     PaginatorModule,

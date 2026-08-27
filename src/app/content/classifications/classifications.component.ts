@@ -1,4 +1,9 @@
-import { Component, OnInit, inject } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnInit,
+  inject,
+} from '@angular/core';
 import { TreeNode } from '@openng/optimus-ui/api';
 import { ButtonModule } from '@openng/optimus-ui/button';
 import {
@@ -19,6 +24,7 @@ import { ClassificationService } from '../../services/classification.service';
   templateUrl: './classifications.component.html',
   styleUrls: ['./classifications.component.scss'],
   imports: [TreeModule, ButtonModule],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: true,
 })
 export class ClassificationsComponent implements OnInit {

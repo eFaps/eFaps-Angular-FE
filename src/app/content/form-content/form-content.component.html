@@ -11,7 +11,9 @@
   <div class="p-dialog-content">
     @if (outline?.classifications) {
       <app-classification-display
-        [classifications]="outline?.classifications"></app-classification-display>
+        [classifications]="
+          $safeNavigationMigration(outline?.classifications)
+        "></app-classification-display>
     }
     <app-sections [sections]="sections"></app-sections>
   </div>

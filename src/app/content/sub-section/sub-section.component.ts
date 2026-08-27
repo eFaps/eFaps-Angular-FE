@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { PanelModule } from '@openng/optimus-ui/panel';
 
 import {
@@ -15,6 +15,7 @@ import { TableSectionComponent } from '../table-section/table-section.component'
   templateUrl: './sub-section.component.html',
   styleUrls: ['./sub-section.component.scss'],
   imports: [TableSectionComponent, FormSectionComponent, PanelModule],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: true,
 })
 export class SubSectionComponent {

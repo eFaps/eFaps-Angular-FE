@@ -1,4 +1,10 @@
-import { Component, inject, Input, input } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  Input,
+  input,
+} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { InputTextModule } from '@openng/optimus-ui/inputtext';
 import { RadioButtonModule } from '@openng/optimus-ui/radiobutton';
@@ -19,6 +25,7 @@ import { ValueService } from '../../services/value.service';
     SelectModule,
     InputTextModule,
   ],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: true,
 })
 export class AttributeSetElementComponent {
