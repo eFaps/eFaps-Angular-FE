@@ -32,4 +32,18 @@ export class ContentService {
     }
     return this.http.get<Outline | UIModule>(url, { params: params });
   }
+
+  getContentWithValues(
+    cmdId: string,
+    values?: Map<String, any>,
+  ): Observable<Outline | UIModule> {
+    const url = `${this.utilService.evalApiUrl()}/ui/content/${cmdId}`;
+    const payload: any =
+      values == null
+        ? {}
+        : {
+            values: Object.fromEntries(values),
+          };
+    return this.http.post<Outline | UIModule>(url, payload);
+  }
 }

@@ -10,6 +10,7 @@ export interface MenuAction {
   modal: boolean;
   type: null | 'SEARCH' | 'EXEC' | 'GRID' | 'FORM' | 'STRBRWSR';
   verify?: Verifcation;
+  cmdId?: string;
 }
 
 export interface Verifcation {

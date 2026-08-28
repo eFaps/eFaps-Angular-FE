@@ -14,6 +14,7 @@ import {
 } from '@openng/optimus-ui/dynamicdialog';
 import { forkJoin, Observable } from 'rxjs';
 
+import { ContentService } from 'src/app/services/content.service';
 import { Classification } from '../../model/classification';
 import { Outline, Section } from '../../model/content';
 import { MenuEntry } from '../../model/menu';
@@ -42,7 +43,10 @@ export class ModalContentComponent {
   private validationService = inject(ValidationService);
   private classificationService = inject(ClassificationService);
   private execService = inject(ExecService);
+  private contentService = inject(ContentService);
   private dialogRef = inject(DynamicDialogRef);
+
+  private config = inject(DynamicDialogConfig);
 
   sections = signal<Section[]>([]);
   classifications = this.classificationService.classifications;
@@ -56,15 +60,13 @@ export class ModalContentComponent {
 
   private sectionsStore: Section[] = [];
   constructor() {
-    const config = inject(DynamicDialogConfig);
+    this.config.header = this.config.data.outline.header;
+    this.config.maximizable = true;
+    this.config.closable = true;
+    this.config.modal = true;
+    this.config.style = { 'max-width': '99vw' };
 
-    config.header = config.data.outline.header;
-    config.maximizable = true;
-    config.closable = true;
-    config.modal = true;
-    config.style = { 'max-width': '99vw' };
-
-    const data = config.data;
+    const data = this.config.data;
     this.callingMenu = data.item;
     this.outline = data.outline;
 
@@ -178,14 +180,43 @@ export class ModalContentComponent {
           }),
         ]);
       }
-      this.execService.exec(this.callingMenu.id, values).subscribe({
-        next: (execResponse) => {
-          this.dialogRef.close(execResponse);
-          this.loading.set(false);
-        },
-        error: () => {
-          this.loading.set(false);
-        },
+      if ('FORM' == this.outline.action?.type) {
+        this.contentService
+          .getContentWithValues(this.outline.action.cmdId!!, values)
+          .subscribe({
+            next: (outline) => {
+              this.loading.set(false);
+              this.reload(outline as Outline, this.outline!!.action!!.cmdId!!);
+            },
+            error: () => {
+              this.loading.set(false);
+            },
+          });
+      } else {
+        this.execService.exec(this.callingMenu.id, values).subscribe({
+          next: (execResponse) => {
+            this.dialogRef.close(execResponse);
+            this.loading.set(false);
+          },
+          error: () => {
+            this.loading.set(false);
+          },
+        });
+      }
+    }
+  }
+
+  reload(outline: Outline, cmdId: string) {
+    this.outline = outline;
+    this.config.header = outline.header;
+    this.sections.set(outline.sections);
+    this.callingMenu.id = cmdId;
+    if (outline.values) {
+      Object.entries(outline.values).forEach(([key, value]) => {
+        this.valueService.addEntry({
+          name: key,
+          value: value,
+        });
       });
     }
   }

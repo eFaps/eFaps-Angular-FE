@@ -1,8 +1,6 @@
 <div class="wrapper">
   @if (!isDynamic()) {
-    <div
-      class="label"
-      *ngIf="formItem?.label != null && formItem?.type != 'BUTTON'">
+    <div class="label" *ngIf="formItem?.label != null && formItem?.type != 'BUTTON'">
       {{ formItem?.label }}
     </div>
     <div class="value">
@@ -15,22 +13,13 @@
             *ngFor="let option of formItem?.options; let indexOfelement = index"
             class="field-radio">
             <p-radioButton
-              [inputId]="
-                $safeNavigationMigration(formItem?.name) +
-                'opt' +
-                indexOfelement
-              "
+              [inputId]="$safeNavigationMigration(formItem?.name) + 'opt' + indexOfelement"
               [value]="option.value"
               [(ngModel)]="radioValue"
               (onClick)="changeRadio($event.value)"></p-radioButton>
-            <label
-              [for]="
-                $safeNavigationMigration(formItem?.name) +
-                'opt' +
-                indexOfelement
-              "
-              >{{ option.label }}</label
-            >
+            <label [for]="$safeNavigationMigration(formItem?.name) + 'opt' + indexOfelement">{{
+              option.label
+            }}</label>
           </div>
         }
         @case ("DROPDOWN") {
@@ -96,15 +85,9 @@
           <div class="snipplet" [innerHtml]="snippletValue | safeHtml"></div>
         }
         @case ("UPLOAD") {
-          <p-fileUpload
-            #upload
-            [url]="uploadUrl"
-            (onUpload)="onUpload($event)"
-            [previewWidth]="0">
+          <p-fileUpload #upload [url]="uploadUrl" (onUpload)="onUpload($event)" [previewWidth]="0">
             <ng-template #empty>
-              <div class="dragDrop">
-                Arrastre y suelte el archivo aquí para cargarlo.
-              </div>
+              <div class="dragDrop">Arrastre y suelte el archivo aquí para cargarlo.</div>
             </ng-template>
           </p-fileUpload>
         }
@@ -116,9 +99,7 @@
             [multiple]="true"
             [previewWidth]="0">
             <ng-template #empty>
-              <div class="dragDrop">
-                Arrastre y suelte archivos aquí para cargarlos.
-              </div>
+              <div class="dragDrop">Arrastre y suelte archivos aquí para cargarlos.</div>
             </ng-template>
           </p-fileUpload>
         }
@@ -199,11 +180,7 @@
         }
         @case ("IMAGE") {
           @if (readOnlyValue != null) {
-            <p-image
-              [src]="evalImageUrl()"
-              alt="Image"
-              width="250"
-              [preview]="true" />
+            <p-image [src]="evalImageUrl()" alt="Image" width="250" [preview]="true" />
           } @else {
             <i class="pi pi-ban"></i>
           }
@@ -230,8 +207,6 @@
   <ng-template #dynamicComponent></ng-template>
 
   @for (message of messages(); track message) {
-    <p-message
-      [severity]="message.severity"
-      [text]="message.summary"></p-message>
+    <p-message [severity]="message.severity" [text]="message.summary"></p-message>
   }
 </div>

@@ -14,6 +14,7 @@ export interface Outline {
   menu?: MenuEntry[];
   oid: string;
   classifications?: Classification[];
+  values?: { [key: string]: any };
 }
 
 export function isOutline(obj: any): boolean {
@@ -93,4 +94,9 @@ export interface TableColumn {
 export interface AttributeSetEntry {
   rowId: number;
   values: Array<FormItem>;
+}
+
+interface KeyValuePair<K, V> {
+  key: K;
+  value: V;
 }

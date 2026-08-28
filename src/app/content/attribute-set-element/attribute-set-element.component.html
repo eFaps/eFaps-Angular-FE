@@ -15,11 +15,7 @@
       (keyup)="onKey(textInput.value)" />
   }
   @case ("RADIO") {
-    @for (
-      option of elementData?.formItem?.options;
-      track option;
-      let indexOfelement = $index
-    ) {
+    @for (option of elementData?.formItem?.options; track option; let indexOfelement = $index) {
       <div class="field-radio">
         <p-radioButton
           [inputId]="'asopt' + indexOfelement"

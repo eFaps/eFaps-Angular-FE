@@ -22,9 +22,7 @@
                   formControlName="{{ filter.name }}"
                   appendTo="body"
                   fluid></p-datepicker>
-                <label for="{{ 'filter' + indexOfelement }}">{{
-                  filter.label
-                }}</label>
+                <label for="{{ 'filter' + indexOfelement }}">{{ filter.label }}</label>
               </p-floatlabel>
             </div>
           }
@@ -56,20 +54,14 @@
                 <span>{{ filter.label }}</span>
               </div>
               <div class="radio-group">
-                @for (
-                  option of optionElements[filter.name];
-                  track option;
-                  let idx = $index
-                ) {
+                @for (option of optionElements[filter.name]; track option; let idx = $index) {
                   <div class="radio-field">
                     <p-radioButton
                       [inputId]="filter.name + 'opt' + idx"
                       [value]="option.value"
                       name="{{ filter.name }}"
                       formControlName="{{ filter.name }}" />
-                    <label [for]="filter.name + 'opt' + idx">{{
-                      option.label
-                    }}</label>
+                    <label [for]="filter.name + 'opt' + idx">{{ option.label }}</label>
                   </div>
                 }
               </div>
@@ -86,9 +78,7 @@
                   optionValue="value"
                   appendTo="body"
                   fluid />
-                <label for="{{ 'filter' + indexOfelement }}">{{
-                  filter.label
-                }}</label>
+                <label for="{{ 'filter' + indexOfelement }}">{{ filter.label }}</label>
               </p-floatlabel>
             </div>
           }
@@ -110,13 +100,9 @@
                   optionValue="value"
                   appendTo="body"
                   fluid
-                  [showClear]="
-                    $safeNavigationMigration(configs[filter.name]?.showClear)
-                  "
+                  [showClear]="$safeNavigationMigration(configs[filter.name]?.showClear)"
                   id="{{ 'filter' + indexOfelement }}" />
-                <label for="{{ 'filter' + indexOfelement }}">{{
-                  filter.label
-                }}</label>
+                <label for="{{ 'filter' + indexOfelement }}">{{ filter.label }}</label>
               </p-floatlabel>
             </div>
           }

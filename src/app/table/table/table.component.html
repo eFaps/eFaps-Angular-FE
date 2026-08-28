@@ -26,15 +26,9 @@
       <ng-template #caption>
         <div class="table-header">
           <div class="left">
-            <p-tieredMenu
-              #menu
-              [model]="menuItems"
-              popup="true"
-              appendTo="body"></p-tieredMenu>
+            <p-tieredMenu #menu [model]="menuItems" popup="true" appendTo="body"></p-tieredMenu>
             @if (menuItems.length > 0) {
-              <p-button
-                (click)="menu.toggle($event)"
-                icon="pi pi-bars"></p-button>
+              <p-button (click)="menu.toggle($event)" icon="pi pi-bars"></p-button>
             }
             {{ title }}
           </div>
@@ -43,11 +37,7 @@
             @if (!paginated) {
               <span class="quantity"
                 >Cantidad:
-                {{
-                  dt.filteredValue?.length
-                    ? dt.filteredValue?.length + " /"
-                    : ""
-                }}
+                {{ dt.filteredValue?.length ? dt.filteredValue?.length + " /" : "" }}
                 {{ elements.length }}</span
               >
             }
@@ -71,10 +61,7 @@
               tooltipPosition="bottom"></p-button>
 
             @if (filtered) {
-              <p-button
-                icon="pi pi-filter"
-                variant="outlined"
-                (click)="filter()"></p-button>
+              <p-button icon="pi pi-filter" variant="outlined" (click)="filter()"></p-button>
             }
             <p-inputGroup>
               <p-inputGroupAddon>
@@ -90,9 +77,7 @@
                 class="p-inputtext-sm" />
               <p-button
                 icon="pi pi-times"
-                (click)="
-                  searchInput.value = ''; dt.filterGlobal('', 'contains')
-                "></p-button>
+                (click)="searchInput.value = ''; dt.filterGlobal('', 'contains')"></p-button>
             </p-inputGroup>
           </div>
         </div>
@@ -105,10 +90,7 @@
             </th>
           }
           @for (col of columns; track col) {
-            <th
-              [pSortableColumn]="col.field"
-              pResizableColumn
-              pReorderableColumn>
+            <th [pSortableColumn]="col.field" pResizableColumn pReorderableColumn>
               {{ col.header }}
               <p-sortIcon [field]="col.field"></p-sortIcon>
               <!--
