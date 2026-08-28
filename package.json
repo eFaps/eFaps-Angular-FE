@@ -54,7 +54,7 @@
     "@types/file-saver": "^2.0.7",
     "@types/jasmine": "~6.0.0",
     "@types/papaparse": "^5.5.2",
-    "@vitest/browser-playwright": "^4.0.18",
+    "@vitest/browser-playwright": "^4.1.11",
     "import-sort-style-module": "^6.0.0",
     "jasmine-core": "~7.0.2",
     "jsdom": "^30.0.1",
