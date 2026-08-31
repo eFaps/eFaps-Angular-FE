@@ -36,6 +36,9 @@ describe('ModalContentComponent', () => {
               outline: {
                 header: {},
               },
+              item: {
+                id: "some id"
+              }
             },
           },
         },
