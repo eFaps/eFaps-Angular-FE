@@ -92,15 +92,15 @@ export class ModalContentComponent {
     afterRenderEffect({
       read: () => {
         // listen to section rendered
-        const sections = this.sections()
+        const sections = this.sections();
         if (this.callBackvalues) {
-          var existingValues = this.valueService.values()
+          var existingValues = this.valueService.values();
           Object.entries(this.callBackvalues).forEach(([key, value]) => {
             if (existingValues.has(key)) {
               this.valueService.updateEntry({
                 name: key,
                 value: value,
-              })
+              });
             } else {
               this.valueService.addEntry({
                 name: key,
@@ -108,10 +108,10 @@ export class ModalContentComponent {
               });
             }
           });
-          this.callBackvalues = undefined
+          this.callBackvalues = undefined;
         }
-      }
-    })
+      },
+    });
   }
 
   private init(data: any) {
@@ -235,7 +235,7 @@ export class ModalContentComponent {
     this.sections.set(outline.sections);
     this.cmdId = cmdId;
     if (outline.values) {
-      this.callBackvalues = outline.values
+      this.callBackvalues = outline.values;
     }
   }
 }

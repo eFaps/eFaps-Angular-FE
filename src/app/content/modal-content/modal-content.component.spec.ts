@@ -37,8 +37,8 @@ describe('ModalContentComponent', () => {
                 header: {},
               },
               item: {
-                id: "some id"
-              }
+                id: 'some id',
+              },
             },
           },
         },
