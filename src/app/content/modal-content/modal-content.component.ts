@@ -1,4 +1,5 @@
 import {
+  afterRenderEffect,
   ChangeDetectionStrategy,
   Component,
   effect,
@@ -55,7 +56,7 @@ export class ModalContentComponent {
   cmdId: string;
   parentOid: string | undefined;
 
-  //values: Map<String, any> | undefined;
+  private callBackvalues?: { [key: string]: any };
 
   private sectionsStore: Section[] = [];
   constructor() {
@@ -88,6 +89,29 @@ export class ModalContentComponent {
     } else {
       this.sections.set(data.outline.sections);
     }
+    afterRenderEffect({
+      read: () => {
+        // listen to section rendered
+        const sections = this.sections()
+        if (this.callBackvalues) {
+          var existingValues = this.valueService.values()
+          Object.entries(this.callBackvalues).forEach(([key, value]) => {
+            if (existingValues.has(key)) {
+              this.valueService.updateEntry({
+                name: key,
+                value: value,
+              })
+            } else {
+              this.valueService.addEntry({
+                name: key,
+                value: value,
+              });
+            }
+          });
+          this.callBackvalues = undefined
+        }
+      }
+    })
   }
 
   private init(data: any) {
@@ -211,12 +235,7 @@ export class ModalContentComponent {
     this.sections.set(outline.sections);
     this.cmdId = cmdId;
     if (outline.values) {
-      Object.entries(outline.values).forEach(([key, value]) => {
-        this.valueService.addEntry({
-          name: key,
-          value: value,
-        });
-      });
+      this.callBackvalues = outline.values
     }
   }
 }
