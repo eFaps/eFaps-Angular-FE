@@ -36,6 +36,7 @@ export class ValueService {
 
   reset() {
     this.valueMap?.clear();
+    this.currentUpdate.next(undefined);
   }
 
   updateEntry(entry: Entry) {

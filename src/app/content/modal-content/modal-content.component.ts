@@ -17,7 +17,6 @@ import { forkJoin, Observable } from 'rxjs';
 import { ContentService } from 'src/app/services/content.service';
 import { Classification } from '../../model/classification';
 import { Outline, Section } from '../../model/content';
-import { MenuEntry } from '../../model/menu';
 import { ClassificationService } from '../../services/classification.service';
 import { ExecService } from '../../services/exec.service';
 import { ValidationService } from '../../services/validation.service';
@@ -53,7 +52,7 @@ export class ModalContentComponent {
   loading = signal<Boolean>(false);
 
   outline: Outline;
-  callingMenu: MenuEntry;
+  cmdId: string;
   parentOid: string | undefined;
 
   //values: Map<String, any> | undefined;
@@ -67,7 +66,7 @@ export class ModalContentComponent {
     this.config.style = { 'max-width': '99vw' };
 
     const data = this.config.data;
-    this.callingMenu = data.item;
+    this.cmdId = data.item.id;
     this.outline = data.outline;
 
     this.init(data);
@@ -193,7 +192,7 @@ export class ModalContentComponent {
             },
           });
       } else {
-        this.execService.exec(this.callingMenu.id, values).subscribe({
+        this.execService.exec(this.cmdId, values).subscribe({
           next: (execResponse) => {
             this.dialogRef.close(execResponse);
             this.loading.set(false);
@@ -210,7 +209,7 @@ export class ModalContentComponent {
     this.outline = outline;
     this.config.header = outline.header;
     this.sections.set(outline.sections);
-    this.callingMenu.id = cmdId;
+    this.cmdId = cmdId;
     if (outline.values) {
       Object.entries(outline.values).forEach(([key, value]) => {
         this.valueService.addEntry({
