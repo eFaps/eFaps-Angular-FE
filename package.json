@@ -22,7 +22,7 @@
     "@angular/core": "^22.1.4",
     "@angular/forms": "^22.1.4",
     "@angular/platform-browser": "^22.1.4",
-    "@angular/platform-browser-dynamic": "^22.1.4",
+    "@angular/platform-browser-dynamic": "^22.1.5",
     "@angular/router": "^22.1.4",
     "@fontsource/roboto": "^5.3.0",
     "@openng/icons": "^1.0.0",
