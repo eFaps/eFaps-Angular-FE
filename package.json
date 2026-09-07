@@ -31,7 +31,7 @@
     "@openng/optimus-ui-themes": "^2.0.2",
     "angular-gridster2": "^22.0.0",
     "chart.js": "^4.5.1",
-    "fast-equals": "^6.0.2",
+    "fast-equals": "^6.0.3",
     "file-saver": "^2.0.5",
     "javascript-time-ago": "^2.6.4",
     "jspdf": "^4.2.1",
