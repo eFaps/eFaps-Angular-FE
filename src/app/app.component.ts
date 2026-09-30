@@ -32,7 +32,7 @@ import {
   typeEventArgs,
 } from 'keycloak-angular';
 import Keycloak from 'keycloak-js';
-import localeEs from 'primelocale/es.json';
+import localeEs from '@openng/optimus-ui-locale/es.json';
 
 import { environment } from 'src/environments/environment';
 import { ModalContentComponent } from './content/modal-content/modal-content.component';
