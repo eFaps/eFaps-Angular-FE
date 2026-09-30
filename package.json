@@ -9,6 +9,7 @@
     "build-demo": "ng build --configuration demo",
     "watch": "ng build --watch --configuration development",
     "test": "ng test --browsers chromiumHeadless --no-progress --no-watch",
+    "test-firefox": "ng test --browsers firefox --no-progress --no-watch",
     "prettier-html": "prettier --print-width 100 --write \"src/**/*.html\" ",
     "prettier-scss": "prettier --write \"src/**/*.scss\" ",
     "prettier-ts": "prettier --write \"src/**/*.ts\"",
@@ -50,18 +51,18 @@
     "@angular/build": "^22.2.0",
     "@angular/cli": "^22.2.0",
     "@angular/compiler-cli": "^22.2.0",
-    "@playwright/test": "^1.62.1",
+    "@playwright/test": "^1.63.0",
     "@types/file-saver": "^2.0.7",
-    "@types/jasmine": "~6.0.0",
+    "@types/jasmine": "~7.0.0",
     "@types/papaparse": "^5.5.2",
-    "@vitest/browser-playwright": "^4.0.18",
+    "@vitest/browser-playwright": "^5.0.3",
     "import-sort-style-module": "^6.0.0",
     "jasmine-core": "~7.0.2",
-    "jsdom": "^30.0.1",
+    "jsdom": "^30.1.1",
     "prettier": "^3.9.9",
     "prettier-plugin-organize-imports": "^4.3.0",
     "typescript": "~6.0.3",
-    "vitest": "^4.0.18"
+    "vitest": "^5.0.3"
   },
   "prettier": {
     "plugins": [
