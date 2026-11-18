@@ -146,6 +146,7 @@ export class SearchContentComponent implements OnInit {
   }
 
   query() {
+    this.showResult.set(false);
     const values = this.valueService.values();
     this.searchService.query(this.search!!.id, values).subscribe({
       next: (searchResult) => {
