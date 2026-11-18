@@ -11,6 +11,7 @@ import {
   signal,
 } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
+import localeEs from '@openng/optimus-ui-locale/es.json';
 import { MenuItem } from '@openng/optimus-ui/api';
 import { BreadcrumbModule } from '@openng/optimus-ui/breadcrumb';
 import { ButtonModule } from '@openng/optimus-ui/button';
@@ -32,7 +33,6 @@ import {
   typeEventArgs,
 } from 'keycloak-angular';
 import Keycloak from 'keycloak-js';
-import localeEs from '@openng/optimus-ui-locale/es.json';
 
 import { environment } from 'src/environments/environment';
 import { ModalContentComponent } from './content/modal-content/modal-content.component';
