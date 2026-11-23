@@ -48,7 +48,7 @@
     "xlsx": "^0.18.5"
   },
   "devDependencies": {
-    "@angular/build": "^22.2.7",
+    "@angular/build": "^22.3.0",
     "@angular/cli": "^22.2.7",
     "@angular/compiler-cli": "^22.2.6",
     "@playwright/test": "^1.63.0",
